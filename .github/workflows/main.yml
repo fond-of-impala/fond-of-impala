@@ -1,0 +1,64 @@
+name: CI
+
+on:
+    - pull_request
+
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+    continous-integration:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php-versions: ["8.0", "8.1", "8.2"]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Setup PHP, with composer and extensions
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-versions }}
+                  extensions: mbstring, dom, fileinfo, pgsql, json
+                  coverage: xdebug
+
+            - name: Changed Files
+              id: changed-files
+              uses: tj-actions/changed-files@v35.9.2
+              with:
+                files: bundles/**/*.php
+
+            - name: Get composer cache directory
+              id: composercache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: Cache composer dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ${{ steps.composercache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ matrix.php-versions }}-${{ hashFiles('composer.json') }}
+                  restore-keys: ${{ runner.os }}-composer-${{ matrix.php-versions }}-
+
+            - name: Cache phpstan
+              uses: actions/cache@v3
+              with:
+                path: phpstanCache
+                key: ${{ runner.os }}-phpstan-${{ matrix.php-versions }}
+
+            - name: Install dependencies
+              env:
+                COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
+              run: make install
+
+            - name: Run phpcs
+              if: steps.changed-files.outputs.any_changed == 'true'
+              run: ./vendor/bin/phpcs -d memory_limit=-1 --standard=./vendor/spryker/code-sniffer/Spryker/ruleset.xml --parallel=75 ${{ steps.changed-files.outputs.all_changed_files }}
+
+            - name: Run codeception
+              run: make codeception-without-coverage
+
+            - name: Run phpstan
+              run: make phpstan

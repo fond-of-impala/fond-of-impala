@@ -1,0 +1,13 @@
+.DS_Store
+.idea
+.vscode
+
+codeception-*.yml
+composer.lock
+composer.phar
+
+phpcs.cache
+phpstanCache
+
+vendor
+

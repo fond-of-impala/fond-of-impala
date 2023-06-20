@@ -1,0 +1,12 @@
+
+{
+  "pathToSplitshLite": "/usr/local/bin/splitsh-lite",
+  "pathToTempDirectory": "/home/dandelion/project/tmp/",
+  "vcs": {
+    "owner": {
+      "name": "fond-of-impala",
+      "type": "organisation"
+    },
+    "token": "<GITHUB_TOKEN>"
+  }
+}

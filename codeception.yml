@@ -1,0 +1,45 @@
+namespace: fond-of-impala/fond-of-impala
+
+suites:
+  unit:
+    path: .
+
+settings:
+  shuffle: true
+  lint: true
+
+bootstrap: _bootstrap.php
+
+paths:
+  tests: tests
+  output: tests/_output
+  support: tests/_support
+  data: tests/_data
+
+coverage:
+  enabled: true
+
+modules:
+  enabled:
+    - \FondOfCodeception\Module\Spryker
+  config:
+    \FondOfCodeception\Module\Spryker:
+      generate_transfer: false
+      generate_map_classes: false
+      generate_propel_classes: false
+      generate_ide_auto_completion: false
+
+env:
+  monorepo:
+    modules:
+      config:
+        \FondOfCodeception\Module\Spryker:
+          generate_transfer: true
+          generate_map_classes: true
+          generate_propel_classes: true
+          generate_ide_auto_completion: true
+          ide_auto_completion_source_directories:
+            './bundles/*/src/': '*/*/'
+            './vendor/fond-of-spryker/*/src/': '*/*/'
+          supported_source_identifiers:
+            - page
