@@ -2,6 +2,12 @@
 {
   "pathToSplitshLite": "/usr/local/bin/splitsh-lite",
   "pathToTempDirectory": "/home/dandelion/project/tmp/",
+  "repositories": {
+    "conditional-availability-extension": {
+      "path": "bundles/conditional-availability-extension",
+      "version": "1.0.0"
+    }
+  },
   "vcs": {
     "owner": {
       "name": "fond-of-impala",

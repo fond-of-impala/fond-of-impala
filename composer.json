@@ -16,6 +16,9 @@
       "email": "dev@jzit.de"
     }
   ],
+  "replace": {
+    "fond-of-impala/conditional-availability-extension": "*"
+  },
   "require": {
     "php": ">=8.0"
   },
@@ -23,6 +26,20 @@
     "fond-of-codeception/spryker": "*",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\Shared\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/src/FondOfImpala/Shared/ConditionalAvailabilityExtension",
+      "FondOfImpala\\Zed\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/src/FondOfImpala/Zed/ConditionalAvailabilityExtension"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\Shared\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityExtension",
+      "FondOfImpala\\Zed\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityExtension",
+      "Generated\\":"src/Generated/",
+      "Orm\\":"src/Orm/"
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
