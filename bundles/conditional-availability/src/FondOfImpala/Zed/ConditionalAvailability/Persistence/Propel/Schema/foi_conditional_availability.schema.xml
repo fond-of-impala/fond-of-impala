@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:noNamespaceSchemaLocation="https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\ConditionalAvailability\Persistence"
+          package="src.Orm.Zed.ConditionalAvailability.Persistence">
+    <table name="foi_conditional_availability" phpName="FoiConditionalAvailability">
+        <column name="id_conditional_availability" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="warehouse_group" type="VARCHAR" size="255" required="true"/>
+        <column name="fk_product" type="INTEGER" required="true"/>
+        <column name="is_accessible" type="BOOLEAN" defaultValue="false"/>
+
+        <foreign-key name="foi_conditional_availability-fk_product" foreignTable="spy_product" phpName="SpyProduct">
+            <reference local="fk_product" foreign="id_product"/>
+        </foreign-key>
+
+        <index name="index-foi_conditional_availability-fk_product">
+            <index-column name="fk_product"/>
+        </index>
+
+        <index name="index-foi_conditional_availability-warehouse_group">
+            <index-column name="warehouse_group"/>
+        </index>
+
+        <unique name="unique-foi_conditional_availability-fk_p-w_g">
+            <unique-column name="fk_product"/>
+            <unique-column name="warehouse_group"/>
+        </unique>
+
+        <id-method-parameter value="foi_conditional_availability_pk_seq"/>
+
+        <behavior name="event">
+            <parameter name="foi_conditional_availability_all" column="*"/>
+        </behavior>
+    </table>
+
+    <table name="foi_conditional_availability_period" phpName="FoiConditionalAvailabilityPeriod">
+        <column name="fk_conditional_availability" type="INTEGER" required="true" primaryKey="true"/>
+        <column name="start_at" required="true" type="TIMESTAMP" primaryKey="true"/>
+        <column name="end_at" required="true" type="TIMESTAMP" primaryKey="true"/>
+        <column name="original_start_at" type="TIMESTAMP"/>
+        <column name="quantity" type="INTEGER" required="true"/>
+        <column name="created_at" required="true" type="TIMESTAMP"/>
+
+        <index name="index-foi_conditional_availability-fk_conditional_availability">
+            <index-column name="fk_conditional_availability"/>
+        </index>
+
+        <foreign-key name="foi_conditional_availability_period-fk_conditional_availability" foreignTable="foi_conditional_availability" phpName="FoiConditionalAvailability" onDelete="CASCADE">
+            <reference local="fk_conditional_availability" foreign="id_conditional_availability"/>
+        </foreign-key>
+
+        <behavior name="event">
+            <parameter name="foi_conditional_availability_period_all" column="*"/>
+        </behavior>
+    </table>
+</database>

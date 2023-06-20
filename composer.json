@@ -17,10 +17,14 @@
     }
   ],
   "replace": {
+    "fond-of-impala/conditional-availability": "*",
     "fond-of-impala/conditional-availability-extension": "*"
   },
   "require": {
-    "php": ">=8.0"
+    "php": ">=8.0",
+    "spryker/event-behavior": "^1.0.0",
+    "spryker/log": "^3.0.0",
+    "spryker/product": "^5.2.2 || ^6.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
@@ -29,16 +33,22 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Service/ConditionalAvailability",
+      "FondOfImpala\\Shared\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Shared/ConditionalAvailability",
       "FondOfImpala\\Shared\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/src/FondOfImpala/Shared/ConditionalAvailabilityExtension",
+      "FondOfImpala\\Zed\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Zed/ConditionalAvailability",
       "FondOfImpala\\Zed\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/src/FondOfImpala/Zed/ConditionalAvailabilityExtension"
     }
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Service/ConditionalAvailability",
+      "FondOfImpala\\Shared\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Shared/ConditionalAvailability",
       "FondOfImpala\\Shared\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityExtension",
+      "FondOfImpala\\Zed\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Zed/ConditionalAvailability",
       "FondOfImpala\\Zed\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityExtension",
-      "Generated\\":"src/Generated/",
-      "Orm\\":"src/Orm/"
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
     }
   },
   "minimum-stability": "dev",
