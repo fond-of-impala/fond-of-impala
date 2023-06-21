@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="ConditionalAvailabilityResponse">
+        <property name="conditionalAvailabilityTransfer" type="ConditionalAvailability"/>
+        <property name="isSuccessful" type="bool"/>
+    </transfer>
+
+
+    <transfer name="ConditionalAvailabilityBulkApiResponse">
+        <property name="conditionalAvailabilityIds" singular="conditionalAvailabilityId" type="int[]" />
+    </transfer>
+
+    <transfer name="ConditionalAvailability">
+        <property name="idConditionalAvailability" type="int"/>
+        <property name="fkProduct" type="int"/>
+        <property name="isAccessible" type="bool" />
+        <property name="warehouseGroup" type="string"/>
+        <property name="conditionalAvailabilityPeriodCollection" type="ConditionalAvailabilityPeriodCollection" />
+    </transfer>
+
+    <transfer name="ConditionalAvailabilityCollection">
+        <property name="conditionalAvailabilities" type="ConditionalAvailability[]" singular="conditionalAvailability" />
+    </transfer>
+</transfers>
