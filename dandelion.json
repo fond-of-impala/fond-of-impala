@@ -3,6 +3,10 @@
   "pathToSplitshLite": "/usr/local/bin/splitsh-lite",
   "pathToTempDirectory": "/home/dandelion/project/tmp/",
   "repositories": {
+    "conditional-availability": {
+      "path": "bundles/conditional-availability",
+      "version": "1.0.0"
+    },
     "conditional-availability-extension": {
       "path": "bundles/conditional-availability-extension",
       "version": "1.0.0"
