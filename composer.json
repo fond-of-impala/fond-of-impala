@@ -48,8 +48,10 @@
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Service/ConditionalAvailability",
       "FondOfImpala\\Shared\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Shared/ConditionalAvailability",
       "FondOfImpala\\Shared\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Zed/ConditionalAvailability",
       "FondOfImpala\\Zed\\ConditionalAvailabilityExtension\\": "bundles/conditional-availability-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityExtension",
+      "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }
