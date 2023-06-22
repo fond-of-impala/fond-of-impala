@@ -8,6 +8,8 @@ include:
   - bundles/conditional-availability-extension
   - bundles/conditional-availability-page-search
   - bundles/conditional-availability-page-search-extension
+  - bundles/conditional-availability-page-search-rest-api
+  - bundles/conditional-availability-sales-connector
   - bundles/product-list-conditional-availability-page-search
 
 suites:

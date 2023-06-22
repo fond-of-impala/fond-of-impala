@@ -18,6 +18,14 @@
     "conditional-availability-page-search-extension": {
       "path": "bundles/conditional-availability-page-search-extension",
       "version": "1.0.0"
+    },
+    "conditional-availability-page-search-rest-api": {
+      "path": "bundles/conditional-availability-page-search-rest-api",
+      "version": "1.0.0"
+    },
+    "conditional-availability-page-search-rest-api-extension": {
+      "path": "bundles/conditional-availability-page-search-rest-api-extension",
+      "version": "1.0.0"
     }
   },
   "vcs": {
