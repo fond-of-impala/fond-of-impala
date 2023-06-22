@@ -9,4 +9,3 @@ parameters:
     tmpDir: phpstanCache
     scanDirectories:
         - src/Orm/Zed
-        - src/Generated
