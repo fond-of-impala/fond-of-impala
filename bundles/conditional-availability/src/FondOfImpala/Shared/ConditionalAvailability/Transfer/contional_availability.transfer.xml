@@ -21,7 +21,7 @@
 
     <transfer name="ConditionalAvailabilityCriteriaFilter">
         <property name="skus" type="string[]" />
-        <property name="minimumQuantity" type="string" />
+        <property name="minimumQuantity" type="int" />
         <property name="warehouseGroup" type="string" />
         <property name="isAccessible" type="bool" />
     </transfer>

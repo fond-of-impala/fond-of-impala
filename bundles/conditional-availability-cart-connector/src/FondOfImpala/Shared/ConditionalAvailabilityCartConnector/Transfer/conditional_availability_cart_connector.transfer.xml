@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="Customer">
+        <property name="hasAvailabilityRestrictions" type="boolean"/>
+    </transfer>
+
+    <transfer name="Item">
+        <property name="deliveryDate" type="string"/>
+        <property name="concreteDeliveryDate" type="string"/>
+        <property name="validationMessages" type="Message[]" singular="validationMessage"/>
+    </transfer>
+
+    <transfer name="RestItemsAttributes">
+        <property name="deliveryDate" type="string"/>
+        <property name="concreteDeliveryDate" type="string"/>
+        <property name="validationMessages" type="Message[]" singular="validationMessage"/>
+    </transfer>
+
+    <transfer name="RestCartItemsAttributes">
+        <property name="deliveryDate" type="string"/>
+        <property name="concreteDeliveryDate" type="string"/>
+    </transfer>
+
+    <transfer name="RestCartItem">
+        <property name="sku" type="string"/>
+        <property name="deliveryDate" type="string"/>
+        <property name="concreteDeliveryDate" type="string"/>
+    </transfer>
+
+    <transfer name="Quote">
+        <property name="deliveryDates" type="array" singular="deliveryDate"/>
+        <property name="concreteDeliveryDates" type="array" singular="concreteDeliveryDate"/>
+    </transfer>
+
+    <transfer name="RestCartsAttributes">
+        <property name="deliveryDates" type="string[]" singular="deliveryDate"/>
+        <property name="concreteDeliveryDates" type="string[]" singular="concreteDeliveryDate"/>
+    </transfer>
+
+    <transfer name="RestCartsRequestAttributes">
+        <property name="deliveryDates" type="string[]" singular="deliveryDate"/>
+        <property name="concreteDeliveryDates" type="string[]" singular="concreteDeliveryDate"/>
+    </transfer>
+</transfers>
