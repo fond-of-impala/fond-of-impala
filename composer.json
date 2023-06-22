@@ -23,7 +23,8 @@
     "fond-of-impala/conditional-availability-checkout-connector": "*",
     "fond-of-impala/conditional-availability-extension": "*",
     "fond-of-impala/conditional-availability-page-search": "*",
-    "fond-of-impala/conditional-availability-page-search-extension": "*"
+    "fond-of-impala/conditional-availability-page-search-extension": "*",
+    "fond-of-impala/conditional-availability-sales-connector": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -40,6 +41,7 @@
     "spryker/log": "^3.0.0",
     "spryker/product": "^6.4.0",
     "spryker/quote-extension": "^1.2.0",
+    "spryker/sales-extension": "^1.3",
     "spryker/search": "^8.10.0",
     "spryker/synchronization-extension": "^1.0.0"
   },
@@ -68,7 +70,9 @@
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
-      "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension"
+      "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/src/FondOfImpala/Shared/ConditionalAvailabilitySalesConnector",
+      "FondOfImpala\\Zed\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/src/FondOfImpala/Zed/ConditionalAvailabilitySalesConnector"
     }
   },
   "autoload-dev": {
@@ -91,6 +95,8 @@
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/tests/FondOfImpala/Shared/ConditionalAvailabilitySalesConnector",
+      "FondOfImpala\\Zed\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/tests/FondOfImpala/Zed/ConditionalAvailabilitySalesConnector",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }
