@@ -24,6 +24,7 @@
     "fond-of-impala/conditional-availability-extension": "*",
     "fond-of-impala/conditional-availability-page-search": "*",
     "fond-of-impala/conditional-availability-page-search-extension": "*",
+    "fond-of-impala/conditional-availability-page-search-rest-api-extension": "*"
     "fond-of-impala/conditional-availability-sales-connector": "*"
   },
   "require": {
@@ -71,6 +72,8 @@
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
+      "FondOfImpala\\Glue\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/src/FondOfImpala/Glue/ConditionalAvailabilityPageSearchRestApiExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchRestApiExtension",
       "FondOfImpala\\Shared\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/src/FondOfImpala/Shared/ConditionalAvailabilitySalesConnector",
       "FondOfImpala\\Zed\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/src/FondOfImpala/Zed/ConditionalAvailabilitySalesConnector"
     }
@@ -95,6 +98,8 @@
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
+      "FondOfImpala\\Glue\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/tests/FondOfImpala/Glue/ConditionalAvailabilityPageSearchRestApiExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchRestApiExtension",
       "FondOfImpala\\Shared\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/tests/FondOfImpala/Shared/ConditionalAvailabilitySalesConnector",
       "FondOfImpala\\Zed\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/tests/FondOfImpala/Zed/ConditionalAvailabilitySalesConnector",
       "Generated\\": "src/Generated/",
