@@ -31,8 +31,8 @@
   "autoload-dev": {
     "psr-4": {
       "FondOfImpala\\": "tests/FondOfImpala/",
-      "Generated\\":"src/Generated/",
-      "Orm\\":"src/Orm/"
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
     }
   },
   "config": {
