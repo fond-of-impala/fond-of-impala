@@ -24,7 +24,6 @@
     "fond-of-impala/conditional-availability-extension": "*",
     "fond-of-impala/conditional-availability-page-search": "*",
     "fond-of-impala/conditional-availability-page-search-extension": "*",
-    "fond-of-impala/conditional-availability-page-search-rest-api": "*",
     "fond-of-impala/conditional-availability-page-search-rest-api-extension": "*"
   },
   "require": {
