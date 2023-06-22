@@ -8,6 +8,7 @@ include:
   - bundles/conditional-availability-extension
   - bundles/conditional-availability-page-search
   - bundles/conditional-availability-page-search-extension
+  - bundles/product-list-conditional-availability-page-search
 
 suites:
   unit:

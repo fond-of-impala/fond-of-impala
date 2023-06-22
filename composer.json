@@ -23,7 +23,8 @@
     "fond-of-impala/conditional-availability-checkout-connector": "*",
     "fond-of-impala/conditional-availability-extension": "*",
     "fond-of-impala/conditional-availability-page-search": "*",
-    "fond-of-impala/conditional-availability-page-search-extension": "*"
+    "fond-of-impala/conditional-availability-page-search-extension": "*",
+    "fond-of-impala/product-list-conditional-availability-page-search": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -39,6 +40,7 @@
     "spryker/event-behavior": "^1.0.0",
     "spryker/log": "^3.0.0",
     "spryker/product": "^6.4.0",
+    "spryker/product-list": "^1.2.0",
     "spryker/quote-extension": "^1.2.0",
     "spryker/search": "^8.10.0",
     "spryker/synchronization-extension": "^1.0.0"
@@ -68,7 +70,10 @@
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
-      "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension"
+      "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
+      "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
+      "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
+      "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch"
     }
   },
   "autoload-dev": {
@@ -91,6 +96,9 @@
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
+      "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
+      "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
+      "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }
