@@ -44,7 +44,7 @@ class ConditionalAvailabilityPeriodPageSearchListener extends AbstractPlugin imp
         }
 
         if (
-            $eventName === ConditionalAvailabilityEvents::ENTITY_foi_CONDITIONAL_AVAILABILITY_PERIOD_DELETE ||
+            $eventName === ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_PERIOD_DELETE ||
             $eventName === ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_UNPUBLISH
         ) {
             $this->getFacade()->unpublish($conditionalAvailabilityIds);
