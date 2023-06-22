@@ -7,6 +7,7 @@ include:
   - bundles/conditional-availability-checkout-connector
   - bundles/conditional-availability-extension
   - bundles/conditional-availability-page-search-extension
+  - bundles/conditional-availability-page-search-rest-api
 
 suites:
   unit:

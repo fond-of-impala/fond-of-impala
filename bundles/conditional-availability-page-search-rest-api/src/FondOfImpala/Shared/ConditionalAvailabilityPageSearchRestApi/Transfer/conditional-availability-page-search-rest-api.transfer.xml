@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="RestConditionalAvailabilityPageSearchRequest"/>
+
+    <transfer name="RestConditionalAvailabilityPageSearchCollectionResponse">
+        <property name="conditionalAvailabilityPeriods" type="RestConditionalAvailabilityPeriod[]"/>
+        <property name="pagination" type="RestConditionalAvailabilityPageSearchPagination"/>
+        <property name="sort" type="RestConditionalAvailabilityPageSearchSort"/>
+    </transfer>
+
+    <transfer name="RestConditionalAvailabilityPeriod">
+        <property name="qty" type="int" />
+        <property name="sku" type="string" />
+        <property name="earliestDeliveryDate" type="string" />
+        <property name="originalStartAt" type="string" />
+        <property name="startAt" type="string" />
+        <property name="endAt" type="string" />
+        <property name="warehouseGroup" type="string" />
+    </transfer>
+
+    <transfer name="RestConditionalAvailabilityPageSearchPaginationSort">
+        <property name="sortParamNames" type="array" singular="sortParamNames"/>
+        <property name="sortParamLocalizedNames" type="array" singular="sortParamLocalizedNames"/>
+        <property name="currentSortParam" type="string"/>
+        <property name="currentSortOrder" type="string"/>
+    </transfer>
+
+    <transfer name="RestConditionalAvailabilityPageSearchPagination">
+        <property name="numFound" type="int" />
+        <property name="currentPage" type="int" />
+        <property name="maxPage" type="int" />
+        <property name="currentItemsPerPage" type="int" />
+    </transfer>
+</transfers>
