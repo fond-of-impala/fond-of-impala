@@ -6,7 +6,7 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\Condit
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
-use Orm\Zed\ConditionalAvailability\Persistence\Base\FosConditionalAvailabilityPeriod;
+use Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod;
 
 class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAvailabilityPeriodPageSearchPublisherInterface
 {
@@ -63,41 +63,41 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
      */
     public function publish(array $conditionalAvailabilityIds): void
     {
-        $fosConditionalAvailabilityPeriodEntities = $this->queryContainer
+        $FoiConditionalAvailabilityPeriodEntities = $this->queryContainer
             ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
                 $conditionalAvailabilityIds,
             )->find()
             ->getData();
 
-        if (count($fosConditionalAvailabilityPeriodEntities) > 0) {
+        if (count($FoiConditionalAvailabilityPeriodEntities) > 0) {
             $this->entityManager->deleteConditionalAvailabilityPeriodSearchPagesByConditionalAvailabilityIds(
                 $conditionalAvailabilityIds,
             );
         }
 
-        $this->storeData($fosConditionalAvailabilityPeriodEntities);
+        $this->storeData($FoiConditionalAvailabilityPeriodEntities);
     }
 
     /**
-     * @param array<\Orm\Zed\ConditionalAvailability\Persistence\Base\FosConditionalAvailabilityPeriod> $fosConditionalAvailabilityPeriodEntities
+     * @param array<\Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod> $FoiConditionalAvailabilityPeriodEntities
      *
      * @return void
      */
-    protected function storeData(array $fosConditionalAvailabilityPeriodEntities): void
+    protected function storeData(array $FoiConditionalAvailabilityPeriodEntities): void
     {
-        foreach ($fosConditionalAvailabilityPeriodEntities as $fosConditionalAvailabilityPeriodEntity) {
-            $this->storeDataSet($fosConditionalAvailabilityPeriodEntity);
+        foreach ($FoiConditionalAvailabilityPeriodEntities as $FoiConditionalAvailabilityPeriodEntity) {
+            $this->storeDataSet($FoiConditionalAvailabilityPeriodEntity);
         }
     }
 
     /**
-     * @param \Orm\Zed\ConditionalAvailability\Persistence\Base\FosConditionalAvailabilityPeriod $fosConditionalAvailabilityPeriodEntity
+     * @param \Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod $FoiConditionalAvailabilityPeriodEntity
      *
      * @return void
      */
-    protected function storeDataSet(FosConditionalAvailabilityPeriod $fosConditionalAvailabilityPeriodEntity): void
+    protected function storeDataSet(FoiConditionalAvailabilityPeriod $FoiConditionalAvailabilityPeriodEntity): void
     {
-        $conditionalAvailabilityPeriodData = $fosConditionalAvailabilityPeriodEntity->toArray();
+        $conditionalAvailabilityPeriodData = $FoiConditionalAvailabilityPeriodEntity->toArray();
 
         $conditionalAvailabilityPeriodPageSearchTransfer = (new ConditionalAvailabilityPeriodPageSearchTransfer())
             ->fromArray($conditionalAvailabilityPeriodData, true)

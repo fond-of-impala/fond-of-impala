@@ -4,7 +4,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\Plugi
 
 use FondOfImpala\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use FondOfImpala\Zed\ConditionalAvailability\Dependency\ConditionalAvailabilityEvents;
-use Orm\Zed\ConditionalAvailability\Persistence\Map\FosConditionalAvailabilityTableMap;
+use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityTableMap;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Spryker\Zed\EventBehavior\Dependency\Plugin\EventResourceQueryContainerPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -38,7 +38,7 @@ class ConditionalAvailabilityEventResourceQueryContainerPlugin extends AbstractP
      */
     public function getIdColumnName(): ?string
     {
-        return FosConditionalAvailabilityTableMap::COL_ID_CONDITIONAL_AVAILABILITY;
+        return FoiConditionalAvailabilityTableMap::COL_ID_CONDITIONAL_AVAILABILITY;
     }
 
     /**

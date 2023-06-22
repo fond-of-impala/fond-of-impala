@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence;
 
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
-use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearch;
+use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearch;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -37,13 +37,13 @@ class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManag
     public function createConditionalAvailabilityPeriodPageSearch(
         ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
     ): void {
-        $fosConditionalAvailabilityPeriodPageSearch = $this->getFactory()
+        $FoiConditionalAvailabilityPeriodPageSearch = $this->getFactory()
             ->createConditionalAvailabilityPeriodPageSearchMapper()
             ->mapTransferToEntity(
                 $conditionalAvailabilityPeriodPageSearchTransfer,
-                new FosConditionalAvailabilityPeriodPageSearch(),
+                new FoiConditionalAvailabilityPeriodPageSearch(),
             );
 
-        $fosConditionalAvailabilityPeriodPageSearch->save();
+        $FoiConditionalAvailabilityPeriodPageSearch->save();
     }
 }

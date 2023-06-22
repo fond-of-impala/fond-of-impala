@@ -5,8 +5,8 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge;
-use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery;
-use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery;
+use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery;
+use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -101,7 +101,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     protected function addConditionalAvailabilityPeriodPropelQuery(Container $container): Container
     {
         $container[static::PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD] = static function () {
-            return FosConditionalAvailabilityPeriodQuery::create();
+            return FoiConditionalAvailabilityPeriodQuery::create();
         };
 
         return $container;
@@ -187,7 +187,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     protected function addConditionalAvailabilityPropelQuery(Container $container): Container
     {
         $container[static::PROPEL_QUERY_CONDITIONAL_AVAILABILITY] = static function () {
-            return FosConditionalAvailabilityQuery::create();
+            return FoiConditionalAvailabilityQuery::create();
         };
 
         return $container;

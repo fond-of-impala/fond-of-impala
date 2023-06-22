@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\Plugin\Event\Listener;
 
 use FondOfImpala\Zed\ConditionalAvailability\Dependency\ConditionalAvailabilityEvents;
-use Orm\Zed\ConditionalAvailability\Persistence\Map\FosConditionalAvailabilityPeriodTableMap;
+use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityPeriodTableMap;
 use Spryker\Zed\Event\Dependency\Plugin\EventBulkHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
@@ -32,7 +32,7 @@ class ConditionalAvailabilityPeriodPageSearchListener extends AbstractPlugin imp
             ->getEventBehaviorFacade()
             ->getEventTransferForeignKeys(
                 $eventTransfers,
-                FosConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY,
+                FoiConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY,
             );
 
         if (!$conditionalAvailabilityIds) {

@@ -5,9 +5,9 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodPageSearchMapper;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodPageSearchMapperInterface;
-use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery;
-use Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery;
-use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearchQuery;
+use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery;
+use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery;
+use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearchQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
@@ -19,25 +19,25 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class ConditionalAvailabilityPageSearchPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FosConditionalAvailabilityPeriodPageSearchQuery
+     * @return \Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearchQuery
      */
-    public function createConditionalAvailabilityPeriodPageSearchQuery(): FosConditionalAvailabilityPeriodPageSearchQuery
+    public function createConditionalAvailabilityPeriodPageSearchQuery(): FoiConditionalAvailabilityPeriodPageSearchQuery
     {
-        return FosConditionalAvailabilityPeriodPageSearchQuery::create();
+        return FoiConditionalAvailabilityPeriodPageSearchQuery::create();
     }
 
     /**
-     * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityPeriodQuery
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery
      */
-    public function getConditionalAvailabilityPeriodPropelQuery(): FosConditionalAvailabilityPeriodQuery
+    public function getConditionalAvailabilityPeriodPropelQuery(): FoiConditionalAvailabilityPeriodQuery
     {
         return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD);
     }
 
     /**
-     * @return \Orm\Zed\ConditionalAvailability\Persistence\FosConditionalAvailabilityQuery
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery
      */
-    public function getConditionalAvailabilityPropelQuery(): FosConditionalAvailabilityQuery
+    public function getConditionalAvailabilityPropelQuery(): FoiConditionalAvailabilityQuery
     {
         return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PROPEL_QUERY_CONDITIONAL_AVAILABILITY);
     }
