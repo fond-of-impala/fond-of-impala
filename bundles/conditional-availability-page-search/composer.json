@@ -1,0 +1,49 @@
+{
+  "name": "fond-of-impala/conditional-availability-page-search",
+  "description": "Conditional availability page search module.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    },
+    {
+      "name": "József Geng",
+      "email": "gengjozsef86@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "fond-of-impala/conditional-availability-page-search-extension": "dev-master",
+    "fond-of-impala/conditional-availability": "dev-master",
+    "spryker/customer": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0",
+    "spryker/event": "^1.0.0 || ^2.0.0",
+    "spryker/event-behavior": "^1.0.0",
+    "spryker/search": "^8.10.0",
+    "spryker/synchronization-extension": "^1.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "^1.0 || ^2.0",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

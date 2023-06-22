@@ -1,0 +1,54 @@
+{
+  "mappings": {
+    "conditional-availability-period": {
+      "dynamic_templates": [
+        {
+          "search-result-data": {
+            "mapping": {
+              "index": "false"
+            },
+            "path_match": "search-result-data.*"
+          }
+        }
+      ],
+      "properties": {
+        "search-result-data": {
+          "type": "object",
+          "properties": {
+
+          }
+        },
+        "store": {
+          "type": "keyword"
+        },
+        "locale": {
+          "type": "keyword"
+        },
+        "sku": {
+          "type": "keyword"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "warehouse-group": {
+          "type": "keyword"
+        },
+        "is-accessible": {
+          "type": "boolean"
+        },
+        "original-start-at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"
+        },
+        "start-at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"
+        },
+        "end-at": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss.SSSSSS"
+        }
+      }
+    }
+  }
+}
