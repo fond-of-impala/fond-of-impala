@@ -40,6 +40,8 @@
     "spryker/checkout-extension": "^1.2.0",
     "spryker/event": "^1.0.0 || ^2.0.0",
     "spryker/event-behavior": "^1.0.0",
+    "spryker/glue-application": "^1.0.0",
+    "spryker/glue-application-extension": "^1.0.0",
     "spryker/log": "^3.0.0",
     "spryker/product": "^6.4.0",
     "spryker/quote-extension": "^1.2.0",
