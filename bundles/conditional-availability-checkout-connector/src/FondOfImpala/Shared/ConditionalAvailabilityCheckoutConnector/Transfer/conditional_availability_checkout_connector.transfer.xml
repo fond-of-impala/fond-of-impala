@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+    <transfer name="Quote">
+        <property name="items" type="Item[]" singular="item"/>
+        <property name="customer" type="Customer"/>
+    </transfer>
+
+    <transfer name="Customer">
+        <property name="hasAvailabilityRestrictions" type="boolean"/>
+    </transfer>
+
+    <transfer name="Item">
+        <property name="sku" type="string"/>
+        <property name="quantity" type="int"/>
+        <property name="concreteDeliveryDate" type="string"/>
+    </transfer>
+
+    <transfer name="CheckoutError">
+        <property name="errorType" type="string"/>
+        <property name="errorCode" type="int" />
+        <property name="message" type="string" />
+        <property name="parameters" type="array"/>
+    </transfer>
+
+    <transfer name="CheckoutResponse">
+        <property name="isSuccess" type="bool" />
+        <property name="errors" type="CheckoutError[]" singular="error" />
+    </transfer>
+</transfers>

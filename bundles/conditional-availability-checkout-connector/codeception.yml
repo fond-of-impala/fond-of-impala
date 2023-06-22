@@ -1,12 +1,4 @@
-namespace: fond-of-impala/fond-of-impala
-
-include:
-  - bundles/conditional-availability
-  - bundles/conditional-availability-bulk-api
-  - bundles/conditional-availability-cart-connector
-  - bundles/conditional-availability-checkout-connector
-  - bundles/conditional-availability-extension
-  - bundles/conditional-availability-page-search-extension
+namespace: fond-of-impala/conditional-availability-checkout-connector
 
 suites:
   unit:
@@ -26,6 +18,8 @@ paths:
 
 coverage:
   enabled: true
+  include:
+    - src/*.php
 
 modules:
   enabled:
@@ -38,7 +32,7 @@ modules:
       generate_ide_auto_completion: false
 
 env:
-  monorepo:
+  standalone:
     modules:
       config:
         \FondOfCodeception\Module\Spryker:
@@ -46,8 +40,4 @@ env:
           generate_map_classes: true
           generate_propel_classes: true
           generate_ide_auto_completion: true
-          ide_auto_completion_source_directories:
-            './bundles/*/src/': '*/*/'
-            './vendor/fond-of-spryker/*/src/': '*/*/'
-          supported_source_identifiers:
-            - page
+  monorepo:
