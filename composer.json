@@ -71,7 +71,8 @@
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearch\\": "bundles/conditional-availability-page-search/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/src/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
-      "FondOfImpala\\Glue\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/src/FondOfImpala/Glue/ConditionalAvailabilityPageSearchRestApiExtension"
+      "FondOfImpala\\Glue\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/src/FondOfImpala/Glue/ConditionalAvailabilityPageSearchRestApiExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchRestApiExtension"
     }
   },
   "autoload-dev": {
@@ -95,6 +96,7 @@
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Zed\\ConditionalAvailabilityPageSearchExtension\\": "bundles/conditional-availability-page-search-extension/tests/FondOfImpala/Zed/ConditionalAvailabilityPageSearchExtension",
       "FondOfImpala\\Glue\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/tests/FondOfImpala/Glue/ConditionalAvailabilityPageSearchRestApiExtension",
+      "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchRestApiExtension",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }
