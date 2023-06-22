@@ -57,7 +57,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
         EventCollectionInterface $eventCollection
     ): void {
         $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_DELETE,
+            ConditionalAvailabilityEvents::ENTITY_foi_CONDITIONAL_AVAILABILITY_DELETE,
             new ConditionalAvailabilityPageSearchListener(),
         );
     }
@@ -85,7 +85,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
         EventCollectionInterface $eventCollection
     ): void {
         $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_CREATE,
+            ConditionalAvailabilityEvents::ENTITY_foi_CONDITIONAL_AVAILABILITY_PERIOD_CREATE,
             new ConditionalAvailabilityPeriodPageSearchListener(),
         );
     }
@@ -99,7 +99,7 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
         EventCollectionInterface $eventCollection
     ): void {
         $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOS_CONDITIONAL_AVAILABILITY_PERIOD_UPDATE,
+            ConditionalAvailabilityEvents::ENTITY_foi_CONDITIONAL_AVAILABILITY_PERIOD_UPDATE,
             new ConditionalAvailabilityPeriodPageSearchListener(),
         );
     }
