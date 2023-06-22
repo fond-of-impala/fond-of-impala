@@ -9,6 +9,7 @@ include:
   - bundles/conditional-availability-page-search
   - bundles/conditional-availability-page-search-extension
   - bundles/conditional-availability-page-search-rest-api
+  - bundles/conditional-availability-sales-connector
 
 suites:
   unit:
