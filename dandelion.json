@@ -10,10 +10,6 @@
     "conditional-availability-extension": {
       "path": "bundles/conditional-availability-extension",
       "version": "1.0.0"
-    },
-    "conditional-availability-page-search-extension": {
-      "path": "bundles/conditional-availability-page-search-extension",
-      "version": "1.0.0"
     }
   },
   "vcs": {
