@@ -5,7 +5,7 @@
           namespace="Orm\Zed\ConditionalAvailabilityPageSearch\Persistence"
           package="src.Orm.Zed.ConditionalAvailabilityPageSearch.Persistence">
 
-    <table name="fos_conditional_availability_period_page_search" identifierQuoting="true">
+    <table name="foi_conditional_availability_period_page_search" identifierQuoting="true">
         <column name="fk_conditional_availability" type="INTEGER" required="true" primaryKey="true"/>
         <column name="start_at" required="true" type="TIMESTAMP" primaryKey="true"/>
         <column name="end_at" required="true" type="TIMESTAMP" primaryKey="true"/>
@@ -15,15 +15,15 @@
         <column name="data" type="LONGVARCHAR" required="false"/>
         <column name="key" type="VARCHAR" required="true"/>
 
-        <index name="fos_conditional_availability_period_page_search-fk_conditional_availability">
+        <index name="foi_conditional_availability_period_page_search-fk_conditional_availability">
             <index-column name="fk_conditional_availability"/>
         </index>
 
-        <index name="fos_conditional_availability_period_page_search-conditional_availability_period_key">
+        <index name="foi_conditional_availability_period_page_search-conditional_availability_period_key">
             <index-column name="conditional_availability_period_key"/>
         </index>
 
-        <id-method-parameter value="fos_conditional_availability_period_page_search_pk_seq"/>
+        <id-method-parameter value="foi_conditional_availability_period_page_search_pk_seq"/>
 
         <behavior name="synchronization">
             <parameter name="resource" value="conditional_availability_period"/>
