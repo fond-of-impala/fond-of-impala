@@ -7,9 +7,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteExpanderPluginInterface;
 
 /**
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Communication\ConditionalAvailabilityCartConnectorCommunicationFactory getFactory()
  */
 class ConditionalAvailabilityQuoteExpanderPlugin extends AbstractPlugin implements QuoteExpanderPluginInterface
 {

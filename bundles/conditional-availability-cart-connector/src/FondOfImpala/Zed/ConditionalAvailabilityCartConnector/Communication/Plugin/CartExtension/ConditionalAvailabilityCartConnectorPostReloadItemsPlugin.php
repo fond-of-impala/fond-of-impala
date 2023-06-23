@@ -8,8 +8,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig getConfig()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Communication\ConditionalAvailabilityCartConnectorCommunicationFactory getFactory()
  */
 class ConditionalAvailabilityCartConnectorPostReloadItemsPlugin extends AbstractPlugin implements PostReloadItemsPluginInterface
 {

@@ -10,8 +10,6 @@ use Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteWritePluginInterface;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig getConfig()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Communication\ConditionalAvailabilityCartConnectorCommunicationFactory getFactory()
  */
 class DeliveryDateCleanerOnEmptyCartQuoteAfterSavePlugin extends AbstractPlugin implements QuoteWritePluginInterface
 {

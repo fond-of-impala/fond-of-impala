@@ -51,23 +51,15 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
     protected $conditionalAvailabilityService;
 
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\CustomerReaderInterface
-     */
-    protected $customerReader;
-
-    /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\CustomerReaderInterface $customerReader
      */
     public function __construct(
         ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade,
-        ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService,
-        CustomerReaderInterface $customerReader
+        ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService
     ) {
         $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
         $this->conditionalAvailabilityService = $conditionalAvailabilityService;
-        $this->customerReader = $customerReader;
     }
 
     /**
@@ -276,12 +268,9 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
             return new ArrayObject();
         }
 
-        $isAccessible = $this->getIsAccessibleByQuoteTransfer($quoteTransfer);
-
         $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
             ->setSkus($skus)
             ->setWarehouseGroup('EU')
-            ->setIsAccessible($isAccessible)
             ->setMinimumQuantity(1);
 
         return $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilities(
@@ -303,23 +292,5 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
         }
 
         return array_unique($skus);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return bool|null
-     */
-    protected function getIsAccessibleByQuoteTransfer(QuoteTransfer $quoteTransfer): ?bool
-    {
-        $customerTransfer = $quoteTransfer->getCustomer();
-
-        if ($customerTransfer === null) {
-            $customerTransfer = $this->customerReader->getCustomerByCustomerReference(
-                $quoteTransfer->getCustomerReference(),
-            );
-        }
-
-        return $customerTransfer->getHasAvailabilityRestrictions() === true ? true : null;
     }
 }
