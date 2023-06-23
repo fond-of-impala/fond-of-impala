@@ -27,11 +27,13 @@
     "fond-of-impala/conditional-availability-page-search-rest-api": "*",
     "fond-of-impala/conditional-availability-page-search-rest-api-extension": "*",
     "fond-of-impala/conditional-availability-sales-connector": "*",
+    "fond-of-impala/jellyfish-sales-order-conditional-availability": "*",
     "fond-of-impala/product-list-conditional-availability-page-search": "*"
   },
   "require": {
     "php": ">=8.0",
     "fond-of-spryker/company-user-carts-rest-api": "dev-master",
+    "fond-of-oryx/jellyfish-sales-order-extension": "^1.0.0 || ^2.0.0",
     "spryker/api": "^0.4.0",
     "spryker/api-extension": "^0.1.0",
     "spryker/api-query-builder": "^0.1.0",
@@ -83,6 +85,8 @@
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/src/FondOfImpala/Shared/ConditionalAvailabilityPageSearchRestApiExtension",
       "FondOfImpala\\Shared\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/src/FondOfImpala/Shared/ConditionalAvailabilitySalesConnector",
       "FondOfImpala\\Zed\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/src/FondOfImpala/Zed/ConditionalAvailabilitySalesConnector",
+      "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
+      "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch"
@@ -114,6 +118,8 @@
       "FondOfImpala\\Shared\\ConditionalAvailabilityPageSearchRestApiExtension\\": "bundles/conditional-availability-page-search-rest-api-extension/tests/FondOfImpala/Shared/ConditionalAvailabilityPageSearchRestApiExtension",
       "FondOfImpala\\Shared\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/tests/FondOfImpala/Shared/ConditionalAvailabilitySalesConnector",
       "FondOfImpala\\Zed\\ConditionalAvailabilitySalesConnector\\": "bundles/conditional-availability-sales-connector/tests/FondOfImpala/Zed/ConditionalAvailabilitySalesConnector",
+      "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/tests/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
+      "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/tests/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch",
