@@ -16,7 +16,6 @@
     <transfer name="ConditionalAvailability">
         <property name="idConditionalAvailability" type="int"/>
         <property name="fkProduct" type="int"/>
-        <property name="isAccessible" type="bool" />
         <property name="warehouseGroup" type="string"/>
         <property name="conditionalAvailabilityPeriodCollection" type="ConditionalAvailabilityPeriodCollection" />
     </transfer>
