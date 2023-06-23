@@ -5,10 +5,10 @@
           namespace="Orm\Zed\ConditionalAvailability\Persistence"
           package="src.Orm.Zed.ConditionalAvailability.Persistence">
     <table name="foi_conditional_availability" phpName="FoiConditionalAvailability">
-        <column name="id_conditional_availability" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="id_conditional_availability" required="true" type="INTEGER" autoIncrement="true"
+                primaryKey="true"/>
         <column name="warehouse_group" type="VARCHAR" size="255" required="true"/>
         <column name="fk_product" type="INTEGER" required="true"/>
-        <column name="is_accessible" type="BOOLEAN" defaultValue="false"/>
 
         <foreign-key name="foi_conditional_availability-fk_product" foreignTable="spy_product" phpName="SpyProduct">
             <reference local="fk_product" foreign="id_product"/>
@@ -46,7 +46,9 @@
             <index-column name="fk_conditional_availability"/>
         </index>
 
-        <foreign-key name="foi_conditional_availability_period-fk_conditional_availability" foreignTable="foi_conditional_availability" phpName="FoiConditionalAvailability" onDelete="CASCADE">
+        <foreign-key name="foi_conditional_availability_period-fk_conditional_availability"
+                     foreignTable="foi_conditional_availability" phpName="FoiConditionalAvailability"
+                     onDelete="CASCADE">
             <reference local="fk_conditional_availability" foreign="id_conditional_availability"/>
         </foreign-key>
 

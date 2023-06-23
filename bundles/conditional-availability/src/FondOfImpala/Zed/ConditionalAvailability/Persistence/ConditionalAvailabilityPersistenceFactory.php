@@ -11,8 +11,9 @@ use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface getEntityManager()
- * @method \FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepositoryInterface getRepository()
  */
 class ConditionalAvailabilityPersistenceFactory extends AbstractPersistenceFactory
