@@ -7,6 +7,9 @@ use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityCheckoutConnectorDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -29,9 +32,8 @@ class ConditionalAvailabilityCheckoutConnectorDependencyProvider extends Abstrac
         $container = parent::provideBusinessLayerDependencies($container);
 
         $container = $this->addConditionalAvailabilityFacade($container);
-        $container = $this->addConditionalAvailabilityService($container);
 
-        return $container;
+        return $this->addConditionalAvailabilityService($container);
     }
 
     /**
@@ -41,11 +43,11 @@ class ConditionalAvailabilityCheckoutConnectorDependencyProvider extends Abstrac
      */
     protected function addConditionalAvailabilityFacade(Container $container): Container
     {
-        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
-                $container->getLocator()->conditionalAvailability()->facade(),
-            );
-        };
+        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ) => new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
+            $container->getLocator()->conditionalAvailability()->facade(),
+        );
 
         return $container;
     }
@@ -57,11 +59,11 @@ class ConditionalAvailabilityCheckoutConnectorDependencyProvider extends Abstrac
      */
     protected function addConditionalAvailabilityService(Container $container): Container
     {
-        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceBridge(
-                $container->getLocator()->conditionalAvailability()->service(),
-            );
-        };
+        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ) => new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceBridge(
+            $container->getLocator()->conditionalAvailability()->service(),
+        );
 
         return $container;
     }
