@@ -56,7 +56,7 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
     public function testGetConditionalAvailabilityIdsByConcreteIds(): void
     {
         static::assertIsArray(
-            $this->facade->getConditionalAvailabilityIdsByConcreteIds([1])
+            $this->facade->getConditionalAvailabilityIdsByConcreteIds([1]),
         );
     }
 

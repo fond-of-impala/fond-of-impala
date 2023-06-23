@@ -7,8 +7,8 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPa
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
-use Spryker\Zed\Kernel\Container;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
 {

@@ -4,8 +4,8 @@ namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
-use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 
 class ConditionalAvailabilityPageSearchClientTest extends Unit
 {
@@ -55,8 +55,6 @@ class ConditionalAvailabilityPageSearchClientTest extends Unit
      */
     public function testSearch(): void
     {
-        $searchString = 'search-string';
-
         $this->factoryMock->expects($this->atLeastOnce())
             ->method('createSearchQuery')
             ->willReturn($this->queryMock);
@@ -83,8 +81,6 @@ class ConditionalAvailabilityPageSearchClientTest extends Unit
             ->with($this->queryMock, [], [])
             ->willReturn([]);
 
-        static::assertIsArray(
-            $this->client->search($searchString),
-        );
+        static::assertIsArray($this->client->search('search-string'));
     }
 }

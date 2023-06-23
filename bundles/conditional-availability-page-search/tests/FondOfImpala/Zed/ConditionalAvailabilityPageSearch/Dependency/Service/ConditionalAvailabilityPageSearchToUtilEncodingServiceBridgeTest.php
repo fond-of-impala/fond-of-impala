@@ -3,8 +3,8 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service;
 
 use Codeception\Test\Unit;
-use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends Unit
 {
@@ -59,7 +59,6 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
             ->with($encodedJsonString)
             ->willReturn([]);
 
-        static::assertIsArray($this->bridge->decodeJson($encodedJsonString));
         static::assertEquals([], $this->bridge->decodeJson($encodedJsonString));
     }
 }

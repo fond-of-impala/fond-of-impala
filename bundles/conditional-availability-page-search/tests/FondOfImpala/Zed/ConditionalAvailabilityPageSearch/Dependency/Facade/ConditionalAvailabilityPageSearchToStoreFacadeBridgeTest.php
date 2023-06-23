@@ -4,8 +4,8 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\StoreTransfer;
-use Spryker\Zed\Store\Business\StoreFacadeInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
 {

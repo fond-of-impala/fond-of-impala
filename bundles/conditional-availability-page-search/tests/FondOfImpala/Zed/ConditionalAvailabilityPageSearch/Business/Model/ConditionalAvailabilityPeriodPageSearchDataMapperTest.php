@@ -16,7 +16,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
     protected ConditionalAvailabilityPeriodPageSearchDataMapper $mapper;
 
     /**
-     * @var array<int,\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
+     * @var array<int, \FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
     protected $pluginMocks;
 
@@ -80,8 +80,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
                 'start_at' => '2020-02-01 00:00:00.000000',
                 'end_at' => '2020-02-29 00:00:00.000000',
                 'store' => 'store',
-            ],
-        );
+            ]);
 
         static::assertArrayHasKey('start-at', $searchData);
         static::assertArrayHasKey('end-at', $searchData);

@@ -4,9 +4,9 @@ namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchFactoryTest extends Unit
 {

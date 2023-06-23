@@ -4,8 +4,8 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
-use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends Unit
 {
@@ -37,7 +37,6 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
             ->disableOriginalConstructor()
             ->getMock();
 
-
         $this->bridge = new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge($this->eventBehaviorFacadeMock);
     }
 
@@ -53,9 +52,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
             ->with($eventTransfers)
             ->willReturn([]);
 
-        static::assertIsArray(
-            $this->bridge->getEventTransferIds($eventTransfers),
-        );
+        static::assertEquals([], $this->bridge->getEventTransferIds($eventTransfers));
     }
 
     /**
@@ -71,8 +68,6 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
             ->with($eventTransfers, $foreignKeyColumnName)
             ->willReturn([]);
 
-        static::assertIsArray(
-            $this->bridge->getEventTransferForeignKeys($eventTransfers, $foreignKeyColumnName),
-        );
+        static::assertEquals([], $this->bridge->getEventTransferForeignKeys($eventTransfers, $foreignKeyColumnName));
     }
 }

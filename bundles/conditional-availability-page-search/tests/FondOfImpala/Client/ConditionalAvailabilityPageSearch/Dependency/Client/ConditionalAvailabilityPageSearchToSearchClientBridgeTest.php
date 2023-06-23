@@ -3,9 +3,9 @@
 namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Search\SearchClientInterface;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
 {

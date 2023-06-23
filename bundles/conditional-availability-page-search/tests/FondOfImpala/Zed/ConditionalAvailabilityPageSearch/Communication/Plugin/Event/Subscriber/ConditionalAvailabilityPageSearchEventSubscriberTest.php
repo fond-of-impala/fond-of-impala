@@ -3,9 +3,9 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\Plugin\Event\Subscriber;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Event\Dependency\EventCollection;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchEventSubscriberTest extends Unit
 {

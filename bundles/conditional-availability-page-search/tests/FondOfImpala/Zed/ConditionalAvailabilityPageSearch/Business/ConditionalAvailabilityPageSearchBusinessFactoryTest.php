@@ -10,8 +10,8 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManager;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainer;
-use Spryker\Zed\Kernel\Container;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
 {
