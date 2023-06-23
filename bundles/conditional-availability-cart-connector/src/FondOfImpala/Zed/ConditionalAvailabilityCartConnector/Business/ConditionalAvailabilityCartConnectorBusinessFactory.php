@@ -13,18 +13,13 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\CustomerReader;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\CustomerReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig getConfig()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Persistence\ConditionalAvailabilityCartConnectorRepositoryInterface getRepository()
  */
 class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusinessFactory
 {
@@ -36,18 +31,6 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
         return new ConditionalAvailabilityExpander(
             $this->getConditionalAvailabilityFacade(),
             $this->getConditionalAvailabilityService(),
-            $this->createCustomerReader(),
-        );
-    }
-
-    /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\CustomerReaderInterface
-     */
-    protected function createCustomerReader(): CustomerReaderInterface
-    {
-        return new CustomerReader(
-            $this->getRepository(),
-            $this->getCustomerFacade(),
         );
     }
 
@@ -102,16 +85,6 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     {
         return $this->getProvidedDependency(
             ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY,
-        );
-    }
-
-    /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface
-     */
-    protected function getCustomerFacade(): ConditionalAvailabilityCartConnectorToCustomerFacadeInterface
-    {
-        return $this->getProvidedDependency(
-            ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER,
         );
     }
 }

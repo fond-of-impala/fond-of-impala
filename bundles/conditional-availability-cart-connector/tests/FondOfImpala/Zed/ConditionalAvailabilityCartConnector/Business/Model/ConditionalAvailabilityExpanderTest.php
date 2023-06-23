@@ -11,7 +11,6 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\Con
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -33,11 +32,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
     protected $conditionalAvailabilityServiceInterfaceMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\CustomerReaderInterface
-     */
-    protected $customerReaderInterfaceMock;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
      */
     protected $quoteTransferMock;
@@ -56,11 +50,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
      * @var string
      */
     protected $sku;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
-     */
-    protected $customerTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityTransfer
@@ -113,11 +102,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
     protected $concreteDeliveryDate;
 
     /**
-     * @var string
-     */
-    protected $customerReference;
-
-    /**
      * @return void
      */
     protected function _before(): void
@@ -127,10 +111,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityServiceInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->customerReaderInterfaceMock = $this->getMockBuilder(CustomerReaderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -147,10 +127,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
         ];
 
         $this->sku = 'sku';
-
-        $this->customerTransferMock = $this->getMockBuilder(CustomerTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
 
         $this->conditionalAvailabilityTransferMock = $this->getMockBuilder(ConditionalAvailabilityTransfer::class)
             ->disableOriginalConstructor()
@@ -184,12 +160,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
 
         $this->concreteDeliveryDate = new DateTime();
 
-        $this->customerReference = 'customer-reference';
-
         $this->conditionalAvailabilityExpander = new ConditionalAvailabilityExpander(
             $this->conditionalAvailabilityFacadeInterfaceMock,
             $this->conditionalAvailabilityServiceInterfaceMock,
-            $this->customerReaderInterfaceMock,
         );
     }
 
@@ -205,23 +178,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($this->sku);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn(null);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomerReference')
-            ->willReturn($this->customerReference);
-
-        $this->customerReaderInterfaceMock->expects(static::atLeastOnce())
-            ->method('getCustomerByCustomerReference')
-            ->with($this->customerReference)
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
 
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
@@ -321,14 +277,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($this->sku);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
-
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->willReturn($this->conditionalAvailabilityTransferMocks);
@@ -402,14 +350,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($this->sku);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
-
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->willReturn($this->conditionalAvailabilityTransferMocks);
@@ -463,14 +403,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($this->sku);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
-
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->willReturn(new ArrayObject([]));
@@ -519,14 +451,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($this->sku);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
 
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
@@ -601,14 +525,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($this->sku);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
-
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->willReturn($this->conditionalAvailabilityTransferMocks);
@@ -678,14 +594,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($this->sku);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
-
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->willReturn(new ArrayObject([]));
@@ -734,14 +642,6 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($this->sku);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
 
         $this->conditionalAvailabilityFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
