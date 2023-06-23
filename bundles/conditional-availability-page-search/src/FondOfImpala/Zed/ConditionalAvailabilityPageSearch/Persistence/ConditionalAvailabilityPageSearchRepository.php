@@ -6,6 +6,8 @@ use Generated\Shared\Transfer\FilterTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchPersistenceFactory getFactory()
  */
 class ConditionalAvailabilityPageSearchRepository extends AbstractRepository implements ConditionalAvailabilityPageSearchRepositoryInterface
