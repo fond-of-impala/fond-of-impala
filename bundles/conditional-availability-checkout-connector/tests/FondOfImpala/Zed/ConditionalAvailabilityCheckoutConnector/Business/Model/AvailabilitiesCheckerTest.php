@@ -11,7 +11,6 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -51,11 +50,6 @@ class AvailabilitiesCheckerTest extends Unit
      * @var string
      */
     protected $sku;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
-     */
-    protected $customerTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityTransfer
@@ -143,10 +137,6 @@ class AvailabilitiesCheckerTest extends Unit
 
         $this->sku = 'sku';
 
-        $this->customerTransferMock = $this->getMockBuilder(CustomerTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->conditionalAvailabilityTransferMock = $this->getMockBuilder(ConditionalAvailabilityTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -197,14 +187,6 @@ class AvailabilitiesCheckerTest extends Unit
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($this->sku);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
@@ -262,14 +244,6 @@ class AvailabilitiesCheckerTest extends Unit
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($this->sku);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
@@ -337,14 +311,6 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('getSku')
             ->willReturn($this->sku);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
-
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->willReturn(new ArrayObject([]));
@@ -378,14 +344,6 @@ class AvailabilitiesCheckerTest extends Unit
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($this->sku);
-
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
-            ->willReturn($this->customerTransferMock);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getHasAvailabilityRestrictions')
-            ->willReturn(false);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')

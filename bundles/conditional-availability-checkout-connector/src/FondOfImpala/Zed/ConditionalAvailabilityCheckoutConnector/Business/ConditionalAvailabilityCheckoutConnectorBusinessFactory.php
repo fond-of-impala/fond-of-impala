@@ -9,9 +9,6 @@ use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
-/**
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\ConditionalAvailabilityCheckoutConnectorConfig getConfig()
- */
 class ConditionalAvailabilityCheckoutConnectorBusinessFactory extends AbstractBusinessFactory
 {
     /**
