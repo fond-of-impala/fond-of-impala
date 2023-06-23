@@ -11,6 +11,8 @@ use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabi
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface getEntityManager()
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface getQueryContainer()

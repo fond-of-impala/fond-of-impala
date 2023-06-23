@@ -4,6 +4,9 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityPageSearchConfig extends AbstractBundleConfig
 {
     /**

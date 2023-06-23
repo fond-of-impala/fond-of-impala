@@ -3,7 +3,6 @@
 namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
@@ -26,11 +25,6 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
     protected $conditionalAvailabilityPageSearchToSearchClientInterfaceMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface
-     */
-    protected $conditionalAvailabilityPageSearchToCustomerClientInterfaceMock;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryInterface
      */
     protected $queryInterfaceMock;
@@ -50,10 +44,6 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityPageSearchToSearchClientInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToSearchClientInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->conditionalAvailabilityPageSearchToCustomerClientInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToCustomerClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -84,26 +74,6 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
         $this->assertInstanceOf(
             ConditionalAvailabilityPageSearchToSearchClientInterface::class,
             $this->conditionalAvailabilityPageSearchFactory->getSearchClient(),
-        );
-    }
-
-    /**
-     * @return void
-     */
-    public function testGetCustomerClient(): void
-    {
-        $this->containerMock->expects($this->atLeastOnce())
-            ->method('has')
-            ->willReturn(true);
-
-        $this->containerMock->expects($this->atLeastOnce())
-            ->method('get')
-            ->with(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_CUSTOMER)
-            ->willReturn($this->conditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
-
-        $this->assertInstanceOf(
-            ConditionalAvailabilityPageSearchToCustomerClientInterface::class,
-            $this->conditionalAvailabilityPageSearchFactory->getCustomerClient(),
         );
     }
 

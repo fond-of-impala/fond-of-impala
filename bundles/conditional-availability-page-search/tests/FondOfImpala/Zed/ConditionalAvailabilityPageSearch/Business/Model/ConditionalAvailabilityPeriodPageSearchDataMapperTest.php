@@ -81,13 +81,11 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
                 'original_start_at' => '2020-01-01 00:00:00.000000',
                 'start_at' => '2020-02-01 00:00:00.000000',
                 'end_at' => '2020-02-29 00:00:00.000000',
-                'is_accessible' => true,
                 'store' => 'EROTS',
             ],
         );
 
         $this->assertArrayHasKey('start-at', $searchData);
         $this->assertArrayHasKey('end-at', $searchData);
-        $this->assertArrayHasKey('is-accessible', $searchData);
     }
 }
