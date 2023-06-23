@@ -5,40 +5,31 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge
      */
-    protected $conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge;
+    protected $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
      */
-    protected $eventBehaviorFacadeInterfaceMock;
-
-    /**
-     * @var array<\Generated\Shared\Transfer\EventEntityTransfer>
-     */
-    protected $eventTransfers;
+    protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
      */
-    protected $eventEntityTransferMock;
-
-    /**
-     * @var string
-     */
-    protected $foreignKeyColumnName;
+    protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock = $this->getMockBuilder(EventBehaviorFacadeInterface::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(EventBehaviorFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -46,15 +37,8 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->eventTransfers = [
-            $this->eventEntityTransferMock,
-        ];
 
-        $this->foreignKeyColumnName = 'foreign-key-column-name';
-
-        $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge = new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
-            $this->eventBehaviorFacadeInterfaceMock,
-        );
+        $this->bridge = new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge($this->eventBehaviorFacadeMock);
     }
 
     /**
@@ -62,15 +46,15 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
      */
     public function testGetEventTransferIds(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock->expects($this->atLeastOnce())
+        $eventTransfers = [$this->eventEntityTransferMock];
+
+        $this->eventBehaviorFacadeMock->expects($this->atLeastOnce())
             ->method('getEventTransferIds')
-            ->with($this->eventTransfers)
+            ->with($eventTransfers)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge->getEventTransferIds(
-                $this->eventTransfers,
-            ),
+        static::assertIsArray(
+            $this->bridge->getEventTransferIds($eventTransfers),
         );
     }
 
@@ -79,16 +63,16 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
      */
     public function testGetEventTransferForeignKeys(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock->expects($this->atLeastOnce())
+        $eventTransfers = [$this->eventEntityTransferMock];
+        $foreignKeyColumnName = 'foreign-key-column-name';
+
+        $this->eventBehaviorFacadeMock->expects($this->atLeastOnce())
             ->method('getEventTransferForeignKeys')
-            ->with($this->eventTransfers, $this->foreignKeyColumnName)
+            ->with($eventTransfers, $foreignKeyColumnName)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridge->getEventTransferForeignKeys(
-                $this->eventTransfers,
-                $this->foreignKeyColumnName,
-            ),
+        static::assertIsArray(
+            $this->bridge->getEventTransferForeignKeys($eventTransfers, $foreignKeyColumnName),
         );
     }
 }

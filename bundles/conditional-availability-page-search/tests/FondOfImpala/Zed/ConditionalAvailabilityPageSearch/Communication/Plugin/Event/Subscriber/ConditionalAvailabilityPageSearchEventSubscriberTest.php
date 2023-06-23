@@ -3,30 +3,32 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\Plugin\Event\Subscriber;
 
 use Codeception\Test\Unit;
+use Spryker\Zed\Event\Dependency\EventCollection;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchEventSubscriberTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\Plugin\Event\Subscriber\ConditionalAvailabilityPageSearchEventSubscriber
      */
-    protected $conditionalAvailabilityPageSearchEventSubscriber;
+    protected ConditionalAvailabilityPageSearchEventSubscriber $subscriber;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected $eventCollectionInterfaceMock;
+    protected MockObject|EventCollectionInterface $eventCollectionMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->eventCollectionInterfaceMock = $this->getMockBuilder(EventCollectionInterface::class)
+        $this->eventCollectionMock = $this->getMockBuilder(EventCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchEventSubscriber = new ConditionalAvailabilityPageSearchEventSubscriber();
+        $this->subscriber = new ConditionalAvailabilityPageSearchEventSubscriber();
     }
 
     /**
@@ -34,11 +36,9 @@ class ConditionalAvailabilityPageSearchEventSubscriberTest extends Unit
      */
     public function testGetSubscribedEvents(): void
     {
-        $this->assertInstanceOf(
-            EventCollectionInterface::class,
-            $this->conditionalAvailabilityPageSearchEventSubscriber->getSubscribedEvents(
-                $this->eventCollectionInterfaceMock,
-            ),
+        static::assertInstanceOf(
+            EventCollection::class,
+            $this->subscriber->getSubscribedEvents($this->eventCollectionMock),
         );
     }
 }

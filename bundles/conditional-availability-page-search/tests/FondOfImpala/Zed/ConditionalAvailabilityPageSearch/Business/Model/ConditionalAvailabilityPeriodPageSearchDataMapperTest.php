@@ -6,28 +6,29 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface;
 use Generated\Shared\Transfer\StoreTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapper
      */
-    protected $conditionalAvailabilityPeriodPageSearchDataMapper;
+    protected ConditionalAvailabilityPeriodPageSearchDataMapper $mapper;
+
+    /**
+     * @var array<int,\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
+     */
+    protected $pluginMocks;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
      */
-    protected $storeFacadeMock;
+    protected MockObject|ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
      */
-    protected $storeTransferMock;
-
-    /**
-     * @var array<\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>|array<\PHPUnit\Framework\MockObject\MockObject>
-     */
-    protected $conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks;
+    protected MockObject|StoreTransfer $storeTransferMock;
 
     /**
      * @return void
@@ -44,16 +45,13 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks = [
+        $this->pluginMocks = [
             $this->getMockBuilder(ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface::class)
                 ->disableOriginalConstructor()
                 ->getMock(),
         ];
 
-        $this->conditionalAvailabilityPeriodPageSearchDataMapper = new ConditionalAvailabilityPeriodPageSearchDataMapper(
-            $this->storeFacadeMock,
-            $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks,
-        );
+        $this->mapper = new ConditionalAvailabilityPeriodPageSearchDataMapper($this->storeFacadeMock, $this->pluginMocks);
     }
 
     /**
@@ -69,23 +67,23 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
             ->method('getName')
             ->willReturn('store');
 
-        $this->conditionalAvailabilityPeriodPageSearchDataExpanderPluginMocks[0]->expects($this->atLeastOnce())
+        $this->pluginMocks[0]->expects($this->atLeastOnce())
             ->method('expand')
             ->willReturnArgument(1);
 
-        $searchData = $this->conditionalAvailabilityPeriodPageSearchDataMapper->mapConditionalAvailabilityPeriodDataToSearchData(
-            [
-                'sku' => 'SKU',
-                'warehouse_group' => 'WG',
+        $searchData = $this->mapper
+            ->mapConditionalAvailabilityPeriodDataToSearchData([
+                'sku' => 'sku',
+                'warehouse_group' => 'warehouse-group',
                 'quantity' => 1,
                 'original_start_at' => '2020-01-01 00:00:00.000000',
                 'start_at' => '2020-02-01 00:00:00.000000',
                 'end_at' => '2020-02-29 00:00:00.000000',
-                'store' => 'EROTS',
+                'store' => 'store',
             ],
         );
 
-        $this->assertArrayHasKey('start-at', $searchData);
-        $this->assertArrayHasKey('end-at', $searchData);
+        static::assertArrayHasKey('start-at', $searchData);
+        static::assertArrayHasKey('end-at', $searchData);
     }
 }

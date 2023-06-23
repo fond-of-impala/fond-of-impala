@@ -5,30 +5,32 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use Spryker\Zed\Kernel\Container;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\ConditionalAvailabilityPageSearchCommunicationFactory
      */
-    protected $conditionalAvailabilityPageSearchCommunicationFactory;
+    protected ConditionalAvailabilityPageSearchCommunicationFactory $factory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
      */
-    protected $conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock;
+    protected MockObject|ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
      */
-    protected $conditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeMock;
+    protected MockObject|ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @return void
@@ -39,16 +41,16 @@ class ConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
+        $this->storeFacadeMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchCommunicationFactory = new ConditionalAvailabilityPageSearchCommunicationFactory();
-        $this->conditionalAvailabilityPageSearchCommunicationFactory->setContainer($this->containerMock);
+        $this->factory = new ConditionalAvailabilityPageSearchCommunicationFactory();
+        $this->factory->setContainer($this->containerMock);
     }
 
     /**
@@ -63,11 +65,11 @@ class ConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR)
-            ->willReturn($this->conditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeMock);
+            ->willReturn($this->eventBehaviorFacadeMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge::class,
-            $this->conditionalAvailabilityPageSearchCommunicationFactory->getEventBehaviorFacade(),
+            $this->factory->getEventBehaviorFacade(),
         );
     }
 }
