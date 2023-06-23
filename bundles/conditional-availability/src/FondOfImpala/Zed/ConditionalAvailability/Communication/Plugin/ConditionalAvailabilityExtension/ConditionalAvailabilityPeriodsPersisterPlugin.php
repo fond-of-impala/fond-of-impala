@@ -7,7 +7,6 @@ use Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface getFacade()
  */
 class ConditionalAvailabilityPeriodsPersisterPlugin extends AbstractPlugin implements ConditionalAvailabilityPostSavePluginInterface

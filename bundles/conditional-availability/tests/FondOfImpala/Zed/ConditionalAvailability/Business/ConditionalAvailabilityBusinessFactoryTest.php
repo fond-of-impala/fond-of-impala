@@ -7,7 +7,6 @@ use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabil
 use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityReader;
 use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityWriter;
 use FondOfImpala\Zed\ConditionalAvailability\Business\Model\GroupedConditionalAvailabilityReader;
-use FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityConfig;
 use FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManager;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository;
@@ -26,11 +25,6 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
     protected $containerMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityConfig
-     */
-    protected $configMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockBuilder|\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository
@@ -53,10 +47,6 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
     protected function _before(): void
     {
         parent::_before();
-
-        $this->configMock = $this->getMockBuilder(ConditionalAvailabilityConfig::class)
-            ->disableOriginalConstructor()
-            ->getMock();
 
         $this->containerMock = $this->getMockBuilder(Container::class)
             ->disableOriginalConstructor()
@@ -99,7 +89,6 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
             }
         };
         $this->businessFactory->setContainer($this->containerMock);
-        $this->businessFactory->setConfig($this->configMock);
         $this->businessFactory->setRepository($this->repositoryMock);
         $this->businessFactory->setEntityManager($this->entityManagerMock);
     }
