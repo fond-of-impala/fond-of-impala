@@ -6,28 +6,24 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityDeliveryDateCleanerTest extends Unit
 {
     /**
+     * @var (\Generated\Shared\Transfer\QuoteTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected QuoteTransfer|MockObject $quoteTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ItemTransfer $itemTransferMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleaner
      */
-    protected $conditionalAvailabilityDeliveryDateCleaner;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
-
-    /**
-     * @var \ArrayObject<\Generated\Shared\Transfer\ItemTransfer>
-     */
-    protected $itemTransferMocks;
+    protected ConditionalAvailabilityDeliveryDateCleaner $conditionalAvailabilityDeliveryDateCleaner;
 
     /**
      * @return void
@@ -42,10 +38,6 @@ class ConditionalAvailabilityDeliveryDateCleanerTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->itemTransferMocks = new ArrayObject([
-           $this->itemTransferMock,
-        ]);
-
         $this->conditionalAvailabilityDeliveryDateCleaner = new ConditionalAvailabilityDeliveryDateCleaner();
     }
 
@@ -54,12 +46,18 @@ class ConditionalAvailabilityDeliveryDateCleanerTest extends Unit
      */
     public function testCleanDeliveryDate(): void
     {
-        $this->quoteTransferMock->expects($this->atLeastOnce())
+        $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
+        $this->quoteTransferMock->expects(static::never())
+            ->method('setDeliveryDates');
+
+        $this->quoteTransferMock->expects(static::never())
+            ->method('setConcreteDeliveryDates');
+
+        static::assertEquals(
+            $this->quoteTransferMock,
             $this->conditionalAvailabilityDeliveryDateCleaner->cleanDeliveryDate(
                 $this->quoteTransferMock,
             ),
@@ -71,12 +69,22 @@ class ConditionalAvailabilityDeliveryDateCleanerTest extends Unit
      */
     public function testCleanDeliveryDateEmptyItems(): void
     {
-        $this->quoteTransferMock->expects($this->atLeastOnce())
+        $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
             ->willReturn(new ArrayObject([]));
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('setDeliveryDates')
+            ->with(null)
+            ->willReturn($this->itemTransferMock);
+
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('setConcreteDeliveryDates')
+            ->with(null)
+            ->willReturn($this->itemTransferMock);
+
+        static::assertEquals(
+            $this->quoteTransferMock,
             $this->conditionalAvailabilityDeliveryDateCleaner->cleanDeliveryDate(
                 $this->quoteTransferMock,
             ),

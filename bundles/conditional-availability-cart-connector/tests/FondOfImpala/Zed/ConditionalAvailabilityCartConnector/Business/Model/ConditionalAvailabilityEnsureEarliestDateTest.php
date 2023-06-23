@@ -5,33 +5,19 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model;
 use Codeception\Test\Unit;
 use FondOfImpala\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityEnsureEarliestDateTest extends Unit
 {
     /**
+     * @var (\Generated\Shared\Transfer\QuoteTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected QuoteTransfer|MockObject $quoteTransferMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDate
      */
-    protected $conditionalAvailabilityEnsureEarliestDate;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
-
-    /**
-     * @var array<string>
-     */
-    protected $deliveryDates;
-
-    /**
-     * @var string
-     */
-    protected $deliveryDate;
-
-    /**
-     * @var array
-     */
-    protected $deliveryDatesWithEarlistestDeliveryDate;
+    protected ConditionalAvailabilityEnsureEarliestDate $conditionalAvailabilityEnsureEarliestDate;
 
     /**
      * @return void
@@ -42,16 +28,6 @@ class ConditionalAvailabilityEnsureEarliestDateTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->deliveryDate = 'delivery-date';
-
-        $this->deliveryDates = [
-            $this->deliveryDate,
-        ];
-
-        $this->deliveryDatesWithEarlistestDeliveryDate = [
-            ConditionalAvailabilityConstants::KEY_EARLIEST_DATE,
-        ];
-
         $this->conditionalAvailabilityEnsureEarliestDate = new ConditionalAvailabilityEnsureEarliestDate();
     }
 
@@ -60,16 +36,28 @@ class ConditionalAvailabilityEnsureEarliestDateTest extends Unit
      */
     public function testEnsureEarliestDate(): void
     {
-        $this->quoteTransferMock->expects($this->atLeastOnce())
+        $deliveryDates = [
+            '...',
+        ];
+        $countOfDeliveryDates = count($deliveryDates);
+
+        $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getDeliveryDates')
-            ->willReturn($this->deliveryDates);
+            ->willReturn($deliveryDates);
 
-        $this->quoteTransferMock->expects($this->atLeastOnce())
+        $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('setDeliveryDates')
-            ->willReturnSelf();
+            ->with(
+                static::callback(
+                    fn (
+                        array $currentDeliveryDates
+                    ) => count($currentDeliveryDates) === ($countOfDeliveryDates + 1)
+                        && $currentDeliveryDates[$countOfDeliveryDates] === ConditionalAvailabilityConstants::KEY_EARLIEST_DATE
+                ),
+            )->willReturnSelf();
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
+        static::assertEquals(
+            $this->quoteTransferMock,
             $this->conditionalAvailabilityEnsureEarliestDate->ensureEarliestDate(
                 $this->quoteTransferMock,
             ),
@@ -81,12 +69,16 @@ class ConditionalAvailabilityEnsureEarliestDateTest extends Unit
      */
     public function testEnsureEarliestDateWithEarliestDeliveryDate(): void
     {
-        $this->quoteTransferMock->expects($this->atLeastOnce())
-            ->method('getDeliveryDates')
-            ->willReturn($this->deliveryDatesWithEarlistestDeliveryDate);
+        $deliveryDates = [
+            ConditionalAvailabilityConstants::KEY_EARLIEST_DATE,
+        ];
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getDeliveryDates')
+            ->willReturn($deliveryDates);
+
+        static::assertEquals(
+            $this->quoteTransferMock,
             $this->conditionalAvailabilityEnsureEarliestDate->ensureEarliestDate(
                 $this->quoteTransferMock,
             ),

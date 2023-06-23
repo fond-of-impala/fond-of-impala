@@ -16,9 +16,7 @@ class ConditionalAvailabilityEnsureEarliestDate implements ConditionalAvailabili
      */
     public function ensureEarliestDate(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $quoteTransfer = $this->ensureEarliestDeliveryDate($quoteTransfer);
-
-        return $quoteTransfer;
+        return $this->ensureEarliestDeliveryDate($quoteTransfer);
     }
 
     /**
