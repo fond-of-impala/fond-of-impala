@@ -6,28 +6,29 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridgeTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityFacadeMock;
+    protected ConditionalAvailabilityFacadeInterface|MockObject $facadeMock;
 
     /**
-     * @var \Generated\Shared\Transfer\ConditionalAvailabilityTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityTransferMock;
+    protected ConditionalAvailabilityTransfer|MockObject $conditionalAvailabilityTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityResponseTransferMock;
+    protected MockObject|ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge
      */
-    protected $facadeBridge;
+    protected ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge $bridge;
 
     /**
      * @return void
@@ -36,7 +37,7 @@ class ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridgeTest ex
     {
         parent::_before();
 
-        $this->conditionalAvailabilityFacadeMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
+        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -48,8 +49,8 @@ class ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridgeTest ex
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->facadeBridge = new ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge(
-            $this->conditionalAvailabilityFacadeMock,
+        $this->bridge = new ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge(
+            $this->facadeMock,
         );
     }
 
@@ -58,14 +59,14 @@ class ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridgeTest ex
      */
     public function testPersistConditionalAvailability(): void
     {
-        $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('persistConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
         static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
-            $this->facadeBridge->persistConditionalAvailability($this->conditionalAvailabilityTransferMock),
+            $this->bridge->persistConditionalAvailability($this->conditionalAvailabilityTransferMock),
         );
     }
 }

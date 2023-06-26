@@ -3,19 +3,20 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Product\Business\ProductFacadeInterface;
 
 class ConditionalAvailabilityBulkApiToProductFacadeBridgeTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Product\Business\ProductFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Product\Business\ProductFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $productFacadeMock;
+    protected MockObject|ProductFacadeInterface $facadeMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToProductFacadeBridge
      */
-    protected $facadeBridge;
+    protected ConditionalAvailabilityBulkApiToProductFacadeBridge $bridge;
 
     /**
      * @return void
@@ -24,12 +25,12 @@ class ConditionalAvailabilityBulkApiToProductFacadeBridgeTest extends Unit
     {
         parent::_before();
 
-        $this->productFacadeMock = $this->getMockBuilder(ProductFacadeInterface::class)
+        $this->facadeMock = $this->getMockBuilder(ProductFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->facadeBridge = new ConditionalAvailabilityBulkApiToProductFacadeBridge(
-            $this->productFacadeMock,
+        $this->bridge = new ConditionalAvailabilityBulkApiToProductFacadeBridge(
+            $this->facadeMock,
         );
     }
 
@@ -41,14 +42,14 @@ class ConditionalAvailabilityBulkApiToProductFacadeBridgeTest extends Unit
         $skus = ['FOO-1', 'FOO-2'];
         $ids = ['FOO-1' => 1, 'FOO-2' => 2];
 
-        $this->productFacadeMock->expects(static::atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('getProductConcreteIdsByConcreteSkus')
             ->with($skus)
             ->willReturn($ids);
 
         static::assertEquals(
             $ids,
-            $this->facadeBridge->getProductConcreteIdsByConcreteSkus($skus),
+            $this->bridge->getProductConcreteIdsByConcreteSkus($skus),
         );
     }
 }

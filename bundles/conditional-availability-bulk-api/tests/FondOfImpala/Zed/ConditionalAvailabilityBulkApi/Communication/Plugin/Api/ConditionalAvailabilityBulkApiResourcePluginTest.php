@@ -9,37 +9,36 @@ use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\ConditionalAvailabilityBulkA
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
 use Generated\Shared\Transfer\ApiRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityBulkApiResourcePluginTest extends Unit
 {
     /**
-     * @var \Generated\Shared\Transfer\ApiDataTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiDataTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiDataTransferMock;
+    protected ApiDataTransfer|MockObject $apiDataTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\ApiItemTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiItemTransferMock;
+    protected MockObject|ApiItemTransfer $apiItemTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\ApiRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiRequestTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiRequestTransferMock;
+    protected ApiRequestTransfer|MockObject $apiRequestTransferMock;
 
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\ConditionalAvailabilityBulkApiFacade|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\ConditionalAvailabilityBulkApiFacade&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $facadeMock;
+    protected ConditionalAvailabilityBulkApiFacade|MockObject $facadeMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Communication\Plugin\Api\ConditionalAvailabilityBulkApiResourcePlugin
      */
-    protected $plugin;
+    protected ConditionalAvailabilityBulkApiResourcePlugin $plugin;
 
     /**
-     * @Override
-     *
      * @return void
      */
     protected function _before(): void
