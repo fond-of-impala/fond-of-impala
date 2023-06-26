@@ -7,6 +7,7 @@ use FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilit
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\Kernel\Container;
 use Spryker\Glue\Kernel\Locator;
 use Spryker\Shared\Kernel\BundleProxy;
@@ -16,32 +17,32 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProviderTest extends Uni
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Locator
      */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
      */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
     /**
-     * @var \FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchClientInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchClientInterface
      */
-    protected $conditionalAvailabilityPageSearchClientMock;
+    protected MockObject|ConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClientMock;
 
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface
      */
-    protected $conditionalAvailabilityServiceMock;
+    protected MockObject|ConditionalAvailabilityServiceInterface $conditionalAvailabilityServiceMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiDependencyProvider
      */
-    protected $conditionalAvailabilityPageSearchRestApiDependencyProvider;
+    protected ConditionalAvailabilityPageSearchRestApiDependencyProvider $dependencyProvider;
 
     /**
      * @return void
@@ -70,7 +71,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProviderTest extends Uni
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchRestApiDependencyProvider = new ConditionalAvailabilityPageSearchRestApiDependencyProvider();
+        $this->dependencyProvider = new ConditionalAvailabilityPageSearchRestApiDependencyProvider();
     }
 
     /**
@@ -95,9 +96,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProviderTest extends Uni
                 $this->conditionalAvailabilityServiceMock,
             );
 
-        $container = $this->conditionalAvailabilityPageSearchRestApiDependencyProvider->provideDependencies(
-            $this->containerMock,
-        );
+        $container = $this->dependencyProvider->provideDependencies($this->containerMock);
 
         static::assertInstanceOf(
             ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class,

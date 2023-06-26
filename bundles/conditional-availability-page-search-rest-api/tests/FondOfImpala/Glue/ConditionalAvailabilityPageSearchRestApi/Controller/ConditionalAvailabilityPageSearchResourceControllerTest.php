@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Controller;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Reader\ConditionalAvailabilityPageSearchReaderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
@@ -12,29 +13,29 @@ use Spryker\Glue\Kernel\AbstractFactory;
 class ConditionalAvailabilityPageSearchResourceControllerTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory
      */
-    protected $conditionalAvailabilityPageSearchRestApiFactoryMock;
+    protected MockObject|ConditionalAvailabilityPageSearchRestApiFactory $factoryMock;
 
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Reader\ConditionalAvailabilityPageSearchReaderInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Reader\ConditionalAvailabilityPageSearchReaderInterface
      */
-    protected $conditionalAvailabilityPageSearchReaderMock;
+    protected MockObject|ConditionalAvailabilityPageSearchReaderInterface $conditionalAvailabilityPageSearchReaderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Controller\ConditionalAvailabilityPageSearchResourceController
      */
-    protected $conditionalAvailabilityPageSearchResourceController;
+    protected ConditionalAvailabilityPageSearchResourceController $controller;
 
     /**
      * @return void
@@ -43,7 +44,7 @@ class ConditionalAvailabilityPageSearchResourceControllerTest extends Unit
     {
         parent::_before();
 
-        $this->conditionalAvailabilityPageSearchRestApiFactoryMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchRestApiFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchRestApiFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -59,7 +60,7 @@ class ConditionalAvailabilityPageSearchResourceControllerTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchResourceController = new class ($this->conditionalAvailabilityPageSearchRestApiFactoryMock) extends ConditionalAvailabilityPageSearchResourceController {
+        $this->controller = new class ($this->factoryMock) extends ConditionalAvailabilityPageSearchResourceController {
             /**
              * @var \Spryker\Glue\Kernel\AbstractFactory
              */
@@ -90,7 +91,7 @@ class ConditionalAvailabilityPageSearchResourceControllerTest extends Unit
      */
     public function testGetAction(): void
     {
-        $this->conditionalAvailabilityPageSearchRestApiFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPageSearchReader')
             ->willReturn($this->conditionalAvailabilityPageSearchReaderMock);
 
@@ -99,7 +100,7 @@ class ConditionalAvailabilityPageSearchResourceControllerTest extends Unit
             ->with($this->restRequestMock)
             ->willReturn($this->restResponseMock);
 
-        $restResponse = $this->conditionalAvailabilityPageSearchResourceController->getAction($this->restRequestMock);
+        $restResponse = $this->controller->getAction($this->restRequestMock);
 
         static::assertEquals($this->restResponseMock, $restResponse);
     }

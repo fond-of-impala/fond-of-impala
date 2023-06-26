@@ -4,37 +4,32 @@ namespace FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridgeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge
      */
-    protected $conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge;
+    protected ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge $conditionalAvailabilityPageSearchClientBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchClientInterface
      */
-    protected $conditionalAvailabilityPageSearchClientInterfaceMock;
-
-    /**
-     * @var string
-     */
-    protected $searchString;
+    protected MockObject|ConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClientMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityPageSearchClientInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchClientInterface::class)
+        $this->conditionalAvailabilityPageSearchClientMock = $this
+            ->getMockBuilder(ConditionalAvailabilityPageSearchClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->searchString = 'search-string';
-
-        $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge = new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
-            $this->conditionalAvailabilityPageSearchClientInterfaceMock,
+        $this->conditionalAvailabilityPageSearchClientBridge = new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
+            $this->conditionalAvailabilityPageSearchClientMock,
         );
     }
 
@@ -43,15 +38,13 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearc
      */
     public function testSearch(): void
     {
-        $this->conditionalAvailabilityPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $searchString = 'search-string';
+
+        $this->conditionalAvailabilityPageSearchClientMock->expects($this->atLeastOnce())
             ->method('search')
-            ->with($this->searchString, [])
+            ->with($searchString, [])
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge->search(
-                $this->searchString,
-            ),
-        );
+        static::assertEquals([], $this->conditionalAvailabilityPageSearchClientBridge->search($searchString));
     }
 }
