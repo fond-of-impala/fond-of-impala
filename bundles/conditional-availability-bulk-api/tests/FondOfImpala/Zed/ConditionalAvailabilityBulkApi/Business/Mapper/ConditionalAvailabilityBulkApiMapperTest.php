@@ -5,18 +5,19 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityBulkApiMapperTest extends Unit
 {
     /**
-     * @var \Generated\Shared\Transfer\ApiDataTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiDataTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiDataTransferMock;
+    protected ApiDataTransfer|MockObject $apiDataTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper\ConditionalAvailabilityBulkApiMapper
      */
-    protected $conditionalAvailabilityBulkApiMapper;
+    protected ConditionalAvailabilityBulkApiMapper $conditionalAvailabilityBulkApiMapper;
 
     /**
      * @Override
