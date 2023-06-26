@@ -4,77 +4,78 @@ namespace FondOfImpala\Zed\ConditionalAvailability\Business;
 
 use ArrayObject;
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPeriodsPersister;
-use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityReader;
-use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityWriter;
-use FondOfImpala\Zed\ConditionalAvailability\Business\Model\GroupedConditionalAvailabilityReader;
+use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPeriodsPersisterInterface;
+use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityReaderInterface;
+use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityWriterInterface;
+use FondOfImpala\Zed\ConditionalAvailability\Business\Model\GroupedConditionalAvailabilityReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository;
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityFacadeTest extends Unit
 {
     /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityCollectionTransfer $conditionalAvailabilityCollectionTransferMock;
+
+    /**
+     * @var (\ArrayObject&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ArrayObject|MockObject $arrayObjectMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCriteriaFilterTransfer|MockObject $conditionalAvailabilityCriteriaFilterTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityTransfer|MockObject $conditionalAvailabilityTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\Model\GroupedConditionalAvailabilityReaderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|GroupedConditionalAvailabilityReaderInterface $groupedConditionalAvailabilityReaderMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityReaderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityReaderInterface $conditionalAvailabilityReaderMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityWriterInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityWriterInterface $conditionalAvailabilityWriterMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPeriodsPersisterInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityPeriodsPersisterInterface $conditionalAvailabilityPeriodsPersisterMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityBusinessFactory&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityBusinessFactory $factoryMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityRepository $repositoryMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacade
      */
-    protected $conditionalAvailabilityFacade;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityBusinessFactory
-     */
-    protected $conditionalAvailabilityBusinessFactoryMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\Model\GroupedConditionalAvailabilityReader
-     */
-    protected $groupedConditionalAvailabilityReaderMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityReader
-     */
-    protected $conditionalAvailabilityReaderMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityWriter
-     */
-    protected $conditionalAvailabilityWriterMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPeriodsPersister
-     */
-    protected $conditionalAvailabilityPeriodsPersisterMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityTransfer
-     */
-    protected $conditionalAvailabilityTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer
-     */
-    protected $conditionalAvailabilityResponseTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer
-     */
-    protected $conditionalAvailabilityCriteriaFilterTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\ArrayObject
-     */
-    protected $arrayObjectMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
-     */
-    protected $conditionalAvailabilityCollectionTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository
-     */
-    protected $conditionalAvailabilityRepositoryMock;
+    protected ConditionalAvailabilityFacade $conditionalAvailabilityFacade;
 
     /**
      * @return void
@@ -103,33 +104,33 @@ class ConditionalAvailabilityFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->groupedConditionalAvailabilityReaderMock = $this->getMockBuilder(GroupedConditionalAvailabilityReader::class)
+        $this->groupedConditionalAvailabilityReaderMock = $this->getMockBuilder(GroupedConditionalAvailabilityReaderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityReaderMock = $this->getMockBuilder(ConditionalAvailabilityReader::class)
+        $this->conditionalAvailabilityReaderMock = $this->getMockBuilder(ConditionalAvailabilityReaderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityWriterMock = $this->getMockBuilder(ConditionalAvailabilityWriter::class)
+        $this->conditionalAvailabilityWriterMock = $this->getMockBuilder(ConditionalAvailabilityWriterInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPeriodsPersisterMock = $this->getMockBuilder(ConditionalAvailabilityPeriodsPersister::class)
+        $this->conditionalAvailabilityPeriodsPersisterMock = $this->getMockBuilder(ConditionalAvailabilityPeriodsPersisterInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityBusinessFactoryMock = $this->getMockBuilder(ConditionalAvailabilityBusinessFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityRepositoryMock = $this->getMockBuilder(ConditionalAvailabilityRepository::class)
+        $this->repositoryMock = $this->getMockBuilder(ConditionalAvailabilityRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->conditionalAvailabilityFacade = new ConditionalAvailabilityFacade();
-        $this->conditionalAvailabilityFacade->setFactory($this->conditionalAvailabilityBusinessFactoryMock);
-        $this->conditionalAvailabilityFacade->setRepository($this->conditionalAvailabilityRepositoryMock);
+        $this->conditionalAvailabilityFacade->setFactory($this->factoryMock);
+        $this->conditionalAvailabilityFacade->setRepository($this->repositoryMock);
     }
 
     /**
@@ -137,16 +138,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testFindConditionalAvailabilityById(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityReader')
             ->willReturn($this->conditionalAvailabilityReaderMock);
 
-        $this->conditionalAvailabilityReaderMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityReaderMock->expects(static::atLeastOnce())
             ->method('findById')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
             $this->conditionalAvailabilityFacade->findConditionalAvailabilityById(
                 $this->conditionalAvailabilityTransferMock,
@@ -159,16 +160,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testCreateConditionalAvailability(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityWriter')
             ->willReturn($this->conditionalAvailabilityWriterMock);
 
-        $this->conditionalAvailabilityWriterMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityWriterMock->expects(static::atLeastOnce())
             ->method('create')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
             $this->conditionalAvailabilityFacade->createConditionalAvailability(
                 $this->conditionalAvailabilityTransferMock,
@@ -181,16 +182,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testUpdateConditionalAvailability(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityWriter')
             ->willReturn($this->conditionalAvailabilityWriterMock);
 
-        $this->conditionalAvailabilityWriterMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityWriterMock->expects(static::atLeastOnce())
             ->method('update')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
             $this->conditionalAvailabilityFacade->updateConditionalAvailability(
                 $this->conditionalAvailabilityTransferMock,
@@ -203,16 +204,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testPersistConditionalAvailability(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityWriter')
             ->willReturn($this->conditionalAvailabilityWriterMock);
 
-        $this->conditionalAvailabilityWriterMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityWriterMock->expects(static::atLeastOnce())
             ->method('persist')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
             $this->conditionalAvailabilityFacade->persistConditionalAvailability(
                 $this->conditionalAvailabilityTransferMock,
@@ -225,16 +226,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testDeleteConditionalAvailability(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityWriter')
             ->willReturn($this->conditionalAvailabilityWriterMock);
 
-        $this->conditionalAvailabilityWriterMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityWriterMock->expects(static::atLeastOnce())
             ->method('delete')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
             $this->conditionalAvailabilityFacade->deleteConditionalAvailability(
                 $this->conditionalAvailabilityTransferMock,
@@ -247,16 +248,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testPersistConditionalAvailabilityPeriods(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriodsPersister')
             ->willReturn($this->conditionalAvailabilityPeriodsPersisterMock);
 
-        $this->conditionalAvailabilityPeriodsPersisterMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodsPersisterMock->expects(static::atLeastOnce())
             ->method('persist')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityTransferMock,
             $this->conditionalAvailabilityFacade->persistConditionalAvailabilityPeriods(
                 $this->conditionalAvailabilityTransferMock,
@@ -269,16 +270,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testFindGroupedConditionalAvailabilities(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createGroupedConditionalAvailabilityReader')
             ->willReturn($this->groupedConditionalAvailabilityReaderMock);
 
-        $this->groupedConditionalAvailabilityReaderMock->expects($this->atLeastOnce())
+        $this->groupedConditionalAvailabilityReaderMock->expects(static::atLeastOnce())
             ->method('find')
             ->with($this->conditionalAvailabilityCriteriaFilterTransferMock)
             ->willReturn($this->arrayObjectMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->arrayObjectMock,
             $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilities(
                 $this->conditionalAvailabilityCriteriaFilterTransferMock,
@@ -291,16 +292,16 @@ class ConditionalAvailabilityFacadeTest extends Unit
      */
     public function testFindConditionalAvailabilities(): void
     {
-        $this->conditionalAvailabilityBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityReader')
             ->willReturn($this->conditionalAvailabilityReaderMock);
 
-        $this->conditionalAvailabilityReaderMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityReaderMock->expects(static::atLeastOnce())
             ->method('find')
             ->with($this->conditionalAvailabilityCriteriaFilterTransferMock)
             ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityCollectionTransferMock,
             $this->conditionalAvailabilityFacade->findConditionalAvailabilities(
                 $this->conditionalAvailabilityCriteriaFilterTransferMock,
@@ -316,12 +317,12 @@ class ConditionalAvailabilityFacadeTest extends Unit
         $conditionalAvailabilityIds = [1, 2, 3];
         $productConcreteIds = [1];
 
-        $this->conditionalAvailabilityRepositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityIdsByProductConcreteIds')
             ->with($productConcreteIds)
             ->willReturn($conditionalAvailabilityIds);
 
-        $this->assertEquals(
+        static::assertEquals(
             $conditionalAvailabilityIds,
             $this->conditionalAvailabilityFacade->getConditionalAvailabilityIdsByProductConcreteIds($productConcreteIds),
         );

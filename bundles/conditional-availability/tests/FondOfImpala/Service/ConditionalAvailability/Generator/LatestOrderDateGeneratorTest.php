@@ -6,23 +6,24 @@ use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig;
 use FondOfImpala\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class LatestOrderDateGeneratorTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\Generator\EarliestOrderDateGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Service\ConditionalAvailability\Generator\EarliestOrderDateGeneratorInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $earliestOrderDateGeneratorMock;
+    protected MockObject|EarliestOrderDateGeneratorInterface $earliestOrderDateGeneratorMock;
 
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $configMock;
+    protected ConditionalAvailabilityConfig|MockObject $configMock;
 
     /**
      * @var \FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGenerator
      */
-    protected $latestOrderDateGenerator;
+    protected LatestOrderDateGenerator $latestOrderDateGenerator;
 
     /**
      * @return void
