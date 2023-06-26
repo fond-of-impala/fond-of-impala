@@ -7,95 +7,59 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Generated\Shared\Transfer\StoreTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpander
      */
-    protected $conditionalAvailabilityPeriodPageSearchExpander;
+    protected ConditionalAvailabilityPeriodPageSearchExpander $expander;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
      */
-    protected $conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock;
-
-    /**
-     * @var array<\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
-     */
-    protected $conditionalAvailabilityPeriodPageDataExpanderPlugins;
+    protected MockObject|ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
      */
-    protected $conditionalAvailabilityPeriodPageSearchTransferMock;
+    protected MockObject|ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface
      */
-    protected $conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMock;
-
-    /**
-     * @var string
-     */
-    protected $startAt;
-
-    /**
-     * @var string
-     */
-    protected $endAt;
-
-    /**
-     * @var int
-     */
-    protected $idConditionalAvailability;
+    protected MockObject|ConditionalAvailabilityPeriodPageDataExpanderPluginInterface $conditionalAvailabilityPeriodPageDataExpanderPluginMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
      */
-    protected $storeTransferMock;
-
-    /**
-     * @var string
-     */
-    protected $storeName;
+    protected MockObject|StoreTransfer $storeTransferMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
+        $this->storeFacadeMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageDataExpanderPluginInterface::class)
+        $this->conditionalAvailabilityPeriodPageDataExpanderPluginMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageDataExpanderPluginInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->conditionalAvailabilityPeriodPageDataExpanderPlugins = [
-            $this->conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMock,
-        ];
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageSearchTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->startAt = 'start-at';
-
-        $this->endAt = 'end-at';
-
-        $this->idConditionalAvailability = 1;
-
         $this->storeTransferMock = $this->getMockBuilder(StoreTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->storeName = 'store-name';
-
-        $this->conditionalAvailabilityPeriodPageSearchExpander = new ConditionalAvailabilityPeriodPageSearchExpander(
-            $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock,
-            $this->conditionalAvailabilityPeriodPageDataExpanderPlugins,
+        $this->expander = new ConditionalAvailabilityPeriodPageSearchExpander(
+            $this->storeFacadeMock,
+            [$this->conditionalAvailabilityPeriodPageDataExpanderPluginMock],
         );
     }
 
@@ -104,25 +68,30 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
      */
     public function testExpand(): void
     {
+        $startAt = '1970-01-01';
+        $endAt = '1970-01-02';
+        $idConditionalAvailability = 1;
+        $storeName = 'store-name';
+
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('getStartAt')
-            ->willReturn($this->startAt);
+            ->willReturn($startAt);
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('getEndAt')
-            ->willReturn($this->endAt);
+            ->willReturn($endAt);
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('getFkConditionalAvailability')
-            ->willReturn($this->idConditionalAvailability);
+            ->willReturn($idConditionalAvailability);
 
-        $this->conditionalAvailabilityPageSearchToStoreFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects($this->atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
         $this->storeTransferMock->expects($this->atLeastOnce())
             ->method('getName')
-            ->willReturn($this->storeName);
+            ->willReturn($storeName);
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('setConditionalAvailabilityPeriodKey')
@@ -130,19 +99,17 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('setStoreName')
-            ->with($this->storeName)
+            ->with($storeName)
             ->willReturnSelf();
 
-        $this->conditionalAvailabilityPeriodPageDataExpanderPluginInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageDataExpanderPluginMock->expects($this->atLeastOnce())
             ->method('expand')
             ->with($this->conditionalAvailabilityPeriodPageSearchTransferMock)
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             ConditionalAvailabilityPeriodPageSearchTransfer::class,
-            $this->conditionalAvailabilityPeriodPageSearchExpander->expand(
-                $this->conditionalAvailabilityPeriodPageSearchTransferMock,
-            ),
+            $this->expander->expand($this->conditionalAvailabilityPeriodPageSearchTransferMock),
         );
     }
 }
