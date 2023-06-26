@@ -5,23 +5,24 @@ namespace FondOfImpala\Service\ConditionalAvailability;
 use Codeception\Test\Unit;
 use FondOfImpala\Service\ConditionalAvailability\Generator\EarliestDeliveryDateGenerator;
 use FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityServiceFactoryTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $configMock;
+    protected ConditionalAvailabilityConfig|MockObject $configMock;
 
     /**
      * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceFactory
      */
-    protected $conditionalAvailabilityServiceFactory;
+    protected ConditionalAvailabilityServiceFactory $factory;
 
     /**
      * @return void
      */
-    protected function _before()
+    protected function _before(): void
     {
         parent::_before();
 
@@ -29,8 +30,8 @@ class ConditionalAvailabilityServiceFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityServiceFactory = new ConditionalAvailabilityServiceFactory();
-        $this->conditionalAvailabilityServiceFactory->setConfig($this->configMock);
+        $this->factory = new ConditionalAvailabilityServiceFactory();
+        $this->factory->setConfig($this->configMock);
     }
 
     /**
@@ -40,7 +41,7 @@ class ConditionalAvailabilityServiceFactoryTest extends Unit
     {
         static::assertInstanceOf(
             EarliestDeliveryDateGenerator::class,
-            $this->conditionalAvailabilityServiceFactory->createEarliestDeliveryDateGenerator(),
+            $this->factory->createEarliestDeliveryDateGenerator(),
         );
     }
 
@@ -51,7 +52,7 @@ class ConditionalAvailabilityServiceFactoryTest extends Unit
     {
         static::assertInstanceOf(
             LatestOrderDateGenerator::class,
-            $this->conditionalAvailabilityServiceFactory->createLatestOrderDateGenerator(),
+            $this->factory->createLatestOrderDateGenerator(),
         );
     }
 }

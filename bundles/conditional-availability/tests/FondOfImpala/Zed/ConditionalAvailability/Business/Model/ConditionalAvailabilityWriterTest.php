@@ -7,40 +7,41 @@ use Exception;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Spryker\Zed\Kernel\Persistence\EntityManager\TransactionHandlerInterface;
 
 class ConditionalAvailabilityWriterTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Psr\Log\LoggerInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $loggerMock;
+    protected LoggerInterface|MockObject $loggerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Persistence\EntityManager\TransactionHandlerInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Kernel\Persistence\EntityManager\TransactionHandlerInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $transactionHandlerMock;
+    protected MockObject|TransactionHandlerInterface $transactionHandlerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPluginExecutorInterface
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityPluginExecutorMock;
+    protected ConditionalAvailabilityTransfer|MockObject $conditionalAvailabilityTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityEntityManagerMock;
+    protected MockObject|ConditionalAvailabilityEntityManagerInterface $entityManagerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityTransfer
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPluginExecutorInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityTransferMock;
+    protected MockObject|ConditionalAvailabilityPluginExecutorInterface $conditionalAvailabilityPluginExecutorMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityWriter
      */
-    protected $conditionalAvailabilityWriter;
+    protected ConditionalAvailabilityWriter $conditionalAvailabilityWriter;
 
     /**
      * @return void
@@ -61,7 +62,7 @@ class ConditionalAvailabilityWriterTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityEntityManagerMock = $this->getMockBuilder(ConditionalAvailabilityEntityManagerInterface::class)
+        $this->entityManagerMock = $this->getMockBuilder(ConditionalAvailabilityEntityManagerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -70,7 +71,7 @@ class ConditionalAvailabilityWriterTest extends Unit
             ->getMock();
 
         $this->conditionalAvailabilityWriter = new class (
-            $this->conditionalAvailabilityEntityManagerMock,
+            $this->entityManagerMock,
             $this->conditionalAvailabilityPluginExecutorMock,
             $this->loggerMock,
             $this->transactionHandlerMock
@@ -78,7 +79,7 @@ class ConditionalAvailabilityWriterTest extends Unit
             /**
              * @var \Spryker\Zed\Kernel\Persistence\EntityManager\TransactionHandlerInterface
              */
-            protected $transactionHandler;
+            protected TransactionHandlerInterface $transactionHandler;
 
             /**
              * @param \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface $entityManager
@@ -118,12 +119,10 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('saveConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willThrowException($exception);
@@ -156,12 +155,10 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('saveConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityTransferMock);
@@ -198,12 +195,10 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('persistConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityTransferMock);
@@ -243,12 +238,10 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('persistConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willThrowException($exception);
@@ -284,12 +277,10 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('saveConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willThrowException($exception);
@@ -322,12 +313,10 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('saveConditionalAvailability')
             ->with($this->conditionalAvailabilityTransferMock)
             ->willReturn($this->conditionalAvailabilityTransferMock);
@@ -366,9 +355,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
@@ -379,7 +366,7 @@ class ConditionalAvailabilityWriterTest extends Unit
             ->method('requireIdConditionalAvailability')
             ->willReturn($this->conditionalAvailabilityTransferMock);
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('deleteConditionalAvailabilityById')
             ->with($idConditionalAvailability)
             ->willThrowException(new Exception());
@@ -405,9 +392,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
+                static fn ($callable) => $callable()
             );
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
@@ -418,7 +403,7 @@ class ConditionalAvailabilityWriterTest extends Unit
             ->method('getIdConditionalAvailability')
             ->willReturn($idConditionalAvailability);
 
-        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
+        $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('deleteConditionalAvailabilityById')
             ->with($idConditionalAvailability);
 

@@ -58,12 +58,12 @@ class GroupedConditionalAvailabilityReaderTest extends Unit
      */
     public function testFind(): void
     {
-        $this->conditionalAvailabilityRepositoryMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityRepositoryMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with($this->conditionalAvailabilityCriteriaFilterTransferMock)
             ->willReturn($this->arrayObjectMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->arrayObjectMock,
             $this->groupedConditionalAvailabilityReader->find($this->conditionalAvailabilityCriteriaFilterTransferMock),
         );

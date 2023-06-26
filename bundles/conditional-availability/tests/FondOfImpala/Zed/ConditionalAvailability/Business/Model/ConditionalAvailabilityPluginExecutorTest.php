@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\ConditionalAvailability\Business\Model;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityExtension\Dependency\Plugin\ConditionalAvailabilityPostSavePluginInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPluginExecutorTest extends Unit
 {
     /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityExtension\Dependency\Plugin\ConditionalAvailabilityPostSavePluginInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityPostSavePluginInterface|MockObject $conditionalAvailabilityPostSavePluginMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPluginExecutor
      */
-    protected $conditionalAvailabilityPluginExecutor;
-
-    /**
-     * @var array<\FondOfImpala\Zed\ConditionalAvailabilityExtension\Dependency\Plugin\ConditionalAvailabilityPostSavePluginInterface>|array<\PHPUnit\Framework\MockObject\MockObject>
-     */
-    protected $conditionalAvailabilityPostSavePluginMocks;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer
-     */
-    protected $conditionalAvailabilityResponseTransferMock;
+    protected ConditionalAvailabilityPluginExecutor $conditionalAvailabilityPluginExecutor;
 
     /**
      * @return void
@@ -34,14 +35,14 @@ class ConditionalAvailabilityPluginExecutorTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPostSavePluginMocks = [
-            $this->getMockBuilder(ConditionalAvailabilityPostSavePluginInterface::class)
+        $this->conditionalAvailabilityPostSavePluginMock = $this->getMockBuilder(ConditionalAvailabilityPostSavePluginInterface::class)
                 ->disableOriginalConstructor()
-                ->getMock(),
-        ];
+                ->getMock();
 
         $this->conditionalAvailabilityPluginExecutor = new ConditionalAvailabilityPluginExecutor(
-            $this->conditionalAvailabilityPostSavePluginMocks,
+            [
+                $this->conditionalAvailabilityPostSavePluginMock,
+            ],
         );
     }
 
@@ -50,12 +51,12 @@ class ConditionalAvailabilityPluginExecutorTest extends Unit
      */
     public function testExecutePostSavePlugins(): void
     {
-        $this->conditionalAvailabilityPostSavePluginMocks[0]->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPostSavePluginMock->expects(static::atLeastOnce())
             ->method('postSave')
             ->with($this->conditionalAvailabilityResponseTransferMock)
             ->willReturn($this->conditionalAvailabilityResponseTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityResponseTransferMock,
             $this->conditionalAvailabilityPluginExecutor->executePostSavePlugins(
                 $this->conditionalAvailabilityResponseTransferMock,
