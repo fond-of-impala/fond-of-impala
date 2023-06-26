@@ -5,28 +5,30 @@ namespace FondOfImpala\Zed\ConditionalAvailabilitySalesConnector\Communication\P
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\SpySalesOrderItemEntityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class DeliveryDateOrderItemExpanderPreSavePluginTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
      */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
      */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\SpySalesOrderItemEntityTransfer
      */
-    protected $spySalesOrderItemEntityTransferMock;
+    protected MockObject|SpySalesOrderItemEntityTransfer $spySalesOrderItemEntityTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilitySalesConnector\Communication\Plugin\SalesExtension\DeliveryDateOrderItemExpanderPreSavePlugin
      */
-    protected $deliveryDateOrderItemExpanderPreSavePlugin;
+    protected DeliveryDateOrderItemExpanderPreSavePlugin $plugin;
 
     /**
      * @return void
@@ -43,12 +45,12 @@ class DeliveryDateOrderItemExpanderPreSavePluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->spySalesOrderItemEntityTransferMock = $this->getMockBuilder('\Generated\Shared\Transfer\SpySalesOrderItemEntityTransfer')
+        $this->spySalesOrderItemEntityTransferMock = $this->getMockBuilder(SpySalesOrderItemEntityTransfer::class)
             ->disableOriginalConstructor()
             ->setMethods(['setDeliveryDate', 'setConcreteDeliveryDate'])
             ->getMock();
 
-        $this->deliveryDateOrderItemExpanderPreSavePlugin = new DeliveryDateOrderItemExpanderPreSavePlugin();
+        $this->plugin = new DeliveryDateOrderItemExpanderPreSavePlugin();
     }
 
     /**
@@ -77,12 +79,12 @@ class DeliveryDateOrderItemExpanderPreSavePluginTest extends Unit
             ->with($concreteDeliveryDate)
             ->willReturn($this->spySalesOrderItemEntityTransferMock);
 
-        $spySalesOrderItemEntityTransfer = $this->deliveryDateOrderItemExpanderPreSavePlugin->expandOrderItem(
+        $spySalesOrderItemEntityTransfer = $this->plugin->expandOrderItem(
             $this->quoteTransferMock,
             $this->itemTransferMock,
             $this->spySalesOrderItemEntityTransferMock,
         );
 
-        $this->assertEquals($this->spySalesOrderItemEntityTransferMock, $spySalesOrderItemEntityTransfer);
+        static::assertEquals($this->spySalesOrderItemEntityTransferMock, $spySalesOrderItemEntityTransfer);
     }
 }
