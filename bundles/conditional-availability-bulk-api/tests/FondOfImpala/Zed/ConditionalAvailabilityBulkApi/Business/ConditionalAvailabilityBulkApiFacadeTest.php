@@ -6,33 +6,34 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Model\ConditionalAvailabilityBulkApiInterface;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityBulkApiFacadeTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\ConditionalAvailabilityBulkApiBusinessFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\ConditionalAvailabilityBulkApiBusinessFactory&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $businessFactoryMock;
+    protected MockObject|ConditionalAvailabilityBulkApiBusinessFactory $factoryMock;
 
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Model\ConditionalAvailabilityBulkApiInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Model\ConditionalAvailabilityBulkApiInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityBulkApiMock;
+    protected ConditionalAvailabilityBulkApiInterface|MockObject $conditionalAvailabilityBulkApiMock;
 
     /**
-     * @var \Generated\Shared\Transfer\ApiDataTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiDataTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiDataTransferMock;
+    protected ApiDataTransfer|MockObject $apiDataTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\ApiItemTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiItemTransferMock;
+    protected MockObject|ApiItemTransfer $apiItemTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\ConditionalAvailabilityBulkApiFacade
      */
-    protected $facade;
+    protected ConditionalAvailabilityBulkApiFacade $facade;
 
     /**
      * @Override
@@ -43,7 +44,7 @@ class ConditionalAvailabilityBulkApiFacadeTest extends Unit
     {
         parent::_before();
 
-        $this->businessFactoryMock = $this->getMockBuilder(ConditionalAvailabilityBulkApiBusinessFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityBulkApiBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -60,7 +61,7 @@ class ConditionalAvailabilityBulkApiFacadeTest extends Unit
             ->getMock();
 
         $this->facade = new ConditionalAvailabilityBulkApiFacade();
-        $this->facade->setFactory($this->businessFactoryMock);
+        $this->facade->setFactory($this->factoryMock);
     }
 
     /**
@@ -68,7 +69,7 @@ class ConditionalAvailabilityBulkApiFacadeTest extends Unit
      */
     public function testPersistConditionalAvailabilities(): void
     {
-        $this->businessFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilitiesBulkApi')
             ->willReturn($this->conditionalAvailabilityBulkApiMock);
 

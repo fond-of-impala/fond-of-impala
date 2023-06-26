@@ -7,33 +7,34 @@ use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailability
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityReaderTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepositoryInterface
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityRepositoryMock;
+    protected ConditionalAvailabilityCriteriaFilterTransfer|MockObject $conditionalAvailabilityCriteriaFilterTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityCollectionTransfer $conditionalAvailabilityCollectionTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityTransfer|MockObject $conditionalAvailabilityTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepositoryInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityRepositoryInterface $repositoryMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityReader
      */
-    protected $conditionalAvailabilityReader;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityTransfer
-     */
-    protected $conditionalAvailabilityTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
-     */
-    protected $conditionalAvailabilityCollectionTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer
-     */
-    protected $conditionalAvailabilityCriteriaFilterTransferMock;
+    protected ConditionalAvailabilityReader $conditionalAvailabilityReader;
 
     /**
      * @return void
@@ -54,12 +55,12 @@ class ConditionalAvailabilityReaderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityRepositoryMock = $this->getMockBuilder(ConditionalAvailabilityRepositoryInterface::class)
+        $this->repositoryMock = $this->getMockBuilder(ConditionalAvailabilityRepositoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->conditionalAvailabilityReader = new ConditionalAvailabilityReader(
-            $this->conditionalAvailabilityRepositoryMock,
+            $this->repositoryMock,
         );
     }
 
@@ -70,15 +71,15 @@ class ConditionalAvailabilityReaderTest extends Unit
     {
         $idConditionalAvailability = 1;
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('requireIdConditionalAvailability')
             ->willReturn($this->conditionalAvailabilityTransferMock);
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getIdConditionalAvailability')
             ->willReturn($idConditionalAvailability);
 
-        $this->conditionalAvailabilityRepositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('findConditionalAvailabilityById')
             ->with($idConditionalAvailability)
             ->willReturn(null);
@@ -87,7 +88,7 @@ class ConditionalAvailabilityReaderTest extends Unit
             ->findById($this->conditionalAvailabilityTransferMock);
 
         $this->assertFalse($conditionalAvailabilityResponseTransfer->getIsSuccessful());
-        $this->assertEquals(null, $conditionalAvailabilityResponseTransfer->getConditionalAvailabilityTransfer());
+        static::assertEquals(null, $conditionalAvailabilityResponseTransfer->getConditionalAvailabilityTransfer());
     }
 
     /**
@@ -97,15 +98,15 @@ class ConditionalAvailabilityReaderTest extends Unit
     {
         $idConditionalAvailability = 1;
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('requireIdConditionalAvailability')
             ->willReturn($this->conditionalAvailabilityTransferMock);
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getIdConditionalAvailability')
             ->willReturn($idConditionalAvailability);
 
-        $this->conditionalAvailabilityRepositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('findConditionalAvailabilityById')
             ->with($idConditionalAvailability)
             ->willReturn($this->conditionalAvailabilityTransferMock);
@@ -114,7 +115,7 @@ class ConditionalAvailabilityReaderTest extends Unit
             ->findById($this->conditionalAvailabilityTransferMock);
 
         $this->assertTrue($conditionalAvailabilityResponseTransfer->getIsSuccessful());
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityTransferMock,
             $conditionalAvailabilityResponseTransfer->getConditionalAvailabilityTransfer(),
         );
@@ -125,7 +126,7 @@ class ConditionalAvailabilityReaderTest extends Unit
      */
     public function testFindAll(): void
     {
-        $this->conditionalAvailabilityRepositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('findConditionalAvailabilities')
             ->withAnyParameters()
             ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
@@ -133,7 +134,7 @@ class ConditionalAvailabilityReaderTest extends Unit
         $conditionalAvailabilityCollectionTransfer = $this->conditionalAvailabilityReader
             ->findAll();
 
-        $this->assertEquals(
+        static::assertEquals(
             $conditionalAvailabilityCollectionTransfer,
             $this->conditionalAvailabilityCollectionTransferMock,
         );
@@ -144,7 +145,7 @@ class ConditionalAvailabilityReaderTest extends Unit
      */
     public function testFindConditionalAvailabilities(): void
     {
-        $this->conditionalAvailabilityRepositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('findConditionalAvailabilities')
             ->with($this->conditionalAvailabilityCriteriaFilterTransferMock)
             ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
@@ -152,7 +153,7 @@ class ConditionalAvailabilityReaderTest extends Unit
         $conditionalAvailabilityCollectionTransfer = $this->conditionalAvailabilityReader
             ->find($this->conditionalAvailabilityCriteriaFilterTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $conditionalAvailabilityCollectionTransfer,
             $this->conditionalAvailabilityCollectionTransferMock,
         );

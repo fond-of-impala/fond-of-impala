@@ -10,6 +10,7 @@ use FondOfImpala\Zed\ConditionalAvailability\Business\Model\GroupedConditionalAv
 use FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManager;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Spryker\Shared\Log\Config\LoggerConfigInterface;
 use Spryker\Zed\Kernel\Container;
@@ -17,29 +18,29 @@ use Spryker\Zed\Kernel\Container;
 class ConditionalAvailabilityBusinessFactoryTest extends Unit
 {
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Kernel\Container&\PHPUnit\Framework\MockObject\MockObject)
+     */
+    protected Container|MockObject $containerMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityRepository $repositoryMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManager&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityEntityManager|MockObject $entityManagerMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject)
+     */
+    protected LoggerInterface|MockObject $loggerMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityBusinessFactory
      */
-    protected $businessFactory;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockBuilder|\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepository
-     */
-    protected $repositoryMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManager
-     */
-    protected $entityManagerMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Psr\Log\LoggerInterface
-     */
-    protected $loggerMock;
+    protected ConditionalAvailabilityBusinessFactory $factory;
 
     /**
      * @return void
@@ -64,11 +65,11 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->businessFactory = new class ($this->loggerMock) extends ConditionalAvailabilityBusinessFactory {
+        $this->factory = new class ($this->loggerMock) extends ConditionalAvailabilityBusinessFactory {
             /**
              * @var \Psr\Log\LoggerInterface
              */
-            protected $logger;
+            protected LoggerInterface $logger;
 
             /**
              * @param \Psr\Log\LoggerInterface $logger
@@ -88,9 +89,9 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
                 return $this->logger;
             }
         };
-        $this->businessFactory->setContainer($this->containerMock);
-        $this->businessFactory->setRepository($this->repositoryMock);
-        $this->businessFactory->setEntityManager($this->entityManagerMock);
+        $this->factory->setContainer($this->containerMock);
+        $this->factory->setRepository($this->repositoryMock);
+        $this->factory->setEntityManager($this->entityManagerMock);
     }
 
     /**
@@ -100,7 +101,7 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             ConditionalAvailabilityReader::class,
-            $this->businessFactory->createConditionalAvailabilityReader(),
+            $this->factory->createConditionalAvailabilityReader(),
         );
     }
 
@@ -111,7 +112,7 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             GroupedConditionalAvailabilityReader::class,
-            $this->businessFactory->createGroupedConditionalAvailabilityReader(),
+            $this->factory->createGroupedConditionalAvailabilityReader(),
         );
     }
 
@@ -122,7 +123,7 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             ConditionalAvailabilityPeriodsPersister::class,
-            $this->businessFactory->createConditionalAvailabilityPeriodsPersister(),
+            $this->factory->createConditionalAvailabilityPeriodsPersister(),
         );
     }
 
@@ -131,19 +132,19 @@ class ConditionalAvailabilityBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityWriter(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->with(ConditionalAvailabilityDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_POST_SAVE)
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_POST_SAVE)
             ->willReturn([]);
 
         static::assertInstanceOf(
             ConditionalAvailabilityWriter::class,
-            $this->businessFactory->createConditionalAvailabilityWriter(),
+            $this->factory->createConditionalAvailabilityWriter(),
         );
     }
 }
