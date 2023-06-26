@@ -3,21 +3,21 @@
 namespace FondOfImpala\Glue\ConditionalAvailabilityCartConnector;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
+use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorService;
 
 class ConditionalAvailabilityCartConnectorFactoryTest extends Unit
 {
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorFactory
      */
-    protected $conditionalAvailabilityCartConnectorFactory;
+    protected ConditionalAvailabilityCartConnectorFactory $factory;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityCartConnectorFactory = new ConditionalAvailabilityCartConnectorFactory();
+        $this->factory = new ConditionalAvailabilityCartConnectorFactory();
     }
 
     /**
@@ -25,9 +25,9 @@ class ConditionalAvailabilityCartConnectorFactoryTest extends Unit
      */
     public function testGetService(): void
     {
-        $this->assertInstanceOf(
-            ConditionalAvailabilityCartConnectorServiceInterface::class,
-            $this->conditionalAvailabilityCartConnectorFactory->getService(),
+        static::assertInstanceOf(
+            ConditionalAvailabilityCartConnectorService::class,
+            $this->factory->getService(),
         );
     }
 }

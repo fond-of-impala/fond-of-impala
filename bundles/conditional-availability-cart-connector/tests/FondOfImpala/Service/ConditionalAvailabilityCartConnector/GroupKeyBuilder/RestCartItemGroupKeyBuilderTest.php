@@ -4,45 +4,31 @@ namespace FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuil
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\RestCartItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestCartItemGroupKeyBuilderTest extends Unit
 {
     /**
+     * @var (\FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\GroupKeyBuilderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|GroupKeyBuilderInterface $groupKeyBuilderMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\RestCartItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected RestCartItemTransfer|MockObject $restCartItemTransferMock;
+
+    /**
      * @var \FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\RestCartItemGroupKeyBuilder
      */
-    protected $restCartItemGroupKeyBuilder;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\GroupKeyBuilderInterface
-     */
-    protected $groupKeyBuilderInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestCartItemTransfer
-     */
-    protected $restCartItemTransferMock;
-
-    /**
-     * @var string
-     */
-    protected $deliveryDate;
-
-    /**
-     * @var string
-     */
-    protected $sku;
-
-    /**
-     * @var string
-     */
-    protected $groupKey;
+    protected RestCartItemGroupKeyBuilder $restCartItemGroupKeyBuilder;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->groupKeyBuilderInterfaceMock = $this->getMockBuilder(GroupKeyBuilderInterface::class)
+        $this->groupKeyBuilderMock = $this->getMockBuilder(GroupKeyBuilderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,14 +36,8 @@ class RestCartItemGroupKeyBuilderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->deliveryDate = 'delivery-date';
-
-        $this->sku = 'sku';
-
-        $this->groupKey = "{$this->sku}.{$this->deliveryDate}";
-
         $this->restCartItemGroupKeyBuilder = new RestCartItemGroupKeyBuilder(
-            $this->groupKeyBuilderInterfaceMock,
+            $this->groupKeyBuilderMock,
         );
     }
 
@@ -66,21 +46,25 @@ class RestCartItemGroupKeyBuilderTest extends Unit
      */
     public function testBuild(): void
     {
-        $this->restCartItemTransferMock->expects($this->atLeastOnce())
+        $deliveryDate = 'bar';
+        $sku = 'foo';
+        $groupKey = sprintf('%s.%s', $sku, $deliveryDate);
+
+        $this->restCartItemTransferMock->expects(static::atLeastOnce())
             ->method('getDeliveryDate')
-            ->willReturn($this->deliveryDate);
+            ->willReturn($deliveryDate);
 
-        $this->restCartItemTransferMock->expects($this->atLeastOnce())
+        $this->restCartItemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
-            ->willReturn($this->sku);
+            ->willReturn($sku);
 
-        $this->groupKeyBuilderInterfaceMock->expects($this->atLeastOnce())
+        $this->groupKeyBuilderMock->expects(static::atLeastOnce())
             ->method('build')
-            ->with($this->sku, $this->deliveryDate)
-            ->willReturn($this->groupKey);
+            ->with($sku, $deliveryDate)
+            ->willReturn($groupKey);
 
-        $this->assertSame(
-            $this->groupKey,
+        static::assertEquals(
+            $groupKey,
             $this->restCartItemGroupKeyBuilder->build($this->restCartItemTransferMock),
         );
     }
@@ -90,16 +74,18 @@ class RestCartItemGroupKeyBuilderTest extends Unit
      */
     public function testBuildEmptyDeliveryDate(): void
     {
-        $this->restCartItemTransferMock->expects($this->atLeastOnce())
+        $sku = 'foo';
+
+        $this->restCartItemTransferMock->expects(static::atLeastOnce())
             ->method('getDeliveryDate')
             ->willReturn(null);
 
-        $this->restCartItemTransferMock->expects($this->atLeastOnce())
+        $this->restCartItemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
-            ->willReturn($this->sku);
+            ->willReturn($sku);
 
-        $this->assertSame(
-            $this->sku,
+        static::assertSame(
+            $sku,
             $this->restCartItemGroupKeyBuilder->build($this->restCartItemTransferMock),
         );
     }
