@@ -6,28 +6,29 @@ use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Service\ConditionalAvailability\Generator\EarliestDeliveryDateGeneratorInterface;
 use FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGeneratorInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityServiceTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceFactory
+     * @var (\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceFactory&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityServiceFactoryMock;
+    protected MockObject|ConditionalAvailabilityServiceFactory $factoryMock;
 
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\Generator\EarliestDeliveryDateGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Service\ConditionalAvailability\Generator\EarliestDeliveryDateGeneratorInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $earliestDeliveryDateGeneratorMock;
+    protected MockObject|EarliestDeliveryDateGeneratorInterface $earliestDeliveryDateGeneratorMock;
 
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGeneratorInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $latestOrderDateGeneratorMock;
+    protected MockObject|LatestOrderDateGeneratorInterface $latestOrderDateGeneratorMock;
 
     /**
      * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityService
      */
-    protected $conditionalAvailabilityService;
+    protected ConditionalAvailabilityService $service;
 
     /**
      * @return void
@@ -36,7 +37,7 @@ class ConditionalAvailabilityServiceTest extends Unit
     {
         parent::_before();
 
-        $this->conditionalAvailabilityServiceFactoryMock = $this->getMockBuilder(ConditionalAvailabilityServiceFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityServiceFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -48,8 +49,8 @@ class ConditionalAvailabilityServiceTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityService = new ConditionalAvailabilityService();
-        $this->conditionalAvailabilityService->setFactory($this->conditionalAvailabilityServiceFactoryMock);
+        $this->service = new ConditionalAvailabilityService();
+        $this->service->setFactory($this->factoryMock);
     }
 
     /**
@@ -59,7 +60,7 @@ class ConditionalAvailabilityServiceTest extends Unit
     {
         $dateTime = new DateTime();
 
-        $this->conditionalAvailabilityServiceFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createEarliestDeliveryDateGenerator')
             ->willReturn($this->earliestDeliveryDateGeneratorMock);
 
@@ -69,7 +70,7 @@ class ConditionalAvailabilityServiceTest extends Unit
 
         static::assertEquals(
             $dateTime,
-            $this->conditionalAvailabilityService->generateEarliestDeliveryDate(),
+            $this->service->generateEarliestDeliveryDate(),
         );
     }
 
@@ -80,7 +81,7 @@ class ConditionalAvailabilityServiceTest extends Unit
     {
         $dateTime = new DateTime();
 
-        $this->conditionalAvailabilityServiceFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createEarliestDeliveryDateGenerator')
             ->willReturn($this->earliestDeliveryDateGeneratorMock);
 
@@ -91,7 +92,7 @@ class ConditionalAvailabilityServiceTest extends Unit
 
         static::assertEquals(
             $dateTime,
-            $this->conditionalAvailabilityService->generateEarliestDeliveryDateByDateTime($dateTime),
+            $this->service->generateEarliestDeliveryDateByDateTime($dateTime),
         );
     }
 
@@ -102,7 +103,7 @@ class ConditionalAvailabilityServiceTest extends Unit
     {
         $dateTime = new DateTime();
 
-        $this->conditionalAvailabilityServiceFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createLatestOrderDateGenerator')
             ->willReturn($this->latestOrderDateGeneratorMock);
 
@@ -113,7 +114,7 @@ class ConditionalAvailabilityServiceTest extends Unit
 
         static::assertEquals(
             $dateTime,
-            $this->conditionalAvailabilityService->generateLatestOrderDateByDeliveryDate($dateTime),
+            $this->service->generateLatestOrderDateByDeliveryDate($dateTime),
         );
     }
 }
