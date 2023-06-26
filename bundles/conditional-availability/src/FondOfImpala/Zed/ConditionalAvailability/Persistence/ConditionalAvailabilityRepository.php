@@ -16,6 +16,8 @@ use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityPersistenceFactory getFactory()
  */
 class ConditionalAvailabilityRepository extends AbstractRepository implements ConditionalAvailabilityRepositoryInterface
@@ -150,12 +152,6 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
         }
 
         $foiConditionalAvailabilityQuery->with(static::RELATION_ALIAS_FOI_CONDITIONAL_AVAILABILITY_PERIOD);
-
-        if ($conditionalAvailabilityCriteriaFilterTransfer->getIsAccessible() !== null) {
-            $foiConditionalAvailabilityQuery->filterByIsAccessible(
-                $conditionalAvailabilityCriteriaFilterTransfer->getIsAccessible(),
-            );
-        }
 
         return $foiConditionalAvailabilityQuery;
     }

@@ -20,7 +20,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailability\ConditionalAvailabilityConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepositoryInterface getRepository()
  * @method \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface getEntityManager()
  */

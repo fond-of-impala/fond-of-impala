@@ -9,6 +9,8 @@ use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchPersistenceFactory getFactory()
  */
 class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryContainer implements ConditionalAvailabilityPageSearchQueryContainerInterface
@@ -27,11 +29,6 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
      * @var string
      */
     public const VIRTUAL_COLUMN_WAREHOUSE_GROUP = 'warehouse_group';
-
-    /**
-     * @var string
-     */
-    public const VIRTUAL_COLUMN_IS_ACCESSIBLE = 'is_accessible';
 
     /**
      * @param array<int> $conditionalAvailabilityIds
@@ -57,10 +54,6 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
             ->withColumn(
                 FoiConditionalAvailabilityTableMap::COL_WAREHOUSE_GROUP,
                 static::VIRTUAL_COLUMN_WAREHOUSE_GROUP,
-            )
-            ->withColumn(
-                FoiConditionalAvailabilityTableMap::COL_IS_ACCESSIBLE,
-                static::VIRTUAL_COLUMN_IS_ACCESSIBLE,
             );
 
         return $FoiConditionalAvailabilityPeriodQuery;

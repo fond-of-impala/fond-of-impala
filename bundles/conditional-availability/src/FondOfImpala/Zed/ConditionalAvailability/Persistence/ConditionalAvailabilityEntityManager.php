@@ -8,6 +8,8 @@ use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriod
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityPersistenceFactory getFactory()
  */
 class ConditionalAvailabilityEntityManager extends AbstractEntityManager implements ConditionalAvailabilityEntityManagerInterface
