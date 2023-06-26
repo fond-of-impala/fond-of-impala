@@ -8,15 +8,9 @@ use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig;
 
 class LatestOrderDateGenerator implements LatestOrderDateGeneratorInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\Generator\EarliestOrderDateGeneratorInterface
-     */
-    protected $earliestOrderDateGenerator;
+    protected EarliestOrderDateGeneratorInterface $earliestOrderDateGenerator;
 
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig
-     */
-    protected $config;
+    protected ConditionalAvailabilityConfig $config;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailability\Generator\EarliestOrderDateGeneratorInterface $earliestOrderDateGenerator

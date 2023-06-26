@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 
 class ConditionalAvailabilityPeriodsPersister implements ConditionalAvailabilityPeriodsPersisterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface
-     */
-    protected $entityManager;
+    protected ConditionalAvailabilityEntityManagerInterface $entityManager;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface $entityManager
