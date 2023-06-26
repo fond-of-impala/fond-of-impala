@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 
@@ -12,27 +13,22 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory
      */
-    protected $conditionalAvailabilityPageSearchFactory;
+    protected ConditionalAvailabilityPageSearchFactory $factory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface
      */
-    protected $conditionalAvailabilityPageSearchToSearchClientInterfaceMock;
+    protected MockObject|ConditionalAvailabilityPageSearchToSearchClientInterface $clientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryInterface
      */
-    protected $queryInterfaceMock;
-
-    /**
-     * @var string
-     */
-    protected $searchString;
+    protected MockObject|QueryInterface $queryMock;
 
     /**
      * @return void
@@ -43,18 +39,16 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchToSearchClientInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToSearchClientInterface::class)
+        $this->clientMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToSearchClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->queryInterfaceMock = $this->getMockBuilder(QueryInterface::class)
+        $this->queryMock = $this->getMockBuilder(QueryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->searchString = 'search-string';
-
-        $this->conditionalAvailabilityPageSearchFactory = new ConditionalAvailabilityPageSearchFactory();
-        $this->conditionalAvailabilityPageSearchFactory->setContainer($this->containerMock);
+        $this->factory = new ConditionalAvailabilityPageSearchFactory();
+        $this->factory->setContainer($this->containerMock);
     }
 
     /**
@@ -69,11 +63,11 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_SEARCH)
-            ->willReturn($this->conditionalAvailabilityPageSearchToSearchClientInterfaceMock);
+            ->willReturn($this->clientMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             ConditionalAvailabilityPageSearchToSearchClientInterface::class,
-            $this->conditionalAvailabilityPageSearchFactory->getSearchClient(),
+            $this->factory->getSearchClient(),
         );
     }
 
@@ -82,6 +76,7 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
      */
     public function testCreateSearchQuery(): void
     {
+        $searchString = 'search-string';
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
@@ -89,14 +84,9 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::PLUGIN_SEARCH_QUERY)
-            ->willReturn($this->queryInterfaceMock);
+            ->willReturn($this->queryMock);
 
-        $this->assertInstanceOf(
-            QueryInterface::class,
-            $this->conditionalAvailabilityPageSearchFactory->createSearchQuery(
-                $this->searchString,
-            ),
-        );
+        static::assertEquals($this->queryMock, $this->factory->createSearchQuery($searchString));
     }
 
     /**
@@ -113,9 +103,7 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_QUERY_EXPANDER)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchFactory->getSearchQueryExpanderPlugins(),
-        );
+        static::assertIsArray($this->factory->getSearchQueryExpanderPlugins());
     }
 
     /**
@@ -132,8 +120,6 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_RESULT_FORMATTER)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchFactory->getSearchResultFormatterPlugins(),
-        );
+        static::assertIsArray($this->factory->getSearchResultFormatterPlugins());
     }
 }

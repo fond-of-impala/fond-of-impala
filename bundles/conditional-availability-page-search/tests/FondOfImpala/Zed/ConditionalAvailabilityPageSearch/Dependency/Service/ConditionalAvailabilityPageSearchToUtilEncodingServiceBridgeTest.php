@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends Unit
@@ -10,31 +11,24 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge
      */
-    protected $conditionalAvailabilityPageSearchToUtilEncodingServiceBridge;
+    protected ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
      */
-    protected $utilEncodingServiceInterfaceMock;
-
-    /**
-     * @var string
-     */
-    protected $encodedJsonString;
+    protected MockObject|UtilEncodingServiceInterface $utilEncodingServiceMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->utilEncodingServiceInterfaceMock = $this->getMockBuilder(UtilEncodingServiceInterface::class)
+        $this->utilEncodingServiceMock = $this->getMockBuilder(UtilEncodingServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->encodedJsonString = 'encoded-json-string';
-
-        $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge = new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
-            $this->utilEncodingServiceInterfaceMock,
+        $this->bridge = new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
+            $this->utilEncodingServiceMock,
         );
     }
 
@@ -43,17 +37,14 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
      */
     public function testEncodeJson(): void
     {
-        $this->utilEncodingServiceInterfaceMock->expects($this->atLeastOnce())
+        $encodedJsonString = 'encoded-json-string';
+
+        $this->utilEncodingServiceMock->expects($this->atLeastOnce())
             ->method('encodeJson')
             ->with([])
-            ->willReturn($this->encodedJsonString);
+            ->willReturn($encodedJsonString);
 
-        $this->assertSame(
-            $this->encodedJsonString,
-            $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge->encodeJson(
-                [],
-            ),
-        );
+        static::assertEquals($encodedJsonString, $this->bridge->encodeJson([]));
     }
 
     /**
@@ -61,15 +52,13 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
      */
     public function testDecodeJson(): void
     {
-        $this->utilEncodingServiceInterfaceMock->expects($this->atLeastOnce())
+        $encodedJsonString = 'encoded-json-string';
+
+        $this->utilEncodingServiceMock->expects($this->atLeastOnce())
             ->method('decodeJson')
-            ->with($this->encodedJsonString)
+            ->with($encodedJsonString)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->conditionalAvailabilityPageSearchToUtilEncodingServiceBridge->decodeJson(
-                $this->encodedJsonString,
-            ),
-        );
+        static::assertEquals([], $this->bridge->decodeJson($encodedJsonString));
     }
 }
