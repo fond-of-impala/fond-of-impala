@@ -6,23 +6,24 @@ use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface;
 use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class EarliestDeliveryDateGeneratorTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface
      */
-    protected $conditionalAvailabilityServiceMock;
+    protected MockObject|ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface $conditionalAvailabilityServiceMock;
 
     /**
-     * @var \Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer
      */
-    protected $restConditionalAvailabilityPeriodTransferMock;
+    protected MockObject|RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransferMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\EarliestDeliveryDate\Generator\EarliestDeliveryDateGenerator
      */
-    protected $earliestDeliveryDateGenerator;
+    protected EarliestDeliveryDateGenerator $earliestDeliveryDateGenerator;
 
     /**
      * @return void

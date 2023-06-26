@@ -8,6 +8,7 @@ use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapperInterface;
 use Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchPaginationTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -21,77 +22,57 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Reader\ConditionalAvailabilityPageSearchReader
      */
-    protected $conditionalAvailabilityPageSearchReader;
+    protected ConditionalAvailabilityPageSearchReader $reader;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
      */
-    protected $restResourceBuilderMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
      */
-    protected $conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock;
+    protected MockObject|ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapperInterface
      */
-    protected $conditionalAvailabilityPageSearchMapperMock;
+    protected MockObject|ConditionalAvailabilityPageSearchMapperInterface $conditionalAvailabilityPageSearchMapperMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
      */
-    protected $requestMock;
+    protected MockObject|Request $requestMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\ParameterBag
      */
-    protected $parameterBagMock;
-
-    /**
-     * @var string
-     */
-    protected $requestParameter;
-
-    /**
-     * @var array
-     */
-    protected $allRequestParameters;
-
-    /**
-     * @var array
-     */
-    protected $searchResult;
+    protected MockObject|ParameterBag $parameterBagMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer
      */
-    protected $restConditionalAvailabilityPageSearchCollectionResponseTransferMock;
+    protected MockObject|RestConditionalAvailabilityPageSearchCollectionResponseTransfer $restConditionalAvailabilityPageSearchCollectionResponseTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
      */
-    protected $restResourceMock;
+    protected MockObject|RestResourceInterface $restResourceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchPaginationTransfer
      */
-    protected $restConditionalAvailabilityPageSearchPaginationTransferMock;
-
-    /**
-     * @var int
-     */
-    protected $numFound;
+    protected MockObject|RestConditionalAvailabilityPageSearchPaginationTransfer $restConditionalAvailabilityPageSearchPaginationTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\PageInterface
@@ -107,11 +88,13 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class)
+        $this->conditionalAvailabilityPageSearchClientMock = $this
+            ->getMockBuilder(ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchMapperMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchMapperInterface::class)
+        $this->conditionalAvailabilityPageSearchMapperMock = $this
+            ->getMockBuilder(ConditionalAvailabilityPageSearchMapperInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -122,12 +105,6 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $this->requestMock = $this->getMockBuilder(Request::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->requestParameter = 'request-parameter';
-
-        $this->allRequestParameters = [];
-
-        $this->searchResult = [];
 
         $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock = $this->getMockBuilder(RestConditionalAvailabilityPageSearchCollectionResponseTransfer::class)
             ->disableOriginalConstructor()
@@ -141,8 +118,6 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->numFound = 1;
-
         $this->restResponseMock = $this->getMockBuilder(RestResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -151,9 +126,9 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchReader = new ConditionalAvailabilityPageSearchReader(
+        $this->reader = new ConditionalAvailabilityPageSearchReader(
             $this->restResourceBuilderMock,
-            $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock,
+            $this->conditionalAvailabilityPageSearchClientMock,
             $this->conditionalAvailabilityPageSearchMapperMock,
         );
     }
@@ -163,6 +138,8 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
      */
     public function testGet(): void
     {
+        $numFound = 1;
+        $searchResult = [];
         $this->requestMock->query = new InputBag();
 
         $this->restRequestMock->expects($this->atLeastOnce())
@@ -181,13 +158,13 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
             ->method('getOffset')
             ->willReturn(12);
 
-        $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchClientMock->expects($this->atLeastOnce())
             ->method('search')
-            ->willReturn($this->searchResult);
+            ->willReturn($searchResult);
 
         $this->conditionalAvailabilityPageSearchMapperMock->expects($this->atLeastOnce())
             ->method('mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer')
-            ->with($this->searchResult)
+            ->with($searchResult)
             ->willReturn($this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock);
 
         $this->restResourceBuilderMock->expects($this->atLeastOnce())
@@ -204,11 +181,11 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
 
         $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects($this->atLeastOnce())
             ->method('getNumFound')
-            ->willReturn($this->numFound);
+            ->willReturn($numFound);
 
         $this->restResourceBuilderMock->expects($this->atLeastOnce())
             ->method('createRestResponse')
-            ->with($this->numFound)
+            ->with($numFound)
             ->willReturn($this->restResponseMock);
 
         $this->restRequestMock->expects($this->never())
@@ -222,7 +199,7 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
 
         static::assertEquals(
             $this->restResponseMock,
-            $this->conditionalAvailabilityPageSearchReader->get(
+            $this->reader->get(
                 $this->restRequestMock,
             ),
         );
@@ -233,6 +210,8 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
      */
     public function testGetWithoutPageParams(): void
     {
+        $numFound = 1;
+        $searchResult = [];
         $this->requestMock->query = new InputBag();
 
         $this->restRequestMock->expects($this->atLeastOnce())
@@ -249,13 +228,13 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $this->pageMock->expects($this->never())
             ->method('getOffset');
 
-        $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchClientMock->expects($this->atLeastOnce())
             ->method('search')
-            ->willReturn($this->searchResult);
+            ->willReturn($searchResult);
 
         $this->conditionalAvailabilityPageSearchMapperMock->expects($this->atLeastOnce())
             ->method('mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer')
-            ->with($this->searchResult)
+            ->with($searchResult)
             ->willReturn($this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock);
 
         $this->restResourceBuilderMock->expects($this->atLeastOnce())
@@ -272,11 +251,11 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
 
         $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects($this->atLeastOnce())
             ->method('getNumFound')
-            ->willReturn($this->numFound);
+            ->willReturn($numFound);
 
         $this->restResourceBuilderMock->expects($this->atLeastOnce())
             ->method('createRestResponse')
-            ->with($this->numFound)
+            ->with($numFound)
             ->willReturn($this->restResponseMock);
 
         $this->restRequestMock->expects($this->atLeastOnce())
@@ -290,7 +269,7 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
 
         static::assertEquals(
             $this->restResponseMock,
-            $this->conditionalAvailabilityPageSearchReader->get(
+            $this->reader->get(
                 $this->restRequestMock,
             ),
         );
