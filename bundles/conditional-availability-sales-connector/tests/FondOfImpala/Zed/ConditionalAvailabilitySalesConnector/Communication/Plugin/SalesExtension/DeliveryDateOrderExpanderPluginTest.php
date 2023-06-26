@@ -6,23 +6,24 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class DeliveryDateOrderExpanderPluginTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\OrderTransfer
      */
-    protected $orderTransferMock;
+    protected MockObject|OrderTransfer $orderTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
      */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilitySalesConnector\Communication\Plugin\SalesExtension\DeliveryDateOrderExpanderPlugin
      */
-    protected $deliveryDateOrderExpanderPlugin;
+    protected DeliveryDateOrderExpanderPlugin $plugin;
 
     /**
      * @return void
@@ -39,7 +40,7 @@ class DeliveryDateOrderExpanderPluginTest extends Unit
                 ->disableOriginalConstructor()
                 ->getMock();
 
-        $this->deliveryDateOrderExpanderPlugin = new DeliveryDateOrderExpanderPlugin();
+        $this->plugin = new DeliveryDateOrderExpanderPlugin();
     }
 
     /**
@@ -72,9 +73,9 @@ class DeliveryDateOrderExpanderPluginTest extends Unit
             ->with($concreteDeliveryDate)
             ->willReturn($this->orderTransferMock);
 
-        $orderTransfer = $this->deliveryDateOrderExpanderPlugin->hydrate($this->orderTransferMock);
+        $orderTransfer = $this->plugin->hydrate($this->orderTransferMock);
 
-        $this->assertEquals($orderTransfer, $this->orderTransferMock);
+        static::assertEquals($orderTransfer, $this->orderTransferMock);
     }
 
     /**
@@ -92,8 +93,8 @@ class DeliveryDateOrderExpanderPluginTest extends Unit
         $this->orderTransferMock->expects($this->never())
             ->method('setConcreteDeliveryDate');
 
-        $orderTransfer = $this->deliveryDateOrderExpanderPlugin->hydrate($this->orderTransferMock);
+        $orderTransfer = $this->plugin->hydrate($this->orderTransferMock);
 
-        $this->assertEquals($orderTransfer, $this->orderTransferMock);
+        static::assertEquals($orderTransfer, $this->orderTransferMock);
     }
 }
