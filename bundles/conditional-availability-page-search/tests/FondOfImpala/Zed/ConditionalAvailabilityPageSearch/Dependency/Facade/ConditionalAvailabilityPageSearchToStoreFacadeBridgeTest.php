@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\StoreTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
@@ -11,24 +12,24 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeBridge
      */
-    protected $conditionalAvailabilityPageSearchToStoreFacadeBridge;
+    protected ConditionalAvailabilityPageSearchToStoreFacadeBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Store\Business\StoreFacadeInterface
      */
-    protected $storeFacadeInterfaceMock;
+    protected MockObject|StoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
      */
-    protected $storeTransferMock;
+    protected MockObject|StoreTransfer $storeTransferMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->storeFacadeInterfaceMock = $this->getMockBuilder(StoreFacadeInterface::class)
+        $this->storeFacadeMock = $this->getMockBuilder(StoreFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -36,9 +37,7 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchToStoreFacadeBridge = new ConditionalAvailabilityPageSearchToStoreFacadeBridge(
-            $this->storeFacadeInterfaceMock,
-        );
+        $this->bridge = new ConditionalAvailabilityPageSearchToStoreFacadeBridge($this->storeFacadeMock);
     }
 
     /**
@@ -46,13 +45,10 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
      */
     public function testGetCurrentStore(): void
     {
-        $this->storeFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects($this->atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->assertEquals(
-            $this->storeTransferMock,
-            $this->conditionalAvailabilityPageSearchToStoreFacadeBridge->getCurrentStore(),
-        );
+        $this->assertEquals($this->storeTransferMock, $this->bridge->getCurrentStore());
     }
 }

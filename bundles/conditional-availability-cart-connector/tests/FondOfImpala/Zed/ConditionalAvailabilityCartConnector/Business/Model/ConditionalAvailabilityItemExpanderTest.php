@@ -7,45 +7,36 @@ use Codeception\Test\Unit;
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
 use Generated\Shared\Transfer\CartChangeTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityItemExpanderTest extends Unit
 {
     /**
+     * @var (\FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorServiceInterface|MockObject $serviceMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\CartChangeTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CartChangeTransfer|MockObject $cartChangeTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ItemTransfer $itemTransferMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpander
      */
-    protected $conditionalAvailabilityItemExpander;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface
-     */
-    protected $conditionalAvailabilityCartConnectorServiceInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CartChangeTransfer
-     */
-    protected $cartChangeTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
-
-    /**
-     * @var \ArrayObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMocks;
-
-    /**
-     * @var string
-     */
-    protected $groupKey;
+    protected ConditionalAvailabilityItemExpander $conditionalAvailabilityItemExpander;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityCartConnectorServiceInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorServiceInterface::class)
+        $this->serviceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -57,14 +48,8 @@ class ConditionalAvailabilityItemExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->itemTransferMocks = new ArrayObject([
-            $this->itemTransferMock,
-        ]);
-
-        $this->groupKey = 'group-key';
-
         $this->conditionalAvailabilityItemExpander = new ConditionalAvailabilityItemExpander(
-            $this->conditionalAvailabilityCartConnectorServiceInterfaceMock,
+            $this->serviceMock,
         );
     }
 
@@ -73,22 +58,24 @@ class ConditionalAvailabilityItemExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->cartChangeTransferMock->expects($this->atLeastOnce())
-            ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
+        $groupKey = 'foo';
 
-        $this->conditionalAvailabilityCartConnectorServiceInterfaceMock->expects($this->atLeastOnce())
+        $this->cartChangeTransferMock->expects(static::atLeastOnce())
+            ->method('getItems')
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
+
+        $this->serviceMock->expects(static::atLeastOnce())
             ->method('buildItemGroupKey')
             ->with($this->itemTransferMock)
-            ->willReturn($this->groupKey);
+            ->willReturn($groupKey);
 
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('setGroupKey')
-            ->with($this->groupKey)
+            ->with($groupKey)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
-            CartChangeTransfer::class,
+        static::assertEquals(
+            $this->cartChangeTransferMock,
             $this->conditionalAvailabilityItemExpander->expand(
                 $this->cartChangeTransferMock,
             ),
