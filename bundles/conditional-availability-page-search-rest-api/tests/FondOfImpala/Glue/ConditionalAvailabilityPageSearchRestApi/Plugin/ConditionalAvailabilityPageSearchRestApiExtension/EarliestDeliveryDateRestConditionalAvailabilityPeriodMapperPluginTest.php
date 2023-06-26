@@ -7,33 +7,29 @@ use DateTime;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\EarliestDeliveryDate\Generator\EarliestDeliveryDateGeneratorInterface;
 use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory
      */
-    protected $conditionalAvailabilityPageSearchRestApiFactoryMock;
+    protected MockObject|ConditionalAvailabilityPageSearchRestApiFactory $factoryMock;
 
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\EarliestDeliveryDate\Generator\EarliestDeliveryDateGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\EarliestDeliveryDate\Generator\EarliestDeliveryDateGeneratorInterface
      */
-    protected $earliestDeliveryDateGeneratorMock;
+    protected MockObject|EarliestDeliveryDateGeneratorInterface $earliestDeliveryDateGeneratorMock;
 
     /**
-     * @var \Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer
      */
-    protected $restConditionalAvailabilityPeriodTransferMock;
-
-    /**
-     * @var array
-     */
-    protected $periodData;
+    protected MockObject|RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransferMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Plugin\ConditionalAvailabilityPageSearchRestApiExtension\EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin
      */
-    protected $earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin;
+    protected EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin $plugin;
 
     /**
      * @return void
@@ -42,7 +38,7 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
     {
         parent::_before();
 
-        $this->conditionalAvailabilityPageSearchRestApiFactoryMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchRestApiFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchRestApiFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -54,12 +50,8 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->periodData = [];
-
-        $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin = new EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin();
-        $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin->setFactory(
-            $this->conditionalAvailabilityPageSearchRestApiFactoryMock,
-        );
+        $this->plugin = new EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin();
+        $this->plugin->setFactory($this->factoryMock);
     }
 
     /**
@@ -67,7 +59,7 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
      */
     public function testMapPeriodDataToRestConditionalAvailabilityPeriodTransferWithInvalidData(): void
     {
-        $this->conditionalAvailabilityPageSearchRestApiFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createEarliestDeliveryDateGenerator')
             ->willReturn($this->earliestDeliveryDateGeneratorMock);
 
@@ -79,9 +71,9 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
         $this->restConditionalAvailabilityPeriodTransferMock->expects(static::never())
             ->method('setEarliestDeliveryDate');
 
-        $restConditionalAvailabilityPeriodTransfer = $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin
+        $restConditionalAvailabilityPeriodTransfer = $this->plugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
-                $this->periodData,
+                [],
                 $this->restConditionalAvailabilityPeriodTransferMock,
             );
 
@@ -99,7 +91,7 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
         $earliestDeliveryDate = (new DateTime())->setTime(0, 0);
         $formattedEarliestDeliveryDate = $earliestDeliveryDate->format('Y-m-d H:i:s');
 
-        $this->conditionalAvailabilityPageSearchRestApiFactoryMock->expects(static::atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createEarliestDeliveryDateGenerator')
             ->willReturn($this->earliestDeliveryDateGeneratorMock);
 
@@ -113,9 +105,9 @@ class EarliestDeliveryDateRestConditionalAvailabilityPeriodMapperPluginTest exte
             ->with($formattedEarliestDeliveryDate)
             ->willReturn($this->restConditionalAvailabilityPeriodTransferMock);
 
-        $restConditionalAvailabilityPeriodTransfer = $this->earliestDeliveryDateRestConditionalAvailabilityPeriodMapperPlugin
+        $restConditionalAvailabilityPeriodTransfer = $this->plugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
-                $this->periodData,
+                [],
                 $this->restConditionalAvailabilityPeriodTransferMock,
             );
 

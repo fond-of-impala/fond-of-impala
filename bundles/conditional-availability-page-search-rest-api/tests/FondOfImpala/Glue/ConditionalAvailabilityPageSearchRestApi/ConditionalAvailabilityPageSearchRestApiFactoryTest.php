@@ -7,6 +7,7 @@ use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Reader\ConditionalAvailabilityPageSearchReader;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\EarliestDeliveryDate\Generator\EarliestDeliveryDateGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\Kernel\Container;
 
@@ -15,27 +16,27 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
      */
-    protected $conditionalAvailabilityPageSearchClientMock;
+    protected MockObject|ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClientMock;
 
     /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface
      */
-    protected $conditionalAvailabilityServiceMock;
+    protected MockObject|ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface $conditionalAvailabilityServiceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
      */
-    protected $restResourceBuilderMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiFactory
      */
-    protected $conditionalAvailabilityPageSearchRestApiFactory;
+    protected ConditionalAvailabilityPageSearchRestApiFactory $factory;
 
     /**
      * @return void
@@ -48,19 +49,21 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchClientMock = $this->getMockBuilder(
-            ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class,
-        )->disableOriginalConstructor()->getMock();
+        $this->conditionalAvailabilityPageSearchClientMock = $this
+            ->getMockBuilder(ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $this->conditionalAvailabilityServiceMock = $this->getMockBuilder(
-            ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface::class,
-        )->disableOriginalConstructor()->getMock();
+        $this->conditionalAvailabilityServiceMock = $this
+            ->getMockBuilder(ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->restResourceBuilderMock = $this->getMockBuilder(RestResourceBuilderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchRestApiFactory = new class ($this->restResourceBuilderMock) extends ConditionalAvailabilityPageSearchRestApiFactory {
+        $this->factory = new class ($this->restResourceBuilderMock) extends ConditionalAvailabilityPageSearchRestApiFactory {
             /**
              * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
              */
@@ -83,7 +86,7 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
             }
         };
 
-        $this->conditionalAvailabilityPageSearchRestApiFactory->setContainer($this->containerMock);
+        $this->factory->setContainer($this->containerMock);
     }
 
     /**
@@ -108,7 +111,7 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
 
         static::assertInstanceOf(
             ConditionalAvailabilityPageSearchReader::class,
-            $this->conditionalAvailabilityPageSearchRestApiFactory->createConditionalAvailabilityPageSearchReader(),
+            $this->factory->createConditionalAvailabilityPageSearchReader(),
         );
     }
 
@@ -130,7 +133,7 @@ class ConditionalAvailabilityPageSearchRestApiFactoryTest extends Unit
 
         static::assertInstanceOf(
             EarliestDeliveryDateGenerator::class,
-            $this->conditionalAvailabilityPageSearchRestApiFactory->createEarliestDeliveryDateGenerator(),
+            $this->factory->createEarliestDeliveryDateGenerator(),
         );
     }
 }

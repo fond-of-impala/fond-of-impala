@@ -5,6 +5,8 @@ namespace FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Plugin\Glue
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\ConditionalAvailabilityPageSearchRestApiConfig;
 use Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Glue\GlueApplication\Rest\Collection\ResourceRouteCollection;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 
 class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
@@ -12,23 +14,23 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Plugin\GlueApplicationExtension\ConditionalAvailabilityPageSearchResourcePlugin
      */
-    protected $conditionalAvailabilityPageSearchResourcePlugin;
+    protected ConditionalAvailabilityPageSearchResourcePlugin $plugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface
      */
-    protected $resourceRouteCollectionInterfaceMock;
+    protected MockObject|ResourceRouteCollectionInterface $resourceRouteCollectionInterfaceMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->resourceRouteCollectionInterfaceMock = $this->getMockBuilder(ResourceRouteCollectionInterface::class)
+        $this->resourceRouteCollectionMock = $this->getMockBuilder(ResourceRouteCollection::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchResourcePlugin = new ConditionalAvailabilityPageSearchResourcePlugin();
+        $this->plugin = new ConditionalAvailabilityPageSearchResourcePlugin();
     }
 
     /**
@@ -36,15 +38,15 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
      */
     public function testConfigure(): void
     {
-        $this->resourceRouteCollectionInterfaceMock->expects($this->atLeastOnce())
+        $this->resourceRouteCollectionMock->expects($this->atLeastOnce())
             ->method('addGet')
             ->with('get')
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
-            ResourceRouteCollectionInterface::class,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->configure(
-                $this->resourceRouteCollectionInterfaceMock,
+        static::assertInstanceOf(
+            ResourceRouteCollection::class,
+            $this->plugin->configure(
+                $this->resourceRouteCollectionMock,
             ),
         );
     }
@@ -54,9 +56,9 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
      */
     public function testGetResourceType(): void
     {
-        $this->assertSame(
+        static::assertEquals(
             ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->getResourceType(),
+            $this->plugin->getResourceType(),
         );
     }
 
@@ -65,9 +67,9 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
      */
     public function testGetController(): void
     {
-        $this->assertSame(
+        static::assertEquals(
             ConditionalAvailabilityPageSearchRestApiConfig::CONTROLLER_RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->getController(),
+            $this->plugin->getController(),
         );
     }
 
@@ -76,9 +78,9 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
      */
     public function testGetResourceAttributesClassName(): void
     {
-        $this->assertSame(
+        static::assertEquals(
             RestConditionalAvailabilityPageSearchRequestTransfer::class,
-            $this->conditionalAvailabilityPageSearchResourcePlugin->getResourceAttributesClassName(),
+            $this->plugin->getResourceAttributesClassName(),
         );
     }
 }

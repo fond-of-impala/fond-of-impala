@@ -9,42 +9,27 @@ use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
 class ConditionalAvailabilityPageSearchMapperTest extends Unit
 {
     /**
-     * @var array
-     */
-    protected $searchResult;
-
-    /**
      * @var array<\PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
-    protected $restConditionalAvailabilityPeriodMapperPluginMocks;
+    protected array $restConditionalAvailabilityPeriodMapperPluginMocks;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapper
      */
-    protected $conditionalAvailabilityPageSearchMapper;
+    protected ConditionalAvailabilityPageSearchMapper $mapper;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->searchResult = [
-            'periods' => [
-                [
-                    'quantity' => 12,
-                    'sku' => 'FOO-BAR-001-001',
-                    'warehouseGroup' => 'EU',
-                ],
-            ],
-        ];
-
         $this->restConditionalAvailabilityPeriodMapperPluginMocks = [
             $this->getMockBuilder(RestConditionalAvailabilityPeriodMapperPluginInterface::class)
                 ->disableOriginalConstructor()
                 ->getMock(),
         ];
 
-        $this->conditionalAvailabilityPageSearchMapper = new ConditionalAvailabilityPageSearchMapper(
+        $this->mapper = new ConditionalAvailabilityPageSearchMapper(
             $this->restConditionalAvailabilityPeriodMapperPluginMocks,
         );
     }
@@ -54,18 +39,26 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
      */
     public function testMapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer(): void
     {
-        $self = $this;
+        $searchResult = [
+            'periods' => [
+                [
+                    'quantity' => 12,
+                    'sku' => 'FOO-BAR-001-001',
+                    'warehouseGroup' => 'EU',
+                ],
+            ],
+        ];
 
         $this->restConditionalAvailabilityPeriodMapperPluginMocks[0]->expects(static::atLeastOnce())
             ->method('mapPeriodDataToRestConditionalAvailabilityPeriodTransfer')
             ->with(
-                $this->searchResult['periods'][0],
+                $searchResult['periods'][0],
                 static::callback(
                     static function (
                         RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer
-                    ) use ($self) {
-                        return $restConditionalAvailabilityPeriodTransfer->getSku() === $self->searchResult['periods'][0]['sku']
-                            && $restConditionalAvailabilityPeriodTransfer->getWarehouseGroup() === $self->searchResult['periods'][0]['warehouseGroup']
+                    ) use ($searchResult) {
+                        return $restConditionalAvailabilityPeriodTransfer->getSku() === $searchResult['periods'][0]['sku']
+                            && $restConditionalAvailabilityPeriodTransfer->getWarehouseGroup() === $searchResult['periods'][0]['warehouseGroup']
                             && $restConditionalAvailabilityPeriodTransfer->getQty() === null;
                     },
                 ),
@@ -78,8 +71,8 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
                 },
             );
 
-        $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->conditionalAvailabilityPageSearchMapper
-            ->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer($this->searchResult);
+        $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->mapper
+            ->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer($searchResult);
 
         static::assertCount(
             1,
@@ -95,7 +88,7 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
         $this->restConditionalAvailabilityPeriodMapperPluginMocks[0]->expects(static::never())
             ->method('mapPeriodDataToRestConditionalAvailabilityPeriodTransfer');
 
-        $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->conditionalAvailabilityPageSearchMapper
+        $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->mapper
             ->mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer([]);
 
         static::assertCount(
