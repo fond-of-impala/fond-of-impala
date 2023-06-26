@@ -9,48 +9,49 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface;
 use Generated\Shared\Transfer\CartChangeTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
 {
     /**
+     * @var (\Generated\Shared\Transfer\QuoteTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected QuoteTransfer|MockObject $quoteTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorBusinessFactory&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|ConditionalAvailabilityCartConnectorBusinessFactory $factoryMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityExpanderInterface|MockObject $conditionalAvailabilityExpanderMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\CartChangeTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CartChangeTransfer|MockObject $cartChangeTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityItemExpanderInterface|MockObject $conditionalAvailabilityItemExpanderMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityDeliveryDateCleanerInterface|MockObject $conditionalAvailabilityDeliveryDateCleanerMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDateInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityEnsureEarliestDateInterface|MockObject $conditionalAvailabilityEnsureEarliestDateMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacade
      */
-    protected $conditionalAvailabilityCartConnectorFacade;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorBusinessFactory
-     */
-    protected $conditionalAvailabilityCartConnectorBusinessFactoryMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface
-     */
-    protected $conditionalAvailabilityExpanderInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CartChangeTransfer
-     */
-    protected $cartChangeTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface
-     */
-    protected $conditionalAvailabilityItemExpanderInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface
-     */
-    protected $conditionalAvailabilityDeliveryDateCleanerInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDateInterface
-     */
-    protected $conditionalAvailabilityEnsureEarliestDateInterfaceMock;
+    protected ConditionalAvailabilityCartConnectorFacade $facade;
 
     /**
      * @return void
@@ -61,11 +62,11 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorBusinessFactoryMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorBusinessFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityExpanderInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityExpanderInterface::class)
+        $this->conditionalAvailabilityExpanderMock = $this->getMockBuilder(ConditionalAvailabilityExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -73,20 +74,20 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityItemExpanderInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityItemExpanderInterface::class)
+        $this->conditionalAvailabilityItemExpanderMock = $this->getMockBuilder(ConditionalAvailabilityItemExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityDeliveryDateCleanerInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityDeliveryDateCleanerInterface::class)
+        $this->conditionalAvailabilityDeliveryDateCleanerMock = $this->getMockBuilder(ConditionalAvailabilityDeliveryDateCleanerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityEnsureEarliestDateInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityEnsureEarliestDateInterface::class)
+        $this->conditionalAvailabilityEnsureEarliestDateMock = $this->getMockBuilder(ConditionalAvailabilityEnsureEarliestDateInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorFacade = new ConditionalAvailabilityCartConnectorFacade();
-        $this->conditionalAvailabilityCartConnectorFacade->setFactory($this->conditionalAvailabilityCartConnectorBusinessFactoryMock);
+        $this->facade = new ConditionalAvailabilityCartConnectorFacade();
+        $this->facade->setFactory($this->factoryMock);
     }
 
     /**
@@ -94,20 +95,18 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
      */
     public function testExpandQuote(): void
     {
-        $this->conditionalAvailabilityCartConnectorBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityExpander')
-            ->willReturn($this->conditionalAvailabilityExpanderInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityExpanderMock);
 
-        $this->conditionalAvailabilityExpanderInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityExpanderMock->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->quoteTransferMock)
             ->willReturn($this->quoteTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->conditionalAvailabilityCartConnectorFacade->expandQuote(
-                $this->quoteTransferMock,
-            ),
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->facade->expandQuote($this->quoteTransferMock),
         );
     }
 
@@ -116,20 +115,18 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
      */
     public function testExpandChangeCartItems(): void
     {
-        $this->conditionalAvailabilityCartConnectorBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityItemExpander')
-            ->willReturn($this->conditionalAvailabilityItemExpanderInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityItemExpanderMock);
 
-        $this->conditionalAvailabilityItemExpanderInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityItemExpanderMock->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->cartChangeTransferMock)
             ->willReturn($this->cartChangeTransferMock);
 
-        $this->assertInstanceOf(
-            CartChangeTransfer::class,
-            $this->conditionalAvailabilityCartConnectorFacade->expandChangedCartItems(
-                $this->cartChangeTransferMock,
-            ),
+        static::assertEquals(
+            $this->cartChangeTransferMock,
+            $this->facade->expandChangedCartItems($this->cartChangeTransferMock),
         );
     }
 
@@ -138,20 +135,18 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
      */
     public function testCleanDeliveryDateOnEmptyCart(): void
     {
-        $this->conditionalAvailabilityCartConnectorBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityDeliveryDateCleaner')
-            ->willReturn($this->conditionalAvailabilityDeliveryDateCleanerInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityDeliveryDateCleanerMock);
 
-        $this->conditionalAvailabilityDeliveryDateCleanerInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityDeliveryDateCleanerMock->expects(static::atLeastOnce())
             ->method('cleanDeliveryDate')
             ->with($this->quoteTransferMock)
             ->willReturn($this->quoteTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->conditionalAvailabilityCartConnectorFacade->cleanDeliveryDateOnEmptyCart(
-                $this->quoteTransferMock,
-            ),
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->facade->cleanDeliveryDateOnEmptyCart($this->quoteTransferMock),
         );
     }
 
@@ -160,20 +155,18 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
      */
     public function testEnsureEarliestDate(): void
     {
-        $this->conditionalAvailabilityCartConnectorBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityEnsureEarliestDate')
-            ->willReturn($this->conditionalAvailabilityEnsureEarliestDateInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityEnsureEarliestDateMock);
 
-        $this->conditionalAvailabilityEnsureEarliestDateInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityEnsureEarliestDateMock->expects(static::atLeastOnce())
             ->method('ensureEarliestDate')
             ->with($this->quoteTransferMock)
             ->willReturn($this->quoteTransferMock);
 
-        $this->assertInstanceOf(
-            QuoteTransfer::class,
-            $this->conditionalAvailabilityCartConnectorFacade->ensureEarliestDate(
-                $this->quoteTransferMock,
-            ),
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->facade->ensureEarliestDate($this->quoteTransferMock),
         );
     }
 }

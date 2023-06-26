@@ -6,40 +6,40 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorFactory;
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
 use Generated\Shared\Transfer\RestCartItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPluginTest extends Unit
 {
     /**
+     * @var (\FondOfImpala\Glue\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorFactory&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorFactory|MockObject $factoryMock;
+
+    /**
+     * @var (\FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorServiceInterface|MockObject $serviceMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\RestCartItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected RestCartItemTransfer|MockObject $restCartItemTransferMock;
+
+    /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityCartConnector\Plugin\CompanyUserCartsRestApi\ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin
      */
-    protected $conditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestCartItemTransfer
-     */
-    protected $restCartItemTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorFactory
-     */
-    protected $conditionalAvailabilityCartConnectorFactoryMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface
-     */
-    protected $conditionalAvailabilityCartConnectorServiceInterfaceMock;
-
-    /**
-     * @var string
-     */
-    protected $groupKey;
+    protected ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin $plugin;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityCartConnectorFactoryMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorFactory::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->serviceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -47,14 +47,8 @@ class ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPluginTest
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorServiceInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorServiceInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->groupKey = 'group-key';
-
-        $this->conditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin = new ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin();
-        $this->conditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin->setFactory($this->conditionalAvailabilityCartConnectorFactoryMock);
+        $this->plugin = new ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin();
+        $this->plugin->setFactory($this->factoryMock);
     }
 
     /**
@@ -62,25 +56,25 @@ class ConditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPluginTest
      */
     public function testExpand(): void
     {
-        $this->conditionalAvailabilityCartConnectorFactoryMock->expects($this->atLeastOnce())
-            ->method('getService')
-            ->willReturn($this->conditionalAvailabilityCartConnectorServiceInterfaceMock);
+        $groupKey = 'foo.bar';
 
-        $this->conditionalAvailabilityCartConnectorServiceInterfaceMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
+            ->method('getService')
+            ->willReturn($this->serviceMock);
+
+        $this->serviceMock->expects(static::atLeastOnce())
             ->method('buildRestCartItemGroupKey')
             ->with($this->restCartItemTransferMock)
-            ->willReturn($this->groupKey);
+            ->willReturn($groupKey);
 
-        $this->restCartItemTransferMock->expects($this->atLeastOnce())
+        $this->restCartItemTransferMock->expects(static::atLeastOnce())
             ->method('setGroupKey')
-            ->with($this->groupKey)
+            ->with($groupKey)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
-            RestCartItemTransfer::class,
-            $this->conditionalAvailabilityCartConnectorGroupKeyRestCartItemExpanderPlugin->expand(
-                $this->restCartItemTransferMock,
-            ),
+        static::assertEquals(
+            $this->restCartItemTransferMock,
+            $this->plugin->expand($this->restCartItemTransferMock),
         );
     }
 }

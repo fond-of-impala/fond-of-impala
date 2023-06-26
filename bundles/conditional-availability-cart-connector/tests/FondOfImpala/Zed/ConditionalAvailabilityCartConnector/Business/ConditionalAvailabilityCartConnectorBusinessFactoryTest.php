@@ -4,41 +4,42 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDateInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleaner;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDate;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpander;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
 {
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Kernel\Container&\PHPUnit\Framework\MockObject\MockObject)
+     */
+    protected Container|MockObject $containerMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface|MockObject $conditionalAvailabilityFacadeMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface|MockObject $conditionalAvailabilityServiceMock;
+
+    /**
+     * @var (\FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorServiceInterface|MockObject $serviceMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorBusinessFactory
      */
-    protected $conditionalAvailabilityCartConnectorBusinessFactory;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface
-     */
-    protected $conditionalAvailabilityFacadeInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface
-     */
-    protected $conditionalAvailabilityServiceInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface
-     */
-    protected $conditionalAvailabilityCartConnectorServiceInterfaceMock;
+    protected ConditionalAvailabilityCartConnectorBusinessFactory $conditionalAvailabilityCartConnectorBusinessFactory;
 
     /**
      * @return void
@@ -49,15 +50,15 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface::class)
+        $this->conditionalAvailabilityFacadeMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityServiceInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface::class)
+        $this->conditionalAvailabilityServiceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorServiceInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorServiceInterface::class)
+        $this->serviceMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -70,23 +71,22 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityExpander(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
                 [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->conditionalAvailabilityFacadeInterfaceMock,
-                $this->conditionalAvailabilityServiceInterfaceMock,
+            )->willReturnOnConsecutiveCalls(
+                $this->conditionalAvailabilityFacadeMock,
+                $this->conditionalAvailabilityServiceMock,
             );
 
-        $this->assertInstanceOf(
-            ConditionalAvailabilityExpanderInterface::class,
+        static::assertInstanceOf(
+            ConditionalAvailabilityExpander::class,
             $this->conditionalAvailabilityCartConnectorBusinessFactory->createConditionalAvailabilityExpander(),
         );
     }
@@ -96,8 +96,8 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityDeliveryDateCleaner(): void
     {
-        $this->assertInstanceOf(
-            ConditionalAvailabilityDeliveryDateCleanerInterface::class,
+        static::assertInstanceOf(
+            ConditionalAvailabilityDeliveryDateCleaner::class,
             $this->conditionalAvailabilityCartConnectorBusinessFactory->createConditionalAvailabilityDeliveryDateCleaner(),
         );
     }
@@ -107,8 +107,8 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityEnsureEarliestDate(): void
     {
-        $this->assertInstanceOf(
-            ConditionalAvailabilityEnsureEarliestDateInterface::class,
+        static::assertInstanceOf(
+            ConditionalAvailabilityEnsureEarliestDate::class,
             $this->conditionalAvailabilityCartConnectorBusinessFactory->createConditionalAvailabilityEnsureEarliestDate(),
         );
     }
@@ -118,17 +118,17 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityItemExpander(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE)
-            ->willReturn($this->conditionalAvailabilityCartConnectorServiceInterfaceMock);
+            ->willReturn($this->serviceMock);
 
-        $this->assertInstanceOf(
-            ConditionalAvailabilityItemExpanderInterface::class,
+        static::assertInstanceOf(
+            ConditionalAvailabilityItemExpander::class,
             $this->conditionalAvailabilityCartConnectorBusinessFactory->createConditionalAvailabilityItemExpander(),
         );
     }

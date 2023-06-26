@@ -5,30 +5,31 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Servi
 use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridgeTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface
+     * @var (\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityServiceMock;
+    protected MockObject|ConditionalAvailabilityServiceInterface $serviceMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge
      */
-    protected $conditionalAvailabilityCartConnectorToConditionalAvailabilityService;
+    protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge $bridge;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityServiceMock = $this->getMockBuilder(ConditionalAvailabilityServiceInterface::class)
+        $this->serviceMock = $this->getMockBuilder(ConditionalAvailabilityServiceInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorToConditionalAvailabilityService = new ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge(
-            $this->conditionalAvailabilityServiceMock,
+        $this->bridge = new ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge(
+            $this->serviceMock,
         );
     }
 
@@ -39,13 +40,13 @@ class ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge
     {
         $earliestDeliveryDate = new DateTime();
 
-        $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
+        $this->serviceMock->expects(static::atLeastOnce())
             ->method('generateEarliestDeliveryDate')
             ->willReturn($earliestDeliveryDate);
 
         static::assertEquals(
             $earliestDeliveryDate,
-            $this->conditionalAvailabilityCartConnectorToConditionalAvailabilityService->generateEarliestDeliveryDate(),
+            $this->bridge->generateEarliestDeliveryDate(),
         );
     }
 
@@ -57,15 +58,14 @@ class ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge
         $deliveryDate = new DateTime();
         $lastOrderDate = new DateTime();
 
-        $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
+        $this->serviceMock->expects(static::atLeastOnce())
             ->method('generateLatestOrderDateByDeliveryDate')
             ->with($deliveryDate)
             ->willReturn($lastOrderDate);
 
         static::assertEquals(
             $lastOrderDate,
-            $this->conditionalAvailabilityCartConnectorToConditionalAvailabilityService
-                ->generateLatestOrderDateByDeliveryDate($deliveryDate),
+            $this->bridge->generateLatestOrderDateByDeliveryDate($deliveryDate),
         );
     }
 
@@ -77,15 +77,14 @@ class ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge
         $dateTime = new DateTime();
         $earliestDeliveryDate = new DateTime();
 
-        $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
+        $this->serviceMock->expects(static::atLeastOnce())
             ->method('generateEarliestDeliveryDateByDateTime')
             ->with($dateTime)
             ->willReturn($earliestDeliveryDate);
 
         static::assertEquals(
             $earliestDeliveryDate,
-            $this->conditionalAvailabilityCartConnectorToConditionalAvailabilityService
-                ->generateEarliestDeliveryDateByDateTime($dateTime),
+            $this->bridge->generateEarliestDeliveryDateByDateTime($dateTime),
         );
     }
 }

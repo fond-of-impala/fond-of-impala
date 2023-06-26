@@ -8,19 +8,14 @@ use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
 class QuantityRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
 {
     /**
-     * @var array
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer
      */
-    protected $periodData;
-
-    /**
-     * @var \Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restConditionalAvailabilityPeriodTransferMock;
+    protected MockObject|RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransferMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Plugin\ConditionalAvailabilityPageSearchRestApiExtension\QuantityRestConditionalAvailabilityPeriodMapperPlugin
      */
-    protected $quantityRestConditionalAvailabilityPeriodMapperPlugin;
+    protected QuantityRestConditionalAvailabilityPeriodMapperPlugin $plugin;
 
     /**
      * @return void
@@ -29,13 +24,12 @@ class QuantityRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
     {
         parent::_before();
 
-        $this->periodData = ['quantity' => 15];
-
-        $this->restConditionalAvailabilityPeriodTransferMock = $this->getMockBuilder(RestConditionalAvailabilityPeriodTransfer::class)
+        $this->restConditionalAvailabilityPeriodTransferMock = $this
+            ->getMockBuilder(RestConditionalAvailabilityPeriodTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->quantityRestConditionalAvailabilityPeriodMapperPlugin = new QuantityRestConditionalAvailabilityPeriodMapperPlugin();
+        $this->plugin = new QuantityRestConditionalAvailabilityPeriodMapperPlugin();
     }
 
     /**
@@ -43,14 +37,15 @@ class QuantityRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
      */
     public function testMapPeriodDataToRestConditionalAvailabilityPeriodTransfer(): void
     {
+        $periodData = ['quantity' => 15];
         $this->restConditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('setQty')
-            ->with($this->periodData['quantity'])
+            ->with($periodData['quantity'])
             ->willReturn($this->restConditionalAvailabilityPeriodTransferMock);
 
-        $restConditionalAvailabilityPeriodTransfer = $this->quantityRestConditionalAvailabilityPeriodMapperPlugin
+        $restConditionalAvailabilityPeriodTransfer = $this->plugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
-                $this->periodData,
+                $periodData,
                 $this->restConditionalAvailabilityPeriodTransferMock,
             );
 
@@ -68,7 +63,7 @@ class QuantityRestConditionalAvailabilityPeriodMapperPluginTest extends Unit
         $this->restConditionalAvailabilityPeriodTransferMock->expects(static::never())
             ->method('setQty');
 
-        $restConditionalAvailabilityPeriodTransfer = $this->quantityRestConditionalAvailabilityPeriodMapperPlugin
+        $restConditionalAvailabilityPeriodTransfer = $this->plugin
             ->mapPeriodDataToRestConditionalAvailabilityPeriodTransfer(
                 [],
                 $this->restConditionalAvailabilityPeriodTransferMock,

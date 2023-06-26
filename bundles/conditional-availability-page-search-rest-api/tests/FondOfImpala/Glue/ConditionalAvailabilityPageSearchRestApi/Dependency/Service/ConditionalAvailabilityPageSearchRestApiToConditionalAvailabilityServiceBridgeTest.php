@@ -5,23 +5,19 @@ namespace FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\
 use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridgeTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface
      */
-    protected $conditionalAvailabilityServiceMock;
-
-    /**
-     * @var \DateTime
-     */
-    protected $dateTime;
+    protected MockObject|ConditionalAvailabilityServiceInterface $conditionalAvailabilityServiceMock;
 
     /**
      * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge
      */
-    protected $conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge;
+    protected ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge $serviceBridge;
 
     /**
      * @return void
@@ -34,9 +30,7 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBr
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->dateTime = new DateTime();
-
-        $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge
+        $this->serviceBridge
             = new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge(
                 $this->conditionalAvailabilityServiceMock,
             );
@@ -47,14 +41,14 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBr
      */
     public function testGenerateEarliestDeliveryDateByDateTime(): void
     {
+        $dateTime = new DateTime();
         $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
             ->method('generateEarliestDeliveryDateByDateTime')
-            ->with($this->dateTime)
-            ->willReturn($this->dateTime);
+            ->with($dateTime)
+            ->willReturn($dateTime);
 
-        $earliestDeliveryDate = $this->conditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge
-            ->generateEarliestDeliveryDateByDateTime($this->dateTime);
+        $earliestDeliveryDate = $this->serviceBridge->generateEarliestDeliveryDateByDateTime($dateTime);
 
-        static::assertEquals($this->dateTime, $earliestDeliveryDate);
+        static::assertEquals($dateTime, $earliestDeliveryDate);
     }
 }

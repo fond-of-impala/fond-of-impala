@@ -3,22 +3,22 @@
 namespace FondOfImpala\Service\ConditionalAvailabilityCartConnector;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\ItemGroupKeyBuilderInterface;
-use FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\RestCartItemGroupKeyBuilderInterface;
+use FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\ItemGroupKeyBuilder;
+use FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\RestCartItemGroupKeyBuilder;
 
 class ConditionalAvailabilityCartConnectorServiceFactoryTest extends Unit
 {
     /**
      * @var \FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceFactory
      */
-    protected $conditionalAvailabilityCartConnectorServiceFactory;
+    protected ConditionalAvailabilityCartConnectorServiceFactory $factory;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityCartConnectorServiceFactory = new ConditionalAvailabilityCartConnectorServiceFactory();
+        $this->factory = new ConditionalAvailabilityCartConnectorServiceFactory();
     }
 
     /**
@@ -26,9 +26,9 @@ class ConditionalAvailabilityCartConnectorServiceFactoryTest extends Unit
      */
     public function testCreateItemGroupKeyBuilder(): void
     {
-        $this->assertInstanceOf(
-            ItemGroupKeyBuilderInterface::class,
-            $this->conditionalAvailabilityCartConnectorServiceFactory->createItemGroupKeyBuilder(),
+        static::assertInstanceOf(
+            ItemGroupKeyBuilder::class,
+            $this->factory->createItemGroupKeyBuilder(),
         );
     }
 
@@ -37,9 +37,9 @@ class ConditionalAvailabilityCartConnectorServiceFactoryTest extends Unit
      */
     public function testCreateRestCartItemGroupKeyBuilder(): void
     {
-        $this->assertInstanceOf(
-            RestCartItemGroupKeyBuilderInterface::class,
-            $this->conditionalAvailabilityCartConnectorServiceFactory->createRestCartItemGroupKeyBuilder(),
+        static::assertInstanceOf(
+            RestCartItemGroupKeyBuilder::class,
+            $this->factory->createRestCartItemGroupKeyBuilder(),
         );
     }
 }
