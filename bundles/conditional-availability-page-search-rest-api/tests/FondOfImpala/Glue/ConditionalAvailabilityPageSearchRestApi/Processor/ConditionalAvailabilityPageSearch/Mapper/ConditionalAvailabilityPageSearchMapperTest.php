@@ -39,8 +39,6 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
      */
     public function testMapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer(): void
     {
-        $self = $this;
-
         $searchResult = [
             'periods' => [
                 [
