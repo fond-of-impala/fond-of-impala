@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Communication\Pl
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacade;
 use Generated\Shared\Transfer\CartChangeTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPluginTest extends Unit
 {
     /**
+     * @var (\Generated\Shared\Transfer\CartChangeTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CartChangeTransfer|MockObject $cartChangeTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacade&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorFacade|MockObject $facadeMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Communication\Plugin\Cart\ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin
      */
-    protected $conditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CartChangeTransfer
-     */
-    protected $cartChangeTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacade
-     */
-    protected $conditionalAvailabilityCartConnectorFacadeMock;
+    protected ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin $plugin;
 
     /**
      * @return void
@@ -32,12 +33,12 @@ class ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPluginTest extends
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorFacadeMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorFacade::class)
+        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorFacade::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin = new ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin();
-        $this->conditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin->setFacade($this->conditionalAvailabilityCartConnectorFacadeMock);
+        $this->plugin = new ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin();
+        $this->plugin->setFacade($this->facadeMock);
     }
 
     /**
@@ -45,14 +46,14 @@ class ConditionalAvailabilityCartConnectorGroupKeyItemExpanderPluginTest extends
      */
     public function testExpandItems(): void
     {
-        $this->conditionalAvailabilityCartConnectorFacadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('expandChangedCartItems')
             ->with($this->cartChangeTransferMock)
             ->willReturn($this->cartChangeTransferMock);
 
-        $this->assertInstanceOf(
-            CartChangeTransfer::class,
-            $this->conditionalAvailabilityCartConnectorGroupKeyItemExpanderPlugin->expandItems(
+        static::assertEquals(
+            $this->cartChangeTransferMock,
+            $this->plugin->expandItems(
                 $this->cartChangeTransferMock,
             ),
         );

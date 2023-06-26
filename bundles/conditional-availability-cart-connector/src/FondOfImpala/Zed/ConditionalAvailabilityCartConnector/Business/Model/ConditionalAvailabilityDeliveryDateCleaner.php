@@ -15,9 +15,7 @@ class ConditionalAvailabilityDeliveryDateCleaner implements ConditionalAvailabil
      */
     public function cleanDeliveryDate(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
-        $quoteTransfer = $this->clearDeliveryDatesOnEmptyCartItems($quoteTransfer);
-
-        return $quoteTransfer;
+        return $this->clearDeliveryDatesOnEmptyCartItems($quoteTransfer);
     }
 
     /**
