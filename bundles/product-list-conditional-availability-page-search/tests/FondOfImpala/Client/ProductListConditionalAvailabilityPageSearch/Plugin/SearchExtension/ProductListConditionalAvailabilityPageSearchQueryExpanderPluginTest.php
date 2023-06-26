@@ -3,7 +3,7 @@
 namespace FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Plugin\SearchExtension;
 
 use Codeception\Test\Unit;
-use Elastica\Query;
+use Elastica\Query as ElasticaQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Terms;
 use FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientInterface;
@@ -11,6 +11,7 @@ use FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductList
 use Generated\Shared\Transfer\CustomerProductListCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use InvalidArgumentException;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
@@ -19,27 +20,27 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
     /**
      * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Plugin\SearchExtension\ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin
      */
-    protected $productListConditionalAvailabilityPageSearchQueryExpanderPlugin;
+    protected ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin $plugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
-    protected $queryInterfaceMock;
+    protected MockObject|QueryInterface $queryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query
      */
-    protected $queryMock;
+    protected MockObject|ElasticaQuery $elasticaQueryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory
      */
-    protected $productListConditionalAvailabilityPageSearchFactoryMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchFactory $factoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientInterface
      */
-    protected $productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToCustomerClientInterface $customerClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
@@ -52,38 +53,28 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
     protected $customerProductListCollectionTransferMock;
 
     /**
-     * @var array<int>
-     */
-    protected $blacklistIds;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query\BoolQuery
      */
     protected $boolQueryMock;
-
-    /**
-     * @var array<int>
-     */
-    protected $whitelistIds;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->productListConditionalAvailabilityPageSearchFactoryMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->queryInterfaceMock = $this->getMockBuilder(QueryInterface::class)
+        $this->queryMock = $this->getMockBuilder(QueryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->queryMock = $this->getMockBuilder(Query::class)
+        $this->elasticaQueryMock = $this->getMockBuilder(ElasticaQuery::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToCustomerClientInterface::class)
+        $this->customerClientMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToCustomerClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -99,24 +90,20 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->blacklistIds = [1];
-
-        $this->whitelistIds = [2];
-
-        $this->productListConditionalAvailabilityPageSearchQueryExpanderPlugin = new class (
-            $this->productListConditionalAvailabilityPageSearchFactoryMock
+        $this->plugin = new class (
+            $this->factoryMock
         ) extends ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin {
             /**
              * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory
              */
-            protected $productListConditionalAvailabilityPageSearchFactory;
+            protected $factory;
 
             /**
              * @param \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory $productListConditionalAvailabilityPageSearchFactory
              */
             public function __construct(ProductListConditionalAvailabilityPageSearchFactory $productListConditionalAvailabilityPageSearchFactory)
             {
-                $this->productListConditionalAvailabilityPageSearchFactory = $productListConditionalAvailabilityPageSearchFactory;
+                $this->factory = $productListConditionalAvailabilityPageSearchFactory;
             }
 
             /**
@@ -124,7 +111,7 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
              */
             protected function getFactory(): AbstractFactory
             {
-                return $this->productListConditionalAvailabilityPageSearchFactory;
+                return $this->factory;
             }
 
             /**
@@ -154,15 +141,18 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQuery(): void
     {
-        $this->queryInterfaceMock->expects($this->atLeastOnce())
+        $blacklistIds = [1];
+        $whitelistIds = [2];
+
+        $this->queryMock->expects($this->atLeastOnce())
             ->method('getSearchQuery')
-            ->willReturn($this->queryMock);
+            ->willReturn($this->elasticaQueryMock);
 
-        $this->productListConditionalAvailabilityPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects($this->atLeastOnce())
             ->method('getCustomerClient')
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
+            ->willReturn($this->customerClientMock);
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects($this->atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
@@ -172,9 +162,9 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
 
         $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getBlacklistIds')
-            ->willReturn($this->blacklistIds);
+            ->willReturn($blacklistIds);
 
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->elasticaQueryMock->expects($this->atLeastOnce())
             ->method('getQuery')
             ->willReturn($this->boolQueryMock);
 
@@ -184,18 +174,13 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
 
         $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getWhitelistIds')
-            ->willReturn($this->whitelistIds);
+            ->willReturn($whitelistIds);
 
         $this->boolQueryMock->expects($this->atLeastOnce())
             ->method('addFilter')
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
-            QueryInterface::class,
-            $this->productListConditionalAvailabilityPageSearchQueryExpanderPlugin->expandQuery(
-                $this->queryInterfaceMock,
-            ),
-        );
+        $this->assertEquals($this->queryMock, $this->plugin->expandQuery($this->queryMock));
     }
 
     /**
@@ -203,15 +188,15 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryNoIds(): void
     {
-        $this->queryInterfaceMock->expects($this->atLeastOnce())
+        $this->queryMock->expects($this->atLeastOnce())
             ->method('getSearchQuery')
-            ->willReturn($this->queryMock);
+            ->willReturn($this->elasticaQueryMock);
 
-        $this->productListConditionalAvailabilityPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects($this->atLeastOnce())
             ->method('getCustomerClient')
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
+            ->willReturn($this->customerClientMock);
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects($this->atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
@@ -227,12 +212,7 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
             ->method('getWhitelistIds')
             ->willReturn([]);
 
-        $this->assertInstanceOf(
-            QueryInterface::class,
-            $this->productListConditionalAvailabilityPageSearchQueryExpanderPlugin->expandQuery(
-                $this->queryInterfaceMock,
-            ),
-        );
+        static::assertEquals($this->queryMock, $this->plugin->expandQuery($this->queryMock));
     }
 
     /**
@@ -240,24 +220,19 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryCustomerNull(): void
     {
-        $this->queryInterfaceMock->expects($this->atLeastOnce())
+        $this->queryMock->expects($this->atLeastOnce())
             ->method('getSearchQuery')
-            ->willReturn($this->queryMock);
+            ->willReturn($this->elasticaQueryMock);
 
-        $this->productListConditionalAvailabilityPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects($this->atLeastOnce())
             ->method('getCustomerClient')
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
+            ->willReturn($this->customerClientMock);
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects($this->atLeastOnce())
             ->method('getCustomer')
             ->willReturn(null);
 
-        $this->assertInstanceOf(
-            QueryInterface::class,
-            $this->productListConditionalAvailabilityPageSearchQueryExpanderPlugin->expandQuery(
-                $this->queryInterfaceMock,
-            ),
-        );
+        static::assertEquals($this->queryMock, $this->plugin->expandQuery($this->queryMock));
     }
 
     /**
@@ -265,15 +240,15 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryCustomerProductListCollectionNull(): void
     {
-        $this->queryInterfaceMock->expects($this->atLeastOnce())
+        $this->queryMock->expects($this->atLeastOnce())
             ->method('getSearchQuery')
-            ->willReturn($this->queryMock);
+            ->willReturn($this->elasticaQueryMock);
 
-        $this->productListConditionalAvailabilityPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects($this->atLeastOnce())
             ->method('getCustomerClient')
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
+            ->willReturn($this->customerClientMock);
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects($this->atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
@@ -281,12 +256,7 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
             ->method('getCustomerProductListCollection')
             ->willReturn(null);
 
-        $this->assertInstanceOf(
-            QueryInterface::class,
-            $this->productListConditionalAvailabilityPageSearchQueryExpanderPlugin->expandQuery(
-                $this->queryInterfaceMock,
-            ),
-        );
+        static::assertEquals($this->queryMock, $this->plugin->expandQuery($this->queryMock));
     }
 
     /**
@@ -294,15 +264,17 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryNoBoolQuery(): void
     {
-        $this->queryInterfaceMock->expects($this->atLeastOnce())
+        $blacklistIds = [1];
+
+        $this->queryMock->expects($this->atLeastOnce())
             ->method('getSearchQuery')
-            ->willReturn($this->queryMock);
+            ->willReturn($this->elasticaQueryMock);
 
-        $this->productListConditionalAvailabilityPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects($this->atLeastOnce())
             ->method('getCustomerClient')
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
+            ->willReturn($this->customerClientMock);
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects($this->atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
@@ -312,18 +284,16 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
 
         $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getBlacklistIds')
-            ->willReturn($this->blacklistIds);
+            ->willReturn($blacklistIds);
 
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->elasticaQueryMock->expects($this->atLeastOnce())
             ->method('getQuery')
-            ->willReturn($this->queryInterfaceMock);
+            ->willReturn($this->queryMock);
 
         try {
-            $this->productListConditionalAvailabilityPageSearchQueryExpanderPlugin->expandQuery(
-                $this->queryInterfaceMock,
-            );
+            $this->plugin->expandQuery($this->queryMock);
         } catch (InvalidArgumentException $exception) {
-            $this->assertInstanceOf(
+            static::assertInstanceOf(
                 InvalidArgumentException::class,
                 $exception,
             );

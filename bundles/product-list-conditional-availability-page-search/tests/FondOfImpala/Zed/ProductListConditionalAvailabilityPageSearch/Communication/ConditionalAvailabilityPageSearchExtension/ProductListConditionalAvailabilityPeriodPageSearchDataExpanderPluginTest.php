@@ -9,40 +9,14 @@ class ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPluginTest e
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication\ConditionalAvailabilityPageSearchExtension\ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPlugin
      */
-    protected $productListPageMapExpanderPlugin;
-
-    /**
-     * @var array
-     */
-    protected $data;
-
-    /**
-     * @var array
-     */
-    protected $productListMap;
-
-    /**
-     * @var array
-     */
-    protected $searchData;
+    protected ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPlugin $plugin;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->productListMap = [
-            'blacklists' => [],
-            'whitelists' => [1],
-        ];
-
-        $this->data = [
-            'product_list_map' => $this->productListMap,
-        ];
-
-        $this->searchData = [];
-
-        $this->productListPageMapExpanderPlugin = new ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPlugin();
+        $this->plugin = new ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPlugin();
     }
 
     /**
@@ -50,10 +24,17 @@ class ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPluginTest e
      */
     public function testExpand(): void
     {
-        $searchData = $this->productListPageMapExpanderPlugin->expand($this->data, $this->searchData);
+        $productListMap = [
+            'blacklists' => [],
+            'whitelists' => [1],
+        ];
+        $data = ['product_list_map' => $productListMap];
+        $searchData = [];
 
-        $this->assertArrayHasKey('product-lists', $searchData);
-        $this->assertEquals($this->productListMap, $searchData['product-lists']);
+        $searchData = $this->plugin->expand($data, $searchData);
+
+        static::assertArrayHasKey('product-lists', $searchData);
+        static::assertEquals($productListMap, $searchData['product-lists']);
     }
 
     /**
@@ -61,8 +42,8 @@ class ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPluginTest e
      */
     public function testExpandEmpty(): void
     {
-        $searchData = $this->productListPageMapExpanderPlugin->expand([], $this->searchData);
+        $searchData = $this->plugin->expand([], []);
 
-        $this->assertArrayNotHasKey('product-lists', $searchData);
+        static::assertArrayNotHasKey('product-lists', $searchData);
     }
 }

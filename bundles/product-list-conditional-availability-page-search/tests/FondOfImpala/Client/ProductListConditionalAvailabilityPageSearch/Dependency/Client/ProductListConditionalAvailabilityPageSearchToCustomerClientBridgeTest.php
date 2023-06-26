@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Depen
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Customer\CustomerClientInterface;
 
 class ProductListConditionalAvailabilityPageSearchToCustomerClientBridgeTest extends Unit
@@ -11,17 +12,17 @@ class ProductListConditionalAvailabilityPageSearchToCustomerClientBridgeTest ext
     /**
      * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientBridge
      */
-    protected $productListConditionalAvailabilityPageSearchToCustomerClientBridge;
+    protected ProductListConditionalAvailabilityPageSearchToCustomerClientBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Customer\CustomerClientInterface
      */
-    protected $customerClientInterfaceMock;
+    protected MockObject|CustomerClientInterface $customerClientInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @return void
@@ -36,7 +37,7 @@ class ProductListConditionalAvailabilityPageSearchToCustomerClientBridgeTest ext
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientBridge = new ProductListConditionalAvailabilityPageSearchToCustomerClientBridge(
+        $this->bridge = new ProductListConditionalAvailabilityPageSearchToCustomerClientBridge(
             $this->customerClientInterfaceMock,
         );
     }
@@ -50,9 +51,6 @@ class ProductListConditionalAvailabilityPageSearchToCustomerClientBridgeTest ext
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        $this->assertInstanceOf(
-            CustomerTransfer::class,
-            $this->productListConditionalAvailabilityPageSearchToCustomerClientBridge->getCustomer(),
-        );
+        static::assertEquals($this->customerTransferMock, $this->bridge->getCustomer());
     }
 }

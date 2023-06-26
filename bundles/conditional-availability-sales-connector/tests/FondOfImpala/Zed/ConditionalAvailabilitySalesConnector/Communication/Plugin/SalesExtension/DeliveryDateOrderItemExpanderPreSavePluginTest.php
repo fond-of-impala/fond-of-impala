@@ -83,6 +83,6 @@ class DeliveryDateOrderItemExpanderPreSavePluginTest extends Unit
             $this->spySalesOrderItemEntityTransferMock,
         );
 
-        $this->assertEquals($this->spySalesOrderItemEntityTransferMock, $spySalesOrderItemEntityTransfer);
+        static::assertEquals($this->spySalesOrderItemEntityTransferMock, $spySalesOrderItemEntityTransfer);
     }
 }

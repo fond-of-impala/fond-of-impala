@@ -4,37 +4,31 @@ namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependen
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridgeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge
      */
-    protected $productListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge;
+    protected ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface
      */
-    protected $conditionalAvailabilityFacadeInterfaceMock;
-
-    /**
-     * @var array<int>
-     */
-    protected $productConcreteIds;
+    protected MockObject|ConditionalAvailabilityFacadeInterface $facadeMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
+        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productConcreteIds = [1];
-
-        $this->productListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge = new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge(
-            $this->conditionalAvailabilityFacadeInterfaceMock,
+        $this->bridge = new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge(
+            $this->facadeMock,
         );
     }
 
@@ -43,15 +37,15 @@ class ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacad
      */
     public function testGetConditionalAvailabilityIdsByProductConcreteIds(): void
     {
-        $this->conditionalAvailabilityFacadeInterfaceMock->expects($this->atLeastOnce())
+        $productConcreteIds = [1];
+        $this->facadeMock->expects($this->atLeastOnce())
             ->method('getConditionalAvailabilityIdsByProductConcreteIds')
-            ->with($this->productConcreteIds)
-            ->willReturn($this->productConcreteIds);
+            ->with($productConcreteIds)
+            ->willReturn($productConcreteIds);
 
-        $this->assertIsArray(
-            $this->productListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge->getConditionalAvailabilityIdsByProductConcreteIds(
-                $this->productConcreteIds,
-            ),
+        static::assertEquals(
+            $productConcreteIds,
+            $this->bridge->getConditionalAvailabilityIdsByProductConcreteIds($productConcreteIds),
         );
     }
 }
