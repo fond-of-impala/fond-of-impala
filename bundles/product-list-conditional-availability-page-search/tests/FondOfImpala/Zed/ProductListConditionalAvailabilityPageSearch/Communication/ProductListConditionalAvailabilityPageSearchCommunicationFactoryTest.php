@@ -7,6 +7,7 @@ use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Fac
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
@@ -14,27 +15,27 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication\ProductListConditionalAvailabilityPageSearchCommunicationFactory
      */
-    protected $productListConditionalAvailabilityPageSearchCommunicationFactory;
+    protected ProductListConditionalAvailabilityPageSearchCommunicationFactory $factory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface
      */
-    protected $productListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterfaceMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface $conditionalAvailabilityPageSearchFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface
      */
-    protected $productListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterfaceMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface $ConditionalAvailabilityFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
      */
-    protected $productListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterfaceMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @return void
@@ -45,20 +46,20 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterfaceMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface::class)
+        $this->conditionalAvailabilityPageSearchFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterfaceMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface::class)
+        $this->conditionalAvailabilityFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterfaceMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchCommunicationFactory = new ProductListConditionalAvailabilityPageSearchCommunicationFactory();
-        $this->productListConditionalAvailabilityPageSearchCommunicationFactory->setContainer($this->containerMock);
+        $this->factory = new ProductListConditionalAvailabilityPageSearchCommunicationFactory();
+        $this->factory->setContainer($this->containerMock);
     }
 
     /**
@@ -73,11 +74,11 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH)
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityPageSearchFacadeMock);
 
-        $this->assertInstanceOf(
-            ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface::class,
-            $this->productListConditionalAvailabilityPageSearchCommunicationFactory->getConditionalAvailabilityPageSearchFacade(),
+        static::assertEquals(
+            $this->conditionalAvailabilityPageSearchFacadeMock,
+            $this->factory->getConditionalAvailabilityPageSearchFacade(),
         );
     }
 
@@ -93,11 +94,11 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY)
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityFacadeMock);
 
-        $this->assertInstanceOf(
-            ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface::class,
-            $this->productListConditionalAvailabilityPageSearchCommunicationFactory->getConditionalAvailabilityFacade(),
+        static::assertEquals(
+            $this->conditionalAvailabilityFacadeMock,
+            $this->factory->getConditionalAvailabilityFacade(),
         );
     }
 
@@ -113,11 +114,8 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR)
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterfaceMock);
+            ->willReturn($this->eventBehaviorFacadeMock);
 
-        $this->assertInstanceOf(
-            ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface::class,
-            $this->productListConditionalAvailabilityPageSearchCommunicationFactory->getEventBehaviorFacade(),
-        );
+        static::assertEquals($this->eventBehaviorFacadeMock, $this->factory->getEventBehaviorFacade());
     }
 }

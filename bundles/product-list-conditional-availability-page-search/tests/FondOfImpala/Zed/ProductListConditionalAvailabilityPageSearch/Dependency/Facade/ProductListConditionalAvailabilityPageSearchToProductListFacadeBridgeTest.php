@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\ProductList\Business\ProductListFacadeInterface;
 
 class ProductListConditionalAvailabilityPageSearchToProductListFacadeBridgeTest extends Unit
@@ -10,31 +11,24 @@ class ProductListConditionalAvailabilityPageSearchToProductListFacadeBridgeTest 
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge
      */
-    protected $productListConditionalAvailabilityPageSearchToProductListFacadeBridge;
+    protected ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\ProductList\Business\ProductListFacadeInterface
      */
-    protected $productListFacadeInterfaceMock;
-
-    /**
-     * @var int
-     */
-    protected $idProduct;
+    protected MockObject|ProductListFacadeInterface $facadeMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->productListFacadeInterfaceMock = $this->getMockBuilder(ProductListFacadeInterface::class)
+        $this->facadeMock = $this->getMockBuilder(ProductListFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->idProduct = 1;
-
-        $this->productListConditionalAvailabilityPageSearchToProductListFacadeBridge = new ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge(
-            $this->productListFacadeInterfaceMock,
+        $this->bridge = new ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge(
+            $this->facadeMock,
         );
     }
 
@@ -43,16 +37,13 @@ class ProductListConditionalAvailabilityPageSearchToProductListFacadeBridgeTest 
      */
     public function testGetProductWhitelistIdsByIdProduct(): void
     {
-        $this->productListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $idProduct = 1;
+        $this->facadeMock->expects($this->atLeastOnce())
             ->method('getProductWhitelistIdsByIdProduct')
-            ->with($this->idProduct)
+            ->with($idProduct)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->productListConditionalAvailabilityPageSearchToProductListFacadeBridge->getProductWhitelistIdsByIdProduct(
-                $this->idProduct,
-            ),
-        );
+        static::assertEquals([], $this->bridge->getProductWhitelistIdsByIdProduct($idProduct));
     }
 
     /**
@@ -60,15 +51,12 @@ class ProductListConditionalAvailabilityPageSearchToProductListFacadeBridgeTest 
      */
     public function testGetProductBlacklistIdsByIdProduct(): void
     {
-        $this->productListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $idProduct = 1;
+        $this->facadeMock->expects($this->atLeastOnce())
             ->method('getProductBlacklistIdsByIdProduct')
-            ->with($this->idProduct)
+            ->with($idProduct)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->productListConditionalAvailabilityPageSearchToProductListFacadeBridge->getProductBlacklistIdsByIdProduct(
-                $this->idProduct,
-            ),
-        );
+        static::assertEquals([], $this->bridge->getProductBlacklistIdsByIdProduct($idProduct));
     }
 }

@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
@@ -10,12 +11,12 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider
      */
-    protected $productListConditionalAvailabilityPageSearchDependencyProvider;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchDependencyProvider $dependencyProvider;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void
@@ -26,7 +27,7 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchDependencyProvider = new ProductListConditionalAvailabilityPageSearchDependencyProvider();
+        $this->dependencyProvider = new ProductListConditionalAvailabilityPageSearchDependencyProvider();
     }
 
     /**
@@ -34,11 +35,9 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
      */
     public function testProvideBusinessLayerDependencies(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Container::class,
-            $this->productListConditionalAvailabilityPageSearchDependencyProvider->provideBusinessLayerDependencies(
-                $this->containerMock,
-            ),
+            $this->dependencyProvider->provideBusinessLayerDependencies($this->containerMock),
         );
     }
 
@@ -47,11 +46,9 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
      */
     public function testProvideCommunicationLayerDependencies(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Container::class,
-            $this->productListConditionalAvailabilityPageSearchDependencyProvider->provideCommunicationLayerDependencies(
-                $this->containerMock,
-            ),
+            $this->dependencyProvider->provideCommunicationLayerDependencies($this->containerMock),
         );
     }
 }
