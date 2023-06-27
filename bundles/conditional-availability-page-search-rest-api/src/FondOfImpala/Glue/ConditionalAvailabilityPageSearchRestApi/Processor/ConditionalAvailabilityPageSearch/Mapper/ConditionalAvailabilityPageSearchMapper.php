@@ -15,7 +15,7 @@ class ConditionalAvailabilityPageSearchMapper implements ConditionalAvailability
     /**
      * @var array<\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface>
      */
-    protected $restConditionalAvailabilityPeriodMapperPlugins;
+    protected array $restConditionalAvailabilityPeriodMapperPlugins;
 
     /**
      * @param array<\FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApiExtension\Dependency\Plugin\RestConditionalAvailabilityPeriodMapperPluginInterface> $restConditionalAvailabilityPeriodMapperPlugins

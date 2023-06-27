@@ -50,11 +50,6 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
     protected MockObject|Request $requestMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\ParameterBag
-     */
-    protected MockObject|ParameterBag $parameterBagMock;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestConditionalAvailabilityPageSearchCollectionResponseTransfer
      */
     protected MockObject|RestConditionalAvailabilityPageSearchCollectionResponseTransfer $restConditionalAvailabilityPageSearchCollectionResponseTransferMock;
@@ -73,11 +68,11 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     protected MockObject|RestResponseInterface $restResponseMock;
-
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\PageInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Glue\GlueApplication\Rest\Request\Data\PageInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $pageMock;
+    protected PageInterface|MockObject $pageMock;
+
 
     /**
      * @return void
