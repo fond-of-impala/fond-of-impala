@@ -54,21 +54,12 @@ class ConditionalAvailabilityPageSearchMapperTest extends Unit
             ->with(
                 $searchResult['periods'][0],
                 static::callback(
-                    static function (
-                        RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer
-                    ) use ($searchResult) {
-                        return $restConditionalAvailabilityPeriodTransfer->getSku() === $searchResult['periods'][0]['sku']
-                            && $restConditionalAvailabilityPeriodTransfer->getWarehouseGroup() === $searchResult['periods'][0]['warehouseGroup']
-                            && $restConditionalAvailabilityPeriodTransfer->getQty() === null;
-                    },
+                    static fn (RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer): bool => $restConditionalAvailabilityPeriodTransfer->getSku() === $searchResult['periods'][0]['sku']
+                        && $restConditionalAvailabilityPeriodTransfer->getWarehouseGroup() === $searchResult['periods'][0]['warehouseGroup']
+                        && $restConditionalAvailabilityPeriodTransfer->getQty() === null,
                 ),
             )->willReturnCallback(
-                static function (
-                    array $periodData,
-                    RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer
-                ) {
-                    return $restConditionalAvailabilityPeriodTransfer;
-                },
+                static fn (array $periodData, RestConditionalAvailabilityPeriodTransfer $restConditionalAvailabilityPeriodTransfer): RestConditionalAvailabilityPeriodTransfer => $restConditionalAvailabilityPeriodTransfer,
             );
 
         $restConditionalAvailabilityPageSearchCollectionResponseTransfer = $this->mapper

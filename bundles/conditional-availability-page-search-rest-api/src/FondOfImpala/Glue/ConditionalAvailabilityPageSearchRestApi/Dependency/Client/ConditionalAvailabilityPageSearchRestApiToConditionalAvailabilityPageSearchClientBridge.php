@@ -6,10 +6,7 @@ use FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilit
 
 class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge implements ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
 {
-    /**
-     * @var \FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchClientInterface
-     */
-    protected $conditionalAvailabilityPageSearchClient;
+    protected ConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClient;
 
     /**
      * @param \FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClient

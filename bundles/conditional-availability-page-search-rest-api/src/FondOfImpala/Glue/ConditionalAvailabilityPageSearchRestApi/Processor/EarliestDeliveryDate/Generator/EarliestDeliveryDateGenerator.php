@@ -9,10 +9,7 @@ use Generated\Shared\Transfer\RestConditionalAvailabilityPeriodTransfer;
 
 class EarliestDeliveryDateGenerator implements EarliestDeliveryDateGeneratorInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface
-     */
-    protected $conditionalAvailabilityService;
+    protected ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface $conditionalAvailabilityService;
 
     /**
      * @param \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Service\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface $conditionalAvailabilityService

@@ -28,20 +28,11 @@ class ConditionalAvailabilityPageSearchReader implements ConditionalAvailability
      */
     protected const PARAMETER_NAME_ITEMS_PER_PAGE = 'ipp';
 
-    /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Client\ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface
-     */
-    protected $conditionalAvailabilityPageSearchClient;
+    protected ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientInterface $conditionalAvailabilityPageSearchClient;
 
-    /**
-     * @var \FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Processor\ConditionalAvailabilityPageSearch\Mapper\ConditionalAvailabilityPageSearchMapperInterface
-     */
-    protected $conditionalAvailabilityPeriodMapper;
+    protected ConditionalAvailabilityPageSearchMapperInterface $conditionalAvailabilityPeriodMapper;
 
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

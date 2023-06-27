@@ -7,6 +7,9 @@ use FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi\Dependency\Servic
 use Spryker\Glue\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Glue\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -35,9 +38,8 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
 
         $container = $this->addConditionalAvailabilityPageSearchClient($container);
         $container = $this->addRestConditionalAvailabilityPeriodMapperPlugins($container);
-        $container = $this->addConditionalAvailabilityService($container);
 
-        return $container;
+        return $this->addConditionalAvailabilityService($container);
     }
 
     /**
@@ -47,11 +49,11 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
      */
     protected function addConditionalAvailabilityPageSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
-                $container->getLocator()->conditionalAvailabilityPageSearch()->client(),
-            );
-        };
+        $container[static::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge => new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
+            $container->getLocator()->conditionalAvailabilityPageSearch()->client(),
+        );
 
         return $container;
     }
@@ -65,9 +67,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
     {
         $self = $this;
 
-        $container[static::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER] = static function () use ($self) {
-            return $self->getRestConditionalAvailabilityPeriodMapperPlugins();
-        };
+        $container[static::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER] = static fn (): array => $self->getRestConditionalAvailabilityPeriodMapperPlugins();
 
         return $container;
     }
@@ -87,11 +87,11 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
      */
     protected function addConditionalAvailabilityService(Container $container): Container
     {
-        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge(
-                $container->getLocator()->conditionalAvailability()->service(),
-            );
-        };
+        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge => new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge(
+            $container->getLocator()->conditionalAvailability()->service(),
+        );
 
         return $container;
     }
