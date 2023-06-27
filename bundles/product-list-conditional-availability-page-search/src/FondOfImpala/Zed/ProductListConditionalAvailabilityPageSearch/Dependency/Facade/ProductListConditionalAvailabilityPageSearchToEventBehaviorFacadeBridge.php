@@ -6,10 +6,7 @@ use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge implements ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
-     */
-    protected $eventBehaviorFacade;
+    protected EventBehaviorFacadeInterface $eventBehaviorFacade;
 
     /**
      * @param \Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface $eventBehaviorFacade

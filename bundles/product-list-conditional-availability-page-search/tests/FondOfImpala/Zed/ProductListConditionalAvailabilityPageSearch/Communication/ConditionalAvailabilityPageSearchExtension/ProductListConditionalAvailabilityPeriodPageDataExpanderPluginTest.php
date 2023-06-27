@@ -40,10 +40,7 @@ class ProductListConditionalAvailabilityPeriodPageDataExpanderPluginTest extends
         $this->productListPageDataExpanderPlugin = new class (
             $this->productListConditionalAvailabilityPageSearchFacadeInterfaceMock
         ) extends ProductListConditionalAvailabilityPeriodPageDataExpanderPlugin {
-            /**
-             * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchFacade
-             */
-            protected $productListConditionalAvailabilityPageSearchFacade;
+            protected ProductListConditionalAvailabilityPageSearchFacade $productListConditionalAvailabilityPageSearchFacade;
 
             /**
              * @param \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchFacade $productListConditionalAvailabilityPageSearchFacade
