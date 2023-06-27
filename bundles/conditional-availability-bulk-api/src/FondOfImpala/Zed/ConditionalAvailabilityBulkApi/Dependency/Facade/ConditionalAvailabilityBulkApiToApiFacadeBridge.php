@@ -9,10 +9,7 @@ use Spryker\Zed\Api\Business\ApiFacadeInterface;
 class ConditionalAvailabilityBulkApiToApiFacadeBridge implements
     ConditionalAvailabilityBulkApiToApiFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Api\Business\ApiFacadeInterface
-     */
-    protected $apiFacade;
+    protected ApiFacadeInterface $apiFacade;
 
     /**
      * @param \Spryker\Zed\Api\Business\ApiFacadeInterface $apiFacade
