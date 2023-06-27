@@ -8,6 +8,9 @@ use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\Conditiona
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityBulkApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -47,11 +50,11 @@ class ConditionalAvailabilityBulkApiDependencyProvider extends AbstractBundleDep
      */
     protected function addConditionalAvailabilityFacade(Container $container): Container
     {
-        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge(
-                $container->getLocator()->conditionalAvailability()->facade(),
-            );
-        };
+        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ): ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge => new ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge(
+            $container->getLocator()->conditionalAvailability()->facade(),
+        );
 
         return $container;
     }
@@ -63,11 +66,9 @@ class ConditionalAvailabilityBulkApiDependencyProvider extends AbstractBundleDep
      */
     protected function addProductFacade(Container $container): Container
     {
-        $container[static::FACADE_PRODUCT] = static function (Container $container) {
-            return new ConditionalAvailabilityBulkApiToProductFacadeBridge(
-                $container->getLocator()->product()->facade(),
-            );
-        };
+        $container[static::FACADE_PRODUCT] = static fn (Container $container): ConditionalAvailabilityBulkApiToProductFacadeBridge => new ConditionalAvailabilityBulkApiToProductFacadeBridge(
+            $container->getLocator()->product()->facade(),
+        );
 
         return $container;
     }
@@ -79,11 +80,9 @@ class ConditionalAvailabilityBulkApiDependencyProvider extends AbstractBundleDep
      */
     protected function addApiFacade(Container $container): Container
     {
-        $container[static::FACADE_API] = static function (Container $container) {
-            return new ConditionalAvailabilityBulkApiToApiFacadeBridge(
-                $container->getLocator()->api()->facade(),
-            );
-        };
+        $container[static::FACADE_API] = static fn (Container $container): ConditionalAvailabilityBulkApiToApiFacadeBridge => new ConditionalAvailabilityBulkApiToApiFacadeBridge(
+            $container->getLocator()->api()->facade(),
+        );
 
         return $container;
     }
