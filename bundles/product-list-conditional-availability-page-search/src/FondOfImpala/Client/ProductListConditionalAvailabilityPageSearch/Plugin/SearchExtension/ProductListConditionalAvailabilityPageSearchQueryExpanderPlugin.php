@@ -160,11 +160,18 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin extends Ab
     {
         $boolQuery = $query->getQuery();
 
+        if (is_array($boolQuery)) {
+            throw new InvalidArgumentException(sprintf(
+                'Product list query expander available only with %s, got: array',
+                BoolQuery::class,
+            ));
+        }
+
         if (!$boolQuery instanceof BoolQuery) {
             throw new InvalidArgumentException(sprintf(
-                'Product List Query Expander available only with %s, got: %s',
+                'Product list query expander available only with %s, got: %s',
                 BoolQuery::class,
-                get_class($boolQuery),
+                $boolQuery::class,
             ));
         }
 
