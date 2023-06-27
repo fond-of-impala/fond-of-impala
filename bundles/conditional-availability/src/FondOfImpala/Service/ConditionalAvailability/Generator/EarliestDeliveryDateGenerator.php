@@ -8,10 +8,7 @@ use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig;
 
 class EarliestDeliveryDateGenerator implements EarliestDeliveryDateGeneratorInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig
-     */
-    protected $config;
+    protected ConditionalAvailabilityConfig $config;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig $config
