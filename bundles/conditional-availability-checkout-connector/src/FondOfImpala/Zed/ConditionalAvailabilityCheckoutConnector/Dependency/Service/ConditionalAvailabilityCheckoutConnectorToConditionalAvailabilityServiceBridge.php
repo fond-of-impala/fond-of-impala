@@ -9,10 +9,7 @@ use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceI
 class ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceBridge implements
     ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface
-     */
-    protected $conditionalAvailabilityService;
+    protected ConditionalAvailabilityServiceInterface $conditionalAvailabilityService;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface $conditionalAvailabilityService
