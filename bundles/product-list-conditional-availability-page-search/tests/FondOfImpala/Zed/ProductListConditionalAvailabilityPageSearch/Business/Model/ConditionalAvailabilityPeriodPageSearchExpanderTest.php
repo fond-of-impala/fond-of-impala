@@ -6,50 +6,36 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Generated\Shared\Transfer\ProductListMapTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpander
      */
-    protected $conditionalAvailabilityPeriodPageSearchExpander;
+    protected ConditionalAvailabilityPeriodPageSearchExpander $expander;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface
      */
-    protected $productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
      */
-    protected $conditionalAvailabilityPeriodPageSearchTransferMock;
+    protected MockObject|ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductListMapTransfer
      */
-    protected $productListMapTransferMock;
-
-    /**
-     * @var int
-     */
-    protected $fkProduct;
-
-    /**
-     * @var array<int>
-     */
-    protected $whitelistIds;
-
-    /**
-     * @var array<int>
-     */
-    protected $blacklistIds;
+    protected MockObject|ProductListMapTransfer $productListMapTransferMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface::class)
+        $this->productListFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -61,14 +47,8 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->fkProduct = 1;
-
-        $this->whitelistIds = [2];
-
-        $this->blacklistIds = [3];
-
-        $this->conditionalAvailabilityPeriodPageSearchExpander = new ConditionalAvailabilityPeriodPageSearchExpander(
-            $this->productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock,
+        $this->expander = new ConditionalAvailabilityPeriodPageSearchExpander(
+            $this->productListFacadeMock,
         );
     }
 
@@ -77,6 +57,10 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
      */
     public function testExpandWithProductLists(): void
     {
+        $fkProduct = 1;
+        $whitelistIds = [2];
+        $blacklistIds = [3];
+
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('requireFkProduct')
             ->willReturnSelf();
@@ -87,31 +71,31 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('getFkProduct')
-            ->willReturn($this->fkProduct);
+            ->willReturn($fkProduct);
 
-        $this->productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects($this->atLeastOnce())
             ->method('getProductWhitelistIdsByIdProduct')
-            ->with($this->fkProduct)
-            ->willReturn($this->whitelistIds);
+            ->with($fkProduct)
+            ->willReturn($whitelistIds);
 
         $this->productListMapTransferMock->expects($this->atLeastOnce())
             ->method('setWhitelists')
-            ->with($this->whitelistIds)
+            ->with($whitelistIds)
             ->willReturnSelf();
 
-        $this->productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects($this->atLeastOnce())
             ->method('getProductBlacklistIdsByIdProduct')
-            ->with($this->fkProduct)
-            ->willReturn($this->blacklistIds);
+            ->with($fkProduct)
+            ->willReturn($blacklistIds);
 
         $this->productListMapTransferMock->expects($this->atLeastOnce())
             ->method('setBlacklists')
-            ->with($this->blacklistIds)
+            ->with($blacklistIds)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
-            ConditionalAvailabilityPeriodPageSearchTransfer::class,
-            $this->conditionalAvailabilityPeriodPageSearchExpander->expandWithProductLists(
+        static::assertEquals(
+            $this->conditionalAvailabilityPeriodPageSearchTransferMock,
+            $this->expander->expandWithProductLists(
                 $this->conditionalAvailabilityPeriodPageSearchTransferMock,
             ),
         );
@@ -122,6 +106,10 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
      */
     public function testExpandWithProductListsProductListMapNull(): void
     {
+        $fkProduct = 1;
+        $whitelistIds = [2];
+        $blacklistIds = [3];
+
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('requireFkProduct')
             ->willReturnSelf();
@@ -132,31 +120,31 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 
         $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
             ->method('getFkProduct')
-            ->willReturn($this->fkProduct);
+            ->willReturn($fkProduct);
 
-        $this->productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects($this->atLeastOnce())
             ->method('getProductWhitelistIdsByIdProduct')
-            ->with($this->fkProduct)
-            ->willReturn($this->whitelistIds);
+            ->with($fkProduct)
+            ->willReturn($whitelistIds);
 
         $this->productListMapTransferMock->expects($this->atLeastOnce())
             ->method('setWhitelists')
-            ->with($this->whitelistIds)
+            ->with($whitelistIds)
             ->willReturnSelf();
 
-        $this->productListConditionalAvailabilityPageSearchToProductListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects($this->atLeastOnce())
             ->method('getProductBlacklistIdsByIdProduct')
-            ->with($this->fkProduct)
-            ->willReturn($this->blacklistIds);
+            ->with($fkProduct)
+            ->willReturn($blacklistIds);
 
         $this->productListMapTransferMock->expects($this->atLeastOnce())
             ->method('setBlacklists')
-            ->with($this->blacklistIds)
+            ->with($blacklistIds)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
-            ConditionalAvailabilityPeriodPageSearchTransfer::class,
-            $this->conditionalAvailabilityPeriodPageSearchExpander->expandWithProductLists(
+        static::assertEquals(
+            $this->conditionalAvailabilityPeriodPageSearchTransferMock,
+            $this->expander->expandWithProductLists(
                 $this->conditionalAvailabilityPeriodPageSearchTransferMock,
             ),
         );

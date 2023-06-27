@@ -124,9 +124,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -146,7 +146,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('generateLatestOrderDateByDeliveryDate')
             ->with(
                 static::callback(
-                    fn (DateTime $deliveryDate) => $deliveryDate == $concreteDeliveryDate,
+                    static fn (DateTime $deliveryDate): bool => $deliveryDate == $concreteDeliveryDate,
                 ),
             )->willReturn($concreteDeliveryDate);
 
@@ -259,9 +259,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -281,7 +281,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('generateLatestOrderDateByDeliveryDate')
             ->with(
                 static::callback(
-                    fn (DateTime $deliveryDate) => $deliveryDate == $concreteDeliveryDate,
+                    static fn (DateTime $deliveryDate): bool => $deliveryDate == $concreteDeliveryDate,
                 ),
             )->willReturn($concreteDeliveryDate);
 
@@ -315,7 +315,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('addValidationMessage')
             ->with(
                 static::callback(
-                    fn (MessageTransfer $messageTransfer) => $messageTransfer->getType() === 'error'
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
                         && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_given_qty'
                 ),
             )->willReturnSelf();
@@ -364,9 +364,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -386,7 +386,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('generateLatestOrderDateByDeliveryDate')
             ->with(
                 static::callback(
-                    fn (DateTime $deliveryDate) => $deliveryDate == $concreteDeliveryDate,
+                    static fn (DateTime $deliveryDate): bool => $deliveryDate == $concreteDeliveryDate,
                 ),
             )->willReturn($concreteDeliveryDate);
 
@@ -402,7 +402,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('addValidationMessage')
             ->with(
                 static::callback(
-                    fn (MessageTransfer $messageTransfer) => $messageTransfer->getType() === 'error'
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
                         && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_given_delivery_date'
                 ),
             )->willReturnSelf();
@@ -446,9 +446,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -462,7 +462,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('generateLatestOrderDateByDeliveryDate')
             ->with(
                 static::callback(
-                    fn (DateTime $deliveryDate) => $deliveryDate == $concreteDeliveryDate,
+                    static fn (DateTime $deliveryDate): bool => $deliveryDate == $concreteDeliveryDate,
                 ),
             )->willReturn($concreteDeliveryDate);
 
@@ -470,7 +470,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('addValidationMessage')
             ->with(
                 static::callback(
-                    fn (MessageTransfer $messageTransfer) => $messageTransfer->getType() === 'error'
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
                         && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_given_delivery_date'
                 ),
             )
@@ -518,9 +518,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -621,9 +621,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -673,7 +673,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('addValidationMessage')
             ->with(
                 static::callback(
-                    fn (MessageTransfer $messageTransfer) => $messageTransfer->getType() === 'error'
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
                         && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_given_qty'
                 ),
             )
@@ -717,9 +717,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -731,7 +731,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('addValidationMessage')
             ->with(
                 static::callback(
-                    fn (MessageTransfer $messageTransfer) => $messageTransfer->getType() === 'error'
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
                         && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_earliest_delivery_date'
                 ),
             )->willReturnSelf();
@@ -783,9 +783,9 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -817,7 +817,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('addValidationMessage')
             ->with(
                 static::callback(
-                    fn (MessageTransfer $messageTransfer) => $messageTransfer->getType() === 'error'
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
                         && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_earliest_delivery_date'
                 ),
             )->willReturnSelf();

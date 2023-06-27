@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 
 class ConditionalAvailabilityItemExpander implements ConditionalAvailabilityItemExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface
-     */
-    protected $conditionalAvailabilityCartConnectorService;
+    protected ConditionalAvailabilityCartConnectorServiceInterface $conditionalAvailabilityCartConnectorService;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface $conditionalAvailabilityCartConnectorService

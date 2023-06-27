@@ -5,35 +5,36 @@ namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListConditionalAvailabilityPageSearchFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchFacade
      */
-    protected $productListConditionalAvailabilityPageSearchFacade;
+    protected ProductListConditionalAvailabilityPageSearchFacade $facade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchBusinessFactory
      */
-    protected $productListConditionalAvailabilityPageSearchBusinessFactoryMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchBusinessFactory $factoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
      */
-    protected $conditionalAvailabilityPeriodPageSearchTransferMock;
+    protected MockObject|ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface
      */
-    protected $conditionalAvailabilityPeriodPageSearchExpanderInterfaceMock;
+    protected MockObject|ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpanderMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->productListConditionalAvailabilityPageSearchBusinessFactoryMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchBusinessFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -41,12 +42,12 @@ class ProductListConditionalAvailabilityPageSearchFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPeriodPageSearchExpanderInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageSearchExpanderInterface::class)
+        $this->conditionalAvailabilityPeriodPageSearchExpanderMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageSearchExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchFacade = new ProductListConditionalAvailabilityPageSearchFacade();
-        $this->productListConditionalAvailabilityPageSearchFacade->setFactory($this->productListConditionalAvailabilityPageSearchBusinessFactoryMock);
+        $this->facade = new ProductListConditionalAvailabilityPageSearchFacade();
+        $this->facade->setFactory($this->factoryMock);
     }
 
     /**
@@ -54,18 +55,18 @@ class ProductListConditionalAvailabilityPageSearchFacadeTest extends Unit
      */
     public function testExpandConditionalAvailabilityPeriodPageSearchTransferWithProductLists(): void
     {
-        $this->productListConditionalAvailabilityPageSearchBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects($this->atLeastOnce())
             ->method('createConditionalAvailabilityPeriodPageSearchExpander')
-            ->willReturn($this->conditionalAvailabilityPeriodPageSearchExpanderInterfaceMock);
+            ->willReturn($this->conditionalAvailabilityPeriodPageSearchExpanderMock);
 
-        $this->conditionalAvailabilityPeriodPageSearchExpanderInterfaceMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchExpanderMock->expects($this->atLeastOnce())
             ->method('expandWithProductLists')
             ->with($this->conditionalAvailabilityPeriodPageSearchTransferMock)
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchTransferMock);
 
-        $this->assertInstanceOf(
-            ConditionalAvailabilityPeriodPageSearchTransfer::class,
-            $this->productListConditionalAvailabilityPageSearchFacade->expandConditionalAvailabilityPeriodPageSearchTransferWithProductLists(
+        static::assertEquals(
+            $this->conditionalAvailabilityPeriodPageSearchTransferMock,
+            $this->facade->expandConditionalAvailabilityPeriodPageSearchTransferWithProductLists(
                 $this->conditionalAvailabilityPeriodPageSearchTransferMock,
             ),
         );

@@ -133,9 +133,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -211,9 +211,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -259,9 +259,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         CheckoutErrorTransfer $checkoutErrorTransfer
-                    ) => $checkoutErrorTransfer->getErrorCode() === 4102
+                    ): bool => $checkoutErrorTransfer->getErrorCode() === 4102
                         && $checkoutErrorTransfer->getMessage() === 'conditional_availability_checkout_connector.product.unavailable'
                         && $checkoutErrorTransfer->getParameters() == ['%sku%' => $sku]
                         && $checkoutErrorTransfer->getErrorType() === 'Conditional Availability'
@@ -302,9 +302,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -314,9 +314,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         CheckoutErrorTransfer $checkoutErrorTransfer
-                    ) => $checkoutErrorTransfer->getErrorCode() === 4102
+                    ): bool => $checkoutErrorTransfer->getErrorCode() === 4102
                         && $checkoutErrorTransfer->getMessage() === 'conditional_availability_checkout_connector.product.unavailable'
                         && $checkoutErrorTransfer->getParameters() == ['%sku%' => $sku]
                         && $checkoutErrorTransfer->getErrorType() === 'Conditional Availability'
@@ -359,9 +359,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('findGroupedConditionalAvailabilities')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
-                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                    ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
                 ),
@@ -391,9 +391,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         CheckoutErrorTransfer $checkoutErrorTransfer
-                    ) => $checkoutErrorTransfer->getErrorCode() === 4102
+                    ): bool => $checkoutErrorTransfer->getErrorCode() === 4102
                         && $checkoutErrorTransfer->getMessage() === 'conditional_availability_checkout_connector.product.unavailable'
                         && $checkoutErrorTransfer->getParameters() == ['%sku%' => $sku]
                         && $checkoutErrorTransfer->getErrorType() === 'Conditional Availability'

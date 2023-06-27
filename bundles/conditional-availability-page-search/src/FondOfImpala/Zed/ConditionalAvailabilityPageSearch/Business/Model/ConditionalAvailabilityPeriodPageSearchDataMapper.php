@@ -72,15 +72,12 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
      */
     protected const SEARCH_RESULT_DATA_KEY_END_AT = 'end_at';
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
-     */
-    protected $storeFacade;
+    protected ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade;
 
     /**
      * @var array<\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
-    protected $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins;
+    protected array $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade

@@ -49,9 +49,9 @@ class ConditionalAvailabilityEnsureEarliestDateTest extends Unit
             ->method('setDeliveryDates')
             ->with(
                 static::callback(
-                    fn (
+                    static fn (
                         array $currentDeliveryDates
-                    ) => count($currentDeliveryDates) === ($countOfDeliveryDates + 1)
+                    ): bool => count($currentDeliveryDates) === ($countOfDeliveryDates + 1)
                         && $currentDeliveryDates[$countOfDeliveryDates] === ConditionalAvailabilityConstants::KEY_EARLIEST_DATE
                 ),
             )->willReturnSelf();

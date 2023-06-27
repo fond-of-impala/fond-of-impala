@@ -62,9 +62,8 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
         $container = $this->addConditionalAvailabilityPeriodPageDataExpanderPlugins($container);
         $container = $this->addConditionalAvailabilityPeriodPageSearchDataExpanderPlugins($container);
         $container = $this->addStoreFacade($container);
-        $container = $this->addUtilEncodingService($container);
 
-        return $container;
+        return $this->addUtilEncodingService($container);
     }
 
     /**
@@ -76,9 +75,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container = $this->addEventBehaviorFacade($container);
-
-        return $container;
+        return $this->addEventBehaviorFacade($container);
     }
 
     /**
@@ -91,9 +88,8 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
         $container = parent::providePersistenceLayerDependencies($container);
 
         $container = $this->addConditionalAvailabilityPeriodPropelQuery($container);
-        $container = $this->addConditionalAvailabilityPropelQuery($container);
 
-        return $container;
+        return $this->addConditionalAvailabilityPropelQuery($container);
     }
 
     /**
@@ -103,9 +99,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
      */
     protected function addConditionalAvailabilityPeriodPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD] = static function () {
-            return FoiConditionalAvailabilityPeriodQuery::create();
-        };
+        $container[static::PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD] = static fn (): FoiConditionalAvailabilityPeriodQuery => FoiConditionalAvailabilityPeriodQuery::create();
 
         return $container;
     }
@@ -117,11 +111,11 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
      */
     protected function addStoreFacade(Container $container): Container
     {
-        $container[static::FACADE_STORE] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchToStoreFacadeBridge(
-                $container->getLocator()->store()->facade(),
-            );
-        };
+        $container[static::FACADE_STORE] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToStoreFacadeBridge => new ConditionalAvailabilityPageSearchToStoreFacadeBridge(
+            $container->getLocator()->store()->facade(),
+        );
 
         return $container;
     }
@@ -133,11 +127,11 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
      */
     protected function addUtilEncodingService(Container $container): Container
     {
-        $container[static::SERVICE_UTIL_ENCODING] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
-                $container->getLocator()->utilEncoding()->service(),
-            );
-        };
+        $container[static::SERVICE_UTIL_ENCODING] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge => new ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge(
+            $container->getLocator()->utilEncoding()->service(),
+        );
 
         return $container;
     }
@@ -151,9 +145,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $self = $this;
 
-        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER] = static function () use ($self) {
-            return $self->getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER] = static fn (): array => $self->getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins();
 
         return $container;
     }
@@ -173,11 +165,11 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
      */
     protected function addEventBehaviorFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT_BEHAVIOR] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
-                $container->getLocator()->eventBehavior()->facade(),
-            );
-        };
+        $container[static::FACADE_EVENT_BEHAVIOR] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge => new ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
+            $container->getLocator()->eventBehavior()->facade(),
+        );
 
         return $container;
     }
@@ -189,9 +181,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
      */
     protected function addConditionalAvailabilityPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_CONDITIONAL_AVAILABILITY] = static function () {
-            return FoiConditionalAvailabilityQuery::create();
-        };
+        $container[static::PROPEL_QUERY_CONDITIONAL_AVAILABILITY] = static fn (): FoiConditionalAvailabilityQuery => FoiConditionalAvailabilityQuery::create();
 
         return $container;
     }
@@ -205,9 +195,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     {
         $self = $this;
 
-        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER] = static function () use ($self) {
-            return $self->getConditionalAvailabilityPeriodPageDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER] = static fn (): array => $self->getConditionalAvailabilityPeriodPageDataExpanderPlugins();
 
         return $container;
     }

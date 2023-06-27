@@ -9,6 +9,9 @@ use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Fac
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ProductListConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -40,9 +43,7 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
-        $container = $this->addProductListFacade($container);
-
-        return $container;
+        return $this->addProductListFacade($container);
     }
 
     /**
@@ -56,9 +57,8 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
 
         $container = $this->addEventBehaviorFacade($container);
         $container = $this->addConditionalAvailabilityPageSearchFacade($container);
-        $container = $this->addConditionalAvailabilityFacade($container);
 
-        return $container;
+        return $this->addConditionalAvailabilityFacade($container);
     }
 
     /**
@@ -68,11 +68,11 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
      */
     protected function addProductListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRODUCT_LIST] = static function (Container $container) {
-            return new ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge(
-                $container->getLocator()->productList()->facade(),
-            );
-        };
+        $container[static::FACADE_PRODUCT_LIST] = static fn (
+            Container $container
+        ): ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge => new ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge(
+            $container->getLocator()->productList()->facade(),
+        );
 
         return $container;
     }
@@ -84,11 +84,11 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
      */
     protected function addConditionalAvailabilityPageSearchFacade(Container $container): Container
     {
-        $container[static::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static function (Container $container) {
-            return new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge(
-                $container->getLocator()->conditionalAvailabilityPageSearch()->facade(),
-            );
-        };
+        $container[static::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static fn (
+            Container $container
+        ): ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge => new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge(
+            $container->getLocator()->conditionalAvailabilityPageSearch()->facade(),
+        );
 
         return $container;
     }
@@ -100,11 +100,11 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
      */
     protected function addEventBehaviorFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT_BEHAVIOR] = static function (Container $container) {
-            return new ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
-                $container->getLocator()->eventBehavior()->facade(),
-            );
-        };
+        $container[static::FACADE_EVENT_BEHAVIOR] = static fn (
+            Container $container
+        ): ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge => new ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
+            $container->getLocator()->eventBehavior()->facade(),
+        );
 
         return $container;
     }
@@ -116,11 +116,11 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
      */
     protected function addConditionalAvailabilityFacade(Container $container): Container
     {
-        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge(
-                $container->getLocator()->conditionalAvailability()->facade(),
-            );
-        };
+        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ): ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge => new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge(
+            $container->getLocator()->conditionalAvailability()->facade(),
+        );
 
         return $container;
     }

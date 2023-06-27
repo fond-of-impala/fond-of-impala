@@ -22,20 +22,14 @@ class ConditionalAvailabilityPageSearchQueryPlugin extends AbstractPlugin implem
      */
     protected const SOURCE_IDENTIFIER = 'conditional-availability-period';
 
-    /**
-     * @var \Elastica\Query
-     */
-    protected $query;
+    protected Query $query;
 
     /**
      * @var \Generated\Shared\Transfer\SearchContextTransfer
      */
     protected $searchContextTransfer;
 
-    /**
-     * @var string
-     */
-    protected $searchString = '';
+    protected string $searchString = '';
 
     public function __construct()
     {

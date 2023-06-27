@@ -6,10 +6,7 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvail
 
 class ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge implements ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchFacadeInterface
-     */
-    protected $conditionalAvailabilityPageSearchFacade;
+    protected ConditionalAvailabilityPageSearchFacadeInterface $conditionalAvailabilityPageSearchFacade;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchFacadeInterface $conditionalAvailabilityPageSearchFacade

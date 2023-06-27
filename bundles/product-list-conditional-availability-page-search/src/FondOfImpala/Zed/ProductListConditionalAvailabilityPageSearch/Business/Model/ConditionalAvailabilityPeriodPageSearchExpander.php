@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\ProductListMapTransfer;
 
 class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvailabilityPeriodPageSearchExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface
-     */
-    protected $productListFacade;
+    protected ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacade;
 
     /**
      * @param \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacade
