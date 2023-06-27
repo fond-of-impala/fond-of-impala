@@ -34,15 +34,9 @@ class AvailabilitiesChecker implements AvailabilitiesCheckerInterface
      */
     protected const PARAMETER_PRODUCT_SKU = '%sku%';
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface
-     */
-    protected $conditionalAvailabilityFacade;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface
-     */
-    protected $conditionalAvailabilityService;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade

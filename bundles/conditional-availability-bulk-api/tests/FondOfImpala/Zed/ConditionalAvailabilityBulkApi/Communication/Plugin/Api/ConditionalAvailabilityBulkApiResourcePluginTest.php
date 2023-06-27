@@ -100,7 +100,7 @@ class ConditionalAvailabilityBulkApiResourcePluginTest extends Unit
         try {
             $this->plugin->get(1);
             static::fail();
-        } catch (Exception $exception) {
+        } catch (Exception) {
         }
     }
 
@@ -112,7 +112,7 @@ class ConditionalAvailabilityBulkApiResourcePluginTest extends Unit
         try {
             $this->plugin->update(1, $this->apiDataTransferMock);
             static::fail();
-        } catch (Exception $exception) {
+        } catch (Exception) {
         }
     }
 
@@ -124,7 +124,7 @@ class ConditionalAvailabilityBulkApiResourcePluginTest extends Unit
         try {
             $this->plugin->remove(1);
             static::fail();
-        } catch (Exception $exception) {
+        } catch (Exception) {
         }
     }
 
@@ -136,7 +136,7 @@ class ConditionalAvailabilityBulkApiResourcePluginTest extends Unit
         try {
             $this->plugin->find($this->apiRequestTransferMock);
             static::fail();
-        } catch (Exception $exception) {
+        } catch (Exception) {
         }
     }
 }

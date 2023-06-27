@@ -207,10 +207,10 @@ class ConditionalAvailabilityBulkApiTest extends Unit
             ->method('createApiItem')
             ->with(
                 static::callback(
-                    static function (ConditionalAvailabilityBulkApiResponseTransfer $transfer) use ($ids) {
-                        return count($transfer->getConditionalAvailabilityIds()) === 1
-                            && $transfer->getConditionalAvailabilityIds()[0] === $ids['BAR-1'];
-                    },
+                    static fn (
+                        ConditionalAvailabilityBulkApiResponseTransfer $transfer
+                    ): bool => count($transfer->getConditionalAvailabilityIds()) === 1
+                        && $transfer->getConditionalAvailabilityIds()[0] === $ids['BAR-1'],
                 ),
                 null,
             )->willReturn($this->apiItemTransferMock);
