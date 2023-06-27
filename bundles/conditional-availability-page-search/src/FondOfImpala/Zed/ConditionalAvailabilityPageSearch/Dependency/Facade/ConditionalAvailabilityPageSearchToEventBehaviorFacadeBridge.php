@@ -6,10 +6,7 @@ use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge implements ConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
-     */
-    protected $eventBehaviorFacade;
+    protected EventBehaviorFacadeInterface $eventBehaviorFacade;
 
     /**
      * @param \Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface $eventBehaviorFacadeFacade
