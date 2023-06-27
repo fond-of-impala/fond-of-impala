@@ -65,12 +65,22 @@ class MinQtyConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstrac
     protected function getBoolQuery(Query $query): BoolQuery
     {
         $boolQuery = $query->getQuery();
+
+        if (is_array($boolQuery)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Min qty query expander available only with %s, got: array',
+                    BoolQuery::class,
+                ),
+            );
+        }
+
         if (!$boolQuery instanceof BoolQuery) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'Localized query expander available only with %s, got: %s',
+                    'Mit qty query expander available only with %s, got: %s',
                     BoolQuery::class,
-                    get_class($boolQuery),
+                    $boolQuery::class,
                 ),
             );
         }
