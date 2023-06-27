@@ -49,9 +49,9 @@ class ProductListConditionalAvailabilityPeriodPageDataExpanderPluginTest extends
             /**
              * @param \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchFacade $productListConditionalAvailabilityPageSearchFacade
              */
-            public function __construct(ProductListConditionalAvailabilityPageSearchFacade $facade)
+            public function __construct(ProductListConditionalAvailabilityPageSearchFacade $productListConditionalAvailabilityPageSearchFacade)
             {
-                $this->facade = $facade;
+                $this->facade = $productListConditionalAvailabilityPageSearchFacade;
             }
 
             /**
