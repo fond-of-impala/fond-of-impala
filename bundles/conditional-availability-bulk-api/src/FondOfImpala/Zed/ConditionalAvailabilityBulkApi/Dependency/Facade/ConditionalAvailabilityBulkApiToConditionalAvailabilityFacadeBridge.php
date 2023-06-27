@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 
 class ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeBridge implements ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface
-     */
-    protected $conditionalAvailabilityFacade;
+    protected ConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade

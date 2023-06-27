@@ -13,25 +13,13 @@ use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 
 class ConditionalAvailabilityBulkApi implements ConditionalAvailabilityBulkApiInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper\ConditionalAvailabilityBulkApiMapperInterface
-     */
-    protected $conditionalAvailabilityBulkApiMapper;
+    protected ConditionalAvailabilityBulkApiMapperInterface $conditionalAvailabilityBulkApiMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeInterface
-     */
-    protected $conditionalAvailabilityFacade;
+    protected ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToProductFacadeInterface
-     */
-    protected $productFacade;
+    protected ConditionalAvailabilityBulkApiToProductFacadeInterface $productFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToApiFacadeInterface
-     */
-    protected $apiQueryContainer;
+    protected ConditionalAvailabilityBulkApiToApiFacadeInterface $apiQueryContainer;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper\ConditionalAvailabilityBulkApiMapperInterface $conditionalAvailabilityBulkApiMapper
