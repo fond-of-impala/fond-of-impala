@@ -93,10 +93,7 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
         $this->plugin = new class (
             $this->factoryMock
         ) extends ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin {
-            /**
-             * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory
-             */
-            protected $factory;
+            protected ProductListConditionalAvailabilityPageSearchFactory $productListConditionalAvailabilityPageSearchFactory;
 
             /**
              * @param \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory $productListConditionalAvailabilityPageSearchFactory

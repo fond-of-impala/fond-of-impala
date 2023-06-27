@@ -7,10 +7,7 @@ use Spryker\Client\Customer\CustomerClientInterface;
 
 class ProductListConditionalAvailabilityPageSearchToCustomerClientBridge implements ProductListConditionalAvailabilityPageSearchToCustomerClientInterface
 {
-    /**
-     * @var \Spryker\Client\Customer\CustomerClientInterface
-     */
-    protected $customerClient;
+    protected CustomerClientInterface $customerClient;
 
     /**
      * @param \Spryker\Client\Customer\CustomerClientInterface $customerClient

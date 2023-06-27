@@ -5,6 +5,9 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearch;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityPeriodPageSearchMapper implements ConditionalAvailabilityPeriodPageSearchMapperInterface
 {
     /**

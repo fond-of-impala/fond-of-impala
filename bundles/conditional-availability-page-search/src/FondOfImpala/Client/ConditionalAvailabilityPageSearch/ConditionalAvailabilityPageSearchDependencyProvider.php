@@ -55,11 +55,11 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
      */
     protected function addSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_SEARCH] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchToSearchClientBridge(
-                $container->getLocator()->search()->client(),
-            );
-        };
+        $container[static::CLIENT_SEARCH] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToSearchClientBridge => new ConditionalAvailabilityPageSearchToSearchClientBridge(
+            $container->getLocator()->search()->client(),
+        );
 
         return $container;
     }
@@ -71,9 +71,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
      */
     protected function addSearchQueryPlugin(Container $container): Container
     {
-        $container[static::PLUGIN_SEARCH_QUERY] = static function () {
-            return new ConditionalAvailabilityPageSearchQueryPlugin();
-        };
+        $container[static::PLUGIN_SEARCH_QUERY] = static fn (): ConditionalAvailabilityPageSearchQueryPlugin => new ConditionalAvailabilityPageSearchQueryPlugin();
 
         return $container;
     }
@@ -87,9 +85,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $self = $this;
 
-        $container[static::PLUGINS_SEARCH_QUERY_EXPANDER] = static function () use ($self) {
-            return $self->getQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_SEARCH_QUERY_EXPANDER] = static fn (): array => $self->getQueryExpanderPlugins();
 
         return $container;
     }
@@ -103,9 +99,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $self = $this;
 
-        $container[static::PLUGINS_SEARCH_RESULT_FORMATTER] = static function () use ($self) {
-            return $self->getResultFormatterPlugins();
-        };
+        $container[static::PLUGINS_SEARCH_RESULT_FORMATTER] = static fn (): array => $self->getResultFormatterPlugins();
 
         return $container;
     }

@@ -6,10 +6,7 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAv
 
 class ConditionalAvailabilityPeriodPageSearchUnpublisher implements ConditionalAvailabilityPeriodPageSearchUnpublisherInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface
-     */
-    protected $entityManager;
+    protected ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager

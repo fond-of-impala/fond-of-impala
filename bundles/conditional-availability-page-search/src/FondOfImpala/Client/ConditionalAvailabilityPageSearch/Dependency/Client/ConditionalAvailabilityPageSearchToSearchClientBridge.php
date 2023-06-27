@@ -7,10 +7,7 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 class ConditionalAvailabilityPageSearchToSearchClientBridge implements ConditionalAvailabilityPageSearchToSearchClientInterface
 {
-    /**
-     * @var \Spryker\Client\Search\SearchClientInterface
-     */
-    protected $searchClient;
+    protected SearchClientInterface $searchClient;
 
     /**
      * @param \Spryker\Client\Search\SearchClientInterface $searchClient
