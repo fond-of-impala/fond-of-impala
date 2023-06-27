@@ -6,35 +6,36 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridgeTest extends Unit
 {
     /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityFacadeInterface|MockObject $facadeMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCriteriaFilterTransfer|MockObject $conditionalAvailabilityCriteriaFilterTransferMock;
+
+    /**
+     * @var (\ArrayObject&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ArrayObject|MockObject $arrayObjectMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge
      */
-    protected $conditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface
-     */
-    protected $conditionalAvailabilityFacadeInterfaceMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer
-     */
-    protected $conditionalAvailabilityCriteriaFilterTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\ArrayObject
-     */
-    protected $arrayObjectMock;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge $bridge;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityFacadeInterfaceMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
+        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -46,8 +47,8 @@ class ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBri
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge = new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
-            $this->conditionalAvailabilityFacadeInterfaceMock,
+        $this->bridge = new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
+            $this->facadeMock,
         );
     }
 
@@ -56,14 +57,14 @@ class ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBri
      */
     public function testFindGroupedConditionalAvailabilities(): void
     {
-        $this->conditionalAvailabilityFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with($this->conditionalAvailabilityCriteriaFilterTransferMock)
             ->willReturn($this->arrayObjectMock);
 
-        $this->assertInstanceOf(
-            ArrayObject::class,
-            $this->conditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge->findGroupedConditionalAvailabilities(
+        static::assertEquals(
+            $this->arrayObjectMock,
+            $this->bridge->findGroupedConditionalAvailabilities(
                 $this->conditionalAvailabilityCriteriaFilterTransferMock,
             ),
         );

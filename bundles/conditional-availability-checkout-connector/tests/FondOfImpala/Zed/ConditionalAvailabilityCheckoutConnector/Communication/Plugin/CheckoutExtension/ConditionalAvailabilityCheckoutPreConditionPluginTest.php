@@ -13,7 +13,7 @@ class ConditionalAvailabilityCheckoutPreConditionPluginTest extends Unit
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Communication\Plugin\CheckoutExtension\ConditionalAvailabilityCheckoutPreConditionPlugin
      */
-    protected $conditionalAvailabilityCheckoutPreConditionPlugin;
+    protected $plugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
@@ -28,19 +28,19 @@ class ConditionalAvailabilityCheckoutPreConditionPluginTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesCheckerInterface
      */
-    protected $availabilitiesCheckerInterfaceMock;
+    protected $availabilitiesCheckerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\ConditionalAvailabilityCheckoutConnectorFacade
      */
-    protected $conditionalAvailabilityCheckoutConnectorFacadeMock;
+    protected $facadeMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityCheckoutConnectorFacadeMock = $this->getMockBuilder(ConditionalAvailabilityCheckoutConnectorFacade::class)
+        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityCheckoutConnectorFacade::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -52,12 +52,12 @@ class ConditionalAvailabilityCheckoutPreConditionPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->availabilitiesCheckerInterfaceMock = $this->getMockBuilder(AvailabilitiesCheckerInterface::class)
+        $this->availabilitiesCheckerMock = $this->getMockBuilder(AvailabilitiesCheckerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCheckoutPreConditionPlugin = new ConditionalAvailabilityCheckoutPreConditionPlugin();
-        $this->conditionalAvailabilityCheckoutPreConditionPlugin->setFacade($this->conditionalAvailabilityCheckoutConnectorFacadeMock);
+        $this->plugin = new ConditionalAvailabilityCheckoutPreConditionPlugin();
+        $this->plugin->setFacade($this->facadeMock);
     }
 
     /**
@@ -65,13 +65,13 @@ class ConditionalAvailabilityCheckoutPreConditionPluginTest extends Unit
      */
     public function testCheckCondition(): void
     {
-        $this->conditionalAvailabilityCheckoutConnectorFacadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('checkAvailabilities')
             ->with($this->quoteTransferMock, $this->checkoutResponseTransferMock)
             ->willReturn(true);
 
-        $this->assertTrue(
-            $this->conditionalAvailabilityCheckoutPreConditionPlugin->checkCondition(
+        static::assertTrue(
+            $this->plugin->checkCondition(
                 $this->quoteTransferMock,
                 $this->checkoutResponseTransferMock,
             ),

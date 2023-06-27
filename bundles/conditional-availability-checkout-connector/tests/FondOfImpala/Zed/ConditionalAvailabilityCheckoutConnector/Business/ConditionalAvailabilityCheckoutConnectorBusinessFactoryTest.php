@@ -7,29 +7,30 @@ use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\Ava
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\ConditionalAvailabilityCheckoutConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityCheckoutConnectorBusinessFactoryTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Kernel\Container&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $containerMock;
+    protected Container|MockObject $containerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityFacadeMock;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface|MockObject $conditionalAvailabilityFacadeMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityServiceMock;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface|MockObject $conditionalAvailabilityServiceMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\ConditionalAvailabilityCheckoutConnectorBusinessFactory
      */
-    protected $conditionalAvailabilityCheckoutConnectorBusinessFactory;
+    protected ConditionalAvailabilityCheckoutConnectorBusinessFactory $factory;
 
     /**
      * @return void
@@ -48,8 +49,8 @@ class ConditionalAvailabilityCheckoutConnectorBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCheckoutConnectorBusinessFactory = new ConditionalAvailabilityCheckoutConnectorBusinessFactory();
-        $this->conditionalAvailabilityCheckoutConnectorBusinessFactory->setContainer($this->containerMock);
+        $this->factory = new ConditionalAvailabilityCheckoutConnectorBusinessFactory();
+        $this->factory->setContainer($this->containerMock);
     }
 
     /**
@@ -74,7 +75,7 @@ class ConditionalAvailabilityCheckoutConnectorBusinessFactoryTest extends Unit
 
         static::assertInstanceOf(
             AvailabilitiesChecker::class,
-            $this->conditionalAvailabilityCheckoutConnectorBusinessFactory->createAvailabilitiesChecker(),
+            $this->factory->createAvailabilitiesChecker(),
         );
     }
 }
