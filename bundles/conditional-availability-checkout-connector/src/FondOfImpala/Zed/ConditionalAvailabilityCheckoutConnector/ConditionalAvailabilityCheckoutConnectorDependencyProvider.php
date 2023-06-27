@@ -45,7 +45,7 @@ class ConditionalAvailabilityCheckoutConnectorDependencyProvider extends Abstrac
     {
         $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static fn (
             Container $container
-        ) => new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
+        ): ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge => new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
             $container->getLocator()->conditionalAvailability()->facade(),
         );
 
@@ -61,7 +61,7 @@ class ConditionalAvailabilityCheckoutConnectorDependencyProvider extends Abstrac
     {
         $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static fn (
             Container $container
-        ) => new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceBridge(
+        ): ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceBridge => new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceBridge(
             $container->getLocator()->conditionalAvailability()->service(),
         );
 

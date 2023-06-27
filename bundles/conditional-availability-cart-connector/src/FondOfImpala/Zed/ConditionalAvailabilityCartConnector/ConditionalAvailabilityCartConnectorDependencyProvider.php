@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector;
 
+use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -51,11 +52,11 @@ class ConditionalAvailabilityCartConnectorDependencyProvider extends AbstractBun
      */
     protected function addConditionalAvailabilityFacade(Container $container): Container
     {
-        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeBridge(
-                $container->getLocator()->conditionalAvailability()->facade(),
-            );
-        };
+        $container[static::FACADE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ): ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeBridge => new ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeBridge(
+            $container->getLocator()->conditionalAvailability()->facade(),
+        );
 
         return $container;
     }
@@ -67,11 +68,11 @@ class ConditionalAvailabilityCartConnectorDependencyProvider extends AbstractBun
      */
     protected function addConditionalAvailabilityService(Container $container): Container
     {
-        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static function (Container $container) {
-            return new ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge(
-                $container->getLocator()->conditionalAvailability()->service(),
-            );
-        };
+        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static fn (
+            Container $container
+        ): ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge => new ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge(
+            $container->getLocator()->conditionalAvailability()->service(),
+        );
 
         return $container;
     }
@@ -83,9 +84,11 @@ class ConditionalAvailabilityCartConnectorDependencyProvider extends AbstractBun
      */
     protected function addService(Container $container): Container
     {
-        $container[static::SERVICE] = static function (Container $container) {
-            return $container->getLocator()->conditionalAvailabilityCartConnector()->service();
-        };
+        $container[static::SERVICE] = static fn (
+            Container $container
+        ): ConditionalAvailabilityCartConnectorServiceInterface => $container->getLocator()
+            ->conditionalAvailabilityCartConnector()
+            ->service();
 
         return $container;
     }

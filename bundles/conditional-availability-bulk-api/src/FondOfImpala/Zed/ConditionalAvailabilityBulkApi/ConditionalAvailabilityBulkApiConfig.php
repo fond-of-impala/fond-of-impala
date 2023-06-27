@@ -4,6 +4,9 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityBulkApiConfig extends AbstractBundleConfig
 {
     /**
