@@ -8,10 +8,7 @@ use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceI
 
 class ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceBridge implements ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface
-     */
-    protected $service;
+    protected ConditionalAvailabilityServiceInterface $service;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface $service
