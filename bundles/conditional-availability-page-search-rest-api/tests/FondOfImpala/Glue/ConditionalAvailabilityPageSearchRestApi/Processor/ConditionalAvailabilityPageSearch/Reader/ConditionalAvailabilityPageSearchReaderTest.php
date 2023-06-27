@@ -68,11 +68,11 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     protected MockObject|RestResponseInterface $restResponseMock;
+
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Glue\GlueApplication\Rest\Request\Data\PageInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
     protected PageInterface|MockObject $pageMock;
-
 
     /**
      * @return void

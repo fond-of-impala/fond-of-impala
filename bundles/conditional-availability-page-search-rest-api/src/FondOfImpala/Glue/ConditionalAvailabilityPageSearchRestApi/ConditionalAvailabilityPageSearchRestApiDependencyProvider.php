@@ -49,7 +49,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
      */
     protected function addConditionalAvailabilityPageSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static fn(
+        $container[static::CLIENT_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static fn (
             Container $container
         ): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge => new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearchClientBridge(
             $container->getLocator()->conditionalAvailabilityPageSearch()->client(),
@@ -67,7 +67,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
     {
         $self = $this;
 
-        $container[static::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER] = static fn(): array => $self->getRestConditionalAvailabilityPeriodMapperPlugins();
+        $container[static::PLUGIN_REST_CONDITIONAL_AVAILABILITY_PERIOD_MAPPER] = static fn (): array => $self->getRestConditionalAvailabilityPeriodMapperPlugins();
 
         return $container;
     }
@@ -87,7 +87,7 @@ class ConditionalAvailabilityPageSearchRestApiDependencyProvider extends Abstrac
      */
     protected function addConditionalAvailabilityService(Container $container): Container
     {
-        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static fn(
+        $container[static::SERVICE_CONDITIONAL_AVAILABILITY] = static fn (
             Container $container
         ): ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge => new ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge(
             $container->getLocator()->conditionalAvailability()->service(),

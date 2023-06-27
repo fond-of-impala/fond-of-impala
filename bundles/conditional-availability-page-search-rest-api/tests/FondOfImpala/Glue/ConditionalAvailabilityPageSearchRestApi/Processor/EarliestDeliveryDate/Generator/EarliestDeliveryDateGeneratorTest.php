@@ -124,7 +124,7 @@ class EarliestDeliveryDateGeneratorTest extends Unit
             ->method('generateEarliestDeliveryDateByDateTime')
             ->with(
                 static::callback(
-                    static fn(
+                    static fn (
                         DateTime $earliestAvailabilityDate
                     ): bool => $earliestAvailabilityDate == (new DateTime())->setTime(0, 0),
                 ),
