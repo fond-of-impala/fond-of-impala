@@ -5,18 +5,19 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Communication\Plugin\A
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\ConditionalAvailabilityBulkApiConfig;
 use Generated\Shared\Transfer\ApiRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityBulkApiValidatorPluginTest extends Unit
 {
     /**
-     * @var \Generated\Shared\Transfer\ApiRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\Generated\Shared\Transfer\ApiRequestTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiRequestTransferMock;
+    protected ApiRequestTransfer|MockObject $apiRequestTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Communication\Plugin\Api\ConditionalAvailabilityBulkApiValidatorPlugin
      */
-    protected $plugin;
+    protected ConditionalAvailabilityBulkApiValidatorPlugin $plugin;
 
     /**
      * @return void

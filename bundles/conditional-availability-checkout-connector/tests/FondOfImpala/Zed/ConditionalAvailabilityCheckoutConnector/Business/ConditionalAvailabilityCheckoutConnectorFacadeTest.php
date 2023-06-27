@@ -6,40 +6,41 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesCheckerInterface;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCheckoutConnectorFacadeTest extends Unit
 {
     /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\ConditionalAvailabilityCheckoutConnectorBusinessFactory&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCheckoutConnectorBusinessFactory|MockObject $factoryMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\QuoteTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected QuoteTransfer|MockObject $quoteTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\CheckoutResponseTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CheckoutResponseTransfer|MockObject $checkoutResponseTransferMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesCheckerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|AvailabilitiesCheckerInterface $availabilitiesCheckerMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\ConditionalAvailabilityCheckoutConnectorFacade
      */
-    protected $conditionalAvailabilityCheckoutConnectorFacade;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\ConditionalAvailabilityCheckoutConnectorBusinessFactory
-     */
-    protected $conditionalAvailabilityCheckoutConnectorBusinessFactoryMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    protected $checkoutResponseTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesCheckerInterface
-     */
-    protected $availabilitiesCheckerInterfaceMock;
+    protected ConditionalAvailabilityCheckoutConnectorFacade $facade;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->conditionalAvailabilityCheckoutConnectorBusinessFactoryMock = $this->getMockBuilder(ConditionalAvailabilityCheckoutConnectorBusinessFactory::class)
+        $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityCheckoutConnectorBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -51,12 +52,12 @@ class ConditionalAvailabilityCheckoutConnectorFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->availabilitiesCheckerInterfaceMock = $this->getMockBuilder(AvailabilitiesCheckerInterface::class)
+        $this->availabilitiesCheckerMock = $this->getMockBuilder(AvailabilitiesCheckerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCheckoutConnectorFacade = new ConditionalAvailabilityCheckoutConnectorFacade();
-        $this->conditionalAvailabilityCheckoutConnectorFacade->setFactory($this->conditionalAvailabilityCheckoutConnectorBusinessFactoryMock);
+        $this->facade = new ConditionalAvailabilityCheckoutConnectorFacade();
+        $this->facade->setFactory($this->factoryMock);
     }
 
     /**
@@ -64,17 +65,17 @@ class ConditionalAvailabilityCheckoutConnectorFacadeTest extends Unit
      */
     public function testCheckAvailabilities(): void
     {
-        $this->conditionalAvailabilityCheckoutConnectorBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createAvailabilitiesChecker')
-            ->willReturn($this->availabilitiesCheckerInterfaceMock);
+            ->willReturn($this->availabilitiesCheckerMock);
 
-        $this->availabilitiesCheckerInterfaceMock->expects($this->atLeastOnce())
+        $this->availabilitiesCheckerMock->expects(static::atLeastOnce())
             ->method('check')
             ->with($this->quoteTransferMock, $this->checkoutResponseTransferMock)
             ->willReturn(true);
 
-        $this->assertTrue(
-            $this->conditionalAvailabilityCheckoutConnectorFacade->checkAvailabilities(
+        static::assertTrue(
+            $this->facade->checkAvailabilities(
                 $this->quoteTransferMock,
                 $this->checkoutResponseTransferMock,
             ),

@@ -4,30 +4,31 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Api\Business\ApiFacadeInterface;
 
 class ConditionalAvailabilityBulkApiToApiFacadeBridgeTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Api\Business\ApiFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Api\Business\ApiFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $facadeMock;
+    protected ApiFacadeInterface|MockObject $facadeMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Shared\Kernel\Transfer\AbstractTransfer&\PHPUnit\Framework\MockObject\MockObject)
      */
-    protected $abstractTransferMock;
+    protected AbstractTransfer|MockObject $abstractTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
+     * @var (\Generated\Shared\Transfer\ApiItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $apiItemTransferMock;
+    protected MockObject|ApiItemTransfer $apiItemTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToApiFacadeBridge
      */
-    protected $bridge;
+    protected ConditionalAvailabilityBulkApiToApiFacadeBridge $bridge;
 
     /**
      * @return void

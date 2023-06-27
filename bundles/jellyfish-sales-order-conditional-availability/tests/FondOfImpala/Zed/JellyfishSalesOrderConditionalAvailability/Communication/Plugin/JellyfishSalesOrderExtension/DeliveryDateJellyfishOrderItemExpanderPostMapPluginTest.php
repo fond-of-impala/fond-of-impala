@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\JellyfishSalesOrderConditionalAvailability\Communicat
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\JellyfishOrderItemTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class DeliveryDateJellyfishOrderItemExpanderPostMapPluginTest extends Unit
 {
     /**
-     * @var \Generated\Shared\Transfer\JellyfishOrderItemTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\JellyfishOrderItemTransfer
      */
-    protected $jellyfishOrderItemTransferMock;
+    protected MockObject|JellyfishOrderItemTransfer $jellyfishOrderItemTransferMock;
 
     /**
-     * @var \Orm\Zed\Sales\Persistence\SpySalesOrderItem|\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Sales\Persistence\SpySalesOrderItem
      */
-    protected $spySalesOrderItemMock;
+    protected MockObject|SpySalesOrderItem $spySalesOrderItemMock;
 
     /**
      * @var \FondOfImpala\Zed\JellyfishSalesOrderConditionalAvailability\Communication\Plugin\JellyfishSalesOrderExtension\DeliveryDateJellyfishOrderItemExpanderPostMapPlugin
      */
-    protected $plugin;
+    protected DeliveryDateJellyfishOrderItemExpanderPostMapPlugin $plugin;
 
     /**
      * @return void

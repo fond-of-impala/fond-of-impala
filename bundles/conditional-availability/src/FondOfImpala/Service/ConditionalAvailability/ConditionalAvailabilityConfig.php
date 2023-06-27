@@ -5,6 +5,9 @@ namespace FondOfImpala\Service\ConditionalAvailability;
 use FondOfImpala\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
 use Spryker\Service\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityConfig extends AbstractBundleConfig
 {
     /**

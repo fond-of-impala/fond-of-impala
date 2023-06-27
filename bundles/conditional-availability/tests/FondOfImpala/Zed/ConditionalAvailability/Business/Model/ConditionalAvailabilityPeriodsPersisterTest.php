@@ -70,11 +70,11 @@ class ConditionalAvailabilityPeriodsPersisterTest extends Unit
      */
     public function testPersistWithInvalidConditionalAvailabilityTransfer(): void
     {
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getIdConditionalAvailability')
             ->willReturn(null);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityTransferMock,
             $this->conditionalAvailabilityPeriodsPersister->persist($this->conditionalAvailabilityTransferMock),
         );
@@ -85,15 +85,15 @@ class ConditionalAvailabilityPeriodsPersisterTest extends Unit
      */
     public function testPersistWithoutConditionalAvailabilityPeriodCollection(): void
     {
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getIdConditionalAvailability')
             ->willReturn(1);
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
             ->willReturn(null);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityTransferMock,
             $this->conditionalAvailabilityPeriodsPersister->persist($this->conditionalAvailabilityTransferMock),
         );
@@ -106,32 +106,32 @@ class ConditionalAvailabilityPeriodsPersisterTest extends Unit
     {
         $idConditionalAvailability = 1;
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getIdConditionalAvailability')
             ->willReturn($idConditionalAvailability);
 
-        $this->conditionalAvailabilityTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
             ->willReturn($this->conditionalAvailabilityPeriodCollectionTransferMock);
 
-        $this->conditionalAvailabilityEntityManagerMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
             ->method('deleteConditionalAvailabilityPeriodsByConditionalAvailabilityId')
             ->with($idConditionalAvailability);
 
-        $this->conditionalAvailabilityPeriodCollectionTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriods')
             ->willReturn($this->conditionalAvailabilityPeriodTransferMocks);
 
-        $this->conditionalAvailabilityPeriodTransferMocks[0]->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
             ->method('setFkConditionalAvailability')
             ->with($idConditionalAvailability)
             ->willReturn($this->conditionalAvailabilityPeriodTransferMocks[0]);
 
-        $this->conditionalAvailabilityEntityManagerMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityEntityManagerMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriod')
             ->with($this->conditionalAvailabilityPeriodTransferMocks[0]);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->conditionalAvailabilityTransferMock,
             $this->conditionalAvailabilityPeriodsPersister->persist($this->conditionalAvailabilityTransferMock),
         );

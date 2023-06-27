@@ -7,104 +7,62 @@ use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface;
+use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
+use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AvailabilitiesCheckerTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityFacadeMock;
+    protected MockObject|ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacadeMock;
 
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityServiceMock;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface|MockObject $conditionalAvailabilityServiceMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
+     * @var (\Generated\Shared\Transfer\QuoteTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $quoteTransferMock;
+    protected QuoteTransfer|MockObject $quoteTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CheckoutResponseTransfer
+     * @var (\Generated\Shared\Transfer\CheckoutResponseTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $checkoutResponseTransferMock;
+    protected CheckoutResponseTransfer|MockObject $checkoutResponseTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
+     * @var (\Generated\Shared\Transfer\ItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
     /**
-     * @var \ArrayObject<\Generated\Shared\Transfer\ItemTransfer>
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $itemTransferMocks;
+    protected ConditionalAvailabilityTransfer|MockObject $conditionalAvailabilityTransferMock;
 
     /**
-     * @var string
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $sku;
+    protected MockObject|ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityTransfer
+     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $conditionalAvailabilityTransferMock;
-
-    /**
-     * @var \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>
-     */
-    protected $conditionalAvailabilityTransferMocks;
-
-    /**
-     * @var string
-     */
-    protected $concreteDeliveryDate;
-
-    /**
-     * @var int
-     */
-    protected $quantity;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer
-     */
-    protected $conditionalAvailabilityPeriodCollectionTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer
-     */
-    protected $conditionalAvailabilityPeriodTransferMock;
-
-    /**
-     * @var string
-     */
-    protected $startAt;
-
-    /**
-     * @var string
-     */
-    protected $endAt;
-
-    /**
-     * @var \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>
-     */
-    protected $conditionalAvailabilityPeriodTransferMocks;
-
-    /**
-     * @var int
-     */
-    protected $availableQuantity;
+    protected ConditionalAvailabilityPeriodTransfer|MockObject $conditionalAvailabilityPeriodTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesChecker
      */
-    protected $availabilitiesChecker;
+    protected AvailabilitiesChecker $availabilitiesChecker;
 
     /**
      * @return void
@@ -131,25 +89,9 @@ class AvailabilitiesCheckerTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->itemTransferMocks = new ArrayObject([
-            $this->itemTransferMock,
-        ]);
-
-        $this->sku = 'sku';
-
         $this->conditionalAvailabilityTransferMock = $this->getMockBuilder(ConditionalAvailabilityTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->conditionalAvailabilityTransferMocks = new ArrayObject([
-            $this->sku => new ArrayObject([
-                $this->conditionalAvailabilityTransferMock,
-            ]),
-        ]);
-
-        $this->concreteDeliveryDate = '2019-07-10 15:06:11.734023';
-
-        $this->availableQuantity = 2;
 
         $this->conditionalAvailabilityPeriodCollectionTransferMock = $this->getMockBuilder(ConditionalAvailabilityPeriodCollectionTransfer::class)
             ->disableOriginalConstructor()
@@ -158,16 +100,6 @@ class AvailabilitiesCheckerTest extends Unit
         $this->conditionalAvailabilityPeriodTransferMock = $this->getMockBuilder(ConditionalAvailabilityPeriodTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->conditionalAvailabilityPeriodTransferMocks = new ArrayObject([
-            $this->conditionalAvailabilityPeriodTransferMock,
-        ]);
-
-        $this->startAt = '2019-07-09 15:06:11.734023';
-
-        $this->endAt = '2019-07-11 15:06:11.734023';
-
-        $this->quantity = 1;
 
         $this->availabilitiesChecker = new AvailabilitiesChecker(
             $this->conditionalAvailabilityFacadeMock,
@@ -180,29 +112,50 @@ class AvailabilitiesCheckerTest extends Unit
      */
     public function testCheck(): void
     {
+        $sku = 'sku';
+        $warehouseGroup = 'EU';
+        $minimumQty = 1;
+        $concreteDeliveryDate = '2019-07-10 15:06:11.734023';
+        $availableQuantity = 2;
+        $startAt = '2019-07-09 15:06:11.734023';
+        $endAt = '2019-07-11 15:06:11.734023';
+        $quantity = 1;
+
         $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
-            ->willReturn($this->sku);
+            ->willReturn($sku);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
-            ->willReturn($this->conditionalAvailabilityTransferMocks);
+            ->with(
+                static::callback(
+                    fn (
+                        ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
+                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                ),
+            )->willReturn(new ArrayObject([
+                $sku => [
+                    $this->conditionalAvailabilityTransferMock,
+                ],
+            ]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getConcreteDeliveryDate')
-            ->willReturn($this->concreteDeliveryDate);
+            ->willReturn($concreteDeliveryDate);
 
         $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
             ->method('generateLatestOrderDateByDeliveryDate')
-            ->willReturn(new DateTime($this->concreteDeliveryDate));
+            ->willReturn(new DateTime($concreteDeliveryDate));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getQuantity')
-            ->willReturn($this->quantity);
+            ->willReturn($quantity);
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
@@ -210,19 +163,19 @@ class AvailabilitiesCheckerTest extends Unit
 
         $this->conditionalAvailabilityPeriodCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriods')
-            ->willReturn($this->conditionalAvailabilityPeriodTransferMocks);
+            ->willReturn(new ArrayObject([$this->conditionalAvailabilityPeriodTransferMock]));
 
         $this->conditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('getStartAt')
-            ->willReturn($this->startAt);
+            ->willReturn($startAt);
 
         $this->conditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('getEndAt')
-            ->willReturn($this->endAt);
+            ->willReturn($endAt);
 
         $this->conditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('getQuantity')
-            ->willReturn($this->availableQuantity);
+            ->willReturn($availableQuantity);
 
         static::assertTrue(
             $this->availabilitiesChecker->check(
@@ -237,29 +190,50 @@ class AvailabilitiesCheckerTest extends Unit
      */
     public function testCheckErrorToCheckoutResponse(): void
     {
+        $sku = 'sku';
+        $warehouseGroup = 'EU';
+        $minimumQty = 1;
+        $concreteDeliveryDate = '2019-07-10 15:06:11.734023';
+        $availableQuantity = 1;
+        $startAt = '2019-07-09 15:06:11.734023';
+        $endAt = '2019-07-11 15:06:11.734023';
+        $quantity = 2;
+
         $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
-            ->willReturn($this->sku);
+            ->willReturn($sku);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
-            ->willReturn($this->conditionalAvailabilityTransferMocks);
+            ->with(
+                static::callback(
+                    fn (
+                        ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
+                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                ),
+            )->willReturn(new ArrayObject([
+                $sku => [
+                    $this->conditionalAvailabilityTransferMock,
+                ],
+            ]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getConcreteDeliveryDate')
-            ->willReturn($this->concreteDeliveryDate);
+            ->willReturn($concreteDeliveryDate);
 
         $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
             ->method('generateLatestOrderDateByDeliveryDate')
-            ->willReturn(new DateTime($this->concreteDeliveryDate));
+            ->willReturn(new DateTime($concreteDeliveryDate));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getQuantity')
-            ->willReturn($this->quantity);
+            ->willReturn($quantity);
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
@@ -267,23 +241,32 @@ class AvailabilitiesCheckerTest extends Unit
 
         $this->conditionalAvailabilityPeriodCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriods')
-            ->willReturn($this->conditionalAvailabilityPeriodTransferMocks);
+            ->willReturn(new ArrayObject([$this->conditionalAvailabilityPeriodTransferMock]));
 
         $this->conditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('getStartAt')
-            ->willReturn($this->startAt);
+            ->willReturn($startAt);
 
         $this->conditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('getEndAt')
-            ->willReturn($this->endAt);
+            ->willReturn($endAt);
 
         $this->conditionalAvailabilityPeriodTransferMock->expects(static::atLeastOnce())
             ->method('getQuantity')
-            ->willReturn(0);
+            ->willReturn($availableQuantity);
 
         $this->checkoutResponseTransferMock->expects(static::atLeastOnce())
             ->method('addError')
-            ->willReturnSelf();
+            ->with(
+                static::callback(
+                    fn (
+                        CheckoutErrorTransfer $checkoutErrorTransfer
+                    ) => $checkoutErrorTransfer->getErrorCode() === 4102
+                        && $checkoutErrorTransfer->getMessage() === 'conditional_availability_checkout_connector.product.unavailable'
+                        && $checkoutErrorTransfer->getParameters() == ['%sku%' => $sku]
+                        && $checkoutErrorTransfer->getErrorType() === 'Conditional Availability'
+                ),
+            )->willReturnSelf();
 
         $this->checkoutResponseTransferMock->expects(static::atLeastOnce())
             ->method('setIsSuccess')
@@ -303,21 +286,42 @@ class AvailabilitiesCheckerTest extends Unit
      */
     public function testCheckErrorToCheckoutResponsesSkuNotExists(): void
     {
+        $sku = 'sku';
+        $warehouseGroup = 'EU';
+        $minimumQty = 1;
+
         $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
-            ->willReturn($this->sku);
+            ->willReturn($sku);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
-            ->willReturn(new ArrayObject([]));
+            ->with(
+                static::callback(
+                    fn (
+                        ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
+                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                ),
+            )->willReturn(new ArrayObject([]));
 
         $this->checkoutResponseTransferMock->expects(static::atLeastOnce())
             ->method('addError')
-            ->willReturnSelf();
+            ->with(
+                static::callback(
+                    fn (
+                        CheckoutErrorTransfer $checkoutErrorTransfer
+                    ) => $checkoutErrorTransfer->getErrorCode() === 4102
+                        && $checkoutErrorTransfer->getMessage() === 'conditional_availability_checkout_connector.product.unavailable'
+                        && $checkoutErrorTransfer->getParameters() == ['%sku%' => $sku]
+                        && $checkoutErrorTransfer->getErrorType() === 'Conditional Availability'
+                ),
+            )->willReturnSelf();
 
         $this->checkoutResponseTransferMock->expects(static::atLeastOnce())
             ->method('setIsSuccess')
@@ -337,29 +341,47 @@ class AvailabilitiesCheckerTest extends Unit
      */
     public function testCheckErrorToCheckoutResponseConditionalAvailabilityPeriodCollectionNull(): void
     {
+        $sku = 'sku';
+        $warehouseGroup = 'EU';
+        $minimumQty = 1;
+        $concreteDeliveryDate = '2019-07-10 15:06:11.734023';
+        $quantity = 1;
+
         $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
-            ->willReturn($this->itemTransferMocks);
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getSku')
-            ->willReturn($this->sku);
+            ->willReturn($sku);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
-            ->willReturn($this->conditionalAvailabilityTransferMocks);
+            ->with(
+                static::callback(
+                    fn (
+                        ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
+                    ) => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                ),
+            )->willReturn(new ArrayObject([
+                $sku => [
+                    $this->conditionalAvailabilityTransferMock,
+                ],
+            ]));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getConcreteDeliveryDate')
-            ->willReturn($this->concreteDeliveryDate);
+            ->willReturn($concreteDeliveryDate);
 
         $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
             ->method('generateLatestOrderDateByDeliveryDate')
-            ->willReturn(new DateTime($this->concreteDeliveryDate));
+            ->willReturn(new DateTime($concreteDeliveryDate));
 
         $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getQuantity')
-            ->willReturn($this->quantity);
+            ->willReturn($quantity);
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
@@ -367,7 +389,16 @@ class AvailabilitiesCheckerTest extends Unit
 
         $this->checkoutResponseTransferMock->expects(static::atLeastOnce())
             ->method('addError')
-            ->willReturnSelf();
+            ->with(
+                static::callback(
+                    fn (
+                        CheckoutErrorTransfer $checkoutErrorTransfer
+                    ) => $checkoutErrorTransfer->getErrorCode() === 4102
+                        && $checkoutErrorTransfer->getMessage() === 'conditional_availability_checkout_connector.product.unavailable'
+                        && $checkoutErrorTransfer->getParameters() == ['%sku%' => $sku]
+                        && $checkoutErrorTransfer->getErrorType() === 'Conditional Availability'
+                ),
+            )->willReturnSelf();
 
         $this->checkoutResponseTransferMock->expects(static::atLeastOnce())
             ->method('setIsSuccess')
