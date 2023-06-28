@@ -7,6 +7,18 @@
       "path": "bundles/conditional-availability",
       "version": "1.0.0"
     },
+    "conditional-availability-bulk-api": {
+      "path": "bundles/conditional-availability-bulk-api",
+      "version": "1.0.0"
+    },
+    "conditional-availability-cart-connector": {
+      "path": "bundles/conditional-availability-cart-connector",
+      "version": "1.0.0"
+    },
+    "conditional-availability-checkout-connector": {
+      "path": "bundles/conditional-availability-checkout-connector",
+      "version": "1.0.0"
+    },
     "conditional-availability-extension": {
       "path": "bundles/conditional-availability-extension",
       "version": "1.0.0"
@@ -25,6 +37,14 @@
     },
     "conditional-availability-page-search-rest-api-extension": {
       "path": "bundles/conditional-availability-page-search-rest-api-extension",
+      "version": "1.0.0"
+    },
+    "conditional-availability-sales-connector": {
+      "path": "bundles/conditional-availability-sales-connector",
+      "version": "1.0.0"
+    },
+    "product-list-conditional-availability-page-search": {
+      "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.0.0"
     }
   },
