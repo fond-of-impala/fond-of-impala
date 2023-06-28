@@ -14,8 +14,8 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/conditional-availability-page-search-extension": "dev-master",
-    "fond-of-impala/conditional-availability": "dev-master",
+    "fond-of-impala/conditional-availability-page-search-extension": "^1.0.0",
+    "fond-of-impala/conditional-availability": "^1.0.0",
     "spryker/event": "^1.0.0 || ^2.0.0",
     "spryker/event-behavior": "^1.0.0",
     "spryker/search": "^8.10.0",
