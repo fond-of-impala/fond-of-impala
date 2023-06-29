@@ -257,15 +257,17 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
     protected function getGroupedConditionalAvailabilitiesByQuoteTransfer(QuoteTransfer $quoteTransfer): ArrayObject
     {
         $skus = $this->getSkusByQuoteTransfer($quoteTransfer);
+        $customerTransfer = $quoteTransfer->getCustomer();
 
-        if (count($skus) === 0) {
+        if (count($skus) === 0 || $customerTransfer === null | $customerTransfer->getAvailabilityChannel() === null) {
             return new ArrayObject();
         }
 
         $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
             ->setSkus($skus)
             ->setWarehouseGroup('EU')
-            ->setMinimumQuantity(1);
+            ->setMinimumQuantity(1)
+            ->setChannel($customerTransfer->getAvailabilityChannel());
 
         return $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilities(
             $conditionalAvailabilityCriteriaFilterTransfer,

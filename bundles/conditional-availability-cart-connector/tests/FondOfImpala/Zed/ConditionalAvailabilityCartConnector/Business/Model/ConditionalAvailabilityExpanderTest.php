@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -38,6 +39,11 @@ class ConditionalAvailabilityExpanderTest extends Unit
      * @var (\Generated\Shared\Transfer\ItemTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
     protected MockObject|ItemTransfer $itemTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\CustomerTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CustomerTransfer|MockObject $customerTransferMock;
 
     /**
      * @var (\Generated\Shared\Transfer\ConditionalAvailabilityTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
@@ -80,6 +86,10 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->customerTransferMock = $this->getMockBuilder(CustomerTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->conditionalAvailabilityTransferMock = $this->getMockBuilder(ConditionalAvailabilityTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -106,6 +116,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $deliveryDate = $concreteDeliveryDate->format('Y-m-d');
         $qty = 1;
@@ -120,6 +131,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -129,6 +148,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([
@@ -239,6 +259,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $deliveryDate = $concreteDeliveryDate->format('Y-m-d');
         $qty = 2;
@@ -255,6 +276,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -264,6 +293,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([
@@ -348,6 +378,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $deliveryDate = $concreteDeliveryDate->format('Y-m-d');
         $qty = 2;
@@ -360,6 +391,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -369,6 +408,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([
@@ -431,6 +471,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $deliveryDate = $concreteDeliveryDate->format('Y-m-d');
 
@@ -442,6 +483,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -451,6 +500,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(new ArrayObject([]));
 
@@ -500,6 +550,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $deliveryDate = $concreteDeliveryDate->format('Y-m-d');
         $qty = 2;
@@ -514,6 +565,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -523,6 +582,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([
@@ -604,6 +664,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $qty = 2;
         $startAt = (new DateTime())->format('Y-m-d');
@@ -617,6 +678,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -626,6 +695,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([
@@ -703,6 +773,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
 
         $this->quoteTransferMock->expects(static::atLeastOnce())
@@ -713,6 +784,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -722,6 +801,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([]),
@@ -768,6 +848,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $sku = 'foo';
         $warehouseGroup = 'EU';
         $minimumQty = 1;
+        $availabilityChannel = 'bar';
         $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
         $qty = 2;
 
@@ -779,6 +860,14 @@ class ConditionalAvailabilityExpanderTest extends Unit
             ->method('getSku')
             ->willReturn($sku);
 
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
             ->method('findGroupedConditionalAvailabilities')
             ->with(
@@ -788,6 +877,7 @@ class ConditionalAvailabilityExpanderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getSkus() == [$sku]
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQty
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
                 ),
             )->willReturn(
                 new ArrayObject([
@@ -825,6 +915,69 @@ class ConditionalAvailabilityExpanderTest extends Unit
         $this->quoteTransferMock->expects(static::atLeastOnce())
             ->method('setDeliveryDates')
             ->with([ConditionalAvailabilityConstants::KEY_EARLIEST_DATE])
+            ->willReturnSelf();
+
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('setConcreteDeliveryDates')
+            ->with([])
+            ->willReturnSelf();
+
+        static::assertEquals(
+            $this->quoteTransferMock,
+            $this->conditionalAvailabilityExpander->expand($this->quoteTransferMock),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testExpandWithoutChannel(): void
+    {
+        $sku = 'foo';
+        $availabilityChannel = null;
+        $concreteDeliveryDate = (new DateTime())->setTime(0, 0);
+        $deliveryDate = $concreteDeliveryDate->format('Y-m-d');
+
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getItems')
+            ->willReturn(new ArrayObject([$this->itemTransferMock]));
+
+        $this->itemTransferMock->expects(static::atLeastOnce())
+            ->method('getSku')
+            ->willReturn($sku);
+
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getAvailabilityChannel')
+            ->willReturn($availabilityChannel);
+
+        $this->itemTransferMock->expects(static::atLeastOnce())
+            ->method('getDeliveryDate')
+            ->willReturn($deliveryDate);
+
+        $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
+            ->method('generateLatestOrderDateByDeliveryDate')
+            ->with(
+                static::callback(
+                    static fn (DateTime $deliveryDate): bool => $deliveryDate == $concreteDeliveryDate,
+                ),
+            )->willReturn($concreteDeliveryDate);
+
+        $this->itemTransferMock->expects(static::atLeastOnce())
+            ->method('addValidationMessage')
+            ->with(
+                static::callback(
+                    static fn (MessageTransfer $messageTransfer): bool => $messageTransfer->getType() === 'error'
+                        && $messageTransfer->getValue() === 'conditional_availability_cart_connector.not_available_for_given_delivery_date'
+                ),
+            )->willReturnSelf();
+
+        $this->quoteTransferMock->expects(static::atLeastOnce())
+            ->method('setDeliveryDates')
+            ->with([$deliveryDate])
             ->willReturnSelf();
 
         $this->quoteTransferMock->expects(static::atLeastOnce())
