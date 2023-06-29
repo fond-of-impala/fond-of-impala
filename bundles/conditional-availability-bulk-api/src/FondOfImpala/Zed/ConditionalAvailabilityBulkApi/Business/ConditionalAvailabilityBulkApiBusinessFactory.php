@@ -2,6 +2,8 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business;
 
+use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGenerator;
+use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper\ConditionalAvailabilityBulkApiMapper;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper\ConditionalAvailabilityBulkApiMapperInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Model\ConditionalAvailabilityBulkApi;
@@ -63,6 +65,16 @@ class ConditionalAvailabilityBulkApiBusinessFactory extends AbstractBusinessFact
      */
     protected function createConditionalAvailabilityBulkApiMapper(): ConditionalAvailabilityBulkApiMapperInterface
     {
-        return new ConditionalAvailabilityBulkApiMapper();
+        return new ConditionalAvailabilityBulkApiMapper(
+            $this->createGroupKeyGenerator(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGeneratorInterface
+     */
+    protected function createGroupKeyGenerator(): GroupKeyGeneratorInterface
+    {
+        return new GroupKeyGenerator();
     }
 }
