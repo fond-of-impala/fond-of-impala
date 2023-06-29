@@ -138,6 +138,12 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
             );
         }
 
+        if ($conditionalAvailabilityCriteriaFilterTransfer->getChannel() !== null) {
+            $foiConditionalAvailabilityQuery->filterByChannel(
+                $conditionalAvailabilityCriteriaFilterTransfer->getChannel(),
+            );
+        }
+
         if ($conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() !== null) {
             $foiConditionalAvailabilityQuery->useFoiConditionalAvailabilityPeriodQuery()
                 ->filterByQuantity(

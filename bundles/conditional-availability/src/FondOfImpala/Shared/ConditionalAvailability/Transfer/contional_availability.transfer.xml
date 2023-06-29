@@ -11,6 +11,7 @@
         <property name="idConditionalAvailability" type="int"/>
         <property name="fkProduct" type="int"/>
         <property name="warehouseGroup" type="string"/>
+        <property name="channel" type="string"/>
         <property name="conditionalAvailabilityPeriodCollection" type="ConditionalAvailabilityPeriodCollection" />
     </transfer>
 
@@ -22,6 +23,7 @@
         <property name="skus" type="string[]" />
         <property name="minimumQuantity" type="int" />
         <property name="warehouseGroup" type="string" />
+        <property name="channel" type="string" />
     </transfer>
 
     <transfer name="ConditionalAvailabilityPeriodResponse">
