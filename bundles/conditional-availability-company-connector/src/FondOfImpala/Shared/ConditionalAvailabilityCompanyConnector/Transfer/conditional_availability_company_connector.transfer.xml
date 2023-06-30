@@ -6,6 +6,7 @@
         </transfer>
 
         <transfer name="Customer">
+            <property name="companyUserTransfer" type="CompanyUser"/>
             <property name="availabilityChannel" type="string"/>
         </transfer>
 

@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\Communication\Plugin\Customer;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\ConditionalAvailabilityCompanyConnectorConfig;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -11,11 +10,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\ConditionalAvailabilityCompanyConnectorConfig
-     */
-    protected MockObject|ConditionalAvailabilityCompanyConnectorConfig $configMock;
-
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
      */
@@ -43,10 +37,6 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
     {
         parent::_before();
 
-        $this->configMock = $this->getMockBuilder(ConditionalAvailabilityCompanyConnectorConfig::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->companyTransferMock = $this->getMockBuilder(CompanyTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -60,7 +50,6 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
             ->getMock();
 
         $this->plugin = new AvailabilityChannelCustomerTransferExpanderPlugin();
-        $this->plugin->setConfig($this->configMock);
     }
 
     /**
@@ -68,12 +57,7 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
      */
     public function testExpandTransfer(): void
     {
-        $defaultAvailabilityChannel = 'default-availability-channel';
         $availabilityChannel = 'availability-channel';
-
-        $this->configMock->expects($this->atLeastOnce())
-            ->method('getDefaultAvailabilityChannel')
-            ->willReturn($defaultAvailabilityChannel);
 
         $this->customerTransferMock->expects($this->atLeastOnce())
             ->method('getCompanyUserTransfer')
@@ -109,19 +93,13 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
      */
     public function testExpandTransferWithNoCompanyUser(): void
     {
-        $defaultAvailabilityChannel = 'default-availability-channel';
-
-        $this->configMock->expects($this->atLeastOnce())
-            ->method('getDefaultAvailabilityChannel')
-            ->willReturn($defaultAvailabilityChannel);
-
         $this->customerTransferMock->expects($this->atLeastOnce())
             ->method('getCompanyUserTransfer')
             ->willReturn(null);
 
         $this->customerTransferMock->expects($this->atLeastOnce())
             ->method('setAvailabilityChannel')
-            ->with($defaultAvailabilityChannel)
+            ->with(null)
             ->willReturnSelf();
 
         $customerTransfer = $this->plugin->expandTransfer($this->customerTransferMock);
@@ -137,12 +115,6 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
      */
     public function testExpandTransferWithNoCompany(): void
     {
-        $defaultAvailabilityChannel = 'default-availability-channel';
-
-        $this->configMock->expects($this->atLeastOnce())
-            ->method('getDefaultAvailabilityChannel')
-            ->willReturn($defaultAvailabilityChannel);
-
         $this->customerTransferMock->expects($this->atLeastOnce())
             ->method('getCompanyUserTransfer')
             ->willReturn($this->companyUserTransferMock);
@@ -153,9 +125,12 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
 
         $this->customerTransferMock->expects($this->atLeastOnce())
             ->method('setAvailabilityChannel')
-            ->with($defaultAvailabilityChannel)
+            ->with(null)
             ->willReturnSelf();
 
-        $customerTransfer = $this->plugin->expandTransfer($this->customerTransferMock);
+        static::assertEquals(
+            $this->customerTransferMock,
+            $this->plugin->expandTransfer($this->customerTransferMock),
+        );
     }
 }

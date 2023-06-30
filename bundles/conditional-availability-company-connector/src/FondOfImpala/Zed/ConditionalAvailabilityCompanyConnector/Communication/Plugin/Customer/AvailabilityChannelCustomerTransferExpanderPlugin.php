@@ -8,7 +8,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\Business\ConditionalAvailabilityCompanyConnectorFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\ConditionalAvailabilityCompanyConnectorConfig getConfig()()
  */
 class AvailabilityChannelCustomerTransferExpanderPlugin extends AbstractPlugin implements CustomerTransferExpanderPluginInterface
 {
@@ -23,22 +22,21 @@ class AvailabilityChannelCustomerTransferExpanderPlugin extends AbstractPlugin i
      */
     public function expandTransfer(CustomerTransfer $customerTransfer): CustomerTransfer
     {
-        $defaultAvailabilityChannel = $this->getConfig()->getDefaultAvailabilityChannel();
         $companyUserTransfer = $customerTransfer->getCompanyUserTransfer();
 
         if ($companyUserTransfer === null) {
-            return $customerTransfer->setAvailabilityChannel($defaultAvailabilityChannel);
+            return $customerTransfer->setAvailabilityChannel(null);
         }
 
         $companyTransfer = $companyUserTransfer->getCompany();
 
         if ($companyTransfer === null) {
-            return $customerTransfer->setAvailabilityChannel($defaultAvailabilityChannel);
+            return $customerTransfer->setAvailabilityChannel(null);
         }
 
         $availabilityChannel = ($companyTransfer->getAvailabilityChannel())
             ? $companyTransfer->getAvailabilityChannel()
-            : $defaultAvailabilityChannel;
+            : null;
 
         return $customerTransfer->setAvailabilityChannel($availabilityChannel);
     }
