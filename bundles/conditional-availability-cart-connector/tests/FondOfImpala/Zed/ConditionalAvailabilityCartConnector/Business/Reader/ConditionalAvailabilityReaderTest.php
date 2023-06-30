@@ -73,7 +73,7 @@ class ConditionalAvailabilityReaderTest extends Unit
 
         $this->conditionalAvailabilityReader = new ConditionalAvailabilityReader(
             $this->skusFilterMock,
-            $this->conditionalAvailabilityFacadeMock
+            $this->conditionalAvailabilityFacadeMock,
         );
     }
 
@@ -115,12 +115,12 @@ class ConditionalAvailabilityReaderTest extends Unit
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getSkus() === $skus
                         && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
-                )
+                ),
             )->willReturn($groupedConditionalAvailabilityTransferMocks);
 
         static::assertEquals(
             $groupedConditionalAvailabilityTransferMocks,
-            $this->conditionalAvailabilityReader->getGroupedByQuote($this->quoteTransferMock)
+            $this->conditionalAvailabilityReader->getGroupedByQuote($this->quoteTransferMock),
         );
     }
 
@@ -143,8 +143,9 @@ class ConditionalAvailabilityReaderTest extends Unit
         $this->conditionalAvailabilityFacadeMock->expects(static::never())
             ->method('findGroupedConditionalAvailabilities');
 
-        static::assertCount(0,
-            $this->conditionalAvailabilityReader->getGroupedByQuote($this->quoteTransferMock)
+        static::assertCount(
+            0,
+            $this->conditionalAvailabilityReader->getGroupedByQuote($this->quoteTransferMock),
         );
     }
 }

@@ -55,9 +55,9 @@ class SkusFilterTest extends Unit
             ->willReturn(
                 new ArrayObject(
                     [
-                        $this->itemTransferMock
-                    ]
-                )
+                        $this->itemTransferMock,
+                    ],
+                ),
             );
 
         $this->itemTransferMock->expects(static::atLeastOnce())
@@ -66,7 +66,7 @@ class SkusFilterTest extends Unit
 
         static::assertEquals(
             [$sku],
-            $this->skusFilter->filterFromQuote($this->quoteTransferMock)
+            $this->skusFilter->filterFromQuote($this->quoteTransferMock),
         );
     }
 }

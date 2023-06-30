@@ -20,15 +20,15 @@ class ConditionalAvailabilityReader implements ConditionalAvailabilityReaderInte
      */
     public function __construct(
         SkusFilterInterface $skusFilter,
-        ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade,
+        ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
     ) {
         $this->skusFilter = $skusFilter;
         $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
      * @return \ArrayObject
      */
     public function getGroupedByQuote(QuoteTransfer $quoteTransfer): ArrayObject
