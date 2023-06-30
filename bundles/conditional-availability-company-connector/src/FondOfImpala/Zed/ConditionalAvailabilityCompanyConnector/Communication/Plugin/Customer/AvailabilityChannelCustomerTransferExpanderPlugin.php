@@ -34,10 +34,6 @@ class AvailabilityChannelCustomerTransferExpanderPlugin extends AbstractPlugin i
             return $customerTransfer->setAvailabilityChannel(null);
         }
 
-        $availabilityChannel = ($companyTransfer->getAvailabilityChannel())
-            ? $companyTransfer->getAvailabilityChannel()
-            : null;
-
-        return $customerTransfer->setAvailabilityChannel($availabilityChannel);
+        return $customerTransfer->setAvailabilityChannel($companyTransfer->getAvailabilityChannel());
     }
 }
