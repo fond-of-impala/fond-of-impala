@@ -8,6 +8,7 @@
         <column name="id_conditional_availability" required="true" type="INTEGER" autoIncrement="true"
                 primaryKey="true"/>
         <column name="warehouse_group" type="VARCHAR" size="255" required="true"/>
+        <column name="channel" type="VARCHAR" size="255" required="true"/>
         <column name="fk_product" type="INTEGER" required="true"/>
 
         <foreign-key name="foi_conditional_availability-fk_product" foreignTable="spy_product" phpName="SpyProduct">
@@ -22,9 +23,14 @@
             <index-column name="warehouse_group"/>
         </index>
 
-        <unique name="unique-foi_conditional_availability-fk_p-w_g">
+        <index name="index-foi_conditional_availability-channel">
+            <index-column name="channel"/>
+        </index>
+
+        <unique name="unique-foi_conditional_availability-fk_p-w_g-c">
             <unique-column name="fk_product"/>
             <unique-column name="warehouse_group"/>
+            <unique-column name="channel"/>
         </unique>
 
         <id-method-parameter value="foi_conditional_availability_pk_seq"/>
