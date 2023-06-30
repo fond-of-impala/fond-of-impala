@@ -11,7 +11,7 @@
         </transfer>
 
         <transfer name="CompanyUser">
-            <property name="Company" type="Company"/>
+            <property name="company" type="Company"/>
         </transfer>
 
         <transfer name="Company" />
