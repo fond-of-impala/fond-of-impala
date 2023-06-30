@@ -10,4 +10,6 @@
             <property name="availabilityChannel" type="string"/>
         </transfer>
 
+        <transfer name="CompanyUser">
+        </transfer>
 </transfers>
