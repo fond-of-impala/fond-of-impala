@@ -29,10 +29,11 @@ class GroupKeyGeneratorTest extends Unit
         $apiData = [
             'sku' => 'FOO-1',
             'warehouse_group' => 'FOO',
+            'channel' => 'BAR',
         ];
 
         static::assertEquals(
-            sha1($apiData['warehouse_group']),
+            sha1(implode('-', array_slice($apiData, 1))),
             $this->groupKeyGenerator->generateByApiData($apiData),
         );
     }

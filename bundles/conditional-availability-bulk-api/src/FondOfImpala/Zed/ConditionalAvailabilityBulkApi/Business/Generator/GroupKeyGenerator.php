@@ -9,6 +9,7 @@ class GroupKeyGenerator implements GroupKeyGeneratorInterface
      */
     public const REQUIRED_API_DATA_KEYS = [
         'warehouse_group',
+        'channel',
     ];
 
     /**
