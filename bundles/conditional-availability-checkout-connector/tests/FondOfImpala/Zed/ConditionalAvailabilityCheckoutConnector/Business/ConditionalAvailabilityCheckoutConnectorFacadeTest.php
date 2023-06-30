@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesCheckerInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Checker\AvailabilitiesCheckerInterface;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -26,7 +26,7 @@ class ConditionalAvailabilityCheckoutConnectorFacadeTest extends Unit
     protected CheckoutResponseTransfer|MockObject $checkoutResponseTransferMock;
 
     /**
-     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model\AvailabilitiesCheckerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Checker\AvailabilitiesCheckerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
     protected MockObject|AvailabilitiesCheckerInterface $availabilitiesCheckerMock;
 

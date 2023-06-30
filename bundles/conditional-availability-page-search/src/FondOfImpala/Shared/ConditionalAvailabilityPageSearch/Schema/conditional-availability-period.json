@@ -33,6 +33,9 @@
         "warehouse-group": {
           "type": "keyword"
         },
+        "channel": {
+          "type": "keyword"
+        },
         "is-accessible": {
           "type": "boolean"
         },

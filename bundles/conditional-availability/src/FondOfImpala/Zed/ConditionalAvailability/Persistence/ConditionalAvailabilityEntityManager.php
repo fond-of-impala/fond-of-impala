@@ -32,6 +32,7 @@ class ConditionalAvailabilityEntityManager extends AbstractEntityManager impleme
             $foiConditionalAvailability = $foiConditionalAvailabilityQuery
                 ->filterByFkProduct($conditionalAvailabilityTransfer->getFkProduct())
                 ->filterByWarehouseGroup($conditionalAvailabilityTransfer->getWarehouseGroup())
+                ->filterByChannel($conditionalAvailabilityTransfer->getChannel())
                 ->findOneOrCreate();
         }
 
