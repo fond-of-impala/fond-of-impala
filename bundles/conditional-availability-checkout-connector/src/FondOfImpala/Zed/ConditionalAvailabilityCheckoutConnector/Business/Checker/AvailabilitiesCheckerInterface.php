@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model;
+namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Checker;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
