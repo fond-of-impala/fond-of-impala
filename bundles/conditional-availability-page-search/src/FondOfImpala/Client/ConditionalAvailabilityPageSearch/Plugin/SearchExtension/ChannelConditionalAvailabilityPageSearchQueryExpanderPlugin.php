@@ -26,7 +26,7 @@ class ChannelConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = [])
     {
         $customerTransfer = $this->getCustomer();
-        $channel = "";
+        $channel = '';
 
         if ($customerTransfer !== null && $customerTransfer->getAvailabilityChannel() !== null) {
             $channel = $customerTransfer->getAvailabilityChannel();
@@ -34,7 +34,7 @@ class ChannelConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
 
         $term = (new Term())->setTerm(
             ConditionalAvailabilityPeriodIndexMap::CHANNEL,
-            $channel
+            $channel,
         );
 
         $this->getBoolQuery($searchQuery->getSearchQuery())
