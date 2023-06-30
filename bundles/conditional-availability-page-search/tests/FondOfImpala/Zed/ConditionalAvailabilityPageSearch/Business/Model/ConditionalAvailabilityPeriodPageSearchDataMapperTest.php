@@ -73,8 +73,9 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
 
         $searchData = $this->mapper
             ->mapConditionalAvailabilityPeriodDataToSearchData([
-                'sku' => 'sku',
-                'warehouse_group' => 'warehouse-group',
+                'sku' => 'FOO-1',
+                'warehouse_group' => 'FOO',
+                'channel' => 'BAR',
                 'quantity' => 1,
                 'original_start_at' => '2020-01-01 00:00:00.000000',
                 'start_at' => '2020-02-01 00:00:00.000000',
