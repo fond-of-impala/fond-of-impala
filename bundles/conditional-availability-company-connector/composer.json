@@ -14,7 +14,8 @@
   ],
   "require": {
     "php": ">=8.0",
-    "spryker/company": "^1.5.0"
+    "spryker/company": "^1.5.0",
+    "spryker/company-user": "^2.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

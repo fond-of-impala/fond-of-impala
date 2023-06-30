@@ -4,4 +4,9 @@
         <transfer name="Company">
             <property name="availabilityChannel" type="string"/>
         </transfer>
+
+        <transfer name="Customer">
+            <property name="availabilityChannel" type="string"/>
+        </transfer>
+
 </transfers>
