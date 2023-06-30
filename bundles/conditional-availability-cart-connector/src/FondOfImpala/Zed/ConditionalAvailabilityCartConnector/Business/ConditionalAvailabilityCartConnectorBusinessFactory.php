@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business;
 
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\SkusFilter;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\SkusFilterInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleaner;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDate;
@@ -13,6 +15,8 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReader;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
@@ -29,9 +33,28 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     public function createConditionalAvailabilityExpander(): ConditionalAvailabilityExpanderInterface
     {
         return new ConditionalAvailabilityExpander(
-            $this->getConditionalAvailabilityFacade(),
+            $this->createConditionalAvailabilityReader(),
             $this->getConditionalAvailabilityService(),
         );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface
+     */
+    protected function createConditionalAvailabilityReader(): ConditionalAvailabilityReaderInterface
+    {
+        return new ConditionalAvailabilityReader(
+            $this->createSkusFilter(),
+            $this->getConditionalAvailabilityFacade(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\SkusFilterInterface
+     */
+    protected function createSkusFilter(): SkusFilterInterface
+    {
+        return new SkusFilter();
     }
 
     /**

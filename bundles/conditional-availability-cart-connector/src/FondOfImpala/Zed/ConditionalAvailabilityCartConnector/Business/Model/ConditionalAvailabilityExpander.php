@@ -5,9 +5,8 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model;
 use ArrayObject;
 use DateTime;
 use FondOfImpala\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
-use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -40,19 +39,19 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
      */
     protected const MESSAGE_NOT_AVAILABLE_FOR_GIVEN_QTY = 'conditional_availability_cart_connector.not_available_for_given_qty';
 
-    protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
+    protected ConditionalAvailabilityReaderInterface $conditionalAvailabilityReader;
 
     protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService;
 
     /**
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface $conditionalAvailabilityReader
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService
      */
     public function __construct(
-        ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade,
+        ConditionalAvailabilityReaderInterface $conditionalAvailabilityReader,
         ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService
     ) {
-        $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
+        $this->conditionalAvailabilityReader = $conditionalAvailabilityReader;
         $this->conditionalAvailabilityService = $conditionalAvailabilityService;
     }
 
@@ -65,7 +64,7 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
     {
         $deliveryDates = [];
         $concreteDeliveryDates = [];
-        $groupedConditionalAvailabilities = $this->getGroupedConditionalAvailabilitiesByQuoteTransfer($quoteTransfer);
+        $groupedConditionalAvailabilities = $this->conditionalAvailabilityReader->getGroupedByQuote($quoteTransfer);
 
         foreach ($quoteTransfer->getItems() as $itemTransfer) {
             $itemTransfer = $this->expandItem($itemTransfer, $groupedConditionalAvailabilities);
@@ -247,44 +246,5 @@ class ConditionalAvailabilityExpander implements ConditionalAvailabilityExpander
     protected function createUniqueDates(array $dates): array
     {
         return array_values(array_unique($dates));
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \ArrayObject
-     */
-    protected function getGroupedConditionalAvailabilitiesByQuoteTransfer(QuoteTransfer $quoteTransfer): ArrayObject
-    {
-        $skus = $this->getSkusByQuoteTransfer($quoteTransfer);
-
-        if (count($skus) === 0) {
-            return new ArrayObject();
-        }
-
-        $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
-            ->setSkus($skus)
-            ->setWarehouseGroup('EU')
-            ->setMinimumQuantity(1);
-
-        return $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilities(
-            $conditionalAvailabilityCriteriaFilterTransfer,
-        );
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return array<string>
-     */
-    protected function getSkusByQuoteTransfer(QuoteTransfer $quoteTransfer): array
-    {
-        $skus = [];
-
-        foreach ($quoteTransfer->getItems() as $item) {
-            $skus[] = $item->getSku();
-        }
-
-        return array_unique($skus);
     }
 }
