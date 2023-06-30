@@ -31,6 +31,11 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
     public const VIRTUAL_COLUMN_WAREHOUSE_GROUP = 'warehouse_group';
 
     /**
+     * @var string
+     */
+    public const VIRTUAL_COLUMN_CHANNEL = 'channel';
+
+    /**
      * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery
@@ -46,14 +51,15 @@ class ConditionalAvailabilityPageSearchQueryContainer extends AbstractQueryConta
             ->withColumn(
                 SpyProductTableMap::COL_SKU,
                 static::VIRTUAL_COLUMN_SKU,
-            )
-            ->withColumn(
+            )->withColumn(
                 FoiConditionalAvailabilityTableMap::COL_FK_PRODUCT,
                 static::VIRTUAL_COLUMN_FK_PRODUCT,
-            )
-            ->withColumn(
+            )->withColumn(
                 FoiConditionalAvailabilityTableMap::COL_WAREHOUSE_GROUP,
                 static::VIRTUAL_COLUMN_WAREHOUSE_GROUP,
+            )->withColumn(
+                FoiConditionalAvailabilityTableMap::COL_CHANNEL,
+                static::VIRTUAL_COLUMN_CHANNEL,
             );
 
         return $FoiConditionalAvailabilityPeriodQuery;

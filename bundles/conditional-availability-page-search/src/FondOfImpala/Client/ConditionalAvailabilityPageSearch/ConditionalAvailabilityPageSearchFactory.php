@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
+use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
@@ -9,6 +10,14 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\SearchStringSetterInterface
 
 class ConditionalAvailabilityPageSearchFactory extends AbstractFactory
 {
+    /**
+     * @return \FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface
+     */
+    public function getCustomerClient(): ConditionalAvailabilityPageSearchToCustomerClientInterface
+    {
+        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_CUSTOMER);
+    }
+
     /**
      * @return \FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface
      */
