@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchFactoryTest extends Unit
@@ -11,17 +12,17 @@ class ProductListConditionalAvailabilityPageSearchFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory
      */
-    protected $productListConditionalAvailabilityPageSearchFactory;
+    protected ProductListConditionalAvailabilityPageSearchFactory $factory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientInterface
      */
-    protected $productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToCustomerClientInterface $customerClientMock;
 
     /**
      * @return void
@@ -32,12 +33,12 @@ class ProductListConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToCustomerClientInterface::class)
+        $this->customerClientMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToCustomerClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchFactory = new ProductListConditionalAvailabilityPageSearchFactory();
-        $this->productListConditionalAvailabilityPageSearchFactory->setContainer($this->containerMock);
+        $this->factory = new ProductListConditionalAvailabilityPageSearchFactory();
+        $this->factory->setContainer($this->containerMock);
     }
 
     /**
@@ -52,11 +53,8 @@ class ProductListConditionalAvailabilityPageSearchFactoryTest extends Unit
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::CLIENT_CUSTOMER)
-            ->willReturn($this->productListConditionalAvailabilityPageSearchToCustomerClientInterfaceMock);
+            ->willReturn($this->customerClientMock);
 
-        $this->assertInstanceOf(
-            ProductListConditionalAvailabilityPageSearchToCustomerClientInterface::class,
-            $this->productListConditionalAvailabilityPageSearchFactory->getCustomerClient(),
-        );
+        static::assertEquals($this->customerClientMock, $this->factory->getCustomerClient());
     }
 }

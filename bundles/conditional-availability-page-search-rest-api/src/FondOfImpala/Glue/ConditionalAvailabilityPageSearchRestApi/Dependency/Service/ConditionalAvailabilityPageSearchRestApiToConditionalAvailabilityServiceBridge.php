@@ -9,10 +9,7 @@ use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceI
 class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceBridge implements
     ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityServiceInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface
-     */
-    protected $conditionalAvailabilityService;
+    protected ConditionalAvailabilityServiceInterface $conditionalAvailabilityService;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityServiceInterface $conditionalAvailabilityService

@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependen
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends Unit
@@ -11,34 +12,29 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
     /**
      * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge
      */
-    protected $productListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge;
+    protected ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
      */
-    protected $eventBehaviorFacadeInterfaceMock;
+    protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @var array<\Generated\Shared\Transfer\EventEntityTransfer>
      */
-    protected $eventTransfers;
+    protected array $eventTransfers;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
      */
-    protected $eventEntityTransferMock;
-
-    /**
-     * @var string
-     */
-    protected $foreignKeyColumnName;
+    protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock = $this->getMockBuilder(EventBehaviorFacadeInterface::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(EventBehaviorFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -46,14 +42,8 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->eventTransfers = [
-            $this->eventEntityTransferMock,
-        ];
-
-        $this->foreignKeyColumnName = 'foreign-key-column-name';
-
-        $this->productListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge = new ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
-            $this->eventBehaviorFacadeInterfaceMock,
+        $this->bridge = new ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge(
+            $this->eventBehaviorFacadeMock,
         );
     }
 
@@ -62,15 +52,22 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
      */
     public function testGetEventTransferForeignKeys(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock->expects($this->atLeastOnce())
+        $eventTransfers = [
+            $this->eventEntityTransferMock,
+        ];
+
+        $foreignKeyColumnName = 'foreign-key-column-name';
+
+        $this->eventBehaviorFacadeMock->expects($this->atLeastOnce())
             ->method('getEventTransferForeignKeys')
-            ->with($this->eventTransfers, $this->foreignKeyColumnName)
+            ->with($eventTransfers, $foreignKeyColumnName)
             ->willReturn([]);
 
-        $this->assertIsArray(
-            $this->productListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge->getEventTransferForeignKeys(
-                $this->eventTransfers,
-                $this->foreignKeyColumnName,
+        static::assertEquals(
+            [],
+            $this->bridge->getEventTransferForeignKeys(
+                $eventTransfers,
+                $foreignKeyColumnName,
             ),
         );
     }

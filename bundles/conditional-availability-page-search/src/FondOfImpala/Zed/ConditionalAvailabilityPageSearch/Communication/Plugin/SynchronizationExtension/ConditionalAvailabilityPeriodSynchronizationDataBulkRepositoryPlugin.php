@@ -45,8 +45,6 @@ class ConditionalAvailabilityPeriodSynchronizationDataBulkRepositoryPlugin exten
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param int $offset
      * @param int $limit
      *

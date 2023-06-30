@@ -16,10 +16,7 @@ class ConditionalAvailabilityMapper implements ConditionalAvailabilityMapperInte
      */
     public const VIRTUAL_COLUMN_SKU = 'sku';
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodMapperInterface
-     */
-    protected $conditionalAvailabilityPeriodMapper;
+    protected ConditionalAvailabilityPeriodMapperInterface $conditionalAvailabilityPeriodMapper;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailability\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodMapperInterface $conditionalAvailabilityPeriodMapper

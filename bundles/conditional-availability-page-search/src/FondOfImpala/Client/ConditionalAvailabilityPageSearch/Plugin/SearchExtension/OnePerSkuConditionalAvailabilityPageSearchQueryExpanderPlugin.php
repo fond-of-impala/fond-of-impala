@@ -45,7 +45,7 @@ class OnePerSkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abst
                 sprintf(
                     'Query expander available only with %s, got: %s',
                     Query::class,
-                    get_class($query),
+                    $query::class,
                 ),
             );
         }

@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
+use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientBridge;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientBridge;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Plugin\SearchExtension\ConditionalAvailabilityPageSearchQueryPlugin;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
@@ -12,6 +13,11 @@ use Spryker\Client\Kernel\Container;
  */
 class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDependencyProvider
 {
+    /**
+     * @var string
+     */
+    public const CLIENT_CUSTOMER = 'CLIENT_CUSTOMER';
+
     /**
      * @var string
      */
@@ -41,6 +47,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $container = parent::provideServiceLayerDependencies($container);
 
+        $container = $this->addCustomerClient($container);
         $container = $this->addSearchClient($container);
         $container = $this->addSearchQueryPlugin($container);
         $container = $this->addQueryExpanderPlugins($container);
@@ -53,13 +60,29 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
      *
      * @return \Spryker\Client\Kernel\Container
      */
+    protected function addCustomerClient(Container $container): Container
+    {
+        $container[static::CLIENT_CUSTOMER] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToCustomerClientBridge => new ConditionalAvailabilityPageSearchToCustomerClientBridge(
+            $container->getLocator()->customer()->client(),
+        );
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
     protected function addSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_SEARCH] = static function (Container $container) {
-            return new ConditionalAvailabilityPageSearchToSearchClientBridge(
-                $container->getLocator()->search()->client(),
-            );
-        };
+        $container[static::CLIENT_SEARCH] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToSearchClientBridge => new ConditionalAvailabilityPageSearchToSearchClientBridge(
+            $container->getLocator()->search()->client(),
+        );
 
         return $container;
     }
@@ -71,9 +94,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
      */
     protected function addSearchQueryPlugin(Container $container): Container
     {
-        $container[static::PLUGIN_SEARCH_QUERY] = static function () {
-            return new ConditionalAvailabilityPageSearchQueryPlugin();
-        };
+        $container[static::PLUGIN_SEARCH_QUERY] = static fn (): ConditionalAvailabilityPageSearchQueryPlugin => new ConditionalAvailabilityPageSearchQueryPlugin();
 
         return $container;
     }
@@ -87,9 +108,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $self = $this;
 
-        $container[static::PLUGINS_SEARCH_QUERY_EXPANDER] = static function () use ($self) {
-            return $self->getQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_SEARCH_QUERY_EXPANDER] = static fn (): array => $self->getQueryExpanderPlugins();
 
         return $container;
     }
@@ -103,9 +122,7 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractDepend
     {
         $self = $this;
 
-        $container[static::PLUGINS_SEARCH_RESULT_FORMATTER] = static function () use ($self) {
-            return $self->getResultFormatterPlugins();
-        };
+        $container[static::PLUGINS_SEARCH_RESULT_FORMATTER] = static fn (): array => $self->getResultFormatterPlugins();
 
         return $container;
     }

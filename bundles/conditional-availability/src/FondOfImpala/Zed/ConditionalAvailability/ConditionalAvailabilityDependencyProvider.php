@@ -36,9 +36,7 @@ class ConditionalAvailabilityDependencyProvider extends AbstractBundleDependency
      */
     protected function addConditionalAvailabilityPostSavePlugins(Container $container): Container
     {
-        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_POST_SAVE] = function () {
-            return $this->getConditionalAvailabilityPostSavePlugins();
-        };
+        $container[static::PLUGINS_CONDITIONAL_AVAILABILITY_POST_SAVE] = fn (): array => $this->getConditionalAvailabilityPostSavePlugins();
 
         return $container;
     }

@@ -4,6 +4,9 @@ namespace FondOfImpala\Glue\ConditionalAvailabilityPageSearchRestApi;
 
 use Spryker\Glue\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityPageSearchRestApiConfig extends AbstractBundleConfig
 {
     /**

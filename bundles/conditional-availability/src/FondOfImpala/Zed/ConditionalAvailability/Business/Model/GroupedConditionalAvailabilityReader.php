@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 
 class GroupedConditionalAvailabilityReader implements GroupedConditionalAvailabilityReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepositoryInterface
-     */
-    protected $repository;
+    protected ConditionalAvailabilityRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityRepositoryInterface $repository

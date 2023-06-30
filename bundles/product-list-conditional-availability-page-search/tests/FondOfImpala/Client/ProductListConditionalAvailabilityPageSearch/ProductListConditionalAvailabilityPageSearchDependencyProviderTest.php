@@ -3,6 +3,7 @@
 namespace FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
@@ -10,12 +11,12 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
     /**
      * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider
      */
-    protected $productListConditionalAvailabilityPageSearchDependencyProvider;
+    protected ProductListConditionalAvailabilityPageSearchDependencyProvider $dependencyProvider;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void
@@ -26,7 +27,7 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productListConditionalAvailabilityPageSearchDependencyProvider = new ProductListConditionalAvailabilityPageSearchDependencyProvider();
+        $this->dependencyProvider = new ProductListConditionalAvailabilityPageSearchDependencyProvider();
     }
 
     /**
@@ -34,9 +35,9 @@ class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends
      */
     public function testProvideServiceLayerDependencies(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Container::class,
-            $this->productListConditionalAvailabilityPageSearchDependencyProvider->provideServiceLayerDependencies(
+            $this->dependencyProvider->provideServiceLayerDependencies(
                 $this->containerMock,
             ),
         );

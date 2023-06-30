@@ -166,9 +166,11 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->conditionalAvailabilityPluginExecutorMock->expects(static::atLeastOnce())
             ->method('executePostSavePlugins')
             ->withAnyParameters()
-            ->willReturnCallback(static function (ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransfer) {
-                return $conditionalAvailabilityResponseTransfer;
-            });
+            ->willReturnCallback(
+                static fn (
+                    ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransfer
+                ): ConditionalAvailabilityResponseTransfer => $conditionalAvailabilityResponseTransfer,
+            );
 
         $this->conditionalAvailabilityTransferMock->expects(static::never())
             ->method('serialize');
@@ -206,9 +208,11 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->conditionalAvailabilityPluginExecutorMock->expects(static::atLeastOnce())
             ->method('executePostSavePlugins')
             ->withAnyParameters()
-            ->willReturnCallback(static function (ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransfer) {
-                return $conditionalAvailabilityResponseTransfer;
-            });
+            ->willReturnCallback(
+                static fn (
+                    ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransfer
+                ): ConditionalAvailabilityResponseTransfer => $conditionalAvailabilityResponseTransfer,
+            );
 
         $this->conditionalAvailabilityTransferMock->expects(static::never())
             ->method('serialize');
@@ -324,9 +328,11 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->conditionalAvailabilityPluginExecutorMock->expects(static::atLeastOnce())
             ->method('executePostSavePlugins')
             ->withAnyParameters()
-            ->willReturnCallback(static function (ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransfer) {
-                return $conditionalAvailabilityResponseTransfer;
-            });
+            ->willReturnCallback(
+                static fn (
+                    ConditionalAvailabilityResponseTransfer $conditionalAvailabilityResponseTransfer
+                ): ConditionalAvailabilityResponseTransfer => $conditionalAvailabilityResponseTransfer,
+            );
 
         $this->conditionalAvailabilityTransferMock->expects(static::never())
             ->method('serialize');

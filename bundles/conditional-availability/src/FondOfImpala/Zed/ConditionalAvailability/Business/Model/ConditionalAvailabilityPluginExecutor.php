@@ -7,9 +7,9 @@ use Generated\Shared\Transfer\ConditionalAvailabilityResponseTransfer;
 class ConditionalAvailabilityPluginExecutor implements ConditionalAvailabilityPluginExecutorInterface
 {
     /**
-     * @var array
+     * @var array<\FondOfImpala\Zed\ConditionalAvailabilityExtension\Dependency\Plugin\ConditionalAvailabilityPostSavePluginInterface>
      */
-    protected $conditionalAvailabilityPostSavePlugins;
+    protected array $conditionalAvailabilityPostSavePlugins;
 
     /**
      * @param array<\FondOfImpala\Zed\ConditionalAvailabilityExtension\Dependency\Plugin\ConditionalAvailabilityPostSavePluginInterface> $conditionalAvailabilityPostSavePlugins

@@ -2,20 +2,34 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper;
 
+use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGeneratorInterface;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 
 class ConditionalAvailabilityBulkApiMapper implements ConditionalAvailabilityBulkApiMapperInterface
 {
-    /**
-     * @var string
-     */
+ /**
+  * @var string
+  */
     protected const DATA_KEY_SKU = 'sku';
 
     /**
      * @var string
      */
     protected const DATA_KEY_WAREHOUSE_GROUP = 'warehouse_group';
+
+    /**
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGeneratorInterface
+     */
+    protected GroupKeyGeneratorInterface $groupKeyGenerator;
+
+    /**
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGeneratorInterface $groupKeyGenerator
+     */
+    public function __construct(GroupKeyGeneratorInterface $groupKeyGenerator)
+    {
+        $this->groupKeyGenerator = $groupKeyGenerator;
+    }
 
     /**
      * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
@@ -28,16 +42,18 @@ class ConditionalAvailabilityBulkApiMapper implements ConditionalAvailabilityBul
         $groupedConditionalAvailabilityTransfers = [];
 
         foreach ($apiDataTransfer->getData() as $item) {
-            if (empty($item[static::DATA_KEY_SKU]) || empty($item[static::DATA_KEY_WAREHOUSE_GROUP])) {
+            $groupKey = $this->groupKeyGenerator->generateByApiData($item);
+
+            if ($groupKey === null || empty($item[static::DATA_KEY_SKU])) {
                 continue;
             }
 
-            if (empty($groupedConditionalAvailabilityTransfers[$item[static::DATA_KEY_WAREHOUSE_GROUP]])) {
-                $groupedConditionalAvailabilityTransfers[$item[static::DATA_KEY_WAREHOUSE_GROUP]] = [];
+            if (empty($groupedConditionalAvailabilityTransfers[$groupKey])) {
+                $groupedConditionalAvailabilityTransfers[$groupKey] = [];
             }
 
             $conditionalAvailabilityTransfer = $this->mapDataToConditionalAvailabilityTransfer($item);
-            $groupedConditionalAvailabilityTransfers[$item[static::DATA_KEY_WAREHOUSE_GROUP]][$item[static::DATA_KEY_SKU]] = $conditionalAvailabilityTransfer;
+            $groupedConditionalAvailabilityTransfers[$groupKey][$item[static::DATA_KEY_SKU]] = $conditionalAvailabilityTransfer;
         }
 
         return $groupedConditionalAvailabilityTransfers;

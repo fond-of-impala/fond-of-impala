@@ -6,6 +6,9 @@ use FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ProductListConditionalAvailabilityPageSearchDependencyProvider extends AbstractDependencyProvider
 {
     /**
@@ -22,9 +25,7 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
     {
         $container = parent::provideServiceLayerDependencies($container);
 
-        $container = $this->addCustomerClient($container);
-
-        return $container;
+        return $this->addCustomerClient($container);
     }
 
     /**
@@ -34,11 +35,11 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
      */
     protected function addCustomerClient(Container $container): Container
     {
-        $container[static::CLIENT_CUSTOMER] = static function (Container $container) {
-            return new ProductListConditionalAvailabilityPageSearchToCustomerClientBridge(
-                $container->getLocator()->customer()->client(),
-            );
-        };
+        $container[static::CLIENT_CUSTOMER] = static fn (
+            Container $container
+        ): ProductListConditionalAvailabilityPageSearchToCustomerClientBridge => new ProductListConditionalAvailabilityPageSearchToCustomerClientBridge(
+            $container->getLocator()->customer()->client(),
+        );
 
         return $container;
     }

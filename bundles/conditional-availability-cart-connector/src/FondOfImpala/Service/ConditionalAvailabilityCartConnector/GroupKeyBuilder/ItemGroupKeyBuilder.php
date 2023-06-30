@@ -6,10 +6,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 
 class ItemGroupKeyBuilder implements ItemGroupKeyBuilderInterface
 {
-    /**
-     * @var \FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\GroupKeyBuilderInterface
-     */
-    protected $groupKeyBuilder;
+    protected GroupKeyBuilderInterface $groupKeyBuilder;
 
     /**
      * @param \FondOfImpala\Service\ConditionalAvailabilityCartConnector\GroupKeyBuilder\GroupKeyBuilderInterface $groupKeyBuilder

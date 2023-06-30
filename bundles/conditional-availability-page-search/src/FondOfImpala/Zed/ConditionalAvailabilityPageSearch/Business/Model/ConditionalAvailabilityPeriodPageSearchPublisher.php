@@ -10,30 +10,15 @@ use Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityP
 
 class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAvailabilityPeriodPageSearchPublisherInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface
-     */
-    protected $queryContainer;
+    protected ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface
-     */
-    protected $entityManager;
+    protected ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface
-     */
-    protected $conditionalAvailabilityPeriodPageSearchExpander;
+    protected ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
-     */
-    protected $utilEncodingService;
+    protected ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface
-     */
-    protected $conditionalAvailabilityPeriodPageSearchDataMapper;
+    protected ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer

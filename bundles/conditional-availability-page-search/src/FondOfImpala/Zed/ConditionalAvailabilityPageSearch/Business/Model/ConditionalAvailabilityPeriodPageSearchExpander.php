@@ -13,20 +13,14 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
      */
     protected const KEY_SEPARATOR = ':';
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
-     */
-    protected $storeFacade;
+    protected ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade;
 
     /**
      * @var array<\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageDataExpanderPluginInterface>
      */
-    protected $conditionalAvailabilityPeriodPageDataExpanderPlugins;
+    protected array $conditionalAvailabilityPeriodPageDataExpanderPlugins;
 
-    /**
-     * @var \DateTime
-     */
-    protected $currentDateTime;
+    protected DateTime $currentDateTime;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade

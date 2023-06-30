@@ -6,10 +6,7 @@ use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge implements ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
 {
-    /**
-     * @var \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
-     */
-    protected $utilEncodingService;
+    protected UtilEncodingServiceInterface $utilEncodingService;
 
     /**
      * @param \Spryker\Service\UtilEncoding\UtilEncodingServiceInterface $utilEncodingService

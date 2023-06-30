@@ -13,20 +13,11 @@ class ConditionalAvailabilityWriter implements ConditionalAvailabilityWriterInte
 {
     use TransactionTrait;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface
-     */
-    protected $entityManager;
+    protected ConditionalAvailabilityEntityManagerInterface $entityManager;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPluginExecutorInterface
-     */
-    protected $conditionalAvailabilityPluginExecutor;
+    protected ConditionalAvailabilityPluginExecutorInterface $conditionalAvailabilityPluginExecutor;
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface $entityManager
@@ -56,9 +47,7 @@ class ConditionalAvailabilityWriter implements ConditionalAvailabilityWriterInte
 
         try {
             $conditionalAvailabilityResponseTransfer = $this->getTransactionHandler()->handleTransaction(
-                function () use ($conditionalAvailabilityResponseTransfer) {
-                    return $this->executeSaveTransaction($conditionalAvailabilityResponseTransfer);
-                },
+                fn (): ConditionalAvailabilityResponseTransfer => $this->executeSaveTransaction($conditionalAvailabilityResponseTransfer),
             );
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), [
@@ -89,9 +78,7 @@ class ConditionalAvailabilityWriter implements ConditionalAvailabilityWriterInte
             $conditionalAvailabilityTransfer->requireIdConditionalAvailability();
 
             $conditionalAvailabilityResponseTransfer = $this->getTransactionHandler()->handleTransaction(
-                function () use ($conditionalAvailabilityResponseTransfer) {
-                    return $this->executeSaveTransaction($conditionalAvailabilityResponseTransfer);
-                },
+                fn (): ConditionalAvailabilityResponseTransfer => $this->executeSaveTransaction($conditionalAvailabilityResponseTransfer),
             );
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), [
@@ -142,11 +129,9 @@ class ConditionalAvailabilityWriter implements ConditionalAvailabilityWriterInte
             $conditionalAvailabilityTransfer->requireIdConditionalAvailability();
 
             $conditionalAvailabilityResponseTransfer = $this->getTransactionHandler()->handleTransaction(
-                function () use ($conditionalAvailabilityResponseTransfer) {
-                    return $this->executeDeleteTransaction($conditionalAvailabilityResponseTransfer);
-                },
+                fn (): ConditionalAvailabilityResponseTransfer => $this->executeDeleteTransaction($conditionalAvailabilityResponseTransfer),
             );
-        } catch (Exception $exception) {
+        } catch (Exception) {
             $conditionalAvailabilityResponseTransfer->setConditionalAvailabilityTransfer(null)
                 ->setIsSuccessful(false);
         }
@@ -187,9 +172,7 @@ class ConditionalAvailabilityWriter implements ConditionalAvailabilityWriterInte
 
         try {
             $conditionalAvailabilityResponseTransfer = $this->getTransactionHandler()->handleTransaction(
-                function () use ($conditionalAvailabilityResponseTransfer) {
-                    return $this->executePersistTransaction($conditionalAvailabilityResponseTransfer);
-                },
+                fn (): ConditionalAvailabilityResponseTransfer => $this->executePersistTransaction($conditionalAvailabilityResponseTransfer),
             );
         } catch (Exception $exception) {
             $this->logger->error($exception->getMessage(), [
