@@ -141,43 +141,43 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
         $blacklistIds = [1];
         $whitelistIds = [2];
 
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->queryMock->expects(static::atLeastOnce())
             ->method('getSearchQuery')
             ->willReturn($this->elasticaQueryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getCustomerClient')
             ->willReturn($this->customerClientMock);
 
-        $this->customerClientMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCustomerProductListCollection')
             ->willReturn($this->customerProductListCollectionTransferMock);
 
-        $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
+        $this->customerProductListCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getBlacklistIds')
             ->willReturn($blacklistIds);
 
-        $this->elasticaQueryMock->expects($this->atLeastOnce())
+        $this->elasticaQueryMock->expects(static::atLeastOnce())
             ->method('getQuery')
             ->willReturn($this->boolQueryMock);
 
-        $this->boolQueryMock->expects($this->atLeastOnce())
+        $this->boolQueryMock->expects(static::atLeastOnce())
             ->method('addMustNot')
             ->willReturnSelf();
 
-        $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
+        $this->customerProductListCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getWhitelistIds')
             ->willReturn($whitelistIds);
 
-        $this->boolQueryMock->expects($this->atLeastOnce())
+        $this->boolQueryMock->expects(static::atLeastOnce())
             ->method('addFilter')
             ->willReturnSelf();
 
-        $this->assertEquals($this->queryMock, $this->plugin->expandQuery($this->queryMock));
+        static::assertEquals($this->queryMock, $this->plugin->expandQuery($this->queryMock));
     }
 
     /**
@@ -185,27 +185,27 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryNoIds(): void
     {
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->queryMock->expects(static::atLeastOnce())
             ->method('getSearchQuery')
             ->willReturn($this->elasticaQueryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getCustomerClient')
             ->willReturn($this->customerClientMock);
 
-        $this->customerClientMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCustomerProductListCollection')
             ->willReturn($this->customerProductListCollectionTransferMock);
 
-        $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
+        $this->customerProductListCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getBlacklistIds')
             ->willReturn([]);
 
-        $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
+        $this->customerProductListCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getWhitelistIds')
             ->willReturn([]);
 
@@ -217,15 +217,15 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryCustomerNull(): void
     {
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->queryMock->expects(static::atLeastOnce())
             ->method('getSearchQuery')
             ->willReturn($this->elasticaQueryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getCustomerClient')
             ->willReturn($this->customerClientMock);
 
-        $this->customerClientMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn(null);
 
@@ -237,19 +237,19 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
      */
     public function testExpandQueryCustomerProductListCollectionNull(): void
     {
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->queryMock->expects(static::atLeastOnce())
             ->method('getSearchQuery')
             ->willReturn($this->elasticaQueryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getCustomerClient')
             ->willReturn($this->customerClientMock);
 
-        $this->customerClientMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCustomerProductListCollection')
             ->willReturn(null);
 
@@ -263,27 +263,27 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
     {
         $blacklistIds = [1];
 
-        $this->queryMock->expects($this->atLeastOnce())
+        $this->queryMock->expects(static::atLeastOnce())
             ->method('getSearchQuery')
             ->willReturn($this->elasticaQueryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getCustomerClient')
             ->willReturn($this->customerClientMock);
 
-        $this->customerClientMock->expects($this->atLeastOnce())
+        $this->customerClientMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCustomerProductListCollection')
             ->willReturn($this->customerProductListCollectionTransferMock);
 
-        $this->customerProductListCollectionTransferMock->expects($this->atLeastOnce())
+        $this->customerProductListCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getBlacklistIds')
             ->willReturn($blacklistIds);
 
-        $this->elasticaQueryMock->expects($this->atLeastOnce())
+        $this->elasticaQueryMock->expects(static::atLeastOnce())
             ->method('getQuery')
             ->willReturn($this->queryMock);
 

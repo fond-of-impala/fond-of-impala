@@ -81,11 +81,11 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityPeriodPageSearchPublisher(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],

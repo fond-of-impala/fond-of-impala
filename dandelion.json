@@ -5,18 +5,22 @@
   "repositories": {
     "conditional-availability": {
       "path": "bundles/conditional-availability",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "conditional-availability-bulk-api": {
       "path": "bundles/conditional-availability-bulk-api",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "conditional-availability-cart-connector": {
       "path": "bundles/conditional-availability-cart-connector",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "conditional-availability-checkout-connector": {
       "path": "bundles/conditional-availability-checkout-connector",
+      "version": "1.1.0"
+    },
+    "conditional-availability-company-connector": {
+      "path": "bundles/conditional-availability-company-connector",
       "version": "1.0.0"
     },
     "conditional-availability-extension": {
@@ -25,7 +29,7 @@
     },
     "conditional-availability-page-search": {
       "path": "bundles/conditional-availability-page-search",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "conditional-availability-page-search-extension": {
       "path": "bundles/conditional-availability-page-search-extension",

@@ -38,7 +38,7 @@ class ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacad
     public function testGetConditionalAvailabilityIdsByProductConcreteIds(): void
     {
         $productConcreteIds = [1];
-        $this->facadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityIdsByProductConcreteIds')
             ->with($productConcreteIds)
             ->willReturn($productConcreteIds);

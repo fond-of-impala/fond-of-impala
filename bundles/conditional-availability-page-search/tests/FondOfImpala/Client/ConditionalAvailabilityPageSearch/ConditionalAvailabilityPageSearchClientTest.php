@@ -55,28 +55,28 @@ class ConditionalAvailabilityPageSearchClientTest extends Unit
      */
     public function testSearch(): void
     {
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createSearchQuery')
             ->willReturn($this->queryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getSearchClient')
             ->willReturn($this->searchClientMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getSearchQueryExpanderPlugins')
             ->willReturn([]);
 
-        $this->searchClientMock->expects($this->atLeastOnce())
+        $this->searchClientMock->expects(static::atLeastOnce())
             ->method('expandQuery')
             ->with($this->queryMock, [], [])
             ->willReturn($this->queryMock);
 
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('getSearchResultFormatterPlugins')
             ->willReturn([]);
 
-        $this->searchClientMock->expects($this->atLeastOnce())
+        $this->searchClientMock->expects(static::atLeastOnce())
             ->method('search')
             ->with($this->queryMock, [], [])
             ->willReturn([]);

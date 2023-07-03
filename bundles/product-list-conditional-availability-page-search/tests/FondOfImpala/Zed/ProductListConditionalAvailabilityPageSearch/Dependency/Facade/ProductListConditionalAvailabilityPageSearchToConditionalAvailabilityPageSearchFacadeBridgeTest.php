@@ -38,7 +38,7 @@ class ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageS
     public function testPublish(): void
     {
         $conditionalAvailabilityIds = [1];
-        $this->facadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('publish')
             ->with($conditionalAvailabilityIds);
 

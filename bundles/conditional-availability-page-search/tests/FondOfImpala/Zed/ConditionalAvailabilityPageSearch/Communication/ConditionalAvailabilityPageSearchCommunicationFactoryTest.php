@@ -58,11 +58,11 @@ class ConditionalAvailabilityPageSearchCommunicationFactoryTest extends Unit
      */
     public function testGetEventBehaviorFacade(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR)
             ->willReturn($this->eventBehaviorFacadeMock);

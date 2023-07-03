@@ -37,7 +37,7 @@ class ProductListConditionalAvailabilityPageSearchEventSubscriberTest extends Un
      */
     public function testGetSubscribedEvents(): void
     {
-        $this->eventCollectionMock->expects($this->atLeastOnce())
+        $this->eventCollectionMock->expects(static::atLeastOnce())
             ->method('addListenerQueued')
             ->withConsecutive(
                 [ProductListEvents::ENTITY_SPY_PRODUCT_LIST_PRODUCT_CONCRETE_CREATE, new ProductListProductConcreteListener()],

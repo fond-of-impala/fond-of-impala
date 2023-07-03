@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/conditional-availability": "^1.0.0",
+    "fond-of-impala/conditional-availability": "^1.1.0",
     "spryker/api": "^0.4.0",
     "spryker/api-extension": "^0.1.0",
     "spryker/api-query-builder": "^0.1.0",
