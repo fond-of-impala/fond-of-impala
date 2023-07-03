@@ -38,7 +38,7 @@ class ConditionalAvailabilityPageSearchResourcePluginTest extends Unit
      */
     public function testConfigure(): void
     {
-        $this->resourceRouteCollectionMock->expects($this->atLeastOnce())
+        $this->resourceRouteCollectionMock->expects(static::atLeastOnce())
             ->method('addGet')
             ->with('get')
             ->willReturnSelf();

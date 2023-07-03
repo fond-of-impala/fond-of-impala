@@ -59,15 +59,15 @@ class ConditionalAvailabilityPeriodPageSearchDataMapperTest extends Unit
      */
     public function testMapConditionalAvailabilityPeriodDataToSearchData(): void
     {
-        $this->storeFacadeMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects(static::atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->storeTransferMock->expects($this->atLeastOnce())
+        $this->storeTransferMock->expects(static::atLeastOnce())
             ->method('getName')
             ->willReturn('store');
 
-        $this->pluginMocks[0]->expects($this->atLeastOnce())
+        $this->pluginMocks[0]->expects(static::atLeastOnce())
             ->method('expand')
             ->willReturnArgument(1);
 

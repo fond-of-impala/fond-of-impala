@@ -61,34 +61,34 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
         $whitelistIds = [2];
         $blacklistIds = [3];
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('requireFkProduct')
             ->willReturnSelf();
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getProductListMap')
             ->willReturn($this->productListMapTransferMock);
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getFkProduct')
             ->willReturn($fkProduct);
 
-        $this->productListFacadeMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects(static::atLeastOnce())
             ->method('getProductWhitelistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($whitelistIds);
 
-        $this->productListMapTransferMock->expects($this->atLeastOnce())
+        $this->productListMapTransferMock->expects(static::atLeastOnce())
             ->method('setWhitelists')
             ->with($whitelistIds)
             ->willReturnSelf();
 
-        $this->productListFacadeMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects(static::atLeastOnce())
             ->method('getProductBlacklistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($blacklistIds);
 
-        $this->productListMapTransferMock->expects($this->atLeastOnce())
+        $this->productListMapTransferMock->expects(static::atLeastOnce())
             ->method('setBlacklists')
             ->with($blacklistIds)
             ->willReturnSelf();
@@ -110,34 +110,34 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
         $whitelistIds = [2];
         $blacklistIds = [3];
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('requireFkProduct')
             ->willReturnSelf();
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getProductListMap')
             ->willReturnOnConsecutiveCalls(null, $this->productListMapTransferMock, $this->productListMapTransferMock);
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getFkProduct')
             ->willReturn($fkProduct);
 
-        $this->productListFacadeMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects(static::atLeastOnce())
             ->method('getProductWhitelistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($whitelistIds);
 
-        $this->productListMapTransferMock->expects($this->atLeastOnce())
+        $this->productListMapTransferMock->expects(static::atLeastOnce())
             ->method('setWhitelists')
             ->with($whitelistIds)
             ->willReturnSelf();
 
-        $this->productListFacadeMock->expects($this->atLeastOnce())
+        $this->productListFacadeMock->expects(static::atLeastOnce())
             ->method('getProductBlacklistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($blacklistIds);
 
-        $this->productListMapTransferMock->expects($this->atLeastOnce())
+        $this->productListMapTransferMock->expects(static::atLeastOnce())
             ->method('setBlacklists')
             ->with($blacklistIds)
             ->willReturnSelf();

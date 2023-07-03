@@ -137,32 +137,32 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $searchResult = [];
         $this->requestMock->query = new InputBag();
 
-        $this->restRequestMock->expects($this->atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getHttpRequest')
             ->willReturn($this->requestMock);
 
-        $this->restRequestMock->expects($this->atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getPage')
             ->willReturn($this->pageMock);
 
-        $this->pageMock->expects($this->atLeastOnce())
+        $this->pageMock->expects(static::atLeastOnce())
             ->method('getLimit')
             ->willReturn(12);
 
-        $this->pageMock->expects($this->atLeastOnce())
+        $this->pageMock->expects(static::atLeastOnce())
             ->method('getOffset')
             ->willReturn(12);
 
-        $this->conditionalAvailabilityPageSearchClientMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchClientMock->expects(static::atLeastOnce())
             ->method('search')
             ->willReturn($searchResult);
 
-        $this->conditionalAvailabilityPageSearchMapperMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchMapperMock->expects(static::atLeastOnce())
             ->method('mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer')
             ->with($searchResult)
             ->willReturn($this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock);
 
-        $this->restResourceBuilderMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderMock->expects(static::atLeastOnce())
             ->method('createRestResource')
             ->with(
                 ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
@@ -170,24 +170,24 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
                 $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock,
             )->willReturn($this->restResourceMock);
 
-        $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects($this->atLeastOnce())
+        $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects(static::atLeastOnce())
             ->method('getPagination')
             ->willReturn($this->restConditionalAvailabilityPageSearchPaginationTransferMock);
 
-        $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects($this->atLeastOnce())
+        $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects(static::atLeastOnce())
             ->method('getNumFound')
             ->willReturn($numFound);
 
-        $this->restResourceBuilderMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderMock->expects(static::atLeastOnce())
             ->method('createRestResponse')
             ->with($numFound)
             ->willReturn($this->restResponseMock);
 
-        $this->restRequestMock->expects($this->never())
+        $this->restRequestMock->expects(static::never())
             ->method('setPage')
             ->willReturnSelf();
 
-        $this->restResponseMock->expects($this->atLeastOnce())
+        $this->restResponseMock->expects(static::atLeastOnce())
             ->method('addResource')
             ->with($this->restResourceMock)
             ->willReturnSelf();
@@ -209,30 +209,30 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
         $searchResult = [];
         $this->requestMock->query = new InputBag();
 
-        $this->restRequestMock->expects($this->atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getHttpRequest')
             ->willReturn($this->requestMock);
 
-        $this->restRequestMock->expects($this->atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getPage')
             ->willReturn(null);
 
-        $this->pageMock->expects($this->never())
+        $this->pageMock->expects(static::never())
             ->method('getLimit');
 
-        $this->pageMock->expects($this->never())
+        $this->pageMock->expects(static::never())
             ->method('getOffset');
 
-        $this->conditionalAvailabilityPageSearchClientMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchClientMock->expects(static::atLeastOnce())
             ->method('search')
             ->willReturn($searchResult);
 
-        $this->conditionalAvailabilityPageSearchMapperMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchMapperMock->expects(static::atLeastOnce())
             ->method('mapSearchResultToRestConditionalAvailabilityPageSearchCollectionResponseTransfer')
             ->with($searchResult)
             ->willReturn($this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock);
 
-        $this->restResourceBuilderMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderMock->expects(static::atLeastOnce())
             ->method('createRestResource')
             ->with(
                 ConditionalAvailabilityPageSearchRestApiConfig::RESOURCE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
@@ -240,24 +240,24 @@ class ConditionalAvailabilityPageSearchReaderTest extends Unit
                 $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock,
             )->willReturn($this->restResourceMock);
 
-        $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects($this->atLeastOnce())
+        $this->restConditionalAvailabilityPageSearchCollectionResponseTransferMock->expects(static::atLeastOnce())
             ->method('getPagination')
             ->willReturn($this->restConditionalAvailabilityPageSearchPaginationTransferMock);
 
-        $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects($this->atLeastOnce())
+        $this->restConditionalAvailabilityPageSearchPaginationTransferMock->expects(static::atLeastOnce())
             ->method('getNumFound')
             ->willReturn($numFound);
 
-        $this->restResourceBuilderMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderMock->expects(static::atLeastOnce())
             ->method('createRestResponse')
             ->with($numFound)
             ->willReturn($this->restResponseMock);
 
-        $this->restRequestMock->expects($this->atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('setPage')
             ->willReturnSelf();
 
-        $this->restResponseMock->expects($this->atLeastOnce())
+        $this->restResponseMock->expects(static::atLeastOnce())
             ->method('addResource')
             ->with($this->restResourceMock)
             ->willReturnSelf();

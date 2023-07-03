@@ -87,7 +87,7 @@ class ConditionalAvailabilityReaderTest extends Unit
         $conditionalAvailabilityResponseTransfer = $this->conditionalAvailabilityReader
             ->findById($this->conditionalAvailabilityTransferMock);
 
-        $this->assertFalse($conditionalAvailabilityResponseTransfer->getIsSuccessful());
+        static::assertFalse($conditionalAvailabilityResponseTransfer->getIsSuccessful());
         static::assertEquals(null, $conditionalAvailabilityResponseTransfer->getConditionalAvailabilityTransfer());
     }
 
@@ -114,7 +114,7 @@ class ConditionalAvailabilityReaderTest extends Unit
         $conditionalAvailabilityResponseTransfer = $this->conditionalAvailabilityReader
             ->findById($this->conditionalAvailabilityTransferMock);
 
-        $this->assertTrue($conditionalAvailabilityResponseTransfer->getIsSuccessful());
+        static::assertTrue($conditionalAvailabilityResponseTransfer->getIsSuccessful());
         static::assertEquals(
             $this->conditionalAvailabilityTransferMock,
             $conditionalAvailabilityResponseTransfer->getConditionalAvailabilityTransfer(),

@@ -40,7 +40,7 @@ class ConditionalAvailabilityPageSearchRestApiToConditionalAvailabilityPageSearc
     {
         $searchString = 'search-string';
 
-        $this->conditionalAvailabilityPageSearchClientMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPageSearchClientMock->expects(static::atLeastOnce())
             ->method('search')
             ->with($searchString, [])
             ->willReturn([]);

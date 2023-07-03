@@ -55,11 +55,11 @@ class ProductListConditionalAvailabilityPageSearchFacadeTest extends Unit
      */
     public function testExpandConditionalAvailabilityPeriodPageSearchTransferWithProductLists(): void
     {
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriodPageSearchExpander')
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchExpanderMock);
 
-        $this->conditionalAvailabilityPeriodPageSearchExpanderMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchExpanderMock->expects(static::atLeastOnce())
             ->method('expandWithProductLists')
             ->with($this->conditionalAvailabilityPeriodPageSearchTransferMock)
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchTransferMock);

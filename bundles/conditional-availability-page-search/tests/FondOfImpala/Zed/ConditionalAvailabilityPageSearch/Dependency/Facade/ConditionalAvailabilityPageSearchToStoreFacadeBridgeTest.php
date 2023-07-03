@@ -45,10 +45,10 @@ class ConditionalAvailabilityPageSearchToStoreFacadeBridgeTest extends Unit
      */
     public function testGetCurrentStore(): void
     {
-        $this->storeFacadeMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects(static::atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->assertEquals($this->storeTransferMock, $this->bridge->getCurrentStore());
+        static::assertEquals($this->storeTransferMock, $this->bridge->getCurrentStore());
     }
 }

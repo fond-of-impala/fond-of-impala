@@ -47,7 +47,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
     {
         $eventTransfers = [$this->eventEntityTransferMock];
 
-        $this->eventBehaviorFacadeMock->expects($this->atLeastOnce())
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
             ->method('getEventTransferIds')
             ->with($eventTransfers)
             ->willReturn([]);
@@ -63,7 +63,7 @@ class ConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends U
         $eventTransfers = [$this->eventEntityTransferMock];
         $foreignKeyColumnName = 'foreign-key-column-name';
 
-        $this->eventBehaviorFacadeMock->expects($this->atLeastOnce())
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
             ->method('getEventTransferForeignKeys')
             ->with($eventTransfers, $foreignKeyColumnName)
             ->willReturn([]);

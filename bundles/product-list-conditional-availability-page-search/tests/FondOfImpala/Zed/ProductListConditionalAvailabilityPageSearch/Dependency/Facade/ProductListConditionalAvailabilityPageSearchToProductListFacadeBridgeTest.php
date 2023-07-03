@@ -38,7 +38,7 @@ class ProductListConditionalAvailabilityPageSearchToProductListFacadeBridgeTest 
     public function testGetProductWhitelistIdsByIdProduct(): void
     {
         $idProduct = 1;
-        $this->facadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('getProductWhitelistIdsByIdProduct')
             ->with($idProduct)
             ->willReturn([]);
@@ -52,7 +52,7 @@ class ProductListConditionalAvailabilityPageSearchToProductListFacadeBridgeTest 
     public function testGetProductBlacklistIdsByIdProduct(): void
     {
         $idProduct = 1;
-        $this->facadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('getProductBlacklistIdsByIdProduct')
             ->with($idProduct)
             ->willReturn([]);

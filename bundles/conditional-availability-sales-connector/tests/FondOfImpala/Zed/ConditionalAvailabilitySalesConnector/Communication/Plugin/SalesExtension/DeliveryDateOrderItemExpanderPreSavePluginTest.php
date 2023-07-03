@@ -61,20 +61,20 @@ class DeliveryDateOrderItemExpanderPreSavePluginTest extends Unit
         $deliveryDate = 'earliest';
         $concreteDeliveryDate = '2020-07-14';
 
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getDeliveryDate')
             ->willReturn($deliveryDate);
 
-        $this->spySalesOrderItemEntityTransferMock->expects($this->atLeastOnce())
+        $this->spySalesOrderItemEntityTransferMock->expects(static::atLeastOnce())
             ->method('setDeliveryDate')
             ->with($deliveryDate)
             ->willReturn($this->spySalesOrderItemEntityTransferMock);
 
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getConcreteDeliveryDate')
             ->willReturn($concreteDeliveryDate);
 
-        $this->spySalesOrderItemEntityTransferMock->expects($this->atLeastOnce())
+        $this->spySalesOrderItemEntityTransferMock->expects(static::atLeastOnce())
             ->method('setConcreteDeliveryDate')
             ->with($concreteDeliveryDate)
             ->willReturn($this->spySalesOrderItemEntityTransferMock);
