@@ -5,6 +5,7 @@ include:
   - bundles/conditional-availability-bulk-api
   - bundles/conditional-availability-cart-connector
   - bundles/conditional-availability-checkout-connector
+  - bundles/conditional-availability-company-connector
   - bundles/conditional-availability-extension
   - bundles/conditional-availability-page-search
   - bundles/conditional-availability-page-search-extension

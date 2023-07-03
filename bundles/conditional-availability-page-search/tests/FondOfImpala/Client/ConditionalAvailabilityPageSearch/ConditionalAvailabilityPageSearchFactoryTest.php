@@ -3,6 +3,7 @@
 namespace FondOfImpala\Client\ConditionalAvailabilityPageSearch;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToCustomerClientInterface;
 use FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
@@ -43,6 +44,10 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->customerClientMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToCustomerClientInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->queryMock = $this->getMockBuilder(QueryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -56,11 +61,11 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
      */
     public function testGetSearchClient(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_SEARCH)
             ->willReturn($this->clientMock);
@@ -74,14 +79,31 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateSearchQuery(): void
+    public function testGetCustomerClient(): void
     {
-        $searchString = 'search-string';
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('get')
+            ->with(ConditionalAvailabilityPageSearchDependencyProvider::CLIENT_CUSTOMER)
+            ->willReturn($this->customerClientMock);
+
+        static::assertEquals($this->customerClientMock, $this->factory->getCustomerClient());
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateSearchQuery(): void
+    {
+        $searchString = 'search-string';
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::PLUGIN_SEARCH_QUERY)
             ->willReturn($this->queryMock);
@@ -94,11 +116,11 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
      */
     public function testGetSearchQueryExpanderPlugins(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_QUERY_EXPANDER)
             ->willReturn([]);
@@ -111,11 +133,11 @@ class ConditionalAvailabilityPageSearchFactoryTest extends Unit
      */
     public function testGetSearchResultFormatterPlugins(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_SEARCH_RESULT_FORMATTER)
             ->willReturn([]);

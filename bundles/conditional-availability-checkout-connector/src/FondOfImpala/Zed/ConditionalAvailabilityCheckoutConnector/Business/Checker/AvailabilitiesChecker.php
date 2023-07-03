@@ -1,14 +1,15 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Model;
+namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Checker;
 
 use ArrayObject;
 use DateTime;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Grouper\ItemsGrouperInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Mapper\ConditionalAvailabilityCriteriaFilterMapperInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface;
 use Generated\Shared\Transfer\CheckoutErrorTransfer;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -34,20 +35,30 @@ class AvailabilitiesChecker implements AvailabilitiesCheckerInterface
      */
     protected const PARAMETER_PRODUCT_SKU = '%sku%';
 
+    protected ItemsGrouperInterface $itemsGrouper;
+
     protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
     protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService;
 
+    protected ConditionalAvailabilityCriteriaFilterMapperInterface $conditionalAvailabilityCriteriaFilterMapper;
+
     /**
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Grouper\ItemsGrouperInterface $itemsGrouper
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Mapper\ConditionalAvailabilityCriteriaFilterMapperInterface $conditionalAvailabilityCriteriaFilterMapper
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService
      */
     public function __construct(
+        ItemsGrouperInterface $itemsGrouper,
+        ConditionalAvailabilityCriteriaFilterMapperInterface $conditionalAvailabilityCriteriaFilterMapper,
         ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade,
         ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface $conditionalAvailabilityService
     ) {
+        $this->itemsGrouper = $itemsGrouper;
         $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
         $this->conditionalAvailabilityService = $conditionalAvailabilityService;
+        $this->conditionalAvailabilityCriteriaFilterMapper = $conditionalAvailabilityCriteriaFilterMapper;
     }
 
     /**
@@ -59,21 +70,26 @@ class AvailabilitiesChecker implements AvailabilitiesCheckerInterface
     public function check(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponseTransfer): bool
     {
         $isPassed = true;
-        $groupedQuoteItemTransferMap = $this->groupQuoteItemsBySku($quoteTransfer);
+        $groupedItemTransfers = $this->itemsGrouper->group($quoteTransfer);
+        $groupedConditionalAvailabilityTransfers = new ArrayObject();
+        $conditionalAvailabilityCriteriaFilterTransfer = $this->conditionalAvailabilityCriteriaFilterMapper->fromQuote(
+            $quoteTransfer,
+        );
 
-        $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
-            ->setWarehouseGroup('EU')
-            ->setMinimumQuantity(1)
-            ->setSkus(array_keys($groupedQuoteItemTransferMap->getArrayCopy()));
+        if ($conditionalAvailabilityCriteriaFilterTransfer !== null) {
+            $skus = array_keys($groupedItemTransfers->getArrayCopy());
 
-        $groupedConditionalAvailabilityTransferMap = $this->conditionalAvailabilityFacade
-            ->findGroupedConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
+            $groupedConditionalAvailabilityTransfers = $this->conditionalAvailabilityFacade
+                ->findGroupedConditionalAvailabilities(
+                    $conditionalAvailabilityCriteriaFilterTransfer->setSkus($skus),
+                );
+        }
 
-        foreach ($groupedQuoteItemTransferMap as $sku => $groupedQuoteItemTransferCollection) {
+        foreach ($groupedItemTransfers as $sku => $groupedQuoteItemTransferCollection) {
             foreach ($groupedQuoteItemTransferCollection as $quoteItemTransfer) {
                 $isQuoteItemAvailable = $this->isQuoteItemAvailable(
                     $quoteItemTransfer,
-                    $groupedConditionalAvailabilityTransferMap,
+                    $groupedConditionalAvailabilityTransfers,
                 );
 
                 if ($isQuoteItemAvailable) {
@@ -134,29 +150,6 @@ class AvailabilitiesChecker implements AvailabilitiesCheckerInterface
         }
 
         return false;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \ArrayObject<string, \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer>>
-     */
-    protected function groupQuoteItemsBySku(QuoteTransfer $quoteTransfer): ArrayObject
-    {
-        /** @var \ArrayObject<string, \ArrayObject<int, \Generated\Shared\Transfer\ItemTransfer>> $groupedQuoteItemTransferMap */
-        $groupedQuoteItemTransferMap = new ArrayObject();
-
-        foreach ($quoteTransfer->getItems() as $itemTransfer) {
-            $sku = $itemTransfer->getSku();
-
-            if (!$groupedQuoteItemTransferMap->offsetExists($sku)) {
-                $groupedQuoteItemTransferMap->offsetSet($sku, new ArrayObject());
-            }
-
-            $groupedQuoteItemTransferMap->offsetGet($sku)->append($itemTransfer);
-        }
-
-        return $groupedQuoteItemTransferMap;
     }
 
     /**

@@ -25,6 +25,11 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
     /**
      * @var string
      */
+    protected const DATA_KEY_CHANNEL = 'channel';
+
+    /**
+     * @var string
+     */
     protected const DATA_KEY_ORIGINAL_START_AT = 'original_start_at';
 
     /**
@@ -56,6 +61,11 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
      * @var string
      */
     protected const SEARCH_RESULT_DATA_KEY_WAREHOUSE_GROUP = 'warehouse_group';
+
+    /**
+     * @var string
+     */
+    protected const SEARCH_RESULT_DATA_KEY_CHANNEL = 'channel';
 
     /**
      * @var string
@@ -111,6 +121,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
             ConditionalAvailabilityPeriodIndexMap::SKU => $data[static::DATA_KEY_SKU],
             ConditionalAvailabilityPeriodIndexMap::QUANTITY => $data[static::DATA_KEY_QUANTITY],
             ConditionalAvailabilityPeriodIndexMap::WAREHOUSE_GROUP => $data[static::DATA_KEY_WAREHOUSE_GROUP],
+            ConditionalAvailabilityPeriodIndexMap::CHANNEL => $data[static::DATA_KEY_CHANNEL],
             ConditionalAvailabilityPeriodIndexMap::ORIGINAL_START_AT => $data[static::DATA_KEY_ORIGINAL_START_AT],
             ConditionalAvailabilityPeriodIndexMap::START_AT => $data[static::DATA_KEY_START_AT],
             ConditionalAvailabilityPeriodIndexMap::END_AT => $data[static::DATA_KEY_END_AT],
@@ -131,6 +142,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
             static::SEARCH_RESULT_DATA_KEY_SKU => $data[static::DATA_KEY_SKU],
             static::SEARCH_RESULT_DATA_KEY_QUANTITY => $data[static::DATA_KEY_QUANTITY],
             static::SEARCH_RESULT_DATA_KEY_WAREHOUSE_GROUP => $data[static::DATA_KEY_WAREHOUSE_GROUP],
+            static::SEARCH_RESULT_DATA_KEY_CHANNEL => $data[static::DATA_KEY_CHANNEL],
             static::SEARCH_RESULT_DATA_KEY_ORIGINAL_START_AT => $data[static::DATA_KEY_ORIGINAL_START_AT],
             static::SEARCH_RESULT_DATA_KEY_START_AT => $data[static::DATA_KEY_START_AT],
             static::SEARCH_RESULT_DATA_KEY_END_AT => $data[static::DATA_KEY_END_AT],
