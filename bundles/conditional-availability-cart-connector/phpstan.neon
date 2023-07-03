@@ -3,3 +3,5 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     scanDirectories:
         - src/Orm/Zed
+    ignoreErrors:
+        - '#Call to an undefined method Generated\\Zed\\Ide\\AutoCompletion&Spryker\\Shared\\Kernel\\LocatorLocatorInterface::conditionalAvailabilityCartConnector\(\)#'
