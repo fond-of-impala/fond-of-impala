@@ -59,23 +59,23 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
     {
         $availabilityChannel = 'availability-channel';
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCompanyUserTransfer')
             ->willReturn($this->companyUserTransferMock);
 
-        $this->companyUserTransferMock->expects($this->atLeastOnce())
+        $this->companyUserTransferMock->expects(static::atLeastOnce())
             ->method('getCompany')
             ->willReturn($this->companyTransferMock);
 
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('getAvailabilityChannel')
             ->willReturn('availability-channel');
 
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('getAvailabilityChannel')
             ->willReturn($availabilityChannel);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('setAvailabilityChannel')
             ->with($availabilityChannel)
             ->willReturnSelf();
@@ -93,11 +93,11 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
      */
     public function testExpandTransferWithNoCompanyUser(): void
     {
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCompanyUserTransfer')
             ->willReturn(null);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('setAvailabilityChannel')
             ->with(null)
             ->willReturnSelf();
@@ -115,15 +115,15 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
      */
     public function testExpandTransferWithNoCompany(): void
     {
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('getCompanyUserTransfer')
             ->willReturn($this->companyUserTransferMock);
 
-        $this->companyUserTransferMock->expects($this->atLeastOnce())
+        $this->companyUserTransferMock->expects(static::atLeastOnce())
             ->method('getCompany')
             ->willReturn(null);
 
-        $this->customerTransferMock->expects($this->atLeastOnce())
+        $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('setAvailabilityChannel')
             ->with(null)
             ->willReturnSelf();

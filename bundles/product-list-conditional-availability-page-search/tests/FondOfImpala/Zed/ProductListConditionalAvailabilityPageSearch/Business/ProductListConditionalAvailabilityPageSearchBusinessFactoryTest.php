@@ -47,11 +47,11 @@ class ProductListConditionalAvailabilityPageSearchBusinessFactoryTest extends Un
      */
     public function testCreateConditionalAvailabilityPeriodPageSearchExpander(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_PRODUCT_LIST)
             ->willReturn($this->productListFacadeMock);

@@ -47,7 +47,7 @@ class ProductListConditionalAvailabilityPageSearchToCustomerClientBridgeTest ext
      */
     public function testGetCustomer(): void
     {
-        $this->customerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientInterfaceMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 

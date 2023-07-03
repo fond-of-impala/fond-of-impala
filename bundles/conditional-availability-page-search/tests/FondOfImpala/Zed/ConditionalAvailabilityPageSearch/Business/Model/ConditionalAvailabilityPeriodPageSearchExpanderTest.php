@@ -73,36 +73,36 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
         $idConditionalAvailability = 1;
         $storeName = 'store-name';
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getStartAt')
             ->willReturn($startAt);
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getEndAt')
             ->willReturn($endAt);
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getFkConditionalAvailability')
             ->willReturn($idConditionalAvailability);
 
-        $this->storeFacadeMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects(static::atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->storeTransferMock->expects($this->atLeastOnce())
+        $this->storeTransferMock->expects(static::atLeastOnce())
             ->method('getName')
             ->willReturn($storeName);
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setConditionalAvailabilityPeriodKey')
             ->willReturnSelf();
 
-        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setStoreName')
             ->with($storeName)
             ->willReturnSelf();
 
-        $this->conditionalAvailabilityPeriodPageDataExpanderPluginMock->expects($this->atLeastOnce())
+        $this->conditionalAvailabilityPeriodPageDataExpanderPluginMock->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->conditionalAvailabilityPeriodPageSearchTransferMock)
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchTransferMock);

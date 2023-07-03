@@ -46,11 +46,11 @@ class ProductListConditionalAvailabilityPageSearchFactoryTest extends Unit
      */
     public function testGetCustomerClient(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::CLIENT_CUSTOMER)
             ->willReturn($this->customerClientMock);

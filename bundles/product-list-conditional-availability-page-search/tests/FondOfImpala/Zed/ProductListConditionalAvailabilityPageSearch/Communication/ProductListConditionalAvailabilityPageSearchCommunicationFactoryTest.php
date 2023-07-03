@@ -67,11 +67,11 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
      */
     public function testGetConditionalAvailabilityPageSearchFacade(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH)
             ->willReturn($this->conditionalAvailabilityPageSearchFacadeMock);
@@ -87,11 +87,11 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
      */
     public function testGetConditionalAvailabilityFacade(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY)
             ->willReturn($this->conditionalAvailabilityFacadeMock);
@@ -107,11 +107,11 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
      */
     public function testGetEventBehaviorFacade(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR)
             ->willReturn($this->eventBehaviorFacadeMock);

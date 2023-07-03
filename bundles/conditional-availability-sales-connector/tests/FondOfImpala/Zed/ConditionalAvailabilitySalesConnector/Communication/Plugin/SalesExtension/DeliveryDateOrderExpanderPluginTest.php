@@ -51,24 +51,24 @@ class DeliveryDateOrderExpanderPluginTest extends Unit
         $deliveryDate = 'earliest';
         $concreteDeliveryDate = '2020-07-14';
 
-        $this->orderTransferMock->expects($this->atLeastOnce())
+        $this->orderTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
             ->willReturn(new ArrayObject([$this->itemTransferMock]));
 
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getDeliveryDate')
             ->willReturn($deliveryDate);
 
-        $this->orderTransferMock->expects($this->atLeastOnce())
+        $this->orderTransferMock->expects(static::atLeastOnce())
             ->method('setDeliveryDate')
             ->with($deliveryDate)
             ->willReturn($this->orderTransferMock);
 
-        $this->itemTransferMock->expects($this->atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('getConcreteDeliveryDate')
             ->willReturn($concreteDeliveryDate);
 
-        $this->orderTransferMock->expects($this->atLeastOnce())
+        $this->orderTransferMock->expects(static::atLeastOnce())
             ->method('setConcreteDeliveryDate')
             ->with($concreteDeliveryDate)
             ->willReturn($this->orderTransferMock);
@@ -83,14 +83,14 @@ class DeliveryDateOrderExpanderPluginTest extends Unit
      */
     public function testHydrateWithoutItems(): void
     {
-        $this->orderTransferMock->expects($this->atLeastOnce())
+        $this->orderTransferMock->expects(static::atLeastOnce())
             ->method('getItems')
             ->willReturn(new ArrayObject());
 
-        $this->orderTransferMock->expects($this->never())
+        $this->orderTransferMock->expects(static::never())
             ->method('setDeliveryDate');
 
-        $this->orderTransferMock->expects($this->never())
+        $this->orderTransferMock->expects(static::never())
             ->method('setConcreteDeliveryDate');
 
         $orderTransfer = $this->plugin->hydrate($this->orderTransferMock);

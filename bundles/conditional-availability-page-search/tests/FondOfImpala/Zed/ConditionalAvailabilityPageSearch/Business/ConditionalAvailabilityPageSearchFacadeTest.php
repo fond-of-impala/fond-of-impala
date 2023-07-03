@@ -65,7 +65,7 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
      */
     public function testPublish(): void
     {
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriodPageSearchPublisher')
             ->willReturn($this->publisherMock);
 
@@ -77,7 +77,7 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
      */
     public function testUnpublish(): void
     {
-        $this->factoryMock->expects($this->atLeastOnce())
+        $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriodPageSearchUnpublisher')
             ->willReturn($this->unpublisherMock);
 

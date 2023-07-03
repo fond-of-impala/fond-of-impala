@@ -66,7 +66,7 @@ class ProductListConditionalAvailabilityPeriodPageDataExpanderPluginTest extends
      */
     public function testExpand(): void
     {
-        $this->facadeMock->expects($this->atLeastOnce())
+        $this->facadeMock->expects(static::atLeastOnce())
             ->method('expandConditionalAvailabilityPeriodPageSearchTransferWithProductLists')
             ->with($this->conditionalAvailabilityPeriodPageSearchTransferMock)
             ->willReturn($this->conditionalAvailabilityPeriodPageSearchTransferMock);

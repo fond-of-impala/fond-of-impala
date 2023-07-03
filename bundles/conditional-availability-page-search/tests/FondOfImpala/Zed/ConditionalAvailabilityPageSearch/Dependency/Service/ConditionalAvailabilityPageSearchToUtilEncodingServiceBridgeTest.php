@@ -39,7 +39,7 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
     {
         $encodedJsonString = 'encoded-json-string';
 
-        $this->utilEncodingServiceMock->expects($this->atLeastOnce())
+        $this->utilEncodingServiceMock->expects(static::atLeastOnce())
             ->method('encodeJson')
             ->with([])
             ->willReturn($encodedJsonString);
@@ -54,7 +54,7 @@ class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends U
     {
         $encodedJsonString = 'encoded-json-string';
 
-        $this->utilEncodingServiceMock->expects($this->atLeastOnce())
+        $this->utilEncodingServiceMock->expects(static::atLeastOnce())
             ->method('decodeJson')
             ->with($encodedJsonString)
             ->willReturn([]);

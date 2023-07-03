@@ -58,7 +58,7 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
 
         $foreignKeyColumnName = 'foreign-key-column-name';
 
-        $this->eventBehaviorFacadeMock->expects($this->atLeastOnce())
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
             ->method('getEventTransferForeignKeys')
             ->with($eventTransfers, $foreignKeyColumnName)
             ->willReturn([]);

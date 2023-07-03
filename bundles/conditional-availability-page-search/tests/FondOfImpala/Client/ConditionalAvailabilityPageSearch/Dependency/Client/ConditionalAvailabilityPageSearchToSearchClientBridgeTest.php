@@ -45,7 +45,7 @@ class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
      */
     public function testSearch(): void
     {
-        $this->searchClientMock->expects($this->atLeastOnce())
+        $this->searchClientMock->expects(static::atLeastOnce())
             ->method('search')
             ->with($this->queryMock)
             ->willReturn([]);
@@ -58,7 +58,7 @@ class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
      */
     public function testExpandQuery(): void
     {
-        $this->searchClientMock->expects($this->atLeastOnce())
+        $this->searchClientMock->expects(static::atLeastOnce())
             ->method('expandQuery')
             ->with($this->queryMock, [])
             ->willReturn($this->queryMock);
