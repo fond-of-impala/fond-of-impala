@@ -3,16 +3,31 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Mapper;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Reader\CustomerReaderInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCriteriaFilterMapperTest extends Unit
 {
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Reader\CustomerReaderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CustomerReaderInterface|MockObject $customerReaderMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\QuoteTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
     protected QuoteTransfer|MockObject $quoteTransferMock;
 
+    /**
+     * @var (\Generated\Shared\Transfer\CustomerTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
     protected CustomerTransfer|MockObject $customerTransferMock;
 
+    /**
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Mapper\ConditionalAvailabilityCriteriaFilterMapper
+     */
     protected ConditionalAvailabilityCriteriaFilterMapper $conditionalAvailabilityCriteriaFilterMapper;
 
     /**
@@ -22,6 +37,10 @@ class ConditionalAvailabilityCriteriaFilterMapperTest extends Unit
     {
         parent::_before();
 
+        $this->customerReaderMock = $this->getMockBuilder(CustomerReaderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->quoteTransferMock = $this->getMockBuilder(QuoteTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -30,7 +49,9 @@ class ConditionalAvailabilityCriteriaFilterMapperTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCriteriaFilterMapper = new ConditionalAvailabilityCriteriaFilterMapper();
+        $this->conditionalAvailabilityCriteriaFilterMapper = new ConditionalAvailabilityCriteriaFilterMapper(
+            $this->customerReaderMock,
+        );
     }
 
     /**
@@ -40,8 +61,9 @@ class ConditionalAvailabilityCriteriaFilterMapperTest extends Unit
     {
         $availabilityChannel = 'FOO';
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
+        $this->customerReaderMock->expects(static::atLeastOnce())
+            ->method('getByQuote')
+            ->with($this->quoteTransferMock)
             ->willReturn($this->customerTransferMock);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
@@ -62,8 +84,9 @@ class ConditionalAvailabilityCriteriaFilterMapperTest extends Unit
      */
     public function testFromQuoteWithoutCustomer(): void
     {
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
+        $this->customerReaderMock->expects(static::atLeastOnce())
+            ->method('getByQuote')
+            ->with($this->quoteTransferMock)
             ->willReturn(null);
 
         static::assertEquals(
