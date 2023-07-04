@@ -17,13 +17,16 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReader;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReader;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacadeInterface getFacade()
+ * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Persistence\ConditionalAvailabilityCartConnectorRepositoryInterface getRepository()
  */
 class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusinessFactory
 {
@@ -45,6 +48,7 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     {
         return new ConditionalAvailabilityReader(
             $this->createSkusFilter(),
+            $this->createCustomerReader(),
             $this->getConditionalAvailabilityFacade(),
         );
     }
@@ -55,6 +59,17 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     protected function createSkusFilter(): SkusFilterInterface
     {
         return new SkusFilter();
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReaderInterface
+     */
+    protected function createCustomerReader(): CustomerReaderInterface
+    {
+        return new CustomerReader(
+            $this->getCustomerFacade(),
+            $this->getRepository(),
+        );
     }
 
     /**
@@ -108,6 +123,16 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     {
         return $this->getProvidedDependency(
             ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY,
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface
+     */
+    protected function getCustomerFacade(): ConditionalAvailabilityCartConnectorToCustomerFacadeInterface
+    {
+        return $this->getProvidedDependency(
+            ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER,
         );
     }
 }
