@@ -8,11 +8,17 @@ use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Grouper\I
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Grouper\ItemsGrouperInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Mapper\ConditionalAvailabilityCriteriaFilterMapper;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Mapper\ConditionalAvailabilityCriteriaFilterMapperInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Reader\CustomerReader;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Reader\CustomerReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\ConditionalAvailabilityCheckoutConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToCustomerFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Service\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
+/**
+ * @method \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Persistence\ConditionalAvailabilityCheckoutConnectorRepositoryInterface getRepository()
+ */
 class ConditionalAvailabilityCheckoutConnectorBusinessFactory extends AbstractBusinessFactory
 {
     /**
@@ -41,7 +47,20 @@ class ConditionalAvailabilityCheckoutConnectorBusinessFactory extends AbstractBu
      */
     protected function createConditionalAvailabilityCriteriaFilterMapper(): ConditionalAvailabilityCriteriaFilterMapperInterface
     {
-        return new ConditionalAvailabilityCriteriaFilterMapper();
+        return new ConditionalAvailabilityCriteriaFilterMapper(
+            $this->createCustomerReader(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Business\Reader\CustomerReaderInterface
+     */
+    protected function createCustomerReader(): CustomerReaderInterface
+    {
+        return new CustomerReader(
+            $this->getCustomerFacade(),
+            $this->getRepository(),
+        );
     }
 
     /**
@@ -58,5 +77,15 @@ class ConditionalAvailabilityCheckoutConnectorBusinessFactory extends AbstractBu
     protected function getConditionalAvailabilityService(): ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityServiceInterface
     {
         return $this->getProvidedDependency(ConditionalAvailabilityCheckoutConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY);
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToCustomerFacadeInterface
+     */
+    protected function getCustomerFacade(): ConditionalAvailabilityCheckoutConnectorToCustomerFacadeInterface
+    {
+        return $this->getProvidedDependency(
+            ConditionalAvailabilityCheckoutConnectorDependencyProvider::FACADE_CUSTOMER,
+        );
     }
 }
