@@ -12,17 +12,22 @@ class ConditionalAvailabilityReader implements ConditionalAvailabilityReaderInte
 {
     protected SkusFilterInterface $skusFilter;
 
+    protected CustomerReaderInterface $customerReader;
+
     protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\SkusFilterInterface $skusFilter
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReaderInterface $customerReader
      * @param \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
      */
     public function __construct(
         SkusFilterInterface $skusFilter,
+        CustomerReaderInterface $customerReader,
         ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
     ) {
         $this->skusFilter = $skusFilter;
+        $this->customerReader = $customerReader;
         $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
     }
 
@@ -34,7 +39,7 @@ class ConditionalAvailabilityReader implements ConditionalAvailabilityReaderInte
     public function getGroupedByQuote(QuoteTransfer $quoteTransfer): ArrayObject
     {
         $skus = $this->skusFilter->filterFromQuote($quoteTransfer);
-        $customerTransfer = $quoteTransfer->getCustomer();
+        $customerTransfer = $this->customerReader->getByQuoteTransfer($quoteTransfer);
 
         if ($customerTransfer === null || $customerTransfer->getAvailabilityChannel() === null || count($skus) === 0) {
             return new ArrayObject();

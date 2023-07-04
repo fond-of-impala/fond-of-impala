@@ -10,7 +10,9 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\Conditi
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Persistence\ConditionalAvailabilityCartConnectorRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
@@ -20,6 +22,11 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|(\Spryker\Zed\Kernel\Container&\PHPUnit\Framework\MockObject\MockObject)
      */
     protected Container|MockObject $containerMock;
+
+    /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorToCustomerFacadeInterface|MockObject $customerFacadeMock;
 
     /**
      * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
@@ -37,6 +44,11 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
     protected ConditionalAvailabilityCartConnectorServiceInterface|MockObject $serviceMock;
 
     /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Persistence\ConditionalAvailabilityCartConnectorRepository&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorRepository|MockObject $repositoryMock;
+
+    /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorBusinessFactory
      */
     protected ConditionalAvailabilityCartConnectorBusinessFactory $conditionalAvailabilityCartConnectorBusinessFactory;
@@ -47,6 +59,10 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
     protected function _before(): void
     {
         $this->containerMock = $this->getMockBuilder(Container::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->customerFacadeMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToCustomerFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -62,8 +78,13 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->repositoryMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorRepository::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->conditionalAvailabilityCartConnectorBusinessFactory = new ConditionalAvailabilityCartConnectorBusinessFactory();
         $this->conditionalAvailabilityCartConnectorBusinessFactory->setContainer($this->containerMock);
+        $this->conditionalAvailabilityCartConnectorBusinessFactory->setRepository($this->repositoryMock);
     }
 
     /**
@@ -78,9 +99,11 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
+                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER],
                 [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
                 [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
             )->willReturnOnConsecutiveCalls(
+                $this->customerFacadeMock,
                 $this->conditionalAvailabilityFacadeMock,
                 $this->conditionalAvailabilityServiceMock,
             );
