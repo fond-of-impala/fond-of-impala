@@ -11,19 +11,19 @@ use PHPUnit\Framework\MockObject\MockObject;
 class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
+     * @var (\Generated\Shared\Transfer\CompanyTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected MockObject|CustomerTransfer $companyTransferMock;
+    protected CompanyTransfer|MockObject $companyTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserTransfer
+     * @var (\Generated\Shared\Transfer\CompanyUserTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected MockObject|CustomerTransfer $companyUserTransferMock;
+    protected CompanyUserTransfer|MockObject $companyUserTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
+     * @var (\Generated\Shared\Transfer\CustomerTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected MockObject|CustomerTransfer $customerTransferMock;
+    protected CustomerTransfer|MockObject $customerTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\Communication\Plugin\Customer\AvailabilityChannelCustomerTransferExpanderPlugin
@@ -69,18 +69,12 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
 
         $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('getAvailabilityChannel')
-            ->willReturn('availability-channel');
-
-        $this->companyTransferMock->expects(static::atLeastOnce())
-            ->method('getAvailabilityChannel')
             ->willReturn($availabilityChannel);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('setAvailabilityChannel')
             ->with($availabilityChannel)
             ->willReturnSelf();
-
-        $customerTransfer = $this->plugin->expandTransfer($this->customerTransferMock);
 
         static::assertEquals(
             $this->customerTransferMock,
@@ -101,8 +95,6 @@ class AvailabilityChannelCustomerTransferExpanderPluginTest extends Unit
             ->method('setAvailabilityChannel')
             ->with(null)
             ->willReturnSelf();
-
-        $customerTransfer = $this->plugin->expandTransfer($this->customerTransferMock);
 
         static::assertEquals(
             $this->customerTransferMock,
