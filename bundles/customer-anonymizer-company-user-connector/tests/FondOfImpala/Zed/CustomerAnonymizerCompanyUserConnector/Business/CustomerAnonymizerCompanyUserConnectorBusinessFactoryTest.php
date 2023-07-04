@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleter;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorDependencyProvider;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface;
+use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence\CustomerAnonymizerCompanyUserConnectorRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
@@ -26,6 +27,11 @@ class CustomerAnonymizerCompanyUserConnectorBusinessFactoryTest extends Unit
      * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface|MockObject $companyUserFacadeMock;
+
+    /**
+     * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface|MockObject $eventFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\CustomerAnonymizerCompanyUserConnectorBusinessFactory
@@ -49,6 +55,10 @@ class CustomerAnonymizerCompanyUserConnectorBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->eventFacadeMock = $this->getMockBuilder(CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->customerAnonymizerCompanyUserConnectorBusinessFactory = new CustomerAnonymizerCompanyUserConnectorBusinessFactory();
         $this->customerAnonymizerCompanyUserConnectorBusinessFactory->setContainer($this->containerMock);
         $this->customerAnonymizerCompanyUserConnectorBusinessFactory->setRepository($this->repositoryMock);
@@ -67,8 +77,10 @@ class CustomerAnonymizerCompanyUserConnectorBusinessFactoryTest extends Unit
             ->method('get')
             ->withConsecutive(
                 [CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_COMPANY_USER],
+                [CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_EVENT],
             )->willReturnOnConsecutiveCalls(
                 $this->companyUserFacadeMock,
+                $this->eventFacadeMock,
             );
 
         static::assertInstanceOf(

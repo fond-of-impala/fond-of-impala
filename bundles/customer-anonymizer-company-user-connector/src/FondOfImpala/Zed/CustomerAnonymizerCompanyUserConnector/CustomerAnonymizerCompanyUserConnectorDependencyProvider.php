@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector;
 
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge;
+use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeBridge;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
@@ -22,6 +23,11 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProvider extends AbstractB
     /**
      * @var string
      */
+    public const FACADE_EVENT = 'FACADE_EVENT';
+
+    /**
+     * @var string
+     */
     public const QUERY_COMPANY_USER = 'QUERY_COMPANY_USER';
 
     /**
@@ -32,6 +38,7 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProvider extends AbstractB
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
+        $container = $this->addEventFacade($container);
 
         return $this->addCompanyUserFacade($container);
     }
@@ -59,6 +66,22 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProvider extends AbstractB
             Container $container
         ): CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge => new CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge(
             $container->getLocator()->companyUser()->facade(),
+        );
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addEventFacade(Container $container): Container
+    {
+        $container[static::FACADE_EVENT] = static fn (
+            Container $container
+        ): CustomerAnonymizerCompanyUserConnectorToEventFacadeBridge => new CustomerAnonymizerCompanyUserConnectorToEventFacadeBridge(
+            $container->getLocator()->event()->facade(),
         );
 
         return $container;

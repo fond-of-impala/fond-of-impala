@@ -2,8 +2,8 @@
 
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence;
 
-use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
-use Generated\Shared\Transfer\CompanyUserTransfer;
+use Generated\Shared\Transfer\CompanyUserIdCollectionTransfer;
+use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -14,21 +14,14 @@ class CustomerAnonymizerCompanyUserConnectorRepository extends AbstractRepositor
     /**
      * @param int $fkCustomer
      *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     * @return \Generated\Shared\Transfer\CompanyUserIdCollectionTransfer
      */
-    public function findCompanyUsersByFkCustomer(int $fkCustomer): CompanyUserCollectionTransfer
+    public function findCompanyUserIdsByFkCustomer(int $fkCustomer): CompanyUserIdCollectionTransfer
     {
-        $collection = new CompanyUserCollectionTransfer();
         $query = $this->getFactory()->getCompanyUserQuery();
 
-        $result = $query->filterByFkCustomer($fkCustomer)->find();
+        $data = $query->filterByFkCustomer($fkCustomer)->select([SpyCompanyUserTableMap::COL_ID_COMPANY_USER])->find()->getData();
 
-        /** @var \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $companyUserEntity */
-        foreach ($result->getData() as $companyUserEntity) {
-            $companyUserTransfer = (new CompanyUserTransfer())->fromArray($companyUserEntity->toArray(), true);
-            $collection->addCompanyUser($companyUserTransfer);
-        }
-
-        return $collection;
+        return (new CompanyUserIdCollectionTransfer())->setIds($data);
     }
 }

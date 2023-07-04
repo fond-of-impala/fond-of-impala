@@ -26,9 +26,6 @@ class CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridgeTest extend
     protected CompanyUserResponseTransfer|MockObject $companyUserResponseTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\CompanyUserCollectionTransfer|\PHPUnit\Framework\MockObject\MockObject
-     *
-     * /**
      * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge
      */
     protected CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge $bridge;

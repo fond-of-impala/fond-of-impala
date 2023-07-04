@@ -4,10 +4,12 @@ namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface;
+use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;
+use Spryker\Zed\Event\Business\EventFacadeInterface;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Kernel\Locator;
 
@@ -32,6 +34,11 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProviderTest extends Unit
      * @var \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected CompanyUserFacadeInterface|MockObject $companyUserFacadeMock;
+
+    /**
+     * @var \Spryker\Zed\Event\Business\EventFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected EventFacadeInterface|MockObject $eventFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorDependencyProvider
@@ -59,6 +66,10 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProviderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->eventFacadeMock = $this->getMockBuilder(EventFacadeInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->dependencyProvider = new CustomerAnonymizerCompanyUserConnectorDependencyProvider();
     }
 
@@ -78,9 +89,10 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProviderTest extends Unit
 
         $this->bundleProxyMock->expects(static::atLeastOnce())
             ->method('__call')
-            ->withConsecutive(['facade'])
+            ->withConsecutive(['facade'], ['facade'])
             ->willReturnOnConsecutiveCalls(
                 $this->companyUserFacadeMock,
+                $this->eventFacadeMock,
             );
 
         $container = $this->dependencyProvider->provideBusinessLayerDependencies($this->containerMock);
@@ -90,6 +102,11 @@ class CustomerAnonymizerCompanyUserConnectorDependencyProviderTest extends Unit
         static::assertInstanceOf(
             CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface::class,
             $container[CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_COMPANY_USER],
+        );
+
+        static::assertInstanceOf(
+            CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface::class,
+            $container[CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_EVENT],
         );
     }
 

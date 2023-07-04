@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business;
 
+use Generated\Shared\Transfer\CompanyUserIdCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 
 interface CustomerAnonymizerCompanyUserConnectorFacadeInterface
@@ -14,4 +15,11 @@ interface CustomerAnonymizerCompanyUserConnectorFacadeInterface
      * @return void
      */
     public function deleteCompanyUsersForCustomer(CustomerTransfer $customerTransfer): void;
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserIdCollectionTransfer $idCollectionTransfer
+     *
+     * @return void
+     */
+    public function deleteCompanyUserByIds(CompanyUserIdCollectionTransfer $idCollectionTransfer): void;
 }

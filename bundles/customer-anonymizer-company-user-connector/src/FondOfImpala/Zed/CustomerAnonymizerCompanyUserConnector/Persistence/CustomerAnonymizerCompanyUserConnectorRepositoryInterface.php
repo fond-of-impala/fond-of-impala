@@ -2,17 +2,14 @@
 
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence;
 
-use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
+use Generated\Shared\Transfer\CompanyUserIdCollectionTransfer;
 
 interface CustomerAnonymizerCompanyUserConnectorRepositoryInterface
 {
     /**
      * @param int $fkCustomer
      *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
-     *
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     * @return \Generated\Shared\Transfer\CompanyUserIdCollectionTransfer
      */
-    public function findCompanyUsersByFkCustomer(int $fkCustomer): CompanyUserCollectionTransfer;
+    public function findCompanyUserIdsByFkCustomer(int $fkCustomer): CompanyUserIdCollectionTransfer;
 }
