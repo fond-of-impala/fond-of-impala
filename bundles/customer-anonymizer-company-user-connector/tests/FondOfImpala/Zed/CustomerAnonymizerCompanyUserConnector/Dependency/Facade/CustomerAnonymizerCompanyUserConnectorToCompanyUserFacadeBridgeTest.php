@@ -3,6 +3,8 @@
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade;
 
 use Codeception\Test\Unit;
+use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
+use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -26,6 +28,16 @@ class CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridgeTest extend
     protected CompanyUserResponseTransfer|MockObject $companyUserResponseTransferMock;
 
     /**
+     * @var (\Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CompanyUserCriteriaFilterTransfer|MockObject $companyUserCriteriaFilterTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\CompanyUserCollectionTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|CompanyUserCollectionTransfer $companyUserCollectionTransferMock;
+
+    /**
      * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge
      */
     protected CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridge $bridge;
@@ -44,6 +56,14 @@ class CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridgeTest extend
             ->getMock();
 
         $this->companyUserResponseTransferMock = $this->getMockBuilder(CompanyUserResponseTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyUserCriteriaFilterTransferMock = $this->getMockBuilder(CompanyUserCriteriaFilterTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyUserCollectionTransferMock = $this->getMockBuilder(CompanyUserCollectionTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -67,6 +87,22 @@ class CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridgeTest extend
             $this->bridge->deleteCompanyUser(
                 $this->companyUserTransferMock,
             ),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetRawCompanyUsersByCriteria(): void
+    {
+        $this->facadeMock->expects(static::atLeastOnce())
+            ->method('getRawCompanyUsersByCriteria')
+            ->with($this->companyUserCriteriaFilterTransferMock)
+            ->willReturn($this->companyUserCollectionTransferMock);
+
+        static::assertEquals(
+            $this->companyUserCollectionTransferMock,
+            $this->bridge->getRawCompanyUsersByCriteria($this->companyUserCriteriaFilterTransferMock),
         );
     }
 }

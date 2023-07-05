@@ -14,12 +14,12 @@ interface CustomerAnonymizerCompanyUserConnectorFacadeInterface
      *
      * @return void
      */
-    public function deleteCompanyUsersForCustomer(CustomerTransfer $customerTransfer): void;
+    public function deleteCompanyUsersByCustomer(CustomerTransfer $customerTransfer): void;
 
     /**
      * @param \Generated\Shared\Transfer\CompanyUserIdCollectionTransfer $idCollectionTransfer
      *
      * @return void
      */
-    public function deleteCompanyUserByIds(CompanyUserIdCollectionTransfer $idCollectionTransfer): void;
+    public function deleteCompanyUsersByCompanyUserIdCollection(CompanyUserIdCollectionTransfer $idCollectionTransfer): void;
 }

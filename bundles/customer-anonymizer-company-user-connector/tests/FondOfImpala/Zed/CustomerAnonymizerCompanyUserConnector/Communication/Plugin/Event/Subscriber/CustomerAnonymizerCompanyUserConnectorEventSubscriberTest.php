@@ -45,9 +45,7 @@ class CustomerAnonymizerCompanyUserConnectorEventSubscriberTest extends Unit
                 [
                     CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER,
                     static::callback(
-                        static function (EventBaseHandlerInterface $eventHandler) {
-                            return $eventHandler instanceof CompanyUserDeleterListener;
-                        },
+                        static fn (EventBaseHandlerInterface $eventHandler): bool => $eventHandler instanceof CompanyUserDeleterListener,
                     ),
                     0,
                     null,

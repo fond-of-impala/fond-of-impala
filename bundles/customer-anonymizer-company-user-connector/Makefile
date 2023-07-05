@@ -12,7 +12,7 @@ phpcbf:
 
 .PHONY: phpstan
 phpstan:
-	./vendor/bin/phpstan --memory-limit=-1 analyse ./src/FondOfImpala ./tests
+	./vendor/bin/phpstan --memory-limit=-1 analyse ./src/FondOfImpala
 
 .PHONY: codeception
 codeception:

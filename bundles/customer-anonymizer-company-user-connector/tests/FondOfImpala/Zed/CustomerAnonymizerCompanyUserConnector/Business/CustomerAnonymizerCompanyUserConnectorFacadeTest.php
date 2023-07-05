@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleterInterface;
+use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleterInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -15,7 +15,7 @@ class CustomerAnonymizerCompanyUserConnectorFacadeTest extends Unit
     protected CustomerTransfer|MockObject $customerTransferMock;
 
     /**
-     * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleterInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected CompanyUserDeleterInterface|MockObject $companyUserDeleter;
 
@@ -63,6 +63,6 @@ class CustomerAnonymizerCompanyUserConnectorFacadeTest extends Unit
             ->method('deleteByCustomer')
             ->with($this->customerTransferMock);
 
-        $this->facade->deleteCompanyUsersForCustomer($this->customerTransferMock);
+        $this->facade->deleteCompanyUsersByCustomer($this->customerTransferMock);
     }
 }

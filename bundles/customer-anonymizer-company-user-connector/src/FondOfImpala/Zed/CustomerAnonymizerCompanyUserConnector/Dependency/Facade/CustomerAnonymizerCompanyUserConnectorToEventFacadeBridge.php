@@ -7,10 +7,7 @@ use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class CustomerAnonymizerCompanyUserConnectorToEventFacadeBridge implements CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Event\Business\EventFacadeInterface
-     */
-    protected $facade;
+    protected EventFacadeInterface $facade;
 
     /**
      * @param \Spryker\Zed\Event\Business\EventFacadeInterface $eventFacade

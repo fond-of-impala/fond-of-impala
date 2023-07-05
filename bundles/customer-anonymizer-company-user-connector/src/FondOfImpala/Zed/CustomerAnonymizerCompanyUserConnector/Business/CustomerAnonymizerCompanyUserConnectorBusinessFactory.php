@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business;
 
-use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleter;
-use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleterInterface;
+use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleter;
+use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleterInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorDependencyProvider;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface;
@@ -18,7 +18,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 class CustomerAnonymizerCompanyUserConnectorBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleterInterface
+     * @return \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleterInterface
      */
     public function createCompanyUserDeleter(): CompanyUserDeleterInterface
     {

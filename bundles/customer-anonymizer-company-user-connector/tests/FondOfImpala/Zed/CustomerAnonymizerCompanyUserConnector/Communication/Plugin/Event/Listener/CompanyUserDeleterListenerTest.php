@@ -52,7 +52,7 @@ class CompanyUserDeleterListenerTest extends Unit
     {
         $this->facadeMock
             ->expects(static::once())
-            ->method('deleteCompanyUserByIds');
+            ->method('deleteCompanyUsersByCompanyUserIdCollection');
 
         $this->listener->handle(
             $this->companyUserIdCollectionTransferMock,

@@ -2,14 +2,14 @@
 
 declare (strict_types=1);
 
-namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model;
+namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter;
 
 use FondOfImpala\Shared\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorConstants;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence\CustomerAnonymizerCompanyUserConnectorRepositoryInterface;
+use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserIdCollectionTransfer;
-use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 
 class CompanyUserDeleter implements CompanyUserDeleterInterface
@@ -51,23 +51,43 @@ class CompanyUserDeleter implements CompanyUserDeleterInterface
      */
     public function deleteByCustomer(CustomerTransfer $customerTransfer): void
     {
-        $companyUserIds = $this->repository->findCompanyUserIdsByFkCustomer($customerTransfer->getIdCustomerOrFail());
+        $idCustomer = $customerTransfer->getIdCustomer();
 
-        if (count($companyUserIds->getIds()) > 0) {
-            $this->eventFacade->trigger(CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER, $companyUserIds);
+        if ($idCustomer === null) {
+            return;
         }
+
+        $companyUserIdCollectionTransfer = $this->repository->findCompanyUserIdsByFkCustomer($idCustomer);
+
+        if (count($companyUserIdCollectionTransfer->getCompanyUserIds()) <= 0) {
+            return;
+        }
+
+        $this->eventFacade->trigger(
+            CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER,
+            $companyUserIdCollectionTransfer,
+        );
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CompanyUserIdCollectionTransfer $idCollectionTransfer
+     * @param \Generated\Shared\Transfer\CompanyUserIdCollectionTransfer $companyUserIdCollectionTransfer
      *
      * @return void
      */
-    public function deleteCompanyUserByIds(CompanyUserIdCollectionTransfer $idCollectionTransfer): void
-    {
-        foreach ($idCollectionTransfer->getIds() as $companyUserId) {
-            $companyUserTransfer = (new CompanyUserTransfer())->setIdCompanyUser($companyUserId);
-            $this->companyUserFacade->deleteCompanyUser($companyUserTransfer);
+    public function deleteCompanyUserByCompanyUserIdCollection(
+        CompanyUserIdCollectionTransfer $companyUserIdCollectionTransfer
+    ): void {
+        foreach (array_chunk($companyUserIdCollectionTransfer->getCompanyUserIds(), 100) as $companyUserIds) {
+            $companyUserCriteriaFilterTransfer = (new CompanyUserCriteriaFilterTransfer())
+                ->setCompanyUserIds($companyUserIds);
+
+            $companyUserCollectionTransfer = $this->companyUserFacade->getRawCompanyUsersByCriteria(
+                $companyUserCriteriaFilterTransfer,
+            );
+
+            foreach ($companyUserCollectionTransfer->getCompanyUsers() as $companyUserTransfer) {
+                $this->companyUserFacade->deleteCompanyUser($companyUserTransfer);
+            }
         }
     }
 }

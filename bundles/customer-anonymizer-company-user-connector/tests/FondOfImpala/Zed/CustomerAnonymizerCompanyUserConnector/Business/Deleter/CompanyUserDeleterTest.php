@@ -1,11 +1,15 @@
 <?php
 
-namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model;
+namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter;
 
+use ArrayObject;
 use Codeception\Test\Unit;
+use FondOfImpala\Shared\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorConstants;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToEventFacadeInterface;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence\CustomerAnonymizerCompanyUserConnectorRepositoryInterface;
+use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
+use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserIdCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
@@ -45,7 +49,17 @@ class CompanyUserDeleterTest extends Unit
     protected CompanyUserIdCollectionTransfer|MockObject $companyUserIdCollectionTransferMock;
 
     /**
-     * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Model\CompanyUserDeleter
+     * @var (\Generated\Shared\Transfer\CompanyUserCollectionTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|CompanyUserCollectionTransfer $companyUserCollectionTransferMock;
+
+    /**
+     * @var (\Generated\Shared\Transfer\CompanyUserTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CompanyUserTransfer|MockObject $companyUserTransferMock;
+
+    /**
+     * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleter
      */
     protected CompanyUserDeleter $companyUserDeleter;
 
@@ -78,6 +92,14 @@ class CompanyUserDeleterTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->companyUserCollectionTransferMock = $this->getMockBuilder(CompanyUserCollectionTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyUserTransferMock = $this->getMockBuilder(CompanyUserTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->companyUserDeleter = new CompanyUserDeleter(
             $this->companyUserFacadeMock,
             $this->eventFacadeMock,
@@ -90,20 +112,28 @@ class CompanyUserDeleterTest extends Unit
      */
     public function testDeleteByCustomer(): void
     {
+        $idCustomer = 1;
+        $companyUserIds = [1, 2, 3];
+
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getIdCustomer')
+            ->willReturn($idCustomer);
+
         $this->repositoryMock->expects(static::atLeastOnce())
             ->method('findCompanyUserIdsByFkCustomer')
+            ->with($idCustomer)
             ->willReturn($this->companyUserIdCollectionTransferMock);
 
         $this->companyUserIdCollectionTransferMock->expects(static::atLeastOnce())
-            ->method('getIds')
-            ->willReturn([100]);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getIdCustomerOrFail')
-            ->willReturn(1);
+            ->method('getCompanyUserIds')
+            ->willReturn($companyUserIds);
 
         $this->eventFacadeMock->expects(static::atLeastOnce())
-            ->method('trigger');
+            ->method('trigger')
+            ->with(
+                CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER,
+                $this->companyUserIdCollectionTransferMock,
+            );
 
         $this->companyUserDeleter->deleteByCustomer(
             $this->customerTransferMock,
@@ -113,22 +143,34 @@ class CompanyUserDeleterTest extends Unit
     /**
      * @return void
      */
-    public function testDeleteCompanyUserByIds(): void
+    public function testDeleteCompanyUserByCompanyUserIdCollection(): void
     {
-        $self = $this;
+        $companyUserIds = [2];
+
         $this->companyUserIdCollectionTransferMock->expects(static::atLeastOnce())
-            ->method('getIds')
-            ->willReturn([100]);
+            ->method('getCompanyUserIds')
+            ->willReturn($companyUserIds);
+
+        $this->companyUserFacadeMock->expects(static::atLeastOnce())
+            ->method('getRawCompanyUsersByCriteria')
+            ->with(
+                static::callback(
+                    static fn (
+                        CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer
+                    ): bool => $companyUserCriteriaFilterTransfer->getCompanyUserIds() === $companyUserIds
+                ),
+            )->willReturn($this->companyUserCollectionTransferMock);
+
+        $this->companyUserCollectionTransferMock->expects(static::atLeastOnce())
+            ->method('getCompanyUsers')
+            ->willReturn(new ArrayObject([$this->companyUserTransferMock]));
 
         $this->companyUserFacadeMock->expects(static::atLeastOnce())
             ->method('deleteCompanyUser')
-            ->willReturnCallback(static function (CompanyUserTransfer $companyUserTransfer) use ($self) {
-                $self->assertSame($companyUserTransfer->getIdCompanyUser(), 100);
+            ->with($this->companyUserTransferMock)
+            ->willReturn($this->companyUserResponseTransferMock);
 
-                return $self->companyUserResponseTransferMock;
-            });
-
-        $this->companyUserDeleter->deleteCompanyUserByIds(
+        $this->companyUserDeleter->deleteCompanyUserByCompanyUserIdCollection(
             $this->companyUserIdCollectionTransferMock,
         );
     }

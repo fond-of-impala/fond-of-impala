@@ -47,7 +47,7 @@ class CompanyUserDeleterBeforeCustomerAnonymizerPluginTest extends Unit
     public function testProcess(): void
     {
         $this->facadeMock->expects(static::atLeastOnce())
-            ->method('deleteCompanyUsersForCustomer')
+            ->method('deleteCompanyUsersByCustomer')
             ->with($this->customerTransfer);
 
         $this->plugin->process(

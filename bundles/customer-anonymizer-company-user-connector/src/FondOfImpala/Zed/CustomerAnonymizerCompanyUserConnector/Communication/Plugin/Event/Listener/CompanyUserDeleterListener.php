@@ -29,7 +29,7 @@ class CompanyUserDeleterListener extends AbstractPlugin implements EventHandlerI
             && $eventName === CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER
         ) {
             try {
-                $this->getFacade()->deleteCompanyUserByIds($transfer);
+                $this->getFacade()->deleteCompanyUsersByCompanyUserIdCollection($transfer);
             } catch (Exception $exception) {
                 //ToDo: maybe log here
                 throw $exception;

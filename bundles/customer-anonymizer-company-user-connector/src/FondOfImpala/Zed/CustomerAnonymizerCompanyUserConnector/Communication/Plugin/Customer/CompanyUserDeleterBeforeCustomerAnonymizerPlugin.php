@@ -18,6 +18,6 @@ class CompanyUserDeleterBeforeCustomerAnonymizerPlugin extends AbstractPlugin im
      */
     public function process(CustomerTransfer $customerTransfer): void
     {
-        $this->getFacade()->deleteCompanyUsersForCustomer($customerTransfer);
+        $this->getFacade()->deleteCompanyUsersByCustomer($customerTransfer);
     }
 }
