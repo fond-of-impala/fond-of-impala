@@ -16,7 +16,7 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 /**
  * @method \FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory getFactory()
  */
-class ChannelConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
+class PossibleChannelConditionalAvailabilityPageSearchQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
      * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
@@ -26,15 +26,15 @@ class ChannelConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abstra
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = [])
     {
-        if (isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_CHANNEL])) {
+        if (!isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_CHANNEL])) {
             return $searchQuery;
         }
 
         $customerTransfer = $this->getCustomer();
-        $channel = '';
+        $channel = $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_CHANNEL];
 
-        if ($customerTransfer !== null && $customerTransfer->getAvailabilityChannel() !== null) {
-            $channel = $customerTransfer->getAvailabilityChannel();
+        if ($customerTransfer === null || !in_array($channel, $customerTransfer->getPossibleAvailabilityChannels(), true)) {
+            $channel = '';
         }
 
         $term = (new Term())->setTerm(

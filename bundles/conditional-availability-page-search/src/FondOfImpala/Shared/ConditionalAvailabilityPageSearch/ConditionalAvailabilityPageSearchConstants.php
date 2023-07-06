@@ -42,6 +42,11 @@ interface ConditionalAvailabilityPageSearchConstants
     /**
      * @var string
      */
+    public const PARAMETER_CHANNEL = 'channel';
+
+    /**
+     * @var string
+     */
     public const PARAMETER_ONE_PER_SKU = 'one-per-sku';
 
     /**
