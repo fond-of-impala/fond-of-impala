@@ -41,7 +41,7 @@
     },
     "conditional-availability-page-search-rest-api": {
       "path": "bundles/conditional-availability-page-search-rest-api",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "conditional-availability-page-search-rest-api-extension": {
       "path": "bundles/conditional-availability-page-search-rest-api-extension",
