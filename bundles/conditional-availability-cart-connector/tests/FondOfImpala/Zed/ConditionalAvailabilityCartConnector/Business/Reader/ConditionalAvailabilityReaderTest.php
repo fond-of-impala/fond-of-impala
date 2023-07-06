@@ -20,6 +20,11 @@ class ConditionalAvailabilityReaderTest extends Unit
     protected SkusFilterInterface|MockObject $skusFilterMock;
 
     /**
+     * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReaderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|CustomerReaderInterface $customerReaderMock;
+
+    /**
      * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
     protected ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface|MockObject $conditionalAvailabilityFacadeMock;
@@ -55,6 +60,10 @@ class ConditionalAvailabilityReaderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->customerReaderMock = $this->getMockBuilder(CustomerReaderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->conditionalAvailabilityFacadeMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -73,6 +82,7 @@ class ConditionalAvailabilityReaderTest extends Unit
 
         $this->conditionalAvailabilityReader = new ConditionalAvailabilityReader(
             $this->skusFilterMock,
+            $this->customerReaderMock,
             $this->conditionalAvailabilityFacadeMock,
         );
     }
@@ -97,8 +107,9 @@ class ConditionalAvailabilityReaderTest extends Unit
             ->with($this->quoteTransferMock)
             ->willReturn($skus);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
+        $this->customerReaderMock->expects(static::atLeastOnce())
+            ->method('getByQuoteTransfer')
+            ->with($this->quoteTransferMock)
             ->willReturn($this->customerTransferMock);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
@@ -136,8 +147,9 @@ class ConditionalAvailabilityReaderTest extends Unit
             ->with($this->quoteTransferMock)
             ->willReturn($skus);
 
-        $this->quoteTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomer')
+        $this->customerReaderMock->expects(static::atLeastOnce())
+            ->method('getByQuoteTransfer')
+            ->with($this->quoteTransferMock)
             ->willReturn(null);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::never())
