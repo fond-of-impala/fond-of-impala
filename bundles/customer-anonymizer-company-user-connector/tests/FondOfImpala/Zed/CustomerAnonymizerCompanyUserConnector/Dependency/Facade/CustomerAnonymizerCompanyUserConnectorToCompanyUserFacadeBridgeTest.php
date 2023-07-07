@@ -89,20 +89,4 @@ class CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeBridgeTest extend
             ),
         );
     }
-
-    /**
-     * @return void
-     */
-    public function testGetRawCompanyUsersByCriteria(): void
-    {
-        $this->facadeMock->expects(static::atLeastOnce())
-            ->method('getRawCompanyUsersByCriteria')
-            ->with($this->companyUserCriteriaFilterTransferMock)
-            ->willReturn($this->companyUserCollectionTransferMock);
-
-        static::assertEquals(
-            $this->companyUserCollectionTransferMock,
-            $this->bridge->getRawCompanyUsersByCriteria($this->companyUserCriteriaFilterTransferMock),
-        );
-    }
 }

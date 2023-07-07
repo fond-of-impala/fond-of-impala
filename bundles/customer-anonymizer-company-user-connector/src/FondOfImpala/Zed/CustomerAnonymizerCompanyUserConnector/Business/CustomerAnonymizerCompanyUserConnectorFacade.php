@@ -30,6 +30,6 @@ class CustomerAnonymizerCompanyUserConnectorFacade extends AbstractFacade implem
      */
     public function deleteCompanyUsersByCompanyUserIdCollection(CompanyUserIdCollectionTransfer $idCollectionTransfer): void
     {
-        $this->getFactory()->createCompanyUserDeleter()->deleteCompanyUserByIds($idCollectionTransfer);
+        $this->getFactory()->createCompanyUserDeleter()->deleteCompanyUserByCompanyUserIdCollection($idCollectionTransfer);
     }
 }

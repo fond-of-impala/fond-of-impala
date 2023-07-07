@@ -81,7 +81,7 @@ class CompanyUserDeleter implements CompanyUserDeleterInterface
             $companyUserCriteriaFilterTransfer = (new CompanyUserCriteriaFilterTransfer())
                 ->setCompanyUserIds($companyUserIds);
 
-            $companyUserCollectionTransfer = $this->companyUserFacade->getRawCompanyUsersByCriteria(
+            $companyUserCollectionTransfer = $this->repository->findCompanyUsersByIds(
                 $companyUserCriteriaFilterTransfer,
             );
 

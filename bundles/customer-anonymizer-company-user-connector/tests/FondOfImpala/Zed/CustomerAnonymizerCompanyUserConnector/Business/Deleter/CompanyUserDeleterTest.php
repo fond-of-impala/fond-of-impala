@@ -151,8 +151,8 @@ class CompanyUserDeleterTest extends Unit
             ->method('getCompanyUserIds')
             ->willReturn($companyUserIds);
 
-        $this->companyUserFacadeMock->expects(static::atLeastOnce())
-            ->method('getRawCompanyUsersByCriteria')
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('findCompanyUsersByIds')
             ->with(
                 static::callback(
                     static fn (
