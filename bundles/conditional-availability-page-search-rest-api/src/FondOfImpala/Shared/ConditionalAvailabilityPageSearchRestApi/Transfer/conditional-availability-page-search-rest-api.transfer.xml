@@ -19,6 +19,7 @@
         <property name="startAt" type="string" />
         <property name="endAt" type="string" />
         <property name="warehouseGroup" type="string" />
+        <property name="channel" type="string" />
     </transfer>
 
     <transfer name="RestConditionalAvailabilityPageSearchPaginationSort">

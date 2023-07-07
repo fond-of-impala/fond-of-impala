@@ -1,6 +1,6 @@
 {
-  "name": "fond-of-impala/conditional-availability-page-search-rest-api",
-  "description": "ConditionalAvailabilityPageSearchRestApi bundle",
+  "name": "fond-of-impala/conditional-availability-customers-rest-api",
+  "description": "Conditional availability customers rest api bundle",
   "license": "MIT",
   "authors": [
     {
@@ -13,12 +13,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
-    "fond-of-impala/conditional-availability": "^1.1.0",
-    "fond-of-impala/conditional-availability-page-search": "^1.1.0",
-    "fond-of-impala/conditional-availability-page-search-rest-api-extension": "^1.0.0",
-    "spryker/glue-application": "^1.0.0",
-    "spryker/glue-application-extension": "^1.0.0"
+    "php": ">=8.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
@@ -36,7 +31,7 @@
     "psr-4": {
       "FondOfImpala\\": "tests/FondOfImpala/",
       "Generated\\": "src/Generated/",
-      "Orm\\":"src/Orm/"
+      "Orm\\": "src/Orm/"
     }
   },
   "config": {

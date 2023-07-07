@@ -6,9 +6,6 @@ use Generated\Shared\Transfer\CustomerTransfer;
 use Spryker\Zed\Customer\Dependency\Plugin\CustomerTransferExpanderPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
-/**
- * @method \FondOfImpala\Zed\ConditionalAvailabilityCompanyConnector\Business\ConditionalAvailabilityCompanyConnectorFacadeInterface getFacade()
- */
 class AvailabilityChannelCustomerTransferExpanderPlugin extends AbstractPlugin implements CustomerTransferExpanderPluginInterface
 {
     /**
