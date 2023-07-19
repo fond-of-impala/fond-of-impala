@@ -51,6 +51,10 @@
       "path": "bundles/conditional-availability-sales-connector",
       "version": "1.0.0"
     },
+    "customer-anonymizer-company-user-connector": {
+      "path": "bundles/customer-anonymizer-company-user-connector",
+      "version": "1.0.0"
+    },
     "jellyfish-sales-order-conditional-availability": {
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
