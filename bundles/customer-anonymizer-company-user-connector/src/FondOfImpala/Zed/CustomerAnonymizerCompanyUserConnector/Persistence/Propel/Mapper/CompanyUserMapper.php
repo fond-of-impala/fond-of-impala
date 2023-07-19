@@ -28,6 +28,7 @@ class CompanyUserMapper implements CompanyUserMapperInterface
 
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $companyUserEntity
+     *
      * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
     public function mapEntityToCompanyUserTransfer(
@@ -35,21 +36,17 @@ class CompanyUserMapper implements CompanyUserMapperInterface
     ): CompanyUserTransfer {
         $companyUserTransfer = (new CompanyUserTransfer())->fromArray($companyUserEntity->toArray(), true);
 
-        if ($companyUserEntity->getCustomer()) {
-            $customerTransfer = (new CustomerTransfer())->fromArray(
-                $companyUserEntity->getCustomer()->toArray(),
-                true,
-            );
-            $companyUserTransfer->setCustomer($customerTransfer);
-        }
+        $customerTransfer = (new CustomerTransfer())->fromArray(
+            $companyUserEntity->getCustomer()->toArray(),
+            true,
+        );
+        $companyUserTransfer->setCustomer($customerTransfer);
 
-        if ($companyUserEntity->getCompany()) {
-            $companyTransfer = (new CompanyTransfer())->fromArray(
-                $companyUserEntity->getCompany()->toArray(),
-                true,
-            );
-            $companyUserTransfer->setCompany($companyTransfer);
-        }
+        $companyTransfer = (new CompanyTransfer())->fromArray(
+            $companyUserEntity->getCompany()->toArray(),
+            true,
+        );
+        $companyUserTransfer->setCompany($companyTransfer);
 
         return $companyUserTransfer;
     }
