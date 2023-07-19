@@ -3,27 +3,27 @@
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence\Propel\Mapper;
 
 use Codeception\Test\Unit;
-use Generated\Shared\Transfer\SpyCompanyEntityTransfer;
-use Generated\Shared\Transfer\SpyCompanyUserEntityTransfer;
-use Generated\Shared\Transfer\SpyCustomerEntityTransfer;
+use Orm\Zed\Company\Persistence\SpyCompany;
+use Orm\Zed\CompanyUser\Persistence\SpyCompanyUser;
+use Orm\Zed\Customer\Persistence\SpyCustomer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyUserMapperTest extends Unit
 {
     /**
-     * @var \Generated\Shared\Transfer\SpyCompanyUserEntityTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected SpyCompanyUserEntityTransfer|MockObject $spyCompanyUserEntityTransfer;
+    protected SpyCompanyUser|MockObject $spyCompanyUserEntityMock;
 
     /**
-     * @var \Generated\Shared\Transfer\SpyCustomerEntityTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Orm\Zed\Customer\Persistence\SpyCustomer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected SpyCustomerEntityTransfer|MockObject $spyCustomerEntityTransfer;
+    protected SpyCustomer|MockObject $spyCustomerMock;
 
     /**
-     * @var \Generated\Shared\Transfer\SpyCompanyEntityTransfer|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Orm\Zed\Company\Persistence\SpyCompany|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected SpyCompanyEntityTransfer|MockObject $spyCompanyEntityTransfer;
+    protected SpyCompany|MockObject $spyCompanyMock;
 
     /**
      * @var \FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence\Propel\Mapper\CompanyUserMapper
@@ -35,15 +35,15 @@ class CompanyUserMapperTest extends Unit
      */
     protected function _before(): void
     {
-        $this->spyCompanyUserEntityTransfer = $this->getMockBuilder(SpyCompanyUserEntityTransfer::class)
+        $this->spyCompanyUserEntityMock = $this->getMockBuilder(SpyCompanyUser::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->spyCustomerEntityTransfer = $this->getMockBuilder(SpyCustomerEntityTransfer::class)
+        $this->spyCustomerMock = $this->getMockBuilder(SpyCustomer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->spyCompanyEntityTransfer = $this->getMockBuilder(SpyCompanyEntityTransfer::class)
+        $this->spyCompanyMock = $this->getMockBuilder(SpyCompanyUser::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -55,54 +55,54 @@ class CompanyUserMapperTest extends Unit
      */
     public function testMapCompanyUserCollection(): void
     {
-        $this->spyCompanyUserEntityTransfer->expects(static::atLeastOnce())
-            ->method('modifiedToArray')
+        $this->spyCompanyUserEntityMock->expects(static::atLeastOnce())
+            ->method('toArray')
             ->willReturn([]);
 
-        $this->spyCompanyUserEntityTransfer->expects(static::atLeastOnce())
+        $this->spyCompanyUserEntityMock->expects(static::atLeastOnce())
             ->method('getCustomer')
-            ->willReturn($this->spyCustomerEntityTransfer);
+            ->willReturn($this->spyCustomerMock);
 
-        $this->spyCompanyUserEntityTransfer->expects(static::atLeastOnce())
+        $this->spyCompanyUserEntityMock->expects(static::atLeastOnce())
             ->method('getCompany')
-            ->willReturn($this->spyCompanyEntityTransfer);
+            ->willReturn($this->spyCompanyMock);
 
-        $this->spyCustomerEntityTransfer->expects(static::atLeastOnce())
-            ->method('modifiedToArray')
+        $this->spyCustomerMock->expects(static::atLeastOnce())
+            ->method('toArray')
             ->willReturn([]);
 
-        $this->spyCompanyEntityTransfer->expects(static::atLeastOnce())
-            ->method('modifiedToArray')
+        $this->spyCompanyMock->expects(static::atLeastOnce())
+            ->method('toArray')
             ->willReturn([]);
 
-        $this->mapper->mapCompanyUserCollection([$this->spyCompanyUserEntityTransfer]);
+        $this->mapper->mapCompanyUserCollection([$this->spyCompanyUserEntityMock]);
     }
 
     /**
      * @return void
      */
-    public function testMapEntityTransferToCompanyUserTransfer(): void
+    public function testMapEntityToCompanyUserTransfer(): void
     {
-        $this->spyCompanyUserEntityTransfer->expects(static::atLeastOnce())
-            ->method('modifiedToArray')
+        $this->spyCompanyUserEntityMock->expects(static::atLeastOnce())
+            ->method('toArray')
             ->willReturn([]);
 
-        $this->spyCompanyUserEntityTransfer->expects(static::atLeastOnce())
+        $this->spyCompanyUserEntityMock->expects(static::atLeastOnce())
             ->method('getCustomer')
-            ->willReturn($this->spyCustomerEntityTransfer);
+            ->willReturn($this->spyCustomerMock);
 
-        $this->spyCompanyUserEntityTransfer->expects(static::atLeastOnce())
+        $this->spyCompanyUserEntityMock->expects(static::atLeastOnce())
             ->method('getCompany')
-            ->willReturn($this->spyCompanyEntityTransfer);
+            ->willReturn($this->spyCompanyMock);
 
-        $this->spyCustomerEntityTransfer->expects(static::atLeastOnce())
-            ->method('modifiedToArray')
+        $this->spyCustomerMock->expects(static::atLeastOnce())
+            ->method('toArray')
             ->willReturn([]);
 
-        $this->spyCompanyEntityTransfer->expects(static::atLeastOnce())
-            ->method('modifiedToArray')
+        $this->spyCompanyMock->expects(static::atLeastOnce())
+            ->method('toArray')
             ->willReturn([]);
 
-        $this->mapper->mapEntityTransferToCompanyUserTransfer($this->spyCompanyUserEntityTransfer);
+        $this->mapper->mapEntityToCompanyUserTransfer($this->spyCompanyUserEntityMock);
     }
 }

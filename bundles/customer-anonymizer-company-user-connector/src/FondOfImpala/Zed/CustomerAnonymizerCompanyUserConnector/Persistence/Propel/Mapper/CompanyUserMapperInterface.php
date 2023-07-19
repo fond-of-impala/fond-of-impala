@@ -4,23 +4,23 @@ namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Persistence\Pr
 
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
-use Generated\Shared\Transfer\SpyCompanyUserEntityTransfer;
+use Orm\Zed\CompanyUser\Persistence\SpyCompanyUser;
 
 interface CompanyUserMapperInterface
 {
     /**
-     * @param array<\Generated\Shared\Transfer\SpyCompanyUserEntityTransfer> $collection
+     * @param array<\Orm\Zed\CompanyUser\Persistence\SpyCompanyUser> $collection
      *
      * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
      */
     public function mapCompanyUserCollection(array $collection): CompanyUserCollectionTransfer;
 
     /**
-     * @param \Generated\Shared\Transfer\SpyCompanyUserEntityTransfer $companyUserEntityTransfer
+     * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $companyUserEntity
      *
      * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
-    public function mapEntityTransferToCompanyUserTransfer(
-        SpyCompanyUserEntityTransfer $companyUserEntityTransfer
+    public function mapEntityToCompanyUserTransfer(
+        SpyCompanyUser $companyUserEntity
     ): CompanyUserTransfer;
 }

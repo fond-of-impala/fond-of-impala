@@ -6,12 +6,12 @@ use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\SpyCompanyUserEntityTransfer;
+use Orm\Zed\CompanyUser\Persistence\SpyCompanyUser;
 
 class CompanyUserMapper implements CompanyUserMapperInterface
 {
     /**
-     * @param array<\Generated\Shared\Transfer\SpyCompanyUserEntityTransfer> $collection
+     * @param array<\Orm\Zed\CompanyUser\Persistence\SpyCompanyUser> $collection
      *
      * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
      */
@@ -19,38 +19,34 @@ class CompanyUserMapper implements CompanyUserMapperInterface
     {
         $companyUserCollectionTransfer = new CompanyUserCollectionTransfer();
 
-        foreach ($collection as $companyUserEntityTransfer) {
-            $companyUserCollectionTransfer->addCompanyUser($this->mapEntityTransferToCompanyUserTransfer($companyUserEntityTransfer));
+        foreach ($collection as $companyUserEntity) {
+            $companyUserCollectionTransfer->addCompanyUser($this->mapEntityToCompanyUserTransfer($companyUserEntity));
         }
 
         return $companyUserCollectionTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\SpyCompanyUserEntityTransfer $companyUserEntityTransfer
+     * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $companyUserEntity
      *
      * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
-    public function mapEntityTransferToCompanyUserTransfer(
-        SpyCompanyUserEntityTransfer $companyUserEntityTransfer
+    public function mapEntityToCompanyUserTransfer(
+        SpyCompanyUser $companyUserEntity
     ): CompanyUserTransfer {
-        $companyUserTransfer = (new CompanyUserTransfer())->fromArray($companyUserEntityTransfer->modifiedToArray(), true);
+        $companyUserTransfer = (new CompanyUserTransfer())->fromArray($companyUserEntity->toArray(), true);
 
-        if ($companyUserEntityTransfer->getCustomer()) {
-            $customerTransfer = (new CustomerTransfer())->fromArray(
-                $companyUserEntityTransfer->getCustomer()->modifiedToArray(),
-                true,
-            );
-            $companyUserTransfer->setCustomer($customerTransfer);
-        }
+        $customerTransfer = (new CustomerTransfer())->fromArray(
+            $companyUserEntity->getCustomer()->toArray(),
+            true,
+        );
+        $companyUserTransfer->setCustomer($customerTransfer);
 
-        if ($companyUserEntityTransfer->getCompany()) {
-            $companyTransfer = (new CompanyTransfer())->fromArray(
-                $companyUserEntityTransfer->getCompany()->modifiedToArray(),
-                true,
-            );
-            $companyUserTransfer->setCompany($companyTransfer);
-        }
+        $companyTransfer = (new CompanyTransfer())->fromArray(
+            $companyUserEntity->getCompany()->toArray(),
+            true,
+        );
+        $companyUserTransfer->setCompany($companyTransfer);
 
         return $companyUserTransfer;
     }
