@@ -17,6 +17,7 @@
     }
   ],
   "replace": {
+    "fond-of-impala/company-type-role": "*",
     "fond-of-impala/conditional-availability": "*",
     "fond-of-impala/conditional-availability-bulk-api": "*",
     "fond-of-impala/conditional-availability-cart-connector": "*",
@@ -65,6 +66,8 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Shared/CompanyTypeRole",
+      "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Service/ConditionalAvailability",
       "FondOfImpala\\Shared\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Shared/ConditionalAvailability",
       "FondOfImpala\\Zed\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Zed/ConditionalAvailability",
@@ -103,6 +106,8 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Shared/CompanyTypeRole",
+      "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Service/ConditionalAvailability",
       "FondOfImpala\\Shared\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Shared/ConditionalAvailability",
       "FondOfImpala\\Zed\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Zed/ConditionalAvailability",
