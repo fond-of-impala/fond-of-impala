@@ -17,6 +17,7 @@
     }
   ],
   "replace": {
+    "fond-of-impala/company-type-converter": "*",
     "fond-of-impala/company-type-role": "*",
     "fond-of-impala/conditional-availability": "*",
     "fond-of-impala/conditional-availability-bulk-api": "*",
@@ -40,6 +41,7 @@
     "fond-of-spryker/company-type": "dev-master",
     "fond-of-spryker/company-user-carts-rest-api": "dev-master",
     "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
+    "fond-of-spryker/company-type-converter-extension": "dev-master",
     "spryker/api": "^0.4.0",
     "spryker/api-extension": "^0.1.0",
     "spryker/api-query-builder": "^0.1.0",
@@ -72,6 +74,8 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Shared/CompanyTypeConverter",
+      "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Zed/CompanyTypeConverter",
       "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Shared/CompanyTypeRole",
       "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Service/ConditionalAvailability",
@@ -112,6 +116,8 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Shared/CompanyTypeConverter",
+      "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Zed/CompanyTypeConverter",
       "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Shared/CompanyTypeRole",
       "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Service/ConditionalAvailability",

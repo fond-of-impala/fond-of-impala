@@ -1,6 +1,6 @@
 # Company Type Role Module
-[![Build Status](https://travis-ci.org/fond-of-impala/company-type-role.svg?branch=master)](https://travis-ci.org/fond-of-impala/company-type-role)
-[![PHP from Travis config](https://img.shields.io/travis/php-v/fond-of-impala/company-type-role.svg)](https://php.net/)
+
+[![CI](https://github.com/fond-of-impala/company-type-role/actions/workflows/main.yml/badge.svg)](https://github.com/fond-of-impala/company-type-role/actions/workflows/main.yml)
 [![license](https://img.shields.io/github/license/fond-of-impala/company-type-role.svg)](https://packagist.org/packages/fond-of-impala/company-type-role)
 
 ## Installation
