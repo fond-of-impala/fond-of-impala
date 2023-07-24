@@ -4,7 +4,7 @@
   "pathToTempDirectory": "/home/dandelion/project/tmp/",
   "repositories": {
     "company-type-role": {
-      "path": "company-type-role",
+      "path": "bundles/company-type-role",
       "version": "1.0.0-beta"
     },
     "conditional-availability": {
