@@ -21,7 +21,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfImpala\Zed\CompanyTypeConverter\CompanyTypeConverterConfig getConfig()
- * @method \FondOfImpala\Zed\CompanyTypeConverter\Persistence\CompanyTypeConverterRepositoryInterface getRepository()
  */
 class CompanyTypeConverterBusinessFactory extends AbstractBusinessFactory
 {
@@ -76,7 +75,7 @@ class CompanyTypeConverterBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface[]
+     * @return \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface[]
      */
     protected function getCompanyTypeConverterPreSavePlugins(): array
     {
