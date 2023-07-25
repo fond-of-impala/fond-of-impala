@@ -1,0 +1,46 @@
+{
+  "name": "fond-of-impala/company-type-converter",
+  "description": "CompanyTypeConverter  module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "József Geng",
+      "email": "gengjozsef86@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "spryker/company": "^1.0.0",
+    "spryker/company-role": "^1.0",
+    "spryker/permission": "^1.2",
+    "spryker/company-user": "^2.0.0",
+    "fond-of-impala/company-type-role": "dev-main",
+    "fond-of-impala/company-type-converter-extension": "dev-main",
+    "fond-of-spryker/company-type": "dev-master"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

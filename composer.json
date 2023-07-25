@@ -18,6 +18,7 @@
   ],
   "replace": {
     "fond-of-impala/company-type": "*",
+    "fond-of-impala/company-type-converter": "*",
     "fond-of-impala/company-type-converter-extension": "*",
     "fond-of-impala/company-type-role": "*",
     "fond-of-impala/conditional-availability": "*",
@@ -42,6 +43,7 @@
     "fond-of-spryker/company-type": "dev-master",
     "fond-of-spryker/company-user-carts-rest-api": "dev-master",
     "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
+    "fond-of-spryker/company-type-converter-extension": "dev-master",
     "spryker/api": "^0.4.0",
     "spryker/api-extension": "^0.1.0",
     "spryker/api-query-builder": "^0.1.0",
@@ -74,6 +76,8 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Shared/CompanyTypeConverter",
+      "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Zed/CompanyTypeConverter",
       "FondOfImpala\\Client\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Client/CompanyType",
       "FondOfImpala\\Shared\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Shared/CompanyType",
       "FondOfImpala\\Zed\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Zed/CompanyType",
@@ -119,6 +123,8 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Shared/CompanyTypeConverter",
+      "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Zed/CompanyTypeConverter",
       "FondOfImpala\\Client\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Client/CompanyType",
       "FondOfImpala\\Shared\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Shared/CompanyType",
       "FondOfImpala\\Zed\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Zed/CompanyType",
