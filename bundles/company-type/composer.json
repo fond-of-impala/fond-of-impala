@@ -1,0 +1,47 @@
+{
+  "name": "fond-of-impala/company-type",
+  "description": "Company type module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    }
+  ],
+  "scripts": {
+    "ci": "make ci",
+    "codeception": "make codeception",
+    "phpcs": "make phpcs",
+    "phpstan": "make phpstan"
+  },
+  "require": {
+    "php": ">=8.0",
+    "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
+    "spryker/company-extension": "^1.0",
+    "spryker/company-business-unit": "^1.0.0 || ^2.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

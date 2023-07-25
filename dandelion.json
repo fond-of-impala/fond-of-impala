@@ -3,8 +3,16 @@
   "pathToSplitshLite": "/usr/local/bin/splitsh-lite",
   "pathToTempDirectory": "/home/dandelion/project/tmp/",
   "repositories": {
+    "company-type": {
+      "path": "bundles/company-type",
+      "version": "1.0.0-beta"
+    },
     "company-type-converter": {
       "path": "bundles/company-type-converter",
+      "version": "1.0.0-beta"
+    },
+    "company-type-converter-extension": {
+      "path": "bundles/company-type-converter-extension",
       "version": "1.0.0-beta"
     },
     "company-type-role": {

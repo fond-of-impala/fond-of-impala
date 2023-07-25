@@ -17,7 +17,9 @@
     }
   ],
   "replace": {
+    "fond-of-impala/company-type": "*",
     "fond-of-impala/company-type-converter": "*",
+    "fond-of-impala/company-type-converter-extension": "*",
     "fond-of-impala/company-type-role": "*",
     "fond-of-impala/conditional-availability": "*",
     "fond-of-impala/conditional-availability-bulk-api": "*",
@@ -76,6 +78,11 @@
     "psr-4": {
       "FondOfImpala\\Shared\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Shared/CompanyTypeConverter",
       "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Zed/CompanyTypeConverter",
+      "FondOfImpala\\Client\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Client/CompanyType",
+      "FondOfImpala\\Shared\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Shared/CompanyType",
+      "FondOfImpala\\Zed\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Zed/CompanyType",
+      "FondOfImpala\\Shared\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/src/FondOfImpala/Shared/CompanyTypeConverterExtension",
+      "FondOfImpala\\Zed\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/src/FondOfImpala/Zed/CompanyTypeConverterExtension",
       "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Shared/CompanyTypeRole",
       "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/src/FondOfImpala/Service/ConditionalAvailability",
@@ -118,6 +125,11 @@
     "psr-4": {
       "FondOfImpala\\Shared\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Shared/CompanyTypeConverter",
       "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Zed/CompanyTypeConverter",
+      "FondOfImpala\\Client\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Client/CompanyType",
+      "FondOfImpala\\Shared\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Shared/CompanyType",
+      "FondOfImpala\\Zed\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Zed/CompanyType",
+      "FondOfImpala\\Shared\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/tests/FondOfImpala/Shared/CompanyTypeConverterExtension",
+      "FondOfImpala\\Zed\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/tests/FondOfImpala/Zed/CompanyTypeConverterExtension",
       "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Shared/CompanyTypeRole",
       "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Service\\ConditionalAvailability\\": "bundles/conditional-availability/tests/FondOfImpala/Service/ConditionalAvailability",

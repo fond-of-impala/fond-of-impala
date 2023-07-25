@@ -1,7 +1,9 @@
 namespace: fond-of-impala/fond-of-impala
 
 include:
+  - bundles/company-type
   - bundles/company-type-converter
+  - bundles/company-type-converter-extension
   - bundles/company-type-role
   - bundles/conditional-availability
   - bundles/conditional-availability-bulk-api

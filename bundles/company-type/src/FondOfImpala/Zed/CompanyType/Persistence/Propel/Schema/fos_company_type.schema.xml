@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed" xsi:noNamespaceSchemaLocation="https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\CompanyType\Persistence"
+          package="src.Orm.Zed.CompanyType.Persistence">
+
+    <table name="fos_company_type" phpName="FosCompanyType">
+        <column name="id_company_type" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="name" required="true" size="255" type="VARCHAR"/>
+
+        <unique name="fos_company_type-name">
+            <unique-column name="name"/>
+        </unique>
+
+        <behavior name="timestampable"/>
+
+        <id-method-parameter value="fos_company_type_pk_seq"/>
+    </table>
+
+</database>
