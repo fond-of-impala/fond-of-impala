@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="CompanyType">
+        <property name="idCompanyType" type="int" />
+        <property name="name" type="string" />
+    </transfer>
+
+    <transfer name="CompanyTypeCollection">
+        <property name="companyTypes" type="CompanyType[]" singular="companyType" />
+    </transfer>
+
+    <transfer name="Company">
+        <property name="fkCompanyType" type="int"/>
+        <property name="companyType" type="CompanyType"/>
+    </transfer>
+
+    <transfer name="CompanyTypeResponse">
+        <property name="companyTypeTransfer" type="CompanyType"/>
+        <property name="isSuccessful" type="bool"/>
+    </transfer>
+
+    <transfer name="EventEntity">
+        <property name="id" type="int"/>
+        <property name="name" type="string"/>
+        <property name="foreignKeys" type="array" singular="foreignKeys"/>
+    </transfer>
+</transfers>
