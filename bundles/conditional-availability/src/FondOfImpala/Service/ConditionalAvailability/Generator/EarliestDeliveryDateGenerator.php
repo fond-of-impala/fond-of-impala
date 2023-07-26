@@ -5,16 +5,23 @@ namespace FondOfImpala\Service\ConditionalAvailability\Generator;
 use DateTime;
 use DateTimeInterface;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig;
+use FondOfImpala\Service\ConditionalAvailability\Validator\DateValidatorInterface;
 
 class EarliestDeliveryDateGenerator implements EarliestDeliveryDateGeneratorInterface
 {
+    protected DateValidatorInterface $dateValidator;
+
     protected ConditionalAvailabilityConfig $config;
 
     /**
+     * @param \FondOfImpala\Service\ConditionalAvailability\Validator\DateValidatorInterface $dateValidator
      * @param \FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig $config
      */
-    public function __construct(ConditionalAvailabilityConfig $config)
-    {
+    public function __construct(
+        DateValidatorInterface $dateValidator,
+        ConditionalAvailabilityConfig $config
+    ) {
+        $this->dateValidator = $dateValidator;
         $this->config = $config;
     }
 
@@ -39,11 +46,14 @@ class EarliestDeliveryDateGenerator implements EarliestDeliveryDateGeneratorInte
 
         $dateTime->setTime(0, 0);
 
+        if (!$this->dateValidator->validate($dateTime)) {
+            $defaultDeliveryDays++;
+        }
+
         while ($defaultDeliveryDays > 0) {
             $dateTime->modify('+1day');
-            $weekDay = (int)$dateTime->format('N');
 
-            if ($weekDay === 6 || $weekDay === 7) {
+            if (!$this->dateValidator->validate($dateTime)) {
                 continue;
             }
 
