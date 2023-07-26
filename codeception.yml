@@ -5,6 +5,7 @@ include:
   - bundles/company-type-converter
   - bundles/company-type-converter-extension
   - bundles/company-type-role
+  - bundles/company-users-bulk-rest-api-extension
   - bundles/conditional-availability
   - bundles/conditional-availability-bulk-api
   - bundles/conditional-availability-cart-connector
