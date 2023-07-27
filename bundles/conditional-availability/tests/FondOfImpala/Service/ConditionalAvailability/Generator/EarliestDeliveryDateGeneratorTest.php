@@ -5,6 +5,7 @@ namespace FondOfImpala\Service\ConditionalAvailability\Generator;
 use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig;
+use FondOfImpala\Service\ConditionalAvailability\Validator\DateValidator;
 use FondOfImpala\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -32,6 +33,7 @@ class EarliestDeliveryDateGeneratorTest extends Unit
             ->getMock();
 
         $this->earliestDeliveryDateGenerator = new EarliestDeliveryDateGenerator(
+            new DateValidator(),
             $this->configMock,
         );
     }
@@ -45,10 +47,10 @@ class EarliestDeliveryDateGeneratorTest extends Unit
             ->method('getDefaultDeliveryDays')
             ->willReturn(ConditionalAvailabilityConstants::DEFAULT_VALUE_DEFAULT_DELIVERY_DAYS);
 
-        $earliestDeliveryDate = $this->earliestDeliveryDateGenerator->generateByDateTime(new DateTime('2021-01-21'));
+        $earliestDeliveryDate = $this->earliestDeliveryDateGenerator->generateByDateTime(new DateTime('2021-01-23'));
 
         static::assertEquals(
-            '2021-01-25',
+            '2021-01-27',
             $earliestDeliveryDate->format('Y-m-d'),
         );
     }
