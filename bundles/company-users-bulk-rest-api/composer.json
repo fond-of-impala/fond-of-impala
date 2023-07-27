@@ -1,5 +1,5 @@
 {
-  "name": "fond-of-impala/company-users-bulk-rest-api-business-central-connector",
+  "name": "fond-of-impala/company-users-bulk-rest-api",
   "description": "CompanyUsersBulkRestApi Module",
   "license": "MIT",
   "authors": [
@@ -15,10 +15,15 @@
   "require": {
     "php": ">=8.0",
     "fond-of-impala/company-users-bulk-rest-api-extension": "^1.0.0",
-    "fond-of-spryker/navision-company": "dev-master",
+    "fond-of-oryx/company-user-company-role-connector": "^1.0.0",
+    "spryker/glue-application": "^1.0.0",
+    "spryker/glue-application-extension": "^1.0.0",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0",
+    "spryker/company-role": "^1.0.0",
     "spryker/company-user": "^2.0.0",
-    "spryker/company-role": "^1.0.0"
+    "spryker/event": "^2.0.0",
+    "spryker/permission-extension": "^1.0.0",
+    "spryker/uuid-behavior": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
