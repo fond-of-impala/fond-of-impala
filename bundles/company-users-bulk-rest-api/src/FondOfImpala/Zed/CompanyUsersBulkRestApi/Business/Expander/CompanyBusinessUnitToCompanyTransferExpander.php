@@ -32,7 +32,7 @@ class CompanyBusinessUnitToCompanyTransferExpander implements ExpanderInterface
         $companyBusinessUnitCollection = $this->repository->findCompanyBusinessUnitsByIdCompany($companyIds);
 
         foreach ($companyUsersBulkPreparationCollectionTransfer->getItems() as $item) {
-            $companyTransfer = $item->getCompany();
+            $companyTransfer = $item->getCompanyOrFail();
             $idCompany = $companyTransfer->getIdCompany();
             $companyBusinessSUnits = [];
             foreach ($companyTransfer->getCompanyBusinessUnits() as $companyBusinessUnit) {

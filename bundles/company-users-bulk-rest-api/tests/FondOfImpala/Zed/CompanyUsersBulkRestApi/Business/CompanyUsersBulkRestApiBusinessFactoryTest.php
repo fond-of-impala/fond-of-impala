@@ -3,6 +3,10 @@
 namespace FondOfImpala\Zed\CompanyUsersBulkRestApi\Business;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CompanyBusinessUnitToCompanyTransferExpander;
+use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CompanyExpander;
+use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CompanyRolesToCompanyTransferExpander;
+use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CustomerByMailExpander;
 use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Manager\BulkManagerInterface;
 use FondOfImpala\Zed\CompanyUsersBulkRestApi\CompanyUsersBulkRestApiDependencyProvider;
 use FondOfImpala\Zed\CompanyUsersBulkRestApi\Dependency\Facade\CompanyUsersBulkRestApiToCompanyUserFacadeInterface;
@@ -134,6 +138,50 @@ class CompanyUsersBulkRestApiBusinessFactoryTest extends Unit
         static::assertInstanceOf(
             BulkManagerInterface::class,
             $this->factory->createBulkManager(),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateCompanyExpander(): void
+    {
+        static::assertInstanceOf(
+            CompanyExpander::class,
+            $this->factory->createCompanyExpander(),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateCustomerByMailExpander(): void
+    {
+        static::assertInstanceOf(
+            CustomerByMailExpander::class,
+            $this->factory->createCustomerByMailExpander(),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateCompanyBusinessUnitToCompanyTransferExpander(): void
+    {
+        static::assertInstanceOf(
+            CompanyBusinessUnitToCompanyTransferExpander::class,
+            $this->factory->createCompanyBusinessUnitToCompanyTransferExpander(),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateCompanyRolesToCompanyTransferExpander(): void
+    {
+        static::assertInstanceOf(
+            CompanyRolesToCompanyTransferExpander::class,
+            $this->factory->createCompanyRolesToCompanyTransferExpander(),
         );
     }
 }
