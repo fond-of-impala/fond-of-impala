@@ -42,7 +42,7 @@
   },
   "require": {
     "php": ">=8.0",
-    "fond-of-oryx/company-user-company-role-connector": "^1.0.0",
+    "fond-of-oryx/company-user-company-role-connector": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/jellyfish-sales-order-extension": "^1.0.0 || ^2.0.0",
     "fond-of-spryker/company-type": "dev-master",
     "fond-of-spryker/company-type-converter-extension": "dev-master",
