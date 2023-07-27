@@ -8,6 +8,7 @@ interface CompanyUsersBulkPostHandlingPluginInterface
 {
     /**
      * @param \Generated\Shared\Transfer\RestCompanyUsersBulkResponseTransfer $restCompanyUsersBulkResponseTransfer
+     *
      * @return \Generated\Shared\Transfer\RestCompanyUsersBulkResponseTransfer
      */
     public function postHandling(
