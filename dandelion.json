@@ -21,15 +21,15 @@
     },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "company-users-bulk-rest-api-business-central-connector": {
       "path": "bundles/company-users-bulk-rest-api-business-central-connector",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "company-users-bulk-rest-api-extension": {
       "path": "bundles/company-users-bulk-rest-api-extension",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "conditional-availability": {
       "path": "bundles/conditional-availability",

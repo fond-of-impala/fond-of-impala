@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/company-users-bulk-rest-api-extension": "*",
+    "fond-of-impala/company-users-bulk-rest-api-extension": "^1.0.0",
     "fond-of-spryker/navision-company": "dev-master",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0",
     "spryker/company-user": "^2.0.0",
