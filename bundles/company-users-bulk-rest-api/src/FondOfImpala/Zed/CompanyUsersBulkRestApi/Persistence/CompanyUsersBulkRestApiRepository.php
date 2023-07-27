@@ -271,7 +271,7 @@ class CompanyUsersBulkRestApiRepository extends AbstractRepository implements Co
     public function findCompanyRolesByCompanyIds(array $companyIds): array
     {
         $result = $this->getFactory()->getCompanyRoleQuery()
-            ->filterByFkCompany_In(array_keys($companyIds))
+            ->filterByFkCompany_In($companyIds)
             ->select([SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE, SpyCompanyRoleTableMap::COL_FK_COMPANY, SpyCompanyRoleTableMap::COL_NAME])
             ->find();
 
