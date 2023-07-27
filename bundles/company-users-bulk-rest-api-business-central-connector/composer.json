@@ -1,0 +1,48 @@
+{
+  "name": "fond-of-impala/company-users-bulk-rest-api-business-central-connector",
+  "description": "CompanyUsersBulkRestApi Module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "József Geng",
+      "email": "gengjozsef86@gmail.com"
+    },
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "fond-of-impala/company-users-bulk-rest-api-extension": "*",
+    "fond-of-spryker/navision-company": "dev-master",
+    "spryker/company-business-unit": "^1.0.0 || ^2.0.0",
+    "spryker/company-user": "^2.0.0",
+    "spryker/company-role": "^1.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

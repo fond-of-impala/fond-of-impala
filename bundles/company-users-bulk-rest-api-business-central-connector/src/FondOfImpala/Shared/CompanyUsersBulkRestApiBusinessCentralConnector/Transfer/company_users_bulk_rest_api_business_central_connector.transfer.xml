@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+    <transfer name="RestCompanyUsersBulkItemCompany">
+        <property name="debtorNumber" type="string"/>
+    </transfer>
+
+    <transfer name="CompanyUsersBulkCompany">
+        <property name="idCompany" type="int"/>
+        <property name="debtorNumber" type="string"/>
+    </transfer>
+
+    <transfer name="CompanyUsersBulkPreparationCollection">
+        <property name="items" singular="item" type="CompanyUsersBulkPreparation[]"/>
+    </transfer>
+
+    <transfer name="CompanyUsersBulkPreparation">
+        <property name="item" type="RestCompanyUsersBulkItem"/>
+        <property name="company" type="CompanyUsersBulkCompany"/>
+        <property name="customer" type="CompanyUsersBulkCustomer"/>
+    </transfer>
+
+    <transfer name="RestCompanyUsersBulkItem">
+        <property name="customer" type="RestCompanyUsersBulkItemCustomer"/>
+        <property name="company" type="RestCompanyUsersBulkItemCompany"/>
+        <property name="role" type="string"/>
+    </transfer>
+
+    <transfer name="RestCompanyUsersBulkItemCustomer">
+        <property name="customerReference" type="string"/>
+        <property name="email" type="string"/>
+    </transfer>
+
+    <transfer name="CompanyUsersBulkCompanyCollection">
+        <property name="companies" singular="company" type="CompanyUsersBulkCompany[]"/>
+    </transfer>
+
+</transfers>
