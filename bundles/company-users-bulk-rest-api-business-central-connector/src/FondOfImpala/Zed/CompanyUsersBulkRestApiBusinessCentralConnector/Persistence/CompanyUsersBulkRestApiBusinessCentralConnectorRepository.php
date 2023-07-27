@@ -25,7 +25,7 @@ class CompanyUsersBulkRestApiBusinessCentralConnectorRepository extends Abstract
         if (count($debtorNumbers) === 0) {
             return $collection;
         }
-        $companyTransfers = $this->getCompanyTransfers($debtorNumbers);
+        $companyTransfers = $this->getCompanyMapByDebtorNumbers($debtorNumbers);
 
         return $collection->setCompanies(new ArrayObject($companyTransfers));
     }
@@ -35,7 +35,7 @@ class CompanyUsersBulkRestApiBusinessCentralConnectorRepository extends Abstract
      *
      * @return array<int, \Generated\Shared\Transfer\CompanyUsersBulkCompanyTransfer>
      */
-    protected function getCompanyTransfers(array $debtorNumbers): array
+    protected function getCompanyMapByDebtorNumbers(array $debtorNumbers): array
     {
         $result = $this->getFactory()->getCompanyQuery()
             ->filterByDebtorNumber_In($debtorNumbers)

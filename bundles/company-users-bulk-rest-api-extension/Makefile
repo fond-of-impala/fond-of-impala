@@ -12,7 +12,7 @@ phpcbf:
 
 .PHONY: phpstan
 phpstan:
-	./vendor/bin/phpstan --memory-limit=-1 analyse ./src/FondOfImpala ./tests
+	./vendor/bin/phpstan --memory-limit=-1 analyse ./src/FondOfImpala
 
 .PHONY: codeception
 codeception:
@@ -24,3 +24,11 @@ codeception-without-coverage:
 
 .PHONY: ci
 ci: phpcs codeception phpstan
+
+.PHONY: clean
+clean:
+	rm -Rf composer.lock
+	rm -Rf ./vendor
+	find ./tests/_output/ -not -name .gitignore -delete
+	rm -Rf src/Generated/*
+	rm -Rf src/Orm/*
