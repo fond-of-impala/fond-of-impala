@@ -8,6 +8,8 @@ use FondOfImpala\Service\ConditionalAvailability\Generator\EarliestOrderDateGene
 use FondOfImpala\Service\ConditionalAvailability\Generator\EarliestOrderDateGeneratorInterface;
 use FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGenerator;
 use FondOfImpala\Service\ConditionalAvailability\Generator\LatestOrderDateGeneratorInterface;
+use FondOfImpala\Service\ConditionalAvailability\Validator\DateValidator;
+use FondOfImpala\Service\ConditionalAvailability\Validator\DateValidatorInterface;
 use Spryker\Service\Kernel\AbstractServiceFactory;
 
 /**
@@ -21,6 +23,7 @@ class ConditionalAvailabilityServiceFactory extends AbstractServiceFactory
     public function createEarliestDeliveryDateGenerator(): EarliestDeliveryDateGeneratorInterface
     {
         return new EarliestDeliveryDateGenerator(
+            $this->createDateValidator(),
             $this->getConfig(),
         );
     }
@@ -32,6 +35,7 @@ class ConditionalAvailabilityServiceFactory extends AbstractServiceFactory
     {
         return new LatestOrderDateGenerator(
             $this->createEarliestOrderDateGenerator(),
+            $this->createDateValidator(),
             $this->getConfig(),
         );
     }
@@ -42,5 +46,13 @@ class ConditionalAvailabilityServiceFactory extends AbstractServiceFactory
     protected function createEarliestOrderDateGenerator(): EarliestOrderDateGeneratorInterface
     {
         return new EarliestOrderDateGenerator();
+    }
+
+    /**
+     * @return \FondOfImpala\Service\ConditionalAvailability\Validator\DateValidatorInterface
+     */
+    protected function createDateValidator(): DateValidatorInterface
+    {
+        return new DateValidator();
     }
 }

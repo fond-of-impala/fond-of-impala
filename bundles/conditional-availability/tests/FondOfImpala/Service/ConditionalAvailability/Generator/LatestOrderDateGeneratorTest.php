@@ -5,6 +5,7 @@ namespace FondOfImpala\Service\ConditionalAvailability\Generator;
 use Codeception\Test\Unit;
 use DateTime;
 use FondOfImpala\Service\ConditionalAvailability\ConditionalAvailabilityConfig;
+use FondOfImpala\Service\ConditionalAvailability\Validator\DateValidator;
 use FondOfImpala\Shared\ConditionalAvailability\ConditionalAvailabilityConstants;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -42,6 +43,7 @@ class LatestOrderDateGeneratorTest extends Unit
 
         $this->latestOrderDateGenerator = new LatestOrderDateGenerator(
             $this->earliestOrderDateGeneratorMock,
+            new DateValidator(),
             $this->configMock,
         );
     }
