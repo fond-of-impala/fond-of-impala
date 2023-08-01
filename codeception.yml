@@ -8,6 +8,7 @@ include:
   - bundles/company-users-bulk-rest-api
   - bundles/company-users-bulk-rest-api-business-central-connector
   - bundles/company-users-bulk-rest-api-extension
+  - bundles/company-users-rest-api
   - bundles/conditional-availability
   - bundles/conditional-availability-bulk-api
   - bundles/conditional-availability-cart-connector
