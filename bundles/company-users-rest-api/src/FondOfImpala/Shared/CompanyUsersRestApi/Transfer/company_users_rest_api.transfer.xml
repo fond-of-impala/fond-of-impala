@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="RestCompanyUsersRequest">
+        <property name="id" type="string" />
+        <property name="restCompanyUsersRequestAttributes" type="RestCompanyUsersRequestAttributes" />
+    </transfer>
+
+    <transfer name="RestCompanyUsersRequestAttributes">
+        <property name="currentCustomer" type="RestCustomer" />
+        <property name="customer" type="RestCustomer" />
+        <property name="company" type="RestCompany" />
+        <property name="companyRole" type="RestCompanyRole" />
+        <property name="isActive" type="bool" />
+        <property name="isDefault" type="bool" />
+    </transfer>
+
+    <transfer name="RestCompany">
+        <property name="idCompany" type="string"/>
+    </transfer>
+
+    <transfer name="RestCustomer">
+        <property name="idCustomer" type="int" />
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="salutation" type="string"/>
+        <property name="email" type="string" />
+        <property name="locale" type="Locale" />
+    </transfer>
+
+    <transfer name="RestCompanyRole">
+        <property name="uuid" type="string" />
+    </transfer>
+
+    <transfer name="RestCompanyUsersResponseAttributes">
+        <property name="companyUserReference" type="string"/>
+        <property name="isActive" type="bool"/>
+    </transfer>
+
+    <transfer name="RestCompanyUsersError">
+        <property name="status" type="int"/>
+        <property name="code" type="string"/>
+        <property name="detail" type="string"/>
+        <property name="parameters" type="array"/>
+    </transfer>
+
+    <transfer name="RestCompanyUsersResponse">
+        <property name="isSuccess" type="bool" />
+        <property name="errors" type="RestCompanyUsersError[]" singular="error" />
+        <property name="restCompanyUsersResponseAttributes" type="RestCompanyUsersResponseAttributes" />
+        <property name="companyUser" type="CompanyUser" />
+    </transfer>
+
+    <transfer name="CompanyUser">
+        <property name="companyUserReference" type="string"/>
+        <property name="isDefault" type="bool"/>
+    </transfer>
+
+    <transfer name="CompanyUserCriteriaFilter">
+        <property name="idCustomer" type="int"/>
+        <property name="idCompanyBusinessUnit" type="int"/>
+    </transfer>
+
+    <transfer name="CompanyBusinessUnit">
+        <property name="defaultBillingAddress" type="int"/>
+        <property name="addressCollection" type="CompanyUnitAddressCollection"/>
+    </transfer>
+
+    <transfer name="CompanyUnitAddress">
+        <property name="idCompanyUnitAddress" type="int"/>
+        <property name="uuid" type="string"/>
+        <property name="name1" type="string" />
+        <property name="name2" type="string" />
+    </transfer>
+
+    <transfer name="CompanyUnitAddressCollection">
+        <property name="companyUnitAddresses" type="CompanyUnitAddress[]" singular="companyUnitAddress"/>
+        <property name="pagination" type="Pagination"/>
+    </transfer>
+
+    <transfer name="Address">
+        <property name="idCompanyUnitAddress" type="int"/>
+        <property name="name1" type="string" />
+        <property name="name2" type="string" />
+    </transfer>
+
+    <transfer name="RestCheckoutRequestAttributes">
+        <property name="customer" type="RestCustomer" restRequestParameter="yes"/>
+        <property name="idCart" type="string" restRequestParameter="required"/>
+        <property name="billingAddress" type="RestAddress" restRequestParameter="yes"/>
+        <property name="shippingAddress" type="RestAddress" restRequestParameter="yes"/>
+        <property name="payments" type="RestPayment[]" singular="payment" restRequestParameter="yes"/>
+        <property name="shipment" type="RestShipment" restRequestParameter="yes"/>
+    </transfer>
+
+    <transfer name="RestAddress">
+        <property name="id" type="string" />
+        <property name="salutation" type="string" restRequestParameter="required"/>
+        <property name="firstName" type="string" restRequestParameter="required"/>
+        <property name="lastName" type="string" restRequestParameter="required"/>
+        <property name="address1" type="string" restRequestParameter="required"/>
+        <property name="address2" type="string" restRequestParameter="required"/>
+        <property name="address3" type="string" restRequestParameter="required"/>
+        <property name="zipCode" type="string" restRequestParameter="required"/>
+        <property name="city" type="string" restRequestParameter="required"/>
+        <property name="country" type="string" restRequestParameter="no"/>
+        <property name="iso2Code" type="string" restRequestParameter="required"/>
+        <property name="company" type="string" restRequestParameter="required"/>
+        <property name="phone" type="string" restRequestParameter="required"/>
+        <property name="isDefaultBilling" type="bool" restRequestParameter="yes" />
+        <property name="isDefaultShipping" type="bool" restRequestParameter="yes" />
+    </transfer>
+
+    <transfer name="Quote">
+        <property name="companyUserReference" type="string"/>
+    </transfer>
+
+    <transfer name="Company">
+        <property name="priceList" type="PriceList"/>
+    </transfer>
+
+    <transfer name="Customer">
+        <property name="isNew" type="bool"/>
+    </transfer>
+
+    <transfer name="PriceList"/>
+
+    <transfer name="RestDeleteCompanyUserRequest">
+        <property name="companyUserReferenceToDelete" type="string" />
+        <property name="idCustomer" type="int" />
+    </transfer>
+
+    <transfer name="RestDeleteCompanyUserResponse">
+        <property name="isSuccess" type="bool" />
+    </transfer>
+
+    <transfer name="RestWriteCompanyUserRequest">
+        <property name="writeableCompanyUserReference" type="string" />
+        <property name="idCustomer" type="int" />
+        <property name="restCompanyUsersRequestAttributes" type="RestCompanyUsersRequestAttributes" />
+    </transfer>
+
+    <transfer name="RestWriteCompanyUserResponse">
+        <property name="isSuccess" type="bool" />
+        <property name="companyUser" type="CompanyUser" />
+    </transfer>
+</transfers>
