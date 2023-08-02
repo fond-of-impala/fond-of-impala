@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi;
 
@@ -27,5 +27,13 @@ class CompanyUsersRestApiConfig extends AbstractBundleConfig
     public function getBaseUri(): string
     {
         return $this->get(CompanyUsersRestApiConstants::BASE_URI, 'http://127.0.0.1/');
+    }
+
+    /**
+     * @return array
+     */
+    public function getProtectedRoles(): array
+    {
+        return $this->get(CompanyUsersRestApiConstants::PROTECTED_ROLES, CompanyUsersRestApiConstants::PROTECTED_ROLES_DEFAULT);
     }
 }

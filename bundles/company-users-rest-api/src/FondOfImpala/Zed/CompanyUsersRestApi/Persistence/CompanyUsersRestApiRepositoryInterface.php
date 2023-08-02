@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Persistence;
 
+use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
@@ -36,4 +37,29 @@ interface CompanyUsersRestApiRepositoryInterface
         int $idCustomer,
         string $foreignCompanyUserReference
     ): ?CompanyUserTransfer;
+
+    /**
+     * @param int $idCompany
+     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function findCompanyUserByFkCompany(
+        int $idCompany
+    ): CompanyUserCollectionTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     * @return array<string>
+     */
+    public function findCompanyUserRolesByCompanyUser(
+        CompanyUserTransfer $companyUserTransfer
+    ): array;
+
+    /**
+     * @param int $idCompany
+     * @return array<int, array>
+     */
+    public function findCompanyUserRolesByFkCompany(
+        int $idCompany
+    ): array;
 }
