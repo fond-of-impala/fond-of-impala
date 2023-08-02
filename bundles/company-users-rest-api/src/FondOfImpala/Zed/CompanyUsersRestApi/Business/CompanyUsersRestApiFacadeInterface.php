@@ -44,20 +44,22 @@ interface CompanyUsersRestApiFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function canDeleteCompanyUser(
-        CompanyUserTransfer                  $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
     ): bool;
 
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function canUpdateCompanyUser(
-        CompanyUserTransfer                  $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
     ): bool;
 }

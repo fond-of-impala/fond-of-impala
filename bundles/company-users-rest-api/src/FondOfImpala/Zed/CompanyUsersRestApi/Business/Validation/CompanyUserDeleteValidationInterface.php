@@ -10,10 +10,11 @@ interface CompanyUserDeleteValidationInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function validate(
-        CompanyUserTransfer                  $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
     ): bool;
 }

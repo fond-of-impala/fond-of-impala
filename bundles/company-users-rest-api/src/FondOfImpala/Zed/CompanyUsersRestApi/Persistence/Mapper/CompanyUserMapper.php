@@ -5,8 +5,6 @@ declare(strict_types = 1);
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Persistence\Mapper;
 
 use ArrayObject;
-use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
-use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;

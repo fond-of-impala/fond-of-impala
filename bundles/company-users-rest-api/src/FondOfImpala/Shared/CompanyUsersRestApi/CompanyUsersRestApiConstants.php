@@ -22,10 +22,10 @@ interface CompanyUsersRestApiConstants
     public const PROTECTED_ROLES = 'FOND_OF_IMPALA:COMPANY_USER_REST_API:PROTECTED_ROLES';
 
     /**
-     * @var string
+     * @var array
      */
     public const PROTECTED_ROLES_DEFAULT = [
         'super_administration',
-        'administration'
+        'administration',
     ];
 }

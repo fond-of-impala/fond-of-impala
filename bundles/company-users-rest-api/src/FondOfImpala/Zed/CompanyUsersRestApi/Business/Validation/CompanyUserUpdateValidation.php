@@ -5,7 +5,6 @@ namespace FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation;
 use Exception;
 use FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig;
 use FondOfImpala\Zed\CompanyUsersRestApi\Persistence\CompanyUsersRestApiRepositoryInterface;
-use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer;
 use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
@@ -36,14 +35,13 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
      * @return bool
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function validate(
-        CompanyUserTransfer                 $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
-    ): bool
-    {
+    ): bool {
         $companyUserCollection = $this->repository->findCompanyUserByFkCompany($companyUserTransfer->getFkCompany());
 
         if (count($companyUserCollection->getCompanyUsers()) <= 1) {
@@ -54,7 +52,7 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
         $resolvedRoleCounts = $this->getProtectedRoleCountUsage($roleData);
         $roleBeforeUpdate = $this->getCurrentRole($companyUserTransfer->getIdCompanyUser(), $roleData);
 
-        if (array_key_exists($roleBeforeUpdate, $resolvedRoleCounts) && $resolvedRoleCounts[$roleBeforeUpdate] <= 1){
+        if (array_key_exists($roleBeforeUpdate, $resolvedRoleCounts) && $resolvedRoleCounts[$roleBeforeUpdate] <= 1) {
             return false;
         }
 
@@ -64,8 +62,10 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
     /**
      * @param int $idCompanyUser
      * @param array<int, array<string, mixed>> $roleData
-     * @return string
+     *
      * @throws \Exception
+     *
+     * @return string
      */
     protected function getCurrentRole(int $idCompanyUser, array $roleData): string
     {
@@ -73,6 +73,7 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
             if (!array_key_exists(SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER, $data) || $data[SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER] !== $idCompanyUser) {
                 continue;
             }
+
             return $data[SpyCompanyRoleTableMap::COL_NAME];
         }
 
@@ -80,7 +81,8 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     * @param array<string, int> $roles
+     *
      * @return array
      */
     protected function getProtectedRoleCountUsage(array $roles): array
@@ -99,6 +101,7 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
             $role = $role[SpyCompanyRoleTableMap::COL_NAME];
             if (array_key_exists($role, $counts)) {
                 $counts[$role] += 1;
+
                 continue;
             }
 

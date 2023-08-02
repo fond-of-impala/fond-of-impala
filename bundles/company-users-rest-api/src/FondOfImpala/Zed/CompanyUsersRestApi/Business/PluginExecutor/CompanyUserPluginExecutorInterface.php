@@ -34,6 +34,7 @@ interface CompanyUserPluginExecutorInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function executePreDeleteValidationPlugins(
@@ -44,6 +45,7 @@ interface CompanyUserPluginExecutorInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function executePreUpdateValidationPlugins(

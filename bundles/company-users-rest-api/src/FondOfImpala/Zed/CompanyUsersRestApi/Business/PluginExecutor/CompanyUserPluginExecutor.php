@@ -84,6 +84,7 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function executePreDeleteValidationPlugins(
@@ -92,7 +93,7 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     ): bool {
         foreach ($this->companyUserPreDeletePlugins as $plugin) {
             $state = $plugin->validate($companyUserTransfer, $restDeleteCompanyUserRequestTransfer);
-            if ($state === false){
+            if ($state === false) {
                 return false;
             }
         }
@@ -103,6 +104,7 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function executePreUpdateValidationPlugins(
@@ -111,7 +113,7 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     ): bool {
         foreach ($this->companyUserPreUpdatePlugins as $plugin) {
             $state = $plugin->validate($companyUserTransfer, $restWriteCompanyUserRequestTransfer);
-            if ($state === false){
+            if ($state === false) {
                 return false;
             }
         }

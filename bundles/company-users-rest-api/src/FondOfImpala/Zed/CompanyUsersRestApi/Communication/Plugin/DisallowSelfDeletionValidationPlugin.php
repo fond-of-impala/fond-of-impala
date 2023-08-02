@@ -15,12 +15,13 @@ class DisallowSelfDeletionValidationPlugin extends AbstractPlugin implements Com
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function validate(
         CompanyUserTransfer $companyUserTransfer,
         RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
-    ): bool{
+    ): bool {
         return $this->getFacade()->canDeleteCompanyUser($companyUserTransfer, $restDeleteCompanyUserRequestTransfer);
     }
 }

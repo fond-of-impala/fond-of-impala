@@ -42,7 +42,7 @@ class CompanyUserDeleter implements CompanyUserDeleterInterface
         CompanyUserReaderInterface $companyUserReader,
         CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade,
         CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade,
-        CompanyUserPluginExecutorInterface $pluginExecutor,
+        CompanyUserPluginExecutorInterface $pluginExecutor
     ) {
         $this->companyUserReader = $companyUserReader;
         $this->companyUserFacade = $companyUserFacade;

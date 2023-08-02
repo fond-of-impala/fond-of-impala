@@ -104,7 +104,7 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new CompanyUserDeleteValidation(
             $this->getRepository(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -115,7 +115,7 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new CompanyUserUpdateValidation(
             $this->getRepository(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 

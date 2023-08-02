@@ -15,12 +15,13 @@ class LastAvailableRoleProtectionOnUpdateValidationPlugin extends AbstractPlugin
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function validate(
         CompanyUserTransfer $companyUserTransfer,
         RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
-    ): bool{
+    ): bool {
         return $this->getFacade()->canUpdateCompanyUser($companyUserTransfer, $restWriteCompanyUserRequestTransfer);
     }
 }

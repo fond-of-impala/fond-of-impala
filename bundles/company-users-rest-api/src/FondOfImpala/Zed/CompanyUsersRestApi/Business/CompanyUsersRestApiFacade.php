@@ -61,10 +61,11 @@ class CompanyUsersRestApiFacade extends AbstractFacade implements CompanyUsersRe
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function canDeleteCompanyUser(
-        CompanyUserTransfer                  $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
     ): bool {
         return $this->getFactory()
@@ -75,10 +76,11 @@ class CompanyUsersRestApiFacade extends AbstractFacade implements CompanyUsersRe
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function canUpdateCompanyUser(
-        CompanyUserTransfer                  $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
     ): bool {
         return $this->getFactory()

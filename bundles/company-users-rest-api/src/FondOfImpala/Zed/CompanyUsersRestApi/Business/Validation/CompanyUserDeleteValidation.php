@@ -33,13 +33,13 @@ class CompanyUserDeleteValidation implements CompanyUserDeleteValidationInterfac
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
      * @return bool
      */
     public function validate(
-        CompanyUserTransfer                  $companyUserTransfer,
+        CompanyUserTransfer $companyUserTransfer,
         RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
-    ): bool
-    {
+    ): bool {
         $companyUserCollection = $this->repository->findCompanyUserByFkCompany($companyUserTransfer->getFkCompany());
 
         if (count($companyUserCollection->getCompanyUsers()) <= 1 || $this->isProtectedByRole($companyUserTransfer)) {
@@ -54,12 +54,13 @@ class CompanyUserDeleteValidation implements CompanyUserDeleteValidationInterfac
     /**
      * @param \Generated\Shared\Transfer\CompanyUserCollectionTransfer $companyUserCollectionTransfer
      * @param int $idCustomer
+     *
      * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
      */
     protected function resolveLoggedInCompanyUser(CompanyUserCollectionTransfer $companyUserCollectionTransfer, int $idCustomer): ?CompanyUserTransfer
     {
-        foreach ($companyUserCollectionTransfer->getCompanyUsers() as $companyUserTransfer){
-            if ($companyUserTransfer->getFkCustomer() === $idCustomer){
+        foreach ($companyUserCollectionTransfer->getCompanyUsers() as $companyUserTransfer) {
+            if ($companyUserTransfer->getFkCustomer() === $idCustomer) {
                 return $companyUserTransfer;
             }
         }
@@ -69,14 +70,15 @@ class CompanyUserDeleteValidation implements CompanyUserDeleteValidationInterfac
 
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     *
      * @return bool
      */
     protected function isProtectedByRole(CompanyUserTransfer $companyUserTransfer): bool
     {
         $protectedRoles = $this->config->getProtectedRoles();
         $userRoles = $this->repository->findCompanyUserRolesByCompanyUser($companyUserTransfer);
-        foreach ($userRoles as $userRole){
-            if (in_array($userRole, $protectedRoles, true)){
+        foreach ($userRoles as $userRole) {
+            if (in_array($userRole, $protectedRoles, true)) {
                 return true;
             }
         }

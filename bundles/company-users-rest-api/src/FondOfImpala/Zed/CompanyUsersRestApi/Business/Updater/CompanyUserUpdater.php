@@ -99,7 +99,7 @@ class CompanyUserUpdater implements CompanyUserUpdaterInterface
             (new CustomerTransfer())->setIdCustomer($companyUserTransfer->getFkCustomer()),
         );
 
-        if (!$this->pluginExecutor->executePreUpdateValidationPlugins($companyUserTransfer, $restWriteCompanyUserRequestTransfer)){
+        if (!$this->pluginExecutor->executePreUpdateValidationPlugins($companyUserTransfer, $restWriteCompanyUserRequestTransfer)) {
             return $restWriteCompanyUserResponseTransfer;
         }
 

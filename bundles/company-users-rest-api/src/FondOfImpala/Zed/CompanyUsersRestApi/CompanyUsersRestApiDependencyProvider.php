@@ -126,6 +126,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
         $container = parent::providePersistenceLayerDependencies($container);
 
         $container = $this->addCompanyRoleToCompanyUserPropelQuery($container);
+
         return $this->addCompanyUserPropelQuery($container);
     }
 

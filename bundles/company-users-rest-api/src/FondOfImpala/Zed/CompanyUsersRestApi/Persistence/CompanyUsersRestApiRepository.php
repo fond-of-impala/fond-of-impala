@@ -99,8 +99,7 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
      */
     public function findCompanyUsersByFilter(
         CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer
-    ): CompanyUserCollectionTransfer
-    {
+    ): CompanyUserCollectionTransfer {
         $queryCompanyUser = $this->getFactory()
             ->getCompanyUserPropelQuery();
 
@@ -141,10 +140,9 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
      * @return \Generated\Shared\Transfer\CompanyUserTransfer|null
      */
     public function findCompanyUserByIdCustomerAndForeignCompanyUserReference(
-        int    $idCustomer,
+        int $idCustomer,
         string $foreignCompanyUserReference
-    ): ?CompanyUserTransfer
-    {
+    ): ?CompanyUserTransfer {
         $companyUser = $this->getFactory()
             ->getCompanyUserPropelQuery()
             ->clear()
@@ -171,13 +169,12 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
 
     /**
      * @param int $idCompany
+     *
      * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findCompanyUserByFkCompany(
         int $idCompany
-    ): CompanyUserCollectionTransfer
-    {
+    ): CompanyUserCollectionTransfer {
         $collection = new CompanyUserCollectionTransfer();
 
         $result = $this->getFactory()
@@ -197,12 +194,12 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
 
     /**
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     *
      * @return array<string>
      */
     public function findCompanyUserRolesByCompanyUser(
         CompanyUserTransfer $companyUserTransfer
-    ): array
-    {
+    ): array {
         return $this->getFactory()
             ->getCompanyRoleToCompanyUserPropelQuery()
             ->clear()
@@ -214,11 +211,10 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
 
     /**
      * @param int $idCompany
+     *
      * @return array<int, array>
      */
-    public function findCompanyUserRolesByFkCompany(
-        int $idCompany
-    ): array
+    public function findCompanyUserRolesByFkCompany(int $idCompany): array
     {
         return $this->getFactory()
             ->getCompanyRoleToCompanyUserPropelQuery()

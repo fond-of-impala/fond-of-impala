@@ -29,7 +29,6 @@ class CompanyUsersRestApiPersistenceFactory extends AbstractPersistenceFactory
 
     /**
      * @return \Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleToCompanyUserQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyRoleToCompanyUserPropelQuery(): SpyCompanyRoleToCompanyUserQuery
     {
