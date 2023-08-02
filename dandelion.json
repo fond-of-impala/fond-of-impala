@@ -31,6 +31,10 @@
       "path": "bundles/company-users-bulk-rest-api-extension",
       "version": "1.0.0"
     },
+    "company-users-rest-api": {
+      "path": "bundles/company-users-rest-api",
+      "version": "1.0.0"
+    },
     "conditional-availability": {
       "path": "bundles/conditional-availability",
       "version": "1.1.1"

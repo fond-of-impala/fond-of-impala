@@ -1,0 +1,31 @@
+company-users:
+  post:
+    company:
+    - Collection:
+        fields:
+          idCompany:
+          - NotBlank
+    customer:
+    - Collection:
+        fields:
+          email:
+          - NotBlank
+          - Email
+          salutation:
+          - NotBlank
+          - Choice: [Mr, Mrs, Ms, Diverse, Dr]
+          firstName:
+          - NotBlank
+          - Length:
+                max: 100
+          lastName:
+          - NotBlank
+          - Length:
+                max: 100
+
+  patch:
+    companyRole:
+    - Collection:
+        fields:
+          uuid:
+          - NotBlank
