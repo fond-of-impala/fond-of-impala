@@ -81,9 +81,9 @@ class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterfac
     }
 
     /**
-     * @param array<string, int> $roles
+     * @param array<int, array<string, mixed>> $roles
      *
-     * @return array
+     * @return array<string, int>
      */
     protected function getProtectedRoleCountUsage(array $roles): array
     {

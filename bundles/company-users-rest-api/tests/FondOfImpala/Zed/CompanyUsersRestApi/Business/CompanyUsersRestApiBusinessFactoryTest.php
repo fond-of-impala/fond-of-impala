@@ -192,6 +192,8 @@ class CompanyUsersRestApiBusinessFactoryTest extends Unit
                 [CompanyUsersRestApiDependencyProvider::FACADE_PERMISSION],
                 [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_CREATE],
                 [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE],
+                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION],
+                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION],
             )->willReturnOnConsecutiveCalls(
                 $this->customerFacadeMock,
                 $this->utilTextServiceMock,
@@ -202,6 +204,8 @@ class CompanyUsersRestApiBusinessFactoryTest extends Unit
                 $this->companyUserFacadeMock,
                 $this->companyUserReferenceFacadeMock,
                 $this->permissionFacadeMock,
+                [],
+                [],
                 [],
                 [],
             );
@@ -228,11 +232,19 @@ class CompanyUsersRestApiBusinessFactoryTest extends Unit
                 [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_ROLE],
                 [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER],
                 [CompanyUsersRestApiDependencyProvider::FACADE_PERMISSION],
+                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_CREATE],
+                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE],
+                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION],
+                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION],
             )->willReturnOnConsecutiveCalls(
                 $this->companyUserReferenceFacadeMock,
                 $this->companyRoleFacadeMock,
                 $this->companyUserFacadeMock,
                 $this->permissionFacadeMock,
+                [],
+                [],
+                [],
+                [],
             );
 
         static::assertInstanceOf(
