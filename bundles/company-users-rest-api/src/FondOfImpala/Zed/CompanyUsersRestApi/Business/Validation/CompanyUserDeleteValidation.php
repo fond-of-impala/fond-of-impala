@@ -76,6 +76,11 @@ class CompanyUserDeleteValidation implements CompanyUserDeleteValidationInterfac
     protected function isProtectedByRole(CompanyUserTransfer $companyUserTransfer): bool
     {
         $protectedRoles = $this->config->getProtectedRoles();
+
+        if (count($protectedRoles) === 0) {
+            return false;
+        }
+
         $userRoles = $this->repository->findCompanyUserRolesByCompanyUser($companyUserTransfer);
         foreach ($userRoles as $userRole) {
             if (in_array($userRole, $protectedRoles, true)) {
