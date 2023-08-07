@@ -10,20 +10,11 @@ use Generated\Shared\Transfer\PriceProductTransfer;
 
 class PriceListPriceWriter implements PriceListPriceWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceProductFacadeInterface
-     */
-    protected $priceProductFacade;
+    protected PriceProductPriceListToPriceProductFacadeInterface $priceProductFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepositoryInterface
-     */
-    protected $repository;
+    protected PriceProductPriceListRepositoryInterface $repository;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListEntityManagerInterface
-     */
-    protected $entityManager;
+    protected PriceProductPriceListEntityManagerInterface $entityManager;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceProductFacadeInterface $priceProductFacade

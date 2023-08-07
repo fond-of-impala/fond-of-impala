@@ -9,10 +9,7 @@ use Generated\Shared\Transfer\PriceProductDimensionTransfer;
 
 class PriceProductDimensionExpander implements PriceProductDimensionExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected PriceProductPriceListToPriceListFacadeInterface $priceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceListFacadeInterface $priceListFacade
