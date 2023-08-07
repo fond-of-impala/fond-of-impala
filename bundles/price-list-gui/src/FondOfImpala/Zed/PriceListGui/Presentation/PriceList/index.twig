@@ -1,0 +1,17 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Price Lists' %}
+
+{% block head_title widget_title | trans %}
+
+{% block action %}
+    {{ createActionButton('/price-list-gui/price-list/create', 'Create Price List' | trans) }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' %}
+        {% block widget_content %}
+            {{ priceListTable | raw }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
