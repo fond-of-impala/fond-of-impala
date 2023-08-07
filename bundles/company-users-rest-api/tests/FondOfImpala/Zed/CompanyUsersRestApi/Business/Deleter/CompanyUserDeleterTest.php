@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business\Deleter;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Communication\Plugin\PermissionExtension\DeleteCompanyUserPermissionPlugin;
 use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserFacadeInterface;
@@ -10,6 +11,7 @@ use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiTo
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyUserDeleterTest extends Unit
 {
@@ -27,6 +29,11 @@ class CompanyUserDeleterTest extends Unit
      * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $permissionFacadeMock;
+
+    /**
+     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CompanyUserPluginExecutorInterface|MockObject $pluginExecutorMock;
 
     /**
      * @var \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
@@ -79,10 +86,15 @@ class CompanyUserDeleterTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->pluginExecutorMock = $this->getMockBuilder(CompanyUserPluginExecutorInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->companyUserDeleter = new CompanyUserDeleter(
             $this->companyUserReaderMock,
             $this->companyUserFacadeMock,
             $this->permissionFacadeMock,
+            $this->pluginExecutorMock,
         );
     }
 
@@ -120,6 +132,10 @@ class CompanyUserDeleterTest extends Unit
 
         $this->companyUserResponseTransferMock->expects(static::atLeastOnce())
             ->method('getIsSuccessful')
+            ->willReturn(true);
+
+        $this->pluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePreDeleteValidationPlugins')
             ->willReturn(true);
 
         $restDeleteCompanyUserResponseTransfer = $this->companyUserDeleter->deleteByRestDeleteCompanyUserRequest(
@@ -236,6 +252,10 @@ class CompanyUserDeleterTest extends Unit
         $this->companyUserResponseTransferMock->expects(static::atLeastOnce())
             ->method('getIsSuccessful')
             ->willReturn(false);
+
+        $this->pluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePreDeleteValidationPlugins')
+            ->willReturn(true);
 
         $restDeleteCompanyUserResponseTransfer = $this->companyUserDeleter->deleteByRestDeleteCompanyUserRequest(
             $this->restDeleteCompanyUserRequestTransferMock,

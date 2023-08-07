@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Persistence;
 
@@ -13,6 +13,8 @@ use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
+use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
+use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleToCompanyUserTableMap;
 use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
@@ -35,17 +37,17 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
         $companyUsers = $this->getFactory()
             ->getCompanyUserPropelQuery()
             ->useCustomerQuery()
-                ->filterByCustomerReference($customerReference)
+            ->filterByCustomerReference($customerReference)
             ->endUse()
             ->useCompanyQuery()
-                ->usePriceListQuery()
-                ->endUse()
+            ->usePriceListQuery()
+            ->endUse()
             ->endUse()
             ->useCompanyBusinessUnitQuery()
             ->endUse()
             ->useSpyCompanyRoleToCompanyUserQuery()
-                ->useCompanyRoleQuery()
-                ->endUse()
+            ->useCompanyRoleQuery()
+            ->endUse()
             ->endUse()
             ->find();
 
@@ -163,5 +165,62 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
         return $this->getFactory()
             ->createCompanyUserMapper()
             ->mapEntityToTransfer($companyUser);
+    }
+
+    /**
+     * @param int $idCompany
+     *
+     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     */
+    public function findCompanyUserByFkCompany(
+        int $idCompany
+    ): CompanyUserCollectionTransfer {
+        $collection = new CompanyUserCollectionTransfer();
+
+        $result = $this->getFactory()
+            ->getCompanyUserPropelQuery()
+            ->clear()
+            ->filterByFkCompany($idCompany)
+            ->find();
+
+        foreach ($result->getData() as $companyUser) {
+            $collection->addCompanyUser($this->getFactory()
+                ->createCompanyUserMapper()
+                ->mapEntityToTransfer($companyUser));
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     *
+     * @return array<string>
+     */
+    public function findCompanyUserRolesByCompanyUser(
+        CompanyUserTransfer $companyUserTransfer
+    ): array {
+        return $this->getFactory()
+            ->getCompanyRoleToCompanyUserPropelQuery()
+            ->clear()
+            ->filterByFkCompanyUser($companyUserTransfer->getIdCompanyUser())
+            ->useCompanyRoleQuery()->endUse()
+            ->select([SpyCompanyRoleTableMap::COL_NAME])
+            ->find()->getData();
+    }
+
+    /**
+     * @param int $idCompany
+     *
+     * @return array<int, array>
+     */
+    public function findCompanyUserRolesByFkCompany(int $idCompany): array
+    {
+        return $this->getFactory()
+            ->getCompanyRoleToCompanyUserPropelQuery()
+            ->clear()
+            ->useCompanyRoleQuery()->filterByFkCompany($idCompany)->endUse()
+            ->select([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER, SpyCompanyRoleTableMap::COL_UUID, SpyCompanyRoleTableMap::COL_NAME])
+            ->find()->getData();
     }
 }

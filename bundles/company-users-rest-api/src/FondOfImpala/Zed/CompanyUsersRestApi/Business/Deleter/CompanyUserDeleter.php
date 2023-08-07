@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business\Deleter;
 
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Communication\Plugin\PermissionExtension\DeleteCompanyUserPermissionPlugin;
 use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserFacadeInterface;
@@ -27,18 +28,26 @@ class CompanyUserDeleter implements CompanyUserDeleterInterface
     protected $permissionFacade;
 
     /**
+     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface
+     */
+    protected $pluginExecutor;
+
+    /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface $companyUserReader
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade
+     * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface $pluginExecutor
      */
     public function __construct(
         CompanyUserReaderInterface $companyUserReader,
         CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade,
-        CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade
+        CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade,
+        CompanyUserPluginExecutorInterface $pluginExecutor
     ) {
         $this->companyUserReader = $companyUserReader;
         $this->companyUserFacade = $companyUserFacade;
         $this->permissionFacade = $permissionFacade;
+        $this->pluginExecutor = $pluginExecutor;
     }
 
     /**
@@ -67,7 +76,7 @@ class CompanyUserDeleter implements CompanyUserDeleterInterface
             $restDeleteCompanyUserRequestTransfer,
         );
 
-        if ($companyUserTransfer === null) {
+        if ($companyUserTransfer === null || $this->pluginExecutor->executePreDeleteValidationPlugins($companyUserTransfer, $restDeleteCompanyUserRequestTransfer) === false) {
             return $restDeleteCompanyUserResponseTransfer;
         }
 

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business;
 
+use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\RestCompanyUsersRequestAttributesTransfer;
 use Generated\Shared\Transfer\RestCompanyUsersResponseTransfer;
 use Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer;
@@ -39,4 +40,26 @@ interface CompanyUsersRestApiFacadeInterface
     public function updateCompanyUserByRestWriteCompanyUserRequest(
         RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
     ): RestWriteCompanyUserResponseTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     * @param \Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+     *
+     * @return bool
+     */
+    public function canDeleteCompanyUser(
+        CompanyUserTransfer $companyUserTransfer,
+        RestDeleteCompanyUserRequestTransfer $restDeleteCompanyUserRequestTransfer
+    ): bool;
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     * @param \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+     *
+     * @return bool
+     */
+    public function canUpdateCompanyUser(
+        CompanyUserTransfer $companyUserTransfer,
+        RestWriteCompanyUserRequestTransfer $restWriteCompanyUserRequestTransfer
+    ): bool;
 }

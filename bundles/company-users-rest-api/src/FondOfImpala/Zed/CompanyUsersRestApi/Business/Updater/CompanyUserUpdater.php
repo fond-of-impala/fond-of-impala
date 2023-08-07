@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business\Updater;
 
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyRoleCollectionReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Communication\Plugin\PermissionExtension\UpdateCompanyUserPermissionPlugin;
@@ -34,21 +35,29 @@ class CompanyUserUpdater implements CompanyUserUpdaterInterface
     protected $permissionFacade;
 
     /**
+     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface
+     */
+    protected $pluginExecutor;
+
+    /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface $companyUserReader
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyRoleCollectionReaderInterface $companyRoleCollectionReader
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade
+     * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface $pluginExecutor
      */
     public function __construct(
         CompanyUserReaderInterface $companyUserReader,
         CompanyRoleCollectionReaderInterface $companyRoleCollectionReader,
         CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade,
-        CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade
+        CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade,
+        CompanyUserPluginExecutorInterface $pluginExecutor
     ) {
         $this->companyUserReader = $companyUserReader;
         $this->companyRoleCollectionReader = $companyRoleCollectionReader;
         $this->companyUserFacade = $companyUserFacade;
         $this->permissionFacade = $permissionFacade;
+        $this->pluginExecutor = $pluginExecutor;
     }
 
     /**
@@ -89,6 +98,11 @@ class CompanyUserUpdater implements CompanyUserUpdaterInterface
         $companyUserTransfer = $companyUserTransfer->setCustomer(
             (new CustomerTransfer())->setIdCustomer($companyUserTransfer->getFkCustomer()),
         );
+
+        if (!$this->pluginExecutor->executePreUpdateValidationPlugins($companyUserTransfer, $restWriteCompanyUserRequestTransfer)) {
+            return $restWriteCompanyUserResponseTransfer;
+        }
+
         $companyUserResponseTransfer = $this->companyUserFacade->update($companyUserTransfer);
         $companyUserTransfer = $companyUserResponseTransfer->getCompanyUser();
 

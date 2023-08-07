@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business\Updater;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyRoleCollectionReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Communication\Plugin\PermissionExtension\UpdateCompanyUserPermissionPlugin;
@@ -12,6 +13,7 @@ use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyUserUpdaterTest extends Unit
 {
@@ -34,6 +36,11 @@ class CompanyUserUpdaterTest extends Unit
      * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeInterface&\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $permissionFacadeMock;
+
+    /**
+     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CompanyUserPluginExecutorInterface|MockObject $pluginExecutorMock;
 
     /**
      * @var \Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer&\PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\MockObject
@@ -88,6 +95,10 @@ class CompanyUserUpdaterTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->pluginExecutorMock = $this->getMockBuilder(CompanyUserPluginExecutorInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->restWriteCompanyUserRequestTransferMock = $this->getMockBuilder(RestWriteCompanyUserRequestTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -113,6 +124,7 @@ class CompanyUserUpdaterTest extends Unit
             $this->companyRoleCollectionReaderMock,
             $this->companyUserFacadeMock,
             $this->permissionFacadeMock,
+            $this->pluginExecutorMock,
         );
     }
 
@@ -159,6 +171,10 @@ class CompanyUserUpdaterTest extends Unit
         $this->updatableCompanyUserTransferMock->expects(static::atLeastOnce())
             ->method('setCustomer')
             ->willReturnSelf();
+
+        $this->pluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePreUpdateValidationPlugins')
+            ->willReturn(true);
 
         $this->companyUserFacadeMock->expects(static::atLeastOnce())
             ->method('update')
@@ -318,6 +334,10 @@ class CompanyUserUpdaterTest extends Unit
         $this->updatableCompanyUserTransferMock->expects(static::atLeastOnce())
             ->method('setCustomer')
             ->willReturnSelf();
+
+        $this->pluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePreUpdateValidationPlugins')
+            ->willReturn(true);
 
         $this->companyUserFacadeMock->expects(static::atLeastOnce())
             ->method('update')
