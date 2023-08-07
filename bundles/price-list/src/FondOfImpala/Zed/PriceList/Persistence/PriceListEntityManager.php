@@ -21,17 +21,17 @@ class PriceListEntityManager extends AbstractEntityManager implements PriceListE
      */
     public function persist(PriceListTransfer $priceListTransfer): PriceListTransfer
     {
-        $fosPriceListQuery = $this->getFactory()->createPriceListQuery();
+        $foiPriceListQuery = $this->getFactory()->createPriceListQuery();
 
-        $fosPriceList = $fosPriceListQuery
+        $foiPriceList = $foiPriceListQuery
             ->filterByIdPriceList($priceListTransfer->getIdPriceList())
             ->findOneOrCreate();
 
-        $fosPriceList->fromArray($priceListTransfer->toArray());
+        $foiPriceList->fromArray($priceListTransfer->toArray());
 
-        $fosPriceList->save();
+        $foiPriceList->save();
 
-        $priceListTransfer->setIdPriceList($fosPriceList->getIdPriceList());
+        $priceListTransfer->setIdPriceList($foiPriceList->getIdPriceList());
 
         return $priceListTransfer;
     }

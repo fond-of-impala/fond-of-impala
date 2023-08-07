@@ -8,7 +8,7 @@ use FondOfImpala\Zed\PriceList\Persistence\Propel\QueryBuilder\PriceListQueryJoi
 use FondOfImpala\Zed\PriceList\Persistence\Propel\QueryBuilder\PriceListQueryJoinQueryBuilderInterface;
 use FondOfImpala\Zed\PriceList\Persistence\Propel\QueryBuilder\PriceListSearchFilterFieldQueryBuilder;
 use FondOfImpala\Zed\PriceList\Persistence\Propel\QueryBuilder\PriceListSearchFilterFieldQueryBuilderInterface;
-use Orm\Zed\PriceList\Persistence\FosPriceListQuery;
+use Orm\Zed\PriceList\Persistence\FoiPriceListQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
@@ -21,11 +21,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class PriceListPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\PriceList\Persistence\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\FoiPriceListQuery
      */
-    public function createPriceListQuery(): FosPriceListQuery
+    public function createPriceListQuery(): FoiPriceListQuery
     {
-        return FosPriceListQuery::create();
+        return FoiPriceListQuery::create();
     }
 
     /**

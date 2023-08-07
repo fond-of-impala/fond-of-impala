@@ -5,7 +5,7 @@ namespace FondOfImpala\Zed\PriceList\Persistence\Propel\QueryBuilder;
 use FondOfImpala\Zed\PriceList\PriceListConfig;
 use Generated\Shared\Transfer\FilterFieldTransfer;
 use Generated\Shared\Transfer\PriceListListTransfer;
-use Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery;
+use Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 
 /**
@@ -34,15 +34,15 @@ class PriceListSearchFilterFieldQueryBuilder implements PriceListSearchFilterFie
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $priceListQuery
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $priceListQuery
      * @param \Generated\Shared\Transfer\PriceListListTransfer $priceListListTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     public function addSalesOrderQueryFilters(
-        FosPriceListQuery $priceListQuery,
+        FoiPriceListQuery $priceListQuery,
         PriceListListTransfer $priceListListTransfer
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         foreach ($priceListListTransfer->getFilterFields() as $filterFieldTransfer) {
             $priceListQuery = $this->addQueryFilter($priceListQuery, $filterFieldTransfer);
         }
@@ -51,15 +51,15 @@ class PriceListSearchFilterFieldQueryBuilder implements PriceListSearchFilterFie
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $priceListQuery
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $priceListQuery
      * @param \Generated\Shared\Transfer\FilterFieldTransfer $filterFieldTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addQueryFilter(
-        FosPriceListQuery $priceListQuery,
+        FoiPriceListQuery $priceListQuery,
         FilterFieldTransfer $filterFieldTransfer
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         $filterFieldType = $filterFieldTransfer->getType();
 
         if (isset($this->config->getFilterFieldTypeMapping()[$filterFieldType])) {
@@ -81,15 +81,15 @@ class PriceListSearchFilterFieldQueryBuilder implements PriceListSearchFilterFie
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $salesOrderQuery
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $salesOrderQuery
      * @param \Generated\Shared\Transfer\FilterFieldTransfer $filterFieldTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addOrderByFilter(
-        FosPriceListQuery $salesOrderQuery,
+        FoiPriceListQuery $salesOrderQuery,
         FilterFieldTransfer $filterFieldTransfer
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         [$orderColumn, $orderDirection] = explode(static::DELIMITER_ORDER_BY, $filterFieldTransfer->getValue());
 
         if ($orderColumn) {

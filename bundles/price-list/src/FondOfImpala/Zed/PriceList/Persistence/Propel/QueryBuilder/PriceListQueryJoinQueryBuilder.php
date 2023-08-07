@@ -6,7 +6,7 @@ use ArrayObject;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 use Generated\Shared\Transfer\QueryJoinTransfer;
 use Generated\Shared\Transfer\QueryWhereConditionTransfer;
-use Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery;
+use Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\Criterion\CustomCriterion;
 
@@ -21,15 +21,15 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     protected const CONCAT = 'CONCAT';
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param \Generated\Shared\Transfer\QueryJoinCollectionTransfer $queryJoinCollectionTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     public function addQueryFilters(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         QueryJoinCollectionTransfer $queryJoinCollectionTransfer
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         $whereConditionGroups = new ArrayObject();
 
         foreach ($queryJoinCollectionTransfer->getQueryJoins() as $queryJoinTransfer) {
@@ -50,17 +50,17 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param \Generated\Shared\Transfer\QueryJoinTransfer $queryJoinTransfer
      * @param \ArrayObject $whereConditionGroups
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function processQueryJoin(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         QueryJoinTransfer $queryJoinTransfer,
         ArrayObject $whereConditionGroups
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         $query = $this->addJoin($query, $queryJoinTransfer);
 
         if (count($queryJoinTransfer->getWithColumns()) > 0) {
@@ -89,15 +89,15 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param array<string> $withColumns
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addWithColumns(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         array $withColumns
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         foreach ($withColumns as $name => $withColumn) {
             $query->withColumn($withColumn, $name);
         }
@@ -106,15 +106,15 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param \Generated\Shared\Transfer\QueryJoinTransfer $queryJoinTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addJoin(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         QueryJoinTransfer $queryJoinTransfer
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         if ($queryJoinTransfer->getRelation()) {
             return $this->addRelationJoin($query, $queryJoinTransfer);
         }
@@ -134,15 +134,15 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param \Generated\Shared\Transfer\QueryJoinTransfer $queryJoinTransfer
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addRelationJoin(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         QueryJoinTransfer $queryJoinTransfer
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         $query->join(
             $queryJoinTransfer->getRelation(),
             $queryJoinTransfer->getJoinType() ?? Criteria::LEFT_JOIN,
@@ -159,17 +159,17 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param \ArrayObject<int, \Generated\Shared\Transfer\QueryWhereConditionTransfer> $queryWhereConditionTransfers
      * @param \ArrayObject $conditionGroups
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addWhereConditionGroup(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         ArrayObject $queryWhereConditionTransfers,
         ArrayObject $conditionGroups
-    ): FosPriceListQuery {
+    ): FoiPriceListQuery {
         $conditionGroupName = uniqid('', true);
 
         $conditions = $this->createWhereConditions($query, $queryWhereConditionTransfers);
@@ -188,13 +188,13 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     }
 
     /**
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      * @param \ArrayObject<int, \Generated\Shared\Transfer\QueryWhereConditionTransfer> $queryWhereConditionTransfers
      *
      * @return array<string>
      */
     protected function createWhereConditions(
-        FosPriceListQuery $query,
+        FoiPriceListQuery $query,
         ArrayObject $queryWhereConditionTransfers
     ): array {
         $conditions = [];
@@ -224,15 +224,15 @@ class PriceListQueryJoinQueryBuilder implements PriceListQueryJoinQueryBuilderIn
     /**
      * @param string $conditionName
      * @param \Generated\Shared\Transfer\QueryWhereConditionTransfer $queryWhereConditionTransfer
-     * @param \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery $query
+     * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $query
      *
-     * @return \Orm\Zed\PriceList\Persistence\Base\FosPriceListQuery
+     * @return \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
      */
     protected function addConditionToQuery(
         string $conditionName,
         QueryWhereConditionTransfer $queryWhereConditionTransfer,
-        FosPriceListQuery $query
-    ): FosPriceListQuery {
+        FoiPriceListQuery $query
+    ): FoiPriceListQuery {
         $column = $queryWhereConditionTransfer->getColumn();
         $value = $queryWhereConditionTransfer->getValue();
         $comparison = $queryWhereConditionTransfer->getComparison() ?? Criteria::LIKE;

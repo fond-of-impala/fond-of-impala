@@ -24,18 +24,18 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
      */
     public function getById(int $idPriceList): ?PriceListTransfer
     {
-        $fosPriceList = $this->getFactory()
+        $foiPriceList = $this->getFactory()
             ->createPriceListQuery()
             ->filterByIdPriceList($idPriceList)
             ->findOne();
 
-        if (!$fosPriceList) {
+        if (!$foiPriceList) {
             return null;
         }
 
         return $this->getFactory()
             ->createPriceListMapper()
-            ->mapEntityToTransfer($fosPriceList);
+            ->mapEntityToTransfer($foiPriceList);
     }
 
     /**
@@ -47,18 +47,18 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
      */
     public function getByName(string $name): ?PriceListTransfer
     {
-        $fosPriceList = $this->getFactory()
+        $foiPriceList = $this->getFactory()
             ->createPriceListQuery()
             ->filterByName($name)
             ->findOne();
 
-        if (!$fosPriceList) {
+        if (!$foiPriceList) {
             return null;
         }
 
         return $this->getFactory()
             ->createPriceListMapper()
-            ->mapEntityToTransfer($fosPriceList);
+            ->mapEntityToTransfer($foiPriceList);
     }
 
     /**
@@ -68,16 +68,16 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
      */
     public function getAll(): PriceListCollectionTransfer
     {
-        $fosPriceLists = $this->getFactory()
+        $foiPriceLists = $this->getFactory()
             ->createPriceListQuery()
             ->find();
 
         $priceListCollectionTransfer = new PriceListCollectionTransfer();
 
-        foreach ($fosPriceLists as $fosPriceList) {
+        foreach ($foiPriceLists as $foiPriceList) {
             $priceListTransfer = $this->getFactory()
                 ->createPriceListMapper()
-                ->mapEntityToTransfer($fosPriceList);
+                ->mapEntityToTransfer($foiPriceList);
 
             $priceListCollectionTransfer->addPriceList($priceListTransfer);
         }
@@ -111,7 +111,7 @@ class PriceListRepository extends AbstractRepository implements PriceListReposit
 
         $priceListTransfers = $this->getFactory()
             ->createPriceListMapper()
-            ->mapEntityCollectionToTransfers($query->find());
+            ->mapEntityCollectionToTransfers($query->find());// @phpstan-ignore-line
 
         return $priceListListTransfer->setPriceLists(new ArrayObject($priceListTransfers));
     }
