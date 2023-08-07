@@ -6,10 +6,7 @@ use Spryker\Service\UtilDateTime\UtilDateTimeServiceInterface;
 
 class PriceListGuiToUtilDateTimeServiceBridge implements PriceListGuiToUtilDateTimeServiceInterface
 {
-    /**
-     * @var \Spryker\Service\UtilDateTime\UtilDateTimeServiceInterface
-     */
-    protected $utilDateTimeService;
+    protected UtilDateTimeServiceInterface $utilDateTimeService;
 
     /**
      * @param \Spryker\Service\UtilDateTime\UtilDateTimeServiceInterface $utilDateTimeService

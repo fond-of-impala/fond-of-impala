@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\PriceListTransfer;
 
 class PriceListFormDataProvider
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceListGui\Dependency\Facade\PriceListGuiToPriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected PriceListGuiToPriceListFacadeInterface $priceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceListGui\Dependency\Facade\PriceListGuiToPriceListFacadeInterface $priceListFacade

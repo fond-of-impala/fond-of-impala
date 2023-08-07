@@ -31,15 +31,9 @@ class PriceListTable extends AbstractTable
      */
     public const URL_DELETE_PRICE_LIST = '/price-list-gui/price-list/delete';
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListGui\Dependency\Service\PriceListGuiToUtilDateTimeServiceInterface
-     */
-    protected $utilDateTimeService;
+    protected PriceListGuiToUtilDateTimeServiceInterface $utilDateTimeService;
 
-    /**
-     * @var \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery
-     */
-    protected $foiPriceListQuery;
+    protected FoiPriceListQuery $foiPriceListQuery;
 
     /**
      * @param \Orm\Zed\PriceList\Persistence\Base\FoiPriceListQuery $foiPriceListQuery
