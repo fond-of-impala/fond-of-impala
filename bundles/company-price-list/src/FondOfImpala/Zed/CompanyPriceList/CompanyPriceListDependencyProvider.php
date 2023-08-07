@@ -34,11 +34,9 @@ class CompanyPriceListDependencyProvider extends AbstractBundleDependencyProvide
      */
     protected function addPriceListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRICE_LIST] = function (Container $container) {
-            return new CompanyPriceListToPriceListFacadeBridge(
-                $container->getLocator()->priceList()->facade(),
-            );
-        };
+        $container[static::FACADE_PRICE_LIST] = fn (Container $container): CompanyPriceListToPriceListFacadeBridge => new CompanyPriceListToPriceListFacadeBridge(
+            $container->getLocator()->priceList()->facade(),
+        );
 
         return $container;
     }

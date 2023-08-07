@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\PriceListTransfer;
 
 class CompanyHydrator implements CompanyHydratorInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyPriceList\Dependency\Facade\CompanyPriceListToPriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected CompanyPriceListToPriceListFacadeInterface $priceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyPriceList\Dependency\Facade\CompanyPriceListToPriceListFacadeInterface $priceListFacade

@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 use Generated\Shared\Transfer\QueryJoinTransfer;
 use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\PriceList\Persistence\Map\FoiPriceListTableMap;
+use PHPUnit\Framework\MockObject\MockObject;
 use Propel\Runtime\ActiveQuery\Criteria;
 
 class CompanySearchPriceListQueryExpanderPluginTest extends Unit
@@ -129,7 +130,7 @@ class CompanySearchPriceListQueryExpanderPluginTest extends Unit
 
         $this->queryJoinCollectionTransfer->expects($this->atLeastOnce())
             ->method('addQueryJoin')
-            ->willReturnCallback(static function (QueryJoinTransfer $queryJoinTransfer) use ($self) {
+            ->willReturnCallback(static function (QueryJoinTransfer $queryJoinTransfer) use ($self): MockObject|QueryJoinCollectionTransfer {
                 static::assertSame($queryJoinTransfer->getWhereConditions()[0]->getValue(), 'value');
                 static::assertSame($queryJoinTransfer->getWhereConditions()[0]->getColumn(), SpyCompanyTableMap::COL_UUID);
                 static::assertSame($queryJoinTransfer->getWhereConditions()[0]->getComparison(), Criteria::EQUAL);
