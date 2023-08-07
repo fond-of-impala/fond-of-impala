@@ -12,6 +12,7 @@ use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiTo
 use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCustomerFacadeBridge;
 use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeBridge;
 use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Service\CompanyUsersRestApiToUtilTextServiceBridge;
+use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleToCompanyUserQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
@@ -64,12 +65,27 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     /**
      * @var string
      */
+    public const PROPEL_QUERY_COMPANY_ROLE_TO_COMPANY_USER = 'PROPEL_QUERY_COMPANY_ROLE_TO_COMPANY_USER';
+
+    /**
+     * @var string
+     */
     public const SERVICE_UTIL_TEXT = 'SERVICE_UTIL_TEXT';
 
     /**
      * @var string
      */
     public const PLUGINS_COMPANY_USER_POST_CREATE = 'PLUGINS_COMPANY_USER_POST_CREATE';
+
+    /**
+     * @var string
+     */
+    public const PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION = 'PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION';
+
+    /**
+     * @var string
+     */
+    public const PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION = 'PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION';
 
     /**
      * @var string
@@ -94,6 +110,8 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
         $container = $this->addUtilTextService($container);
         $container = $this->addPermissionFacade($container);
         $container = $this->addCompanyUserPostCreatePlugin($container);
+        $container = $this->addCompanyUserPreDeleteValidationPlugin($container);
+        $container = $this->addCompanyUserPreUpdateValidationPlugin($container);
 
         return $this->addCompanyUserPreCreatePlugins($container);
     }
@@ -107,6 +125,8 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
+        $container = $this->addCompanyRoleToCompanyUserPropelQuery($container);
+
         return $this->addCompanyUserPropelQuery($container);
     }
 
@@ -119,6 +139,20 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $container[static::PROPEL_QUERY_COMPANY_USER] = static function () {
             return SpyCompanyUserQuery::create();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCompanyRoleToCompanyUserPropelQuery(Container $container): Container
+    {
+        $container[static::PROPEL_QUERY_COMPANY_ROLE_TO_COMPANY_USER] = static function () {
+            return SpyCompanyRoleToCompanyUserQuery::create();
         };
 
         return $container;
@@ -272,6 +306,54 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPostCreatePluginInterface>
      */
     protected function getCompanyUserPostCreatePlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addCompanyUserPreDeleteValidationPlugin(Container $container): Container
+    {
+        $self = $this;
+
+        $container[static::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION] = static function () use ($self) {
+            return $self->getCompanyUserPreDeleteValidationPlugins();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreDeleteValidationPluginInterface>
+     */
+    protected function getCompanyUserPreDeleteValidationPlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addCompanyUserPreUpdateValidationPlugin(Container $container): Container
+    {
+        $self = $this;
+
+        $container[static::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION] = static function () use ($self) {
+            return $self->getCompanyUserPreUpdateValidationPlugins();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreUpdateValidationPluginInterface>
+     */
+    protected function getCompanyUserPreUpdateValidationPlugins(): array
     {
         return [];
     }

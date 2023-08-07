@@ -36,4 +36,31 @@ interface CompanyUsersRestApiRepositoryInterface
         int $idCustomer,
         string $foreignCompanyUserReference
     ): ?CompanyUserTransfer;
+
+    /**
+     * @param int $idCompany
+     *
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     */
+    public function findCompanyUserByFkCompany(
+        int $idCompany
+    ): CompanyUserCollectionTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     *
+     * @return array<string>
+     */
+    public function findCompanyUserRolesByCompanyUser(
+        CompanyUserTransfer $companyUserTransfer
+    ): array;
+
+    /**
+     * @param int $idCompany
+     *
+     * @return array<int, array>
+     */
+    public function findCompanyUserRolesByFkCompany(int $idCompany): array;
 }

@@ -14,5 +14,18 @@ interface CompanyUsersRestApiConstants
     /**
      * @var string
      */
-    public const BASE_URI = 'FOND_OF_SPRYKER:COMPANY_USER_REST_API:BASE_URI';
+    public const BASE_URI = 'FOND_OF_IMPALA:COMPANY_USER_REST_API:BASE_URI';
+
+    /**
+     * @var string
+     */
+    public const PROTECTED_ROLES = 'FOND_OF_IMPALA:COMPANY_USER_REST_API:PROTECTED_ROLES';
+
+    /**
+     * @var array
+     */
+    public const PROTECTED_ROLES_DEFAULT = [
+        'super_administration',
+        'administration',
+    ];
 }

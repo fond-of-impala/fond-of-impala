@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business;
 
@@ -28,6 +28,10 @@ use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CustomerReader;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CustomerReaderInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Updater\CompanyUserUpdater;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Updater\CompanyUserUpdaterInterface;
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\CompanyUserDeleteValidation;
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\CompanyUserDeleteValidationInterface;
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\CompanyUserUpdateValidation;
+use FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\CompanyUserUpdateValidationInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\RestApiError;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\RestApiErrorInterface;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Writer\CustomerWriter;
@@ -69,6 +73,7 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
             $this->createCompanyUserReader(),
             $this->getCompanyUserFacade(),
             $this->getPermissionFacade(),
+            $this->createCompanyUserPluginExecutor(),
         );
     }
 
@@ -89,6 +94,28 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
             $this->getConfig(),
             $this->getPermissionFacade(),
             $this->createCompanyUserPluginExecutor(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\CompanyUserDeleteValidationInterface
+     */
+    public function createCompanyUserDeleteValidation(): CompanyUserDeleteValidationInterface
+    {
+        return new CompanyUserDeleteValidation(
+            $this->getRepository(),
+            $this->getConfig(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\CompanyUserUpdateValidationInterface
+     */
+    public function createCompanyUserUpdateValidation(): CompanyUserUpdateValidationInterface
+    {
+        return new CompanyUserUpdateValidation(
+            $this->getRepository(),
+            $this->getConfig(),
         );
     }
 
@@ -229,6 +256,8 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
         return new CompanyUserPluginExecutor(
             $this->getCompanyUserPreCreatePlugins(),
             $this->getCompanyUserPostCreatePlugins(),
+            $this->getCompanyUserPreDeleteValidationPlugins(),
+            $this->getCompanyUserPreUpdateValidationPlugins(),
         );
     }
 
@@ -239,6 +268,26 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return $this->getProvidedDependency(
             CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE,
+        );
+    }
+
+    /**
+     * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreDeleteValidationPluginInterface>
+     */
+    protected function getCompanyUserPreDeleteValidationPlugins(): array
+    {
+        return $this->getProvidedDependency(
+            CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION,
+        );
+    }
+
+    /**
+     * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreUpdateValidationPluginInterface>
+     */
+    protected function getCompanyUserPreUpdateValidationPlugins(): array
+    {
+        return $this->getProvidedDependency(
+            CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION,
         );
     }
 
@@ -262,6 +311,7 @@ class CompanyUsersRestApiBusinessFactory extends AbstractBusinessFactory
             $this->createCompanyRoleCollectionReader(),
             $this->getCompanyUserFacade(),
             $this->getPermissionFacade(),
+            $this->createCompanyUserPluginExecutor(),
         );
     }
 
