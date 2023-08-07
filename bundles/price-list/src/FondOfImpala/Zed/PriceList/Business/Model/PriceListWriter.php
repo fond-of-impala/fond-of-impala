@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\PriceListTransfer;
 
 class PriceListWriter implements PriceListWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceList\Persistence\PriceListEntityManagerInterface
-     */
-    protected $entityManager;
+    protected PriceListEntityManagerInterface $entityManager;
 
     /**
      * @param \FondOfImpala\Zed\PriceList\Persistence\PriceListEntityManagerInterface $entityManager

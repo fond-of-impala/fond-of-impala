@@ -23,10 +23,7 @@ class PriceListSearchFilterFieldQueryBuilder implements PriceListSearchFilterFie
      */
     protected const DELIMITER_ORDER_BY = '::';
 
-    /**
-     * @var \FondOfImpala\Zed\PriceList\PriceListConfig
-     */
-    protected $config;
+    protected PriceListConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\PriceList\PriceListConfig $config

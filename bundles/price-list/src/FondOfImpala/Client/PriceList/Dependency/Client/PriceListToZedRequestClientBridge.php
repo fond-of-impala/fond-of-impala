@@ -7,10 +7,7 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class PriceListToZedRequestClientBridge implements PriceListToZedRequestClientInterface
 {
-    /**
-     * @var \Spryker\Client\ZedRequest\ZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected ZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \Spryker\Client\ZedRequest\ZedRequestClientInterface $zedRequestClient

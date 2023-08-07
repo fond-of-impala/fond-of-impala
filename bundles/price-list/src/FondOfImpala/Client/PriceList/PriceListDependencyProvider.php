@@ -32,9 +32,7 @@ class PriceListDependencyProvider extends AbstractDependencyProvider
      */
     protected function addZedRequestClient(Container $container): Container
     {
-        $container[static::CLIENT_ZED_REQUEST] = static function (Container $container) {
-            return new PriceListToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
-        };
+        $container[static::CLIENT_ZED_REQUEST] = static fn (Container $container): PriceListToZedRequestClientBridge => new PriceListToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
 
         return $container;
     }

@@ -38,9 +38,7 @@ class PriceListDependencyProvider extends AbstractBundleDependencyProvider
     {
         $self = $this;
 
-        $container[static::PLUGINS_SEARCH_PRICE_LIST_QUERY_EXPANDER] = static function () use ($self) {
-            return $self->getSearchPriceListQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_SEARCH_PRICE_LIST_QUERY_EXPANDER] = static fn (): array => $self->getSearchPriceListQueryExpanderPlugins();
 
         return $container;
     }

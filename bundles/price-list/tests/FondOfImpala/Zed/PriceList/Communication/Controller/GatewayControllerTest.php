@@ -43,7 +43,7 @@ class GatewayControllerTest extends Unit
             /**
              * @var \FondOfImpala\Zed\PriceList\Business\PriceListFacadeInterface
              */
-            protected $priceListFacade;
+            protected AbstractFacade $priceListFacade;
 
             /**
              * @param \Spryker\Zed\Kernel\Business\AbstractFacade $facade

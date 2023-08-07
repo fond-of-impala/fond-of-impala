@@ -169,9 +169,7 @@ class PriceListReaderTest extends Unit
             ->with(
                 $filterFieldTransfers,
                 static::callback(
-                    static function (QueryJoinCollectionTransfer $queryJoinCollectionTransfer) {
-                        return $queryJoinCollectionTransfer->getQueryJoins()->count() === 0;
-                    },
+                    static fn (QueryJoinCollectionTransfer $queryJoinCollectionTransfer): bool => $queryJoinCollectionTransfer->getQueryJoins()->count() === 0,
                 ),
             )->willReturn($this->queryJoinCollectionTransferMock);
 

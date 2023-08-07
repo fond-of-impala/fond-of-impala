@@ -18,7 +18,7 @@ class PriceListReader implements PriceListReaderInterface
     /**
      * @var array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface>
      */
-    protected $searchPriceListQueryExpanderPlugins;
+    protected array $searchPriceListQueryExpanderPlugins;
 
     /**
      * @var array<int, \Generated\Shared\Transfer\PriceListTransfer>
