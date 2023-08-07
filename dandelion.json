@@ -91,6 +91,10 @@
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
     },
+    "price-product-price-list-page-search-extension": {
+      "path": "bundles/price-product-price-list-page-search-extension",
+      "version": "1.0.0-beta"
+    },
     "product-list-conditional-availability-page-search": {
       "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.0.0"
