@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<database
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="zed"
+    xsi:noNamespaceSchemaLocation="https://static.spryker.com/schema-01.xsd"
+    namespace="Orm\Zed\PriceList\Persistence"
+    package="src.Orm.Zed.PriceList.Persistence">
+
+    <table name="foi_price_list" identifierQuoting="true">
+        <column name="uuid" required="false" type="VARCHAR" size="255"/>
+
+        <unique name="foi_price_list-unique-uuid">
+            <unique-column name="uuid"/>
+        </unique>
+
+        <behavior name="uuid">
+            <parameter name="key_prefix" value="price_list"/>
+            <parameter name="key_columns" value="id_price_list"/>
+        </behavior>
+    </table>
+</database>
