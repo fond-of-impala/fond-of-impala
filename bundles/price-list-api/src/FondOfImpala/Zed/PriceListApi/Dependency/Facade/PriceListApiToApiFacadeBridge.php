@@ -9,10 +9,7 @@ use Spryker\Zed\Api\Business\ApiFacadeInterface;
 
 class PriceListApiToApiFacadeBridge implements PriceListApiToApiFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Api\Business\ApiFacadeInterface
-     */
-    protected $apiFacade;
+    protected ApiFacadeInterface $apiFacade;
 
     /**
      * @param \Spryker\Zed\Api\Business\ApiFacadeInterface $apiFacade

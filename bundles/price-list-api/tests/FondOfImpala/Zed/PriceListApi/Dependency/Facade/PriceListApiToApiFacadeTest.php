@@ -25,20 +25,14 @@ class PriceListApiToApiFacadeTest extends Unit
      */
     protected $abstractTransferMock;
 
-    /**
-     * @var string
-     */
-    private $id;
+    private ?string $id = null;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
      */
     private $apiItemTransferMock;
 
-    /**
-     * @var array
-     */
-    private $transferData;
+    private ?array $transferData = null;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiCollectionTransfer

@@ -10,6 +10,7 @@ use FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeB
 use FondOfImpala\Zed\PriceListApi\Dependency\QueryContainer\PriceListApiToApiQueryBuilderQueryContainerBridge;
 use Orm\Zed\PriceList\Persistence\FoiPriceListQuery;
 use Orm\Zed\Product\Persistence\SpyProductAbstractQuery;
+use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Propel;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
@@ -101,9 +102,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPriceListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRICE_LIST] = static function (Container $container) {
-            return new PriceListApiToPriceListFacadeBridge($container->getLocator()->priceList()->facade());
-        };
+        $container[static::FACADE_PRICE_LIST] = static fn (Container $container): PriceListApiToPriceListFacadeBridge => new PriceListApiToPriceListFacadeBridge($container->getLocator()->priceList()->facade());
 
         return $container;
     }
@@ -115,9 +114,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPriceProductPriceListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRICE_PRODUCT_PRICE_LIST] = static function (Container $container) {
-            return new PriceListApiToPriceProductPriceListFacadeBridge($container->getLocator()->priceProductPriceList()->facade());
-        };
+        $container[static::FACADE_PRICE_PRODUCT_PRICE_LIST] = static fn (Container $container): PriceListApiToPriceProductPriceListFacadeBridge => new PriceListApiToPriceProductPriceListFacadeBridge($container->getLocator()->priceProductPriceList()->facade());
 
         return $container;
     }
@@ -129,9 +126,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addProductFacade(Container $container): Container
     {
-        $container[static::FACADE_PRODUCT] = static function (Container $container) {
-            return new PriceListApiToProductFacadeBridge($container->getLocator()->product()->facade());
-        };
+        $container[static::FACADE_PRODUCT] = static fn (Container $container): PriceListApiToProductFacadeBridge => new PriceListApiToProductFacadeBridge($container->getLocator()->product()->facade());
 
         return $container;
     }
@@ -143,9 +138,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPropelCommunication(Container $container): Container
     {
-        $container[static::PROPEL_CONNECTION] = static function () {
-            return Propel::getConnection();
-        };
+        $container[static::PROPEL_CONNECTION] = static fn (): ConnectionInterface => Propel::getConnection();
 
         return $container;
     }
@@ -159,9 +152,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
     {
         $self = $this;
 
-        $container[static::PLUGINS_PRICE_PRODUCTS_HYDRATION] = static function () use ($self) {
-            return $self->getPriceProductsHydrationPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCTS_HYDRATION] = static fn (): array => $self->getPriceProductsHydrationPlugins();
 
         return $container;
     }
@@ -183,9 +174,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function provideApiFacade(Container $container): Container
     {
-        $container[static::FACADE_API] = static function (Container $container) {
-            return new PriceListApiToApiFacadeBridge($container->getLocator()->api()->facade());
-        };
+        $container[static::FACADE_API] = static fn (Container $container): PriceListApiToApiFacadeBridge => new PriceListApiToApiFacadeBridge($container->getLocator()->api()->facade());
 
         return $container;
     }
@@ -197,9 +186,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPriceListPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRICE_LIST] = static function () {
-            return FoiPriceListQuery::create();
-        };
+        $container[static::PROPEL_QUERY_PRICE_LIST] = static fn (): FoiPriceListQuery => FoiPriceListQuery::create();
 
         return $container;
     }
@@ -211,9 +198,7 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addProductAbstractPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRODUCT_ABSTRACT] = static function () {
-            return SpyProductAbstractQuery::create();
-        };
+        $container[static::PROPEL_QUERY_PRODUCT_ABSTRACT] = static fn (): SpyProductAbstractQuery => SpyProductAbstractQuery::create();
 
         return $container;
     }
@@ -225,11 +210,9 @@ class PriceListApiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function provideApiQueryBuilderQueryContainer(Container $container): Container
     {
-        $container[static::QUERY_CONTAINER_API_QUERY_BUILDER] = static function (Container $container) {
-            return new PriceListApiToApiQueryBuilderQueryContainerBridge(
-                $container->getLocator()->apiQueryBuilder()->queryContainer(),
-            );
-        };
+        $container[static::QUERY_CONTAINER_API_QUERY_BUILDER] = static fn (Container $container): PriceListApiToApiQueryBuilderQueryContainerBridge => new PriceListApiToApiQueryBuilderQueryContainerBridge(
+            $container->getLocator()->apiQueryBuilder()->queryContainer(),
+        );
 
         return $container;
     }

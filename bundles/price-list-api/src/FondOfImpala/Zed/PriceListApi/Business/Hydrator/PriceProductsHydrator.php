@@ -17,15 +17,9 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
      */
     protected const GROUPED_KEY_CONCRETE = 'concrete';
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeInterface
-     */
-    protected $productFacade;
+    protected PriceListApiToProductFacadeInterface $productFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiRepositoryInterface
-     */
-    protected $repository;
+    protected PriceListApiRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeInterface $productFacade

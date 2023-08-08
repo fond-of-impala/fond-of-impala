@@ -239,7 +239,7 @@ class PriceListApiTest extends Unit
         try {
             $this->priceListApi->add($this->apiDataTransferMock);
             static::fail();
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 
@@ -331,9 +331,7 @@ class PriceListApiTest extends Unit
             ->method('findPriceListById')
             ->with(
                 static::callback(
-                    static function (PriceListTransfer $priceListTransfer) use ($idPriceList) {
-                        return $priceListTransfer->getIdPriceList() === $idPriceList;
-                    },
+                    static fn (PriceListTransfer $priceListTransfer): bool => $priceListTransfer->getIdPriceList() === $idPriceList,
                 ),
             )
             ->willReturn($this->priceListTransferMock);
@@ -401,7 +399,7 @@ class PriceListApiTest extends Unit
         try {
             $this->priceListApi->update($idPriceList, $this->apiDataTransferMock);
             static::fail();
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 
@@ -418,9 +416,7 @@ class PriceListApiTest extends Unit
             ->method('findPriceListById')
             ->with(
                 static::callback(
-                    static function (PriceListTransfer $priceListTransfer) use ($idPriceList) {
-                        return $priceListTransfer->getIdPriceList() === $idPriceList;
-                    },
+                    static fn (PriceListTransfer $priceListTransfer): bool => $priceListTransfer->getIdPriceList() === $idPriceList,
                 ),
             )
             ->willReturn($this->priceListTransferMock);
@@ -505,7 +501,7 @@ class PriceListApiTest extends Unit
         try {
             $this->priceListApi->update($idPriceList, $this->apiDataTransferMock);
             static::fail();
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 
@@ -522,9 +518,7 @@ class PriceListApiTest extends Unit
             ->method('findPriceListById')
             ->with(
                 static::callback(
-                    static function (PriceListTransfer $priceListTransfer) use ($idPriceList) {
-                        return $priceListTransfer->getIdPriceList() === $idPriceList;
-                    },
+                    static fn (PriceListTransfer $priceListTransfer): bool => $priceListTransfer->getIdPriceList() === $idPriceList,
                 ),
             )->willReturn($this->priceListTransferMock);
 
@@ -618,15 +612,13 @@ class PriceListApiTest extends Unit
             ->method('findPriceListById')
             ->with(
                 static::callback(
-                    static function (PriceListTransfer $priceListTransfer) use ($idPriceList) {
-                        return $priceListTransfer->getIdPriceList() === $idPriceList;
-                    },
+                    static fn (PriceListTransfer $priceListTransfer): bool => $priceListTransfer->getIdPriceList() === $idPriceList,
                 ),
             )->willReturn(null);
 
         try {
             $this->priceListApi->get($idPriceList);
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 
@@ -641,9 +633,7 @@ class PriceListApiTest extends Unit
             ->method('findPriceListById')
             ->with(
                 static::callback(
-                    static function (PriceListTransfer $priceListTransfer) use ($idPriceList) {
-                        return $priceListTransfer->getIdPriceList() === $idPriceList;
-                    },
+                    static fn (PriceListTransfer $priceListTransfer): bool => $priceListTransfer->getIdPriceList() === $idPriceList,
                 ),
             )->willReturn($this->priceListTransferMock);
 

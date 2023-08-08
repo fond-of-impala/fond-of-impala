@@ -35,45 +35,24 @@ class PriceListApi implements PriceListApiInterface
 {
     use LoggerTrait;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected PriceListApiToPriceListFacadeInterface $priceListFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Business\Mapper\TransferMapperInterface
-     */
-    protected $transferMapper;
+    protected TransferMapperInterface $transferMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceProductPriceListFacadeInterface
-     */
-    protected $priceProductPriceListFacade;
+    protected PriceListApiToPriceProductPriceListFacadeInterface $priceProductPriceListFacade;
 
     /**
      * @var array<\FondOfImpala\Zed\PriceListApi\Dependency\Plugin\PriceProductsHydrationPluginInterface>
      */
-    protected $priceProductsHydrationPlugins;
+    protected array $priceProductsHydrationPlugins;
 
-    /**
-     * @var \Propel\Runtime\Connection\ConnectionInterface
-     */
-    protected $connection;
+    protected ConnectionInterface $connection;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToApiFacadeInterface
-     */
-    protected $apiFacade;
+    protected PriceListApiToApiFacadeInterface $apiFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiQueryContainerInterface
-     */
-    protected $queryContainer;
+    protected PriceListApiQueryContainerInterface $queryContainer;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceListApi\Dependency\QueryContainer\PriceListApiToApiQueryBuilderQueryContainerInterface
-     */
-    protected $apiQueryBuilderQueryContainer;
+    protected PriceListApiToApiQueryBuilderQueryContainerInterface $apiQueryBuilderQueryContainer;
 
     /**
      * @param \Propel\Runtime\Connection\ConnectionInterface $connection

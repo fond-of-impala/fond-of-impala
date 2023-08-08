@@ -146,7 +146,7 @@ class PriceListApiResourcePluginTest extends Unit
     {
         try {
             $this->priceListApiResourcePlugin->remove($this->idProductList);
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 

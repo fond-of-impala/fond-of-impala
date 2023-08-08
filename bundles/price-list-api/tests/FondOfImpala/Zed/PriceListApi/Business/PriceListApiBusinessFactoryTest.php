@@ -39,10 +39,7 @@ class PriceListApiBusinessFactoryTest extends Unit
      */
     private $connectionInterfaceMock;
 
-    /**
-     * @var array
-     */
-    private $priceProductHydrationPlugins;
+    private ?array $priceProductHydrationPlugins = null;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceListFacadeInterface

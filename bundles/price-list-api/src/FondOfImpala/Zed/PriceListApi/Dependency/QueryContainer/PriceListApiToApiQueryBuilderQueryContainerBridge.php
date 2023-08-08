@@ -9,10 +9,7 @@ use Spryker\Zed\ApiQueryBuilder\Persistence\ApiQueryBuilderQueryContainerInterfa
 
 class PriceListApiToApiQueryBuilderQueryContainerBridge implements PriceListApiToApiQueryBuilderQueryContainerInterface
 {
-    /**
-     * @var \Spryker\Zed\ApiQueryBuilder\Persistence\ApiQueryBuilderQueryContainerInterface
-     */
-    protected $apiQueryBuilderQueryContainer;
+    protected ApiQueryBuilderQueryContainerInterface $apiQueryBuilderQueryContainer;
 
     /**
      * @param \Spryker\Zed\ApiQueryBuilder\Persistence\ApiQueryBuilderQueryContainerInterface $apiQueryBuilderQueryContainer

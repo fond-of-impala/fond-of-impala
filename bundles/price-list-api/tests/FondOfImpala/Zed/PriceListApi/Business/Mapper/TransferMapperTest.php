@@ -12,10 +12,7 @@ class TransferMapperTest extends Unit
      */
     protected $transferMapper;
 
-    /**
-     * @var array
-     */
-    private $transferData;
+    private ?array $transferData = null;
 
     /**
      * @return void
