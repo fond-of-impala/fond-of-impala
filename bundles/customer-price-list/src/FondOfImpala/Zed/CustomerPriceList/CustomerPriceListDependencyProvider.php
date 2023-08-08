@@ -34,9 +34,7 @@ class CustomerPriceListDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addPropelPriceListQuery(Container $container): Container
     {
-        $container[static::PROPEL_PRICE_LIST_QUERY] = static function () {
-            return FoiPriceListQuery::create();
-        };
+        $container[static::PROPEL_PRICE_LIST_QUERY] = static fn (): FoiPriceListQuery => FoiPriceListQuery::create();
 
         return $container;
     }

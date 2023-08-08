@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\PriceListCollectionTransfer;
 
 class CustomerPriceListReader implements CustomerPriceListReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepositoryInterface
-     */
-    protected $customerPriceListRepository;
+    protected CustomerPriceListRepositoryInterface $customerPriceListRepository;
 
     /**
      * @param \FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepositoryInterface $customerPriceListRepository

@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CustomerTransfer;
 
 class CustomerExpander implements CustomerExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepositoryInterface
-     */
-    protected $repository;
+    protected CustomerPriceListRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepositoryInterface $repository

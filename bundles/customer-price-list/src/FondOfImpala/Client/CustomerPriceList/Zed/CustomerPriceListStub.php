@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\PriceListCollectionTransfer;
 
 class CustomerPriceListStub implements CustomerPriceListStubInterface
 {
-    /**
-     * @var \FondOfImpala\Client\CustomerPriceList\Dependency\Client\CustomerPriceListToZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected CustomerPriceListToZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \FondOfImpala\Client\CustomerPriceList\Dependency\Client\CustomerPriceListToZedRequestClientInterface $zedRequestClient

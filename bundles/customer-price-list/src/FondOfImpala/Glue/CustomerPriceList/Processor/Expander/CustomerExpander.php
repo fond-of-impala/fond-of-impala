@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CustomerTransfer;
 
 class CustomerExpander implements CustomerExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Client\CustomerPriceList\CustomerPriceListClientInterface
-     */
-    protected $customerPriceListClient;
+    protected CustomerPriceListClientInterface $customerPriceListClient;
 
     /**
      * @param \FondOfImpala\Client\CustomerPriceList\CustomerPriceListClientInterface $customerPriceListClient
