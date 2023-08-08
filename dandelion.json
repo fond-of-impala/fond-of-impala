@@ -87,6 +87,10 @@
       "path": "bundles/customer-anonymizer-company-user-connector",
       "version": "1.0.0"
     },
+    "customer-price-list": {
+      "path": "bundles/customer-price-list",
+      "version": "1.0.0-beta"
+    },
     "jellyfish-sales-order-conditional-availability": {
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
