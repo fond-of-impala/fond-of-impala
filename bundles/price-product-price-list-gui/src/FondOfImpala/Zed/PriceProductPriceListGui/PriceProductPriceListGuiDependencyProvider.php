@@ -34,11 +34,9 @@ class PriceProductPriceListGuiDependencyProvider extends AbstractBundleDependenc
      */
     protected function addPriceListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRICE_LIST] = function (Container $container) {
-            return new PriceProductPriceListGuiToPriceListFacadeBridge(
-                $container->getLocator()->priceList()->facade(),
-            );
-        };
+        $container[static::FACADE_PRICE_LIST] = fn (Container $container): PriceProductPriceListGuiToPriceListFacadeBridge => new PriceProductPriceListGuiToPriceListFacadeBridge(
+            $container->getLocator()->priceList()->facade(),
+        );
 
         return $container;
     }

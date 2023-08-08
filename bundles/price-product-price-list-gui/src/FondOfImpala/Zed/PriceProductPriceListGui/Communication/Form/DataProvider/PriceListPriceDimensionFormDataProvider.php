@@ -7,10 +7,7 @@ use FondOfImpala\Zed\PriceProductPriceListGui\Dependency\Facade\PriceProductPric
 
 class PriceListPriceDimensionFormDataProvider
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListGui\Dependency\Facade\PriceProductPriceListGuiToPriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected PriceProductPriceListGuiToPriceListFacadeInterface $priceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListGui\Dependency\Facade\PriceProductPriceListGuiToPriceListFacadeInterface $priceListFacade
