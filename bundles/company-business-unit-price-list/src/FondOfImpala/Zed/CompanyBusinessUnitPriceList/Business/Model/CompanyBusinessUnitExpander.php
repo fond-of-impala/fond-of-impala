@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\PriceListTransfer;
 
 class CompanyBusinessUnitExpander implements CompanyBusinessUnitExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyBusinessUnitPriceList\Dependency\Facade\CompanyBusinessUnitPriceListToPriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected CompanyBusinessUnitPriceListToPriceListFacadeInterface $priceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyBusinessUnitPriceList\Dependency\Facade\CompanyBusinessUnitPriceListToPriceListFacadeInterface $priceListFacade
