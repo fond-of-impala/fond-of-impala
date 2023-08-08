@@ -149,20 +149,16 @@ class PriceListReaderTest extends Unit
         $this->filterFieldsExpanderPluginMocks[0]->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->restRequestMock, static::callback(
-                static function (ArrayObject $filterFieldTransfers) {
-                    return $filterFieldTransfers->count() === 0;
-                },
+                static fn (ArrayObject $filterFieldTransfers): bool => $filterFieldTransfers->count() === 0,
             ))->willReturn($filterFieldTransfer);
 
         $this->priceListClientMock->expects(static::atLeastOnce())
             ->method('findPriceLists')
             ->with(
                 static::callback(
-                    static function (PriceListListTransfer $priceListListTransfer) use ($filterFieldTransfer) {
-                        return $priceListListTransfer->getQueryJoins() === null
-                            && $priceListListTransfer->getPriceLists()->count() === 0
-                            && $priceListListTransfer->getFilterFields() === $filterFieldTransfer;
-                    },
+                    static fn (PriceListListTransfer $priceListListTransfer): bool => $priceListListTransfer->getQueryJoins() === null
+                        && $priceListListTransfer->getPriceLists()->count() === 0
+                        && $priceListListTransfer->getFilterFields() === $filterFieldTransfer,
                 ),
             )->willReturn($this->priceListListTransferMock);
 
@@ -230,20 +226,16 @@ class PriceListReaderTest extends Unit
         $this->filterFieldsExpanderPluginMocks[0]->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->restRequestMock, static::callback(
-                static function (ArrayObject $filterFieldTransfers) {
-                    return $filterFieldTransfers->count() === 0;
-                },
+                static fn (ArrayObject $filterFieldTransfers): bool => $filterFieldTransfers->count() === 0,
             ))->willReturn($filterFieldTransfer);
 
         $this->priceListClientMock->expects(static::atLeastOnce())
             ->method('findPriceLists')
             ->with(
                 static::callback(
-                    static function (PriceListListTransfer $priceListListTransfer) use ($filterFieldTransfer) {
-                        return $priceListListTransfer->getQueryJoins() === null
-                            && $priceListListTransfer->getPriceLists()->count() === 0
-                            && $priceListListTransfer->getFilterFields() === $filterFieldTransfer;
-                    },
+                    static fn (PriceListListTransfer $priceListListTransfer): bool => $priceListListTransfer->getQueryJoins() === null
+                        && $priceListListTransfer->getPriceLists()->count() === 0
+                        && $priceListListTransfer->getFilterFields() === $filterFieldTransfer,
                 ),
             )->willReturn($this->priceListListTransferMock);
 
@@ -358,20 +350,16 @@ class PriceListReaderTest extends Unit
         $this->filterFieldsExpanderPluginMocks[0]->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->restRequestMock, static::callback(
-                static function (ArrayObject $filterFieldTransfers) {
-                    return $filterFieldTransfers->count() === 0;
-                },
+                static fn (ArrayObject $filterFieldTransfers): bool => $filterFieldTransfers->count() === 0,
             ))->willReturn($filterFieldTransfer);
 
         $this->priceListClientMock->expects(static::atLeastOnce())
             ->method('findPriceLists')
             ->with(
                 static::callback(
-                    static function (PriceListListTransfer $priceListListTransfer) use ($filterFieldTransfer) {
-                        return $priceListListTransfer->getQueryJoins() === null
-                            && $priceListListTransfer->getPriceLists()->count() === 0
-                            && $priceListListTransfer->getFilterFields() === $filterFieldTransfer;
-                    },
+                    static fn (PriceListListTransfer $priceListListTransfer): bool => $priceListListTransfer->getQueryJoins() === null
+                        && $priceListListTransfer->getPriceLists()->count() === 0
+                        && $priceListListTransfer->getFilterFields() === $filterFieldTransfer,
                 ),
             )->willReturn($this->priceListListTransferMock);
 

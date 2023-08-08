@@ -16,30 +16,18 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class PriceListReader implements PriceListReaderInterface
 {
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
-    /**
-     * @var \FondOfImpala\Glue\PriceListsRestApi\Processor\Validation\RestApiErrorInterface
-     */
-    protected $restApiError;
+    protected RestApiErrorInterface $restApiError;
 
-    /**
-     * @var \FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListMapperInterface
-     */
-    protected $priceListMapper;
+    protected PriceListMapperInterface $priceListMapper;
 
-    /**
-     * @var \FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientInterface
-     */
-    protected $priceListClient;
+    protected PriceListsRestApiToPriceListClientInterface $priceListClient;
 
     /**
      * @var array<\FondOfOryx\Glue\PriceListsRestApiExtension\Dependency\Plugin\FilterFieldsExpanderPluginInterface>
      */
-    protected $filterFieldsExpanderPlugins;
+    protected array $filterFieldsExpanderPlugins;
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

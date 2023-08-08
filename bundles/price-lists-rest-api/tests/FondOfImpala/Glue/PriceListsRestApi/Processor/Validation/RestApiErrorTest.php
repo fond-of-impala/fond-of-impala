@@ -41,11 +41,9 @@ class RestApiErrorTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getCode() === PriceListsRestApiConfig::RESPONSE_CODE_PRICE_LIST_NOT_FOUND
-                            && $restErrorMessageTransfer->getStatus() === Response::HTTP_NOT_FOUND
-                            && $restErrorMessageTransfer->getDetail() === PriceListsRestApiConfig::RESPONSE_DETAILS_PRICE_LIST_NOT_FOUND;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getCode() === PriceListsRestApiConfig::RESPONSE_CODE_PRICE_LIST_NOT_FOUND
+                        && $restErrorMessageTransfer->getStatus() === Response::HTTP_NOT_FOUND
+                        && $restErrorMessageTransfer->getDetail() === PriceListsRestApiConfig::RESPONSE_DETAILS_PRICE_LIST_NOT_FOUND,
                 ),
             )->willReturnSelf();
 
@@ -66,11 +64,9 @@ class RestApiErrorTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getCode() === PriceListsRestApiConfig::RESPONSE_CODE_UUID_MISSING
-                            && $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST
-                            && $restErrorMessageTransfer->getDetail() === PriceListsRestApiConfig::RESPONSE_DETAILS_UUID_MISSING;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getCode() === PriceListsRestApiConfig::RESPONSE_CODE_UUID_MISSING
+                        && $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST
+                        && $restErrorMessageTransfer->getDetail() === PriceListsRestApiConfig::RESPONSE_DETAILS_UUID_MISSING,
                 ),
             )->willReturnSelf();
 

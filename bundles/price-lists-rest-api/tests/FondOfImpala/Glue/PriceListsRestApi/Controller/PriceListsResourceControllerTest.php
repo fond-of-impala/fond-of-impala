@@ -69,10 +69,7 @@ class PriceListsResourceControllerTest extends Unit
         $this->priceListsResourceController = new class (
             $this->priceListsRestApiFactoryMock
         ) extends PriceListsResourceController {
-            /**
-             * @var \FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiFactory
-             */
-            protected $priceListsRestApiFactory;
+            protected PriceListsRestApiFactory $priceListsRestApiFactory;
 
             /**
              * @param \FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiFactory $priceListsRestApiFactory

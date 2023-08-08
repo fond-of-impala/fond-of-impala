@@ -39,11 +39,9 @@ class PriceListsRestApiDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addPriceListClient(Container $container): Container
     {
-        $container[static::CLIENT_PRICE_LIST] = static function (Container $container) {
-            return new PriceListsRestApiToPriceListClientBridge(
-                $container->getLocator()->priceList()->client(),
-            );
-        };
+        $container[static::CLIENT_PRICE_LIST] = static fn (Container $container): PriceListsRestApiToPriceListClientBridge => new PriceListsRestApiToPriceListClientBridge(
+            $container->getLocator()->priceList()->client(),
+        );
 
         return $container;
     }
@@ -57,9 +55,7 @@ class PriceListsRestApiDependencyProvider extends AbstractBundleDependencyProvid
     {
         $self = $this;
 
-        $container[static::PLUGINS_FILTER_FIELDS_EXPANDER] = static function () use ($self) {
-            return $self->getFilterFieldsExpanderPlugins();
-        };
+        $container[static::PLUGINS_FILTER_FIELDS_EXPANDER] = static fn (): array => $self->getFilterFieldsExpanderPlugins();
 
         return $container;
     }
