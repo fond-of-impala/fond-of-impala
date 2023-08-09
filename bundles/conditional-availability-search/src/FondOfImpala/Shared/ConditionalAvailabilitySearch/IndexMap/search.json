@@ -1,0 +1,10 @@
+{
+    "mappings": {
+        "page": {
+            "properties": {
+                "stock-status": {
+                }
+            }
+        }
+    }
+}

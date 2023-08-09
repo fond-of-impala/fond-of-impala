@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+    <transfer name="PageMap">
+        <property name="conditionalAvailabilities" type="ConditionalAvailabilityMap"/>
+    </transfer>
+
+    <transfer name="ConditionalAvailabilityMap">
+        <property name="stockStatus" type="StockStatus[]" singular="status" />
+    </transfer>
+
+    <transfer name="ProductPageSearch">
+        <property name="conditionalAvailabilityMap" type="ConditionalAvailabilityMap"/>
+    </transfer>
+
+    <transfer name="ProductConcretePageSearch">
+        <property name="fkProduct" type="int"/>
+        <property name="conditionalAvailabilityMap" type="ConditionalAvailabilityMap"/>
+    </transfer>
+
+    <transfer name="StockStatus">
+        <property name="channel" type="string"/>
+        <property name="qty" type="int"/>
+    </transfer>
+
+</transfers>
