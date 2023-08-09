@@ -40,5 +40,7 @@ env:
           generate_map_classes: true
           generate_propel_classes: true
           generate_ide_auto_completion: true
-          source_identifiers: [ "page", "price-product-price-list" ]
+          supported_source_identifiers:
+            - page
+            - price-product-price-list
   monorepo:

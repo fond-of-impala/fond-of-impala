@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model;
 
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface;
-use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 use Generated\Shared\Search\PriceProductPriceListIndexMap;
 
 abstract class AbstractPriceProductSearchMapper implements PriceProductSearchMapperInterface
@@ -85,7 +84,7 @@ abstract class AbstractPriceProductSearchMapper implements PriceProductSearchMap
             PriceProductPriceListIndexMap::ID_PRICE_LIST => $data[static::DATA_KEY_ID_PRICE_LIST],
             PriceProductPriceListIndexMap::SKU => $data[static::DATA_KEY_SKU],
             PriceProductPriceListIndexMap::PRICE_LIST_NAME => $data[static::DATA_KEY_PRICE_LIST_NAME],
-            ConditionalAvailabilityPeriodIndexMap::SEARCH_RESULT_DATA => $this->mapDataToSearchResultData($data),
+            PriceProductPriceListIndexMap::SEARCH_RESULT_DATA => $this->mapDataToSearchResultData($data),
         ];
 
         $searchData = $this->expandSearchData($data, $searchData);
