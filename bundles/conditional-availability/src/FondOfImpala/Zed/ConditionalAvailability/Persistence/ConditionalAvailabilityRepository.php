@@ -42,7 +42,7 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
         $foiConditionalAvailability = $this->getFactory()
             ->createConditionalAvailabilityQuery()
             ->useFoiConditionalAvailabilityPeriodQuery()
-                ->addAscendingOrderByColumn(FoiConditionalAvailabilityPeriodTableMap::COL_START_AT)
+            ->addAscendingOrderByColumn(FoiConditionalAvailabilityPeriodTableMap::COL_START_AT)
             ->endUse()
             ->with(static::RELATION_ALIAS_FOI_CONDITIONAL_AVAILABILITY_PERIOD)
             ->filterByIdConditionalAvailability($idConditionalAvailability)
@@ -122,6 +122,12 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
         FoiConditionalAvailabilityQuery $foiConditionalAvailabilityQuery,
         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
     ): FoiConditionalAvailabilityQuery {
+        $ids = $conditionalAvailabilityCriteriaFilterTransfer->getIds();
+
+        if (count($ids) !== 0) {
+            $foiConditionalAvailabilityQuery->filterByIdConditionalAvailability_In($ids);
+        }
+
         $skus = $conditionalAvailabilityCriteriaFilterTransfer->getSkus();
 
         if (count($skus) !== 0) {
