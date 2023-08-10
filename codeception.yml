@@ -29,6 +29,7 @@ include:
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/price-list
   - bundles/price-list-api
+  - bundles/price-lists-rest-api
   - bundles/price-product-price-list-page-search-extension
   - bundles/product-list-conditional-availability-page-search
 
