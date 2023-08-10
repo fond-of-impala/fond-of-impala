@@ -111,6 +111,10 @@
       "path": "bundles/price-list",
       "version": "1.0.0-beta"
     },
+    "price-list-api": {
+      "path": "bundles/price-list-api",
+      "version": "1.0.0-beta"
+    },
     "price-product-price-list-page-search-extension": {
       "path": "bundles/price-product-price-list-page-search-extension",
       "version": "1.0.0-beta"
