@@ -107,6 +107,10 @@
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
     },
+    "price-list-gui": {
+      "path": "bundles/price-list-gui",
+      "version": "1.0.0-beta"
+    },
     "price-list": {
       "path": "bundles/price-list",
       "version": "1.0.0-beta"
