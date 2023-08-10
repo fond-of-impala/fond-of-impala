@@ -17,6 +17,7 @@
     }
   ],
   "replace": {
+    "fond-of-impala/company-price-list": "*",
     "fond-of-impala/company-type": "*",
     "fond-of-impala/company-type-converter": "*",
     "fond-of-impala/company-type-converter-extension": "*",
@@ -46,9 +47,11 @@
   "require": {
     "php": ">=8.0",
     "fond-of-oryx/company-user-company-role-connector": "^1.0.0 || ^2.0.0",
+    "fond-of-oryx/company-user-search-rest-api": "^2.0.0",
     "fond-of-oryx/company-users-rest-api-extension": "^1.1.0 || ^2.0.0",
     "fond-of-oryx/jellyfish-sales-order-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/price-list-extension": "^1.0.0",
+    "fond-of-spryker/company-extension": "dev-master",
     "fond-of-spryker/company-price-list": "dev-master",
     "fond-of-spryker/company-type": "dev-master",
     "fond-of-spryker/company-type-converter-extension": "dev-master",
@@ -91,6 +94,8 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyPriceList\\": "bundles/company-price-list/src/FondOfImpala/Shared/CompanyPriceList",
+      "FondOfImpala\\Zed\\CompanyPriceList\\": "bundles/company-price-list/src/FondOfImpala/Zed/CompanyPriceList",
       "FondOfImpala\\Client\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Client/CompanyType",
       "FondOfImpala\\Shared\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Shared/CompanyType",
       "FondOfImpala\\Zed\\CompanyType\\": "bundles/company-type/src/FondOfImpala/Zed/CompanyType",
@@ -147,6 +152,7 @@
       "FondOfImpala\\Shared\\PriceList\\": "bundles/price-list/src/FondOfImpala/Shared/PriceList",
       "FondOfImpala\\Zed\\PriceList\\": "bundles/price-list/src/FondOfImpala/Zed/PriceList",
       "FondOfImpala\\Shared\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/src/FondOfImpala/Shared/PriceProductPriceListPageSearchExtension",
+      "FondOfImpala\\Shared\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/src/FondOfImpala/Shared/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/src/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
@@ -155,6 +161,8 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Shared\\CompanyPriceList\\": "bundles/company-price-list/tests/FondOfImpala/Shared/CompanyPriceList",
+      "FondOfImpala\\Zed\\CompanyPriceList\\": "bundles/company-price-list/tests/FondOfImpala/Zed/CompanyPriceList",
       "FondOfImpala\\Client\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Client/CompanyType",
       "FondOfImpala\\Shared\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Shared/CompanyType",
       "FondOfImpala\\Zed\\CompanyType\\": "bundles/company-type/tests/FondOfImpala/Zed/CompanyType",
@@ -210,6 +218,7 @@
       "FondOfImpala\\Client\\PriceList\\": "bundles/price-list/tests/FondOfImpala/Client/PriceList",
       "FondOfImpala\\Shared\\PriceList\\": "bundles/price-list/tests/FondOfImpala/Shared/PriceList",
       "FondOfImpala\\Zed\\PriceList\\": "bundles/price-list/tests/FondOfImpala/Zed/PriceList",
+      "FondOfImpala\\Shared\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Shared/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Shared\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Shared/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
