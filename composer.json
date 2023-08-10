@@ -50,6 +50,7 @@
     "fond-of-impala/price-product-price-list": "*",
     "fond-of-impala/price-product-price-list-gui": "*",
     "fond-of-impala/price-product-price-list-page-search-extension": "*",
+    "fond-of-impala/price-product-price-list-page-search-extension": "*",
     "fond-of-impala/product-list-conditional-availability-page-search": "*"
   },
   "require": {
@@ -170,6 +171,7 @@
       "FondOfImpala\\Zed\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Zed/CustomerPriceList",
       "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
+      "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/src/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Glue\\PriceListsRestApi\\": "bundles/price-lists-rest-api/src/FondOfImpala/Glue/PriceListsRestApi",
       "FondOfImpala\\Shared\\PriceListsRestApi\\": "bundles/price-lists-rest-api/src/FondOfImpala/Shared/PriceListsRestApi",
       "FondOfImpala\\Zed\\PriceListsRestApi\\": "bundles/price-lists-rest-api/src/FondOfImpala/Zed/PriceListsRestApi",
@@ -283,6 +285,7 @@
       "FondOfImpala\\Shared\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Shared/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Zed\\PriceProductPriceListGui\\": "bundles/price-product-price-list-gui/tests/FondOfImpala/Zed/PriceProductPriceListGui",
       "FondOfImpala\\Shared\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Shared/PriceProductPriceListPageSearchExtension",
+      "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
