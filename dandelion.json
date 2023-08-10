@@ -11,6 +11,10 @@
       "path": "bundles/company-business-unit-price-list",
       "version": "1.0.0-beta"
     },
+    "company-price-list-gui": {
+      "path": "bundles/company-price-list-gui",
+      "version": "1.0.0-beta"
+    },
     "company-type": {
       "path": "bundles/company-type",
       "version": "1.0.0-beta"
