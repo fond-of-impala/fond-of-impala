@@ -7,6 +7,10 @@
       "path": "bundles/company-price-list",
       "version": "1.0.0-beta"
     },
+    "company-business-unit-price-list": {
+      "path": "bundles/company-business-unit-price-list",
+      "version": "1.0.0-beta"
+    },
     "company-type": {
       "path": "bundles/company-type",
       "version": "1.0.0-beta"

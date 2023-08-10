@@ -1,6 +1,7 @@
 namespace: fond-of-impala/fond-of-impala
 
 include:
+  - bundles/company-business-unit-price-list
   - bundles/company-price-list
   - bundles/company-type
   - bundles/company-type-converter
