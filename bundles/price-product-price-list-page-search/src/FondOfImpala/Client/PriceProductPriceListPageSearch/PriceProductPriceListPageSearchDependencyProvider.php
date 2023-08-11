@@ -87,11 +87,9 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_SEARCH] = function (Container $container) {
-            return new PriceProductPriceListPageSearchToSearchClientBridge(
-                $container->getLocator()->search()->client(),
-            );
-        };
+        $container[static::CLIENT_SEARCH] = fn (Container $container): PriceProductPriceListPageSearchToSearchClientBridge => new PriceProductPriceListPageSearchToSearchClientBridge(
+            $container->getLocator()->search()->client(),
+        );
 
         return $container;
     }
@@ -103,9 +101,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductAbstractPriceListSearchQueryPlugin(Container $container): Container
     {
-        $container[static::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY] = function () {
-            return $this->createPriceProductAbstractPriceListSearchQueryPlugin();
-        };
+        $container[static::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY] = fn (): QueryInterface => $this->createPriceProductAbstractPriceListSearchQueryPlugin();
 
         return $container;
     }
@@ -117,9 +113,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductAbstractPriceListSearchResultFormatterPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_RESULT_FORMATTER] = function () {
-            return $this->createPriceProductAbstractPriceListSearchResultFormatterPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_RESULT_FORMATTER] = fn (): array => $this->createPriceProductAbstractPriceListSearchResultFormatterPlugins();
 
         return $container;
     }
@@ -131,9 +125,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductAbstractPriceListSearchQueryExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY_EXPANDER] = function () {
-            return $this->createPriceProductAbstractPriceListSearchQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY_EXPANDER] = fn (): array => $this->createPriceProductAbstractPriceListSearchQueryExpanderPlugins();
 
         return $container;
     }
@@ -145,9 +137,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductAbstractPriceListSearchCountQueryExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_COUNT_QUERY_EXPANDER] = function () {
-            return $this->createPriceProductAbstractPriceListSearchCountQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_COUNT_QUERY_EXPANDER] = fn (): array => $this->createPriceProductAbstractPriceListSearchCountQueryExpanderPlugins();
 
         return $container;
     }
@@ -159,9 +149,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductConcretePriceListSearchQueryPlugin(Container $container): Container
     {
-        $container[static::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY] = function () {
-            return $this->createPriceProductConcretePriceListSearchQueryPlugin();
-        };
+        $container[static::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY] = fn (): QueryInterface => $this->createPriceProductConcretePriceListSearchQueryPlugin();
 
         return $container;
     }
@@ -173,9 +161,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductConcretePriceListSearchResultFormatterPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_RESULT_FORMATTER] = function () {
-            return $this->createPriceProductConcretePriceListSearchResultFormatterPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_RESULT_FORMATTER] = fn (): array => $this->createPriceProductConcretePriceListSearchResultFormatterPlugins();
 
         return $container;
     }
@@ -187,9 +173,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductConcretePriceListSearchQueryExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY_EXPANDER] = function () {
-            return $this->createPriceProductConcretePriceListSearchQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY_EXPANDER] = fn (): array => $this->createPriceProductConcretePriceListSearchQueryExpanderPlugins();
 
         return $container;
     }
@@ -201,9 +185,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addPriceProductConcretePriceListSearchQueryCountExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY_EXPANDER] = function () {
-            return $this->createPriceProductConcretePriceListSearchCountQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY_EXPANDER] = fn (): array => $this->createPriceProductConcretePriceListSearchCountQueryExpanderPlugins();
 
         return $container;
     }

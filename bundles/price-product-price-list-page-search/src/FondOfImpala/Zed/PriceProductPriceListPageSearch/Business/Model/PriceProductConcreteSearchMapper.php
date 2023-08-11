@@ -9,7 +9,7 @@ class PriceProductConcreteSearchMapper extends AbstractPriceProductSearchMapper
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[]
      */
-    protected $priceProductConcretePriceListPageDataExpanderPlugins;
+    protected array $priceProductConcretePriceListPageDataExpanderPlugins;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacade

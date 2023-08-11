@@ -14,11 +14,22 @@
     "phpcs": "make phpcs",
     "phpstan": "make phpstan"
   },
+  "repositories": [
+    {
+      "name": "fond-of-impala/price-list",
+      "type":"path",
+      "options": {
+        "symlink": false
+      },
+      "packagist.org": false,
+      "url":"../price-list"
+    }
+  ],
   "require": {
     "php": ">=8.0",
     "spryker/event-behavior": "^1.0.0",
     "spryker/price-product": "^4.0.0",
-    "fond-of-impala/price-list": "^1.0.0"
+    "fond-of-impala/price-list": "dev-main"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

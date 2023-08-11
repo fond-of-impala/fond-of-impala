@@ -34,11 +34,9 @@ class ProductListPriceProductPriceListPageSearchDependencyProvider extends Abstr
      */
     protected function addCustomerClient(Container $container): Container
     {
-        $container[static::CLIENT_CUSTOMER] = static function (Container $container) {
-            return new ProductListPriceProductPriceListPageSearchToCustomerClientBridge(
-                $container->getLocator()->customer()->client(),
-            );
-        };
+        $container[static::CLIENT_CUSTOMER] = static fn (Container $container): ProductListPriceProductPriceListPageSearchToCustomerClientBridge => new ProductListPriceProductPriceListPageSearchToCustomerClientBridge(
+            $container->getLocator()->customer()->client(),
+        );
 
         return $container;
     }

@@ -7,10 +7,7 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class PriceProductPriceListPageSearchToStoreFacadeBridge implements PriceProductPriceListPageSearchToStoreFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Store\Business\StoreFacadeInterface
-     */
-    protected $storeFacade;
+    protected StoreFacadeInterface $storeFacade;
 
     /**
      * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade

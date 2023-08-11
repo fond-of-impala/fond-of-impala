@@ -9,10 +9,7 @@ use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
 
 class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter implements PriceProductAbstractSearchWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceProductAbstractSearchExpanderInterface
-     */
-    protected $priceProductAbstractSearchExpander;
+    protected PriceProductAbstractSearchExpanderInterface $priceProductAbstractSearchExpander;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceGrouperInterface $priceGrouper
@@ -56,9 +53,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
         }
 
         $priceKeys = array_map(
-            function (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) {
-                return $priceProductPriceListPageSearchTransfer->getPriceKey();
-            },
+            fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
             $priceProductPriceListPageSearchTransfers,
         );
 
@@ -167,9 +162,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
         }
 
         $priceKeys = array_map(
-            function (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) {
-                return $priceProductPriceListPageSearchTransfer->getPriceKey();
-            },
+            fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
             $priceProductPriceListPageSearchTransfers,
         );
 

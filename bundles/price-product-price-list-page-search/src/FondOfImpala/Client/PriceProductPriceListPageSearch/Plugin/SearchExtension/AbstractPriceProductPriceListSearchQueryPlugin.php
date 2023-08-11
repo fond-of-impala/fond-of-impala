@@ -23,20 +23,14 @@ abstract class AbstractPriceProductPriceListSearchQueryPlugin extends AbstractPl
      */
     protected const SOURCE_IDENTIFIER = 'price-product-price-list';
 
-    /**
-     * @var \Elastica\Query
-     */
-    protected $query;
+    protected Query $query;
 
     /**
      * @var \Generated\Shared\Transfer\SearchContextTransfer
      */
     protected $searchContextTransfer;
 
-    /**
-     * @var string
-     */
-    protected $searchString = '';
+    protected string $searchString = '';
 
     public function __construct()
     {

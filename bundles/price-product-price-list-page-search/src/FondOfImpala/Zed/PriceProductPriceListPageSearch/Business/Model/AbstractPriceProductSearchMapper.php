@@ -52,10 +52,7 @@ abstract class AbstractPriceProductSearchMapper implements PriceProductSearchMap
      */
     protected const SEARCH_RESULT_DATA_KEY_PRICES = 'prices';
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface
-     */
-    protected $storeFacade;
+    protected PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacade

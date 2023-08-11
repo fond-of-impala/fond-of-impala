@@ -40,10 +40,7 @@ class ProductListPriceProductConcretePriceListPageDataExpanderPluginTest extends
         $this->productListPriceProductConcretePriceListPageDataExpanderPlugin = new class (
             $this->productListPriceProductPriceListPageSearchFacadeInterfaceMock
         ) extends ProductListPriceProductConcretePriceListPageDataExpanderPlugin {
-            /**
-             * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchFacade
-             */
-            protected $productListPriceProductPriceListPageSearchFacade;
+            protected ProductListPriceProductPriceListPageSearchFacade $productListPriceProductPriceListPageSearchFacade;
 
             /**
              * @param \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchFacade $productListPriceProductPriceListPageSearchFacade

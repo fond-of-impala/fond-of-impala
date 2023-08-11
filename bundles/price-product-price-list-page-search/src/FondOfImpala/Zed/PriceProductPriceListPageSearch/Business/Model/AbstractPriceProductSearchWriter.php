@@ -9,30 +9,15 @@ use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
 
 abstract class AbstractPriceProductSearchWriter
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceGrouperInterface
-     */
-    protected $priceGrouper;
+    protected PriceGrouperInterface $priceGrouper;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchRepositoryInterface
-     */
-    protected $repository;
+    protected PriceProductPriceListPageSearchRepositoryInterface $repository;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchEntityManagerInterface
-     */
-    protected $entityManager;
+    protected PriceProductPriceListPageSearchEntityManagerInterface $entityManager;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceProductSearchMapperInterface
-     */
-    protected $priceProductSearchMapper;
+    protected PriceProductSearchMapperInterface $priceProductSearchMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceInterface
-     */
-    protected $utilEncodingService;
+    protected PriceProductPriceListPageSearchToUtilEncodingServiceInterface $utilEncodingService;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceGrouperInterface $priceGrouper

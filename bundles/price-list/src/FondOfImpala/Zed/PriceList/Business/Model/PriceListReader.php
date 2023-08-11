@@ -10,10 +10,7 @@ use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 
 class PriceListReader implements PriceListReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceList\Persistence\PriceListRepositoryInterface
-     */
-    protected $repository;
+    protected PriceListRepositoryInterface $repository;
 
     /**
      * @var array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface>

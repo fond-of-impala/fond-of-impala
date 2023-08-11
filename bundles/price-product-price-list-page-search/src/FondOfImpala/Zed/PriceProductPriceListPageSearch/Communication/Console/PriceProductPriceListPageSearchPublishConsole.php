@@ -84,18 +84,11 @@ class PriceProductPriceListPageSearchPublishConsole extends Console
         $type = $input->getOption(static::TYPE_OPTION);
         $idPriceList = $input->getOption(static::ID_PRICE_LIST_OPTION);
 
-        switch ($type) {
-            case static::TYPE_ABSTRACT:
-                $this->getFacade()->publishAbstractPriceProductPriceListByIdPriceList($idPriceList);
-
-                break;
-            case static::TYPE_CONCRETE:
-                $this->getFacade()->publishConcretePriceProductPriceListByIdPriceList($idPriceList);
-
-                break;
-            default:
-                $output->writeln(static::ERROR_MESSAGE);
-        }
+        match ($type) {
+            static::TYPE_ABSTRACT => $this->getFacade()->publishAbstractPriceProductPriceListByIdPriceList($idPriceList),
+            static::TYPE_CONCRETE => $this->getFacade()->publishConcretePriceProductPriceListByIdPriceList($idPriceList),
+            default => $output->writeln(static::ERROR_MESSAGE),
+        };
 
         return 0;
     }

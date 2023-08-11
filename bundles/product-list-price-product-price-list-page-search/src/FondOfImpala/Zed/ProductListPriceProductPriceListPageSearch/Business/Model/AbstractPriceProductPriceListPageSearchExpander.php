@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\ProductListMapTransfer;
 
 abstract class AbstractPriceProductPriceListPageSearchExpander implements PriceProductPriceListPageSearchExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeInterface
-     */
-    protected $productListFacade;
+    protected ProductListPriceProductPriceListPageSearchToProductListFacadeInterface $productListFacade;
 
     /**
      * @param \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeInterface $productListFacade

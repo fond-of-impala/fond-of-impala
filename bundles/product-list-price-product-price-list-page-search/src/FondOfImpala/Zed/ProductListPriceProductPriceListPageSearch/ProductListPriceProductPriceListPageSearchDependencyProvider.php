@@ -68,11 +68,9 @@ class ProductListPriceProductPriceListPageSearchDependencyProvider extends Abstr
      */
     protected function addProductListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRODUCT_LIST] = static function (Container $container) {
-            return new ProductListPriceProductPriceListPageSearchToProductListFacadeBridge(
-                $container->getLocator()->productList()->facade(),
-            );
-        };
+        $container[static::FACADE_PRODUCT_LIST] = static fn (Container $container): ProductListPriceProductPriceListPageSearchToProductListFacadeBridge => new ProductListPriceProductPriceListPageSearchToProductListFacadeBridge(
+            $container->getLocator()->productList()->facade(),
+        );
 
         return $container;
     }
@@ -84,11 +82,9 @@ class ProductListPriceProductPriceListPageSearchDependencyProvider extends Abstr
      */
     protected function addEventBehaviorFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT_BEHAVIOR] = static function (Container $container) {
-            return new ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridge(
-                $container->getLocator()->eventBehavior()->facade(),
-            );
-        };
+        $container[static::FACADE_EVENT_BEHAVIOR] = static fn (Container $container): ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridge => new ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridge(
+            $container->getLocator()->eventBehavior()->facade(),
+        );
 
         return $container;
     }
@@ -100,11 +96,9 @@ class ProductListPriceProductPriceListPageSearchDependencyProvider extends Abstr
      */
     protected function addPriceProductPriceListPageSearchFacade(Container $container): Container
     {
-        $container[static::FACADE_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH] = static function (Container $container) {
-            return new ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeBridge(
-                $container->getLocator()->priceProductPriceListPageSearch()->facade(),
-            );
-        };
+        $container[static::FACADE_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH] = static fn (Container $container): ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeBridge => new ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeBridge(
+            $container->getLocator()->priceProductPriceListPageSearch()->facade(),
+        );
 
         return $container;
     }
@@ -116,11 +110,9 @@ class ProductListPriceProductPriceListPageSearchDependencyProvider extends Abstr
      */
     protected function addProductFacade(Container $container): Container
     {
-        $container[static::FACADE_PRODUCT] = static function (Container $container) {
-            return new ProductListPriceProductPriceListPageSearchToProductFacadeBridge(
-                $container->getLocator()->product()->facade(),
-            );
-        };
+        $container[static::FACADE_PRODUCT] = static fn (Container $container): ProductListPriceProductPriceListPageSearchToProductFacadeBridge => new ProductListPriceProductPriceListPageSearchToProductFacadeBridge(
+            $container->getLocator()->product()->facade(),
+        );
 
         return $container;
     }

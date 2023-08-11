@@ -42,5 +42,5 @@ env:
           generate_ide_auto_completion: true
           supported_source_identifiers:
             - page
-            - conditional-availability-period
+            - price-product-price-list
   monorepo:

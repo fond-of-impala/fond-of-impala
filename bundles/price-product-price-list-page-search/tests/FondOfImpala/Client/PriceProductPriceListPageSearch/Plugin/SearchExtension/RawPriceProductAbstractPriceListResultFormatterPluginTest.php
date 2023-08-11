@@ -65,7 +65,7 @@ class RawPriceProductAbstractPriceListResultFormatterPluginTest extends Unit
     /**
      * @return void
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertSame('price_product_abstract_price_lists', $this->rawPriceProductAbstractPriceListResultFormatterPlugin->getName());
     }
@@ -73,7 +73,7 @@ class RawPriceProductAbstractPriceListResultFormatterPluginTest extends Unit
     /**
      * @return void
      */
-    public function testFormatSearchResult()
+    public function testFormatSearchResult(): void
     {
         $reflectionMethod = $this->getReflectionMethodByName('formatSearchResult');
 

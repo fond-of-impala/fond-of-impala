@@ -25,20 +25,14 @@ class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
      */
     protected $queryInterfaceMock;
 
-    /**
-     * @var array
-     */
-    private $searchQueryExpanders;
+    private ?array $searchQueryExpanders = null;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface
      */
     protected $queryExpanderPluginInterfaceMock;
 
-    /**
-     * @var array
-     */
-    private $resultSets;
+    private ?array $resultSets = null;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet

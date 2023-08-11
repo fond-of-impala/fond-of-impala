@@ -7,10 +7,7 @@ use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 class ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridge implements
     ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
-     */
-    protected $eventBehaviorFacade;
+    protected EventBehaviorFacadeInterface $eventBehaviorFacade;
 
     /**
      * @param \Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface $eventBehaviorFacade

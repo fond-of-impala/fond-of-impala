@@ -8,6 +8,17 @@
       "email": "daniel-rose@gmx.de"
     }
   ],
+  "repositories": [
+    {
+      "name": "fond-of-impala/price-list",
+      "type":"path",
+      "options": {
+        "symlink": false
+      },
+      "packagist.org": false,
+      "url":"../price-list"
+    }
+  ],
   "require": {
     "php": ">=8.0",
     "fond-of-impala/price-list": "dev-main",

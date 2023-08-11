@@ -9,7 +9,7 @@ class PriceProductAbstractSearchExpander implements PriceProductAbstractSearchEx
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[]
      */
-    protected $priceProductAbstractPriceListPageDataExpanderPlugins;
+    protected array $priceProductAbstractPriceListPageDataExpanderPlugins;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[] $priceProductAbstractPriceListPageDataExpanderPlugins

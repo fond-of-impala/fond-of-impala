@@ -106,10 +106,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPluginTest extends 
         $this->productListPriceProductPriceListPageSearchQueryExpanderPlugin = new class (
             $this->productListPriceProductPriceListPageSearchFactoryMock
         ) extends ProductListPriceProductPriceListPageSearchQueryExpanderPlugin {
-            /**
-             * @var \FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchFactory
-             */
-            protected $productListPriceProductPriceListPageSearchFactory;
+            protected ProductListPriceProductPriceListPageSearchFactory $productListPriceProductPriceListPageSearchFactory;
 
             /**
              * @param \FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchFactory $productListPriceProductPriceListPageSearchFactory
@@ -323,7 +320,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPluginTest extends 
                 $this->queryMock,
             );
             self::fail();
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException) {
         }
     }
 }

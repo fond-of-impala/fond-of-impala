@@ -109,11 +109,9 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
      */
     protected function addEventBehaviorFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT_BEHAVIOR] = static function (Container $container) {
-            return new PriceProductPriceListPageSearchToEventBehaviorFacadeBridge(
-                $container->getLocator()->eventBehavior()->facade(),
-            );
-        };
+        $container[static::FACADE_EVENT_BEHAVIOR] = static fn (Container $container): PriceProductPriceListPageSearchToEventBehaviorFacadeBridge => new PriceProductPriceListPageSearchToEventBehaviorFacadeBridge(
+            $container->getLocator()->eventBehavior()->facade(),
+        );
 
         return $container;
     }
@@ -125,9 +123,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
      */
     protected function addPropelPriceProductPriceListQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRICE_PRODUCT_PRICE_LIST] = static function () {
-            return FoiPriceProductPriceListQuery::create();
-        };
+        $container[static::PROPEL_QUERY_PRICE_PRODUCT_PRICE_LIST] = static fn () => FoiPriceProductPriceListQuery::create();
 
         return $container;
     }
@@ -139,11 +135,9 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
      */
     protected function addStoreFacade(Container $container): Container
     {
-        $container[static::FACADE_STORE] = static function (Container $container) {
-            return new PriceProductPriceListPageSearchToStoreFacadeBridge(
-                $container->getLocator()->store()->facade(),
-            );
-        };
+        $container[static::FACADE_STORE] = static fn (Container $container): PriceProductPriceListPageSearchToStoreFacadeBridge => new PriceProductPriceListPageSearchToStoreFacadeBridge(
+            $container->getLocator()->store()->facade(),
+        );
 
         return $container;
     }
@@ -155,11 +149,9 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
      */
     protected function addUtilEncodingService(Container $container): Container
     {
-        $container[static::SERVICE_UTIL_ENCODING] = static function (Container $container) {
-            return new PriceProductPriceListPageSearchToUtilEncodingServiceBridge(
-                $container->getLocator()->utilEncoding()->service(),
-            );
-        };
+        $container[static::SERVICE_UTIL_ENCODING] = static fn (Container $container): PriceProductPriceListPageSearchToUtilEncodingServiceBridge => new PriceProductPriceListPageSearchToUtilEncodingServiceBridge(
+            $container->getLocator()->utilEncoding()->service(),
+        );
 
         return $container;
     }
@@ -173,9 +165,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $self = $this;
 
-        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_PAGE_SEARCH_DATA_EXPANDER] = static function () use ($self) {
-            return $self->getPriceProductAbstractPriceListPageSearchDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_PAGE_SEARCH_DATA_EXPANDER] = static fn (): array => $self->getPriceProductAbstractPriceListPageSearchDataExpanderPlugins();
 
         return $container;
     }
@@ -199,9 +189,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $self = $this;
 
-        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_PAGE_SEARCH_DATA_EXPANDER] = static function () use ($self) {
-            return $self->getPriceProductConcretePriceListPageSearchDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_PAGE_SEARCH_DATA_EXPANDER] = static fn (): array => $self->getPriceProductConcretePriceListPageSearchDataExpanderPlugins();
 
         return $container;
     }
@@ -225,9 +213,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $self = $this;
 
-        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_PAGE_DATA_EXPANDER] = static function () use ($self) {
-            return $self->getPriceProductAbstractPriceListPageDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_PAGE_DATA_EXPANDER] = static fn (): array => $self->getPriceProductAbstractPriceListPageDataExpanderPlugins();
 
         return $container;
     }
@@ -249,9 +235,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $self = $this;
 
-        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_PAGE_DATA_EXPANDER] = static function () use ($self) {
-            return $self->getPriceProductConcretePriceListPageDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_PRICE_PRODUCT_CONCRETE_PRICE_LIST_PAGE_DATA_EXPANDER] = static fn (): array => $self->getPriceProductConcretePriceListPageDataExpanderPlugins();
 
         return $container;
     }
