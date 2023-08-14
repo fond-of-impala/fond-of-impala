@@ -65,7 +65,6 @@
     "fond-of-oryx/price-lists-rest-api-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/price-list-extension": "^1.0.0",
     "fond-of-spryker/company-extension": "dev-master",
-    "fond-of-spryker/company-price-list": "dev-master",
     "fond-of-spryker/company-type": "dev-master",
     "fond-of-spryker/company-type-converter-extension": "dev-master",
     "fond-of-spryker/company-user-carts-rest-api": "dev-master",
