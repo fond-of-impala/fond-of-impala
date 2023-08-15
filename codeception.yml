@@ -79,3 +79,4 @@ env:
           supported_source_identifiers:
             - page
             - conditional-availability-period
+            - price-product-price-list
