@@ -5,7 +5,7 @@ namespace FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Plugin\
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Terms;
-use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Search\PriceProductPriceListIndexMap;
 use Generated\Shared\Transfer\CustomerProductListCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use InvalidArgumentException;
@@ -73,7 +73,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPlugin extends Abst
      */
     protected function createBlacklistTermQuery(array $blacklistIds): Terms
     {
-        return new Terms(PageIndexMap::PRODUCT_LISTS_BLACKLISTS, $blacklistIds);
+        return new Terms(PriceProductPriceListIndexMap::PRODUCT_LISTS_BLACKLISTS, $blacklistIds);
     }
 
     /**
@@ -83,7 +83,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPlugin extends Abst
      */
     protected function createWhitelistTermQuery(array $whitelistIds): Terms
     {
-        return new Terms(PageIndexMap::PRODUCT_LISTS_WHITELISTS, $whitelistIds);
+        return new Terms(PriceProductPriceListIndexMap::PRODUCT_LISTS_WHITELISTS, $whitelistIds);
     }
 
     /**

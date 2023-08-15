@@ -26,7 +26,7 @@ class ProductListPriceProductConcretePriceListPageSearchListener extends Abstrac
         $this->preventTransaction();
 
         $concreteProductIds = $this->getFactory()->getEventBehaviorFacade()
-            ->getEventTransferForeignKeys($transfers, SpyProductListProductConcreteTableMap::COL_FK_PRODUCT);
+            ->getEventTransferForeignKeys($transfers, SpyProductListProductConcreteTableMap::COL_FK_PRODUCT);// @phpstan-ignore-line
 
         $this->getFactory()->getPriceProductPriceListPageSearchFacade()
             ->publishConcretePriceProductByProductIds($concreteProductIds);

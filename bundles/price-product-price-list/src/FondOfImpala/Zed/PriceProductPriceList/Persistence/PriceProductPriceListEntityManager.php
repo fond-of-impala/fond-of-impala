@@ -50,7 +50,7 @@ class PriceProductPriceListEntityManager extends AbstractEntityManager implement
             ->filterByFkPriceProductStore($idPriceProductStore)
             ->find();
 
-        $this->deleteEntitiesAndTriggerEvents($priceProductPriceListEntities);
+        $this->deleteEntitiesAndTriggerEvents($priceProductPriceListEntities);// @phpstan-ignore-line
     }
 
     /**
