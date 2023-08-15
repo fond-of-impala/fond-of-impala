@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\PriceListListTransfer;
 
 class PriceListsRestApiToPriceListClientBridge implements PriceListsRestApiToPriceListClientInterface
 {
-    /**
-     * @var \FondOfImpala\Client\PriceList\PriceListClientInterface
-     */
-    protected $priceListClient;
+    protected PriceListClientInterface $priceListClient;
 
     /**
      * @param \FondOfImpala\Client\PriceList\PriceListClientInterface $priceListClient

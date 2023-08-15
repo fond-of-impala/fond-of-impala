@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\PriceListApi\Dependency\Facade;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiCollectionTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
@@ -30,14 +31,14 @@ class PriceListApiToApiFacadeTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
      */
-    private $apiItemTransferMock;
+    private MockObject|ApiItemTransfer $apiItemTransferMock;
 
     private ?array $transferData = null;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiCollectionTransfer
      */
-    private $apiCollectionTransferMock;
+    private MockObject|ApiCollectionTransfer $apiCollectionTransferMock;
 
     /**
      * @return void

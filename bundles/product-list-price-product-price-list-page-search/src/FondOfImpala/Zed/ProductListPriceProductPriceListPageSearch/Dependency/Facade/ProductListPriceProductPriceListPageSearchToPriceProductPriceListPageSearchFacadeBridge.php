@@ -7,10 +7,7 @@ use FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceL
 class ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeBridge implements
     ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchFacadeInterface
-     */
-    protected $priceProductPriceListPageSearchFacade;
+    protected PriceProductPriceListPageSearchFacadeInterface $priceProductPriceListPageSearchFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchFacadeInterface $priceProductPriceListPageSearchFacade

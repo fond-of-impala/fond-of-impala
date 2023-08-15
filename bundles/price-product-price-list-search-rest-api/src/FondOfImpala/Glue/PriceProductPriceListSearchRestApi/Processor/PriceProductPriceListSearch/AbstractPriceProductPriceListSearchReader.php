@@ -27,20 +27,11 @@ abstract class AbstractPriceProductPriceListSearchReader implements PriceProduct
      */
     protected const PARAMETER_NAME_ITEMS_PER_PAGE = 'ipp';
 
-    /**
-     * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface
-     */
-    protected $priceProductPriceListPageSearchClient;
+    protected PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClient;
 
-    /**
-     * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductPriceListSearchResourceMapperInterface
-     */
-    protected $priceProductPriceListSearchResourceMapper;
+    protected PriceProductPriceListSearchResourceMapperInterface $priceProductPriceListSearchResourceMapper;
 
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
     /**
      * @param \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClient

@@ -50,10 +50,7 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
         $this->priceProductPriceListSearchRestApiFactory = new class (
             $this->restResourceBuilderInterfaceMock
         ) extends PriceProductPriceListSearchRestApiFactory {
-            /**
-             * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-             */
-            protected $restResourceBuilder;
+            protected RestResourceBuilderInterface $restResourceBuilder;
 
             /**
              * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

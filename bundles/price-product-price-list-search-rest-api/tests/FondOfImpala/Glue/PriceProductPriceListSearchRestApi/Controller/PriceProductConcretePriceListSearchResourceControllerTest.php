@@ -59,10 +59,7 @@ class PriceProductConcretePriceListSearchResourceControllerTest extends Unit
         $this->priceProductConcretePriceListSearchResourceController = new class (
             $this->priceProductPriceListSearchRestApiFactoryMock
         ) extends PriceProductConcretePriceListSearchResourceController {
-            /**
-             * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiFactory
-             */
-            protected $priceProductPriceListSearchRestApiFactory;
+            protected PriceProductPriceListSearchRestApiFactory $priceProductPriceListSearchRestApiFactory;
 
             /**
              * @param \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiFactory $priceProductPriceListSearchRestApiFactory

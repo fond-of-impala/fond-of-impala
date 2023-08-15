@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\PriceListTransfer;
 
 class PriceListGuiToPriceListFacadeBridge implements PriceListGuiToPriceListFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceList\Business\PriceListFacadeInterface
-     */
-    protected $priceListFacade;
+    protected PriceListFacadeInterface $priceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceList\Business\PriceListFacadeInterface $priceListFacade

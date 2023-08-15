@@ -34,11 +34,9 @@ class PriceProductPriceListSearchRestApiDependencyProvider extends AbstractBundl
      */
     protected function addPriceProductPriceListPageSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH] = function (Container $container) {
-            return new PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge(
-                $container->getLocator()->priceProductPriceListPageSearch()->client(),
-            );
-        };
+        $container[static::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH] = fn(Container $container): PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge => new PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge(
+            $container->getLocator()->priceProductPriceListPageSearch()->client(),
+        );
 
         return $container;
     }

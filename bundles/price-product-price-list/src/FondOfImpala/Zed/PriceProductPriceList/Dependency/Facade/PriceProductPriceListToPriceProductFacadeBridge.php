@@ -7,10 +7,7 @@ use Spryker\Zed\PriceProduct\Business\PriceProductFacadeInterface;
 
 class PriceProductPriceListToPriceProductFacadeBridge implements PriceProductPriceListToPriceProductFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\PriceProduct\Business\PriceProductFacadeInterface
-     */
-    protected $priceProductFacade;
+    protected PriceProductFacadeInterface $priceProductFacade;
 
     /**
      * @param \Spryker\Zed\PriceProduct\Business\PriceProductFacadeInterface $priceProductFacade

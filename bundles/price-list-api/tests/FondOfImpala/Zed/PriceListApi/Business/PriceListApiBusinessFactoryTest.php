@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\PriceListApi\Business;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceListApi\Business\Hydrator\PriceProductsHydrator;
 use FondOfImpala\Zed\PriceListApi\Business\Model\PriceListApi;
@@ -37,29 +38,29 @@ class PriceListApiBusinessFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Propel\Runtime\Connection\ConnectionInterface
      */
-    private $connectionInterfaceMock;
+    private MockObject|ConnectionInterface $connectionInterfaceMock;
 
-    private ?array $priceProductHydrationPlugins = null;
+    private array $priceProductHydrationPlugins = [];
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceListFacadeInterface
      */
-    private $facadePriceListMock;
+    private MockObject|PriceListApiToPriceListFacadeInterface $facadePriceListMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceProductPriceListFacadeInterface
      */
-    private $facadePriceProductPriceListMock;
+    private MockObject|PriceListApiToPriceProductPriceListFacadeInterface $facadePriceProductPriceListMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToApiFacadeInterface
      */
-    private $queryContainerApiMock;
+    private MockObject|PriceListApiToApiFacadeInterface $queryContainerApiMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\QueryContainer\PriceListApiToApiQueryBuilderQueryContainerInterface
      */
-    private $queryContainerApiQueryBuilderMock;
+    private MockObject|PriceListApiToApiQueryBuilderQueryContainerInterface $queryContainerApiQueryBuilderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiQueryContainer

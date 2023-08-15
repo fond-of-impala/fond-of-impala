@@ -6,10 +6,7 @@ use FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPag
 
 class PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge implements PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface
 {
-    /**
-     * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchClientInterface
-     */
-    protected $priceProductPriceListPageSearchClient;
+    protected PriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClient;
 
     /**
      * @param \FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClient

@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use Elastica\ResultSet;
 use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
@@ -37,7 +38,7 @@ class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet
      */
-    private $resultSetMock;
+    private MockObject|ResultSet $resultSetMock;
 
     /**
      * @return void

@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\PriceProductTransfer;
 
 class PriceListApiToPriceProductPriceListFacadeBridge implements PriceListApiToPriceProductPriceListFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacadeInterface
-     */
-    protected $priceProductPriceListFacade;
+    protected PriceProductPriceListFacadeInterface $priceProductPriceListFacade;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacadeInterface $priceProductPriceListFacade
