@@ -2,9 +2,9 @@
 
 namespace FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use Elastica\ResultSet;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 use Spryker\Client\Search\SearchClientInterface;

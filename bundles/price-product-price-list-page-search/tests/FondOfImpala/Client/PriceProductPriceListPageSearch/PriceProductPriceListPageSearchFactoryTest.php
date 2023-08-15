@@ -2,10 +2,10 @@
 
 namespace FondOfImpala\Client\PriceProductPriceListPageSearch;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientInterface;
 use FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\PriceProductConcretePriceListSearchQueryPlugin;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 

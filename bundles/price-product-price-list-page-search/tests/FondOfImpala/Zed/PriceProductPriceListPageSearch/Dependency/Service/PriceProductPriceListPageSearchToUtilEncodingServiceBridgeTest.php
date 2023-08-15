@@ -2,8 +2,8 @@
 
 namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 class PriceProductPriceListPageSearchToUtilEncodingServiceBridgeTest extends Unit

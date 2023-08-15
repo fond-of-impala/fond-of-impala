@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\PriceListApi\Business;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceListApi\Business\Hydrator\PriceProductsHydrator;
 use FondOfImpala\Zed\PriceListApi\Business\Model\PriceListApi;
@@ -15,6 +14,7 @@ use FondOfImpala\Zed\PriceListApi\Dependency\QueryContainer\PriceListApiToApiQue
 use FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiQueryContainer;
 use FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiRepository;
 use FondOfImpala\Zed\PriceListApi\PriceListApiDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Propel\Runtime\Connection\ConnectionInterface;
 use Spryker\Zed\Kernel\Container;
 

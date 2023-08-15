@@ -2,10 +2,10 @@
 
 namespace FondOfImpala\Zed\PriceListApi\Dependency\Facade;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiCollectionTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Api\Business\ApiFacadeInterface;
 
