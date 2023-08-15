@@ -5,25 +5,26 @@ namespace FondOfImpala\Glue\PriceListsRestApi\Plugin\PriceListsRestApiExtension;
 use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Shared\PriceListsRestApi\PriceListsRestApiConstants;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class PriceListFilterFieldsExpanderPluginTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface|mixed
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface|mixed
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
      */
-    protected $restResourceMock;
+    protected MockObject|RestResourceInterface $restResourceMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Plugin\PriceListsRestApiExtension\PriceListFilterFieldsExpanderPlugin
      */
-    protected $plugin;
+    protected PriceListFilterFieldsExpanderPlugin $plugin;
 
     /**
      * @return void

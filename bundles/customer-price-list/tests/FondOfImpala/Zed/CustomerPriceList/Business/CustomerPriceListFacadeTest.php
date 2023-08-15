@@ -7,38 +7,39 @@ use FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerExpanderInterface;
 use FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerPriceListReaderInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CustomerPriceListFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CustomerPriceList\Business\CustomerPriceListFacade
      */
-    protected $customerPriceListFacade;
+    protected CustomerPriceListFacade $customerPriceListFacade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CustomerPriceList\Business\CustomerPriceListBusinessFactory
      */
-    protected $customerPriceListBusinessFactoryMock;
+    protected MockObject|CustomerPriceListBusinessFactory $customerPriceListBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerExpanderInterface
      */
-    protected $customerExpanderInterfaceMock;
+    protected MockObject|CustomerExpanderInterface $customerExpanderInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerPriceListReaderInterface
      */
-    protected $customerPriceListReaderInterfaceMock;
+    protected MockObject|CustomerPriceListReaderInterface $customerPriceListReaderInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
      */
-    protected $priceListCollectionTransferMock;
+    protected MockObject|PriceListCollectionTransfer $priceListCollectionTransferMock;
 
     /**
      * @return void

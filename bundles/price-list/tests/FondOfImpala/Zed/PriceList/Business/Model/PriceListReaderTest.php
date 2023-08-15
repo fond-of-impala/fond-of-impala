@@ -10,43 +10,44 @@ use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListReaderTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Persistence\PriceListRepositoryInterface
      */
-    protected $repositoryMock;
+    protected MockObject|PriceListRepositoryInterface $repositoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
      */
-    protected $priceListCollectionTransferMock;
+    protected MockObject|PriceListCollectionTransfer $priceListCollectionTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var array<\FondOfOryx\Zed\PriceListExtension\Dependency\Plugin\SearchPriceListQueryExpanderPluginInterface|\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected $searchPriceListQueryExpanderPluginMocks;
+    protected array $searchPriceListQueryExpanderPluginMocks;
 
     /**
-     * @var \Generated\Shared\Transfer\QueryJoinCollectionTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \Generated\Shared\Transfer\QueryJoinCollectionTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $queryJoinCollectionTransferMock;
+    protected MockObject|QueryJoinCollectionTransfer $queryJoinCollectionTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceList\Business\Model\PriceListReader
      */
-    protected $priceListReader;
+    protected PriceListReader $priceListReader;
 
     /**
      * @return void
@@ -92,11 +93,11 @@ class PriceListReaderTest extends Unit
     {
         $idPriceList = 1;
 
-        $this->priceListTransferMock->expects($this->atLeastOnce())
+        $this->priceListTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceListOrFail')
             ->willReturn($idPriceList);
 
-        $this->repositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getById')
             ->with($idPriceList)
             ->willReturn($this->priceListTransferMock);
@@ -116,11 +117,11 @@ class PriceListReaderTest extends Unit
     {
         $priceListName = 'foo';
 
-        $this->priceListTransferMock->expects($this->atLeastOnce())
+        $this->priceListTransferMock->expects(static::atLeastOnce())
             ->method('getName')
             ->willReturn($priceListName);
 
-        $this->repositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getByName')
             ->with($priceListName)
             ->willReturn($this->priceListTransferMock);
@@ -138,7 +139,7 @@ class PriceListReaderTest extends Unit
      */
     public function testFindAll(): void
     {
-        $this->repositoryMock->expects($this->atLeastOnce())
+        $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getAll')
             ->willReturn($this->priceListCollectionTransferMock);
 

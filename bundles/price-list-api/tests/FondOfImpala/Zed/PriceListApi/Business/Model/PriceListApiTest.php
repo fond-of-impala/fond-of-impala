@@ -18,6 +18,7 @@ use Generated\Shared\Transfer\PriceListTransfer;
 use Generated\Shared\Transfer\PriceProductDimensionTransfer;
 use Generated\Shared\Transfer\PriceProductTransfer;
 use Laminas\Stdlib\ArrayObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use Propel\Runtime\Connection\ConnectionInterface;
 
 class PriceListApiTest extends Unit
@@ -25,77 +26,77 @@ class PriceListApiTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Propel\Runtime\Connection\ConnectionInterface
      */
-    protected $connectionMock;
+    protected MockObject|ConnectionInterface $connectionMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceListFacadeInterface
      */
-    protected $priceListFacadeMock;
+    protected MockObject|PriceListApiToPriceListFacadeInterface $priceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceProductPriceListFacadeInterface
      */
-    protected $priceProductPriceListFacadeMock;
+    protected MockObject|PriceListApiToPriceProductPriceListFacadeInterface $priceProductPriceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\Mapper\TransferMapperInterface
      */
-    protected $transferMapperMock;
+    protected MockObject|TransferMapperInterface $transferMapperMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToApiFacadeInterface
      */
-    protected $apiQueryContainerMock;
+    protected MockObject|PriceListApiToApiFacadeInterface $apiQueryContainerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\QueryContainer\PriceListApiToApiQueryBuilderQueryContainerInterface
      */
-    protected $apiQueryBuilderQueryContainerMock;
+    protected MockObject|PriceListApiToApiQueryBuilderQueryContainerInterface $apiQueryBuilderQueryContainerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiQueryContainerInterface
      */
-    protected $queryContainerMock;
+    protected MockObject|PriceListApiQueryContainerInterface $queryContainerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiDataTransfer
      */
-    protected $apiDataTransferMock;
+    protected MockObject|ApiDataTransfer $apiDataTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListApiTransfer
      */
-    protected $priceListApiTransferMock;
+    protected MockObject|PriceListApiTransfer $priceListApiTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductTransfer
      */
-    protected $priceProductTransferMock;
+    protected MockObject|PriceProductTransfer $priceProductTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
      */
-    protected $apiItemTransferMock;
+    protected MockObject|ApiItemTransfer $apiItemTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductDimensionTransfer
      */
-    protected $priceProductDimensionTransferMock;
+    protected MockObject|PriceProductDimensionTransfer $priceProductDimensionTransferMock;
 
     /**
      * @var array<\FondOfImpala\Zed\PriceListApi\Dependency\Plugin\PriceProductsHydrationPluginInterface|\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected $priceProductsHydrationPluginMocks;
+    protected array $priceProductsHydrationPluginMocks;
 
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Business\Model\PriceListApi
      */
-    protected $priceListApi;
+    protected PriceListApi $priceListApi;
 
     /**
      * @return void

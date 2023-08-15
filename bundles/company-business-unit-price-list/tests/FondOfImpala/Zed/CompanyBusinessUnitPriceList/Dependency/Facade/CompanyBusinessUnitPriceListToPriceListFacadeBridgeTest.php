@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\CompanyBusinessUnitPriceList\Dependency\Facade;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceList\Business\PriceListFacadeInterface;
 use Generated\Shared\Transfer\PriceListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyBusinessUnitPriceListToPriceListFacadeBridgeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyBusinessUnitPriceList\Dependency\Facade\CompanyBusinessUnitPriceListToPriceListFacadeBridge
      */
-    protected $companyBusinessUnitPriceListToPriceListFacadeBridge;
+    protected CompanyBusinessUnitPriceListToPriceListFacadeBridge $companyBusinessUnitPriceListToPriceListFacadeBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Business\PriceListFacadeInterface
      */
-    protected $priceListFacadeInterfaceMock;
+    protected MockObject|PriceListFacadeInterface $priceListFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @return void
@@ -48,11 +49,11 @@ class CompanyBusinessUnitPriceListToPriceListFacadeBridgeTest extends Unit
      */
     public function testFindPriceListById(): void
     {
-        $this->priceListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->priceListFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findPriceListById')
             ->willReturn($this->priceListTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceListTransfer::class,
             $this->companyBusinessUnitPriceListToPriceListFacadeBridge->findPriceListById(
                 $this->priceListTransferMock,

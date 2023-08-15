@@ -7,6 +7,7 @@ use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\Model\P
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\Model\PriceProductConcretePriceListPageSearchExpander;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeInterface;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ProductListPriceProductPriceListPageSearchBusinessFactoryTest extends Unit
@@ -14,17 +15,17 @@ class ProductListPriceProductPriceListPageSearchBusinessFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeInterface
      */
-    protected $productListFacadeMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToProductListFacadeInterface $productListFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchBusinessFactory
      */
-    protected $productListPriceProductPriceListPageSearchBusinessFactory;
+    protected ProductListPriceProductPriceListPageSearchBusinessFactory $productListPriceProductPriceListPageSearchBusinessFactory;
 
     /**
      * @return void

@@ -7,38 +7,39 @@ use FondOfImpala\Zed\CompanyBusinessUnitPriceList\Dependency\Facade\CompanyBusin
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyBusinessUnitExpanderTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\Model\CompanyBusinessUnitExpander
      */
-    protected $companyBusinessUnitExpander;
+    protected CompanyBusinessUnitExpander $companyBusinessUnitExpander;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyBusinessUnitPriceList\Dependency\Facade\CompanyBusinessUnitPriceListToPriceListFacadeInterface
      */
-    protected $priceListFacadeMock;
+    protected MockObject|CompanyBusinessUnitPriceListToPriceListFacadeInterface $priceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyBusinessUnitTransfer
      */
-    protected $companyBusinessUnitTransferMock;
+    protected MockObject|CompanyBusinessUnitTransfer $companyBusinessUnitTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
      */
-    protected $companyTransferMock;
+    protected MockObject|CompanyTransfer $companyTransferMock;
 
     /**
      * @var int
      */
-    protected $fkPriceList;
+    protected int $fkPriceList;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @return void
@@ -75,23 +76,23 @@ class CompanyBusinessUnitExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->companyBusinessUnitTransferMock->expects($this->atLeastOnce())
+        $this->companyBusinessUnitTransferMock->expects(static::atLeastOnce())
             ->method('getCompany')
             ->willReturn($this->companyTransferMock);
 
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('getFkPriceList')
             ->willReturn($this->fkPriceList);
 
-        $this->priceListFacadeMock->expects($this->atLeastOnce())
+        $this->priceListFacadeMock->expects(static::atLeastOnce())
             ->method('findPriceListById')
             ->willReturn($this->priceListTransferMock);
 
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('setPriceList')
             ->willReturn($this->companyTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyBusinessUnitTransfer::class,
             $this->companyBusinessUnitExpander->expand(
                 $this->companyBusinessUnitTransferMock,
@@ -104,11 +105,11 @@ class CompanyBusinessUnitExpanderTest extends Unit
      */
     public function testExpandCompanyTransferNull(): void
     {
-        $this->companyBusinessUnitTransferMock->expects($this->atLeastOnce())
+        $this->companyBusinessUnitTransferMock->expects(static::atLeastOnce())
             ->method('getCompany')
             ->willReturn(null);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyBusinessUnitTransfer::class,
             $this->companyBusinessUnitExpander->expand(
                 $this->companyBusinessUnitTransferMock,

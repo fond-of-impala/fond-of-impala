@@ -8,6 +8,7 @@ use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facad
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeBridge;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductFacadeBridge;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeBridge;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 use Spryker\Zed\Kernel\Container;
@@ -20,42 +21,42 @@ class ProductListPriceProductPriceListPageSearchDependencyProviderTest extends U
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Locator
      */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
      */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
      */
-    protected $eventBehaviorFacadeMock;
+    protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchFacadeInterface
      */
-    protected $priceProductPriceListPageSearchFacadeMock;
+    protected MockObject|PriceProductPriceListPageSearchFacadeInterface $priceProductPriceListPageSearchFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Product\Business\ProductFacadeInterface
      */
-    protected $productFacadeMock;
+    protected MockObject|ProductFacadeInterface $productFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\ProductList\Business\ProductListFacadeInterface
      */
-    protected $productListFacadeMock;
+    protected MockObject|ProductListFacadeInterface $productListFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchDependencyProvider
      */
-    protected $productListPriceProductPriceListPageSearchDependencyProvider;
+    protected ProductListPriceProductPriceListPageSearchDependencyProvider $productListPriceProductPriceListPageSearchDependencyProvider;
 
     /**
      * @return void

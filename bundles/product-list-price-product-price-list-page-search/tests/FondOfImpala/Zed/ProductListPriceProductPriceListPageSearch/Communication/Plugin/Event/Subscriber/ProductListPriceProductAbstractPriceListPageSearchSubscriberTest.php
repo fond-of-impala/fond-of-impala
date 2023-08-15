@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communicat
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communication\Plugin\Event\Listener\ProductListPriceProductAbstractPriceListPageSearchListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\ProductList\Dependency\ProductListEvents;
 
@@ -12,12 +13,12 @@ class ProductListPriceProductAbstractPriceListPageSearchSubscriberTest extends U
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected $eventCollectionInterfaceMock;
+    protected MockObject|EventCollectionInterface $eventCollectionInterfaceMock;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communication\Plugin\Event\Subscriber\ProductListPriceProductAbstractPriceListPageSearchSubscriber
      */
-    protected $productListPriceProductAbstractPriceListPageSearchSubscriber;
+    protected ProductListPriceProductAbstractPriceListPageSearchSubscriber $productListPriceProductAbstractPriceListPageSearchSubscriber;
 
     /**
      * @return void

@@ -3,6 +3,7 @@
 namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\Kernel\Container;
 
 class PriceProductPriceListSearchRestApiDependencyProviderTest extends Unit
@@ -10,12 +11,12 @@ class PriceProductPriceListSearchRestApiDependencyProviderTest extends Unit
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiDependencyProvider
      */
-    protected $priceProductPriceListSearchRestApiDependencyProvider;
+    protected PriceProductPriceListSearchRestApiDependencyProvider $priceProductPriceListSearchRestApiDependencyProvider;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void
@@ -34,7 +35,7 @@ class PriceProductPriceListSearchRestApiDependencyProviderTest extends Unit
      */
     public function testProvideDependencies(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Container::class,
             $this->priceProductPriceListSearchRestApiDependencyProvider->provideDependencies(
                 $this->containerMock,

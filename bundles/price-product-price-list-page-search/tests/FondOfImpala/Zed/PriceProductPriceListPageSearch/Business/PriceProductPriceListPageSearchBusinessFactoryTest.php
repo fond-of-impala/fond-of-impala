@@ -10,6 +10,7 @@ use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PricePro
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchEntityManager;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchRepository;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
@@ -17,32 +18,32 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchBusinessFactory
      */
-    protected $priceProductPriceListPageSearchBusinessFactory;
+    protected PriceProductPriceListPageSearchBusinessFactory $priceProductPriceListPageSearchBusinessFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchRepository
      */
-    protected $priceProductPriceListPageSearchRepositoryMock;
+    protected MockObject|PriceProductPriceListPageSearchRepository $priceProductPriceListPageSearchRepositoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchEntityManager
      */
-    protected $priceProductPriceListPageSearchEntityManagerMock;
+    protected MockObject|PriceProductPriceListPageSearchEntityManager $priceProductPriceListPageSearchEntityManagerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface
      */
-    protected $storeFacadeMock;
+    protected MockObject|PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceInterface
      */
-    protected $utilEncodingServiceMock;
+    protected MockObject|PriceProductPriceListPageSearchToUtilEncodingServiceInterface $utilEncodingServiceMock;
 
     /**
      * @return void
@@ -82,7 +83,7 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
      */
     public function testCreatePriceProductAbstractSearchWrite(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::FACADE_STORE],
@@ -96,7 +97,7 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
                 true,
             );
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::FACADE_STORE],
@@ -110,7 +111,7 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
                 [],
             );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceProductAbstractSearchWriter::class,
             $this->priceProductPriceListPageSearchBusinessFactory->createPriceProductAbstractSearchWriter(),
         );
@@ -121,7 +122,7 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
      */
     public function testCreatePriceProductConcreteSearchWriter(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::FACADE_STORE],
@@ -135,7 +136,7 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
                 true,
             );
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::FACADE_STORE],
@@ -149,7 +150,7 @@ class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
                 [],
             );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceProductConcreteSearchWriter::class,
             $this->priceProductPriceListPageSearchBusinessFactory->createPriceProductConcreteSearchWriter(),
         );

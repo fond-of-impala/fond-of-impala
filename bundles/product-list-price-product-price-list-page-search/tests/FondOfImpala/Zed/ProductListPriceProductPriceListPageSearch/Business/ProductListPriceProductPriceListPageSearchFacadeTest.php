@@ -5,33 +5,34 @@ namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\Model\PriceProductPriceListPageSearchExpanderInterface;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListPriceProductPriceListPageSearchFacadeTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchBusinessFactory
      */
-    protected $productListPriceProductPriceListPageSearchBusinessFactoryMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchBusinessFactory $productListPriceProductPriceListPageSearchBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
      */
-    protected $priceProductPriceListPageSearchTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\Model\PriceProductPriceListPageSearchExpanderInterface
      */
-    protected $priceProductAbstractPriceListPageSearchExpanderMock;
+    protected MockObject|PriceProductPriceListPageSearchExpanderInterface $priceProductAbstractPriceListPageSearchExpanderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\Model\PriceProductPriceListPageSearchExpanderInterface
      */
-    protected $priceProductConcretePriceListPageSearchExpanderMock;
+    protected MockObject|PriceProductPriceListPageSearchExpanderInterface $priceProductConcretePriceListPageSearchExpanderMock;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchFacade
      */
-    protected $productListPriceProductPriceListPageSearchFacade;
+    protected ProductListPriceProductPriceListPageSearchFacade $productListPriceProductPriceListPageSearchFacade;
 
     /**
      * @return void

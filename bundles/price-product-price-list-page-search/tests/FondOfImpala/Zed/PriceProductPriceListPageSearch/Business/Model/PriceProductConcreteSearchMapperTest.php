@@ -6,28 +6,29 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface;
 use FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface;
 use Generated\Shared\Transfer\StoreTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductConcreteSearchMapperTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceProductConcreteSearchMapper
      */
-    protected $priceProductConcreteSearchMapper;
+    protected PriceProductConcreteSearchMapper $priceProductConcreteSearchMapper;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface
      */
-    protected $storeFacadeMock;
+    protected MockObject|PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
      */
-    protected $storeTransferMock;
+    protected MockObject|StoreTransfer $storeTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject[]|\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[]
      */
-    protected $priceProductConcretePriceListPageDataExpanderPluginMocks;
+    protected array $priceProductConcretePriceListPageDataExpanderPluginMocks;
 
     /**
      * @return void
@@ -61,15 +62,15 @@ class PriceProductConcreteSearchMapperTest extends Unit
      */
     public function testMapTransferToSearchData(): void
     {
-        $this->storeFacadeMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects(static::atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->storeTransferMock->expects($this->atLeastOnce())
+        $this->storeTransferMock->expects(static::atLeastOnce())
             ->method('getName')
             ->willReturn('DE');
 
-        $this->priceProductConcretePriceListPageDataExpanderPluginMocks[0]->expects($this->atLeastOnce())
+        $this->priceProductConcretePriceListPageDataExpanderPluginMocks[0]->expects(static::atLeastOnce())
             ->method('expand')
             ->willReturnArgument(1);
 
@@ -91,8 +92,8 @@ class PriceProductConcreteSearchMapperTest extends Unit
             ],
         );
 
-        $this->assertArrayHasKey('id-price-list', $searchData);
-        $this->assertArrayHasKey('price-list-name', $searchData);
-        $this->assertArrayHasKey('search-result-data', $searchData);
+        static::assertArrayHasKey('id-price-list', $searchData);
+        static::assertArrayHasKey('price-list-name', $searchData);
+        static::assertArrayHasKey('search-result-data', $searchData);
     }
 }

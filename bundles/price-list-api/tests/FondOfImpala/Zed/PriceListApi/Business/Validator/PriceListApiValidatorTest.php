@@ -6,28 +6,29 @@ namespace FondOfImpala\Zed\PriceListApi\Business\Validator;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListApiValidatorTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Business\Validator\PriceListApiValidator
      */
-    protected $priceListApiValidator;
+    protected PriceListApiValidator $priceListApiValidator;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiRequestTransfer
      */
-    protected $apiRequestTransferMock;
+    protected MockObject|ApiRequestTransfer $apiRequestTransferMock;
 
     /**
      * @var array
      */
-    protected $transferData;
+    protected array $transferData;
 
     /**
      * @var \Generated\Shared\Transfer\ApiDataTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $apiDataTransferMock;
+    protected MockObject|ApiDataTransfer $apiDataTransferMock;
 
     /**
      * @return void
@@ -59,7 +60,7 @@ class PriceListApiValidatorTest extends Unit
      */
     public function testValidate(): void
     {
-        $this->apiRequestTransferMock->expects($this->atLeastOnce())
+        $this->apiRequestTransferMock->expects(static::atLeastOnce())
             ->method('getApiDataOrFail')
             ->willReturn($this->apiDataTransferMock);
 
@@ -67,6 +68,6 @@ class PriceListApiValidatorTest extends Unit
             ->method('getData')
             ->willReturn($this->transferData);
 
-        $this->assertIsArray($this->priceListApiValidator->validate($this->apiRequestTransferMock));
+        static::assertIsArray($this->priceListApiValidator->validate($this->apiRequestTransferMock));
     }
 }

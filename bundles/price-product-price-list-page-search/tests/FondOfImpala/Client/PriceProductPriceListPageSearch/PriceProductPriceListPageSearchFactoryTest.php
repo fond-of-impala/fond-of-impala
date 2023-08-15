@@ -14,37 +14,37 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchFactory
      */
-    protected $priceProductPriceListPageSearchFactory;
+    protected PriceProductPriceListPageSearchFactory $priceProductPriceListPageSearchFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var array
      */
-    protected $requestParameters;
+    protected array $requestParameters;
 
     /**
      * @var string
      */
-    protected $search;
+    protected string $search;
 
     /**
      * @var array
      */
-    protected $queryExpanderPlugins;
+    protected array $queryExpanderPlugins;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\SearchStringSetterInterface
      */
-    protected $searchStringSetterInterfaceMock;
+    protected MockObject|SearchStringSetterInterface $searchStringSetterInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\PriceProductConcretePriceListSearchQueryPlugin
      */
-    protected $priceProductConcretePriceListSearchQueryPluginMock;
+    protected MockObject|PriceProductConcretePriceListSearchQueryPlugin $priceProductConcretePriceListSearchQueryPluginMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientInterface
@@ -54,7 +54,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchConfig
      */
-    protected $priceProductPriceListPageSearchConfigMock;
+    protected MockObject|PriceProductPriceListPageSearchConfig $priceProductPriceListPageSearchConfigMock;
 
     /**
      * @return void
@@ -99,15 +99,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetSearchClient(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn($this->priceProductPriceListPageSearchToSearchClientInterfaceMock);
 
-        $this->assertInstanceOf(PriceProductPriceListPageSearchToSearchClientInterface::class, $this->priceProductPriceListPageSearchFactory->getSearchClient());
+        static::assertInstanceOf(PriceProductPriceListPageSearchToSearchClientInterface::class, $this->priceProductPriceListPageSearchFactory->getSearchClient());
     }
 
     /**
@@ -115,7 +115,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testCreatePriceProductAbstractPriceListSearchQuery(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY],
@@ -126,7 +126,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
                 true,
             );
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY],
@@ -137,7 +137,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
                 $this->priceProductPriceListPageSearchToSearchClientInterfaceMock,
             );
 
-        $this->assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchFactory->createPriceProductAbstractPriceListSearchQuery($this->search, $this->requestParameters, $this->queryExpanderPlugins));
+        static::assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchFactory->createPriceProductAbstractPriceListSearchQuery($this->search, $this->requestParameters, $this->queryExpanderPlugins));
     }
 
     /**
@@ -145,7 +145,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testCreatePriceProductConcretePriceListSearchQuery(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY],
@@ -156,7 +156,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
                 true,
             );
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY],
@@ -167,7 +167,7 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
                 $this->priceProductPriceListPageSearchToSearchClientInterfaceMock,
             );
 
-        $this->assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchFactory->createPriceProductConcretePriceListSearchQuery($this->search, $this->requestParameters, $this->queryExpanderPlugins));
+        static::assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchFactory->createPriceProductConcretePriceListSearchQuery($this->search, $this->requestParameters, $this->queryExpanderPlugins));
     }
 
     /**
@@ -175,15 +175,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductAbstractPriceListSearchQueryExpanderPlugins(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn($this->queryExpanderPlugins);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchQueryExpanderPlugins());
+        static::assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchQueryExpanderPlugins());
     }
 
     /**
@@ -191,15 +191,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductAbstractPriceListSearchCountQueryExpanderPlugins(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn([1]);
 
-        $this->assertSame([1], $this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchCountQueryExpanderPlugins());
+        static::assertSame([1], $this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchCountQueryExpanderPlugins());
     }
 
     /**
@@ -207,15 +207,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductAbstractPriceListSearchResultFormatters(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn([]);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchResultFormatters());
+        static::assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchResultFormatters());
     }
 
     /**
@@ -223,15 +223,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductAbstractPriceListSearchQueryPlugin(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn($this->priceProductConcretePriceListSearchQueryPluginMock);
 
-        $this->assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchQueryPlugin());
+        static::assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchFactory->getPriceProductAbstractPriceListSearchQueryPlugin());
     }
 
     /**
@@ -239,15 +239,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductConcretePriceListSearchQueryExpanderPlugins(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn([]);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductConcretePriceListSearchQueryExpanderPlugins());
+        static::assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductConcretePriceListSearchQueryExpanderPlugins());
     }
 
     /**
@@ -255,15 +255,15 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductConcretePriceListSearchCountQueryExpanderPlugins(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn([]);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductConcretePriceListSearchCountQueryExpanderPlugins());
+        static::assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductConcretePriceListSearchCountQueryExpanderPlugins());
     }
 
     /**
@@ -271,14 +271,14 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetPriceProductConcretePriceListSearchResultFormatters(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn([]);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductConcretePriceListSearchResultFormatters());
+        static::assertIsArray($this->priceProductPriceListPageSearchFactory->getPriceProductConcretePriceListSearchResultFormatters());
     }
 }

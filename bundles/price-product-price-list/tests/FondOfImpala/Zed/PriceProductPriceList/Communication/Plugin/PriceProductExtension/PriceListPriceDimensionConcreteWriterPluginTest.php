@@ -6,23 +6,24 @@ use Codeception\Test\Unit;
 use FondOfImpala\Shared\PriceProductPriceList\PriceProductPriceListConstants;
 use FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListPriceDimensionConcreteWriterPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Communication\Plugin\PriceProductExtension\PriceListPriceDimensionConcreteWriterPlugin
      */
-    protected $priceListPriceDimensionConcreteWriterPlugin;
+    protected PriceListPriceDimensionConcreteWriterPlugin $priceListPriceDimensionConcreteWriterPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade
      */
-    protected $priceProductPriceListFacadeMock;
+    protected MockObject|PriceProductPriceListFacade $priceProductPriceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductTransfer
      */
-    protected $priceProductTransferMock;
+    protected MockObject|PriceProductTransfer $priceProductTransferMock;
 
     /**
      * @return void
@@ -48,7 +49,7 @@ class PriceListPriceDimensionConcreteWriterPluginTest extends Unit
      */
     public function testSavePrice(): void
     {
-        $this->assertInstanceOf(PriceProductTransfer::class, $this->priceListPriceDimensionConcreteWriterPlugin->savePrice($this->priceProductTransferMock));
+        static::assertInstanceOf(PriceProductTransfer::class, $this->priceListPriceDimensionConcreteWriterPlugin->savePrice($this->priceProductTransferMock));
     }
 
     /**
@@ -56,6 +57,6 @@ class PriceListPriceDimensionConcreteWriterPluginTest extends Unit
      */
     public function testGetDimensionName(): void
     {
-        $this->assertSame(PriceProductPriceListConstants::PRICE_DIMENSION_PRICE_LIST, $this->priceListPriceDimensionConcreteWriterPlugin->getDimensionName());
+        static::assertSame(PriceProductPriceListConstants::PRICE_DIMENSION_PRICE_LIST, $this->priceListPriceDimensionConcreteWriterPlugin->getDimensionName());
     }
 }

@@ -5,33 +5,34 @@ namespace FondOfImpala\Zed\PriceList\Business\Model;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceList\Persistence\PriceListEntityManagerInterface;
 use Generated\Shared\Transfer\PriceListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListWriterTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceList\Business\Model\PriceListWriter
      */
-    protected $priceListWriter;
+    protected PriceListWriter $priceListWriter;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Persistence\PriceListEntityManagerInterface
      */
-    protected $priceListEntityManagerInterfaceMock;
+    protected MockObject|PriceListEntityManagerInterface $priceListEntityManagerInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @var int
      */
-    protected $idPriceList;
+    protected int $idPriceList;
 
     /**
      * @var string
      */
-    protected $namePriceList;
+    protected string $namePriceList;
 
     /**
      * @return void
@@ -60,12 +61,12 @@ class PriceListWriterTest extends Unit
      */
     public function testPersist(): void
     {
-        $this->priceListEntityManagerInterfaceMock->expects($this->atLeastOnce())
+        $this->priceListEntityManagerInterfaceMock->expects(static::atLeastOnce())
             ->method('persist')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceListTransfer::class,
             $this->priceListWriter->persist(
                 $this->priceListTransferMock,
@@ -78,11 +79,11 @@ class PriceListWriterTest extends Unit
      */
     public function testDeleteById(): void
     {
-        $this->priceListTransferMock->expects($this->atLeastOnce())
+        $this->priceListTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceList')
             ->willReturn($this->idPriceList);
 
-        $this->priceListEntityManagerInterfaceMock->expects($this->atLeastOnce())
+        $this->priceListEntityManagerInterfaceMock->expects(static::atLeastOnce())
             ->method('deleteById')
             ->with($this->idPriceList);
 
@@ -96,11 +97,11 @@ class PriceListWriterTest extends Unit
      */
     public function testDeleteByName(): void
     {
-        $this->priceListTransferMock->expects($this->atLeastOnce())
+        $this->priceListTransferMock->expects(static::atLeastOnce())
             ->method('getName')
             ->willReturn($this->namePriceList);
 
-        $this->priceListEntityManagerInterfaceMock->expects($this->atLeastOnce())
+        $this->priceListEntityManagerInterfaceMock->expects(static::atLeastOnce())
             ->method('deleteByName')
             ->with($this->namePriceList);
 
@@ -114,12 +115,12 @@ class PriceListWriterTest extends Unit
      */
     public function testCreate(): void
     {
-        $this->priceListEntityManagerInterfaceMock->expects($this->atLeastOnce())
+        $this->priceListEntityManagerInterfaceMock->expects(static::atLeastOnce())
             ->method('persist')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceListTransfer::class,
             $this->priceListWriter->create(
                 $this->priceListTransferMock,
@@ -132,12 +133,12 @@ class PriceListWriterTest extends Unit
      */
     public function testUpdate(): void
     {
-        $this->priceListEntityManagerInterfaceMock->expects($this->atLeastOnce())
+        $this->priceListEntityManagerInterfaceMock->expects(static::atLeastOnce())
             ->method('persist')
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceListTransfer::class,
             $this->priceListWriter->update(
                 $this->priceListTransferMock,

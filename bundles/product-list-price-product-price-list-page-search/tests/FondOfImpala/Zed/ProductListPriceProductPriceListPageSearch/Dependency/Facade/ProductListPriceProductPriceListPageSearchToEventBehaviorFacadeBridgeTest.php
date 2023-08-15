@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest extends Unit
@@ -11,27 +12,27 @@ class ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
      */
-    protected $facadeMock;
+    protected MockObject|EventBehaviorFacadeInterface $facadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject[]|\Generated\Shared\Transfer\EventEntityTransfer[]
      */
-    protected $eventTransfers;
+    protected array $eventTransfers;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
      */
-    protected $eventEntityTransferMock;
+    protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
     /**
      * @var string
      */
-    protected $foreignKeyColumnName;
+    protected string $foreignKeyColumnName;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridge
      */
-    protected $bridge;
+    protected ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridge $bridge;
 
     /**
      * @return void

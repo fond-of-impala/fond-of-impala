@@ -4,18 +4,19 @@ namespace FondOfImpala\Zed\PriceProductPriceList\Communication\Plugin\PriceProdu
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListPriceProductStorePreDeletePluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Communication\Plugin\PriceProductExtension\PriceListPriceProductStorePreDeletePlugin
      */
-    protected $priceListPriceProductStorePreDeletePlugin;
+    protected PriceListPriceProductStorePreDeletePlugin $priceListPriceProductStorePreDeletePlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade
      */
-    protected $priceProductPriceListFacadeMock;
+    protected MockObject|PriceProductPriceListFacade $priceProductPriceListFacadeMock;
 
     /**
      * @return void

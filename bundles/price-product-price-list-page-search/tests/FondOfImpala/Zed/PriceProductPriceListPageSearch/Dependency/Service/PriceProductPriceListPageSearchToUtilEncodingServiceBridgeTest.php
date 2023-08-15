@@ -11,7 +11,7 @@ class PriceProductPriceListPageSearchToUtilEncodingServiceBridgeTest extends Uni
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceBridge
      */
-    protected $priceProductPriceListPageSearchToUtilEncodingServiceBridge;
+    protected PriceProductPriceListPageSearchToUtilEncodingServiceBridge $priceProductPriceListPageSearchToUtilEncodingServiceBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
@@ -37,11 +37,11 @@ class PriceProductPriceListPageSearchToUtilEncodingServiceBridgeTest extends Uni
      */
     public function testEncodeJson(): void
     {
-        $this->utilEncodingServiceInterfaceMock->expects($this->atLeastOnce())
+        $this->utilEncodingServiceInterfaceMock->expects(static::atLeastOnce())
             ->method('encodeJson')
             ->willReturn('{id: hi}');
 
-        $this->assertSame('{id: hi}', $this->priceProductPriceListPageSearchToUtilEncodingServiceBridge->encodeJson('{id: hi}'));
+        static::assertSame('{id: hi}', $this->priceProductPriceListPageSearchToUtilEncodingServiceBridge->encodeJson('{id: hi}'));
     }
 
     /**
@@ -49,10 +49,10 @@ class PriceProductPriceListPageSearchToUtilEncodingServiceBridgeTest extends Uni
      */
     public function testDecodeJson(): void
     {
-        $this->utilEncodingServiceInterfaceMock->expects($this->atLeastOnce())
+        $this->utilEncodingServiceInterfaceMock->expects(static::atLeastOnce())
             ->method('decodeJson')
             ->willReturn([]);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchToUtilEncodingServiceBridge->decodeJson('{id: hi}'));
+        static::assertIsArray($this->priceProductPriceListPageSearchToUtilEncodingServiceBridge->decodeJson('{id: hi}'));
     }
 }

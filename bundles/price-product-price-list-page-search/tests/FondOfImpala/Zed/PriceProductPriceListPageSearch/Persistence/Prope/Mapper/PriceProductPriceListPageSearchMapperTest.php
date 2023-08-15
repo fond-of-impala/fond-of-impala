@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\Prope\Map
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\Propel\Mapper\PriceProductPriceListPageSearchMapper;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductPriceListPageSearchMapperTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\Propel\Mapper\PriceProductPriceListPageSearchMapper
      */
-    protected $priceProductPriceListPageSearchMapper;
+    protected PriceProductPriceListPageSearchMapper $priceProductPriceListPageSearchMapper;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
      */
-    protected $priceProductPriceListPageSearchTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
     /**
      * @var array
      */
-    protected $priceProductPriceListsData;
+    protected array $priceProductPriceListsData;
 
     /**
      * @return void
@@ -50,6 +51,6 @@ class PriceProductPriceListPageSearchMapperTest extends Unit
      */
     public function testMapDataArrayToTransferArray(): void
     {
-        $this->assertIsArray($this->priceProductPriceListPageSearchMapper->mapDataArrayToTransferArray($this->priceProductPriceListsData));
+        static::assertIsArray($this->priceProductPriceListPageSearchMapper->mapDataArrayToTransferArray($this->priceProductPriceListsData));
     }
 }

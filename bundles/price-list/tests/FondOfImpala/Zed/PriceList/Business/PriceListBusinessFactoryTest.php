@@ -8,6 +8,7 @@ use FondOfImpala\Zed\PriceList\Business\Model\PriceListWriter;
 use FondOfImpala\Zed\PriceList\Persistence\PriceListEntityManager;
 use FondOfImpala\Zed\PriceList\Persistence\PriceListRepository;
 use FondOfImpala\Zed\PriceList\PriceListDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class PriceListBusinessFactoryTest extends Unit
@@ -15,22 +16,22 @@ class PriceListBusinessFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Persistence\PriceListRepository
      */
-    protected $priceListRepositoryMock;
+    protected MockObject|PriceListRepository $priceListRepositoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Persistence\PriceListEntityManager
      */
-    protected $priceListEntityManagerMock;
+    protected MockObject|PriceListEntityManager $priceListEntityManagerMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceList\Business\PriceListBusinessFactory
      */
-    protected $priceListBusinessFactory;
+    protected PriceListBusinessFactory $priceListBusinessFactory;
 
     /**
      * @return void

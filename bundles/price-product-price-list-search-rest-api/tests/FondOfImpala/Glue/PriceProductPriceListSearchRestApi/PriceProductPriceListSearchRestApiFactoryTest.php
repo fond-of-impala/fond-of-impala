@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\PriceProductPriceListSearch\PriceProductPriceListSearchReaderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\Kernel\Container;
 
@@ -13,22 +14,22 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiFactory
      */
-    protected $priceProductPriceListSearchRestApiFactory;
+    protected PriceProductPriceListSearchRestApiFactory $priceProductPriceListSearchRestApiFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
      */
-    protected $restResourceBuilderInterfaceMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface
      */
-    protected $priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock;
+    protected MockObject|PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface $priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock;
 
     /**
      * @return void
@@ -76,16 +77,16 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
      */
     public function testCreatePriceProductConcretePriceListSearchReader(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH)
             ->willReturn($this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceProductPriceListSearchReaderInterface::class,
             $this->priceProductPriceListSearchRestApiFactory->createPriceProductConcretePriceListSearchReader(),
         );
@@ -96,16 +97,16 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
      */
     public function testCreatePriceProductAbstractPriceListSearchReader(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH)
             ->willReturn($this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceProductPriceListSearchReaderInterface::class,
             $this->priceProductPriceListSearchRestApiFactory->createPriceProductAbstractPriceListSearchReader(),
         );

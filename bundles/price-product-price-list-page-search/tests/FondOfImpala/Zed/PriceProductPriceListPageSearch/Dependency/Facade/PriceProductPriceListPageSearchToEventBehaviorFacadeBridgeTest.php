@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class PriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest extends Unit
@@ -11,22 +12,22 @@ class PriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest extends Uni
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToEventBehaviorFacadeBridge
      */
-    protected $priceProductPriceListPageSearchToEventBehaviorFacadeBridge;
+    protected PriceProductPriceListPageSearchToEventBehaviorFacadeBridge $priceProductPriceListPageSearchToEventBehaviorFacadeBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
      */
-    protected $eventBehaviorFacadeInterfaceMock;
+    protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
      */
-    protected $eventEntityTransferMock;
+    protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
     /**
      * @var array
      */
-    protected $eventTransfers;
+    protected array $eventTransfers;
 
     /**
      * @return void
@@ -55,11 +56,11 @@ class PriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest extends Uni
      */
     public function testGetEventTransferIds(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->eventBehaviorFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('getEventTransferIds')
             ->willReturn($this->eventTransfers);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchToEventBehaviorFacadeBridge->getEventTransferIds($this->eventTransfers));
+        static::assertIsArray($this->priceProductPriceListPageSearchToEventBehaviorFacadeBridge->getEventTransferIds($this->eventTransfers));
     }
 
     /**
@@ -67,10 +68,10 @@ class PriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest extends Uni
      */
     public function testGetEventTransferForeignKeys(): void
     {
-        $this->eventBehaviorFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->eventBehaviorFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('getEventTransferForeignKeys')
             ->willReturn($this->eventTransfers);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchToEventBehaviorFacadeBridge->getEventTransferForeignKeys($this->eventTransfers, 'fk_key'));
+        static::assertIsArray($this->priceProductPriceListPageSearchToEventBehaviorFacadeBridge->getEventTransferForeignKeys($this->eventTransfers, 'fk_key'));
     }
 }

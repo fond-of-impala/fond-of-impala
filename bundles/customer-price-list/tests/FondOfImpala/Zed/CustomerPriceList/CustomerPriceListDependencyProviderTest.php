@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CustomerPriceList;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class CustomerPriceListDependencyProviderTest extends Unit
@@ -10,12 +11,12 @@ class CustomerPriceListDependencyProviderTest extends Unit
     /**
      * @var \FondOfImpala\Zed\CustomerPriceList\CustomerPriceListDependencyProvider
      */
-    protected $customerPriceListDependencyProvider;
+    protected CustomerPriceListDependencyProvider $customerPriceListDependencyProvider;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void

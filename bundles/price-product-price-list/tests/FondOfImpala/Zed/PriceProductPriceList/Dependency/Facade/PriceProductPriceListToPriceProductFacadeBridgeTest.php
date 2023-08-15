@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\PriceProduct\Business\PriceProductFacade;
 
 class PriceProductPriceListToPriceProductFacadeBridgeTest extends Unit
@@ -11,17 +12,17 @@ class PriceProductPriceListToPriceProductFacadeBridgeTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceProductFacadeBridge
      */
-    protected $priceProductPriceListToPriceProductFacadeBridgeTest;
+    protected PriceProductPriceListToPriceProductFacadeBridge $priceProductPriceListToPriceProductFacadeBridgeTest;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\PriceProduct\Business\PriceProductFacade
      */
-    protected $priceProductFacadeMock;
+    protected MockObject|PriceProductFacade $priceProductFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductTransfer
      */
-    protected $priceProductTransferMock;
+    protected MockObject|PriceProductTransfer $priceProductTransferMock;
 
     /**
      * @return void
@@ -48,6 +49,6 @@ class PriceProductPriceListToPriceProductFacadeBridgeTest extends Unit
      */
     public function testPersistPriceProductStore(): void
     {
-        $this->assertInstanceOf(PriceProductTransfer::class, $this->priceProductPriceListToPriceProductFacadeBridgeTest->persistPriceProductStore($this->priceProductTransferMock));
+        static::assertInstanceOf(PriceProductTransfer::class, $this->priceProductPriceListToPriceProductFacadeBridgeTest->persistPriceProductStore($this->priceProductTransferMock));
     }
 }

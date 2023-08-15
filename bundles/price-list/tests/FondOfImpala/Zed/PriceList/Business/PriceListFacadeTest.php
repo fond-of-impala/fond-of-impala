@@ -8,43 +8,44 @@ use FondOfImpala\Zed\PriceList\Business\Model\PriceListWriterInterface;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
 use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListFacadeTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Business\PriceListBusinessFactory
      */
-    protected $priceListBusinessFactoryMock;
+    protected MockObject|PriceListBusinessFactory $priceListBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Business\Model\PriceListWriterInterface
      */
-    protected $priceListWriterMock;
+    protected MockObject|PriceListWriterInterface $priceListWriterMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Business\Model\PriceListReaderInterface
      */
-    protected $priceListReaderMock;
+    protected MockObject|PriceListReaderInterface $priceListReaderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
      */
-    protected $priceListCollectionTransferMock;
+    protected MockObject|PriceListCollectionTransfer $priceListCollectionTransferMock;
 
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceList\Business\PriceListFacadeInterface
      */
-    protected $priceListFacade;
+    protected PriceListFacadeInterface $priceListFacade;
 
     /**
      * @return void

@@ -6,33 +6,34 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepositoryInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CustomerExpanderTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerExpander
      */
-    protected $customerExpander;
+    protected CustomerExpander $customerExpander;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepositoryInterface
      */
-    protected $customerPriceListRepositoryInterfaceMock;
+    protected MockObject|CustomerPriceListRepositoryInterface $customerPriceListRepositoryInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var int
      */
-    protected $idCustomer;
+    protected int $idCustomer;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
      */
-    protected $priceListCollectionTransferMock;
+    protected MockObject|PriceListCollectionTransfer $priceListCollectionTransferMock;
 
     /**
      * @return void

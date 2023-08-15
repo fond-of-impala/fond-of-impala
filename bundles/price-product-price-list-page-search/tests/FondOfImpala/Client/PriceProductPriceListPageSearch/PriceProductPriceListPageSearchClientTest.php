@@ -5,6 +5,7 @@ namespace FondOfImpala\Client\PriceProductPriceListPageSearch;
 use Codeception\Test\Unit;
 use Elastica\ResultSet;
 use FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\Kernel\Container;
 
 class PriceProductPriceListPageSearchClientTest extends Unit
@@ -12,42 +13,42 @@ class PriceProductPriceListPageSearchClientTest extends Unit
     /**
      * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchClient
      */
-    protected $priceProductPriceListPageSearchClient;
+    protected PriceProductPriceListPageSearchClient $priceProductPriceListPageSearchClient;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchFactory
      */
-    protected $priceProductPriceListPageSearchFactoryMock;
+    protected MockObject|PriceProductPriceListPageSearchFactory $priceProductPriceListPageSearchFactoryMock;
 
     /**
      * @var string
      */
-    protected $search;
+    protected string $search;
 
     /**
      * @var array
      */
-    protected $requestParameters;
+    protected array $requestParameters;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientInterface
      */
-    protected $priceProductPriceListPageSearchToSearchClientInterfaceMock;
+    protected MockObject|PriceProductPriceListPageSearchToSearchClientInterface $priceProductPriceListPageSearchToSearchClientInterfaceMock;
 
     /**
      * @var array
      */
-    protected $resultSets;
+    protected array $resultSets;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet
      */
-    protected $resultSetMock;
+    protected MockObject|ResultSet $resultSetMock;
 
     /**
      * @return void
@@ -91,15 +92,15 @@ class PriceProductPriceListPageSearchClientTest extends Unit
      */
     public function testSearchAbstract(): void
     {
-        $this->priceProductPriceListPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchFactoryMock->expects(static::atLeastOnce())
             ->method('getSearchClient')
             ->willReturn($this->priceProductPriceListPageSearchToSearchClientInterfaceMock);
 
-        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('search')
             ->willReturn($this->resultSets);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchClient->searchAbstract($this->search, $this->requestParameters));
+        static::assertIsArray($this->priceProductPriceListPageSearchClient->searchAbstract($this->search, $this->requestParameters));
     }
 
     /**
@@ -107,19 +108,19 @@ class PriceProductPriceListPageSearchClientTest extends Unit
      */
     public function testSearchAbstractCount(): void
     {
-        $this->priceProductPriceListPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchFactoryMock->expects(static::atLeastOnce())
             ->method('getSearchClient')
             ->willReturn($this->priceProductPriceListPageSearchToSearchClientInterfaceMock);
 
-        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('search')
             ->willReturn($this->resultSetMock);
 
-        $this->resultSetMock->expects($this->atLeastOnce())
+        $this->resultSetMock->expects(static::atLeastOnce())
             ->method('getTotalHits')
             ->willReturn(1);
 
-        $this->assertSame(1, $this->priceProductPriceListPageSearchClient->searchAbstractCount($this->search, $this->requestParameters));
+        static::assertSame(1, $this->priceProductPriceListPageSearchClient->searchAbstractCount($this->search, $this->requestParameters));
     }
 
     /**
@@ -127,15 +128,15 @@ class PriceProductPriceListPageSearchClientTest extends Unit
      */
     public function testSearchConcrete(): void
     {
-        $this->priceProductPriceListPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchFactoryMock->expects(static::atLeastOnce())
             ->method('getSearchClient')
             ->willReturn($this->priceProductPriceListPageSearchToSearchClientInterfaceMock);
 
-        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('search')
             ->willReturn($this->resultSets);
 
-        $this->assertIsArray($this->priceProductPriceListPageSearchClient->searchConcrete($this->search, $this->requestParameters));
+        static::assertIsArray($this->priceProductPriceListPageSearchClient->searchConcrete($this->search, $this->requestParameters));
     }
 
     /**
@@ -143,18 +144,18 @@ class PriceProductPriceListPageSearchClientTest extends Unit
      */
     public function testSearchConcreteCount(): void
     {
-        $this->priceProductPriceListPageSearchFactoryMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchFactoryMock->expects(static::atLeastOnce())
             ->method('getSearchClient')
             ->willReturn($this->priceProductPriceListPageSearchToSearchClientInterfaceMock);
 
-        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchToSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('search')
             ->willReturn($this->resultSetMock);
 
-        $this->resultSetMock->expects($this->atLeastOnce())
+        $this->resultSetMock->expects(static::atLeastOnce())
             ->method('getTotalHits')
             ->willReturn(1);
 
-        $this->assertSame(1, $this->priceProductPriceListPageSearchClient->searchConcreteCount($this->search, $this->requestParameters));
+        static::assertSame(1, $this->priceProductPriceListPageSearchClient->searchConcreteCount($this->search, $this->requestParameters));
     }
 }

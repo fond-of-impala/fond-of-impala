@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\PriceListApi\Dependency\Facade;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceList\Business\PriceListFacade;
 use Generated\Shared\Transfer\PriceListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListApiToPriceListFacadeBridgeTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceList\Business\PriceListFacade
      */
-    protected $priceListFacadeMock;
+    protected MockObject|PriceListFacade $priceListFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToPriceListFacadeBridge
      */
-    protected $priceListApiToPriceListFacadeBridge;
+    protected PriceListApiToPriceListFacadeBridge $priceListApiToPriceListFacadeBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @return void

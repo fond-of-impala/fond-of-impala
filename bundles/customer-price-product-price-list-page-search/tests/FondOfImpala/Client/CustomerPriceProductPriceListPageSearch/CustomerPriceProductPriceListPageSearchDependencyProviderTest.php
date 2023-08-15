@@ -3,6 +3,7 @@
 namespace FondOfImpala\Client\CustomerPriceProductPriceListPageSearch;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class CustomerPriceProductPriceListPageSearchDependencyProviderTest extends Unit
@@ -10,12 +11,12 @@ class CustomerPriceProductPriceListPageSearchDependencyProviderTest extends Unit
     /**
      * @var \FondOfImpala\Client\CustomerPriceProductPriceListPageSearch\CustomerPriceProductPriceListPageSearchDependencyProvider
      */
-    protected $customerPriceProductPriceListPageSearchDependencyProvider;
+    protected CustomerPriceProductPriceListPageSearchDependencyProvider $customerPriceProductPriceListPageSearchDependencyProvider;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void
@@ -34,7 +35,7 @@ class CustomerPriceProductPriceListPageSearchDependencyProviderTest extends Unit
      */
     public function testProvideServiceLayerDependencies(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Container::class,
             $this->customerPriceProductPriceListPageSearchDependencyProvider->provideServiceLayerDependencies(
                 $this->containerMock,

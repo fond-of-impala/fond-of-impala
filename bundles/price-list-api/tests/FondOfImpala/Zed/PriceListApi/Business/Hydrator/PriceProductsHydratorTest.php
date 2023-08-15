@@ -6,28 +6,29 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeInterface;
 use FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiRepositoryInterface;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductsHydratorTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeInterface
      */
-    protected $productFacadeMock;
+    protected MockObject|PriceListApiToProductFacadeInterface $productFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiRepositoryInterface
      */
-    protected $repositoryMock;
+    protected MockObject|PriceListApiRepositoryInterface $repositoryMock;
 
     /**
      * @var array<\Generated\Shared\Transfer\PriceProductTransfer>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected $priceProductTransferMocks;
+    protected array $priceProductTransferMocks;
 
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Business\Hydrator\PriceProductsHydrator
      */
-    protected $priceProductsHydrator;
+    protected PriceProductsHydrator $priceProductsHydrator;
 
     /**
      * @return void

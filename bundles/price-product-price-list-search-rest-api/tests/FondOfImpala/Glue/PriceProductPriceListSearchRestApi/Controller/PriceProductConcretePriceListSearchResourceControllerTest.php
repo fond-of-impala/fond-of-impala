@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Controller;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiFactory;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\PriceProductPriceListSearch\PriceProductPriceListSearchReaderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
@@ -13,27 +14,27 @@ class PriceProductConcretePriceListSearchResourceControllerTest extends Unit
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Controller\PriceProductConcretePriceListSearchResourceController
      */
-    protected $priceProductConcretePriceListSearchResourceController;
+    protected PriceProductConcretePriceListSearchResourceController $priceProductConcretePriceListSearchResourceController;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiFactory
      */
-    protected $priceProductPriceListSearchRestApiFactoryMock;
+    protected MockObject|PriceProductPriceListSearchRestApiFactory $priceProductPriceListSearchRestApiFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestInterfaceMock;
+    protected MockObject|RestRequestInterface $restRequestInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\PriceProductPriceListSearch\PriceProductPriceListSearchReaderInterface
      */
-    protected $priceProductPriceListSearchReaderInterfaceMock;
+    protected MockObject|PriceProductPriceListSearchReaderInterface $priceProductPriceListSearchReaderInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseInterfaceMock;
+    protected MockObject|RestResponseInterface $restResponseInterfaceMock;
 
     /**
      * @return void
@@ -84,16 +85,16 @@ class PriceProductConcretePriceListSearchResourceControllerTest extends Unit
      */
     public function testGetAction(): void
     {
-        $this->priceProductPriceListSearchRestApiFactoryMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListSearchRestApiFactoryMock->expects(static::atLeastOnce())
             ->method('createPriceProductConcretePriceListSearchReader')
             ->willReturn($this->priceProductPriceListSearchReaderInterfaceMock);
 
-        $this->priceProductPriceListSearchReaderInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListSearchReaderInterfaceMock->expects(static::atLeastOnce())
             ->method('search')
             ->with($this->restRequestInterfaceMock)
             ->willReturn($this->restResponseInterfaceMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RestResponseInterface::class,
             $this->priceProductConcretePriceListSearchResourceController->getAction(
                 $this->restRequestInterfaceMock,

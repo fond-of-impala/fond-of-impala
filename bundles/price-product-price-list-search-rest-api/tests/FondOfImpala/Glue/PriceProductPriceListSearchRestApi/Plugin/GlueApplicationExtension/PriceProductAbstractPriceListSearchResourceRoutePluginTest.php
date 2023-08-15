@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Plugin\GlueApplic
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiConfig;
 use Generated\Shared\Transfer\RestPriceProductPriceListSearchAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 
 class PriceProductAbstractPriceListSearchResourceRoutePluginTest extends Unit
@@ -12,12 +13,12 @@ class PriceProductAbstractPriceListSearchResourceRoutePluginTest extends Unit
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Plugin\GlueApplicationExtension\PriceProductAbstractPriceListSearchResourceRoutePlugin
      */
-    protected $priceProductAbstractPriceListSearchResourceRoutePlugin;
+    protected PriceProductAbstractPriceListSearchResourceRoutePlugin $priceProductAbstractPriceListSearchResourceRoutePlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface
      */
-    protected $resourceRouteCollectionInterfaceMock;
+    protected MockObject|ResourceRouteCollectionInterface $resourceRouteCollectionInterfaceMock;
 
     /**
      * @return void
@@ -36,12 +37,12 @@ class PriceProductAbstractPriceListSearchResourceRoutePluginTest extends Unit
      */
     public function testConfigure(): void
     {
-        $this->resourceRouteCollectionInterfaceMock->expects($this->atLeastOnce())
+        $this->resourceRouteCollectionInterfaceMock->expects(static::atLeastOnce())
             ->method('addGet')
             ->with('get', true)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             ResourceRouteCollectionInterface::class,
             $this->priceProductAbstractPriceListSearchResourceRoutePlugin->configure(
                 $this->resourceRouteCollectionInterfaceMock,
@@ -54,7 +55,7 @@ class PriceProductAbstractPriceListSearchResourceRoutePluginTest extends Unit
      */
     public function testGetResourceType(): void
     {
-        $this->assertSame(
+        static::assertSame(
             PriceProductPriceListSearchRestApiConfig::RESOURCE_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH,
             $this->priceProductAbstractPriceListSearchResourceRoutePlugin->getResourceType(),
         );
@@ -65,7 +66,7 @@ class PriceProductAbstractPriceListSearchResourceRoutePluginTest extends Unit
      */
     public function testGetController(): void
     {
-        $this->assertSame(
+        static::assertSame(
             PriceProductPriceListSearchRestApiConfig::CONTROLLER_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH,
             $this->priceProductAbstractPriceListSearchResourceRoutePlugin->getController(),
         );
@@ -76,7 +77,7 @@ class PriceProductAbstractPriceListSearchResourceRoutePluginTest extends Unit
      */
     public function testGetResourceAttributesClassName(): void
     {
-        $this->assertSame(
+        static::assertSame(
             RestPriceProductPriceListSearchAttributesTransfer::class,
             $this->priceProductAbstractPriceListSearchResourceRoutePlugin->getResourceAttributesClassName(),
         );

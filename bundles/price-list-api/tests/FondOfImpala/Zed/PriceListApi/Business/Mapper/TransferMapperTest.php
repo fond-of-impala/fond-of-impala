@@ -10,7 +10,7 @@ class TransferMapperTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Business\Mapper\TransferMapper
      */
-    protected $transferMapper;
+    protected TransferMapper $transferMapper;
 
     private ?array $transferData = null;
 
@@ -32,8 +32,8 @@ class TransferMapperTest extends Unit
     public function testToTransfer(): void
     {
         $priceListApiTransfer = $this->transferMapper->toTransfer($this->transferData[0]);
-        $this->assertInstanceOf(PriceListApiTransfer::class, $priceListApiTransfer);
-        $this->assertEquals('Lorem Ipsum', $priceListApiTransfer->getName());
+        static::assertInstanceOf(PriceListApiTransfer::class, $priceListApiTransfer);
+        static::assertEquals('Lorem Ipsum', $priceListApiTransfer->getName());
     }
 
     /**
@@ -41,7 +41,7 @@ class TransferMapperTest extends Unit
      */
     public function testToTransferCollection(): void
     {
-        $this->assertIsArray($this->transferMapper->toTransferCollection($this->transferData));
-        $this->assertEquals('Lorem Ipsum', $this->transferMapper->toTransferCollection($this->transferData)[0]->getName());
+        static::assertIsArray($this->transferMapper->toTransferCollection($this->transferData));
+        static::assertEquals('Lorem Ipsum', $this->transferMapper->toTransferCollection($this->transferData)[0]->getName());
     }
 }

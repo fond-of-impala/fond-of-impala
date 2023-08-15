@@ -7,6 +7,7 @@ use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facad
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeInterface;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductFacadeInterface;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ProductListPriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
@@ -14,27 +15,27 @@ class ProductListPriceProductPriceListPageSearchCommunicationFactoryTest extends
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductFacadeInterface
      */
-    protected $productFacadeMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToProductFacadeInterface $productFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeInterface
      */
-    protected $eventBehaviorFacadeMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeInterface
      */
-    protected $priceProductPriceListPageSearchFacadeMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeInterface $priceProductPriceListPageSearchFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communication\ProductListPriceProductPriceListPageSearchCommunicationFactory
      */
-    protected $productListPriceProductPriceListPageSearchCommunicationFactory;
+    protected ProductListPriceProductPriceListPageSearchCommunicationFactory $productListPriceProductPriceListPageSearchCommunicationFactory;
 
     /**
      * @return void

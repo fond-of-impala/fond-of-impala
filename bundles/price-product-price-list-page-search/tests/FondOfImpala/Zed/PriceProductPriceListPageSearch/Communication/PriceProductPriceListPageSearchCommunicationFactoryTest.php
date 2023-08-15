@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Communication\Plugin;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Communication\PriceProductPriceListPageSearchCommunicationFactory;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToEventBehaviorFacadeBridge;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class PriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
@@ -12,17 +13,17 @@ class PriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Communication\PriceProductPriceListPageSearchCommunicationFactory
      */
-    protected $priceProductPriceListPageSearchCommunicationFactory;
+    protected PriceProductPriceListPageSearchCommunicationFactory $priceProductPriceListPageSearchCommunicationFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToEventBehaviorFacadeInterface
      */
-    protected $priceProductPriceListPageSearchToEventBehaviorFacadeInterfaceMock;
+    protected MockObject|PriceProductPriceListPageSearchToEventBehaviorFacadeInterface $priceProductPriceListPageSearchToEventBehaviorFacadeInterfaceMock;
 
     /**
      * @return void
@@ -48,15 +49,15 @@ class PriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
      */
     public function testGetEventBehaviorFacade(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->willReturn($this->priceProductPriceListPageSearchToEventBehaviorFacadeInterfaceMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             PriceProductPriceListPageSearchToEventBehaviorFacadeBridge::class,
             $this->priceProductPriceListPageSearchCommunicationFactory->getEventBehaviorFacade(),
         );

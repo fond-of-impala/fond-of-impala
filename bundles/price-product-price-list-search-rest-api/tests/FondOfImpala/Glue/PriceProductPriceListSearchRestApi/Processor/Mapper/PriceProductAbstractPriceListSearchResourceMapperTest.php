@@ -10,12 +10,12 @@ class PriceProductAbstractPriceListSearchResourceMapperTest extends Unit
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductAbstractPriceListSearchResourceMapper
      */
-    protected $priceProductAbstractPriceListSearchResourceMapper;
+    protected PriceProductAbstractPriceListSearchResourceMapper $priceProductAbstractPriceListSearchResourceMapper;
 
     /**
      * @var array
      */
-    protected $restSearchResponse;
+    protected array $restSearchResponse;
 
     /**
      * @return void
@@ -36,7 +36,7 @@ class PriceProductAbstractPriceListSearchResourceMapperTest extends Unit
      */
     public function testGetPricesSearchKey(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RestPriceProductPriceListSearchAttributesTransfer::class,
             $this->priceProductAbstractPriceListSearchResourceMapper->mapRestSearchResponseToRestAttributesTransfer(
                 $this->restSearchResponse,
@@ -49,7 +49,7 @@ class PriceProductAbstractPriceListSearchResourceMapperTest extends Unit
      */
     public function testGetPricesSearchKeyNoArray(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RestPriceProductPriceListSearchAttributesTransfer::class,
             $this->priceProductAbstractPriceListSearchResourceMapper->mapRestSearchResponseToRestAttributesTransfer(
                 [],

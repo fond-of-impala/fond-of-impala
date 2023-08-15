@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\ProductListPriceProductPriceListPageSearch;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Dependency\Client\ProductListPriceProductPriceListPageSearchToCustomerClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class ProductListPriceProductPriceListPageSearchFactoryTest extends Unit
@@ -11,17 +12,17 @@ class ProductListPriceProductPriceListPageSearchFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Dependency\Client\ProductListPriceProductPriceListPageSearchToCustomerClientInterface
      */
-    protected $customerClientMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToCustomerClientInterface $customerClientMock;
 
     /**
      * @var \FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchFactory
      */
-    protected $productListPriceProductPriceListPageSearchFactory;
+    protected ProductListPriceProductPriceListPageSearchFactory $productListPriceProductPriceListPageSearchFactory;
 
     /**
      * @return void

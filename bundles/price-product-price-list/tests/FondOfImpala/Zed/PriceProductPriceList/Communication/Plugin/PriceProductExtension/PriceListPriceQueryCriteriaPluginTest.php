@@ -7,28 +7,29 @@ use FondOfImpala\Shared\PriceProductPriceList\PriceProductPriceListConstants;
 use FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepository;
 use Generated\Shared\Transfer\PriceProductCriteriaTransfer;
 use Generated\Shared\Transfer\QueryCriteriaTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListPriceQueryCriteriaPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Communication\Plugin\PriceProductExtension\PriceListPriceQueryCriteriaPlugin
      */
-    protected $priceListPriceQueryCriteriaPlugin;
+    protected PriceListPriceQueryCriteriaPlugin $priceListPriceQueryCriteriaPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepository
      */
-    protected $priceProductPriceListRepositoryMock;
+    protected MockObject|PriceProductPriceListRepository $priceProductPriceListRepositoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductCriteriaTransfer
      */
-    protected $priceProductCriteriaTransferMock;
+    protected MockObject|PriceProductCriteriaTransfer $priceProductCriteriaTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QueryCriteriaTransfer
      */
-    protected $queryCriteriaTransferMock;
+    protected MockObject|QueryCriteriaTransfer $queryCriteriaTransferMock;
 
     /**
      * @return void

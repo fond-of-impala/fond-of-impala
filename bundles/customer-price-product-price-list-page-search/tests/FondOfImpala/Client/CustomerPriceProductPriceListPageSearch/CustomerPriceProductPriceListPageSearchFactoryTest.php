@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\CustomerPriceProductPriceListPageSearch;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\CustomerPriceProductPriceListPageSearch\Dependency\Client\CustomerPriceProductPriceListPageSearchToCustomerClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class CustomerPriceProductPriceListPageSearchFactoryTest extends Unit
@@ -11,17 +12,17 @@ class CustomerPriceProductPriceListPageSearchFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Client\CustomerPriceProductPriceListPageSearch\CustomerPriceProductPriceListPageSearchFactory
      */
-    protected $customerPriceProductPriceListPageSearchFactory;
+    protected CustomerPriceProductPriceListPageSearchFactory $customerPriceProductPriceListPageSearchFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CustomerPriceProductPriceListPageSearch\Dependency\Client\CustomerPriceProductPriceListPageSearchToCustomerClientInterface
      */
-    protected $customerPriceProductPriceListPageSearchToCustomerClientInterfaceMock;
+    protected MockObject|CustomerPriceProductPriceListPageSearchToCustomerClientInterface $customerPriceProductPriceListPageSearchToCustomerClientInterfaceMock;
 
     /**
      * @return void
@@ -45,16 +46,16 @@ class CustomerPriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testGetCustomerClient(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(CustomerPriceProductPriceListPageSearchDependencyProvider::CLIENT_CUSTOMER)
             ->willReturn($this->customerPriceProductPriceListPageSearchToCustomerClientInterfaceMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CustomerPriceProductPriceListPageSearchToCustomerClientInterface::class,
             $this->customerPriceProductPriceListPageSearchFactory->getCustomerClient(),
         );

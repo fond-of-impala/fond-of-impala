@@ -7,28 +7,29 @@ use FondOfImpala\Shared\PriceProductPriceList\PriceProductPriceListConstants;
 use FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceListFacadeInterface;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Generated\Shared\Transfer\PriceProductDimensionTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductDimensionExpanderTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Business\Model\PriceProductDimensionExpander
      */
-    protected $priceProductDimensionExpander;
+    protected PriceProductDimensionExpander $priceProductDimensionExpander;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceListFacadeInterface
      */
-    protected $priceListFacadeMock;
+    protected MockObject|PriceProductPriceListToPriceListFacadeInterface $priceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductDimensionTransfer
      */
-    protected $priceProductDimensionTransferMock;
+    protected MockObject|PriceProductDimensionTransfer $priceProductDimensionTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @return void
@@ -59,28 +60,28 @@ class PriceProductDimensionExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceList')
             ->willReturn(1);
 
-        $this->priceListFacadeMock->expects($this->atLeastOnce())
+        $this->priceListFacadeMock->expects(static::atLeastOnce())
             ->method('findPriceListById')
             ->willReturn($this->priceListTransferMock);
 
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('setType')
             ->with(PriceProductPriceListConstants::PRICE_DIMENSION_PRICE_LIST)
             ->willReturn($this->priceProductDimensionTransferMock);
 
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('setName')
             ->willReturn($this->priceProductDimensionTransferMock);
 
-        $this->priceListTransferMock->expects($this->atLeastOnce())
+        $this->priceListTransferMock->expects(static::atLeastOnce())
             ->method('getName')
             ->willReturn('name');
 
-        $this->assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
+        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
     }
 
     /**
@@ -88,14 +89,14 @@ class PriceProductDimensionExpanderTest extends Unit
      */
     public function testExpandNull(): void
     {
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceList')
             ->willReturn(1);
 
-        $this->priceListFacadeMock->expects($this->atLeastOnce())
+        $this->priceListFacadeMock->expects(static::atLeastOnce())
             ->method('findPriceListById')
             ->willReturn(null);
 
-        $this->assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
+        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
     }
 }

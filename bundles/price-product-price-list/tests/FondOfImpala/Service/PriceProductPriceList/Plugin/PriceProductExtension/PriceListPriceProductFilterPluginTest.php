@@ -9,6 +9,7 @@ use Generated\Shared\Transfer\PriceProductDimensionTransfer;
 use Generated\Shared\Transfer\PriceProductFilterTransfer;
 use Generated\Shared\Transfer\PriceProductTransfer;
 use Iterator;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\PriceProduct\PriceProductConfig;
 
 class PriceListPriceProductFilterPluginTest extends Unit
@@ -16,37 +17,37 @@ class PriceListPriceProductFilterPluginTest extends Unit
     /**
      * @var \FondOfImpala\Service\PriceProductPriceList\Plugin\PriceProductExtension\PriceListPriceProductFilterPlugin
      */
-    protected $priceListPriceProductFilterPlugin;
+    protected PriceListPriceProductFilterPlugin $priceListPriceProductFilterPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductTransfer
      */
-    protected $priceProductTransferMock;
+    protected MockObject|PriceProductTransfer $priceProductTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductFilterTransfer
      */
-    protected $priceProductFilterTransferMock;
+    protected MockObject|PriceProductFilterTransfer $priceProductFilterTransferMock;
 
     /**
      * @var array
      */
-    protected $priceListProductTransfers;
+    protected array $priceListProductTransfers;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductDimensionTransfer
      */
-    protected $priceProductDimensionTransferMock;
+    protected MockObject|PriceProductDimensionTransfer $priceProductDimensionTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\MoneyValueTransfer
      */
-    protected $moneyValueTransferMock;
+    protected MockObject|MoneyValueTransfer $moneyValueTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Iterator
      */
-    protected $iteratorMock;
+    protected MockObject|Iterator $iteratorMock;
 
     /**
      * @return void
@@ -54,10 +55,6 @@ class PriceListPriceProductFilterPluginTest extends Unit
     protected function _before(): void
     {
         parent::_before();
-
-        $this->priceProductTransferMock = $this->getMockBuilder(PriceProductTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
 
         $this->priceProductTransferMock = $this->getMockBuilder(PriceProductTransfer::class)
             ->disableOriginalConstructor()
@@ -92,27 +89,27 @@ class PriceListPriceProductFilterPluginTest extends Unit
      */
     public function testFilterConditionOne(): void
     {
-        $this->priceProductTransferMock->expects($this->atLeastOnce())
+        $this->priceProductTransferMock->expects(static::atLeastOnce())
             ->method('getPriceDimension')
             ->willReturn($this->priceProductDimensionTransferMock);
 
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceList')
             ->willReturn(1);
 
-        $this->priceProductFilterTransferMock->expects($this->atLeastOnce())
+        $this->priceProductFilterTransferMock->expects(static::atLeastOnce())
             ->method('getPriceMode')
             ->willReturn(PriceProductConfig::PRICE_GROSS_MODE);
 
-        $this->priceProductTransferMock->expects($this->atLeastOnce())
+        $this->priceProductTransferMock->expects(static::atLeastOnce())
             ->method('getMoneyValue')
             ->willReturn($this->moneyValueTransferMock);
 
-        $this->moneyValueTransferMock->expects($this->atLeastOnce())
+        $this->moneyValueTransferMock->expects(static::atLeastOnce())
             ->method('getGrossAmount')
             ->willReturn(1);
 
-        $this->assertIsArray($this->priceListPriceProductFilterPlugin->filter($this->priceListProductTransfers, $this->priceProductFilterTransferMock));
+        static::assertIsArray($this->priceListPriceProductFilterPlugin->filter($this->priceListProductTransfers, $this->priceProductFilterTransferMock));
     }
 
     /**
@@ -120,27 +117,27 @@ class PriceListPriceProductFilterPluginTest extends Unit
      */
     public function testFilterIdPriceListNull(): void
     {
-        $this->priceProductTransferMock->expects($this->atLeastOnce())
+        $this->priceProductTransferMock->expects(static::atLeastOnce())
             ->method('getPriceDimension')
             ->willReturn($this->priceProductDimensionTransferMock);
 
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceList')
             ->willReturn(null);
 
-        $this->priceProductFilterTransferMock->expects($this->atLeastOnce())
+        $this->priceProductFilterTransferMock->expects(static::atLeastOnce())
             ->method('getPriceMode')
             ->willReturn(PriceProductConfig::PRICE_GROSS_MODE);
 
-        $this->priceProductTransferMock->expects($this->atLeastOnce())
+        $this->priceProductTransferMock->expects(static::atLeastOnce())
             ->method('getMoneyValue')
             ->willReturn($this->moneyValueTransferMock);
 
-        $this->moneyValueTransferMock->expects($this->atLeastOnce())
+        $this->moneyValueTransferMock->expects(static::atLeastOnce())
             ->method('getGrossAmount')
             ->willReturn(null);
 
-        $this->assertIsArray($this->priceListPriceProductFilterPlugin->filter($this->priceListProductTransfers, $this->priceProductFilterTransferMock));
+        static::assertIsArray($this->priceListPriceProductFilterPlugin->filter($this->priceListProductTransfers, $this->priceProductFilterTransferMock));
     }
 
     /**
@@ -148,6 +145,6 @@ class PriceListPriceProductFilterPluginTest extends Unit
      */
     public function testGetDimensionName(): void
     {
-        $this->assertSame(PriceProductPriceListConstants::PRICE_DIMENSION_PRICE_LIST, $this->priceListPriceProductFilterPlugin->getDimensionName());
+        static::assertSame(PriceProductPriceListConstants::PRICE_DIMENSION_PRICE_LIST, $this->priceListPriceProductFilterPlugin->getDimensionName());
     }
 }

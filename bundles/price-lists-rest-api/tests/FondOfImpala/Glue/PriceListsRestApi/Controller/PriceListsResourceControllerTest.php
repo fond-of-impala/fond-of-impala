@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceListsRestApi\Controller;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiFactory;
 use FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListReaderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
@@ -14,32 +15,32 @@ class PriceListsResourceControllerTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiFactory
      */
-    protected $priceListsRestApiFactoryMock;
+    protected MockObject|PriceListsRestApiFactory $priceListsRestApiFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListReaderInterface
      */
-    protected $priceListReaderMock;
+    protected MockObject|PriceListReaderInterface $priceListReaderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
      */
-    protected $restResourceMock;
+    protected MockObject|RestResourceInterface $restResourceMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Controller\PriceListsResourceController
      */
-    protected $priceListsResourceController;
+    protected PriceListsResourceController $priceListsResourceController;
 
     /**
      * @return void

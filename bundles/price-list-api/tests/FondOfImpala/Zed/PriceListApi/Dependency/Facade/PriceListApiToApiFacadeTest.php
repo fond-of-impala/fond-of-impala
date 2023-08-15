@@ -14,17 +14,17 @@ class PriceListApiToApiFacadeTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToApiFacadeBridge
      */
-    protected $bridge;
+    protected PriceListApiToApiFacadeBridge $bridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Api\Business\ApiFacadeInterface
      */
-    protected $facadeMock;
+    protected MockObject|ApiFacadeInterface $facadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
-    protected $abstractTransferMock;
+    protected MockObject|AbstractTransfer $abstractTransferMock;
 
     private ?string $id = null;
 

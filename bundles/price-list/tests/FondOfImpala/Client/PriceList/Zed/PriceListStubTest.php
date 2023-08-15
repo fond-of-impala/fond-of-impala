@@ -5,23 +5,24 @@ namespace FondOfImpala\Client\PriceList\Zed;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceList\Dependency\Client\PriceListToZedRequestClientInterface;
 use Generated\Shared\Transfer\PriceListListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListStubTest extends Unit
 {
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var \FondOfImpala\Client\PriceList\Dependency\Client\PriceListToZedRequestClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $zedRequestClientMock;
+    protected MockObject|PriceListToZedRequestClientInterface $zedRequestClientMock;
 
     /**
      * @var \FondOfImpala\Client\PriceList\Zed\PriceListStub
      */
-    protected $priceListStub;
+    protected PriceListStub $priceListStub;
 
     /**
      * @return void

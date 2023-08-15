@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communicat
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchFacade;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 class ProductListPriceProductAbstractPriceListPageDataExpanderPluginTest extends Unit
@@ -12,17 +13,17 @@ class ProductListPriceProductAbstractPriceListPageDataExpanderPluginTest extends
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communication\Plugin\PriceProductPriceListPageSearchExtension\ProductListPriceProductAbstractPriceListPageDataExpanderPlugin
      */
-    protected $productListPriceProductAbstractPriceListPageDataExpanderPlugin;
+    protected ProductListPriceProductAbstractPriceListPageDataExpanderPlugin $productListPriceProductAbstractPriceListPageDataExpanderPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\ProductListPriceProductPriceListPageSearchFacade
      */
-    protected $productListPriceProductPriceListPageSearchFacadeInterfaceMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchFacade $productListPriceProductPriceListPageSearchFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
      */
-    protected $priceProductPriceListPageSearchTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
     /**
      * @return void

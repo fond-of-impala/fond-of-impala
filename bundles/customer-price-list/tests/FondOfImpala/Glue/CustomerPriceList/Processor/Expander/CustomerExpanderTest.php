@@ -5,23 +5,24 @@ namespace FondOfImpala\Glue\CustomerPriceList\Processor\Expander;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\CustomerPriceList\CustomerPriceListClientInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CustomerExpanderTest extends Unit
 {
     /**
      * @var \FondOfImpala\Glue\CustomerPriceList\Processor\Expander\CustomerExpander
      */
-    protected $customerExpander;
+    protected CustomerExpander $customerExpander;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CustomerPriceList\CustomerPriceListClientInterface
      */
-    protected $customerPriceListClientInterfaceMock;
+    protected MockObject|CustomerPriceListClientInterface $customerPriceListClientInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @return void

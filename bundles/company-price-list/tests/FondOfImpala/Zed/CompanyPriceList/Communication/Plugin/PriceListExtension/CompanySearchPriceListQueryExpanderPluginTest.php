@@ -19,27 +19,27 @@ class CompanySearchPriceListQueryExpanderPluginTest extends Unit
     /**
      * @var \FondOfImpala\Zed\CompanyPriceList\Communication\Plugin\PriceListExtension\CompanySearchPriceListQueryExpanderPlugin
      */
-    protected $plugin;
+    protected CompanySearchPriceListQueryExpanderPlugin $plugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
      */
-    protected $companyTransferMock;
+    protected MockObject|CompanyTransfer $companyTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\FilterFieldTransfer
      */
-    protected $filterFieldTransferMock;
+    protected MockObject|FilterFieldTransfer $filterFieldTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QueryJoinCollectionTransfer
      */
-    protected $queryJoinCollectionTransfer;
+    protected MockObject|QueryJoinCollectionTransfer $queryJoinCollectionTransfer;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyPriceList\Business\CompanyPriceListFacade
      */
-    protected $companyPriceListFacadeMock;
+    protected MockObject|CompanyPriceListFacade $companyPriceListFacadeMock;
 
     /**
      * @return void
@@ -71,11 +71,11 @@ class CompanySearchPriceListQueryExpanderPluginTest extends Unit
      */
     public function testIsApplicableWillReturnFalse(): void
     {
-        $this->filterFieldTransferMock->expects($this->atLeastOnce())
+        $this->filterFieldTransferMock->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn('');
 
-        $this->assertFalse(
+        static::assertFalse(
             $this->plugin->isApplicable(
                 [$this->filterFieldTransferMock],
             ),
@@ -87,11 +87,11 @@ class CompanySearchPriceListQueryExpanderPluginTest extends Unit
      */
     public function testIsApplicableWillReturnTrue(): void
     {
-        $this->filterFieldTransferMock->expects($this->atLeastOnce())
+        $this->filterFieldTransferMock->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn(CompanyPriceListConstants::FILTER_FIELD_TYPE_ID_CUSTOMER);
 
-        $this->assertTrue(
+        static::assertTrue(
             $this->plugin->isApplicable(
                 [$this->filterFieldTransferMock],
             ),
@@ -103,7 +103,7 @@ class CompanySearchPriceListQueryExpanderPluginTest extends Unit
      */
     public function testExpandWillDoNothing(): void
     {
-        $this->filterFieldTransferMock->expects($this->atLeastOnce())
+        $this->filterFieldTransferMock->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn('');
 
@@ -120,15 +120,15 @@ class CompanySearchPriceListQueryExpanderPluginTest extends Unit
     {
         $self = $this;
 
-        $this->filterFieldTransferMock->expects($this->atLeastOnce())
+        $this->filterFieldTransferMock->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn(CompanyPriceListConstants::FILTER_FIELD_TYPE_ID_CUSTOMER);
 
-        $this->filterFieldTransferMock->expects($this->atLeastOnce())
+        $this->filterFieldTransferMock->expects(static::atLeastOnce())
             ->method('getValue')
             ->willReturn('value');
 
-        $this->queryJoinCollectionTransfer->expects($this->atLeastOnce())
+        $this->queryJoinCollectionTransfer->expects(static::atLeastOnce())
             ->method('addQueryJoin')
             ->willReturnCallback(static function (QueryJoinTransfer $queryJoinTransfer) use ($self): MockObject|QueryJoinCollectionTransfer {
                 static::assertSame($queryJoinTransfer->getWhereConditions()[0]->getValue(), 'value');

@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceListsRestApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceList\PriceListClientInterface;
 use FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Locator;
 use Spryker\Glue\Kernel\Container;
 use Spryker\Shared\Kernel\BundleProxy;
@@ -14,27 +15,27 @@ class PriceListsRestApiDependencyProviderTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Locator|mixed
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Locator
      */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy|mixed
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
      */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceList\PriceListClientInterface
      */
-    protected $priceClientMock;
+    protected MockObject|PriceListClientInterface $priceClientMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiDependencyProvider
      */
-    protected $dependencyProvider;
+    protected PriceListsRestApiDependencyProvider $dependencyProvider;
 
     /**
      * @return void

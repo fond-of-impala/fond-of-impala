@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\CustomerPriceList\CustomerPriceListFactory;
 use FondOfImpala\Glue\CustomerPriceList\Processor\Expander\CustomerExpanderInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class PriceListCustomerExpanderPluginTest extends Unit
@@ -13,27 +14,27 @@ class PriceListCustomerExpanderPluginTest extends Unit
     /**
      * @var \FondOfImpala\Glue\CustomerPriceList\Plugin\CustomersRestApiExtension\PriceListCustomerExpanderPlugin
      */
-    protected $priceListCustomerExpanderPlugin;
+    protected PriceListCustomerExpanderPlugin $priceListCustomerExpanderPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\CustomerPriceList\CustomerPriceListFactory
      */
-    protected $customerPriceListFactoryMock;
+    protected MockObject|CustomerPriceListFactory $customerPriceListFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestInterfaceMock;
+    protected MockObject|RestRequestInterface $restRequestInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\CustomerPriceList\Processor\Expander\CustomerExpanderInterface
      */
-    protected $customerExpanderInterfaceMock;
+    protected MockObject|CustomerExpanderInterface $customerExpanderInterfaceMock;
 
     /**
      * @return void

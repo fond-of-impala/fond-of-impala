@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\PriceListApi\Dependency\Facade;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Product\Business\ProductFacadeInterface;
 
 class PriceListApiToProductFacadeBridgeTest extends Unit
@@ -10,12 +11,12 @@ class PriceListApiToProductFacadeBridgeTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeBridge
      */
-    protected $priceListApiToProductFacadeBridge;
+    protected PriceListApiToProductFacadeBridge $priceListApiToProductFacadeBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Product\Business\ProductFacadeInterface
      */
-    protected $productFacadeMock;
+    protected MockObject|ProductFacadeInterface $productFacadeMock;
 
     /**
      * @return void

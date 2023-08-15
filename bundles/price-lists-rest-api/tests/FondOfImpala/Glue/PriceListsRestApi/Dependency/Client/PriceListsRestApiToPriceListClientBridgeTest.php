@@ -5,23 +5,24 @@ namespace FondOfImpala\Glue\PriceListsRestApi\Dependency\Client;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceList\PriceListClientInterface;
 use Generated\Shared\Transfer\PriceListListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListsRestApiToPriceListClientBridgeTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceList\PriceListClientInterface
      */
-    protected $priceListClientMock;
+    protected MockObject|PriceListClientInterface $priceListClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListListTransfer
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientBridge
      */
-    protected $bridge;
+    protected PriceListsRestApiToPriceListClientBridge $bridge;
 
     /**
      * @return void
@@ -51,7 +52,7 @@ class PriceListsRestApiToPriceListClientBridgeTest extends Unit
             ->with($this->priceListListTransferMock)
             ->willReturn($this->priceListListTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->priceListListTransferMock,
             $this->bridge->findPriceLists(
                 $this->priceListListTransferMock,

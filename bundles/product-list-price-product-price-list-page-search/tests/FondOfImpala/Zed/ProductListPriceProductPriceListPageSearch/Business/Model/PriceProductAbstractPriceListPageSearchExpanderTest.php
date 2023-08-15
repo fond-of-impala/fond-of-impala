@@ -6,43 +6,44 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeInterface;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
 use Generated\Shared\Transfer\ProductListMapTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductAbstractPriceListPageSearchExpanderTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeInterface
      */
-    protected $productListFacadeMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToProductListFacadeInterface $productListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
      */
-    protected $priceProductPriceListPageSearchTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductListMapTransfer
      */
-    protected $productListMapTransferMock;
+    protected MockObject|ProductListMapTransfer $productListMapTransferMock;
 
     /**
      * @var int
      */
-    protected $idProductAbstract;
+    protected int $idProductAbstract;
 
     /**
      * @var int[]
      */
-    protected $whitelistIds;
+    protected array $whitelistIds;
 
     /**
      * @var int[]
      */
-    protected $blacklistIds;
+    protected array $blacklistIds;
 
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Business\Model\PriceProductPriceListPageSearchExpanderInterface
      */
-    protected $priceProductAbstractPriceListPageSearchExpander;
+    protected PriceProductPriceListPageSearchExpanderInterface $priceProductAbstractPriceListPageSearchExpander;
 
     /**
      * @return void

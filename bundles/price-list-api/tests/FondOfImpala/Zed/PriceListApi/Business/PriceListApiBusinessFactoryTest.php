@@ -23,17 +23,17 @@ class PriceListApiBusinessFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Business\PriceListApiBusinessFactory
      */
-    protected $priceListApiBusinessFactory;
+    protected PriceListApiBusinessFactory $priceListApiBusinessFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Dependency\Facade\PriceListApiToProductFacadeInterface
      */
-    protected $priceListApiToProductFacadeInterfaceMock;
+    protected MockObject|PriceListApiToProductFacadeInterface $priceListApiToProductFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Propel\Runtime\Connection\ConnectionInterface
@@ -65,12 +65,12 @@ class PriceListApiBusinessFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiQueryContainer
      */
-    protected $queryContainerMock;
+    protected MockObject|PriceListApiQueryContainer $queryContainerMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Persistence\PriceListApiRepositoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $repositoryMock;
+    protected MockObject|PriceListApiRepositoryInterface $repositoryMock;
 
     /**
      * @return void

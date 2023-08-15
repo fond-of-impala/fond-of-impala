@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\PriceListApi\Communication\Plugin\PriceListApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacade;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductIdsPriceProductsHydrationPluginTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacade
      */
-    protected $priceListApiFacadeMock;
+    protected MockObject|PriceListApiFacade $priceListApiFacadeMock;
 
     /**
      * @var array<\Generated\Shared\Transfer\PriceProductTransfer>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected $priceProductTransferMocks;
+    protected array $priceProductTransferMocks;
 
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Communication\Plugin\PriceListApi\ProductIdsPriceProductsHydrationPlugin
      */
-    protected $productIdsPriceProductsHydrationPlugin;
+    protected ProductIdsPriceProductsHydrationPlugin $productIdsPriceProductsHydrationPlugin;
 
     /**
      * @return void

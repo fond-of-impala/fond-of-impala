@@ -5,6 +5,7 @@ namespace FondOfImpala\Client\CustomerPriceList;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\CustomerPriceList\Dependency\Client\CustomerPriceListToZedRequestClientInterface;
 use FondOfImpala\Client\CustomerPriceList\Zed\CustomerPriceListStubInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class CustomerPriceListFactoryTest extends Unit
@@ -12,17 +13,17 @@ class CustomerPriceListFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Client\CustomerPriceList\CustomerPriceListFactory
      */
-    protected $customerPriceListFactory;
+    protected CustomerPriceListFactory $customerPriceListFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CustomerPriceList\Dependency\Client\CustomerPriceListToZedRequestClientInterface
      */
-    protected $customerPriceListToZedRequestClientInterfaceMock;
+    protected MockObject|CustomerPriceListToZedRequestClientInterface $customerPriceListToZedRequestClientInterfaceMock;
 
     /**
      * @return void

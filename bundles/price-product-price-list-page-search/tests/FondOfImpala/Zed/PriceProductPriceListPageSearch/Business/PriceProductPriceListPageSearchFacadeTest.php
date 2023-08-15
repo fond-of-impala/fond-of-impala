@@ -3,18 +3,19 @@
 namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Business;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductPriceListPageSearchFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchFacade
      */
-    protected $priceProductPriceListPageSearchFacade;
+    protected PriceProductPriceListPageSearchFacade $priceProductPriceListPageSearchFacade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchBusinessFactory
      */
-    protected $priceProductPriceListPageSearchBusinessFactoryMock;
+    protected MockObject|PriceProductPriceListPageSearchBusinessFactory $priceProductPriceListPageSearchBusinessFactoryMock;
 
     /**
      * @return void

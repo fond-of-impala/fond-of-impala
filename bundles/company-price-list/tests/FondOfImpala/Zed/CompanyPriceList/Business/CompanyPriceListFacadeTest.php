@@ -5,28 +5,29 @@ namespace FondOfImpala\Zed\CompanyPriceList\Business;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyPriceList\Business\Model\CompanyHydratorInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyPriceListFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyPriceList\Business\CompanyPriceListFacade
      */
-    protected $companyPriceListFacade;
+    protected CompanyPriceListFacade $companyPriceListFacade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
      */
-    protected $companyTransferMock;
+    protected MockObject|CompanyTransfer $companyTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyPriceList\Business\CompanyPriceListBusinessFactory
      */
-    protected $companyPriceListBusinessFactoryMock;
+    protected MockObject|CompanyPriceListBusinessFactory $companyPriceListBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyPriceList\Business\Model\CompanyHydratorInterface
      */
-    protected $companyHydratorInterfaceMock;
+    protected MockObject|CompanyHydratorInterface $companyHydratorInterfaceMock;
 
     /**
      * @return void
@@ -54,16 +55,16 @@ class CompanyPriceListFacadeTest extends Unit
      */
     public function testHydrateCompany(): void
     {
-        $this->companyPriceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->companyPriceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createCompanyHydrator')
             ->willReturn($this->companyHydratorInterfaceMock);
 
-        $this->companyHydratorInterfaceMock->expects($this->atLeastOnce())
+        $this->companyHydratorInterfaceMock->expects(static::atLeastOnce())
             ->method('hydrate')
             ->with($this->companyTransferMock)
             ->willReturn($this->companyTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyTransfer::class,
             $this->companyPriceListFacade->hydrateCompany(
                 $this->companyTransferMock,

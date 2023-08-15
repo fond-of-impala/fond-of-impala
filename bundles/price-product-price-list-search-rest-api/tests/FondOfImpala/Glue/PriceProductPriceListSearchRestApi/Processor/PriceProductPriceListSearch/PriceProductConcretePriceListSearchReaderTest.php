@@ -8,6 +8,7 @@ use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSe
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductPriceListSearchResourceMapperInterface;
 use Generated\Shared\Transfer\RestPriceProductPriceListSearchAttributesTransfer;
 use Generated\Shared\Transfer\RestPriceProductPriceListSearchPaginationTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -21,82 +22,82 @@ class PriceProductConcretePriceListSearchReaderTest extends Unit
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\PriceProductPriceListSearch\PriceProductConcretePriceListSearchReader
      */
-    protected $priceProductConcretePriceListSearchReader;
+    protected PriceProductConcretePriceListSearchReader $priceProductConcretePriceListSearchReader;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface
      */
-    protected $priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock;
+    protected MockObject|PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface $priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductPriceListSearchResourceMapperInterface
      */
-    protected $priceProductPriceListSearchResourceMapperInterfaceMock;
+    protected MockObject|PriceProductPriceListSearchResourceMapperInterface $priceProductPriceListSearchResourceMapperInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
      */
-    protected $restResourceBuilderInterfaceMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestInterfaceMock;
+    protected MockObject|RestRequestInterface $restRequestInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\ParameterBag
      */
-    protected $parameterBag;
+    protected MockObject|ParameterBag $parameterBag;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
      */
-    protected $requestMock;
+    protected MockObject|Request $requestMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\PageInterface
      */
-    protected $pageInterfaceMock;
+    protected MockObject|PageInterface $pageInterfaceMock;
 
     /**
      * @var int
      */
-    protected $limit;
+    protected int $limit;
 
     /**
      * @var int
      */
-    protected $offset;
+    protected int $offset;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestPriceProductPriceListSearchAttributesTransfer
      */
-    protected $restPriceProductPriceListSearchAttributesTransferMock;
+    protected MockObject|RestPriceProductPriceListSearchAttributesTransfer $restPriceProductPriceListSearchAttributesTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
      */
-    protected $restResourceInterfaceMock;
+    protected MockObject|RestResourceInterface $restResourceInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestPriceProductPriceListSearchPaginationTransfer
      */
-    protected $restPriceProductPriceListSearchPaginationTransferMock;
+    protected MockObject|RestPriceProductPriceListSearchPaginationTransfer $restPriceProductPriceListSearchPaginationTransferMock;
 
     /**
      * @var int
      */
-    protected $numFound;
+    protected int $numFound;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseInterfaceMock;
+    protected MockObject|RestResponseInterface $restResponseInterfaceMock;
 
     /**
      * @var string
      */
-    protected $requestParameter;
+    protected string $requestParameter;
 
     /**
      * @return void
@@ -169,40 +170,40 @@ class PriceProductConcretePriceListSearchReaderTest extends Unit
      */
     public function testSearch(): void
     {
-        $this->restRequestInterfaceMock->expects($this->atLeastOnce())
+        $this->restRequestInterfaceMock->expects(static::atLeastOnce())
             ->method('getHttpRequest')
             ->willReturn($this->requestMock);
 
-        $this->parameterBag->expects($this->atLeastOnce())
+        $this->parameterBag->expects(static::atLeastOnce())
             ->method('get')
             ->with(PriceProductPriceListSearchRestApiConfig::QUERY_STRING_PARAMETER, '')
             ->willReturn($this->requestParameter);
 
-        $this->parameterBag->expects($this->atLeastOnce())
+        $this->parameterBag->expects(static::atLeastOnce())
             ->method('all')
             ->willReturn([]);
 
-        $this->restRequestInterfaceMock->expects($this->atLeastOnce())
+        $this->restRequestInterfaceMock->expects(static::atLeastOnce())
             ->method('getPage')
             ->willReturn($this->pageInterfaceMock);
 
-        $this->pageInterfaceMock->expects($this->atLeastOnce())
+        $this->pageInterfaceMock->expects(static::atLeastOnce())
             ->method('getLimit')
             ->willReturn($this->limit);
 
-        $this->pageInterfaceMock->expects($this->atLeastOnce())
+        $this->pageInterfaceMock->expects(static::atLeastOnce())
             ->method('getOffset')
             ->willReturn($this->offset);
 
-        $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('searchConcrete')
             ->willReturn([]);
 
-        $this->priceProductPriceListSearchResourceMapperInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListSearchResourceMapperInterfaceMock->expects(static::atLeastOnce())
             ->method('mapRestSearchResponseToRestAttributesTransfer')
             ->willReturn($this->restPriceProductPriceListSearchAttributesTransferMock);
 
-        $this->restResourceBuilderInterfaceMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderInterfaceMock->expects(static::atLeastOnce())
             ->method('createRestResource')
             ->with(
                 PriceProductPriceListSearchRestApiConfig::RESOURCE_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH,
@@ -210,25 +211,25 @@ class PriceProductConcretePriceListSearchReaderTest extends Unit
                 $this->restPriceProductPriceListSearchAttributesTransferMock,
             )->willReturn($this->restResourceInterfaceMock);
 
-        $this->restPriceProductPriceListSearchAttributesTransferMock->expects($this->atLeastOnce())
+        $this->restPriceProductPriceListSearchAttributesTransferMock->expects(static::atLeastOnce())
             ->method('getPagination')
             ->willReturn($this->restPriceProductPriceListSearchPaginationTransferMock);
 
-        $this->restPriceProductPriceListSearchPaginationTransferMock->expects($this->atLeastOnce())
+        $this->restPriceProductPriceListSearchPaginationTransferMock->expects(static::atLeastOnce())
             ->method('getNumFound')
             ->willReturn($this->numFound);
 
-        $this->restResourceBuilderInterfaceMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderInterfaceMock->expects(static::atLeastOnce())
             ->method('createRestResponse')
             ->with($this->numFound)
             ->willReturn($this->restResponseInterfaceMock);
 
-        $this->restResponseInterfaceMock->expects($this->atLeastOnce())
+        $this->restResponseInterfaceMock->expects(static::atLeastOnce())
             ->method('addResource')
             ->with($this->restResourceInterfaceMock)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RestResponseInterface::class,
             $this->priceProductConcretePriceListSearchReader->search(
                 $this->restRequestInterfaceMock,
@@ -241,32 +242,32 @@ class PriceProductConcretePriceListSearchReaderTest extends Unit
      */
     public function testSearchPageNull(): void
     {
-        $this->restRequestInterfaceMock->expects($this->atLeastOnce())
+        $this->restRequestInterfaceMock->expects(static::atLeastOnce())
             ->method('getHttpRequest')
             ->willReturn($this->requestMock);
 
-        $this->parameterBag->expects($this->atLeastOnce())
+        $this->parameterBag->expects(static::atLeastOnce())
             ->method('get')
             ->with(PriceProductPriceListSearchRestApiConfig::QUERY_STRING_PARAMETER, '')
             ->willReturn($this->requestParameter);
 
-        $this->parameterBag->expects($this->atLeastOnce())
+        $this->parameterBag->expects(static::atLeastOnce())
             ->method('all')
             ->willReturn([]);
 
-        $this->restRequestInterfaceMock->expects($this->atLeastOnce())
+        $this->restRequestInterfaceMock->expects(static::atLeastOnce())
             ->method('getPage')
             ->willReturn(null);
 
-        $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('searchConcrete')
             ->willReturn([]);
 
-        $this->priceProductPriceListSearchResourceMapperInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListSearchResourceMapperInterfaceMock->expects(static::atLeastOnce())
             ->method('mapRestSearchResponseToRestAttributesTransfer')
             ->willReturn($this->restPriceProductPriceListSearchAttributesTransferMock);
 
-        $this->restResourceBuilderInterfaceMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderInterfaceMock->expects(static::atLeastOnce())
             ->method('createRestResource')
             ->with(
                 PriceProductPriceListSearchRestApiConfig::RESOURCE_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH,
@@ -274,25 +275,25 @@ class PriceProductConcretePriceListSearchReaderTest extends Unit
                 $this->restPriceProductPriceListSearchAttributesTransferMock,
             )->willReturn($this->restResourceInterfaceMock);
 
-        $this->restPriceProductPriceListSearchAttributesTransferMock->expects($this->atLeastOnce())
+        $this->restPriceProductPriceListSearchAttributesTransferMock->expects(static::atLeastOnce())
             ->method('getPagination')
             ->willReturn($this->restPriceProductPriceListSearchPaginationTransferMock);
 
-        $this->restPriceProductPriceListSearchPaginationTransferMock->expects($this->atLeastOnce())
+        $this->restPriceProductPriceListSearchPaginationTransferMock->expects(static::atLeastOnce())
             ->method('getNumFound')
             ->willReturn($this->numFound);
 
-        $this->restResourceBuilderInterfaceMock->expects($this->atLeastOnce())
+        $this->restResourceBuilderInterfaceMock->expects(static::atLeastOnce())
             ->method('createRestResponse')
             ->with($this->numFound)
             ->willReturn($this->restResponseInterfaceMock);
 
-        $this->restResponseInterfaceMock->expects($this->atLeastOnce())
+        $this->restResponseInterfaceMock->expects(static::atLeastOnce())
             ->method('addResource')
             ->with($this->restResourceInterfaceMock)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RestResponseInterface::class,
             $this->priceProductConcretePriceListSearchReader->search(
                 $this->restRequestInterfaceMock,

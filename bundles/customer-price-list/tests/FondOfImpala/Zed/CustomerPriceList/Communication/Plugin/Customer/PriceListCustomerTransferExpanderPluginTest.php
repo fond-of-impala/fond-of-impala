@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\CustomerPriceList\Communication\Plugin\Customer;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CustomerPriceList\Business\CustomerPriceListFacade;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListCustomerTransferExpanderPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CustomerPriceList\Communication\Plugin\Customer\PriceListCustomerTransferExpanderPlugin
      */
-    protected $priceListCustomerTransferExpanderPlugin;
+    protected PriceListCustomerTransferExpanderPlugin $priceListCustomerTransferExpanderPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CustomerPriceList\Business\CustomerPriceListFacade
      */
-    protected $customerPriceListFacadeMock;
+    protected MockObject|CustomerPriceListFacade $customerPriceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @return void

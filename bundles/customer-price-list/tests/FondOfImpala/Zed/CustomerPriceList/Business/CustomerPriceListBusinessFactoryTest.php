@@ -6,18 +6,19 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerExpanderInterface;
 use FondOfImpala\Zed\CustomerPriceList\Business\Model\CustomerPriceListReaderInterface;
 use FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CustomerPriceListBusinessFactoryTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CustomerPriceList\Business\CustomerPriceListBusinessFactory
      */
-    protected $customerPriceListBusinessFactory;
+    protected CustomerPriceListBusinessFactory $customerPriceListBusinessFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CustomerPriceList\Persistence\CustomerPriceListRepository
      */
-    protected $customerPriceListRepositoryMock;
+    protected MockObject|CustomerPriceListRepository $customerPriceListRepositoryMock;
 
     /**
      * @return void

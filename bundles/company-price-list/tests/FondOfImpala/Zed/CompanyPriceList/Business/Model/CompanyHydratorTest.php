@@ -6,33 +6,34 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyPriceList\Dependency\Facade\CompanyPriceListToPriceListFacadeInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyHydratorTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyPriceList\Business\Model\CompanyHydrator
      */
-    protected $companyHydrator;
+    protected CompanyHydrator $companyHydrator;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyPriceList\Dependency\Facade\CompanyPriceListToPriceListFacadeInterface
      */
-    protected $companyPriceListToPriceListFacadeInterfaceMock;
+    protected MockObject|CompanyPriceListToPriceListFacadeInterface $companyPriceListToPriceListFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
      */
-    protected $companyTransferMock;
+    protected MockObject|CompanyTransfer $companyTransferMock;
 
     /**
      * @var int
      */
-    protected $idPriceList;
+    protected int $idPriceList;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @return void
@@ -63,20 +64,20 @@ class CompanyHydratorTest extends Unit
      */
     public function testHydrate(): void
     {
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('getFkPriceList')
             ->willReturn($this->idPriceList);
 
-        $this->companyPriceListToPriceListFacadeInterfaceMock->expects($this->atLeastOnce())
+        $this->companyPriceListToPriceListFacadeInterfaceMock->expects(static::atLeastOnce())
             ->method('findPriceListById')
             ->willReturn($this->priceListTransferMock);
 
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('setPriceList')
             ->with($this->priceListTransferMock)
             ->willReturn($this->companyTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyTransfer::class,
             $this->companyHydrator->hydrate(
                 $this->companyTransferMock,
@@ -89,11 +90,11 @@ class CompanyHydratorTest extends Unit
      */
     public function testHydrateIdPriceListNull(): void
     {
-        $this->companyTransferMock->expects($this->atLeastOnce())
+        $this->companyTransferMock->expects(static::atLeastOnce())
             ->method('getFkPriceList')
             ->willReturn(null);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyTransfer::class,
             $this->companyHydrator->hydrate(
                 $this->companyTransferMock,

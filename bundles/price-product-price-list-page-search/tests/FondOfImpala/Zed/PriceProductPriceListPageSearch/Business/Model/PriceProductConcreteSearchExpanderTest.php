@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductConcreteSearchExpanderTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject[]|\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface[]
      */
-    protected $priceProductConcretePriceListPageDataExpanderPluginMocks;
+    protected array $priceProductConcretePriceListPageDataExpanderPluginMocks;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
      */
-    protected $priceProductPriceListPageSearchTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceProductConcreteSearchExpander
      */
-    protected $priceProductConcreteSearchExpander;
+    protected PriceProductConcreteSearchExpander $priceProductConcreteSearchExpander;
 
     /**
      * @return void
@@ -50,7 +51,7 @@ class PriceProductConcreteSearchExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->priceProductConcretePriceListPageDataExpanderPluginMocks[0]->expects($this->atLeastOnce())
+        $this->priceProductConcretePriceListPageDataExpanderPluginMocks[0]->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->priceProductPriceListPageSearchTransferMock)
             ->willReturn($this->priceProductPriceListPageSearchTransferMock);
@@ -58,7 +59,7 @@ class PriceProductConcreteSearchExpanderTest extends Unit
         $priceProductPriceListPageSearchTransfer = $this->priceProductConcreteSearchExpander
             ->expand($this->priceProductPriceListPageSearchTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->priceProductPriceListPageSearchTransferMock,
             $priceProductPriceListPageSearchTransfer,
         );

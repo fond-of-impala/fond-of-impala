@@ -11,6 +11,7 @@ use FondOfOryx\Glue\PriceListsRestApiExtension\Dependency\Plugin\FilterFieldsExp
 use Generated\Shared\Transfer\PriceListListTransfer;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Generated\Shared\Transfer\RestPriceListAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -21,62 +22,62 @@ class PriceListReaderTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
      */
-    protected $restResourceBuilderMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceListsRestApi\Processor\Validation\RestApiErrorInterface
      */
-    protected $restApiErrorMock;
+    protected MockObject|RestApiErrorInterface $restApiErrorMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientInterface
      */
-    protected $priceListClientMock;
+    protected MockObject|PriceListsRestApiToPriceListClientInterface $priceListClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListMapperInterface
      */
-    protected $priceListMapperMock;
+    protected MockObject|PriceListMapperInterface $priceListMapperMock;
 
     /**
      * @var array<\FondOfOryx\Glue\PriceListsRestApiExtension\Dependency\Plugin\FilterFieldsExpanderPluginInterface|\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected $filterFieldsExpanderPluginMocks;
+    protected array $filterFieldsExpanderPluginMocks;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListListTransfer
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestPriceListAttributesTransfer
      */
-    protected $restPriceListAttributesTransferMock;
+    protected MockObject|RestPriceListAttributesTransfer $restPriceListAttributesTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
      */
-    protected $restResourceMock;
+    protected MockObject|RestResourceInterface $restResourceMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListReader
      */
-    protected $priceListReader;
+    protected PriceListReader $priceListReader;
 
     /**
      * @return void

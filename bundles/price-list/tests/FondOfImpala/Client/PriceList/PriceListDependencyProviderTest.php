@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\PriceList;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceList\Dependency\Client\PriceListToZedRequestClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Kernel\Locator;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
@@ -14,27 +15,27 @@ class PriceListDependencyProviderTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Locator
      */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
      */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\ZedRequest\ZedRequestClientInterface
      */
-    protected $zedRequestClientMock;
+    protected MockObject|ZedRequestClientInterface $zedRequestClientMock;
 
     /**
      * @var \FondOfImpala\Client\PriceList\PriceListDependencyProvider
      */
-    protected $dependencyProvider;
+    protected PriceListDependencyProvider $dependencyProvider;
 
     /**
      * @return void

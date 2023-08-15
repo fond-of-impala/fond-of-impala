@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyBusinessUnitPriceList;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class CompanyBusinessUnitPriceListDependencyProviderTest extends Unit
@@ -10,12 +11,12 @@ class CompanyBusinessUnitPriceListDependencyProviderTest extends Unit
     /**
      * @var \FondOfImpala\Zed\CompanyBusinessUnitPriceList\CompanyBusinessUnitPriceListDependencyProvider
      */
-    protected $companyBusinessUnitPriceListDependencyProvider;
+    protected CompanyBusinessUnitPriceListDependencyProvider $companyBusinessUnitPriceListDependencyProvider;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void
@@ -36,7 +37,7 @@ class CompanyBusinessUnitPriceListDependencyProviderTest extends Unit
      */
     public function testProvideBusinessLayerDependencies(): void
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Container::class,
             $this->companyBusinessUnitPriceListDependencyProvider->provideBusinessLayerDependencies(
                 $this->containerMock,

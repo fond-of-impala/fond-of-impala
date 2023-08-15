@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceListsRestApi\Processor\Validation;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiConfig;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,12 +14,12 @@ class RestApiErrorTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Processor\Validation\RestApiError
      */
-    protected $restApiError;
+    protected RestApiError $restApiError;
 
     /**
      * @return void

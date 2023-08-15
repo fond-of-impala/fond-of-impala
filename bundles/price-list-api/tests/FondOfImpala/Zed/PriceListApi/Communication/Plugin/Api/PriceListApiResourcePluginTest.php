@@ -11,48 +11,49 @@ use Generated\Shared\Transfer\ApiCollectionTransfer;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
 use Generated\Shared\Transfer\ApiRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListApiResourcePluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Communication\Plugin\Api\PriceListApiResourcePlugin
      */
-    protected $priceListApiResourcePlugin;
+    protected PriceListApiResourcePlugin $priceListApiResourcePlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiDataTransfer
      */
-    protected $apiDataTransferMock;
+    protected MockObject|ApiDataTransfer $apiDataTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacadeInterface
      */
-    protected $priceListFacadeInterfaceMock;
+    protected MockObject|PriceListApiFacadeInterface $priceListFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
      */
-    protected $apiItemTransferMock;
+    protected MockObject|ApiItemTransfer $apiItemTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacade
      */
-    protected $priceListApiFacadeMock;
+    protected MockObject|PriceListApiFacade $priceListApiFacadeMock;
 
     /**
      * @var int
      */
-    protected $idProductList;
+    protected int $idProductList;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiRequestTransfer
      */
-    protected $apiRequestTransferMock;
+    protected MockObject|ApiRequestTransfer $apiRequestTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiCollectionTransfer
      */
-    protected $apiCollectionTransferMock;
+    protected MockObject|ApiCollectionTransfer $apiCollectionTransferMock;
 
     /**
      * @return void
@@ -97,7 +98,7 @@ class PriceListApiResourcePluginTest extends Unit
      */
     public function testGetResourceName(): void
     {
-        $this->assertSame(PriceListApiConfig::RESOURCE_PRICE_LISTS, $this->priceListApiResourcePlugin->getResourceName());
+        static::assertSame(PriceListApiConfig::RESOURCE_PRICE_LISTS, $this->priceListApiResourcePlugin->getResourceName());
     }
 
     /**
@@ -105,12 +106,12 @@ class PriceListApiResourcePluginTest extends Unit
      */
     public function testAdd(): void
     {
-        $this->priceListApiFacadeMock->expects($this->atLeastOnce())
+        $this->priceListApiFacadeMock->expects(static::atLeastOnce())
             ->method('addPriceList')
             ->with($this->apiDataTransferMock)
             ->willReturn($this->apiItemTransferMock);
 
-        $this->assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->add($this->apiDataTransferMock));
+        static::assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->add($this->apiDataTransferMock));
     }
 
     /**
@@ -118,12 +119,12 @@ class PriceListApiResourcePluginTest extends Unit
      */
     public function testGet(): void
     {
-        $this->priceListApiFacadeMock->expects($this->atLeastOnce())
+        $this->priceListApiFacadeMock->expects(static::atLeastOnce())
             ->method('getPriceList')
             ->with($this->idProductList)
             ->willReturn($this->apiItemTransferMock);
 
-        $this->assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->get($this->idProductList));
+        static::assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->get($this->idProductList));
     }
 
     /**
@@ -131,12 +132,12 @@ class PriceListApiResourcePluginTest extends Unit
      */
     public function testUpdate(): void
     {
-        $this->priceListApiFacadeMock->expects($this->atLeastOnce())
+        $this->priceListApiFacadeMock->expects(static::atLeastOnce())
             ->method('updatePriceList')
             ->with($this->idProductList, $this->apiDataTransferMock)
             ->willReturn($this->apiItemTransferMock);
 
-        $this->assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->update($this->idProductList, $this->apiDataTransferMock));
+        static::assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->update($this->idProductList, $this->apiDataTransferMock));
     }
 
     /**
@@ -155,11 +156,11 @@ class PriceListApiResourcePluginTest extends Unit
      */
     public function testFind(): void
     {
-        $this->priceListApiFacadeMock->expects($this->atLeastOnce())
+        $this->priceListApiFacadeMock->expects(static::atLeastOnce())
             ->method('findPriceLists')
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        $this->assertInstanceOf(ApiCollectionTransfer::class, $this->priceListApiResourcePlugin->find($this->apiRequestTransferMock));
+        static::assertInstanceOf(ApiCollectionTransfer::class, $this->priceListApiResourcePlugin->find($this->apiRequestTransferMock));
     }
 }

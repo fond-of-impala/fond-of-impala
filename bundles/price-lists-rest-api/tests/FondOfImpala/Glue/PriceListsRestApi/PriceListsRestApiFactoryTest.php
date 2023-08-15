@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceListsRestApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientInterface;
 use FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListReader;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\Kernel\Container;
 
@@ -13,22 +14,22 @@ class PriceListsRestApiFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
      */
-    protected $restResourceBuilderMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientInterface
      */
-    protected $priceClientMock;
+    protected MockObject|PriceListsRestApiToPriceListClientInterface $priceClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiFactory
      */
-    protected $factory;
+    protected PriceListsRestApiFactory $factory;
 
     /**
      * @return void
@@ -75,11 +76,11 @@ class PriceListsRestApiFactoryTest extends Unit
      */
     public function testCreatePriceListReader(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [PriceListsRestApiDependencyProvider::CLIENT_PRICE_LIST],

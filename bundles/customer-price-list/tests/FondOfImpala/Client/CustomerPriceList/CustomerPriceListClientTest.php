@@ -6,33 +6,34 @@ use Codeception\Test\Unit;
 use FondOfImpala\Client\CustomerPriceList\Zed\CustomerPriceListStubInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\PriceListCollectionTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CustomerPriceListClientTest extends Unit
 {
     /**
      * @var \FondOfImpala\Client\CustomerPriceList\CustomerPriceListClient
      */
-    protected $customerPriceListClient;
+    protected CustomerPriceListClient $customerPriceListClient;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CustomerPriceList\CustomerPriceListFactory
      */
-    protected $customerPriceListFactoryMock;
+    protected MockObject|CustomerPriceListFactory $customerPriceListFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CustomerPriceList\Zed\CustomerPriceListStubInterface
      */
-    protected $customerPriceListStubInterfaceMock;
+    protected MockObject|CustomerPriceListStubInterface $customerPriceListStubInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListCollectionTransfer
      */
-    protected $priceListCollectionTransferMock;
+    protected MockObject|PriceListCollectionTransfer $priceListCollectionTransferMock;
 
     /**
      * @return void

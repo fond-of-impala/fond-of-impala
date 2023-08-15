@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\PriceProductPriceList\Communication\Plugin\PriceProdu
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade;
 use Generated\Shared\Transfer\PriceProductDimensionTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListPriceProductDimensionExpanderStrategyPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Communication\Plugin\PriceProductExtension\PriceListPriceProductDimensionExpanderStrategyPlugin
      */
-    protected $priceListPriceProductDimensionExpanderStrategyPlugin;
+    protected PriceListPriceProductDimensionExpanderStrategyPlugin $priceListPriceProductDimensionExpanderStrategyPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade
      */
-    protected $priceProductPriceListFacadeMock;
+    protected MockObject|PriceProductPriceListFacade $priceProductPriceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductDimensionTransfer
      */
-    protected $priceProductDimensionTransferMock;
+    protected MockObject|PriceProductDimensionTransfer $priceProductDimensionTransferMock;
 
     /**
      * @return void
@@ -47,7 +48,7 @@ class PriceListPriceProductDimensionExpanderStrategyPluginTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceListPriceProductDimensionExpanderStrategyPlugin->expand($this->priceProductDimensionTransferMock));
+        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceListPriceProductDimensionExpanderStrategyPlugin->expand($this->priceProductDimensionTransferMock));
     }
 
     /**
@@ -55,10 +56,10 @@ class PriceListPriceProductDimensionExpanderStrategyPluginTest extends Unit
      */
     public function testIsApplicable(): void
     {
-        $this->priceProductDimensionTransferMock->expects($this->atLeastOnce())
+        $this->priceProductDimensionTransferMock->expects(static::atLeastOnce())
             ->method('getIdPriceList')
             ->willReturn(1);
 
-        $this->assertTrue($this->priceListPriceProductDimensionExpanderStrategyPlugin->isApplicable($this->priceProductDimensionTransferMock));
+        static::assertTrue($this->priceListPriceProductDimensionExpanderStrategyPlugin->isApplicable($this->priceProductDimensionTransferMock));
     }
 }

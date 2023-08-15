@@ -5,28 +5,29 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
 use Generated\Shared\Transfer\PriceProductPriceListPageSearchValueTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceGrouperTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceGrouper
      */
-    protected $priceGrouper;
+    protected PriceGrouper $priceGrouper;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
      */
-    protected $priceProductPriceListPageSearchTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchValueTransfer
      */
-    protected $priceProductPriceListPageSearchValueTransferMock;
+    protected MockObject|PriceProductPriceListPageSearchValueTransfer $priceProductPriceListPageSearchValueTransferMock;
 
     /**
      * @var array
      */
-    protected $priceTransfers;
+    protected array $priceTransfers;
 
     /**
      * @return void
@@ -55,18 +56,18 @@ class PriceGrouperTest extends Unit
      */
     public function testGroupPricesData(): void
     {
-        $this->priceProductPriceListPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getUngroupedPrices')
             ->willReturn($this->priceTransfers);
 
-        $this->priceProductPriceListPageSearchTransferMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setPrices')
             ->willReturn($this->priceProductPriceListPageSearchTransferMock);
 
-        $this->priceProductPriceListPageSearchValueTransferMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchValueTransferMock->expects(static::atLeastOnce())
             ->method('getGrossPrice')
             ->willReturn(1);
 
-        $this->assertInstanceOf(PriceProductPriceListPageSearchTransfer::class, $this->priceGrouper->groupPricesData($this->priceProductPriceListPageSearchTransferMock, ['prices' => []]));
+        static::assertInstanceOf(PriceProductPriceListPageSearchTransfer::class, $this->priceGrouper->groupPricesData($this->priceProductPriceListPageSearchTransferMock, ['prices' => []]));
     }
 }

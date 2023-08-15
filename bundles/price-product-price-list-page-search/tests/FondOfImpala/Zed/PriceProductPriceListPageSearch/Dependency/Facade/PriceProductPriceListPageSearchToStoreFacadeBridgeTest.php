@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\StoreTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class PriceProductPriceListPageSearchToStoreFacadeBridgeTest extends Unit
@@ -11,17 +12,17 @@ class PriceProductPriceListPageSearchToStoreFacadeBridgeTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeBridge
      */
-    protected $priceProductPriceListPageSearchToStoreFacadeBridge;
+    protected PriceProductPriceListPageSearchToStoreFacadeBridge $priceProductPriceListPageSearchToStoreFacadeBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Store\Business\StoreFacadeInterface
      */
-    protected $storeFacadeMock;
+    protected MockObject|StoreFacadeInterface $storeFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
      */
-    protected $storeTransferMock;
+    protected MockObject|StoreTransfer $storeTransferMock;
 
     /**
      * @return void
@@ -46,11 +47,11 @@ class PriceProductPriceListPageSearchToStoreFacadeBridgeTest extends Unit
      */
     public function testGetCurrentStore(): void
     {
-        $this->storeFacadeMock->expects($this->atLeastOnce())
+        $this->storeFacadeMock->expects(static::atLeastOnce())
             ->method('getCurrentStore')
             ->willReturn($this->storeTransferMock);
 
-        $this->assertEquals(
+        static::assertEquals(
             $this->storeTransferMock,
             $this->priceProductPriceListPageSearchToStoreFacadeBridge->getCurrentStore(),
         );

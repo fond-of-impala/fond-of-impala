@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\CompanyBusinessUnitPriceList\Communication\Plugin\Com
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\CompanyBusinessUnitPriceListFacade;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListCompanyBusinessUnitExpanderPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyBusinessUnitPriceList\Communication\Plugin\CompanyBusinessUnitExtension\PriceListCompanyBusinessUnitExpanderPlugin
      */
-    protected $priceListCompanyBusinessUnitExpanderPlugin;
+    protected PriceListCompanyBusinessUnitExpanderPlugin $priceListCompanyBusinessUnitExpanderPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\CompanyBusinessUnitPriceListFacade
      */
-    protected $companyBusinessUnitPriceListFacadeMock;
+    protected MockObject|CompanyBusinessUnitPriceListFacade $companyBusinessUnitPriceListFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyBusinessUnitTransfer
      */
-    protected $companyBusinessUnitTransferMock;
+    protected MockObject|CompanyBusinessUnitPriceListFacade $companyBusinessUnitTransferMock;
 
     /**
      * @return void
@@ -47,11 +48,11 @@ class PriceListCompanyBusinessUnitExpanderPluginTest extends Unit
      */
     public function testExpand(): void
     {
-        $this->companyBusinessUnitPriceListFacadeMock->expects($this->atLeastOnce())
+        $this->companyBusinessUnitPriceListFacadeMock->expects(static::atLeastOnce())
             ->method('expandCompanyBusinessUnit')
             ->willReturn($this->companyBusinessUnitTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyBusinessUnitTransfer::class,
             $this->priceListCompanyBusinessUnitExpanderPlugin->expand(
                 $this->companyBusinessUnitTransferMock,

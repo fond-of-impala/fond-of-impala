@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Depende
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Customer\CustomerClientInterface;
 
 class ProductListPriceProductPriceListPageSearchToCustomerClientBridgeTest extends Unit
@@ -11,17 +12,17 @@ class ProductListPriceProductPriceListPageSearchToCustomerClientBridgeTest exten
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Customer\CustomerClientInterface
      */
-    protected $customerClientMock;
+    protected MockObject|CustomerClientInterface $customerClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var \FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Dependency\Client\ProductListPriceProductPriceListPageSearchToCustomerClientBridge
      */
-    protected $productListPriceProductPriceListPageSearchToCustomerClientBridge;
+    protected ProductListPriceProductPriceListPageSearchToCustomerClientBridge $productListPriceProductPriceListPageSearchToCustomerClientBridge;
 
     /**
      * @return void

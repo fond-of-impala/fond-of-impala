@@ -5,23 +5,24 @@ namespace FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\PriceListTransfer;
 use Generated\Shared\Transfer\RestPriceListAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListMapperTest extends Unit
 {
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListMapper
      */
-    protected $priceListMapper;
+    protected PriceListMapper $priceListMapper;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceListTransfer
      */
-    protected $priceListTransferMock;
+    protected MockObject|PriceListTransfer $priceListTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestPriceListAttributesTransfer
      */
-    protected $restPriceListAttributesTransferMock;
+    protected MockObject|RestPriceListAttributesTransfer $restPriceListAttributesTransferMock;
 
     /**
      * @return void
@@ -53,7 +54,7 @@ class PriceListMapperTest extends Unit
             ->with([], true)
             ->willReturnSelf();
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RestPriceListAttributesTransfer::class,
             $this->priceListMapper->mapPriceListTransferToRestPriceListAttributesTransfer(
                 $this->priceListTransferMock,

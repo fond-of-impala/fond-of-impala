@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\ProductList\Business\ProductListFacadeInterface;
 
 class ProductListPriceProductPriceListPageSearchToProductListFacadeBridgeTest extends Unit
@@ -10,22 +11,22 @@ class ProductListPriceProductPriceListPageSearchToProductListFacadeBridgeTest ex
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency\Facade\ProductListPriceProductPriceListPageSearchToProductListFacadeBridge
      */
-    protected $productListPriceProductPriceListPageSearchToProductListFacadeBridge;
+    protected ProductListPriceProductPriceListPageSearchToProductListFacadeBridge $productListPriceProductPriceListPageSearchToProductListFacadeBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\ProductList\Business\ProductListFacadeInterface
      */
-    protected $productListFacadeMock;
+    protected MockObject|ProductListFacadeInterface $productListFacadeMock;
 
     /**
      * @var int
      */
-    protected $idProduct;
+    protected int $idProduct;
 
     /**
      * @var int
      */
-    protected $idProductAbstract;
+    protected int $idProductAbstract;
 
     /**
      * @return void

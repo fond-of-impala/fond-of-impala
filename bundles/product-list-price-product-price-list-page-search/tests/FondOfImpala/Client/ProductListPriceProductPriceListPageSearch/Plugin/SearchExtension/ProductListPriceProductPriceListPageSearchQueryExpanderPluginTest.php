@@ -11,6 +11,7 @@ use FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\ProductListPr
 use Generated\Shared\Transfer\CustomerProductListCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use InvalidArgumentException;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
@@ -19,52 +20,52 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPluginTest extends 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
-    protected $queryMock;
+    protected MockObject|QueryInterface $queryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query
      */
-    protected $elasticaQueryMock;
+    protected MockObject|Query $elasticaQueryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\ProductListPriceProductPriceListPageSearchFactory
      */
-    protected $productListPriceProductPriceListPageSearchFactoryMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchFactory $productListPriceProductPriceListPageSearchFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Dependency\Client\ProductListPriceProductPriceListPageSearchToCustomerClientInterface
      */
-    protected $customerClientMock;
+    protected MockObject|ProductListPriceProductPriceListPageSearchToCustomerClientInterface $customerClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerProductListCollectionTransfer
      */
-    protected $customerProductListCollectionTransferMock;
+    protected MockObject|CustomerProductListCollectionTransfer $customerProductListCollectionTransferMock;
 
     /**
      * @var int[]
      */
-    protected $blacklistIds;
+    protected array $blacklistIds;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query\BoolQuery
      */
-    protected $boolQueryMock;
+    protected MockObject|BoolQuery $boolQueryMock;
 
     /**
      * @var int[]
      */
-    protected $whitelistIds;
+    protected array $whitelistIds;
 
     /**
      * @var \FondOfImpala\Client\ProductListPriceProductPriceListPageSearch\Plugin\SearchExtension\ProductListPriceProductPriceListPageSearchQueryExpanderPlugin
      */
-    protected $productListPriceProductPriceListPageSearchQueryExpanderPlugin;
+    protected ProductListPriceProductPriceListPageSearchQueryExpanderPlugin $productListPriceProductPriceListPageSearchQueryExpanderPlugin;
 
     /**
      * @return void

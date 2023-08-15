@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\CustomerPriceProductPriceListPageSearch\Dependency
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Customer\CustomerClientInterface;
 
 class CustomerPriceProductPriceListPageSearchToCustomerClientBridgeTest extends Unit
@@ -11,17 +12,17 @@ class CustomerPriceProductPriceListPageSearchToCustomerClientBridgeTest extends 
     /**
      * @var \FondOfImpala\Client\CustomerPriceProductPriceListPageSearch\Dependency\Client\CustomerPriceProductPriceListPageSearchToCustomerClientBridge
      */
-    protected $customerPriceProductPriceListPageSearchToCustomerClientBridge;
+    protected CustomerPriceProductPriceListPageSearchToCustomerClientBridge $customerPriceProductPriceListPageSearchToCustomerClientBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Customer\CustomerClientInterface
      */
-    protected $customerClientInterfaceMock;
+    protected MockObject|CustomerClientInterface $customerClientInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
      */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @return void
@@ -46,11 +47,11 @@ class CustomerPriceProductPriceListPageSearchToCustomerClientBridgeTest extends 
      */
     public function testGetCustomer(): void
     {
-        $this->customerClientInterfaceMock->expects($this->atLeastOnce())
+        $this->customerClientInterfaceMock->expects(static::atLeastOnce())
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CustomerTransfer::class,
             $this->customerPriceProductPriceListPageSearchToCustomerClientBridge->getCustomer(),
         );

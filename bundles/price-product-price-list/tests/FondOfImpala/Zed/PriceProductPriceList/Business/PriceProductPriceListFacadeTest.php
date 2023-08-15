@@ -5,28 +5,29 @@ namespace FondOfImpala\Zed\PriceProductPriceList\Business;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\PriceProductDimensionTransfer;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductPriceListFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListFacade
      */
-    protected $priceProductPriceListFacade;
+    protected PriceProductPriceListFacade $priceProductPriceListFacade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListBusinessFactory
      */
-    protected $priceProductPriceListBusinessFactoryMock;
+    protected MockObject|PriceProductPriceListBusinessFactory $priceProductPriceListBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductDimensionTransfer
      */
-    protected $priceProductDimensionTransferMock;
+    protected MockObject|PriceProductDimensionTransfer $priceProductDimensionTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductTransfer
      */
-    protected $priceProductTransferMock;
+    protected MockObject|PriceProductTransfer $priceProductTransferMock;
 
     /**
      * @return void
@@ -56,7 +57,7 @@ class PriceProductPriceListFacadeTest extends Unit
      */
     public function testExpandPriceProductDimension(): void
     {
-        $this->assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductPriceListFacade->expandPriceProductDimension($this->priceProductDimensionTransferMock));
+        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductPriceListFacade->expandPriceProductDimension($this->priceProductDimensionTransferMock));
     }
 
     /**
@@ -64,7 +65,7 @@ class PriceProductPriceListFacadeTest extends Unit
      */
     public function testSavePriceProductPriceList(): void
     {
-        $this->assertInstanceOf(PriceProductTransfer::class, $this->priceProductPriceListFacade->savePriceProductPriceList($this->priceProductTransferMock));
+        static::assertInstanceOf(PriceProductTransfer::class, $this->priceProductPriceListFacade->savePriceProductPriceList($this->priceProductTransferMock));
     }
 
     /**

@@ -10,6 +10,7 @@ use FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceLi
 use FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListEntityManager;
 use FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepository;
 use FondOfImpala\Zed\PriceProductPriceList\PriceProductPriceListDependencyProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class PriceProductPriceListBusinessFactoryTest extends Unit
@@ -17,32 +18,32 @@ class PriceProductPriceListBusinessFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Business\PriceProductPriceListBusinessFactory
      */
-    protected $priceProductPriceListBusinessFactory;
+    protected PriceProductPriceListBusinessFactory $priceProductPriceListBusinessFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepository
      */
-    protected $priceProductPriceListRepositoryMock;
+    protected MockObject|PriceProductPriceListRepository $priceProductPriceListRepositoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListEntityManager
      */
-    protected $priceProductPriceListEntityManagerMock;
+    protected MockObject|PriceProductPriceListEntityManager $priceProductPriceListEntityManagerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceListFacadeInterface
      */
-    protected $priceProductPriceListToPriceListFacadeInterfaceMock;
+    protected MockObject|PriceProductPriceListToPriceListFacadeInterface $priceProductPriceListToPriceListFacadeInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceProductFacadeInterface
      */
-    protected $priceProductPriceListToPriceProductFacadeInterfaceMock;
+    protected MockObject|PriceProductPriceListToPriceProductFacadeInterface $priceProductPriceListToPriceProductFacadeInterfaceMock;
 
     /**
      * @return void
@@ -82,16 +83,16 @@ class PriceProductPriceListBusinessFactoryTest extends Unit
      */
     public function testCreatePriceProductDimensionExpander(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(PriceProductPriceListDependencyProvider::FACADE_PRICE_LIST)
             ->willReturn($this->priceProductPriceListToPriceListFacadeInterfaceMock);
 
-        $this->assertInstanceOf(PriceProductDimensionExpanderInterface::class, $this->priceProductPriceListBusinessFactory->createPriceProductDimensionExpander());
+        static::assertInstanceOf(PriceProductDimensionExpanderInterface::class, $this->priceProductPriceListBusinessFactory->createPriceProductDimensionExpander());
     }
 
     /**
@@ -99,15 +100,15 @@ class PriceProductPriceListBusinessFactoryTest extends Unit
      */
     public function testCreatePriceListPriceWrite(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(PriceProductPriceListDependencyProvider::FACADE_PRICE_PRODUCT)
             ->willReturn($this->priceProductPriceListToPriceProductFacadeInterfaceMock);
 
-        $this->assertInstanceOf(PriceListPriceWriterInterface::class, $this->priceProductPriceListBusinessFactory->createPriceListPriceWriter());
+        static::assertInstanceOf(PriceListPriceWriterInterface::class, $this->priceProductPriceListBusinessFactory->createPriceListPriceWriter());
     }
 }

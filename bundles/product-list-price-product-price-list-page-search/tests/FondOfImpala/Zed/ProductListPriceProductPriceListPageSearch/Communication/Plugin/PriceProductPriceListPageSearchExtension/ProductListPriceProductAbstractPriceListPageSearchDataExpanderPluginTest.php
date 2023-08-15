@@ -9,22 +9,22 @@ class ProductListPriceProductAbstractPriceListPageSearchDataExpanderPluginTest e
     /**
      * @var \FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Communication\Plugin\PriceProductPriceListPageSearchExtension\ProductListPriceProductAbstractPriceListPageSearchDataExpanderPlugin
      */
-    protected $productListPriceProductAbstractPriceListPageSearchDataExpanderPlugin;
+    protected ProductListPriceProductAbstractPriceListPageSearchDataExpanderPlugin $productListPriceProductAbstractPriceListPageSearchDataExpanderPlugin;
 
     /**
      * @var array
      */
-    protected $data;
+    protected array $data;
 
     /**
      * @var array
      */
-    protected $productListMap;
+    protected array $productListMap;
 
     /**
      * @var array
      */
-    protected $searchData;
+    protected array $searchData;
 
     /**
      * @return void

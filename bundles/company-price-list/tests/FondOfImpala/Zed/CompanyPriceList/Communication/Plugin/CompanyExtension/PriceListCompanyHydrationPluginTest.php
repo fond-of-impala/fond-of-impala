@@ -5,23 +5,24 @@ namespace FondOfImpala\Zed\CompanyPriceList\Communication\Plugin\CompanyExtensio
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyPriceList\Business\CompanyPriceListFacade;
 use Generated\Shared\Transfer\CompanyTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListCompanyHydrationPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyPriceList\Communication\Plugin\CompanyExtension\PriceListCompanyHydrationPlugin
      */
-    protected $priceListCompanyHydrationPlugin;
+    protected PriceListCompanyHydrationPlugin $priceListCompanyHydrationPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTransfer
      */
-    protected $companyTransferMock;
+    protected MockObject|CompanyTransfer $companyTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyPriceList\Business\CompanyPriceListFacade
      */
-    protected $companyPriceListFacadeMock;
+    protected MockObject|CompanyPriceListFacade $companyPriceListFacadeMock;
 
     /**
      * @return void
@@ -45,12 +46,12 @@ class PriceListCompanyHydrationPluginTest extends Unit
      */
     public function testHydrate(): void
     {
-        $this->companyPriceListFacadeMock->expects($this->atLeastOnce())
+        $this->companyPriceListFacadeMock->expects(static::atLeastOnce())
             ->method('hydrateCompany')
             ->with($this->companyTransferMock)
             ->willReturn($this->companyTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyTransfer::class,
             $this->priceListCompanyHydrationPlugin->hydrate(
                 $this->companyTransferMock,

@@ -4,28 +4,29 @@ namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchClientInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridgeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge
      */
-    protected $priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge;
+    protected PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge $priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchClientInterface
      */
-    protected $priceProductPriceListPageSearchClientInterfaceMock;
+    protected MockObject|PriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClientInterfaceMock;
 
     /**
      * @var string
      */
-    protected $searchString;
+    protected string $searchString;
 
     /**
      * @var array
      */
-    protected $requestParameters;
+    protected array $requestParameters;
 
     /**
      * @return void
@@ -51,12 +52,12 @@ class PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientB
      */
     public function testSearchAbstract(): void
     {
-        $this->priceProductPriceListPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('searchAbstract')
             ->with($this->searchString, $this->requestParameters)
             ->willReturn([]);
 
-        $this->assertIsArray(
+        static::assertIsArray(
             $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge->searchAbstract(
                 $this->searchString,
                 $this->requestParameters,
@@ -69,12 +70,12 @@ class PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientB
      */
     public function testSearchConcrete(): void
     {
-        $this->priceProductPriceListPageSearchClientInterfaceMock->expects($this->atLeastOnce())
+        $this->priceProductPriceListPageSearchClientInterfaceMock->expects(static::atLeastOnce())
             ->method('searchConcrete')
             ->with($this->searchString, $this->requestParameters)
             ->willReturn([]);
 
-        $this->assertIsArray(
+        static::assertIsArray(
             $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientBridge->searchConcrete(
                 $this->searchString,
                 $this->requestParameters,

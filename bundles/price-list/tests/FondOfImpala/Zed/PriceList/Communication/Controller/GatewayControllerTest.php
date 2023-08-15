@@ -5,24 +5,25 @@ namespace FondOfImpala\Zed\PriceList\Communication\Controller;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceList\Business\PriceListFacade;
 use Generated\Shared\Transfer\PriceListListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 class GatewayControllerTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Zed\PriceList\Business\PriceListFacade|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \FondOfImpala\Zed\PriceList\Business\PriceListFacade|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $facadeMock;
+    protected MockObject|PriceListFacade $facadeMock;
 
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\PriceList\Communication\Controller\GatewayController
      */
-    protected $gatewayController;
+    protected GatewayController $gatewayController;
 
     /**
      * @return void

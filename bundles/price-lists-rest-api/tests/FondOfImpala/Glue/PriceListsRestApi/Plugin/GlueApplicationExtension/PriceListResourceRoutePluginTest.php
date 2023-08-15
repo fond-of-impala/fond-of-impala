@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceListsRestApi\Plugin\GlueApplicationExtension;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceListsRestApi\PriceListsRestApiConfig;
 use Generated\Shared\Transfer\RestPriceListAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 
 class PriceListResourceRoutePluginTest extends Unit
@@ -12,12 +13,12 @@ class PriceListResourceRoutePluginTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface
      */
-    protected $resourceRouteCollectionMock;
+    protected MockObject|ResourceRouteCollectionInterface $resourceRouteCollectionMock;
 
     /**
      * @var \FondOfImpala\Glue\PriceListsRestApi\Plugin\GlueApplicationExtension\PriceListResourceRoutePlugin
      */
-    protected $plugin;
+    protected PriceListResourceRoutePlugin $plugin;
 
     /**
      * @return void

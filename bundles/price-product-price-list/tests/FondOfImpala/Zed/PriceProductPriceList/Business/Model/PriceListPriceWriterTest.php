@@ -9,6 +9,7 @@ use FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepo
 use Generated\Shared\Transfer\MoneyValueTransfer;
 use Generated\Shared\Transfer\PriceProductDimensionTransfer;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\Transfer\EntityTransferInterface;
 
 class PriceListPriceWriterTest extends Unit
@@ -16,42 +17,42 @@ class PriceListPriceWriterTest extends Unit
     /**
      * @var \FondOfImpala\Zed\PriceProductPriceList\Business\Model\PriceListPriceWriter
      */
-    protected $priceListPriceWriter;
+    protected PriceListPriceWriter $priceListPriceWriter;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Dependency\Facade\PriceProductPriceListToPriceProductFacadeInterface
      */
-    protected $priceProductFacadeMock;
+    protected MockObject|PriceProductPriceListToPriceProductFacadeInterface $priceProductFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListRepositoryInterface
      */
-    protected $repositoryMock;
+    protected MockObject|PriceProductPriceListRepositoryInterface $repositoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceList\Persistence\PriceProductPriceListEntityManagerInterface
      */
-    protected $entityManagerMock;
+    protected MockObject|PriceProductPriceListEntityManagerInterface $entityManagerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductTransfer
      */
-    protected $priceProductTransferMock;
+    protected MockObject|PriceProductTransfer $priceProductTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductDimensionTransfer
      */
-    protected $priceProductDimensionTransferMock;
+    protected MockObject|PriceProductDimensionTransfer $priceProductDimensionTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\MoneyValueTransfer
      */
-    protected $moneyValueTransferMock;
+    protected MockObject|MoneyValueTransfer $moneyValueTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\EntityTransferInterface
      */
-    protected $entityTransferInterfaceMock;
+    protected MockObject|EntityTransferInterface $entityTransferInterfaceMock;
 
     /**
      * @return void

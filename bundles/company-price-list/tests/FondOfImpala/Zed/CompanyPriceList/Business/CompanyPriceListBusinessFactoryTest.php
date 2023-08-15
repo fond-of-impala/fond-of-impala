@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyPriceList\Business\Model\CompanyHydratorInterface;
 use FondOfImpala\Zed\CompanyPriceList\CompanyPriceListDependencyProvider;
 use FondOfImpala\Zed\CompanyPriceList\Dependency\Facade\CompanyPriceListToPriceListFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class CompanyPriceListBusinessFactoryTest extends Unit
@@ -13,17 +14,17 @@ class CompanyPriceListBusinessFactoryTest extends Unit
     /**
      * @var \FondOfImpala\Zed\CompanyPriceList\Business\CompanyPriceListBusinessFactory
      */
-    protected $companyPriceListBusinessFactory;
+    protected CompanyPriceListBusinessFactory $companyPriceListBusinessFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyPriceList\Dependency\Facade\CompanyPriceListToPriceListFacadeInterface
      */
-    protected $companyPriceListToPriceListFacadeInterfaceMock;
+    protected MockObject|CompanyPriceListToPriceListFacadeInterface $companyPriceListToPriceListFacadeInterfaceMock;
 
     /**
      * @return void
@@ -47,16 +48,16 @@ class CompanyPriceListBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyHydrator(): void
     {
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(CompanyPriceListDependencyProvider::FACADE_PRICE_LIST)
             ->willReturn($this->companyPriceListToPriceListFacadeInterfaceMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyHydratorInterface::class,
             $this->companyPriceListBusinessFactory->createCompanyHydrator(),
         );

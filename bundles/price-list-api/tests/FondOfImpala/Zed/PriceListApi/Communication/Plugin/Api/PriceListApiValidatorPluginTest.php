@@ -6,23 +6,24 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacade;
 use FondOfImpala\Zed\PriceListApi\PriceListApiConfig;
 use Generated\Shared\Transfer\ApiRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListApiValidatorPluginTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Communication\Plugin\Api\PriceListApiValidatorPlugin
      */
-    protected $priceListApiValidatorPlugin;
+    protected PriceListApiValidatorPlugin $priceListApiValidatorPlugin;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacade
      */
-    protected $priceListApiFacadeMock;
+    protected MockObject|PriceListApiFacade $priceListApiFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiRequestTransfer
      */
-    protected $apiRequestTransferMock;
+    protected MockObject|ApiRequestTransfer $apiRequestTransferMock;
 
     /**
      * @return void
@@ -49,7 +50,7 @@ class PriceListApiValidatorPluginTest extends Unit
      */
     public function testGetResourceName(): void
     {
-        $this->assertSame(PriceListApiConfig::RESOURCE_PRICE_LISTS, $this->priceListApiValidatorPlugin->getResourceName());
+        static::assertSame(PriceListApiConfig::RESOURCE_PRICE_LISTS, $this->priceListApiValidatorPlugin->getResourceName());
     }
 
     /**
@@ -57,6 +58,6 @@ class PriceListApiValidatorPluginTest extends Unit
      */
     public function testValidate(): void
     {
-        $this->assertIsArray($this->priceListApiValidatorPlugin->validate($this->apiRequestTransferMock));
+        static::assertIsArray($this->priceListApiValidatorPlugin->validate($this->apiRequestTransferMock));
     }
 }

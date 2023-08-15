@@ -11,63 +11,64 @@ use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
 use Generated\Shared\Transfer\ApiRequestTransfer;
 use Generated\Shared\Transfer\PriceProductTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListApiFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\PriceListApi\Business\PriceListApiFacade
      */
-    protected $priceListApiFacade;
+    protected PriceListApiFacade $priceListApiFacade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiDataTransfer
      */
-    protected $apiDataTransferMock;
+    protected MockObject|ApiDataTransfer $apiDataTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\PriceListApiBusinessFactory
      */
-    protected $priceListApiBusinessFactoryMock;
+    protected MockObject|PriceListApiBusinessFactory $priceListApiBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\Model\PriceListApi
      */
-    protected $priceListApiMock;
+    protected MockObject|PriceListApi $priceListApiMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
      */
-    protected $apiItemTransferMock;
+    protected MockObject|ApiItemTransfer $apiItemTransferMock;
 
     /**
      * @var int
      */
-    protected $idPriceList;
+    protected int $idPriceList;
 
     /**
      * @var array<\Generated\Shared\Transfer\PriceProductTransfer>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected $priceProductTransferMocks;
+    protected array $priceProductTransferMocks;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\Hydrator\PriceProductsHydratorInterface
      */
-    protected $priceProductsHydratorMock;
+    protected MockObject|PriceProductsHydratorInterface $priceProductsHydratorMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiRequestTransfer
      */
-    protected $apiRequestTransferMock;
+    protected MockObject|ApiRequestTransfer $apiRequestTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiCollectionTransfer
      */
-    protected $apiCollectionTransferMock;
+    protected MockObject|ApiCollectionTransfer $apiCollectionTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceListApi\Business\Validator\PriceListApiValidatorInterface
      */
-    protected $priceListApiValidatorInterfaceMock;
+    protected MockObject|PriceListApiValidatorInterface $priceListApiValidatorInterfaceMock;
 
     /**
      * @return void

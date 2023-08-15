@@ -3,6 +3,7 @@
 namespace FondOfImpala\Client\PriceList\Dependency\Client;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
@@ -11,17 +12,17 @@ class PriceListToZedRequestClientBridgeTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\ZedRequest\ZedRequestClientInterface
      */
-    protected $zedRequestClientMock;
+    protected MockObject|ZedRequestClientInterface $zedRequestClientMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\TransferInterface
      */
-    protected $transferMock;
+    protected MockObject|TransferInterface $transferMock;
 
     /**
      * @var \FondOfImpala\Client\PriceList\Dependency\Client\PriceListToZedRequestClientBridge
      */
-    protected $zedRequestClientBridge;
+    protected PriceListToZedRequestClientBridge $zedRequestClientBridge;
 
     /**
      * @return void

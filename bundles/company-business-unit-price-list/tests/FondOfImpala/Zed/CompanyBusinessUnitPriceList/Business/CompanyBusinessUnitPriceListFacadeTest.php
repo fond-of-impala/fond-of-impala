@@ -5,28 +5,29 @@ namespace FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\Model\CompanyBusinessUnitExpanderInterface;
 use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyBusinessUnitPriceListFacadeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\CompanyBusinessUnitPriceListFacade
      */
-    protected $companyBusinessUnitPriceListFacade;
+    protected CompanyBusinessUnitPriceListFacade $companyBusinessUnitPriceListFacade;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\CompanyBusinessUnitPriceListBusinessFactory
      */
-    protected $companyBusinessUnitPriceListBusinessFactoryMock;
+    protected MockObject|CompanyBusinessUnitPriceListBusinessFactory $companyBusinessUnitPriceListBusinessFactoryMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyBusinessUnitTransfer
      */
-    protected $companyBusinessUnitTransferMock;
+    protected MockObject|CompanyBusinessUnitTransfer $companyBusinessUnitTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyBusinessUnitPriceList\Business\Model\CompanyBusinessUnitExpanderInterface
      */
-    protected $companyBusinessUnitExpanderInterfaceMock;
+    protected MockObject|CompanyBusinessUnitExpanderInterface $companyBusinessUnitExpanderInterfaceMock;
 
     /**
      * @return void
@@ -56,15 +57,15 @@ class CompanyBusinessUnitPriceListFacadeTest extends Unit
      */
     public function testExpandCompanyBusinessUnit(): void
     {
-        $this->companyBusinessUnitPriceListBusinessFactoryMock->expects($this->atLeastOnce())
+        $this->companyBusinessUnitPriceListBusinessFactoryMock->expects(static::atLeastOnce())
             ->method('createCompanyBusinessUnitExpander')
             ->willReturn($this->companyBusinessUnitExpanderInterfaceMock);
 
-        $this->companyBusinessUnitExpanderInterfaceMock->expects($this->atLeastOnce())
+        $this->companyBusinessUnitExpanderInterfaceMock->expects(static::atLeastOnce())
             ->method('expand')
             ->willReturn($this->companyBusinessUnitTransferMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             CompanyBusinessUnitTransfer::class,
             $this->companyBusinessUnitPriceListFacade->expandCompanyBusinessUnit($this->companyBusinessUnitTransferMock),
         );

@@ -10,7 +10,7 @@ class PriceProductConcretePriceListSearchQueryPluginTest extends Unit
     /**
      * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\PriceProductConcretePriceListSearchQueryPlugin
      */
-    protected $priceProductConcretePriceListSearchQueryPlugin;
+    protected PriceProductConcretePriceListSearchQueryPlugin $priceProductConcretePriceListSearchQueryPlugin;
 
     /**
      * @return void
@@ -27,7 +27,7 @@ class PriceProductConcretePriceListSearchQueryPluginTest extends Unit
      */
     public function testGetSearchQuery(): void
     {
-        $this->assertInstanceOf(Query::class, $this->priceProductConcretePriceListSearchQueryPlugin->getSearchQuery());
+        static::assertInstanceOf(Query::class, $this->priceProductConcretePriceListSearchQueryPlugin->getSearchQuery());
     }
 
     /**
@@ -37,6 +37,6 @@ class PriceProductConcretePriceListSearchQueryPluginTest extends Unit
     {
         $this->priceProductConcretePriceListSearchQueryPlugin->setSearchString('');
 
-        $this->assertSame('', $this->priceProductConcretePriceListSearchQueryPlugin->getSearchString());
+        static::assertSame('', $this->priceProductConcretePriceListSearchQueryPlugin->getSearchString());
     }
 }

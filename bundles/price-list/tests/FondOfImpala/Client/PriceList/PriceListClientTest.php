@@ -5,28 +5,29 @@ namespace FondOfImpala\Client\PriceList;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\PriceList\Zed\PriceListStubInterface;
 use Generated\Shared\Transfer\PriceListListTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceListClientTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Client\PriceList\PriceListFactory|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \FondOfImpala\Client\PriceList\PriceListFactory|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $factoryMock;
+    protected MockObject|PriceListFactory $factoryMock;
 
     /**
-     * @var \FondOfImpala\Client\PriceList\Zed\PriceListStubInterface|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \FondOfImpala\Client\PriceList\Zed\PriceListStubInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $zedStubMock;
+    protected MockObject|PriceListStubInterface $zedStubMock;
 
     /**
-     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
+     * @var \Generated\Shared\Transfer\PriceListListTransfer|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $priceListListTransferMock;
+    protected MockObject|PriceListListTransfer $priceListListTransferMock;
 
     /**
      * @var \FondOfImpala\Client\PriceList\PriceListClient
      */
-    protected $client;
+    protected PriceListClient $client;
 
     /**
      * @return void
