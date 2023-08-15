@@ -48,7 +48,7 @@ class PriceListGuiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPriceListPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_FOS_PRICE_LIST] = fn(): FoiPriceListQuery => FoiPriceListQuery::create();
+        $container[static::PROPEL_QUERY_FOS_PRICE_LIST] = fn (): FoiPriceListQuery => FoiPriceListQuery::create();
 
         return $container;
     }
@@ -60,7 +60,7 @@ class PriceListGuiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addPriceListFacade(Container $container): Container
     {
-        $container[static::FACADE_PRICE_LIST] = fn(Container $container): PriceListGuiToPriceListFacadeBridge => new PriceListGuiToPriceListFacadeBridge(
+        $container[static::FACADE_PRICE_LIST] = fn (Container $container): PriceListGuiToPriceListFacadeBridge => new PriceListGuiToPriceListFacadeBridge(
             $container->getLocator()->priceList()->facade(),
         );
 
@@ -74,7 +74,7 @@ class PriceListGuiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addUtilDateTimeService(Container $container): Container
     {
-        $container[static::SERVICE_UTIL_DATE_TIME] = fn(Container $container): PriceListGuiToUtilDateTimeServiceBridge => new PriceListGuiToUtilDateTimeServiceBridge(
+        $container[static::SERVICE_UTIL_DATE_TIME] = fn (Container $container): PriceListGuiToUtilDateTimeServiceBridge => new PriceListGuiToUtilDateTimeServiceBridge(
             $container->getLocator()->utilDateTime()->service(),
         );
 
