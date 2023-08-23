@@ -40,6 +40,7 @@
     "fond-of-impala/customer-anonymizer-company-user-connector": "*",
     "fond-of-impala/jellyfish-sales-order-conditional-availability": "*",
     "fond-of-impala/price-product-price-list-page-search-extension": "*",
+    "fond-of-impala/product-image-grouping-product-page-search": "*",
     "fond-of-impala/product-list-conditional-availability-page-search": "*"
   },
   "require": {
@@ -59,6 +60,7 @@
     "spryker/api-query-builder": "^0.1.0",
     "spryker/cart": "^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0",
     "spryker/cart-extension": "^2.2.1 || ^3.0.0 || ^4.0.0",
+    "spryker/catalog": "^5.0.0",
     "spryker/company": "^1.0.0",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0",
     "spryker/company-role": "^1.0.0",
@@ -75,6 +77,7 @@
     "spryker/permission-extension": "^1.0.0",
     "spryker/product": "^6.4.0",
     "spryker/product-list": "^1.2.0",
+    "spryker/product-page-search": "^3.0.0",
     "spryker/quote-extension": "^1.2.0",
     "spryker/sales-extension": "^1.3",
     "spryker/search": "^8.10.0",
@@ -142,6 +145,9 @@
       "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/src/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
+      "FondOfImpala\\Client\\ProductImageGroupingProductPageSearch\\": "bundles/product-image-grouping-product-page-search/src/FondOfImpala/Client/ProductImageGroupingProductPageSearch",
+      "FondOfImpala\\Shared\\ProductImageGroupingProductPageSearch\\": "bundles/product-image-grouping-product-page-search/src/FondOfImpala/Shared/ProductImageGroupingProductPageSearch",
+      "FondOfImpala\\Zed\\ProductImageGroupingProductPageSearch\\": "bundles/product-image-grouping-product-page-search/src/FondOfImpala/Zed/ProductImageGroupingProductPageSearch",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch"
@@ -202,6 +208,9 @@
       "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/tests/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/tests/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\PriceProductPriceListPageSearchExtension\\": "bundles/price-product-price-list-page-search-extension/tests/FondOfImpala/Zed/PriceProductPriceListPageSearchExtension",
+      "FondOfImpala\\Client\\ProductImageGroupingProductPageSearch\\": "bundles/product-image-grouping-product-page-search/tests/FondOfImpala/Client/ProductImageGroupingProductPageSearch",
+      "FondOfImpala\\Shared\\ProductImageGroupingProductPageSearch\\": "bundles/product-image-grouping-product-page-search/tests/FondOfImpala/Shared/ProductImageGroupingProductPageSearch",
+      "FondOfImpala\\Zed\\ProductImageGroupingProductPageSearch\\": "bundles/product-image-grouping-product-page-search/tests/FondOfImpala/Zed/ProductImageGroupingProductPageSearch",
       "FondOfImpala\\Client\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Client/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Shared\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Shared/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/tests/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch",

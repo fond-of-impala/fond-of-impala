@@ -24,6 +24,7 @@ include:
   - bundles/customer-anonymizer-company-user-connector
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/price-product-price-list-page-search-extension
+  - bundles/product-image-grouping-product-page-search
   - bundles/product-list-conditional-availability-page-search
 
 suites:
