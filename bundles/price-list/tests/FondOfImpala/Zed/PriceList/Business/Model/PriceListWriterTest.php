@@ -66,8 +66,8 @@ class PriceListWriterTest extends Unit
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        static::assertInstanceOf(
-            PriceListTransfer::class,
+        static::assertEquals(
+            $this->priceListTransferMock,
             $this->priceListWriter->persist(
                 $this->priceListTransferMock,
             ),
@@ -120,8 +120,8 @@ class PriceListWriterTest extends Unit
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        static::assertInstanceOf(
-            PriceListTransfer::class,
+        static::assertEquals(
+            $this->priceListTransferMock,
             $this->priceListWriter->create(
                 $this->priceListTransferMock,
             ),
@@ -138,8 +138,8 @@ class PriceListWriterTest extends Unit
             ->with($this->priceListTransferMock)
             ->willReturn($this->priceListTransferMock);
 
-        static::assertInstanceOf(
-            PriceListTransfer::class,
+        static::assertEquals(
+            $this->priceListTransferMock,
             $this->priceListWriter->update(
                 $this->priceListTransferMock,
             ),

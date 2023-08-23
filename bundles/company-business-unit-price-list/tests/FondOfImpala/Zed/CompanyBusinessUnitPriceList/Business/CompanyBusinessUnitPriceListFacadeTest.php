@@ -65,8 +65,8 @@ class CompanyBusinessUnitPriceListFacadeTest extends Unit
             ->method('expand')
             ->willReturn($this->companyBusinessUnitTransferMock);
 
-        static::assertInstanceOf(
-            CompanyBusinessUnitTransfer::class,
+        static::assertEquals(
+            $this->companyBusinessUnitTransferMock,
             $this->companyBusinessUnitPriceListFacade->expandCompanyBusinessUnit($this->companyBusinessUnitTransferMock),
         );
     }

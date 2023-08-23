@@ -68,6 +68,6 @@ class PriceGrouperTest extends Unit
             ->method('getGrossPrice')
             ->willReturn(1);
 
-        static::assertInstanceOf(PriceProductPriceListPageSearchTransfer::class, $this->priceGrouper->groupPricesData($this->priceProductPriceListPageSearchTransferMock, ['prices' => []]));
+        static::assertEquals($this->priceProductPriceListPageSearchTransferMock, $this->priceGrouper->groupPricesData($this->priceProductPriceListPageSearchTransferMock, ['prices' => []]));
     }
 }

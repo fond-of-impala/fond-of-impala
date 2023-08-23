@@ -51,8 +51,8 @@ class CustomerPriceProductPriceListPageSearchToCustomerClientBridgeTest extends 
             ->method('getCustomer')
             ->willReturn($this->customerTransferMock);
 
-        static::assertInstanceOf(
-            CustomerTransfer::class,
+        static::assertEquals(
+            $this->customerTransferMock,
             $this->customerPriceProductPriceListPageSearchToCustomerClientBridge->getCustomer(),
         );
     }

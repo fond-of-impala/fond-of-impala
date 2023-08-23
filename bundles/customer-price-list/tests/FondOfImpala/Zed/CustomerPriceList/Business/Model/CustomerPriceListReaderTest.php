@@ -77,8 +77,8 @@ class CustomerPriceListReaderTest extends Unit
             ->with($this->idCustomer)
             ->willReturn($this->priceListCollectionTransferMock);
 
-        $this->assertInstanceOf(
-            PriceListCollectionTransfer::class,
+        $this->assertEquals(
+            $this->priceListCollectionTransferMock,
             $this->customerPriceListReader->getPriceListCollectionByIdCustomer(
                 $this->customerTransferMock,
             ),

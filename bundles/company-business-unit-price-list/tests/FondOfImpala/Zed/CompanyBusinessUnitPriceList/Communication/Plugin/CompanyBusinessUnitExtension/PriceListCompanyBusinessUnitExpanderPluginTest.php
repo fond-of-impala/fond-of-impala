@@ -52,8 +52,8 @@ class PriceListCompanyBusinessUnitExpanderPluginTest extends Unit
             ->method('expandCompanyBusinessUnit')
             ->willReturn($this->companyBusinessUnitTransferMock);
 
-        static::assertInstanceOf(
-            CompanyBusinessUnitTransfer::class,
+        static::assertEquals(
+            $this->companyBusinessUnitTransferMock,
             $this->priceListCompanyBusinessUnitExpanderPlugin->expand(
                 $this->companyBusinessUnitTransferMock,
             ),

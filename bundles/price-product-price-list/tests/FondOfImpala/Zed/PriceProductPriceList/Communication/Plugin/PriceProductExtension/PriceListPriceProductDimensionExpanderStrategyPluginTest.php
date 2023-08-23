@@ -48,7 +48,9 @@ class PriceListPriceProductDimensionExpanderStrategyPluginTest extends Unit
      */
     public function testExpand(): void
     {
-        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceListPriceProductDimensionExpanderStrategyPlugin->expand($this->priceProductDimensionTransferMock));
+        $this->priceProductPriceListFacadeMock->expects(static::atLeastOnce())->method('expandPriceProductDimension')->willReturn($this->priceProductDimensionTransferMock);
+
+        static::assertEquals($this->priceProductDimensionTransferMock, $this->priceListPriceProductDimensionExpanderStrategyPlugin->expand($this->priceProductDimensionTransferMock));
     }
 
     /**

@@ -54,8 +54,8 @@ class PriceListMapperTest extends Unit
             ->with([], true)
             ->willReturnSelf();
 
-        static::assertInstanceOf(
-            RestPriceListAttributesTransfer::class,
+        static::assertEquals(
+            $this->restPriceListAttributesTransferMock,
             $this->priceListMapper->mapPriceListTransferToRestPriceListAttributesTransfer(
                 $this->priceListTransferMock,
                 $this->restPriceListAttributesTransferMock,

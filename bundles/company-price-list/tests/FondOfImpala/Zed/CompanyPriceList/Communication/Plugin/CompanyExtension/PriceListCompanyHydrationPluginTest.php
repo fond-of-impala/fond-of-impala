@@ -51,8 +51,8 @@ class PriceListCompanyHydrationPluginTest extends Unit
             ->with($this->companyTransferMock)
             ->willReturn($this->companyTransferMock);
 
-        static::assertInstanceOf(
-            CompanyTransfer::class,
+        static::assertEquals(
+            $this->companyTransferMock,
             $this->priceListCompanyHydrationPlugin->hydrate(
                 $this->companyTransferMock,
             ),

@@ -92,8 +92,8 @@ class CompanyBusinessUnitExpanderTest extends Unit
             ->method('setPriceList')
             ->willReturn($this->companyTransferMock);
 
-        static::assertInstanceOf(
-            CompanyBusinessUnitTransfer::class,
+        static::assertEquals(
+            $this->companyBusinessUnitTransferMock,
             $this->companyBusinessUnitExpander->expand(
                 $this->companyBusinessUnitTransferMock,
             ),
@@ -109,8 +109,8 @@ class CompanyBusinessUnitExpanderTest extends Unit
             ->method('getCompany')
             ->willReturn(null);
 
-        static::assertInstanceOf(
-            CompanyBusinessUnitTransfer::class,
+        static::assertEquals(
+            $this->companyBusinessUnitTransferMock,
             $this->companyBusinessUnitExpander->expand(
                 $this->companyBusinessUnitTransferMock,
             ),

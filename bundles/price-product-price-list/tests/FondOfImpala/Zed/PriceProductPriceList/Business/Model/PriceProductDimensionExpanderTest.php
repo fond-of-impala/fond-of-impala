@@ -81,7 +81,7 @@ class PriceProductDimensionExpanderTest extends Unit
             ->method('getName')
             ->willReturn('name');
 
-        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
+        static::assertEquals($this->priceProductDimensionTransferMock, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
     }
 
     /**
@@ -97,6 +97,6 @@ class PriceProductDimensionExpanderTest extends Unit
             ->method('findPriceListById')
             ->willReturn(null);
 
-        static::assertInstanceOf(PriceProductDimensionTransfer::class, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
+        static::assertEquals($this->priceProductDimensionTransferMock, $this->priceProductDimensionExpander->expand($this->priceProductDimensionTransferMock));
     }
 }

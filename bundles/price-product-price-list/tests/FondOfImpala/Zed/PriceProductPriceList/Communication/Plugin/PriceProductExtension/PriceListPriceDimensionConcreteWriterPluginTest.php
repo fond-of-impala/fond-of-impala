@@ -49,7 +49,9 @@ class PriceListPriceDimensionConcreteWriterPluginTest extends Unit
      */
     public function testSavePrice(): void
     {
-        static::assertInstanceOf(PriceProductTransfer::class, $this->priceListPriceDimensionConcreteWriterPlugin->savePrice($this->priceProductTransferMock));
+        $this->priceProductPriceListFacadeMock->expects(static::atLeastOnce())->method('savePriceProductPriceList')->willReturn($this->priceProductTransferMock);
+
+        static::assertEquals($this->priceProductTransferMock, $this->priceListPriceDimensionConcreteWriterPlugin->savePrice($this->priceProductTransferMock));
     }
 
     /**

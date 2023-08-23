@@ -111,7 +111,7 @@ class PriceListApiResourcePluginTest extends Unit
             ->with($this->apiDataTransferMock)
             ->willReturn($this->apiItemTransferMock);
 
-        static::assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->add($this->apiDataTransferMock));
+        static::assertEquals($this->apiItemTransferMock, $this->priceListApiResourcePlugin->add($this->apiDataTransferMock));
     }
 
     /**
@@ -124,7 +124,7 @@ class PriceListApiResourcePluginTest extends Unit
             ->with($this->idProductList)
             ->willReturn($this->apiItemTransferMock);
 
-        static::assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->get($this->idProductList));
+        static::assertEquals($this->apiItemTransferMock, $this->priceListApiResourcePlugin->get($this->idProductList));
     }
 
     /**
@@ -137,7 +137,7 @@ class PriceListApiResourcePluginTest extends Unit
             ->with($this->idProductList, $this->apiDataTransferMock)
             ->willReturn($this->apiItemTransferMock);
 
-        static::assertInstanceOf(ApiItemTransfer::class, $this->priceListApiResourcePlugin->update($this->idProductList, $this->apiDataTransferMock));
+        static::assertEquals($this->apiItemTransferMock, $this->priceListApiResourcePlugin->update($this->idProductList, $this->apiDataTransferMock));
     }
 
     /**
@@ -161,6 +161,6 @@ class PriceListApiResourcePluginTest extends Unit
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        static::assertInstanceOf(ApiCollectionTransfer::class, $this->priceListApiResourcePlugin->find($this->apiRequestTransferMock));
+        static::assertEquals($this->apiCollectionTransferMock, $this->priceListApiResourcePlugin->find($this->apiRequestTransferMock));
     }
 }

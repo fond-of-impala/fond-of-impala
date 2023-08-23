@@ -77,8 +77,8 @@ class CompanyHydratorTest extends Unit
             ->with($this->priceListTransferMock)
             ->willReturn($this->companyTransferMock);
 
-        static::assertInstanceOf(
-            CompanyTransfer::class,
+        static::assertEquals(
+            $this->companyTransferMock,
             $this->companyHydrator->hydrate(
                 $this->companyTransferMock,
             ),
@@ -94,8 +94,8 @@ class CompanyHydratorTest extends Unit
             ->method('getFkPriceList')
             ->willReturn(null);
 
-        static::assertInstanceOf(
-            CompanyTransfer::class,
+        static::assertEquals(
+            $this->companyTransferMock,
             $this->companyHydrator->hydrate(
                 $this->companyTransferMock,
             ),
