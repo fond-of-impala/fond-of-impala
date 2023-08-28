@@ -5,7 +5,7 @@ namespace FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Communication\P
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInterface;
+use Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductPageDataExpanderPluginInterface;
 
 /**
  * @method \Spryker\Zed\ProductPageSearch\Persistence\ProductPageSearchQueryContainerInterface getQueryContainer()
@@ -13,7 +13,7 @@ use Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInter
  * @method \Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface getFacade()
  * @method \Spryker\Zed\ProductPageSearch\ProductPageSearchConfig getConfig()
  */
-class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin implements ProductPageDataExpanderInterface
+class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin implements ProductPageDataExpanderPluginInterface
 {
     /**
      * {@inheritDoc}
