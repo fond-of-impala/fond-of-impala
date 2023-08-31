@@ -6,34 +6,30 @@ This package will group the image sets by name. Example:
 
 ```
 "groupedImages": {
-    "setName1": {
-        "images": [
-            {
-                "externalUrlSmall": "https:\/\/...",
-                "externalUrlLarge": "https:\/\/...",
-                "sortOrder": 5
-            },
-            {
-                "externalUrlSmall": "https:\/\/...",
-                "externalUrlLarge": "https:\/\/...",
-                "sortOrder": 10
-            },
-            {
-                "externalUrlSmall": "https:\/\/...",
-                "externalUrlLarge": "https:\/\/...",
-                "sortOrder": 15
-            }
-        ]
+  "setName1": [
+    {
+      "externalUrlSmall": "https:\/\/...",
+      "externalUrlLarge": "https:\/\/...",
+      "sortOrder": 5
     },
-    "setName2": {
-        "images": [
-            {
-                "externalUrlSmall": "https:\/\/...",
-                "externalUrlLarge": "https:\/\/...",
-                "sortOrder": 0
-            }
-        ]
+    {
+      "externalUrlSmall": "https:\/\/...",
+      "externalUrlLarge": "https:\/\/...",
+      "sortOrder": 10
+    },
+    {
+      "externalUrlSmall": "https:\/\/...",
+      "externalUrlLarge": "https:\/\/...",
+      "sortOrder": 15
     }
+  ],
+  "setName2": [
+    {
+      "externalUrlSmall": "https:\/\/...",
+      "externalUrlLarge": "https:\/\/...",
+      "sortOrder": 0
+    }
+  ]
 }
 ```
 
