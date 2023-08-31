@@ -135,6 +135,10 @@
       "path": "bundles/price-product-price-list-page-search-extension",
       "version": "1.0.0-beta"
     },
+    "product-image-grouping-product-page-search": {
+      "path": "bundles/product-image-grouping-product-page-search",
+      "version": "1.0.0"
+    },
     "product-list-conditional-availability-page-search": {
       "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.0.0"
