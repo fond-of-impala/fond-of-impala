@@ -54,7 +54,8 @@
     "fond-of-impala/price-product-price-list-page-search-extension": "*",
     "fond-of-impala/price-product-price-list-search-rest-api": "*",
     "fond-of-impala/product-image-grouping-product-page-search": "*",
-    "fond-of-impala/product-list-conditional-availability-page-search": "*"
+    "fond-of-impala/product-list-conditional-availability-page-search": "*",
+    "fond-of-impala/product-list-price-product-price-list-page-search": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -175,6 +176,7 @@
       "FondOfImpala\\Shared\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Shared/CustomerPriceList",
       "FondOfImpala\\Zed\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Zed/CustomerPriceList",
       "FondOfImpala\\Client\\CustomerPriceProductPriceListPageSearch\\": "bundles/customer-price-product-price-list-page-search/src/FondOfImpala/Client/CustomerPriceProductPriceListPageSearch",
+      "FondOfImpala\\Shared\\CustomerPriceProductPriceListPageSearch\\": "bundles/customer-price-product-price-list-page-search/src/FondOfImpala/Shared/CustomerPriceProductPriceListPageSearch",
       "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/src/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Client\\PriceList\\": "bundles/price-list/src/FondOfImpala/Client/PriceList",
@@ -270,6 +272,7 @@
       "FondOfImpala\\Shared\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Shared/CustomerPriceList",
       "FondOfImpala\\Zed\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Zed/CustomerPriceList",
       "FondOfImpala\\Client\\CustomerPriceProductPriceListPageSearch\\": "bundles/customer-price-product-price-list-page-search/tests/FondOfImpala/Client/CustomerPriceProductPriceListPageSearch",
+      "FondOfImpala\\Shared\\CustomerPriceProductPriceListPageSearch\\": "bundles/customer-price-product-price-list-page-search/tests/FondOfImpala/Shared/CustomerPriceProductPriceListPageSearch",
       "FondOfImpala\\Shared\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/tests/FondOfImpala/Shared/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Zed\\JellyfishSalesOrderConditionalAvailability\\": "bundles/jellyfish-sales-order-conditional-availability/tests/FondOfImpala/Zed/JellyfishSalesOrderConditionalAvailability",
       "FondOfImpala\\Client\\PriceList\\": "bundles/price-list/tests/FondOfImpala/Client/PriceList",
