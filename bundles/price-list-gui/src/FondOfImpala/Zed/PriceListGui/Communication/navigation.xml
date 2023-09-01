@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <product>
+        <pages>
+            <price-list>
+                <label>Price Lists</label>
+                <title>Price Lists</title>
+                <bundle>price-list-gui</bundle>
+                <controller>price-list</controller>
+                <action>index</action>
+                <icon>fa-dollar</icon>
+                <pages>
+                    <price-list-create>
+                        <label>Create Price List</label>
+                        <title>Create Price List</title>
+                        <bundle>price-list-gui</bundle>
+                        <controller>price-list</controller>
+                        <action>create</action>
+                        <visible>0</visible>
+                    </price-list-create>
+                    <price-list-edit>
+                        <label>Edit Price List</label>
+                        <title>Edit Price List</title>
+                        <bundle>price-list-gui</bundle>
+                        <controller>price-list</controller>
+                        <action>update</action>
+                        <visible>0</visible>
+                    </price-list-edit>
+                </pages>
+            </price-list>
+        </pages>
+    </product>
+</config>

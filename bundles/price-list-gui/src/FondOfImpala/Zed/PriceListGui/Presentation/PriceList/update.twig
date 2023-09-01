@@ -1,0 +1,26 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set widget_title = 'Update'| trans ~ ' "' ~ priceListTransfer.getName() | e ~ '" ' ~ 'Price List'| trans %}
+
+{% block head_title widget_title | trans %}
+
+{% block action %}
+    {{ backActionButton('/price-list-gui/price-list', 'Price Lists' | trans) }}
+    {{ createActionButton('/price-list-gui/price-list/create', 'Create Price List' | trans) }}
+{% endblock %}
+
+{% block content %}
+    {% embed '@Gui/Partials/widget.twig' %}
+        {% block widget_content %}
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ 'Price List' | trans }}</div>
+                <div class="panel-body">
+                    {{ form_start(priceListForm) }}
+                    {{ form_widget(priceListForm) }}
+                    <input type="submit" class="btn btn-primary safe-submit" value="{{ 'Save' | trans }}"/>
+                    {{ form_end(priceListForm) }}
+                </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{
+  "mappings": {
+    "price-product-price-list": {
+      "dynamic_templates": [
+        {
+          "search-result-data": {
+            "mapping": {
+              "index": "false"
+            },
+            "path_match": "search-result-data.*"
+          }
+        }
+      ],
+      "properties": {
+        "search-result-data": {
+          "type": "object",
+          "properties": {
+
+          }
+        },
+        "store": {
+          "type": "keyword"
+        },
+        "type": {
+          "type": "keyword"
+        },
+        "locale": {
+          "type": "keyword"
+        },
+        "id-price-list": {
+          "type": "integer"
+        },
+        "sku": {
+          "type": "keyword"
+        },
+        "price-list-name": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

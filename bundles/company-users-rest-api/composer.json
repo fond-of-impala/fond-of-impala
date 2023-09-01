@@ -24,8 +24,8 @@
   },
   "require": {
     "php": ">=8.0",
+    "fond-of-impala/company-price-list": "^1.0.0",
     "fond-of-oryx/company-users-rest-api-extension": "^2.1.0",
-    "fond-of-spryker/company-price-list": "dev-master",
     "fond-of-spryker/company-user-reference": "dev-master",
     "spryker/company": "^1.4.0",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0",
