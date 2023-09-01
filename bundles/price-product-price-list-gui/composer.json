@@ -8,29 +8,9 @@
       "email": "daniel-rose@gmx.de"
     }
   ],
-  "repositories": [
-    {
-      "name": "fond-of-impala/price-list",
-      "type":"path",
-      "options": {
-        "symlink": false
-      },
-      "packagist.org": false,
-      "url":"../price-list"
-    },
-    {
-      "name": "fond-of-impala/price-product-price-list",
-      "type":"path",
-      "options": {
-        "symlink": false
-      },
-      "packagist.org": false,
-      "url":"../price-product-price-list"
-    }
-  ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/price-product-price-list": "dev-main",
+    "fond-of-impala/price-product-price-list": "^1.0.0",
     "spryker/product-management-extension": "^1.0.0"
   },
   "require-dev": {

@@ -8,17 +8,6 @@
       "email": "daniel-rose@gmx.de"
     }
   ],
-  "repositories": [
-    {
-      "name": "fond-of-impala/price-list",
-      "type":"path",
-      "options": {
-        "symlink": false
-      },
-      "packagist.org": false,
-      "url":"../price-list"
-    }
-  ],
   "scripts": {
     "ci": "make ci",
     "codeception": "make codeception",
@@ -31,7 +20,7 @@
     "spryker/glue-application-extension": "^1.0.0",
     "spryker/uuid-behavior": "^1.0.0",
     "fond-of-oryx/price-lists-rest-api-extension": "^1.0.0 || ^2.0.0",
-    "fond-of-impala/price-list": "dev-main"
+    "fond-of-impala/price-list": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
