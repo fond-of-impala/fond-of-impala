@@ -41,7 +41,7 @@ class RawCatalogSearchResultFormatterPlugin extends SprykerRawCatalogSearchResul
             $key = lcfirst(str_replace('_', '', ucwords($key, '_')));
 
             foreach ($images as $image) {
-                $groupedImages[$key][] = (new RestCatalogSearchProductImageTransfer())->fromArray($image, true)->toArray();
+                $groupedImages[$key][] = (new RestCatalogSearchProductImageTransfer())->fromArray($image, true)->toArray(true, true);
             }
         }
 
