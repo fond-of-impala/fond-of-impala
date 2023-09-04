@@ -79,6 +79,6 @@ class RawCatalogSearchResultFormatterPluginTest extends Unit
         static::assertCount(1, $data[0][ProductImageGroupMapExpanderPlugin::KEY]['frontView']);
         static::assertArrayHasKey('topView', $data[0][ProductImageGroupMapExpanderPlugin::KEY]);
         static::assertCount(2, $data[0][ProductImageGroupMapExpanderPlugin::KEY]['topView']);
-        static::assertEquals(99, $data[0][ProductImageGroupMapExpanderPlugin::KEY]['topView'][1]['sort_order']);
+        static::assertEquals(99, $data[0][ProductImageGroupMapExpanderPlugin::KEY]['topView'][1]['sortOrder']);
     }
 }
