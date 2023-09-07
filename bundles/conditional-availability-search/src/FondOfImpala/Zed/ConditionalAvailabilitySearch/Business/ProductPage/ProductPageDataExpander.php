@@ -50,7 +50,6 @@ class ProductPageDataExpander implements ProductPageDataExpanderInterface
 
     /**
      * @param array<\Generated\Shared\Transfer\ProductPayloadTransfer> $payloadTransfers
-     * @param array $mappedProductListIds
      *
      * @return array<\Generated\Shared\Transfer\ProductPayloadTransfer>
      */
@@ -110,7 +109,8 @@ class ProductPageDataExpander implements ProductPageDataExpanderInterface
 
     /**
      * @param ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer
-     * @return StockStatusTransfer
+     *
+     * @return int
      */
     protected function getStockStatus(ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer): int
     {
@@ -135,6 +135,11 @@ class ProductPageDataExpander implements ProductPageDataExpanderInterface
         return 0;
     }
 
+    /**
+     * @param Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer
+     *
+     * @return array<string, Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>
+     */
     protected function sortConditionalAvailabilityPeriodCollection(
         ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer
     ): array

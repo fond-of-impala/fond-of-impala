@@ -2,6 +2,8 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade;
 
+use Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface;
+
 class ConditionalAvailabilitySearchToProductPageSearchFacadeBridge implements ConditionalAvailabilitySearchToProductPageSearchFacadeInterface
 {
     /**
@@ -12,12 +14,16 @@ class ConditionalAvailabilitySearchToProductPageSearchFacadeBridge implements Co
     /**
      * @param \Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface $productPageSearchFacade
      */
-    public function __construct($productPageSearchFacade)
+    public function __construct(ProductPageSearchFacadeInterface $productPageSearchFacade)
     {
         $this->productPageSearchFacade = $productPageSearchFacade;
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param array<int> $productAbstractIds
      *
      * @return void
@@ -28,6 +34,10 @@ class ConditionalAvailabilitySearchToProductPageSearchFacadeBridge implements Co
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @param array<int> $productConcreteIds
      *
      * @return void

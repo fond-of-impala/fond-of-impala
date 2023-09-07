@@ -38,10 +38,7 @@ class ConditionalAvailabilitySearchBusinessFactory extends AbstractBusinessFacto
      */
     public function createProductPageDataExpander(): ProductPageDataExpanderInterface
     {
-        return new ProductPageDataExpander(
-            $this->getProductFacade(),
-            $this->getConditionalAvailabilityFacade()
-        );
+        return new ProductPageDataExpander($this->getProductFacade(), $this->getConditionalAvailabilityFacade());
     }
 
     /**
@@ -54,6 +51,11 @@ class ConditionalAvailabilitySearchBusinessFactory extends AbstractBusinessFacto
         return $this->getProvidedDependency(ConditionalAvailabilitySearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY);
     }
 
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductFacadeInterface
+     *
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
     public function getProductFacade(): ConditionalAvailabilitySearchToProductFacadeInterface
     {
         return $this->getProvidedDependency(ConditionalAvailabilitySearchDependencyProvider::FACADE_PRODUCT);

@@ -7,16 +7,14 @@ use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\Conditional
 class ProductAbstractReader implements ProductAbstractReaderInterface
 {
     /**
-     * @var \Spryker\Zed\ProductListSearch\Persistence\ProductListSearchRepositoryInterface
+     * @var \FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductFacadeInterface
      */
     protected $productFacade;
 
     /**
-     * @param \Spryker\Zed\ProductListSearch\Persistence\ProductListSearchRepositoryInterface $productListSearchRepository
+     * @param \FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductFacadeInterface $productFacade
      */
-    public function __construct(
-        ConditionalAvailabilitySearchToProductFacadeInterface $productFacade
-    ) {
+    public function __construct(ConditionalAvailabilitySearchToProductFacadeInterface $productFacade) {
         $this->productFacade = $productFacade;
     }
 

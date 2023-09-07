@@ -48,6 +48,6 @@ class ProductConcreteStockStatusPageMapExpanderPlugin extends AbstractPlugin imp
      */
     protected function setStockStatusData(PageMapTransfer $pageMapTransfer, array $productData): PageMapTransfer
     {
-        return $pageMapTransfer->setStockStatus(['B2B' => 1, 'B2B_INT' => 2]);
+        return $pageMapTransfer->setStockStatus($productData[ProductPageSearchTransfer::STOCK_STATUS]);
     }
 }

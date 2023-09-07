@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpanderInterface
 {
     /**
-     * @var \Spryker\Zed\ProductListSearch\Dependency\Facade\ProductListSearchToProductListFacadeInterface
+     * @var \FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToConditionalAvailabilityFacadeInterface
      */
     protected $conditionalAvailabilityFacade;
 
@@ -54,7 +54,8 @@ class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpa
 
     /**
      * @param ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer
-     * @return StockStatusTransfer
+     *
+     * @return string
      */
     protected function getStockStatus(ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer): string
     {
@@ -93,5 +94,4 @@ class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpa
 
         return $conditionalAvailabilityPeriods;
     }
-
 }

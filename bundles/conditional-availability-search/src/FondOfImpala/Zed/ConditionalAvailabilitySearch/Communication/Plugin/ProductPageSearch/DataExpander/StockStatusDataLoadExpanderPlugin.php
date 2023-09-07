@@ -2,19 +2,12 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Communication\Plugin\ProductPageSearch\DataExpander;
 
-use Generated\Shared\Transfer\ProductListMapTransfer;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Generated\Shared\Transfer\ProductPayloadTransfer;
-use Orm\Zed\ProductList\Persistence\Map\SpyProductListTableMap;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\ProductPageSearch\Dependency\Plugin\ProductPageDataExpanderInterface;
 
-/**
- * @method \Spryker\Zed\ProductListSearch\Business\ProductListSearchFacadeInterface getFacade()
- * @method \Spryker\Zed\ProductListSearch\Communication\ProductListSearchCommunicationFactory getFactory()
- * @method \Spryker\Zed\ProductListSearch\ProductListSearchConfig getConfig()
- */
 class StockStatusDataLoadExpanderPlugin extends AbstractPlugin implements ProductPageDataExpanderInterface
 {
     /**

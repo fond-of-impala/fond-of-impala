@@ -33,25 +33,8 @@ interface ConditionalAvailabilitySearchFacadeInterface
     public function expandProductPageData(ProductPageLoadTransfer $loadTransfer): ProductPageLoadTransfer;
 
     /**
-     *  Specification:
-     *  - Maps ConditionalAvailability data to ConditionalAvailabilityMapTransfer.
-     *
-     * @api
-     *
-     * @param array<string, mixed> $productData
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer $conditionalAvailabilityMapTransfer
-     *
-     * @return \Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer
-     */
-    public function mapProductDataToConditionalAvailabilityMapTransfer(
-        array $productData,
-        ConditionalAvailabilityMapTransfer $conditionalAvailabilityMapTransfer
-    ): ConditionalAvailabilityMapTransfer;
-
-
-    /**
      * Specification:
-     * - Expands ProductConcretePageSearchTransfer with conditional availabilities data and returns the modified object.
+     * - Expands ProductConcretePageSearchTransfer with stock status data and returns the modified object.
      *
      * @api
      *

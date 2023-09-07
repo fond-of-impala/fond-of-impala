@@ -13,16 +13,6 @@ class ConditionalAvailabilitySearchConfig extends AbstractBundleConfig
 
     /**
      * Specification:
-     * - This event is used for stock status publishing.
-     *
-     * @api
-     *
-     * @var string
-     */
-    public const CONDITIONAL_AVAILABILITY_PUBLISH = 'ConditionalAvailability.spy_conditional_availability.publish';
-
-    /**
-     * Specification:
      *  - Conditional Availability resource name, used for key generation.
      *
      * @api

@@ -34,6 +34,9 @@ class ConditionalAvailabilitySearchToProductFacadeBridge implements ConditionalA
     }
 
     /**
+     * {@inheritDoc}
+     *
+     * @api
      *
      * @param int $idProductAbstract
      *

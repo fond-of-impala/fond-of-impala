@@ -16,7 +16,7 @@ class ProductConcreteStockStatusPageDataExpanderPlugin extends AbstractPlugin im
 {
     /**
      * {@inheritDoc}
-     * - Expands provided ProductConcretePageSearchTransfer with conditional availability ids.
+     * - Expands provided ProductConcretePageSearchTransfer with stock status.
      *
      * @api
      *
@@ -29,9 +29,7 @@ class ProductConcreteStockStatusPageDataExpanderPlugin extends AbstractPlugin im
         ProductConcreteTransfer $productConcreteTransfer,
         ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
     ): ProductConcretePageSearchTransfer {
-        $productConcretePageSearchTransfer->setFkProduct(
-            $productConcreteTransfer->getIdProductConcrete(),
-        );
+        $productConcretePageSearchTransfer->setFkProduct($productConcreteTransfer->getIdProductConcrete());
 
         return $this->getFacade()
             ->expandProductConcretePageSearchTransferWithStockStatus($productConcretePageSearchTransfer);

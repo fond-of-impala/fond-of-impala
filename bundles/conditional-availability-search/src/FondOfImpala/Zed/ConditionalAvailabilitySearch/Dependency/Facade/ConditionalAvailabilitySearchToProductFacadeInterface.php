@@ -13,7 +13,6 @@ interface ConditionalAvailabilitySearchToProductFacadeInterface
     public function getProductAbstractIdsByProductConcreteIds(array $productConcreteIds): array;
 
     /**
-     *
      * @param int $idProductAbstract
      *
      * @return array<\Generated\Shared\Transfer\ProductConcreteTransfer>

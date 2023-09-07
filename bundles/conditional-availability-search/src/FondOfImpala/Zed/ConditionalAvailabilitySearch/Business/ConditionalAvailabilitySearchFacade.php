@@ -23,9 +23,7 @@ class ConditionalAvailabilitySearchFacade extends AbstractFacade implements Cond
      */
     public function getProductAbstractIdsByConcreteIds(array $concreteIds): array
     {
-        return $this->getFactory()
-            ->createProductAbstractReader()
-            ->getProductAbstractIdsByConcreteIds($concreteIds);
+        return $this->getFactory()->createProductAbstractReader()->getProductAbstractIdsByConcreteIds($concreteIds);
     }
 
     /**
@@ -47,47 +45,11 @@ class ConditionalAvailabilitySearchFacade extends AbstractFacade implements Cond
      *
      * @api
      *
-     * @param array<string, mixed> $productData
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer $conditionalAvailabilityMapTransfer
-     *
-     * @return \Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer
-     */
-    public function mapProductDataToConditionalAvailabilityMapTransfer(
-        array $productData,
-        ConditionalAvailabilityMapTransfer $conditionalAvailabilityMapTransfer
-    ): ConditionalAvailabilityMapTransfer {
-        return $this->getFactory()
-            ->createProductDataToConditionalAvailabilityMapTransferMapper()
-            ->mapProductDataToConditionalAvailabilityMapTransfer($productData, $conditionalAvailabilityMapTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
      *
      * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
      */
     public function expandProductConcretePageSearchTransferWithStockStatus(
-        ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
-    ): ProductConcretePageSearchTransfer {
-        return $this->getFactory()
-            ->createProductConcretePageSearchExpander()
-            ->expandProductConcretePageSearchTransferWithStockStatus($productConcretePageSearchTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
-     */
-    public function expandProductAbstractPageSearchTransferWithStockStatus(
         ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
     ): ProductConcretePageSearchTransfer {
         return $this->getFactory()

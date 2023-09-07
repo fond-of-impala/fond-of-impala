@@ -8,11 +8,6 @@ use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\Conditional
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductPageSearchFacadeInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 
-/**
- * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\ConditionalAvailabilitySearchConfig getConfig()
- * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\Persistence\ConditionalAvailabilitySearchRepositoryInterface getRepository()
- * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ConditionalAvailabilitySearchFacadeInterface getFacade()
- */
 class ConditionalAvailabilitySearchCommunicationFactory extends AbstractCommunicationFactory
 {
     /**
