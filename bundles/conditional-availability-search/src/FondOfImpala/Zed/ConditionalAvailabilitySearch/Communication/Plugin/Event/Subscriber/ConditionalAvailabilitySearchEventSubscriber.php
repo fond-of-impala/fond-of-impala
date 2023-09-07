@@ -40,4 +40,14 @@ class ConditionalAvailabilitySearchEventSubscriber extends AbstractPlugin implem
         );
     }
 
+    /*protected function addConditionalAvailabilityUpdateProductConcretePageSearchPublishListener(EventCollectionInterface $eventCollection): void
+    {
+        $eventCollection->addListenerQueued(
+            ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_UPDATE,
+            new ConditionalAvailabilityProductConcretePageSearchPublishListener(),
+            0,
+            null,
+            $this->getConfig()->getEventQueueName()
+        );
+    }*/
 }

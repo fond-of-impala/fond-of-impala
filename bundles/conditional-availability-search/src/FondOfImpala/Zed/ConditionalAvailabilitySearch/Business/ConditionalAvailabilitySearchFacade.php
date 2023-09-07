@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Business;
 
+use Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer;
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -11,6 +12,22 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  */
 class ConditionalAvailabilitySearchFacade extends AbstractFacade implements ConditionalAvailabilitySearchFacadeInterface
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param array<int> $concreteIds
+     *
+     * @return array<int>
+     */
+    public function getProductAbstractIdsByConcreteIds(array $concreteIds): array
+    {
+        return $this->getFactory()
+            ->createProductAbstractReader()
+            ->getProductAbstractIdsByConcreteIds($concreteIds);
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -54,6 +71,23 @@ class ConditionalAvailabilitySearchFacade extends AbstractFacade implements Cond
      * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
      */
     public function expandProductConcretePageSearchTransferWithStockStatus(
+        ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
+    ): ProductConcretePageSearchTransfer {
+        return $this->getFactory()
+            ->createProductConcretePageSearchExpander()
+            ->expandProductConcretePageSearchTransferWithStockStatus($productConcretePageSearchTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
+     *
+     * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
+     */
+    public function expandProductAbstractPageSearchTransferWithStockStatus(
         ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
     ): ProductConcretePageSearchTransfer {
         return $this->getFactory()

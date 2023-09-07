@@ -3,13 +3,16 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade;
 
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
+use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 
 interface ConditionalAvailabilitySearchToConditionalAvailabilityFacadeInterface
 {
     /**
-     * @param array<int> $conditionalAvailabilitiesIds
+     * @param \Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */
-    public function findConditionalAvailabilities(array $conditionalAvailabilitiesIds): ConditionalAvailabilityCollectionTransfer;
+    public function findConditionalAvailabilities(
+        ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
+    ): ConditionalAvailabilityCollectionTransfer;
 }

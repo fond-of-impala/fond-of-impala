@@ -2,11 +2,24 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Business;
 
+use Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer;
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
 
 interface ConditionalAvailabilitySearchFacadeInterface
 {
+    /**
+     * Specification:
+     *  - Retrieve list of abstract product ids by concrete product ids.
+     *
+     * @api
+     *
+     * @param array<int> $concreteIds
+     *
+     * @return array<int>
+     */
+    public function getProductAbstractIdsByConcreteIds(array $concreteIds): array;
+
     /**
      * Specification:
      *  - Expand product page transfer with conditional availability data.

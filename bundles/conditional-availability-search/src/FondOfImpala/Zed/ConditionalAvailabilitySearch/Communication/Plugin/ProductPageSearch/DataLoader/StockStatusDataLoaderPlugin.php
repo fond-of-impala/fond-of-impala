@@ -9,7 +9,7 @@ use Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductPageDataLoad
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ConditionalAvailabilitySearchFacadeInterface getFacade()
  */
-class ConditionalAvailabilityProductPageDataLoaderPlugin extends AbstractPlugin implements ProductPageDataLoaderPluginInterface
+class StockStatusDataLoaderPlugin extends AbstractPlugin implements ProductPageDataLoaderPluginInterface
 {
     /**
      * {@inheritDoc}

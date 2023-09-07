@@ -5,10 +5,14 @@ namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Business;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Expander\ProductConcretePageSearchExpander;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Expander\ProductConcretePageSearchExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Mapper\ProductDataToConditionalAvailabilityMapTransferMapper;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Mapper\ProductDataToConditionalAvailabilityMapTransferMapperInterface;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ProductPage\ProductPageDataExpander;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ProductPage\ProductPageDataExpanderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Reader\ProductAbstractReader;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Reader\ProductAbstractReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\ConditionalAvailabilitySearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToConditionalAvailabilityFacadeInterface;
-use Spryker\Zed\ConditionalAvailabilitySearch\Business\ConditionalAvailability\ProductDataToConditionalAvailabilityMapTransferMapperInterface;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 class ConditionalAvailabilitySearchBusinessFactory extends AbstractBusinessFactory
@@ -16,9 +20,28 @@ class ConditionalAvailabilitySearchBusinessFactory extends AbstractBusinessFacto
     /**
      * @return \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Expander\ProductConcretePageSearchExpanderInterface
      */
+    public function createProductAbstractReader(): ProductAbstractReaderInterface
+    {
+        return new ProductAbstractReader($this->getProductFacade());
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Expander\ProductConcretePageSearchExpanderInterface
+     */
     public function createProductConcretePageSearchExpander(): ProductConcretePageSearchExpanderInterface
     {
         return new ProductConcretePageSearchExpander($this->getConditionalAvailabilityFacade());
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ProductPage\ProductPageDataExpanderInterface
+     */
+    public function createProductPageDataExpander(): ProductPageDataExpanderInterface
+    {
+        return new ProductPageDataExpander(
+            $this->getProductFacade(),
+            $this->getConditionalAvailabilityFacade()
+        );
     }
 
     /**
@@ -31,16 +54,13 @@ class ConditionalAvailabilitySearchBusinessFactory extends AbstractBusinessFacto
         return $this->getProvidedDependency(ConditionalAvailabilitySearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY);
     }
 
-    /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ProductPage\ProductPageDataExpanderInterface
-     */
-    public function createProductPageDataExpander(): ProductPageDataExpanderInterface
+    public function getProductFacade(): ConditionalAvailabilitySearchToProductFacadeInterface
     {
-        return new ProductPageDataExpander();
+        return $this->getProvidedDependency(ConditionalAvailabilitySearchDependencyProvider::FACADE_PRODUCT);
     }
 
     /**
-     * @return \Spryker\Zed\ConditionalAvailabilitySearch\Business\ConditionalAvailability\ProductDataToConditionalAvailabilityMapTransferMapperInterface
+     * @return ProductDataToConditionalAvailabilityMapTransferMapperInterface
      */
     public function createProductDataToConditionalAvailabilityMapTransferMapper(): ProductDataToConditionalAvailabilityMapTransferMapperInterface
     {

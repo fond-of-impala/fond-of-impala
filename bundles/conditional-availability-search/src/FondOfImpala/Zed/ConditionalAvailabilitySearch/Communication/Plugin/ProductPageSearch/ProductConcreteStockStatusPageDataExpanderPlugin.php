@@ -12,7 +12,7 @@ use Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductConcretePage
  * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\ConditionalAvailabilitySearchConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\Communication\ConditionalAvailabilitySearchCommunicationFactory getFactory()
  */
-class ProductConcreteConditionalAvailabilityPageDataExpanderPlugin extends AbstractPlugin implements ProductConcretePageDataExpanderPluginInterface
+class ProductConcreteStockStatusPageDataExpanderPlugin extends AbstractPlugin implements ProductConcretePageDataExpanderPluginInterface
 {
     /**
      * {@inheritDoc}

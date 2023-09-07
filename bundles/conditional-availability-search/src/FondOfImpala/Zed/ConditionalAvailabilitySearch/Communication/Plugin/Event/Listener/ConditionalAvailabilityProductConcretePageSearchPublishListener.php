@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Communication\Plugin\Event\Listener;
 
+use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Spryker\Zed\Event\Dependency\Plugin\EventBulkHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -29,9 +30,12 @@ class ConditionalAvailabilityProductConcretePageSearchPublishListener extends Ab
             ->getEventBehaviorFacade()
             ->getEventTransferIds($eventEntityTransfers);
 
+        $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
+            ->setIds($conditionalAvailabilityIds);
+
         $conditionalAvailabilityCollection = $this->getFactory()
             ->getConditionalAvailabilityFacade()
-            ->findConditionalAvailabilities($conditionalAvailabilityIds);
+            ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
 
         if ($conditionalAvailabilityCollection->getConditionalAvailabilities()->count() === 0) {
             return;
@@ -43,5 +47,9 @@ class ConditionalAvailabilityProductConcretePageSearchPublishListener extends Ab
         }
 
         $this->getFactory()->getProductPageSearchFacade()->publishProductConcretes($productConcreteIds);
+
+        $productAbstractIds = $this->getFacade()->getProductAbstractIdsByConcreteIds($productConcreteIds);
+
+        $this->getFactory()->getProductPageSearchFacade()->publish($productAbstractIds);
     }
 }

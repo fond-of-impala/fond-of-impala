@@ -5,6 +5,8 @@ namespace FondOfImpala\Zed\ConditionalAvailabilitySearch;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToConditionalAvailabilityFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToEventBehaviorFacadeBridge;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductFacadeBridge;
+use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductPageSearchFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade\ConditionalAvailabilitySearchToProductPageSearchFacadeInterface;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -23,12 +25,31 @@ class ConditionalAvailabilitySearchDependencyProvider extends AbstractBundleDepe
     /**
      * @var string
      */
+    public const FACADE_PRODUCT = 'FACADE_PRODUCT';
+
+    /**
+     * @var string
+     */
     public const FACADE_PRODUCT_PAGE_SEARCH = 'FACADE_PRODUCT_PAGE_SEARCH';
 
     /**
      * @var string
      */
     public const FACADE_CONDITIONAL_AVAILABILITY = 'FACADE_CONDITIONAL_AVAILABILITY';
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function provideBusinessLayerDependencies(Container $container): Container
+    {
+        $container = parent::provideBusinessLayerDependencies($container);
+        $container = $this->addConditionalAvailabilityFacade($container);
+        $container = $this->addProductFacade($container);
+
+        return $container;
+    }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -88,6 +109,22 @@ class ConditionalAvailabilitySearchDependencyProvider extends AbstractBundleDepe
             Container $container
         ): ConditionalAvailabilitySearchToConditionalAvailabilityFacadeInterface => new ConditionalAvailabilitySearchToConditionalAvailabilityFacadeBridge(
             $container->getLocator()->conditionalAvailability()->facade(),
+        );
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addProductFacade(Container $container): Container
+    {
+        $container[static::FACADE_PRODUCT] = static fn(
+            Container $container
+        ): ConditionalAvailabilitySearchToProductFacadeInterface => new ConditionalAvailabilitySearchToProductFacadeBridge(
+            $container->getLocator()->product()->facade(),
         );
 
         return $container;

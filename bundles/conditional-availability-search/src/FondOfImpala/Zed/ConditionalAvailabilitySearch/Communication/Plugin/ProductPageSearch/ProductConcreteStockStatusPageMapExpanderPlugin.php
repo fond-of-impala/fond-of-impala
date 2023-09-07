@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Communication\Plugin\ProductPageSearch;
 
-use Generated\Shared\Transfer\ConditionalAvailabilityMapTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
 use Generated\Shared\Transfer\PageMapTransfer;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
@@ -13,7 +12,7 @@ use Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductConcretePage
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\ConditionalAvailabilitySearchFacadeInterface getFacade()
  */
-class ProductConcreteConditionalAvailabilityPageMapExpanderPlugin extends AbstractPlugin implements ProductConcretePageMapExpanderPluginInterface
+class ProductConcreteStockStatusPageMapExpanderPlugin extends AbstractPlugin implements ProductConcretePageMapExpanderPluginInterface
 {
     /**
      * {@inheritDoc}
@@ -34,11 +33,11 @@ class ProductConcreteConditionalAvailabilityPageMapExpanderPlugin extends Abstra
         array $productData,
         LocaleTransfer $localeTransfer
     ): PageMapTransfer {
-        if (!isset($productData[ProductPageSearchTransfer::CONDITIONAL_AVAILABILITY_MAP])) {
+        if (!isset($productData[ProductPageSearchTransfer::STOCK_STATUS])) {
             return $pageMapTransfer;
         }
 
-        return $this->setConditionalAvailabilitiesData($pageMapTransfer, $productData);
+        return $this->setStockStatusData($pageMapTransfer, $productData);
     }
 
     /**
@@ -47,17 +46,8 @@ class ProductConcreteConditionalAvailabilityPageMapExpanderPlugin extends Abstra
      *
      * @return \Generated\Shared\Transfer\PageMapTransfer
      */
-    protected function setConditionalAvailabilitiesData(
-        PageMapTransfer $pageMapTransfer,
-        array $productData
-    ): PageMapTransfer {
-        $pageMapTransfer->setConditionalAvailabilities(
-            $this->getFacade()->mapProductDataToConditionalAvailabilityMapTransfer(
-                $productData,
-                new ConditionalAvailabilityMapTransfer()
-            ),
-        );
-
-        return $pageMapTransfer;
+    protected function setStockStatusData(PageMapTransfer $pageMapTransfer, array $productData): PageMapTransfer
+    {
+        return $pageMapTransfer->setStockStatus(['B2B' => 1, 'B2B_INT' => 2]);
     }
 }

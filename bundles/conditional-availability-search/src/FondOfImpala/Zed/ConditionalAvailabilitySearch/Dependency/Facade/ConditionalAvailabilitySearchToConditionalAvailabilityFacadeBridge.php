@@ -22,16 +22,13 @@ class ConditionalAvailabilitySearchToConditionalAvailabilityFacadeBridge impleme
     }
 
     /**
-     * @param array<int> $conditionalAvailabilitiesIds
+     * @param \Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */
     public function findConditionalAvailabilities(
-        array $conditionalAvailabilitiesIds
+        ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
     ): ConditionalAvailabilityCollectionTransfer {
-        $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
-            ->setIds($conditionalAvailabilitiesIds);
-
         return $this->conditionalAvailabilityFacade
             ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
     }
