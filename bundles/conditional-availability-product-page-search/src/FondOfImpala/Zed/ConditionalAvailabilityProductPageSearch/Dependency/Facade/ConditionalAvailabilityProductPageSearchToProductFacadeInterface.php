@@ -1,10 +1,11 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade;
 
-interface ConditionalAvailabilitySearchToProductFacadeInterface
+interface ConditionalAvailabilityProductPageSearchToProductFacadeInterface
 {
     /**
+     *
      * @param array<int> $productConcreteIds
      *
      * @return array<int>

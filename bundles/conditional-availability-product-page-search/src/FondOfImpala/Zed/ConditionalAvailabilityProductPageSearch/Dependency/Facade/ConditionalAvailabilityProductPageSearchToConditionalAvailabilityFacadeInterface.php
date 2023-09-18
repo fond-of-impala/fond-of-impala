@@ -1,11 +1,11 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade;
 
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 
-interface ConditionalAvailabilitySearchToConditionalAvailabilityFacadeInterface
+interface ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer

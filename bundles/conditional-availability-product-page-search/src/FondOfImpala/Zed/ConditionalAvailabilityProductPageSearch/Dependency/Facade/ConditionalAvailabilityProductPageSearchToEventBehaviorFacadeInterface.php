@@ -1,8 +1,8 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Dependency\Facade;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade;
 
-interface ConditionalAvailabilitySearchToEventBehaviorFacadeInterface
+interface ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface
 {
     /**
      * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers

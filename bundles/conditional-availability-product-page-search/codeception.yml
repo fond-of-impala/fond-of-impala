@@ -1,4 +1,4 @@
-namespace: fond-of-impala/conditional-availability-search
+namespace: fond-of-impala/conditional-availability-product-page-search
 
 suites:
   unit:

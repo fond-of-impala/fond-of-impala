@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Reader;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader;
 
 interface ProductAbstractReaderInterface
 {

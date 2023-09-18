@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilitySearch\Business\Expander;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander;
 
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 
