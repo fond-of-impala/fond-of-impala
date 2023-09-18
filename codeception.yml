@@ -24,6 +24,7 @@ include:
   - bundles/conditional-availability-page-search-extension
   - bundles/conditional-availability-page-search-rest-api
   - bundles/conditional-availability-page-search-rest-api-extension
+  - bundles/conditional-availability-product-page-search
   - bundles/conditional-availability-sales-connector
   - bundles/customer-anonymizer-company-user-connector
   - bundles/customer-price-list
