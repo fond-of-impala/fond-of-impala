@@ -5,7 +5,6 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\F
 interface ConditionalAvailabilityProductPageSearchToProductFacadeInterface
 {
     /**
-     *
      * @param array<int> $productConcreteIds
      *
      * @return array<int>
