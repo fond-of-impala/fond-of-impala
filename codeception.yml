@@ -1,7 +1,47 @@
 namespace: fond-of-impala/fond-of-impala
 
 include:
+  - bundles/company-price-list-gui
+  - bundles/company-business-unit-price-list
+  - bundles/company-price-list
+  - bundles/company-price-list-gui
+  - bundles/company-type
+  - bundles/company-type-converter
+  - bundles/company-type-converter-extension
+  - bundles/company-type-role
+  - bundles/company-users-bulk-rest-api
+  - bundles/company-users-bulk-rest-api-business-central-connector
+  - bundles/company-users-bulk-rest-api-extension
+  - bundles/company-users-rest-api
+  - bundles/conditional-availability
+  - bundles/conditional-availability-bulk-api
+  - bundles/conditional-availability-cart-connector
+  - bundles/conditional-availability-checkout-connector
+  - bundles/conditional-availability-company-connector
+  - bundles/conditional-availability-customers-rest-api
+  - bundles/conditional-availability-extension
+  - bundles/conditional-availability-page-search
+  - bundles/conditional-availability-page-search-extension
+  - bundles/conditional-availability-page-search-rest-api
+  - bundles/conditional-availability-page-search-rest-api-extension
   - bundles/conditional-availability-product-page-search
+  - bundles/conditional-availability-sales-connector
+  - bundles/customer-anonymizer-company-user-connector
+  - bundles/customer-price-list
+  - bundles/customer-price-product-price-list-page-search
+  - bundles/jellyfish-sales-order-conditional-availability
+  - bundles/price-list
+  - bundles/price-list-api
+  - bundles/price-list-gui
+  - bundles/price-lists-rest-api
+  - bundles/price-product-price-list
+  - bundles/price-product-price-list-gui
+  - bundles/price-product-price-list-page-search
+  - bundles/price-product-price-list-page-search-extension
+  - bundles/price-product-price-list-search-rest-api
+  - bundles/product-image-grouping-product-page-search
+  - bundles/product-list-conditional-availability-page-search
+  - bundles/product-list-price-product-price-list-page-search
 
 suites:
   unit:
