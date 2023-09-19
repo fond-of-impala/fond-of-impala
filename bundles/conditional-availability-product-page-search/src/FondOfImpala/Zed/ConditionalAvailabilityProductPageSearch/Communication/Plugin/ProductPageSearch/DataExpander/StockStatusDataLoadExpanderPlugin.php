@@ -42,7 +42,7 @@ class StockStatusDataLoadExpanderPlugin extends AbstractPlugin implements Produc
      */
     protected function getStockStatus(array $productData): array
     {
-        return $this->getProductPayload($productData)->getStockStatus() ?? [];
+        return $this->getProductPayload($productData)->getStockStatus();
     }
 
     /**
