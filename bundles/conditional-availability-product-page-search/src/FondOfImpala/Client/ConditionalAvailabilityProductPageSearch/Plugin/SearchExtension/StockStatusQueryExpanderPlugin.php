@@ -41,6 +41,7 @@ class StockStatusQueryExpanderPlugin extends AbstractPlugin implements QueryExpa
 
     /**
      * @param \Elastica\Query $query
+     * @param string $stockStatus
      *
      * @return void
      */
