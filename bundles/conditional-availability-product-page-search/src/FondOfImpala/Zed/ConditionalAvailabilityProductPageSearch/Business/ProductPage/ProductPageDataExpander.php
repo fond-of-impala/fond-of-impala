@@ -147,11 +147,11 @@ class ProductPageDataExpander implements ProductPageDataExpanderInterface
         foreach ($conditionalAvailabilityPeriods as $conditionalAvailabilityPeriodTransfer) {
             /** @var \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer $conditionalAvailabilityPeriodTransfer */
             if ($conditionalAvailabilityPeriodTransfer->getQuantity() > 0) {
-                return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK;
+                return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_LATER_IN_STOCK;
             }
         }
 
-        return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_LATER_IN_STOCK;
+        return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK;
     }
 
     /**
