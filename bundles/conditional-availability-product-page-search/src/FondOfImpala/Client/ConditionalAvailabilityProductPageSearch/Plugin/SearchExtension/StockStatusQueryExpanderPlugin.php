@@ -49,10 +49,9 @@ class StockStatusQueryExpanderPlugin extends AbstractPlugin implements QueryExpa
     {
         $boolQuery = $this->getBoolQuery($query);
 
-        $matchQuery = $this->getFactory()
-            ->createQueryBuilder()
-            ->createMatchQuery()
-            ->setField(PageIndexMap::STOCK_STATUS, $stockStatus);
+        /** @var \Elastica\Query\MatchQuery $matchQuery */
+        $matchQuery = $this->getFactory()->createQueryBuilder()->createMatchQuery();
+        $matchQuery->setField(PageIndexMap::STOCK_STATUS, $stockStatus);
 
         $boolQuery->addMust($matchQuery);
     }
