@@ -35,6 +35,4 @@ class ConditionalAvailabilityProductPageSearchConfig extends AbstractBundleConfi
      * @var int
      */
     public const STOCK_STATUS_OUT_OF_STOCK = 0;
-
-
 }
