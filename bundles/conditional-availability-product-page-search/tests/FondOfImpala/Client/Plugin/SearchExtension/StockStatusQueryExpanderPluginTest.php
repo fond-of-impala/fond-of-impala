@@ -4,11 +4,11 @@ namespace FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Plugin\Se
 
 use Codeception\Test\Unit;
 use Elastica\Query;
-use Elastica\Query\Term;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchQuery;
-use Generated\Shared\Search\PageIndexMap;
+use Elastica\Query\Term;
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchFactory;
+use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
