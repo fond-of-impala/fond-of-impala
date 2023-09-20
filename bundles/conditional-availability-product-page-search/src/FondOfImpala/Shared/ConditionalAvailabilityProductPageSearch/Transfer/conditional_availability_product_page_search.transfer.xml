@@ -22,4 +22,9 @@
         <property name="productAbstractIds" type="array" singular="productAbstractIds"/>
         <property name="payloadTransfers" type="array" singular="payloadTransfers"/>
     </transfer>
+
+    <transfer name="ConditionalAvailabilityCriteriaFilter">
+        <property name="ids" type="int[]" />
+    </transfer>
+
 </transfers>
