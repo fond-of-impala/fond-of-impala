@@ -14,7 +14,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 use Generated\Shared\Transfer\EventEntityTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ConditionalAvailabilityProductConcretePageSearchPublishListenerTest extends Unit
+class ConditionalAvailabilityProductPageSearchPublishListenerTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
@@ -47,9 +47,9 @@ class ConditionalAvailabilityProductConcretePageSearchPublishListenerTest extend
     protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener\ConditionalAvailabilityProductConcretePageSearchPublishListener
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener\ConditionalAvailabilityProductPageSearchPublishListener
      */
-    protected ConditionalAvailabilityProductConcretePageSearchPublishListener $listener;
+    protected ConditionalAvailabilityProductPageSearchPublishListener $listener;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
@@ -100,7 +100,7 @@ class ConditionalAvailabilityProductConcretePageSearchPublishListenerTest extend
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->listener = new ConditionalAvailabilityProductConcretePageSearchPublishListener();
+        $this->listener = new ConditionalAvailabilityProductPageSearchPublishListener();
         $this->listener->setFactory($this->factoryMock);
     }
 
@@ -119,7 +119,7 @@ class ConditionalAvailabilityProductConcretePageSearchPublishListenerTest extend
             ->willReturn($this->eventBehaviorFacadeMock);
 
         $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
-            ->method('getEventTransferIds')
+            ->method('getEventTransferForeignKeys')
             ->with($eventEntityTransfers)
             ->willReturn($conditionalAvailabilityIds);
 

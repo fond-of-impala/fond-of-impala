@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Subscriber;
 
 use FondOfImpala\Zed\ConditionalAvailability\Dependency\ConditionalAvailabilityEvents;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener\ConditionalAvailabilityProductConcretePageSearchPublishListener;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener\ConditionalAvailabilityProductPageSearchPublishListener;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventSubscriberInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -20,8 +20,8 @@ class ConditionalAvailabilityProductPageSearchEventSubscriber extends AbstractPl
     public function getSubscribedEvents(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
         $eventCollection->addListenerQueued(
-            ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_CREATE,
-            new ConditionalAvailabilityProductConcretePageSearchPublishListener(),
+            ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_PERIOD_CREATE,
+            new ConditionalAvailabilityProductPageSearchPublishListener(),
         );
 
         return $eventCollection;

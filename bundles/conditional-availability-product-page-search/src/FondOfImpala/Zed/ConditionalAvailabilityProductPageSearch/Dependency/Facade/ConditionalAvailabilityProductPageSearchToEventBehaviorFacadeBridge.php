@@ -19,11 +19,12 @@ class ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeBridge implem
 
     /**
      * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers
+     * @param string $foreignKeyColumnName
      *
-     * @return array<int>
+     * @return array
      */
-    public function getEventTransferIds(array $eventTransfers): array
+    public function getEventTransferForeignKeys(array $eventTransfers, string $foreignKeyColumnName): array
     {
-        return $this->eventBehaviorFacade->getEventTransferIds($eventTransfers);
+        return $this->eventBehaviorFacade->getEventTransferForeignKeys($eventTransfers, $foreignKeyColumnName);
     }
 }

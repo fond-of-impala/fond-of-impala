@@ -3,14 +3,14 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener;
 
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
+use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityPeriodTableMap;
 use Spryker\Zed\Event\Dependency\Plugin\EventBulkHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\ConditionalAvailabilityProductPageSearchCommunicationFactory getFactory()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ConditionalAvailabilityProductPageSearchFacadeInterface getFacade()
  */
-class ConditionalAvailabilityProductConcretePageSearchPublishListener extends AbstractPlugin implements EventBulkHandlerInterface
+class ConditionalAvailabilityProductPageSearchPublishListener extends AbstractPlugin implements EventBulkHandlerInterface
 {
     /**
      * {@inheritDoc}
@@ -27,7 +27,10 @@ class ConditionalAvailabilityProductConcretePageSearchPublishListener extends Ab
     {
         $conditionalAvailabilityIds = $this->getFactory()
             ->getEventBehaviorFacade()
-            ->getEventTransferIds($eventEntityTransfers);
+            ->getEventTransferForeignKeys(
+                $eventEntityTransfers,
+                FoiConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY,
+            );
 
         $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
             ->setIds($conditionalAvailabilityIds);

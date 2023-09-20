@@ -5,7 +5,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communicatio
 use Codeception\Test\Unit;
 use Exception;
 use FondOfImpala\Zed\ConditionalAvailability\Dependency\ConditionalAvailabilityEvents;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener\ConditionalAvailabilityProductConcretePageSearchPublishListener;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener\ConditionalAvailabilityProductPageSearchPublishListener;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventBaseHandlerInterface;
@@ -45,8 +45,8 @@ class ConditionalAvailabilitySearchEventSubscriberTest extends Unit
             ->expects(static::exactly(1))
             ->method('addListenerQueued')
             ->willReturnCallback(static function (string $eventName, EventBaseHandlerInterface $eventHandler) {
-                if ($eventName === ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_CREATE) {
-                    static::assertInstanceOf(ConditionalAvailabilityProductConcretePageSearchPublishListener::class, $eventHandler);
+                if ($eventName === ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_PERIOD_CREATE) {
+                    static::assertInstanceOf(ConditionalAvailabilityProductPageSearchPublishListener::class, $eventHandler);
 
                     return;
                 }
