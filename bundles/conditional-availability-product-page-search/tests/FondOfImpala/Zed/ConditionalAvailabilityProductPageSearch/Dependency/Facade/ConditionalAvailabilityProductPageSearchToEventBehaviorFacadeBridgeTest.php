@@ -35,14 +35,15 @@ class ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeBridgeTest ex
     /**
      * @return void
      */
-    public function testGetEventTransferIds(): void
+    public function testGetEventTransferForeignKeys(): void
     {
         $eventTransfers = [];
+        $foreignKeyColumnName = 'foreignKeyColumnName';
         $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
-            ->method('getEventTransferIds')
-            ->with($eventTransfers)
+            ->method('getEventTransferForeignKeys')
+            ->with($eventTransfers, $foreignKeyColumnName)
             ->willReturn([]);
 
-        static::assertIsArray($this->bridge->getEventTransferIds($eventTransfers));
+        static::assertIsArray($this->bridge->getEventTransferForeignKeys($eventTransfers, $foreignKeyColumnName));
     }
 }
