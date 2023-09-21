@@ -132,6 +132,11 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
             $foiConditionalAvailabilityQuery->innerJoinWithSpyProduct();
         }
 
+        $ids = $conditionalAvailabilityCriteriaFilterTransfer->getIds();
+        if (count($ids) !== 0) {
+            $foiConditionalAvailabilityQuery->filterByIdConditionalAvailability_In($ids);
+        }
+
         if ($conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() !== null) {
             $foiConditionalAvailabilityQuery->filterByWarehouseGroup(
                 $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup(),
