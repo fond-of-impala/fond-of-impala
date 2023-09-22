@@ -132,11 +132,6 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
             $foiConditionalAvailabilityQuery->innerJoinWithSpyProduct();
         }
 
-        $ids = $conditionalAvailabilityCriteriaFilterTransfer->getIds();
-        if (count($ids) !== 0) {
-            $foiConditionalAvailabilityQuery->filterByIdConditionalAvailability_In($ids);
-        }
-
         if ($conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() !== null) {
             $foiConditionalAvailabilityQuery->filterByWarehouseGroup(
                 $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup(),
@@ -215,5 +210,29 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
             ->find();
 
         return $foiConditionalAvailabilityCollection->toArray();
+    }
+
+    /**
+     * @param array<int> $conditionalAvailabilityIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function getConditionalAvailabilitiesByIds(
+        array $conditionalAvailabilityIds
+    ): ConditionalAvailabilityCollectionTransfer {
+        $foiConditionalAvailabilityQuery = $this->getFactory()
+            ->createConditionalAvailabilityQuery();
+
+        $foiConditionalAvailabilityQuery->filterByIdConditionalAvailability_In($conditionalAvailabilityIds);
+
+        /** @var \Propel\Runtime\Collection\ObjectCollection $foiConditionalAvailabilityCollection */
+        $foiConditionalAvailabilityCollection = $foiConditionalAvailabilityQuery->find();
+
+        return $this->getFactory()
+            ->createConditionalAvailabilityMapper()
+            ->mapEntityCollectionToTransferCollection(
+                $foiConditionalAvailabilityCollection,
+                new ConditionalAvailabilityCollectionTransfer(),
+            );
     }
 }

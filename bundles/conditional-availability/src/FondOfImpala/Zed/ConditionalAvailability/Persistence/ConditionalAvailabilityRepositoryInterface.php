@@ -52,4 +52,13 @@ interface ConditionalAvailabilityRepositoryInterface
      * @return array<int>
      */
     public function getConditionalAvailabilityIdsByProductConcreteIds(array $productConcreteIds): array;
+
+    /**
+     * @param array<int> $conditionalAvailabilityIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function getConditionalAvailabilitiesByIds(
+        array $conditionalAvailabilityIds
+    ): ConditionalAvailabilityCollectionTransfer;
 }
