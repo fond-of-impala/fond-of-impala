@@ -49,7 +49,7 @@
     },
     "conditional-availability": {
       "path": "bundles/conditional-availability",
-      "version": "1.1.1"
+      "version": "1.2.0"
     },
     "conditional-availability-bulk-api": {
       "path": "bundles/conditional-availability-bulk-api",
@@ -89,6 +89,10 @@
     },
     "conditional-availability-page-search-rest-api-extension": {
       "path": "bundles/conditional-availability-page-search-rest-api-extension",
+      "version": "1.0.0"
+    },
+    "conditional-availability-product-page-search": {
+      "path": "bundles/conditional-availability-product-page-search",
       "version": "1.0.0"
     },
     "conditional-availability-sales-connector": {
