@@ -234,5 +234,5 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
                 $foiConditionalAvailabilityCollection,
                 new ConditionalAvailabilityCollectionTransfer(),
             );
-}
+    }
 }
