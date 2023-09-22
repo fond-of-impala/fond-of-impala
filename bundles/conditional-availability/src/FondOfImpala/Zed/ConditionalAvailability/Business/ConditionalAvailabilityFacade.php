@@ -158,4 +158,17 @@ class ConditionalAvailabilityFacade extends AbstractFacade implements Conditiona
     ): ConditionalAvailabilityResponseTransfer {
         return $this->getFactory()->createConditionalAvailabilityWriter()->persist($conditionalAvailabilityTransfer);
     }
+    /**
+     * Specifications:
+     * - Retrieves conditional availabilities by ids
+     *
+     * @param array<int>$conditionalAvailabilityIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function getConditionalAvailabilitiesByIds(
+        array $conditionalAvailabilityIds
+    ): ConditionalAvailabilityCollectionTransfer {
+        return $this->getRepository()->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
+    }
 }
