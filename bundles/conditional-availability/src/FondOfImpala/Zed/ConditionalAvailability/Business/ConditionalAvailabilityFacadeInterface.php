@@ -148,7 +148,7 @@ interface ConditionalAvailabilityFacadeInterface
      * Specifications:
      * - Retrieves conditional availabilities by ids
      *
-     * @param array<int>$conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */

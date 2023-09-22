@@ -213,7 +213,7 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
     }
 
     /**
-     * @param array<int>$conditionalAvailabilityIds
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */
