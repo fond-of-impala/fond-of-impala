@@ -74,4 +74,24 @@ class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBri
             $conditionalAvailabilityCollectionTransfer,
         );
     }
+
+    /**
+     * @return void
+     */
+    public function testGetConditionalAvailabilitiesByIds(): void
+    {
+        $conditionalAvailabilityIds = [1];
+        $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
+            ->method('getConditionalAvailabilitiesByIds')
+            ->with($conditionalAvailabilityIds)
+            ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
+
+        $conditionalAvailabilityCollectionTransfer = $this->bridge
+            ->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
+
+        static::assertEquals(
+            $this->conditionalAvailabilityCollectionTransferMock,
+            $conditionalAvailabilityCollectionTransfer,
+        );
+    }
 }
