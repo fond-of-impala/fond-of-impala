@@ -32,4 +32,15 @@ class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBri
         return $this->conditionalAvailabilityFacade
             ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
     }
+
+    /**
+     * @param array<int>$conditionalAvailabilityIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function getConditionalAvailabilitiesByIds(
+        array $conditionalAvailabilityIds
+    ): ConditionalAvailabilityCollectionTransfer {
+        return $this->conditionalAvailabilityFacade->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
+    }
 }

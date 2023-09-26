@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\Event\Listener;
 
-use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityPeriodTableMap;
 use Spryker\Zed\Event\Dependency\Plugin\EventBulkHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -32,12 +31,9 @@ class ConditionalAvailabilityProductPageSearchPublishListener extends AbstractPl
                 FoiConditionalAvailabilityPeriodTableMap::COL_FK_CONDITIONAL_AVAILABILITY,
             );
 
-        $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
-            ->setIds($conditionalAvailabilityIds);
-
         $conditionalAvailabilityCollection = $this->getFactory()
             ->getConditionalAvailabilityFacade()
-            ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
+            ->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
 
         if ($conditionalAvailabilityCollection->getConditionalAvailabilities()->count() === 0) {
             return;

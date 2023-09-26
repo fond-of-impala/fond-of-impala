@@ -128,7 +128,8 @@ class ConditionalAvailabilityProductPageSearchPublishListenerTest extends Unit
             ->willReturn($this->conditionalAvailabilityFacadeMock);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
-            ->method('findConditionalAvailabilities')
+            ->method('getConditionalAvailabilitiesByIds')
+            ->with($conditionalAvailabilityIds)
             ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
 
         $this->conditionalAvailabilityCollectionTransferMock->expects(static::atLeastOnce())
