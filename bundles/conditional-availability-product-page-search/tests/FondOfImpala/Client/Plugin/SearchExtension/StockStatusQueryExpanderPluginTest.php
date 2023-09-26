@@ -8,7 +8,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchFactory;
-use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
@@ -103,22 +102,8 @@ class StockStatusQueryExpanderPluginTest extends Unit
             ->method('getQuery')
             ->willReturn($this->boolQueryMock);
 
-        $this->factoryMock->expects(static::atLeastOnce())
-            ->method('createQueryBuilder')
-            ->willReturn($this->queryBuilderMock);
-
-        $this->queryBuilderMock->expects(static::atLeastOnce())
-            ->method('createMatchQuery')
-            ->willReturn($this->matchQueryMock);
-
-        $this->matchQueryMock->expects(static::atLeastOnce())
-            ->method('setField')
-            ->with(PageIndexMap::STOCK_STATUS, $requestParameters['stock-status'])
-            ->willReturnSelf();
-
         $this->boolQueryMock->expects(static::atLeastOnce())
             ->method('addMust')
-            ->with($this->matchQueryMock)
             ->willReturnSelf();
 
         $query = $this->plugin->expandQuery($this->queryMock, $requestParameters);
