@@ -30,6 +30,7 @@ include:
   - bundles/customer-price-list
   - bundles/customer-price-product-price-list-page-search
   - bundles/jellyfish-sales-order-conditional-availability
+  - bundles/jellyfish-sales-order-purchaser
   - bundles/price-list
   - bundles/price-list-api
   - bundles/price-list-gui
