@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed"
+          xsi:noNamespaceSchemaLocation="https://static.spryker.com/schema-01.xsd"
+          namespace="Orm\Zed\ErpOrder\Persistence" package="src.Orm.Zed.ErpOrder.Persistence">
+    <table name="foo_erp_order" phpName="ErpOrder" identifierQuoting="true">
+        <column name="purchaser_email" required="false" size="255" type="VARCHAR" caseInsensitive="true"/>
+        <column name="purchaser_first_name" required="false" size="100" type="VARCHAR"/>
+        <column name="purchaser_last_name" required="false" size="100" type="VARCHAR"/>
+    </table>
+
+</database>
