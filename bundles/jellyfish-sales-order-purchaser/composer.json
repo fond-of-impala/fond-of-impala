@@ -10,8 +10,6 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-oryx/erp-order": "^3.2.0",
-    "fond-of-oryx/erp-order-extension": "^2.0.0",
     "fond-of-oryx/jellyfish-sales-order": "^2.1.0",
     "spryker/sales": "^11.0.0"
   },

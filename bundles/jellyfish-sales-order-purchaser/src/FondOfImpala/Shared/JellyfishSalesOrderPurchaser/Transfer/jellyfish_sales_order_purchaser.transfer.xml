@@ -5,10 +5,4 @@
     <transfer name="JellyfishOrder">
         <property name="purchaserEmail" type="string"/>
     </transfer>
-
-    <transfer name="ErpOrder">
-        <property name="purchaserEmail" type="string"/>
-        <property name="purchaserFirstName" type="string"/>
-        <property name="purchaserLastName" type="string"/>
-    </transfer>
 </transfers>
