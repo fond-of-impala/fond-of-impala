@@ -9,6 +9,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
+use Generated\Shared\Transfer\ProductPayloadTransfer;
 
 class ProductPageDataExpander implements ProductPageDataExpanderInterface
 {
@@ -59,6 +60,14 @@ class ProductPageDataExpander implements ProductPageDataExpanderInterface
         foreach ($payloadTransfers as $payloadTransfer) {
             $productAbstractStockStatus = [];
             $stockStatus = [];
+
+            if (
+                !$payloadTransfer instanceof ProductPayloadTransfer
+                || $payloadTransfer->getIdProductAbstract() === null
+            ) {
+                continue;
+            }
+
             $productConcreteTransfers = $this->productFacade->getConcreteProductsByAbstractProductId(
                 $payloadTransfer->getIdProductAbstract(),
             );

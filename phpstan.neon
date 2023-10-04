@@ -6,6 +6,7 @@ parameters:
     level: 5
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
+    treatPhpDocTypesAsCertain: false
     tmpDir: phpstanCache
     scanDirectories:
         - src/Orm/Zed
