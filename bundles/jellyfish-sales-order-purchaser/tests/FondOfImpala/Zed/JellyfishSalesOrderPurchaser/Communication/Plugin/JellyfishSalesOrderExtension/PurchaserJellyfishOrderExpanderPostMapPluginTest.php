@@ -45,9 +45,9 @@ class PurchaserJellyfishOrderExpanderPostMapPluginTest extends Unit
     /**
      * @return void
      */
-    public function testExpand(): void
+    public function testSearchCompaniesAction(): void
     {
-        $email = 'john.doe@mail.com';
+        $email = 'john.doe@example.com';
 
         $this->spySalesOrderMock->expects(static::atLeastOnce())
             ->method('getEmail')
@@ -58,12 +58,11 @@ class PurchaserJellyfishOrderExpanderPostMapPluginTest extends Unit
             ->with($email)
             ->willReturn($this->jellyfishOrderTransferMock);
 
+        $jellyfishOrderTransfer = $this->plugin->expand($this->jellyfishOrderTransferMock, $this->sprySalesOrderMock);
+
         static::assertEquals(
             $this->jellyfishOrderTransferMock,
-            $this->plugin->expand(
-                $this->jellyfishOrderTransferMock,
-                $this->spySalesOrderMock,
-            ),
+            $jellyfishOrderTransfer,
         );
     }
 }
