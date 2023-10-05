@@ -115,6 +115,10 @@
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
     },
+    "jellyfish-sales-order-purchaser": {
+      "path": "bundles/jellyfish-sales-order-purchaser",
+      "version": "1.0.0"
+    },
     "price-lists-rest-api": {
       "path": "bundles/price-lists-rest-api",
       "version": "1.0.0-beta"
