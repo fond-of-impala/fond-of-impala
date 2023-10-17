@@ -37,7 +37,7 @@ class CompanyUserMapper implements CompanyUserMapperInterface
         $companyUserTransfer = (new CompanyUserTransfer())->fromArray($companyUserEntity->toArray(), true);
 
         $customerEntity = $companyUserEntity->getCustomer();
-        if ($customerEntity !== null){
+        if ($customerEntity !== null) {
             $customerTransfer = (new CustomerTransfer())->fromArray(
                 $customerEntity->toArray(),
                 true,
@@ -46,7 +46,7 @@ class CompanyUserMapper implements CompanyUserMapperInterface
         }
 
         $companyEntity = $companyUserEntity->getCompany();
-        if ($companyEntity !== null){
+        if ($companyEntity !== null) {
             $companyTransfer = (new CompanyTransfer())->fromArray(
                 $companyEntity->toArray(),
                 true,
