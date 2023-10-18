@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Plugin\Se
 
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\Terms;
 use FondOfImpala\Shared\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchConstants;
 use Generated\Shared\Search\PageIndexMap;
 use InvalidArgumentException;
@@ -47,13 +48,8 @@ class StockStatusQueryExpanderPlugin extends AbstractPlugin implements QueryExpa
      */
     protected function addStockStatusFilterToQuery(Query $query, string $stockStatus): void
     {
-        $boolQuery = $this->getBoolQuery($query);
-
-        /** @var \Elastica\Query\MatchQuery $matchQuery */
-        $matchQuery = $this->getFactory()->createQueryBuilder()->createMatchQuery();
-        $matchQuery->setField(PageIndexMap::STOCK_STATUS, $stockStatus);
-
-        $boolQuery->addMust($matchQuery);
+        $this->getBoolQuery($query)
+            ->addMust(new Terms(PageIndexMap::STOCK_STATUS, [$stockStatus]));
     }
 
     /**
