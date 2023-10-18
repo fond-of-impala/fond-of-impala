@@ -101,7 +101,7 @@
     },
     "customer-anonymizer-company-user-connector": {
       "path": "bundles/customer-anonymizer-company-user-connector",
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     "customer-price-list": {
       "path": "bundles/customer-price-list",
