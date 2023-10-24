@@ -11,6 +11,7 @@ jobs:
   size-labeler:
     runs-on: ubuntu-latest
     permissions:
+      issues: write
       pull-requests: write
     name: Label the PR size
     steps:
