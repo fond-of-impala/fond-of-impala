@@ -71,8 +71,7 @@ class CompanyFilterFieldsExpanderPluginTest extends Unit
 
         $this->httpRequestMock->query = new ParameterBag([
                 CompanyCartSearchRestApiConstants::PARAMETER_NAME_COMPANY_ID => $companyUuid,
-            ],
-        );
+            ]);
 
         $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getResource')
