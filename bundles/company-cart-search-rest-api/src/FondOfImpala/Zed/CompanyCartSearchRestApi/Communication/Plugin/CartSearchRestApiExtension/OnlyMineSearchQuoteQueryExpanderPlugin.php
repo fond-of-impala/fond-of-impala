@@ -73,7 +73,7 @@ class OnlyMineSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
         foreach ($filterFieldTransfers as $filterFieldTransfer) {
             if ($filterFieldTransfer->getType() === CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_ONLY_MINE) {
                 $onlyMine = filter_var($filterFieldTransfer->getValue(), FILTER_CALLBACK, [
-                    'options' => $callbackFilter
+                    'options' => $callbackFilter,
                 ]);
             }
 
