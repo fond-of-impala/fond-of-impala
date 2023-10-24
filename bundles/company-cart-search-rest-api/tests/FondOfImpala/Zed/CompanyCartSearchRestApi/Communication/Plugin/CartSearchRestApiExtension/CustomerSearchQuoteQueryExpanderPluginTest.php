@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\CartSea
 use Codeception\Test\Unit;
 use FondOfImpala\Shared\CompanyCartSearchRestApi\CompanyCartSearchRestApiConstants;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\PermissionExtension\SearchCartPermissionPlugin;
+use FondOfImpala\Zed\CompanyCartSearchRestApi\CompanyCartSearchRestApiConfig;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Persistence\CompanyCartSearchRestApiRepository;
 use Generated\Shared\Transfer\FilterFieldTransfer;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
@@ -19,6 +20,11 @@ use Propel\Runtime\ActiveQuery\Criteria;
 
 class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
 {
+    /**
+     * @var \FondOfImpala\Zed\CompanyCartSearchRestApi\CompanyCartSearchRestApiConfig|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected MockObject|CompanyCartSearchRestApiConfig $configMock;
+
     /**
      * @var \FondOfImpala\Zed\CompanyCartSearchRestApi\Persistence\CompanyCartSearchRestApiRepository|\PHPUnit\Framework\MockObject\MockObject
      */
@@ -46,6 +52,10 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
     {
         parent::_before();
 
+        $this->configMock = $this->getMockBuilder(CompanyCartSearchRestApiConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->repositoryMock = $this->getMockBuilder(CompanyCartSearchRestApiRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -64,6 +74,7 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
             ->getMock();
 
         $this->plugin = new CustomerSearchQuoteQueryExpanderPlugin();
+        $this->plugin->setConfig($this->configMock);
         $this->plugin->setRepository($this->repositoryMock);
     }
 
@@ -72,6 +83,14 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
      */
     public function testIsApplicable(): void
     {
+        $notAllowedFilterFieldTypes = [
+            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID,
+        ];
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getNotAllowedFilterFieldTypesForCustomerFilter')
+            ->willReturn($notAllowedFilterFieldTypes);
+
         $this->filterFieldTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn('foo');
@@ -88,13 +107,21 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
      */
     public function testIsApplicableWithInvalidFilterFieldTypes(): void
     {
+        $notAllowedFilterFieldTypes = [
+            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID,
+        ];
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getNotAllowedFilterFieldTypesForCustomerFilter')
+            ->willReturn($notAllowedFilterFieldTypes);
+
         $this->filterFieldTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn(CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_ID_CUSTOMER);
 
         $this->filterFieldTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getType')
-            ->willReturn(CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID);
+            ->willReturn($notAllowedFilterFieldTypes[0]);
 
         static::assertFalse($this->plugin->isApplicable($this->filterFieldTransferMocks));
     }
