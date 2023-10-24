@@ -18,6 +18,7 @@ use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
+ * @method \FondOfImpala\Zed\CompanyCartSearchRestApi\CompanyCartSearchRestApiConfig getConfig()
  * @method \FondOfImpala\Zed\CompanyCartSearchRestApi\Persistence\CompanyCartSearchRestApiRepositoryInterface getRepository()
  */
 class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements SearchQuoteQueryExpanderPluginInterface
@@ -28,11 +29,6 @@ class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
     protected const REQUIRED_FILTER_FIELD_TYPE = CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_ID_CUSTOMER;
 
     /**
-     * @var string
-     */
-    protected const NOT_ALLOWED_FILTER_FIELD_TYPE = CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID;
-
-    /**
      * @param array<\Generated\Shared\Transfer\FilterFieldTransfer> $filterFieldTransfers
      *
      * @return bool
@@ -40,9 +36,10 @@ class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
     public function isApplicable(array $filterFieldTransfers): bool
     {
         $isApplicable = false;
+        $notAllowedFilterFieldTypes = $this->getConfig()->getNotAllowedFilterFieldTypesForCustomerFilter();
 
         foreach ($filterFieldTransfers as $filterFieldTransfer) {
-            if ($filterFieldTransfer->getType() === static::NOT_ALLOWED_FILTER_FIELD_TYPE) {
+            if (in_array($filterFieldTransfer->getType(), $notAllowedFilterFieldTypes, true)) {
                 return false;
             }
 
