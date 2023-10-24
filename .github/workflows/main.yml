@@ -10,6 +10,8 @@ concurrency:
 jobs:
   size-labeler:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     name: Label the PR size
     steps:
       - uses: codelytv/pr-size-labeler@v1
