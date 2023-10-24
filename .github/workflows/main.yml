@@ -1,64 +1,94 @@
 name: CI
 
 on:
-    - pull_request
+  - pull_request
 
 concurrency:
   group: ${{ github.head_ref }}
   cancel-in-progress: true
 
 jobs:
-    continous-integration:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                php-versions: ["8.0", "8.1", "8.2"]
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+  size-labeler:
+    runs-on: ubuntu-latest
+    name: Label the PR size
+    steps:
+      - uses: codelytv/pr-size-labeler@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          xs_label: 'size/xs'
+          xs_max_size: '10'
+          s_label: 'size/s'
+          s_max_size: '100'
+          m_label: 'size/m'
+          m_max_size: '500'
+          l_label: 'size/l'
+          l_max_size: '1000'
+          xl_label: 'size/xl'
+          fail_if_xl: 'false'
+          message_if_xl: >
+            This PR exceeds the recommended size of 1000 lines.
+            Please make sure you are NOT addressing multiple issues with one PR.
+            Note this PR might be rejected due to its size.
+          github_api_url: 'api.github.com'
+          files_to_ignore: |
+            '*Test.php'
+            '.gitkeep'
+            'LICENSE'
+            '*.md'
 
-            - name: Setup PHP, with composer and extensions
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php-versions }}
-                  extensions: mbstring, dom, fileinfo, pgsql, json
-                  coverage: xdebug
+  continous-integration:
+    name: Continous integration
+    needs: size-labeler
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: [ "8.0", "8.1", "8.2" ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-            - name: Changed Files
-              id: changed-files
-              uses: tj-actions/changed-files@v37.4.0
-              with:
-                files: bundles/**/*.php
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, dom, fileinfo, pgsql, json
+          coverage: xdebug
 
-            - name: Get composer cache directory
-              id: composercache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v37.4.0
+        with:
+          files: bundles/**/*.php
 
-            - name: Cache composer dependencies
-              uses: actions/cache@v3
-              with:
-                  path: ${{ steps.composercache.outputs.dir }}
-                  key: ${{ runner.os }}-composer-${{ matrix.php-versions }}-${{ hashFiles('composer.json') }}
-                  restore-keys: ${{ runner.os }}-composer-${{ matrix.php-versions }}-
+      - name: Get composer cache directory
+        id: composercache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-            - name: Cache phpstan
-              uses: actions/cache@v3
-              with:
-                path: phpstanCache
-                key: ${{ runner.os }}-phpstan-${{ matrix.php-versions }}
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composercache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ matrix.php-versions }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-${{ matrix.php-versions }}-
 
-            - name: Install dependencies
-              env:
-                COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
-              run: make install
+      - name: Cache phpstan
+        uses: actions/cache@v3
+        with:
+          path: phpstanCache
+          key: ${{ runner.os }}-phpstan-${{ matrix.php-versions }}
 
-            - name: Run phpcs
-              if: steps.changed-files.outputs.any_changed == 'true'
-              run: ./vendor/bin/phpcs -d memory_limit=-1 --standard=./vendor/spryker/code-sniffer/Spryker/ruleset.xml --parallel=75 ${{ steps.changed-files.outputs.all_changed_files }}
+      - name: Install dependencies
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
+        run: make install
 
-            - name: Run codeception
-              run: make codeception-without-coverage
+      - name: Run phpcs
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: ./vendor/bin/phpcs -d memory_limit=-1 --standard=./vendor/spryker/code-sniffer/Spryker/ruleset.xml --parallel=75 ${{ steps.changed-files.outputs.all_changed_files }}
 
-            - name: Run phpstan
-              run: make phpstan
+      - name: Run codeception
+        run: make codeception-without-coverage
+
+      - name: Run phpstan
+        run: make phpstan
