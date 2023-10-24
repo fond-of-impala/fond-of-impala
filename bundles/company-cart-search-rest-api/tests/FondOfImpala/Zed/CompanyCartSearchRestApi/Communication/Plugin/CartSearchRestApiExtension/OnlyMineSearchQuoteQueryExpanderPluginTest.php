@@ -7,6 +7,7 @@ use FondOfImpala\Shared\CompanyCartSearchRestApi\CompanyCartSearchRestApiConstan
 use Generated\Shared\Transfer\FilterFieldTransfer;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 use Generated\Shared\Transfer\QueryJoinTransfer;
+use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Quote\Persistence\Map\SpyQuoteTableMap;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -111,8 +112,18 @@ class OnlyMineSearchQuoteQueryExpanderPluginTest extends Unit
                 [
                     static::callback(
                         static function (QueryJoinTransfer $queryJoinTransfer) {
-                            return $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_CUSTOMER_REFERENCE]
-                                && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_CUSTOMER_REFERENCE]
+                            return $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE]
+                                && $queryJoinTransfer->getRight() == [SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]
+                                && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
+                                && $queryJoinTransfer->getWhereConditions()->count() === 0;
+                        },
+                    ),
+                ],
+                [
+                    static::callback(
+                        static function (QueryJoinTransfer $queryJoinTransfer) {
+                            return $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_FK_CUSTOMER]
+                                && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_ID_CUSTOMER]
                                 && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
                                 && $queryJoinTransfer->getWhereConditions()->count() === 1;
                         },

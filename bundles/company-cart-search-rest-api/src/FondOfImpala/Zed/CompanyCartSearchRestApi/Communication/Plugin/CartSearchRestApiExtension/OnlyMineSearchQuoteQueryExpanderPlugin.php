@@ -7,6 +7,7 @@ use FondOfOryx\Zed\CartSearchRestApiExtension\Dependency\Plugin\SearchQuoteQuery
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 use Generated\Shared\Transfer\QueryJoinTransfer;
 use Generated\Shared\Transfer\QueryWhereConditionTransfer;
+use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Quote\Persistence\Map\SpyQuoteTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -57,10 +58,23 @@ class OnlyMineSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
     ): QueryJoinCollectionTransfer {
         $onlyMine = null;
         $idCustomer = null;
+        $callbackFilter = static function (string $value) {
+            if (strtolower($value) === 'true') {
+                return true;
+            }
+
+            if (strtolower($value) === 'false') {
+                return true;
+            }
+
+            return null;
+        };
 
         foreach ($filterFieldTransfers as $filterFieldTransfer) {
             if ($filterFieldTransfer->getType() === CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_ONLY_MINE) {
-                $onlyMine = (bool)$filterFieldTransfer->getValue();
+                $onlyMine = filter_var($filterFieldTransfer->getValue(), FILTER_CALLBACK, [
+                    'options' => $callbackFilter
+                ]);
             }
 
             if ($filterFieldTransfer->getType() === CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_ID_CUSTOMER) {
@@ -75,8 +89,13 @@ class OnlyMineSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
         return $queryJoinCollectionTransfer->addQueryJoin(
             (new QueryJoinTransfer())
                 ->setJoinType(Criteria::INNER_JOIN)
-                ->setLeft([SpyQuoteTableMap::COL_CUSTOMER_REFERENCE])
-                ->setRight([SpyCustomerTableMap::COL_CUSTOMER_REFERENCE])
+                ->setLeft([SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE])
+                ->setRight([SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]),
+        )->addQueryJoin(
+            (new QueryJoinTransfer())
+                ->setJoinType(Criteria::INNER_JOIN)
+                ->setLeft([SpyCompanyUserTableMap::COL_FK_CUSTOMER])
+                ->setRight([SpyCustomerTableMap::COL_ID_CUSTOMER])
                 ->addQueryWhereCondition(
                     (new QueryWhereConditionTransfer())
                         ->setValue($idCustomer)
