@@ -8,6 +8,7 @@ interface CompanyUserQueryExpanderInterface
 {
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $companyUserQuery
+     *
      * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
      */
     public function expand(SpyCompanyUserQuery $companyUserQuery): SpyCompanyUserQuery;

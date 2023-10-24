@@ -10,6 +10,7 @@ class PriceListCompanyUserQueryExpanderPlugin extends AbstractPlugin implements 
 {
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $companyUserQuery
+     *
      * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
      */
     public function expandCompanyUserQuery(SpyCompanyUserQuery $companyUserQuery): SpyCompanyUserQuery
@@ -22,5 +23,4 @@ class PriceListCompanyUserQueryExpanderPlugin extends AbstractPlugin implements 
 
         return $companyUserQuery;
     }
-
 }

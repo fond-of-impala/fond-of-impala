@@ -7,7 +7,7 @@ use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 class CompanyUserQueryExpander implements CompanyUserQueryExpanderInterface
 {
     /**
-     * @var array|\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\QueryExpander\CompanyUserQueryExpanderPluginInterface[]
+     * @var \FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\QueryExpander\CompanyUserQueryExpanderPluginInterface[]|array
      */
     protected array $expanderPlugins;
 
@@ -21,6 +21,7 @@ class CompanyUserQueryExpander implements CompanyUserQueryExpanderInterface
 
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $companyUserQuery
+     *
      * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
      */
     public function expand(SpyCompanyUserQuery $companyUserQuery): SpyCompanyUserQuery
