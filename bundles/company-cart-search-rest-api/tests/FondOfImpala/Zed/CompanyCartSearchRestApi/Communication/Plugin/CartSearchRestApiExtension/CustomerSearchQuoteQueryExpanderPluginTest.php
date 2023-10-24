@@ -84,7 +84,7 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
     public function testIsApplicable(): void
     {
         $notAllowedFilterFieldTypes = [
-            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID
+            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID,
         ];
 
         $this->configMock->expects(static::atLeastOnce())
@@ -108,7 +108,7 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
     public function testIsApplicableWithInvalidFilterFieldTypes(): void
     {
         $notAllowedFilterFieldTypes = [
-            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID
+            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID,
         ];
 
         $this->configMock->expects(static::atLeastOnce())

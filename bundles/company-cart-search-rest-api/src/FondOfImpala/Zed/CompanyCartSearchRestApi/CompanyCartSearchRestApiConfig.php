@@ -13,9 +13,10 @@ class CompanyCartSearchRestApiConfig extends AbstractBundleConfig
     /**
      * @return array<string>
      */
-    public function getNotAllowedFilterFieldTypesForCustomerFilter(): array {
+    public function getNotAllowedFilterFieldTypesForCustomerFilter(): array
+    {
         return [
-            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID
+            CompanyCartSearchRestApiConstants::FILTER_FIELD_TYPE_COMPANY_UUID,
         ];
     }
 }
