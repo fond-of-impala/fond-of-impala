@@ -70,7 +70,7 @@ class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
             $idCustomer = $filterFieldTransfer->getValue();
         }
 
-        $queryJoinCollectionTransfer->addQueryJoin(
+        return $queryJoinCollectionTransfer->addQueryJoin(
             (new QueryJoinTransfer())
                 ->setJoinType(Criteria::INNER_JOIN)
                 ->setLeft([SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE])
@@ -84,30 +84,6 @@ class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
                     (new QueryWhereConditionTransfer())
                         ->setValue($idCustomer)
                         ->setColumn(SpyCustomerTableMap::COL_ID_CUSTOMER)
-                        ->setComparison(Criteria::EQUAL),
-                ),
-        );
-
-        $idPermission = $this->getRepository()->getIdPermissionByKey(SearchCartPermissionPlugin::KEY);
-
-        if ($idPermission === null) {
-            return $queryJoinCollectionTransfer;
-        }
-
-        return $queryJoinCollectionTransfer->addQueryJoin(
-            (new QueryJoinTransfer())
-                ->setJoinType(Criteria::INNER_JOIN)
-                ->setLeft([SpyCompanyUserTableMap::COL_ID_COMPANY_USER])
-                ->setRight([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER]),
-        )->addQueryJoin(
-            (new QueryJoinTransfer())
-                ->setJoinType(Criteria::INNER_JOIN)
-                ->setLeft([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_ROLE])
-                ->setRight([SpyCompanyRoleToPermissionTableMap::COL_FK_COMPANY_ROLE])
-                ->addQueryWhereCondition(
-                    (new QueryWhereConditionTransfer())
-                        ->setValue((string)$idPermission)
-                        ->setColumn(SpyCompanyRoleToPermissionTableMap::COL_FK_PERMISSION)
                         ->setComparison(Criteria::EQUAL),
                 ),
         );
