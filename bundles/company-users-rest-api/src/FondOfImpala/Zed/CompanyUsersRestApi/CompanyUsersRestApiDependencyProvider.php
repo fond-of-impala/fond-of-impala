@@ -93,6 +93,11 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     public const PLUGINS_COMPANY_USER_PRE_CREATE = 'PLUGINS_COMPANY_USER_PRE_CREATE';
 
     /**
+     * @var string
+     */
+    public const PLUGINS_COMPANY_USER_QUERY_EXPANDER = 'PLUGINS_COMPANY_USER_QUERY_EXPANDER';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -126,6 +131,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
         $container = parent::providePersistenceLayerDependencies($container);
 
         $container = $this->addCompanyRoleToCompanyUserPropelQuery($container);
+        $container = $this->addCompanyUserQueryExpanderPlugins($container);
 
         return $this->addCompanyUserPropelQuery($container);
     }
@@ -378,6 +384,30 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreCreatePluginInterface>
      */
     protected function getCompanyUserPreCreatePlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addCompanyUserQueryExpanderPlugins(Container $container): Container
+    {
+        $self = $this;
+
+        $container[static::PLUGINS_COMPANY_USER_QUERY_EXPANDER] = static function () use ($self) {
+            return $self->getCompanyUserQueryExpanderPlugins();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @return array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\QueryExpander\CompanyUserQueryExpanderPluginInterface>
+     */
+    protected function getCompanyUserQueryExpanderPlugins(): array
     {
         return [];
     }
