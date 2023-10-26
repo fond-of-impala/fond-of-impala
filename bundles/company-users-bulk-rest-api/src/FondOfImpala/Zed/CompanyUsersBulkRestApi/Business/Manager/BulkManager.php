@@ -152,13 +152,13 @@ class BulkManager implements BulkManagerInterface
                     $response = $this->companyUserFacade->create($companyUserTransfer);
 
                     if (!$response->getIsSuccessful()) {
-                        $this->logger->warning(sprintf('Could not create companyUser for customer "%s" and company "%s"', $customer->getCustomerReference(), $company->getUuid()));
-                        $this->logger->warning(json_encode($companyUserTransfer->toArray()));
+                        $this->logger->error(sprintf('Could not create companyUser for customer "%s" and company "%s"', $customer->getCustomerReference(), $company->getUuid()));
+                        $this->logger->error(json_encode($companyUserTransfer->toArray()));
                     }
                 }
             }
         } catch (Throwable $throwable) {
-            $this->logger->warning($throwable->getMessage(), $throwable->getTrace());
+            $this->logger->error($throwable->getMessage(), $throwable->getTrace());
         }
     }
 
@@ -185,13 +185,13 @@ class BulkManager implements BulkManagerInterface
                     $response = $this->companyUserFacade->deleteCompanyUser($companyUserTransfer);
 
                     if (!$response->getIsSuccessful()) {
-                        $this->logger->warning(sprintf('Could not delete companyUser for customer "%s" and company "%s"', $customer->getCustomerReference(), $company->getUuid()));
-                        $this->logger->warning(json_encode($companyUserTransfer->toArray()));
+                        $this->logger->error(sprintf('Could not delete companyUser for customer "%s" and company "%s"', $customer->getCustomerReference(), $company->getUuid()));
+                        $this->logger->error(json_encode($companyUserTransfer->toArray()));
                     }
                 }
             }
         } catch (Throwable $throwable) {
-            $this->logger->warning($throwable->getMessage(), $throwable->getTrace());
+            $this->logger->error($throwable->getMessage(), $throwable->getTrace());
         }
     }
 

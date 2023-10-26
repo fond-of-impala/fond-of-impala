@@ -211,4 +211,28 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
 
         return $foiConditionalAvailabilityCollection->toArray();
     }
+
+    /**
+     * @param array<int> $conditionalAvailabilityIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function getConditionalAvailabilitiesByIds(
+        array $conditionalAvailabilityIds
+    ): ConditionalAvailabilityCollectionTransfer {
+        $foiConditionalAvailabilityQuery = $this->getFactory()
+            ->createConditionalAvailabilityQuery();
+
+        $foiConditionalAvailabilityQuery->filterByIdConditionalAvailability_In($conditionalAvailabilityIds);
+
+        /** @var \Propel\Runtime\Collection\ObjectCollection $foiConditionalAvailabilityCollection */
+        $foiConditionalAvailabilityCollection = $foiConditionalAvailabilityQuery->find();
+
+        return $this->getFactory()
+            ->createConditionalAvailabilityMapper()
+            ->mapEntityCollectionToTransferCollection(
+                $foiConditionalAvailabilityCollection,
+                new ConditionalAvailabilityCollectionTransfer(),
+            );
+    }
 }

@@ -3,12 +3,16 @@
   "pathToSplitshLite": "/usr/local/bin/splitsh-lite",
   "pathToTempDirectory": "/home/dandelion/project/tmp/",
   "repositories": {
-    "company-price-list": {
-      "path": "bundles/company-price-list",
-      "version": "1.0.0-beta"
-    },
     "company-business-unit-price-list": {
       "path": "bundles/company-business-unit-price-list",
+      "version": "1.0.0-beta"
+    },
+    "company-cart-search-rest-api": {
+      "path": "bundles/company-cart-search-rest-api",
+      "version": "1.0.0"
+    },
+    "company-price-list": {
+      "path": "bundles/company-price-list",
       "version": "1.0.0-beta"
     },
     "company-price-list-gui": {
@@ -33,7 +37,7 @@
     },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",
-      "version": "1.1.0"
+      "version": "1.1.1"
     },
     "company-users-bulk-rest-api-business-central-connector": {
       "path": "bundles/company-users-bulk-rest-api-business-central-connector",
@@ -45,11 +49,15 @@
     },
     "company-users-rest-api": {
       "path": "bundles/company-users-rest-api",
+      "version": "2.0.0"
+    },
+    "company-users-rest-api-price-list-connector": {
+      "path": "bundles/company-users-rest-api-price-list-connector",
       "version": "1.0.0"
     },
     "conditional-availability": {
       "path": "bundles/conditional-availability",
-      "version": "1.1.1"
+      "version": "1.2.0"
     },
     "conditional-availability-bulk-api": {
       "path": "bundles/conditional-availability-bulk-api",
@@ -91,13 +99,17 @@
       "path": "bundles/conditional-availability-page-search-rest-api-extension",
       "version": "1.0.0"
     },
+    "conditional-availability-product-page-search": {
+      "path": "bundles/conditional-availability-product-page-search",
+      "version": "1.1.1"
+    },
     "conditional-availability-sales-connector": {
       "path": "bundles/conditional-availability-sales-connector",
       "version": "1.0.0"
     },
     "customer-anonymizer-company-user-connector": {
       "path": "bundles/customer-anonymizer-company-user-connector",
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     "customer-price-list": {
       "path": "bundles/customer-price-list",
@@ -111,13 +123,13 @@
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
     },
-    "price-lists-rest-api": {
-      "path": "bundles/price-lists-rest-api",
-      "version": "1.0.0-beta"
+    "jellyfish-sales-order-purchaser": {
+      "path": "bundles/jellyfish-sales-order-purchaser",
+      "version": "1.0.0"
     },
-    "price-list-gui": {
-      "path": "bundles/price-list-gui",
-      "version": "1.0.0-beta"
+    "permission-cart-search-rest-api": {
+      "path": "bundles/permission-cart-search-rest-api",
+      "version": "1.0.0"
     },
     "price-list": {
       "path": "bundles/price-list",
@@ -125,6 +137,14 @@
     },
     "price-list-api": {
       "path": "bundles/price-list-api",
+      "version": "1.0.0-beta"
+    },
+    "price-list-gui": {
+      "path": "bundles/price-list-gui",
+      "version": "1.0.0-beta"
+    },
+    "price-lists-rest-api": {
+      "path": "bundles/price-lists-rest-api",
       "version": "1.0.0-beta"
     },
     "price-product-price-list": {
@@ -147,10 +167,6 @@
       "path": "bundles/price-product-price-list-search-rest-api",
       "version": "1.0.0-beta"
     },
-    "product-list-price-product-price-list-page-search": {
-      "path": "bundles/product-list-price-product-price-list-page-search",
-      "version": "1.0.0-beta"
-    },
     "product-image-grouping-product-page-search": {
       "path": "bundles/product-image-grouping-product-page-search",
       "version": "1.0.0"
@@ -158,6 +174,10 @@
     "product-list-conditional-availability-page-search": {
       "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.0.0"
+    },
+    "product-list-price-product-price-list-page-search": {
+      "path": "bundles/product-list-price-product-price-list-page-search",
+      "version": "1.0.0-beta"
     }
   },
   "vcs": {

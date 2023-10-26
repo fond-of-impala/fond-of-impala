@@ -1,8 +1,8 @@
 namespace: fond-of-impala/fond-of-impala
 
 include:
-  - bundles/company-price-list-gui
   - bundles/company-business-unit-price-list
+  - bundles/company-cart-search-rest-api
   - bundles/company-price-list
   - bundles/company-price-list-gui
   - bundles/company-type
@@ -24,11 +24,14 @@ include:
   - bundles/conditional-availability-page-search-extension
   - bundles/conditional-availability-page-search-rest-api
   - bundles/conditional-availability-page-search-rest-api-extension
+  - bundles/conditional-availability-product-page-search
   - bundles/conditional-availability-sales-connector
   - bundles/customer-anonymizer-company-user-connector
   - bundles/customer-price-list
   - bundles/customer-price-product-price-list-page-search
   - bundles/jellyfish-sales-order-conditional-availability
+  - bundles/jellyfish-sales-order-purchaser
+  - bundles/permission-cart-search-rest-api
   - bundles/price-list
   - bundles/price-list-api
   - bundles/price-list-gui
