@@ -45,6 +45,10 @@
     },
     "company-users-rest-api": {
       "path": "bundles/company-users-rest-api",
+      "version": "2.0.0"
+    },
+    "company-users-rest-api-price-list-connector": {
+      "path": "bundles/company-users-rest-api-price-list-connector",
       "version": "1.0.0"
     },
     "conditional-availability": {
