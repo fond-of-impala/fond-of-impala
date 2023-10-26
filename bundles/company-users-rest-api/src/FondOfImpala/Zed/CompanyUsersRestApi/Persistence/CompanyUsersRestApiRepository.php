@@ -33,23 +33,22 @@ class CompanyUsersRestApiRepository extends AbstractRepository implements Compan
      */
     public function findActiveCompanyUsersByCustomerReference(string $customerReference): array
     {
-        /** @var array<\Orm\Zed\CompanyUser\Persistence\Base\SpyCompanyUser> $companyUsers */
-        $companyUsers = $this->getFactory()
+        $query = $this->getFactory()
             ->getCompanyUserPropelQuery()
             ->useCustomerQuery()
-            ->filterByCustomerReference($customerReference)
-            ->endUse()
-            ->useCompanyQuery()
-            ->usePriceListQuery()
-            ->endUse()
+                ->filterByCustomerReference($customerReference)
             ->endUse()
             ->useCompanyBusinessUnitQuery()
             ->endUse()
             ->useSpyCompanyRoleToCompanyUserQuery()
-            ->useCompanyRoleQuery()
-            ->endUse()
-            ->endUse()
-            ->find();
+                ->useCompanyRoleQuery()
+                ->endUse()
+            ->endUse();
+
+        $query = $this->getFactory()->createCompanyUserQueryExpander()->expand($query);
+
+        /** @var array<\Orm\Zed\CompanyUser\Persistence\Base\SpyCompanyUser> $companyUsers */
+        $companyUsers = $query->find();
 
         $companyUserTransfers = [];
 

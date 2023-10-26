@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\PermissionExtension;
+namespace FondOfImpala\Zed\PermissionCartSearchRestApi\Communication\Plugin\PermissionExtension;
 
 use Spryker\Shared\PermissionExtension\Dependency\Plugin\PermissionPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;

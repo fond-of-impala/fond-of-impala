@@ -1,16 +1,8 @@
 {
-  "name": "fond-of-impala/company-users-rest-api",
-  "description": "Company users rest api module",
+  "name": "fond-of-impala/company-users-rest-api-price-list-connector",
+  "description": "Company users rest api price list connector module",
   "license": "MIT",
   "authors": [
-    {
-      "name": "Daniel Rose",
-      "email": "daniel-rose@gmx.de"
-    },
-    {
-      "name": "Felix Pfister",
-      "email": "felix@pfister.de"
-    },
     {
       "name": "Julian Hyatt",
       "email": "dev@jzit.de"
@@ -26,14 +18,8 @@
     "php": ">=8.0",
     "fond-of-impala/company-price-list": "^1.0.0",
     "fond-of-oryx/company-users-rest-api-extension": "^2.2.0",
-    "fond-of-spryker/company-user-reference": "dev-master",
     "spryker/company": "^1.4.0",
-    "spryker/company-business-unit": "^1.0.0 || ^2.0.0",
-    "spryker/company-user": "^2.3.0",
-    "spryker/company-role": "^1.0.0",
-    "spryker/company-roles-rest-api": "^1.0.0",
-    "spryker/glue-application": "^1.0.0",
-    "spryker/permission": "^1.0.0"
+    "spryker/company-user": "^2.3.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

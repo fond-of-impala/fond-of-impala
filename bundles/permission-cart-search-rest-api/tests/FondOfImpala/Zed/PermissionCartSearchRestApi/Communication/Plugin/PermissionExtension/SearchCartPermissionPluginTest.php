@@ -1,13 +1,13 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\PermissionExtension;
+namespace FondOfImpala\Zed\PermissionCartSearchRestApi\Communication\Plugin\PermissionExtension;
 
 use Codeception\Test\Unit;
 
 class SearchCartPermissionPluginTest extends Unit
 {
     /**
-     * @var \FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\PermissionExtension\SearchCartPermissionPlugin
+     * @var \FondOfImpala\Zed\PermissionCartSearchRestApi\Communication\Plugin\PermissionExtension\SearchCartPermissionPlugin
      */
     protected SearchCartPermissionPlugin $plugin;
 
