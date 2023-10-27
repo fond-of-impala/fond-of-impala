@@ -1,6 +1,6 @@
 {
-  "name": "fond-of-impala/company-cart-search-rest-api",
-  "description": "Company cart search rest api bundle",
+  "name": "fond-of-impala/permission-cart-search-rest-api",
+  "description": "Permission cart search rest api bundle",
   "license": "MIT",
   "authors": [
     {
@@ -15,12 +15,10 @@
   "require": {
     "php": ">=8.0",
     "fond-of-oryx/cart-search-rest-api-extension": "^1.0.0 || ^2.0.0",
-    "spryker/company": "^1.0.0",
     "spryker/company-role": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",
     "spryker/permission": "^1.0.0",
-    "spryker/permission-extension": "^1.0.0",
-    "spryker/uuid-behavior": "^1.0.0"
+    "spryker/permission-extension": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

@@ -3,13 +3,10 @@
 namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\CartSearchRestApiExtension;
 
 use FondOfImpala\Shared\CompanyCartSearchRestApi\CompanyCartSearchRestApiConstants;
-use FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\PermissionExtension\SearchCartPermissionPlugin;
 use FondOfOryx\Zed\CartSearchRestApiExtension\Dependency\Plugin\SearchQuoteQueryExpanderPluginInterface;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 use Generated\Shared\Transfer\QueryJoinTransfer;
 use Generated\Shared\Transfer\QueryWhereConditionTransfer;
-use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleToCompanyUserTableMap;
-use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleToPermissionTableMap;
 use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Quote\Persistence\Map\SpyQuoteTableMap;
@@ -70,7 +67,7 @@ class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
             $idCustomer = $filterFieldTransfer->getValue();
         }
 
-        $queryJoinCollectionTransfer->addQueryJoin(
+        return $queryJoinCollectionTransfer->addQueryJoin(
             (new QueryJoinTransfer())
                 ->setJoinType(Criteria::INNER_JOIN)
                 ->setLeft([SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE])
@@ -84,30 +81,6 @@ class CustomerSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
                     (new QueryWhereConditionTransfer())
                         ->setValue($idCustomer)
                         ->setColumn(SpyCustomerTableMap::COL_ID_CUSTOMER)
-                        ->setComparison(Criteria::EQUAL),
-                ),
-        );
-
-        $idPermission = $this->getRepository()->getIdPermissionByKey(SearchCartPermissionPlugin::KEY);
-
-        if ($idPermission === null) {
-            return $queryJoinCollectionTransfer;
-        }
-
-        return $queryJoinCollectionTransfer->addQueryJoin(
-            (new QueryJoinTransfer())
-                ->setJoinType(Criteria::INNER_JOIN)
-                ->setLeft([SpyCompanyUserTableMap::COL_ID_COMPANY_USER])
-                ->setRight([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER]),
-        )->addQueryJoin(
-            (new QueryJoinTransfer())
-                ->setJoinType(Criteria::INNER_JOIN)
-                ->setLeft([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_ROLE])
-                ->setRight([SpyCompanyRoleToPermissionTableMap::COL_FK_COMPANY_ROLE])
-                ->addQueryWhereCondition(
-                    (new QueryWhereConditionTransfer())
-                        ->setValue((string)$idPermission)
-                        ->setColumn(SpyCompanyRoleToPermissionTableMap::COL_FK_PERMISSION)
                         ->setComparison(Criteria::EQUAL),
                 ),
         );
