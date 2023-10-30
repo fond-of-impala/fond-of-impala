@@ -17,6 +17,7 @@
     }
   ],
   "replace": {
+    "fond-of-impala/collaborative-cart-search-rest-api": "*",
     "fond-of-impala/company-business-unit-price-list": "*",
     "fond-of-impala/company-cart-search-rest-api": "*",
     "fond-of-impala/company-price-list": "*",
@@ -71,6 +72,7 @@
     "fond-of-oryx/jellyfish-sales-order-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/price-lists-rest-api-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/price-list-extension": "^1.0.0",
+    "fond-of-spryker/collaborative-cart": "dev-master",
     "fond-of-spryker/company-extension": "dev-master",
     "fond-of-spryker/company-type": "dev-master",
     "fond-of-spryker/company-type-converter-extension": "dev-master",
@@ -123,6 +125,9 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Glue\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/src/FondOfImpala/Glue/CollaborativeCartSearchRestApi",
+      "FondOfImpala\\Shared\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/src/FondOfImpala/Shared/CollaborativeCartSearchRestApi",
+      "FondOfImpala\\Zed\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/src/FondOfImpala/Zed/CollaborativeCartSearchRestApi",
       "FondOfImpala\\Shared\\CompanyBusinessUnitPriceList\\": "bundles/company-business-unit-price-list/src/FondOfImpala/Shared/CompanyBusinessUnitPriceList",
       "FondOfImpala\\Zed\\CompanyBusinessUnitPriceList\\": "bundles/company-business-unit-price-list/src/FondOfImpala/Zed/CompanyBusinessUnitPriceList",
       "FondOfImpala\\Glue\\CompanyCartSearchRestApi\\": "bundles/company-cart-search-rest-api/src/FondOfImpala/Glue/CompanyCartSearchRestApi",
@@ -230,6 +235,9 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Glue\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/tests/FondOfImpala/Glue/CollaborativeCartSearchRestApi",
+      "FondOfImpala\\Shared\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/tests/FondOfImpala/Shared/CollaborativeCartSearchRestApi",
+      "FondOfImpala\\Zed\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/tests/FondOfImpala/Zed/CollaborativeCartSearchRestApi",
       "FondOfImpala\\Shared\\CompanyBusinessUnitPriceList\\": "bundles/company-business-unit-price-list/tests/FondOfImpala/Shared/CompanyBusinessUnitPriceList",
       "FondOfImpala\\Zed\\CompanyBusinessUnitPriceList\\": "bundles/company-business-unit-price-list/tests/FondOfImpala/Zed/CompanyBusinessUnitPriceList",
       "FondOfImpala\\Glue\\CompanyCartSearchRestApi\\": "bundles/company-cart-search-rest-api/tests/FondOfImpala/Glue/CompanyCartSearchRestApi",

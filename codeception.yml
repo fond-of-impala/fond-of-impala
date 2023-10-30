@@ -1,6 +1,7 @@
 namespace: fond-of-impala/fond-of-impala
 
 include:
+  - bundles/collaborative-cart-search-rest-api
   - bundles/company-business-unit-price-list
   - bundles/company-cart-search-rest-api
   - bundles/company-price-list
