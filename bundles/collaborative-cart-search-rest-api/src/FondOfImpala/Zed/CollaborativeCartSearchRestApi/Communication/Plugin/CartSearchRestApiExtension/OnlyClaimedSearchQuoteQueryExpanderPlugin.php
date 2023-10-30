@@ -78,17 +78,12 @@ class OnlyClaimedSearchQuoteQueryExpanderPlugin extends AbstractPlugin implement
             return $queryJoinCollectionTransfer;
         }
 
-        $whereCondition = (new QueryWhereConditionTransfer())
-            ->setColumn(SpyQuoteTableMap::COL_ORIGINAL_CUSTOMER_REFERENCE);
-
-        if (!$onlyClaimed) {
-            $whereCondition->setComparison(Criteria::ISNULL);
-        } else {
-            $whereCondition->setComparison(Criteria::ISNOTNULL);
-        }
-
         return $queryJoinCollectionTransfer->addQueryJoin(
-            (new QueryJoinTransfer())->addQueryWhereCondition($whereCondition),
+            (new QueryJoinTransfer())->addQueryWhereCondition(
+                (new QueryWhereConditionTransfer())
+                    ->setColumn(SpyQuoteTableMap::COL_ORIGINAL_CUSTOMER_REFERENCE)
+                    ->setComparison($onlyClaimed ? Criteria::ISNOTNULL : Criteria::ISNULL),
+            ),
         );
     }
 }
