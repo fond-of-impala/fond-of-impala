@@ -27,7 +27,19 @@ class CompanyCartSearchRestApiRepository extends AbstractRepository implements C
         $idPermission = $this->getIdPermissionByKey(SeeAllCompanyQuotesPermissionPlugin::KEY);
 
         if ($idPermission === null) {
-            return null;
+            /** @var int|null $idCompany */
+            $idCompany = $this->getFactory()
+                ->getCompanyQuery()
+                ->clear()
+                ->useCompanyUserQuery()
+                    ->useCustomerQuery()
+                        ->filterByIdCustomer($idCustomer)
+                    ->endUse()
+                ->endUse()
+                ->select([SpyCompanyTableMap::COL_ID_COMPANY])
+                ->findOneByUuid($companyUuid);
+
+            return $idCompany;
         }
 
         /** @var int|null $idCompany */

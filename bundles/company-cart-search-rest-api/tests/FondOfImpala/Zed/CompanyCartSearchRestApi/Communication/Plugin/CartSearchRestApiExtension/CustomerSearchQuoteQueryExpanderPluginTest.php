@@ -4,14 +4,11 @@ namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\CartSea
 
 use Codeception\Test\Unit;
 use FondOfImpala\Shared\CompanyCartSearchRestApi\CompanyCartSearchRestApiConstants;
-use FondOfImpala\Zed\CompanyCartSearchRestApi\Communication\Plugin\PermissionExtension\SearchCartPermissionPlugin;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\CompanyCartSearchRestApiConfig;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Persistence\CompanyCartSearchRestApiRepository;
 use Generated\Shared\Transfer\FilterFieldTransfer;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
 use Generated\Shared\Transfer\QueryJoinTransfer;
-use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleToCompanyUserTableMap;
-use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleToPermissionTableMap;
 use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Quote\Persistence\Map\SpyQuoteTableMap;
@@ -24,11 +21,6 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
      * @var \FondOfImpala\Zed\CompanyCartSearchRestApi\CompanyCartSearchRestApiConfig|\PHPUnit\Framework\MockObject\MockObject
      */
     protected MockObject|CompanyCartSearchRestApiConfig $configMock;
-
-    /**
-     * @var \FondOfImpala\Zed\CompanyCartSearchRestApi\Persistence\CompanyCartSearchRestApiRepository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected MockObject|CompanyCartSearchRestApiRepository $repositoryMock;
 
     /**
      * @var array<\Generated\Shared\Transfer\FilterFieldTransfer|\PHPUnit\Framework\MockObject\MockObject>
@@ -75,7 +67,6 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
 
         $this->plugin = new CustomerSearchQuoteQueryExpanderPlugin();
         $this->plugin->setConfig($this->configMock);
-        $this->plugin->setRepository($this->repositoryMock);
     }
 
     /**
@@ -131,8 +122,6 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
      */
     public function testExpand(): void
     {
-        $idPermission = 1;
-
         $this->filterFieldTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getType')
             ->willReturn('foo');
@@ -144,11 +133,6 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
         $this->filterFieldTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getValue')
             ->willReturn(1);
-
-        $this->repositoryMock->expects(static::atLeastOnce())
-            ->method('getIdPermissionByKey')
-            ->with(SearchCartPermissionPlugin::KEY)
-            ->willReturn($idPermission);
 
         $this->queryJoinCollectionTransferMock->expects(static::atLeastOnce())
             ->method('addQueryJoin')
@@ -168,26 +152,6 @@ class CustomerSearchQuoteQueryExpanderPluginTest extends Unit
                         static function (QueryJoinTransfer $queryJoinTransfer) {
                             return $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_FK_CUSTOMER]
                                 && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_ID_CUSTOMER]
-                                && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                                && $queryJoinTransfer->getWhereConditions()->count() === 1;
-                        },
-                    ),
-                ],
-                [
-                    static::callback(
-                        static function (QueryJoinTransfer $queryJoinTransfer) {
-                            return $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_ID_COMPANY_USER]
-                                && $queryJoinTransfer->getRight() == [SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER]
-                                && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                                && $queryJoinTransfer->getWhereConditions()->count() === 0;
-                        },
-                    ),
-                ],
-                [
-                    static::callback(
-                        static function (QueryJoinTransfer $queryJoinTransfer) {
-                            return $queryJoinTransfer->getLeft() == [SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_ROLE]
-                                && $queryJoinTransfer->getRight() == [SpyCompanyRoleToPermissionTableMap::COL_FK_COMPANY_ROLE]
                                 && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
                                 && $queryJoinTransfer->getWhereConditions()->count() === 1;
                         },

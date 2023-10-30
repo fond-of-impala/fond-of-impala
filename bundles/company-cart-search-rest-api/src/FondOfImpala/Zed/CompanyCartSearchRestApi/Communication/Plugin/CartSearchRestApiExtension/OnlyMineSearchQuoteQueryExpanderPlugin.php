@@ -64,7 +64,7 @@ class OnlyMineSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
             }
 
             if (strtolower($value) === 'false') {
-                return true;
+                return false;
             }
 
             return null;
