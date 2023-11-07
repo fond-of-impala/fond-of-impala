@@ -16,6 +16,11 @@ use Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductPageDataExpa
 class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin implements ProductPageDataExpanderPluginInterface
 {
     /**
+     * @var string
+     */
+    protected const IMAGE_GROUP_NAME_EMPTY = '*';
+
+    /**
      * {@inheritDoc}
      *
      * @api
@@ -39,7 +44,7 @@ class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin imp
         foreach ($imageSetsByLocale as $imageSet) {
             foreach ($productImages as $productImage) {
                 if ($productImage['fk_product_image_set'] === $imageSet->getIdProductImageSet()) {
-                    $regrouped[$imageSet->getName()][] = $productImage;
+                    $regrouped[($imageSet->getName() ?? static::IMAGE_GROUP_NAME_EMPTY)][] = $productImage;
                 }
             }
         }
