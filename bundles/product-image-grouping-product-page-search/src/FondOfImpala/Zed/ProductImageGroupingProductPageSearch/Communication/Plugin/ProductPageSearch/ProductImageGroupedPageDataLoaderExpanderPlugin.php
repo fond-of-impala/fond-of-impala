@@ -18,7 +18,7 @@ class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin imp
     /**
      * @var string
      */
-    protected  const IMAGE_GROUP_NAME_EMPTY = '*';
+    protected const IMAGE_GROUP_NAME_EMPTY = '*';
 
     /**
      * {@inheritDoc}
