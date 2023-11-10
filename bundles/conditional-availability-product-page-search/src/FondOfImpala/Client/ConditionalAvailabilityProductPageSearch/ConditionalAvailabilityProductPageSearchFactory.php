@@ -6,8 +6,6 @@ namespace FondOfImpala\Client\ConditionalAvailabilityProductPageSearch;
 
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Client\SearchElasticsearch\Query\QueryBuilder;
-use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
 
 class ConditionalAvailabilityProductPageSearchFactory extends AbstractFactory
 {
