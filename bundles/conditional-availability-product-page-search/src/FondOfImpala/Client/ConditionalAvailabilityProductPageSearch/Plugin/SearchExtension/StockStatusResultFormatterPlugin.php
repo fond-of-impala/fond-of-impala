@@ -25,8 +25,8 @@ class StockStatusResultFormatterPlugin extends AbstractPlugin implements ResultF
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\SearchHttpResponseTransfer|\Generated\Shared\Transfer\SuggestionsSearchHttpResponseTransfer $searchResult
-     * @param array<string, mixed> $requestParameters
+     * @param \Elastica\ResultSet $searchResult
+     * @param array<string, Generated\Shared\Transfer\FacetSearchResultTransfer> $requestParameters
      *
      * @return array<int, mixed>
      */
@@ -85,12 +85,12 @@ class StockStatusResultFormatterPlugin extends AbstractPlugin implements ResultF
     }
 
     /**
-     * @param int $value
+     * @param string $value
      * @param int $docCount
      *
      * @return \Generated\Shared\Transfer\FacetSearchResultValueTransfer
      */
-    protected function getFacetSearchValueTransfer(int $value, int $docCount): FacetSearchResultValueTransfer
+    protected function getFacetSearchValueTransfer(string $value, int $docCount): FacetSearchResultValueTransfer
     {
         return (new FacetSearchResultValueTransfer())
             ->setValue($value)

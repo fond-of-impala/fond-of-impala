@@ -12,14 +12,6 @@ use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
 class ConditionalAvailabilityProductPageSearchFactory extends AbstractFactory
 {
     /**
-     * @return \Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface
-     */
-    public function createQueryBuilder(): QueryBuilderInterface
-    {
-        return new QueryBuilder();
-    }
-
-    /**
      * @return \FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface
      */
     public function getCustomerClient(): ConditionalAvailabilityProductPageSearchToCustomerClientInterface
