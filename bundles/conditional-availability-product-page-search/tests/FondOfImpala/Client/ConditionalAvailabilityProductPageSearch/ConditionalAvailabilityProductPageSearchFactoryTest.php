@@ -47,17 +47,6 @@ class ConditionalAvailabilityProductPageSearchFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateQueryBuilder(): void
-    {
-        static::assertInstanceOf(
-            QueryBuilderInterface::class,
-            $this->factory->createQueryBuilder(),
-        );
-    }
-
-    /**
-     * @return void
-     */
     public function testGetCustomerClient(): void
     {
         $this->containerMock->expects(static::atLeastOnce())
