@@ -26,11 +26,11 @@ class StockStatusResultFormatterPlugin extends AbstractPlugin implements ResultF
      * @api
      *
      * @param \Elastica\ResultSet $searchResult
-     * @param array<string, Generated\Shared\Transfer\FacetSearchResultTransfer> $requestParameters
+     * @param array<mixed> $requestParameters
      *
-     * @return array<int, mixed>
+     * @return mixed
      */
-    public function formatResult($searchResult, array $requestParameters = []): array
+    public function formatResult($searchResult, array $requestParameters = [])
     {
         $result = [];
         $stockStatusAggregation = $searchResult->getAggregation(static::STOCK_STATUS_KEY);
