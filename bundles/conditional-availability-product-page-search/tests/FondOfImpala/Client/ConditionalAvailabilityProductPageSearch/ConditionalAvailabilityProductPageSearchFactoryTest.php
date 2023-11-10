@@ -6,7 +6,6 @@ use Codeception\Test\Unit;
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
-use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
 
 class ConditionalAvailabilityProductPageSearchFactoryTest extends Unit
 {
