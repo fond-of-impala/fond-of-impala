@@ -25,7 +25,6 @@ class ConditionalAvailabilityProductPageSearchFactoryTest extends Unit
      */
     protected ConditionalAvailabilityProductPageSearchFactory $factory;
 
-
     /**
      * @return void
      */

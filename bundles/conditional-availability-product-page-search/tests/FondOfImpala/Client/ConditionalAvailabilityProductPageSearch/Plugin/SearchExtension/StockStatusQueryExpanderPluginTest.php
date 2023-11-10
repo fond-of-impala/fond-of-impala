@@ -10,7 +10,7 @@ use Elastica\Query\Term;
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchFactory;
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;

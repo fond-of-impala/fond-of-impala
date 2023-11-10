@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace FondOfImpala\Client\ConditionalAvailabilityProductPageSearch;
 
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface;
-use Spryker\Client\CatalogPriceProductConnector\CatalogPriceProductConnectorDependencyProvider;
 use Spryker\Client\Kernel\AbstractFactory;
 use Spryker\Client\SearchElasticsearch\Query\QueryBuilder;
 use Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface;
@@ -21,9 +20,7 @@ class ConditionalAvailabilityProductPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return ConditionalAvailabilityProductPageSearchToCustomerClientInterface
-     *
-     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface
      */
     public function getCustomerClient(): ConditionalAvailabilityProductPageSearchToCustomerClientInterface
     {

@@ -6,9 +6,9 @@ use Codeception\Test\Unit;
 use FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Customer\CustomerClientInterface;
-use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Kernel\Locator;
+use Spryker\Shared\Kernel\BundleProxy;
 
 class ConditionalAvailabilityProductPageSearchDependencyProviderTest extends Unit
 {
@@ -31,7 +31,6 @@ class ConditionalAvailabilityProductPageSearchDependencyProviderTest extends Uni
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Locator
      */
     protected MockObject|Locator $locatorMock;
-
 
     /**
      * @return void
@@ -84,6 +83,5 @@ class ConditionalAvailabilityProductPageSearchDependencyProviderTest extends Uni
             ConditionalAvailabilityProductPageSearchToCustomerClientInterface::class,
             $container[ConditionalAvailabilityProductPageSearchDependencyProvider::CLIENT_CUSTOMER],
         );
-
     }
 }

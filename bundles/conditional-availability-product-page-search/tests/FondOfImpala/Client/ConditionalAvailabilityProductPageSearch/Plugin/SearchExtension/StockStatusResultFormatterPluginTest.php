@@ -70,19 +70,19 @@ class StockStatusResultFormatterPluginTest extends Unit
     {
         $requestParameters = [];
         $stockStatusAggregation = [
-            "buckets" => [
+            'buckets' => [
                 0 => [
-                    "key" => "availabilityChannel-1",
-                    "doc_count" => 1
-                ]
-            ]
+                    'key' => 'availabilityChannel-1',
+                    'doc_count' => 1,
+                ],
+            ],
         ];
 
         $availabilityChannel = 'availabilityChannel';
 
         $this->elasticaResultSetMock->expects(static::atLeastOnce())
             ->method('getAggregation')
-            ->with("stock-status")
+            ->with('stock-status')
             ->willReturn($stockStatusAggregation);
 
         $this->factoryMock->expects(static::atLeastOnce())
@@ -101,7 +101,7 @@ class StockStatusResultFormatterPluginTest extends Unit
             ->formatResult($this->elasticaResultSetMock, $requestParameters);
 
         static::assertIsArray($result);
-        static::assertNotEmpty($result["stock-status"]);
+        static::assertNotEmpty($result['stock-status']);
     }
 
     /**
@@ -114,7 +114,7 @@ class StockStatusResultFormatterPluginTest extends Unit
 
         $this->elasticaResultSetMock->expects(static::atLeastOnce())
             ->method('getAggregation')
-            ->with("stock-status")
+            ->with('stock-status')
             ->willReturn($stockStatusAggregation);
 
         $result = $this->plugin
@@ -131,17 +131,17 @@ class StockStatusResultFormatterPluginTest extends Unit
     {
         $requestParameters = [];
         $stockStatusAggregation = [
-            "buckets" => [
+            'buckets' => [
                 0 => [
-                    "key" => "availabilityChannel-1",
-                    "doc_count" => 1
-                ]
-            ]
+                    'key' => 'availabilityChannel-1',
+                    'doc_count' => 1,
+                ],
+            ],
         ];
 
         $this->elasticaResultSetMock->expects(static::atLeastOnce())
             ->method('getAggregation')
-            ->with("stock-status")
+            ->with('stock-status')
             ->willReturn($stockStatusAggregation);
 
         $this->factoryMock->expects(static::atLeastOnce())
@@ -166,19 +166,19 @@ class StockStatusResultFormatterPluginTest extends Unit
     {
         $requestParameters = [];
         $stockStatusAggregation = [
-            "buckets" => [
+            'buckets' => [
                 0 => [
-                    "key" => "availabilityChannel2-1",
-                    "doc_count" => 1
-                ]
-            ]
+                    'key' => 'availabilityChannel2-1',
+                    'doc_count' => 1,
+                ],
+            ],
         ];
 
         $availabilityChannel = 'availabilityChannel';
 
         $this->elasticaResultSetMock->expects(static::atLeastOnce())
             ->method('getAggregation')
-            ->with("stock-status")
+            ->with('stock-status')
             ->willReturn($stockStatusAggregation);
 
         $this->factoryMock->expects(static::atLeastOnce())
@@ -197,7 +197,7 @@ class StockStatusResultFormatterPluginTest extends Unit
             ->formatResult($this->elasticaResultSetMock, $requestParameters);
 
         static::assertIsArray($result);
-        static::assertNotEmpty($result["stock-status"]);
+        static::assertNotEmpty($result['stock-status']);
     }
 
     /**
@@ -207,6 +207,4 @@ class StockStatusResultFormatterPluginTest extends Unit
     {
         $this->assertEquals('facets', $this->plugin->getName());
     }
-
-
 }

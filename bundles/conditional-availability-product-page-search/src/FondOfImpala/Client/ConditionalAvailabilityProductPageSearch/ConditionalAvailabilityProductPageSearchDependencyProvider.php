@@ -43,5 +43,4 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
 
         return $container;
     }
-
 }

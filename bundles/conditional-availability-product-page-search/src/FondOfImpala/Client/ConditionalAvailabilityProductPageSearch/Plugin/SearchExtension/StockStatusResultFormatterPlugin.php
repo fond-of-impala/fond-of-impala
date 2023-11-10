@@ -17,7 +17,7 @@ class StockStatusResultFormatterPlugin extends AbstractPlugin implements ResultF
     /**
      * @var string
      */
-    protected const STOCK_STATUS_KEY =  "stock-status";
+    protected const STOCK_STATUS_KEY = 'stock-status';
 
     /**
      * {@inheritDoc}
@@ -50,14 +50,15 @@ class StockStatusResultFormatterPlugin extends AbstractPlugin implements ResultF
             ->setConfig(new FacetConfigTransfer());
 
         foreach ($stockStatusAggregation['buckets'] as $bucket) {
-            $bucketKeyParts = explode('-',$bucket["key"]);
+            $bucketKeyParts = explode('-', $bucket['key']);
 
             if ($bucketKeyParts[0] !== $customerTransfer->getAvailabilityChannel()) {
                 continue;
             }
 
              $stockStatusFacetSearchResultTransfer->addValue(
-                 $this->getFacetSearchValueTransfer(end($bucketKeyParts), $bucket["doc_count"]));
+                 $this->getFacetSearchValueTransfer(end($bucketKeyParts), $bucket['doc_count']),
+             );
         }
 
         $result[static::STOCK_STATUS_KEY] = $stockStatusFacetSearchResultTransfer;
@@ -84,12 +85,12 @@ class StockStatusResultFormatterPlugin extends AbstractPlugin implements ResultF
     }
 
     /**
-     * @param  int  $value
-     * @param  int $docCount
+     * @param int $value
+     * @param int $docCount
      *
      * @return \Generated\Shared\Transfer\FacetSearchResultValueTransfer
      */
-    protected function getFacetSearchValueTransfer(int $value, int $docCount) : FacetSearchResultValueTransfer
+    protected function getFacetSearchValueTransfer(int $value, int $docCount): FacetSearchResultValueTransfer
     {
         return (new FacetSearchResultValueTransfer())
             ->setValue($value)
