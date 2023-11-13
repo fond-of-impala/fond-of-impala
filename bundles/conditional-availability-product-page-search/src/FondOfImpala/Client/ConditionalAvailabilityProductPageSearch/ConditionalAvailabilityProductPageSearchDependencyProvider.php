@@ -33,7 +33,7 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    protected function addCustomerClient(Container $container)
+    protected function addCustomerClient(Container $container): Container
     {
         $container[static::CLIENT_CUSTOMER] = static fn (
             Container $container
