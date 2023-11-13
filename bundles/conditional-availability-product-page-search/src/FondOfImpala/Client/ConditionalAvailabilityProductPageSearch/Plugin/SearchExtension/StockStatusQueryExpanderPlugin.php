@@ -2,11 +2,13 @@
 
 namespace FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Plugin\SearchExtension;
 
+use Elastica\Aggregation\Terms as AggregationTerms;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Terms;
+use Elastica\Query\Terms as QueryTerms;
 use FondOfImpala\Shared\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchConstants;
 use Generated\Shared\Search\PageIndexMap;
+use Generated\Shared\Transfer\CustomerTransfer;
 use InvalidArgumentException;
 use Spryker\Client\Kernel\AbstractPlugin;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface;
@@ -18,6 +20,21 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 class StockStatusQueryExpanderPlugin extends AbstractPlugin implements QueryExpanderPluginInterface
 {
     /**
+     * @var string
+     */
+    protected const TERM_NAME = 'stock-status';
+
+    /**
+     * @var string
+     */
+    protected const TERM_FIELD = 'stock-status';
+
+    /**
+     * @var int
+     */
+    protected const SIZE = 9999;
+
+    /**
      * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface $searchQuery
      * @param array<string, mixed> $requestParameters
      *
@@ -25,31 +42,48 @@ class StockStatusQueryExpanderPlugin extends AbstractPlugin implements QueryExpa
      */
     public function expandQuery(QueryInterface $searchQuery, array $requestParameters = [])
     {
-        if (!isset($requestParameters[ConditionalAvailabilityProductPageSearchConstants::PARAMETER_STOCK_STATUS])) {
-            return $searchQuery;
-        }
+        /** @var \Elastica\Query $query */
+        $query = $searchQuery->getSearchQuery();
 
-        $stockStatus = $requestParameters[ConditionalAvailabilityProductPageSearchConstants::PARAMETER_STOCK_STATUS];
+        $query->addAggregation(
+            (new AggregationTerms(static::TERM_NAME))
+                ->setSize(static::SIZE)
+                ->setField(static::TERM_FIELD),
+        );
 
-        if (!is_string($stockStatus) || $stockStatus === '') {
-            return $searchQuery;
-        }
-
-        $this->addStockStatusFilterToQuery($searchQuery->getSearchQuery(), $stockStatus);
+        $this->addStockStatusFilterToQuery($query, $requestParameters);
 
         return $searchQuery;
     }
 
     /**
      * @param \Elastica\Query $query
-     * @param string $stockStatus
+     * @param array<mixed> $requestParameters
      *
      * @return void
      */
-    protected function addStockStatusFilterToQuery(Query $query, string $stockStatus): void
+    protected function addStockStatusFilterToQuery(Query $query, array $requestParameters = []): void
     {
+        if (!isset($requestParameters[ConditionalAvailabilityProductPageSearchConstants::PARAMETER_STOCK_STATUS])) {
+            return;
+        }
+
+        $stockStatus = $requestParameters[ConditionalAvailabilityProductPageSearchConstants::PARAMETER_STOCK_STATUS];
+
+        if (!is_string($stockStatus) || $stockStatus === '') {
+            return;
+        }
+
+        $customerTransfer = $this->getCustomer();
+
+        if (!$customerTransfer || !$customerTransfer->getAvailabilityChannel()) {
+            return;
+        }
+
+        $stockStatus = $customerTransfer->getAvailabilityChannel() . '-' . $stockStatus;
+
         $this->getBoolQuery($query)
-            ->addMust(new Terms(PageIndexMap::STOCK_STATUS, [$stockStatus]));
+            ->addMust(new QueryTerms(PageIndexMap::STOCK_STATUS, [$stockStatus]));
     }
 
     /**
@@ -72,5 +106,15 @@ class StockStatusQueryExpanderPlugin extends AbstractPlugin implements QueryExpa
         }
 
         return $boolQuery;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\CustomerTransfer|null
+     */
+    protected function getCustomer(): ?CustomerTransfer
+    {
+        return $this->getFactory()
+            ->getCustomerClient()
+            ->getCustomer();
     }
 }
