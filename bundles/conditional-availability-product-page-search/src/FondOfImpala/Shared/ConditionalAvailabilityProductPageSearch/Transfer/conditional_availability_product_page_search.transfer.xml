@@ -23,12 +23,4 @@
         <property name="payloadTransfers" type="array" singular="payloadTransfers"/>
     </transfer>
 
-    <transfer name="RestCatalogSearchAttributes">
-        <property name="stockStatus" type="RestStockStatusSearchResult[]" singular="stockStatus"/>
-    </transfer>
-
-    <transfer name="RestStockStatusSearchResult">
-        <property name="values" type="array" singular="value"/>
-    </transfer>
-
 </transfers>

@@ -21,11 +21,11 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
      *
      * @return \Spryker\Client\Kernel\Container
      */
-    public function provideServiceLayerDependencies(Container $container)
+    public function provideServiceLayerDependencies(Container $container): Container
     {
-        $container = $this->addCustomerClient($container);
+        $container = parent::provideServiceLayerDependencies($container);
 
-        return $container;
+        return $this->addCustomerClient($container);
     }
 
     /**
