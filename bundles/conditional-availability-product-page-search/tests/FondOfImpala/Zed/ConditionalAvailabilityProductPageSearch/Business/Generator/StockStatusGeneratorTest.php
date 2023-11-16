@@ -306,7 +306,7 @@ class StockStatusGeneratorTest extends Unit
                 $channel,
             );
             static::fail();
-        } catch (InvalidRawValueException $exception) {
+        } catch (InvalidRawValueException) {
         }
     }
 }
