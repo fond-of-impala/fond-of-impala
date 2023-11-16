@@ -11,7 +11,7 @@ interface ProductConcretePageSearchExpanderInterface
      *
      * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
      */
-    public function expandProductConcretePageSearchTransferWithStockStatus(
+    public function expand(
         ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
     ): ProductConcretePageSearchTransfer;
 }

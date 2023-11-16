@@ -4,7 +4,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpanderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ProductPage\ProductPageDataExpanderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
@@ -28,9 +28,9 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
     protected MockObject|ProductAbstractReaderInterface $productAbstractReaderMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ProductPage\ProductPageDataExpanderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface
      */
-    protected MockObject|ProductPageDataExpanderInterface $productPageDataExpanderMock;
+    protected MockObject|ProductPageLoadExpanderInterface $productPageLoadExpanderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPageLoadTransfer
@@ -66,7 +66,7 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productPageDataExpanderMock = $this->getMockBuilder(ProductPageDataExpanderInterface::class)
+        $this->productPageLoadExpanderMock = $this->getMockBuilder(ProductPageLoadExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -92,11 +92,11 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
     public function testExpandProductPageData(): void
     {
         $this->factoryMock->expects(static::atLeastOnce())
-            ->method('createProductPageDataExpander')
-            ->willReturn($this->productPageDataExpanderMock);
+            ->method('createProductPageLoadExpander')
+            ->willReturn($this->productPageLoadExpanderMock);
 
-        $this->productPageDataExpanderMock->expects(static::atLeastOnce())
-            ->method('expandProductPageData')
+        $this->productPageLoadExpanderMock->expects(static::atLeastOnce())
+            ->method('expand')
             ->with($this->productPageLoadTransferMock)
             ->willReturn($this->productPageLoadTransferMock);
 
@@ -115,7 +115,7 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
             ->willReturn($this->productConcretePageSearchExpanderMock);
 
         $this->productConcretePageSearchExpanderMock->expects(static::atLeastOnce())
-            ->method('expandProductConcretePageSearchTransferWithStockStatus')
+            ->method('expand')
             ->with($this->productConcretePageSearchTransferMock)
             ->willReturn($this->productConcretePageSearchTransferMock);
 

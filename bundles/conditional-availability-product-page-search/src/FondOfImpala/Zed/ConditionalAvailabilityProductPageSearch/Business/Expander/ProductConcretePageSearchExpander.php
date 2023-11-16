@@ -2,27 +2,33 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander;
 
-use FondOfImpala\Shared\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchConfig;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 
 class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpanderInterface
 {
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface
      */
-    protected $conditionalAvailabilityFacade;
+    protected StockStatusGeneratorInterface $stockStatusGenerator;
 
     /**
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
+     */
+    protected ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
+
+    /**
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface $stockStatusGenerator
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
      */
     public function __construct(
+        StockStatusGeneratorInterface $stockStatusGenerator,
         ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
     ) {
         $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
+        $this->stockStatusGenerator = $stockStatusGenerator;
     }
 
     /**
@@ -30,7 +36,7 @@ class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpa
      *
      * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
      */
-    public function expandProductConcretePageSearchTransferWithStockStatus(
+    public function expand(
         ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
     ): ProductConcretePageSearchTransfer {
         $productConcretePageSearchTransfer->requireFkProduct();
@@ -42,69 +48,25 @@ class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpa
             ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
 
         $stockStatus = [];
-        foreach ($conditionalAvailabilityCollectionTransfer->getConditionalAvailabilities() as $conditionalAvailability) {
-            $stockStatus[] = $this->getStockStatus($conditionalAvailability);
+
+        $conditionalAvailabilityTransfers = $conditionalAvailabilityCollectionTransfer->getConditionalAvailabilities();
+
+        foreach ($conditionalAvailabilityTransfers as $conditionalAvailabilityTransfer) {
+            $channel = $conditionalAvailabilityTransfer->getChannel();
+            $conditionalAvailabilityPeriodCollectionTransfer = $conditionalAvailabilityTransfer
+                ->getConditionalAvailabilityPeriodCollection();
+
+            if ($channel === null || $conditionalAvailabilityPeriodCollectionTransfer === null) {
+                continue;
+            }
+
+            $stockStatusRawValue = $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
+                $conditionalAvailabilityPeriodCollectionTransfer,
+            );
+
+            $stockStatus[] = $this->stockStatusGenerator->generateByRawValueAndChannel($stockStatusRawValue, $channel);
         }
 
         return $productConcretePageSearchTransfer->setStockStatus($stockStatus);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer
-     *
-     * @return string
-     */
-    protected function getStockStatus(ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer): string
-    {
-        $conditionalAvailabilityPeriods =
-            $this->sortConditionalAvailabilityPeriodCollection(
-                $conditionalAvailabilityTransfer->getConditionalAvailabilityPeriodCollection(),
-            );
-
-        return $conditionalAvailabilityTransfer->getChannel() .
-            '-' . $this->getStockStatusValue($conditionalAvailabilityPeriods);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer
-     *
-     * @return array<string, \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>
-     */
-    protected function sortConditionalAvailabilityPeriodCollection(
-        ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer
-    ): array {
-        $conditionalAvailabilityPeriods = [];
-
-        foreach ($conditionalAvailabilityPeriodCollectionTransfer->getConditionalAvailabilityPeriods() as $conditionalAvailabilityPeriodTransfer) {
-            $conditionalAvailabilityPeriods[$conditionalAvailabilityPeriodTransfer->getStartAt()] = $conditionalAvailabilityPeriodTransfer;
-        }
-
-        ksort($conditionalAvailabilityPeriods);
-
-        return $conditionalAvailabilityPeriods;
-    }
-
-    /**
-     * @param array<string, \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer> $conditionalAvailabilityPeriods
-     *
-     * @return int
-     */
-    protected function getStockStatusValue(array $conditionalAvailabilityPeriods): int
-    {
-        /** @var \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer $conditionalAvailabilityPeriodTransfer */
-        $conditionalAvailabilityPeriodTransfer = array_shift($conditionalAvailabilityPeriods);
-
-        if ($conditionalAvailabilityPeriodTransfer->getQuantity() > 0) {
-            return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_IN_STOCK;
-        }
-
-        foreach ($conditionalAvailabilityPeriods as $conditionalAvailabilityPeriodTransfer) {
-            /** @var \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer $conditionalAvailabilityPeriodTransfer */
-            if ($conditionalAvailabilityPeriodTransfer->getQuantity() > 0) {
-                return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_LATER_IN_STOCK;
-            }
-        }
-
-        return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK;
     }
 }

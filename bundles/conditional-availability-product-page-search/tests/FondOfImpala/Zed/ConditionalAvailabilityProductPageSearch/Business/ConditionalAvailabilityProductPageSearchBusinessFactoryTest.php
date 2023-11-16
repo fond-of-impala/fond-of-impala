@@ -3,9 +3,9 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpanderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ProductPage\ProductPageDataExpanderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpander;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpander;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReader;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
@@ -20,12 +20,12 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
     protected MockObject|Container $containerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
      */
     protected MockObject|ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacadeMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
      */
     protected MockObject|ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacadeMock;
 
@@ -73,7 +73,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
             ->willReturn($this->productFacadeMock);
 
         static::assertInstanceOf(
-            ProductAbstractReaderInterface::class,
+            ProductAbstractReader::class,
             $this->factory->createProductAbstractReader(),
         );
     }
@@ -94,7 +94,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
             ->willReturn($this->conditionalAvailabilityFacadeMock);
 
         static::assertInstanceOf(
-            ProductConcretePageSearchExpanderInterface::class,
+            ProductConcretePageSearchExpander::class,
             $this->factory->createProductConcretePageSearchExpander(),
         );
     }
@@ -102,7 +102,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateProductPageDataExpander(): void
+    public function testCreateProductPageLoadExpander(): void
     {
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
@@ -119,8 +119,8 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
             )->willReturn($this->productFacadeMock, $this->conditionalAvailabilityFacadeMock);
 
         static::assertInstanceOf(
-            ProductPageDataExpanderInterface::class,
-            $this->factory->createProductPageDataExpander(),
+            ProductPageLoadExpander::class,
+            $this->factory->createProductPageLoadExpander(),
         );
     }
 }

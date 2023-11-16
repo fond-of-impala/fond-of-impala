@@ -22,7 +22,7 @@ class ConditionalAvailabilityProductPageSearchFacade extends AbstractFacade impl
      */
     public function expandProductPageData(ProductPageLoadTransfer $loadTransfer): ProductPageLoadTransfer
     {
-        return $this->getFactory()->createProductPageDataExpander()->expandProductPageData($loadTransfer);
+        return $this->getFactory()->createProductPageLoadExpander()->expand($loadTransfer);
     }
 
     /**
@@ -39,6 +39,6 @@ class ConditionalAvailabilityProductPageSearchFacade extends AbstractFacade impl
     ): ProductConcretePageSearchTransfer {
         return $this->getFactory()
             ->createProductConcretePageSearchExpander()
-            ->expandProductConcretePageSearchTransferWithStockStatus($productConcretePageSearchTransfer);
+            ->expand($productConcretePageSearchTransfer);
     }
 }
