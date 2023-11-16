@@ -4,6 +4,10 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business;
 
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpanderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpander;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGenerator;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ProductPage\ProductPageDataExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ProductPage\ProductPageDataExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReader;
@@ -28,15 +32,30 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
      */
     public function createProductConcretePageSearchExpander(): ProductConcretePageSearchExpanderInterface
     {
-        return new ProductConcretePageSearchExpander($this->getConditionalAvailabilityFacade());
+        return new ProductConcretePageSearchExpander(
+            $this->createStockStatusGenerator(),
+            $this->getConditionalAvailabilityFacade()
+        );
     }
 
     /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ProductPage\ProductPageDataExpanderInterface
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface
      */
-    public function createProductPageDataExpander(): ProductPageDataExpanderInterface
+    public function createProductPageLoadExpander(): ProductPageLoadExpanderInterface
     {
-        return new ProductPageDataExpander($this->getProductFacade(), $this->getConditionalAvailabilityFacade());
+        return new ProductPageLoadExpander(
+            $this->createStockStatusGenerator(),
+            $this->getProductFacade(),
+            $this->getConditionalAvailabilityFacade()
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface
+     */
+    protected function createStockStatusGenerator(): StockStatusGeneratorInterface
+    {
+        return new StockStatusGenerator();
     }
 
     /**
@@ -44,7 +63,9 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
      */
     protected function getConditionalAvailabilityFacade(): ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
     {
-        return $this->getProvidedDependency(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY);
+        return $this->getProvidedDependency(
+            ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY
+        );
     }
 
     /**
@@ -52,6 +73,8 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
      */
     protected function getProductFacade(): ConditionalAvailabilityProductPageSearchToProductFacadeInterface
     {
-        return $this->getProvidedDependency(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT);
+        return $this->getProvidedDependency(
+            ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT
+        );
     }
 }
