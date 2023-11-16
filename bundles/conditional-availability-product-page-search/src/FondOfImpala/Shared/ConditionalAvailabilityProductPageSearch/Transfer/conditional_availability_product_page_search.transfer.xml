@@ -23,4 +23,27 @@
         <property name="payloadTransfers" type="array" singular="payloadTransfers"/>
     </transfer>
 
+    <transfer name="ConditionalAvailabilityCollection">
+        <property name="conditionalAvailabilities" type="ConditionalAvailability[]" singular="conditionalAvailability" />
+    </transfer>
+
+    <transfer name="ConditionalAvailability">
+        <property name="fkProduct" type="int"/>
+        <property name="channel" type="string"/>
+        <property name="conditionalAvailabilityPeriodCollection" type="ConditionalAvailabilityPeriodCollection" />
+    </transfer>
+
+    <transfer name="ConditionalAvailabilityPeriodCollection">
+        <property name="conditionalAvailabilityPeriods" type="ConditionalAvailabilityPeriod[]" singular="conditionalAvailabilityPeriod" />
+    </transfer>
+
+    <transfer name="ConditionalAvailabilityPeriod">
+        <property name="quantity" type="int" />
+        <property name="startAt" type="string" />
+        <property name="endAt" type="string" />
+    </transfer>
+
+    <transfer name="Customer">
+        <property name="availabilityChannel" type="string" />
+    </transfer>
 </transfers>
