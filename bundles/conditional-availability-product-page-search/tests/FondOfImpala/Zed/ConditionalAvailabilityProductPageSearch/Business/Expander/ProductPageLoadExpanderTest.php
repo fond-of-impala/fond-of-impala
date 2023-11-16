@@ -10,7 +10,6 @@ use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 use Generated\Shared\Transfer\ProductConcreteTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
@@ -115,7 +114,7 @@ class ProductPageLoadExpanderTest extends Unit
         $this->expander = new ProductPageLoadExpander(
             $this->stockStatusGeneratorMock,
             $this->productFacadeMock,
-            $this->conditionalAvailabilityFacadeMock
+            $this->conditionalAvailabilityFacadeMock,
         );
     }
 
@@ -170,7 +169,7 @@ class ProductPageLoadExpanderTest extends Unit
             ->method('generateByRawValueAndChannel')
             ->with(
                 ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_IN_STOCK,
-                $channel
+                $channel,
             )->willReturn($stockStatus);
 
         $this->productPayloadTransferMock->expects(static::atLeastOnce())

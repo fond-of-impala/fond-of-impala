@@ -9,6 +9,9 @@ use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
 
 class StockStatusGenerator implements StockStatusGeneratorInterface
 {
+    /**
+     * @var string
+     */
     public const PATTERN_STOCK_STATUS = '%s-%s';
 
     /**
@@ -17,7 +20,7 @@ class StockStatusGenerator implements StockStatusGeneratorInterface
     public const VALID_RAW_VALUES = [
         ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_IN_STOCK,
         ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_LATER_IN_STOCK,
-        ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK
+        ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK,
     ];
 
     /**
@@ -26,8 +29,8 @@ class StockStatusGenerator implements StockStatusGeneratorInterface
      * @return int
      */
     public function generateRawValueByConditionalAvailabilityPeriodCollection(
-        ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer): int
-    {
+        ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer
+    ): int {
         $today = (new DateTime())->setTime(0, 0);
         $conditionalAvailabilityPeriodTransfers = $conditionalAvailabilityPeriodCollectionTransfer
             ->getConditionalAvailabilityPeriods();
@@ -37,7 +40,7 @@ class StockStatusGenerator implements StockStatusGeneratorInterface
             $endAt = (new DateTime($conditionalAvailabilityPeriodTransfer->getEndAt()))->setTime(0, 0);
             $qty = $conditionalAvailabilityPeriodTransfer->getQuantity();
 
-            if ($qty > 0 && $startAt <= $today && $endAt >= $today ) {
+            if ($qty > 0 && $startAt <= $today && $endAt >= $today) {
                 return ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_IN_STOCK;
             }
 
@@ -53,6 +56,8 @@ class StockStatusGenerator implements StockStatusGeneratorInterface
      * @param int $rawValue
      * @param string $channel
      *
+     * @throws \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Exception\InvalidRawValueException
+     *
      * @return string
      */
     public function generateByRawValueAndChannel(int $rawValue, string $channel): string
@@ -62,8 +67,8 @@ class StockStatusGenerator implements StockStatusGeneratorInterface
                 sprintf(
                     'Given raw value (%s) is invalid. Possible raw values are %s',
                     $rawValue,
-                    implode('|', static::VALID_RAW_VALUES)
-                )
+                    implode('|', static::VALID_RAW_VALUES),
+                ),
             );
         }
 

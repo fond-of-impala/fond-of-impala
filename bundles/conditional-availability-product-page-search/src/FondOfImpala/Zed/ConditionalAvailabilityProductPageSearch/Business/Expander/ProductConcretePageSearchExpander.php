@@ -2,12 +2,9 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander;
 
-use FondOfImpala\Shared\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchConfig;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 
 class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpanderInterface
@@ -64,7 +61,7 @@ class ProductConcretePageSearchExpander implements ProductConcretePageSearchExpa
             }
 
             $stockStatusRawValue = $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
-                $conditionalAvailabilityPeriodCollectionTransfer
+                $conditionalAvailabilityPeriodCollectionTransfer,
             );
 
             $stockStatus[] = $this->stockStatusGenerator->generateByRawValueAndChannel($stockStatusRawValue, $channel);

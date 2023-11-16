@@ -20,7 +20,7 @@ class StockStatusGeneratorTest extends Unit
     protected MockObject|ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransferMock;
 
     /**
-     * @var array<\PHPUnit\Framework\MockObject\MockObject|ConditionalAvailabilityPeriodTransfer>
+     * @var array<\PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>
      */
     protected array $conditionalAvailabilityPeriodTransferMocks;
 
@@ -37,8 +37,8 @@ class StockStatusGeneratorTest extends Unit
         parent::_before();
 
         $this->conditionalAvailabilityPeriodCollectionTransferMock = $this->getMockBuilder(
-                ConditionalAvailabilityPeriodCollectionTransfer::class
-            )->disableOriginalConstructor()
+            ConditionalAvailabilityPeriodCollectionTransfer::class,
+        )->disableOriginalConstructor()
             ->getMock();
 
         $this->conditionalAvailabilityPeriodTransferMocks = [
@@ -70,26 +70,25 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->sub(new DateInterval('P10D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getStartAt')
             ->willReturn(
                 (new DateTime())
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[2]->expects(static::never())
             ->method('getStartAt');
-
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getEndAt')
             ->willReturn(
                 (new DateTime())
                     ->sub(new DateInterval('P1D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
@@ -97,7 +96,7 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P9D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[2]->expects(static::never())
@@ -117,8 +116,8 @@ class StockStatusGeneratorTest extends Unit
         static::assertEquals(
             ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_IN_STOCK,
             $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
-                $this->conditionalAvailabilityPeriodCollectionTransferMock
-            )
+                $this->conditionalAvailabilityPeriodCollectionTransferMock,
+            ),
         );
     }
 
@@ -136,14 +135,14 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->sub(new DateInterval('P10D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getStartAt')
             ->willReturn(
                 (new DateTime())
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[2]->expects(static::atLeastOnce())
@@ -151,16 +150,15 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P10D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
-
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getEndAt')
             ->willReturn(
                 (new DateTime())
                     ->sub(new DateInterval('P1D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
@@ -168,7 +166,7 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P9D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[2]->expects(static::atLeastOnce())
@@ -176,7 +174,7 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P18D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
@@ -194,8 +192,8 @@ class StockStatusGeneratorTest extends Unit
         static::assertEquals(
             ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_LATER_IN_STOCK,
             $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
-                $this->conditionalAvailabilityPeriodCollectionTransferMock
-            )
+                $this->conditionalAvailabilityPeriodCollectionTransferMock,
+            ),
         );
     }
 
@@ -213,14 +211,14 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->sub(new DateInterval('P10D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getStartAt')
             ->willReturn(
                 (new DateTime())
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[2]->expects(static::atLeastOnce())
@@ -228,16 +226,15 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P10D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
-
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getEndAt')
             ->willReturn(
                 (new DateTime())
                     ->sub(new DateInterval('P1D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
@@ -245,7 +242,7 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P9D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[2]->expects(static::atLeastOnce())
@@ -253,7 +250,7 @@ class StockStatusGeneratorTest extends Unit
             ->willReturn(
                 (new DateTime())
                     ->add(new DateInterval('P18D'))
-                    ->format(DateTimeInterface::W3C)
+                    ->format(DateTimeInterface::W3C),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
@@ -271,14 +268,13 @@ class StockStatusGeneratorTest extends Unit
         static::assertEquals(
             ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK,
             $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
-                $this->conditionalAvailabilityPeriodCollectionTransferMock
-            )
+                $this->conditionalAvailabilityPeriodCollectionTransferMock,
+            ),
         );
     }
 
     /**
      * @return void
-     * @throws \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Exception\InvalidRawValueException
      */
     public function testGenerateByRawValueAndChannel(): void
     {
@@ -288,18 +284,17 @@ class StockStatusGeneratorTest extends Unit
             sprintf(
                 StockStatusGenerator::PATTERN_STOCK_STATUS,
                 $channel,
-                ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK
+                ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK,
             ),
             $this->stockStatusGenerator->generateByRawValueAndChannel(
                 ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_OUT_OF_STOCK,
-                $channel
-            )
+                $channel,
+            ),
         );
     }
 
     /**
      * @return void
-     * @throws \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Exception\InvalidRawValueException
      */
     public function testGenerateByRawValueAndChannelWithError(): void
     {
@@ -308,9 +303,10 @@ class StockStatusGeneratorTest extends Unit
         try {
             $this->stockStatusGenerator->generateByRawValueAndChannel(
                 99999,
-                $channel
+                $channel,
             );
             static::fail();
-        } catch (InvalidRawValueException $exception) {}
+        } catch (InvalidRawValueException $exception) {
+        }
     }
 }

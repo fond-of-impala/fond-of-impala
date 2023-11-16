@@ -100,7 +100,7 @@ class ProductConcretePageSearchExpanderTest extends Unit
 
         $this->expander = new ProductConcretePageSearchExpander(
             $this->stockStatusGeneratorMock,
-            $this->conditionalAvailabilityFacadeMock
+            $this->conditionalAvailabilityFacadeMock,
         );
     }
 
@@ -128,7 +128,6 @@ class ProductConcretePageSearchExpanderTest extends Unit
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
             ->willReturn($this->conditionalAvailabilityPeriodCollectionTransferMock);
-
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getChannel')

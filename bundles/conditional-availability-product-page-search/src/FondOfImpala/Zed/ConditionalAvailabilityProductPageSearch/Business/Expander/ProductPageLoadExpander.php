@@ -86,19 +86,19 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
                     ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
 
                 $currentGroupedStockStatusRawValues = $this->getGroupedStockStatusRawValuesByConditionalAvailabilityCollection(
-                    $conditionalAvailabilityCollectionTransfer
+                    $conditionalAvailabilityCollectionTransfer,
                 );
 
                 $groupedStockStatusRawValues = $this->combineGroupedStockStatusRawValues(
                     $groupedStockStatusRawValues,
-                    $currentGroupedStockStatusRawValues
+                    $currentGroupedStockStatusRawValues,
                 );
             }
 
             foreach ($groupedStockStatusRawValues as $channel => $stockStatusRawValue) {
                 $stockStatus[] = $this->stockStatusGenerator->generateByRawValueAndChannel(
                     $stockStatusRawValue,
-                    $channel
+                    $channel,
                 );
             }
 
@@ -129,8 +129,8 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
 
             $productConcreteStockStatus[$conditionalAvailabilityTransfer->getChannel()]
                 = $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
-                    $conditionalAvailabilityPeriodCollectionTransfer
-            );
+                    $conditionalAvailabilityPeriodCollectionTransfer,
+                );
         }
 
         return $productConcreteStockStatus;
