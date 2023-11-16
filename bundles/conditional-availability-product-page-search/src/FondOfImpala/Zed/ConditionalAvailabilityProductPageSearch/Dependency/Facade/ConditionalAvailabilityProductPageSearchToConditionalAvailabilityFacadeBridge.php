@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 
 class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBridge implements ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface
-     */
-    protected $conditionalAvailabilityFacade;
+    protected ConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade

@@ -44,7 +44,7 @@ class ConditionalAvailabilitySearchEventSubscriberTest extends Unit
         $this->eventCollectionMock
             ->expects(static::exactly(1))
             ->method('addListenerQueued')
-            ->willReturnCallback(static function (string $eventName, EventBaseHandlerInterface $eventHandler) {
+            ->willReturnCallback(static function (string $eventName, EventBaseHandlerInterface $eventHandler): void {
                 if ($eventName === ConditionalAvailabilityEvents::ENTITY_FOI_CONDITIONAL_AVAILABILITY_PERIOD_CREATE) {
                     static::assertInstanceOf(ConditionalAvailabilityProductPageSearchPublishListener::class, $eventHandler);
 

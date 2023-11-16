@@ -6,10 +6,7 @@ use Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface;
 
 class ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeBridge implements ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface
-     */
-    protected $productPageSearchFacade;
+    protected ProductPageSearchFacadeInterface $productPageSearchFacade;
 
     /**
      * @param \Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface $productPageSearchFacade
