@@ -9,7 +9,7 @@ class ProductAbstractReader implements ProductAbstractReaderInterface
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
      */
-    protected $productFacade;
+    protected ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacade;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacade
