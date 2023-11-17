@@ -63,7 +63,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     }
 
     /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer\ProductStockStatusTriggererInterface
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer\StockStatusTriggererInterface
      */
     public function createStockStatusTriggerer(): StockStatusTriggererInterface
     {

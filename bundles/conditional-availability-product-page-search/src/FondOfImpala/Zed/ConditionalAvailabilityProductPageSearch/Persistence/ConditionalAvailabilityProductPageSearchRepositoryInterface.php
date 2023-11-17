@@ -2,6 +2,9 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface ConditionalAvailabilityProductPageSearchRepositoryInterface
 {
     /**

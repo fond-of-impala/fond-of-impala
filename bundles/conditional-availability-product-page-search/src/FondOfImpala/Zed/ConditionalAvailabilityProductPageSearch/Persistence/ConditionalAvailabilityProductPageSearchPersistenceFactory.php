@@ -7,6 +7,9 @@ use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\Propel
 use Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityProductPageSearchPersistenceFactory extends AbstractPersistenceFactory
 {
 
