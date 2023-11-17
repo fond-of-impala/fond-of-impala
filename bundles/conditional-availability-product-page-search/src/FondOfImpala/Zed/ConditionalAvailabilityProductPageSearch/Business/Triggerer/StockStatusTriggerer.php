@@ -24,7 +24,7 @@ class StockStatusTriggerer implements StockStatusTriggererInterface
     protected ConditionalAvailabilityProductPageSearchRepositoryInterface $repository;
 
     /**
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface $productAbstractReader,
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface $productAbstractReader
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface $productPageSearchFacade
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface $repository
      */

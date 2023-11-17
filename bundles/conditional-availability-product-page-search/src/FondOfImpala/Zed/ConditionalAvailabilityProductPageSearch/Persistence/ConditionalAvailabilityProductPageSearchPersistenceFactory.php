@@ -11,8 +11,8 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class ConditionalAvailabilityProductPageSearchPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-    * @return \Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityQuery
-    */
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityQuery
+     */
     public function createFoiConditionalAvailabilityQuery(): FoiConditionalAvailabilityQuery
     {
         return FoiConditionalAvailabilityQuery::create();
