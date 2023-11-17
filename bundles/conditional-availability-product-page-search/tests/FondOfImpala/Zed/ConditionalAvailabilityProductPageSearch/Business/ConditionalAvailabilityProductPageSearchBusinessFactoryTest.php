@@ -146,6 +146,9 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
         );
     }
 
+    /**
+     * @return void
+     */
     public function testCreateStockStatusTriggerer(): void
     {
         $this->containerMock->expects(static::atLeastOnce())

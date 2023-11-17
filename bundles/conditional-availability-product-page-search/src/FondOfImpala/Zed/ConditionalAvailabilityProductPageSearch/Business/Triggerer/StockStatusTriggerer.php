@@ -51,7 +51,7 @@ class StockStatusTriggerer implements StockStatusTriggererInterface
 
         $this->productPageSearchFacade->publishProductConcretes($productConcreteIds);
         $this->productPageSearchFacade->publish(
-            $this->productAbstractReader->getProductAbstractIdsByConcreteIds($productConcreteIds)
+            $this->productAbstractReader->getProductAbstractIdsByConcreteIds($productConcreteIds),
         );
     }
 }

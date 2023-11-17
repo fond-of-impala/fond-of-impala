@@ -70,7 +70,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
         return new StockStatusTriggerer(
             $this->createProductAbstractReader(),
             $this->getProductPageSearchFacade(),
-            $this->getRepository()
+            $this->getRepository(),
         );
     }
 

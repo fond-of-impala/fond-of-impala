@@ -2,8 +2,6 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence;
 
-use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
-use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriod;
 use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityPeriodTableMap;
 use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityTableMap;
 use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
@@ -40,5 +38,4 @@ class ConditionalAvailabilityProductPageSearchRepository extends AbstractReposit
 
         return $collection->toArray();
     }
-
 }

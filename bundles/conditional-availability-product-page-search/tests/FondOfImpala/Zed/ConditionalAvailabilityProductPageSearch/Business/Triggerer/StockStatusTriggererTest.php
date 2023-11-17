@@ -52,9 +52,8 @@ class StockStatusTriggererTest extends Unit
         $this->triggerer = new StockStatusTriggerer(
             $this->productAbstractReaderMock,
             $this->productPageSearchFacadeMock,
-            $this->repositoryMock
+            $this->repositoryMock,
         );
-
     }
 
     /**
@@ -62,8 +61,8 @@ class StockStatusTriggererTest extends Unit
      */
     public function testTrigger(): void
     {
-        $productConcreteIds= [1];
-        $productAbstractIds= [1];
+        $productConcreteIds = [1];
+        $productAbstractIds = [1];
 
         $this->repositoryMock->expects(static::atLeastOnce())
             ->method('findConcreteProductIdsToTrigger')
@@ -84,5 +83,4 @@ class StockStatusTriggererTest extends Unit
 
         $this->triggerer->trigger();
     }
-
 }
