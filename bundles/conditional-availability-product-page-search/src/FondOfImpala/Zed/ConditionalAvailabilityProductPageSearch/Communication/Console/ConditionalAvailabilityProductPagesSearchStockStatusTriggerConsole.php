@@ -21,7 +21,7 @@ class ConditionalAvailabilityProductPagesSearchStockStatusTriggerConsole extends
     /**
      * @var string
      */
-    public const DESCRIPTION = 'This command will trigger stock status.';
+    public const DESCRIPTION = 'This command will trigger products with changed stock status.';
 
     /**
      * @return void
@@ -42,7 +42,7 @@ class ConditionalAvailabilityProductPagesSearchStockStatusTriggerConsole extends
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->info('Trigger stock status');
+        $this->info('Trigger product with changed stock status');
         $this->getFacade()->triggerStockStatus();
 
         return static::CODE_SUCCESS;
