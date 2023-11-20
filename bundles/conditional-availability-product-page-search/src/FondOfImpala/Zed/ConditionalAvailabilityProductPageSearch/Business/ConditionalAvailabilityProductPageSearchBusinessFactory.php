@@ -10,11 +10,17 @@ use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReader;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTrigger;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
+/**
+ * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface getRepository()
+ */
 class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBusinessFactory
 {
     /**
@@ -57,6 +63,18 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     }
 
     /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface
+     */
+    public function createStockStatusTrigger(): StockStatusTriggerInterface
+    {
+        return new StockStatusTrigger(
+            $this->createProductAbstractReader(),
+            $this->getProductPageSearchFacade(),
+            $this->getRepository(),
+        );
+    }
+
+    /**
      * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
      */
     protected function getConditionalAvailabilityFacade(): ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
@@ -74,5 +92,13 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
         return $this->getProvidedDependency(
             ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT,
         );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
+     */
+    public function getProductPageSearchFacade(): ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
+    {
+        return $this->getProvidedDependency(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT_PAGE_SEARCH);
     }
 }

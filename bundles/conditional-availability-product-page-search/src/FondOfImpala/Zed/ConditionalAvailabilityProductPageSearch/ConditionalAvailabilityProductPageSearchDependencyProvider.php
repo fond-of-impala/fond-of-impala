@@ -48,7 +48,7 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
         $container = $this->addConditionalAvailabilityFacade($container);
         $container = $this->addProductFacade($container);
 
-        return $container;
+        return $this->addProductPageSearchFacade($container);
     }
 
     /**

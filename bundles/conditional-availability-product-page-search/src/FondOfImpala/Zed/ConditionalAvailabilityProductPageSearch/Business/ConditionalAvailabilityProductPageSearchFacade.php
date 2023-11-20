@@ -41,4 +41,16 @@ class ConditionalAvailabilityProductPageSearchFacade extends AbstractFacade impl
             ->createProductConcretePageSearchExpander()
             ->expand($productConcretePageSearchTransfer);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function triggerStockStatus(): void
+    {
+        $this->getFactory()->createStockStatusTrigger()->trigger();
+    }
 }

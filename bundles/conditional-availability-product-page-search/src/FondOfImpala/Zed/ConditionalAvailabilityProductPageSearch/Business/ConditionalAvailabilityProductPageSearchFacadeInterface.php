@@ -32,4 +32,15 @@ interface ConditionalAvailabilityProductPageSearchFacadeInterface
     public function expandProductConcretePageSearchTransferWithStockStatus(
         ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
     ): ProductConcretePageSearchTransfer;
+
+    /**
+     * Specification:
+     * - Retrieve fk products to be triggered
+     * - trigger concrete products and abstract products
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function triggerStockStatus(): void;
 }
