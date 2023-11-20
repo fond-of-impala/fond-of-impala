@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
@@ -8,7 +8,7 @@ use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class StockStatusTriggererTest extends Unit
+class StockStatusTriggerTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
@@ -26,9 +26,9 @@ class StockStatusTriggererTest extends Unit
     protected MockObject|ConditionalAvailabilityProductPageSearchRepository $repositoryMock;
 
     /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer\StockStatusTriggerer
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTrigger
      */
-    protected StockStatusTriggerer $triggerer;
+    protected StockStatusTrigger $trigger;
 
     /**
      * @return void
@@ -49,7 +49,7 @@ class StockStatusTriggererTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->triggerer = new StockStatusTriggerer(
+        $this->trigger = new StockStatusTrigger(
             $this->productAbstractReaderMock,
             $this->productPageSearchFacadeMock,
             $this->repositoryMock,
@@ -81,6 +81,6 @@ class StockStatusTriggererTest extends Unit
             ->method('publishProductConcretes')
             ->with($productAbstractIds);
 
-        $this->triggerer->trigger();
+        $this->trigger->trigger();
     }
 }

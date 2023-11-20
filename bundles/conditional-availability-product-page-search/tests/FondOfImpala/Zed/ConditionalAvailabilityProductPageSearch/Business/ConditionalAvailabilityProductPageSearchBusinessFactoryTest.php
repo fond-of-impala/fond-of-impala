@@ -6,7 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReader;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer\StockStatusTriggererInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
@@ -149,7 +149,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
     /**
      * @return void
      */
-    public function testCreateStockStatusTriggerer(): void
+    public function testCreateStockStatusTrigger(): void
     {
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
@@ -166,8 +166,8 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
             )->willReturn($this->productFacadeMock, $this->productPageSearchFacadeMock);
 
         static::assertInstanceOf(
-            StockStatusTriggererInterface::class,
-            $this->factory->createStockStatusTriggerer(),
+            StockStatusTriggerInterface::class,
+            $this->factory->createStockStatusTrigger(),
         );
     }
 }

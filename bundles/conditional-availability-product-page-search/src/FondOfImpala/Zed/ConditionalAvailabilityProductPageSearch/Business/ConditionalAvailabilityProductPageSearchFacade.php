@@ -51,6 +51,6 @@ class ConditionalAvailabilityProductPageSearchFacade extends AbstractFacade impl
      */
     public function triggerStockStatus(): void
     {
-        $this->getFactory()->createStockStatusTriggerer()->trigger();
+        $this->getFactory()->createStockStatusTrigger()->trigger();
     }
 }

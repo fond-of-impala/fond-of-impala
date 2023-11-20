@@ -6,7 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer\StockStatusTriggererInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface;
 use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -49,9 +49,9 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
     protected MockObject|ProductConcretePageSearchTransfer $productConcretePageSearchTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer\StockStatusTriggererInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface
      */
-    protected MockObject|StockStatusTriggererInterface $stockStatusTriggererMock;
+    protected MockObject|StockStatusTriggerInterface $stockStatusTriggerMock;
 
     /**
      * @return void
@@ -88,7 +88,7 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->stockStatusTriggererMock = $this->getMockBuilder(StockStatusTriggererInterface::class)
+        $this->stockStatusTriggerMock = $this->getMockBuilder(StockStatusTriggerInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -141,10 +141,10 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
     public function testTriggerStockStatus(): void
     {
         $this->factoryMock->expects(static::atLeastOnce())
-            ->method('createStockStatusTriggerer')
-            ->willReturn($this->stockStatusTriggererMock);
+            ->method('createStockStatusTrigger')
+            ->willReturn($this->stockStatusTriggerMock);
 
-        $this->stockStatusTriggererMock->expects(static::atLeastOnce())
+        $this->stockStatusTriggerMock->expects(static::atLeastOnce())
             ->method('trigger');
 
         $this->facade->triggerStockStatus();

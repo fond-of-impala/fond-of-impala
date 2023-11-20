@@ -1,12 +1,12 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Triggerer;
+namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger;
 
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface;
 
-class StockStatusTriggerer implements StockStatusTriggererInterface
+class StockStatusTrigger implements StockStatusTriggerInterface
 {
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
