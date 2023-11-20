@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ConditionalAvailabilityProductPageSearchFacadeInterface getFacade()
  */
-class ConditionalAvailabilityProductPagesSearchStockStatusTriggerConsole extends Console
+class TriggerStockStatusConsole extends Console
 {
     /**
      * @var string
@@ -42,7 +42,7 @@ class ConditionalAvailabilityProductPagesSearchStockStatusTriggerConsole extends
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->info('Trigger product with changed stock status');
+        $this->info('Trigger products with changed stock status');
         $this->getFacade()->triggerStockStatus();
 
         return static::CODE_SUCCESS;
