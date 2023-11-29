@@ -21,7 +21,7 @@ class ConditionalAvailabilityCartConnectorFacade extends AbstractFacade implemen
     public function expandQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()
-            ->createConditionalAvailabilityExpander()
+            ->createQuoteExpander()
             ->expand($quoteTransfer);
     }
 

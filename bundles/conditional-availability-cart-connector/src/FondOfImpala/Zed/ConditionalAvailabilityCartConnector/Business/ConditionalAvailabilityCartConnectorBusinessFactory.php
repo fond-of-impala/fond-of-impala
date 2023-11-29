@@ -5,8 +5,16 @@ declare(strict_types = 1);
 namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business;
 
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\QuoteExpander;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\QuoteExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\SkusFilter;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\SkusFilterInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\ConcreteDeliveryDateGenerator;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\ConcreteDeliveryDateGeneratorInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\EarliestDeliveryDateGenerator;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\EarliestDeliveryDateGeneratorInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\MessageGenerator;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\MessageGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleaner;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDate;
@@ -19,6 +27,8 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\Condit
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReader;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReaderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reducer\ConditionalAvailabilityReducer;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reducer\ConditionalAvailabilityReducerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface;
@@ -38,6 +48,20 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
         return new ConditionalAvailabilityExpander(
             $this->createConditionalAvailabilityReader(),
             $this->getConditionalAvailabilityService(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\QuoteExpanderInterface
+     */
+    public function createQuoteExpander(): QuoteExpanderInterface
+    {
+        return new QuoteExpander(
+            $this->createConditionalAvailabilityReader(),
+            $this->createConditionalAvailabilityReducer(),
+            $this->createEarliestDeliveryDateGenerator(),
+            $this->createConcreteDeliveryDateGenerator(),
+            $this->createMessageGenerator(),
         );
     }
 
@@ -134,5 +158,41 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
         return $this->getProvidedDependency(
             ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER,
         );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reducer\ConditionalAvailabilityReducerInterface
+     */
+    protected function createConditionalAvailabilityReducer(): ConditionalAvailabilityReducerInterface
+    {
+        return new ConditionalAvailabilityReducer();
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\EarliestDeliveryDateGeneratorInterface
+     */
+    protected function createEarliestDeliveryDateGenerator(): EarliestDeliveryDateGeneratorInterface
+    {
+        return new EarliestDeliveryDateGenerator(
+            $this->getConditionalAvailabilityService()
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\ConcreteDeliveryDateGeneratorInterface
+     */
+    protected function createConcreteDeliveryDateGenerator(): ConcreteDeliveryDateGeneratorInterface
+    {
+        return new ConcreteDeliveryDateGenerator(
+            $this->getConditionalAvailabilityService()
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\MessageGeneratorInterface
+     */
+    protected function createMessageGenerator(): MessageGeneratorInterface
+    {
+        return new MessageGenerator();
     }
 }
