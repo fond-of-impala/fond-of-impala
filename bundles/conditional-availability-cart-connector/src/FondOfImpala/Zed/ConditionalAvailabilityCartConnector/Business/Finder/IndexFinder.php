@@ -62,10 +62,17 @@ class IndexFinder implements IndexFinderInterface
     }
 
     /**
-     * @inheritDoc
+     * @param \ArrayObject $conditionalAvailabilityPeriodTransfers
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
+     *
+     * @return int|null
+     *
+     * @throws \Exception
      */
-    public function findConcreteFromConditionalAvailabilityPeriods(ArrayObject $conditionalAvailabilityPeriodTransfers, ItemTransfer $itemTransfer): ?int
-    {
+    public function findConcreteFromConditionalAvailabilityPeriods(
+        ArrayObject $conditionalAvailabilityPeriodTransfers,
+        ItemTransfer $itemTransfer
+    ): ?int {
         $quantity = $itemTransfer->getQuantity();
         $concreteDeliveryDate = new DateTime($itemTransfer->getDeliveryDate());
         $latestOrderDate = $this->conditionalAvailabilityService->generateLatestOrderDateByDeliveryDate(
