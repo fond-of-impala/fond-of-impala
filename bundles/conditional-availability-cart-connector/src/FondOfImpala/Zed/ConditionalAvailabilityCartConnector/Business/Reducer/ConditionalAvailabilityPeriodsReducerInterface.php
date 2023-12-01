@@ -12,7 +12,7 @@ interface ConditionalAvailabilityPeriodsReducerInterface
      * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      * @param int $effectedIndex
      *
-     * @return \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer> $conditionalAvailabilityPeriodTransfers
+     * @return \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>
      */
     public function reduceByItemAndEffectedIndex(
         ArrayObject $conditionalAvailabilityPeriodTransfers,
