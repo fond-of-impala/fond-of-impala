@@ -1,10 +1,10 @@
 <?php
 
-namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model;
+namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander;
 
 use Generated\Shared\Transfer\QuoteTransfer;
 
-interface ConditionalAvailabilityExpanderInterface
+interface QuoteExpanderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer

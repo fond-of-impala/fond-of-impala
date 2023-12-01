@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\QuoteExpanderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDateInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface;
@@ -26,7 +27,7 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
     /**
      * @var (\FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityExpanderInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected ConditionalAvailabilityExpanderInterface|MockObject $conditionalAvailabilityExpanderMock;
+    protected ConditionalAvailabilityExpanderInterface|MockObject $quoteExpanderMock;
 
     /**
      * @var (\Generated\Shared\Transfer\CartChangeTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
@@ -66,7 +67,7 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityExpanderMock = $this->getMockBuilder(ConditionalAvailabilityExpanderInterface::class)
+        $this->quoteExpanderMock = $this->getMockBuilder(QuoteExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -96,10 +97,10 @@ class ConditionalAvailabilityCartConnectorFacadeTest extends Unit
     public function testExpandQuote(): void
     {
         $this->factoryMock->expects(static::atLeastOnce())
-            ->method('createConditionalAvailabilityExpander')
-            ->willReturn($this->conditionalAvailabilityExpanderMock);
+            ->method('createQuoteExpander')
+            ->willReturn($this->quoteExpanderMock);
 
-        $this->conditionalAvailabilityExpanderMock->expects(static::atLeastOnce())
+        $this->quoteExpanderMock->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->quoteTransferMock)
             ->willReturn($this->quoteTransferMock);
