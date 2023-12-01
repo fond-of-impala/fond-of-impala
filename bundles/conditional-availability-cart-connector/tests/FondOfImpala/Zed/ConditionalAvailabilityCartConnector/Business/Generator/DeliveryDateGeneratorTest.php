@@ -2,9 +2,9 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator;
 
-use \DateTime;
-use \DateTimeInterface;
 use Codeception\Test\Unit;
+use DateTime;
+use DateTimeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
@@ -59,13 +59,13 @@ class DeliveryDateGeneratorTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->today =  new DateTime('now');
-        $this->earliestDeliveryDate =  new DateTime('now');
+        $this->today = new DateTime('now');
+        $this->earliestDeliveryDate = new DateTime('now');
 
         $this->deliveryDateGenerator = new DeliveryDateGenerator(
             $this->today,
             $this->earliestDeliveryDate,
-            $this->conditionalAvailabilityServiceMock
+            $this->conditionalAvailabilityServiceMock,
         );
     }
 

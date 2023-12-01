@@ -80,7 +80,7 @@ class ItemExpanderTest extends Unit
                 ->getMock(),
             $this->getMockBuilder(ConditionalAvailabilityPeriodTransfer::class)
                 ->disableOriginalConstructor()
-                ->getMock()
+                ->getMock(),
         ];
 
         $this->expander = new ItemExpander(
@@ -88,7 +88,7 @@ class ItemExpanderTest extends Unit
             $this->indexFinderMock,
             $this->messageGeneratorMock,
             $this->deliveryDateGeneratorMock,
-            $this->conditionalAvailabilityPeriodsReducerMock
+            $this->conditionalAvailabilityPeriodsReducerMock,
         );
     }
 
@@ -149,8 +149,8 @@ class ItemExpanderTest extends Unit
             $this->itemTransferMock,
             $this->expander->expand(
                 $this->itemTransferMock,
-                $groupedConditionalAvailabilities
-            )
+                $groupedConditionalAvailabilities,
+            ),
         );
     }
 
@@ -204,8 +204,8 @@ class ItemExpanderTest extends Unit
             $this->itemTransferMock,
             $this->expander->expand(
                 $this->itemTransferMock,
-                $groupedConditionalAvailabilities
-            )
+                $groupedConditionalAvailabilities,
+            ),
         );
     }
 
@@ -256,8 +256,8 @@ class ItemExpanderTest extends Unit
             $this->itemTransferMock,
             $this->expander->expand(
                 $this->itemTransferMock,
-                $groupedConditionalAvailabilities
-            )
+                $groupedConditionalAvailabilities,
+            ),
         );
     }
 
@@ -318,8 +318,8 @@ class ItemExpanderTest extends Unit
             $this->itemTransferMock,
             $this->expander->expand(
                 $this->itemTransferMock,
-                $groupedConditionalAvailabilities
-            )
+                $groupedConditionalAvailabilities,
+            ),
         );
     }
 
@@ -374,8 +374,8 @@ class ItemExpanderTest extends Unit
             $this->itemTransferMock,
             $this->expander->expand(
                 $this->itemTransferMock,
-                $groupedConditionalAvailabilities
-            )
+                $groupedConditionalAvailabilities,
+            ),
         );
     }
 
@@ -427,8 +427,8 @@ class ItemExpanderTest extends Unit
             $this->itemTransferMock,
             $this->expander->expand(
                 $this->itemTransferMock,
-                $groupedConditionalAvailabilities
-            )
+                $groupedConditionalAvailabilities,
+            ),
         );
     }
 }

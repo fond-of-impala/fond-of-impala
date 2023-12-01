@@ -66,8 +66,6 @@ class IndexFinder implements IndexFinderInterface
      * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
      * @return int|null
-     *
-     * @throws \Exception
      */
     public function findConcreteFromConditionalAvailabilityPeriods(
         ArrayObject $conditionalAvailabilityPeriodTransfers,

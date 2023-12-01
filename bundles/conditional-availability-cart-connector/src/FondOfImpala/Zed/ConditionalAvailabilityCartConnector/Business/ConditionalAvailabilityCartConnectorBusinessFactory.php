@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business;
 
 use DateTime;
-use DateTimeInterface;
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\ItemExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\ItemExpanderInterface;
@@ -51,7 +50,7 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     {
         return new QuoteExpander(
             $this->createConditionalAvailabilityReader(),
-            $this->createItemExpander()
+            $this->createItemExpander(),
         );
     }
 
@@ -122,7 +121,7 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
             $this->createIndexFinder(),
             $this->createMessageGenerator(),
             $this->createDeliveryDateGenerator(),
-            $this->createConditionalAvailabilityPeriodsReducer()
+            $this->createConditionalAvailabilityPeriodsReducer(),
         );
     }
 
@@ -162,7 +161,7 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
         return new IndexFinder(
             new DateTime(),
             $this->getConditionalAvailabilityService()->generateEarliestDeliveryDate(),
-            $this->getConditionalAvailabilityService()
+            $this->getConditionalAvailabilityService(),
         );
     }
 

@@ -62,7 +62,7 @@ class IndexFinderTest extends Unit
         $this->finder = new IndexFinder(
             $this->today,
             $this->earliestDeliveryDate,
-            $this->conditionalAvailabilityServiceMock
+            $this->conditionalAvailabilityServiceMock,
         );
     }
 
@@ -81,7 +81,7 @@ class IndexFinderTest extends Unit
             ->method('getEndAt')
             ->willReturn(
                 (clone $this->today)->sub(new DateInterval('P10D'))
-                    ->format('Y-m-d')
+                    ->format('Y-m-d'),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
@@ -92,7 +92,7 @@ class IndexFinderTest extends Unit
             ->method('getEndAt')
             ->willReturn(
                 (clone $this->today)->add(new DateInterval('P10D'))
-                    ->format('Y-m-d')
+                    ->format('Y-m-d'),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
@@ -109,8 +109,8 @@ class IndexFinderTest extends Unit
             1,
             $this->finder->findEarliestFromConditionalAvailabilityPeriods(
                 new ArrayObject($this->conditionalAvailabilityPeriodTransferMocks),
-                $this->itemTransferMock
-            )
+                $this->itemTransferMock,
+            ),
         );
     }
 
@@ -129,7 +129,7 @@ class IndexFinderTest extends Unit
             ->method('getEndAt')
             ->willReturn(
                 (clone $this->today)->sub(new DateInterval('P10D'))
-                    ->format('Y-m-d')
+                    ->format('Y-m-d'),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
@@ -140,8 +140,8 @@ class IndexFinderTest extends Unit
             null,
             $this->finder->findEarliestFromConditionalAvailabilityPeriods(
                 new ArrayObject([$this->conditionalAvailabilityPeriodTransferMocks[0]]),
-                $this->itemTransferMock
-            )
+                $this->itemTransferMock,
+            ),
         );
     }
 
@@ -160,7 +160,7 @@ class IndexFinderTest extends Unit
             ->method('getEndAt')
             ->willReturn(
                 (clone $this->today)->sub(new DateInterval('P10D'))
-                    ->format('Y-m-d')
+                    ->format('Y-m-d'),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
@@ -171,7 +171,7 @@ class IndexFinderTest extends Unit
             ->method('getEndAt')
             ->willReturn(
                 (clone $this->today)->add(new DateInterval('P10D'))
-                    ->format('Y-m-d')
+                    ->format('Y-m-d'),
             );
 
         $this->conditionalAvailabilityPeriodTransferMocks[1]->expects(static::atLeastOnce())
@@ -188,8 +188,8 @@ class IndexFinderTest extends Unit
             null,
             $this->finder->findEarliestFromConditionalAvailabilityPeriods(
                 new ArrayObject($this->conditionalAvailabilityPeriodTransferMocks),
-                $this->itemTransferMock
-            )
+                $this->itemTransferMock,
+            ),
         );
     }
 }

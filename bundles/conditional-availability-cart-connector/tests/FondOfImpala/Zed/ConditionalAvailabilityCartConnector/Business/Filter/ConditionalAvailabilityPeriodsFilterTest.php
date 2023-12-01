@@ -58,12 +58,12 @@ class ConditionalAvailabilityPeriodsFilterTest extends Unit
         /** @var \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilities */
         $groupedConditionalAvailabilities = new ArrayObject([
             $sku => new ArrayObject([
-                $this->conditionalAvailabilityTransferMock
-            ])
+                $this->conditionalAvailabilityTransferMock,
+            ]),
         ]);
 
         $conditionalAvailabilityPeriodTransfers = new ArrayObject([
-            $this->conditionalAvailabilityPeriodTransferMock
+            $this->conditionalAvailabilityPeriodTransferMock,
         ]);
 
         $this->itemTransferMock->expects(static::atLeastOnce())
@@ -82,8 +82,8 @@ class ConditionalAvailabilityPeriodsFilterTest extends Unit
             $conditionalAvailabilityPeriodTransfers,
             $this->filter->filterFromGroupedConditionalAvailabilitiesByItem(
                 $groupedConditionalAvailabilities,
-                $this->itemTransferMock
-            )
+                $this->itemTransferMock,
+            ),
         );
     }
 
@@ -97,8 +97,8 @@ class ConditionalAvailabilityPeriodsFilterTest extends Unit
         /** @var \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilities */
         $groupedConditionalAvailabilities = new ArrayObject([
             'bar' => new ArrayObject([
-                $this->conditionalAvailabilityTransferMock
-            ])
+                $this->conditionalAvailabilityTransferMock,
+            ]),
         ]);
 
         $this->itemTransferMock->expects(static::atLeastOnce())
@@ -108,13 +108,12 @@ class ConditionalAvailabilityPeriodsFilterTest extends Unit
         $this->conditionalAvailabilityTransferMock->expects(static::never())
             ->method('getConditionalAvailabilityPeriodCollection');
 
-
         static::assertEquals(
             null,
             $this->filter->filterFromGroupedConditionalAvailabilitiesByItem(
                 $groupedConditionalAvailabilities,
-                $this->itemTransferMock
-            )
+                $this->itemTransferMock,
+            ),
         );
     }
 
@@ -128,12 +127,12 @@ class ConditionalAvailabilityPeriodsFilterTest extends Unit
         /** @var \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilities */
         $groupedConditionalAvailabilities = new ArrayObject([
             $sku => new ArrayObject([
-                $this->conditionalAvailabilityTransferMock
-            ])
+                $this->conditionalAvailabilityTransferMock,
+            ]),
         ]);
 
         $conditionalAvailabilityPeriodTransfers = new ArrayObject([
-            $this->conditionalAvailabilityPeriodTransferMock
+            $this->conditionalAvailabilityPeriodTransferMock,
         ]);
 
         $this->itemTransferMock->expects(static::atLeastOnce())
@@ -148,8 +147,8 @@ class ConditionalAvailabilityPeriodsFilterTest extends Unit
             null,
             $this->filter->filterFromGroupedConditionalAvailabilitiesByItem(
                 $groupedConditionalAvailabilities,
-                $this->itemTransferMock
-            )
+                $this->itemTransferMock,
+            ),
         );
     }
 }

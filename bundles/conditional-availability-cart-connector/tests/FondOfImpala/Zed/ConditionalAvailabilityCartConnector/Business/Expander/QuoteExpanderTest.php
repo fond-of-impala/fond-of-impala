@@ -56,7 +56,7 @@ class QuoteExpanderTest extends Unit
 
         $this->expander = new QuoteExpander(
             $this->conditionalAvailabilityReaderMock,
-            $this->itemExpanderMock
+            $this->itemExpanderMock,
         );
     }
 
@@ -91,7 +91,7 @@ class QuoteExpanderTest extends Unit
             ->withConsecutive([$this->itemTransferMocks[0]], [$this->itemTransferMocks[1]])
             ->willReturnOnConsecutiveCalls(
                 $this->itemTransferMocks[0],
-                $this->itemTransferMocks[1]
+                $this->itemTransferMocks[1],
             );
 
         $this->itemTransferMocks[0]->expects(static::atLeastOnce())
@@ -122,7 +122,7 @@ class QuoteExpanderTest extends Unit
 
         static::assertEquals(
             $this->quoteTransferMock,
-            $this->expander->expand($this->quoteTransferMock)
+            $this->expander->expand($this->quoteTransferMock),
         );
     }
 }
