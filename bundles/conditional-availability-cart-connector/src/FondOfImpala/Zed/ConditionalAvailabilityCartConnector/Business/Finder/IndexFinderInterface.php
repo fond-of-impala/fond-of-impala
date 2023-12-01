@@ -11,7 +11,7 @@ interface IndexFinderInterface
      * @param \ArrayObject $conditionalAvailabilityPeriodTransfers
      * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
-     * @return \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer|null
+     * @return int|null
      */
     public function findEarliestFromConditionalAvailabilityPeriods(
         ArrayObject $conditionalAvailabilityPeriodTransfers,
@@ -22,7 +22,7 @@ interface IndexFinderInterface
      * @param \ArrayObject $conditionalAvailabilityPeriodTransfers
      * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
-     * @return \Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer|null
+     * @return int|null
      */
     public function findConcreteFromConditionalAvailabilityPeriods(
         ArrayObject $conditionalAvailabilityPeriodTransfers,

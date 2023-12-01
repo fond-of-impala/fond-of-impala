@@ -17,26 +17,4 @@ interface ItemExpanderInterface
         ItemTransfer $itemTransfer,
         ArrayObject $groupedConditionalAvailabilities
     ): ItemTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     * @param \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilities
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
-     */
-    public function expandEarliest(
-        ItemTransfer $itemTransfer,
-        ArrayObject $groupedConditionalAvailabilities
-    ): ItemTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     * @param \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilities
-     *
-     * @return \Generated\Shared\Transfer\ItemTransfer
-     */
-    public function expandConcrete(
-        ItemTransfer $itemTransfer,
-        ArrayObject $groupedConditionalAvailabilities
-    ): ItemTransfer;
 }

@@ -82,7 +82,7 @@ class ItemExpander implements ItemExpanderInterface
      *
      * @return \Generated\Shared\Transfer\ItemTransfer
      */
-    public function expandEarliest(
+    protected function expandEarliest(
         ItemTransfer $itemTransfer,
         ArrayObject $groupedConditionalAvailabilities
     ): ItemTransfer {
@@ -127,7 +127,7 @@ class ItemExpander implements ItemExpanderInterface
      *
      * @return \Generated\Shared\Transfer\ItemTransfer
      */
-    public function expandConcrete(
+    protected function expandConcrete(
         ItemTransfer $itemTransfer,
         ArrayObject $groupedConditionalAvailabilities
     ): ItemTransfer {
