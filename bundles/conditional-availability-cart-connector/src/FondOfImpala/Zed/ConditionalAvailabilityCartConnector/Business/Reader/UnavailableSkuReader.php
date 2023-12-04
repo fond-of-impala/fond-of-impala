@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 class UnavailableSkuReader implements UnavailableSkuReaderInterface
 {
     /**
-     * @var array<string, ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer|null>>
+     * @var array<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer|null>>
      */
     protected static array $cacheConditionalAvailabilityPeriodTransferList = [];
 

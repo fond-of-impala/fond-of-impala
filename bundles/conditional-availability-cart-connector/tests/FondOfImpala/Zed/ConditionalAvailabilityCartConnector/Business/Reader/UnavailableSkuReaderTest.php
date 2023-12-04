@@ -103,7 +103,7 @@ class UnavailableSkuReaderTest extends Unit
         $skus = [
             'foo',
             'bar',
-            'oof'
+            'oof',
         ];
         $unavailableSkus = array_slice($skus, 0, 2);
         $index = 3;
