@@ -60,7 +60,7 @@
     "fond-of-impala/price-product-price-list-page-search-extension": "*",
     "fond-of-impala/price-product-price-list-search-rest-api": "*",
     "fond-of-impala/product-image-grouping-product-page-search": "*",
-    "fond-of-impala/product-list": "*",
+    "fond-of-impala/product-list-connector": "*",
     "fond-of-impala/product-list-conditional-availability-page-search": "*",
     "fond-of-impala/product-list-price-product-price-list-page-search": "*"
   },

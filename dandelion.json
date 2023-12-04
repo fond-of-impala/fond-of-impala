@@ -179,6 +179,10 @@
       "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.0.0"
     },
+    "product-list-connector": {
+      "path": "bundles/product-list-connector",
+      "version": "1.0.0"
+    },
     "product-list-price-product-price-list-page-search": {
       "path": "bundles/product-list-price-product-price-list-page-search",
       "version": "1.0.0-beta"

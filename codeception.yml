@@ -44,6 +44,7 @@ include:
   - bundles/price-product-price-list-search-rest-api
   - bundles/product-image-grouping-product-page-search
   - bundles/product-list-conditional-availability-page-search
+  - bundles/product-list-connector
   - bundles/product-list-price-product-price-list-page-search
 
 suites:
