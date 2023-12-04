@@ -21,7 +21,7 @@ class ConditionalAvailabilityCartConnectorFacade extends AbstractFacade implemen
     public function expandQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
         return $this->getFactory()
-            ->createConditionalAvailabilityExpander()
+            ->createQuoteExpander()
             ->expand($quoteTransfer);
     }
 
@@ -59,5 +59,17 @@ class ConditionalAvailabilityCartConnectorFacade extends AbstractFacade implemen
         return $this->getFactory()
             ->createConditionalAvailabilityEnsureEarliestDate()
             ->ensureEarliestDate($quoteTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return array<string>
+     */
+    public function getUnavailableSkusByQuote(QuoteTransfer $quoteTransfer): array
+    {
+        return $this->getFactory()
+            ->createUnavailableSkuReader()
+            ->getByQuote($quoteTransfer);
     }
 }

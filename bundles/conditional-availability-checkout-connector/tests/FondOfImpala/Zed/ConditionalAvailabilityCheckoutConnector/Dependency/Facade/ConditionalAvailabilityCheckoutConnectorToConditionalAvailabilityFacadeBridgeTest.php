@@ -2,52 +2,33 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade;
 
-use ArrayObject;
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface;
-use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\ConditionalAvailabilityCartConnectorFacadeInterface;
+use Generated\Shared\Transfer\QuoteTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridgeTest extends Unit
 {
-    /**
-     * @var (\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected ConditionalAvailabilityFacadeInterface|MockObject $facadeMock;
+    protected ConditionalAvailabilityCartConnectorFacadeInterface|MockObject $facadeMock;
 
-    /**
-     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected ConditionalAvailabilityCriteriaFilterTransfer|MockObject $conditionalAvailabilityCriteriaFilterTransferMock;
+    protected QuoteTransfer|MockObject $quoteTransferMock;
 
-    /**
-     * @var (\ArrayObject&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected ArrayObject|MockObject $arrayObjectMock;
-
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityCheckoutConnector\Dependency\Facade\ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge
-     */
-    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge $bridge;
+    protected ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityCartConnectorFacadeBridge $bridge;
 
     /**
      * @return void
      */
     protected function _before(): void
     {
-        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityFacadeInterface::class)
+        $this->facadeMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityCriteriaFilterTransferMock = $this->getMockBuilder(ConditionalAvailabilityCriteriaFilterTransfer::class)
+        $this->quoteTransferMock = $this->getMockBuilder(QuoteTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->arrayObjectMock = $this->getMockBuilder(ArrayObject::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->bridge = new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBridge(
+        $this->bridge = new ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityCartConnectorFacadeBridge(
             $this->facadeMock,
         );
     }
@@ -55,18 +36,15 @@ class ConditionalAvailabilityCheckoutConnectorToConditionalAvailabilityFacadeBri
     /**
      * @return void
      */
-    public function testFindGroupedConditionalAvailabilities(): void
+    public function testGetUnavailableSkusByQuote(): void
     {
-        $this->facadeMock->expects(static::atLeastOnce())
-            ->method('findGroupedConditionalAvailabilities')
-            ->with($this->conditionalAvailabilityCriteriaFilterTransferMock)
-            ->willReturn($this->arrayObjectMock);
+        $skus = ['foo', 'bar'];
 
-        static::assertEquals(
-            $this->arrayObjectMock,
-            $this->bridge->findGroupedConditionalAvailabilities(
-                $this->conditionalAvailabilityCriteriaFilterTransferMock,
-            ),
-        );
+        $this->facadeMock->expects(static::atLeastOnce())
+            ->method('getUnavailableSkusByQuote')
+            ->with($this->quoteTransferMock)
+            ->willReturn($skus);
+
+        static::assertEquals($skus, $this->bridge->getUnavailableSkusByQuote($this->quoteTransferMock));
     }
 }

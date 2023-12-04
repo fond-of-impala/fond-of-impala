@@ -36,4 +36,11 @@ interface ConditionalAvailabilityCartConnectorFacadeInterface
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function ensureEarliestDate(QuoteTransfer $quoteTransfer): QuoteTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return array<string>
+     */
+    public function getUnavailableSkusByQuote(QuoteTransfer $quoteTransfer): array;
 }
