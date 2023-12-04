@@ -103,7 +103,9 @@ class UnavailableSkuReaderTest extends Unit
         $skus = [
             'foo',
             'bar',
+            'oof',
         ];
+        $unavailableSkus = array_slice($skus, 0, 2);
         $index = 3;
 
         $this->conditionalAvailabilityReaderMock->expects(static::atLeastOnce())
@@ -152,16 +154,29 @@ class UnavailableSkuReaderTest extends Unit
             ->willReturn($this->conditionalAvailabilityPeriodTransferMocks);
 
         $this->itemTransferMocks[0]->expects(static::atLeastOnce())
+            ->method('requireSku')
+            ->willReturn($this->itemTransferMocks[0]);
+
+        $this->itemTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($skus[0]);
+
+        $this->itemTransferMocks[1]->expects(static::atLeastOnce())
+            ->method('requireSku')
+            ->willReturn($this->itemTransferMocks[1]);
 
         $this->itemTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getSku')
             ->willReturn($skus[1]);
 
-        $this->itemTransferMocks[2]->expects(static::never())
-            ->method('getSku');
+        $this->itemTransferMocks[2]->expects(static::atLeastOnce())
+            ->method('getSku')
+            ->willReturn($skus[2]);
 
-        static::assertEquals($skus, $this->reader->getByQuote($this->quoteTransferMock));
+        $this->itemTransferMocks[2]->expects(static::atLeastOnce())
+            ->method('requireSku')
+            ->willReturn($this->itemTransferMocks[2]);
+
+        static::assertEquals($unavailableSkus, $this->reader->getByQuote($this->quoteTransferMock));
     }
 }

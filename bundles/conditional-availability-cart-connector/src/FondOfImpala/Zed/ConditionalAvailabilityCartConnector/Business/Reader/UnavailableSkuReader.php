@@ -11,6 +11,11 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class UnavailableSkuReader implements UnavailableSkuReaderInterface
 {
+    /**
+     * @var array<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer|null>>
+     */
+    protected static array $cacheConditionalAvailabilityPeriodTransferList = [];
+
     protected ConditionalAvailabilityReaderInterface $conditionalAvailabilityReader;
 
     protected ConditionalAvailabilityPeriodsFilterInterface $conditionalAvailabilityPeriodsFilter;
@@ -71,18 +76,23 @@ class UnavailableSkuReader implements UnavailableSkuReaderInterface
         ItemTransfer $itemTransfer,
         ArrayObject $groupedConditionalAvailabilityTransfers
     ): bool {
-        $conditionalAvailabilityPeriodTransfers = $this->conditionalAvailabilityPeriodsFilter
-            ->filterFromGroupedConditionalAvailabilitiesByItem(
-                $groupedConditionalAvailabilityTransfers,
-                $itemTransfer,
-            );
+        $sku = $itemTransfer->requireSku()
+            ->getSku();
 
-        if ($conditionalAvailabilityPeriodTransfers === null) {
+        if (!array_key_exists($sku, static::$cacheConditionalAvailabilityPeriodTransferList)) {
+            static::$cacheConditionalAvailabilityPeriodTransferList[$sku] = $this->conditionalAvailabilityPeriodsFilter
+                ->filterFromGroupedConditionalAvailabilitiesByItem(
+                    $groupedConditionalAvailabilityTransfers,
+                    $itemTransfer,
+                );
+        }
+
+        if (static::$cacheConditionalAvailabilityPeriodTransferList[$sku] === null) {
             return false;
         }
 
         $effectedIndex = $this->indexFinder->findConcreteFromConditionalAvailabilityPeriods(
-            $conditionalAvailabilityPeriodTransfers,
+            static::$cacheConditionalAvailabilityPeriodTransferList[$sku],
             $itemTransfer,
         );
 
@@ -91,7 +101,7 @@ class UnavailableSkuReader implements UnavailableSkuReaderInterface
         }
 
         $this->conditionalAvailabilityPeriodsReducer->reduceByItemAndEffectedIndex(
-            $conditionalAvailabilityPeriodTransfers,
+            static::$cacheConditionalAvailabilityPeriodTransferList[$sku],
             $itemTransfer,
             $effectedIndex,
         );
