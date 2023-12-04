@@ -7,7 +7,6 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\Quot
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleanerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDateInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpanderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\UnavailableSkuReader;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\UnavailableSkuReaderInterface;
 use Generated\Shared\Transfer\CartChangeTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
