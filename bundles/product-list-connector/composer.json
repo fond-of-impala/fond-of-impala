@@ -1,5 +1,5 @@
 {
-  "name": "fond-of-impala/product-list",
+  "name": "fond-of-impala/product-list-connector",
   "description": "Product list",
   "license": "MIT",
   "authors": [
@@ -16,7 +16,7 @@
   },
   "require": {
     "php": ">=8.0",
-    "fond-of-oryx/product-list-extension": "^1.0.0"
+    "spryker/product-list": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

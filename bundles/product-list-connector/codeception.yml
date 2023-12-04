@@ -1,4 +1,4 @@
-namespace: fond-of-impala/product-list
+namespace: fond-of-impala/product-list-connector
 
 suites:
   unit:
