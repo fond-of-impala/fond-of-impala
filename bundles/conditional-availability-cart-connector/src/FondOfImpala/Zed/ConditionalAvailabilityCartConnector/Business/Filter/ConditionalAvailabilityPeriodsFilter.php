@@ -28,7 +28,6 @@ class ConditionalAvailabilityPeriodsFilter implements ConditionalAvailabilityPer
 
         /** @var \Generated\Shared\Transfer\ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer */
         $conditionalAvailabilityTransfer = $groupedConditionalAvailabilities->offsetGet($sku)->offsetGet(0);
-        /** @var \Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransfer */
         $conditionalAvailabilityPeriodCollectionTransfer = $conditionalAvailabilityTransfer->getConditionalAvailabilityPeriodCollection();
 
         if ($conditionalAvailabilityPeriodCollectionTransfer === null) {
