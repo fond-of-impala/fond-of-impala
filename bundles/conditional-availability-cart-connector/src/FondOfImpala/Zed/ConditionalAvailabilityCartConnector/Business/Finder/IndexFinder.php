@@ -72,7 +72,7 @@ class IndexFinder implements IndexFinderInterface
         ItemTransfer $itemTransfer
     ): ?int {
         $quantity = $itemTransfer->getQuantity();
-        $concreteDeliveryDate = new DateTime($itemTransfer->getDeliveryDate());
+        $concreteDeliveryDate = new DateTime($itemTransfer->getConcreteDeliveryDate() ?? $itemTransfer->getDeliveryDate());
         $latestOrderDate = $this->conditionalAvailabilityService->generateLatestOrderDateByDeliveryDate(
             $concreteDeliveryDate,
         );
