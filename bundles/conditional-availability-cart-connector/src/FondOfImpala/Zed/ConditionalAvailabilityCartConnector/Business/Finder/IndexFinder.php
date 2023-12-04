@@ -62,7 +62,7 @@ class IndexFinder implements IndexFinderInterface
     }
 
     /**
-     * @param \ArrayObject $conditionalAvailabilityPeriodTransfers
+     * @param \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer> $conditionalAvailabilityPeriodTransfers
      * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
      * @return int|null

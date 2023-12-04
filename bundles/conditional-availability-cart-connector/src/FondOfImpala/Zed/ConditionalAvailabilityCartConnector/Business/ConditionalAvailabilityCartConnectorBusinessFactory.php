@@ -30,6 +30,8 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\Condit
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReader;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\CustomerReaderInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\UnavailableSkuReader;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\UnavailableSkuReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reducer\ConditionalAvailabilityPeriodsReducer;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reducer\ConditionalAvailabilityPeriodsReducerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
@@ -171,6 +173,19 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
     protected function createConditionalAvailabilityPeriodsFilter(): ConditionalAvailabilityPeriodsFilterInterface
     {
         return new ConditionalAvailabilityPeriodsFilter();
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\UnavailableSkuReaderInterface
+     */
+    public function createUnavailableSkuReader(): UnavailableSkuReaderInterface
+    {
+        return new UnavailableSkuReader(
+            $this->createConditionalAvailabilityReader(),
+            $this->createConditionalAvailabilityPeriodsFilter(),
+            $this->createIndexFinder(),
+            $this->createConditionalAvailabilityPeriodsReducer(),
+        );
     }
 
     /**
