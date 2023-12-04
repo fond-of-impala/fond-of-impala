@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/conditional-availability": "^1.0.0",
+    "fond-of-impala/conditional-availability-cart-connector": "^2.0.0",
     "spryker/checkout-extension": "^1.2.0"
   },
   "require-dev": {
