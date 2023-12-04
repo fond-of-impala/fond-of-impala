@@ -8,21 +8,25 @@ interface ProductListManagerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @return void
+     *
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
      * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return void
      */
     public function addProductToProductLists(ProductConcreteTransfer $productConcreteTransfer): void;
 
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
-     * @return void
+     *
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
      * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return void
      */
     public function updateProductToProductLists(ProductConcreteTransfer $productConcreteTransfer): void;
 }

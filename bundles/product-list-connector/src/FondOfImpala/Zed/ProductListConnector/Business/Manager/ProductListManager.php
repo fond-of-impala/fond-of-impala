@@ -30,11 +30,8 @@ class ProductListManager implements ProductListManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function addProductToProductLists(ProductConcreteTransfer $productConcreteTransfer): void
     {
@@ -43,11 +40,8 @@ class ProductListManager implements ProductListManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function updateProductToProductLists(ProductConcreteTransfer $productConcreteTransfer): void
     {
@@ -56,11 +50,8 @@ class ProductListManager implements ProductListManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     protected function manageProductToProductListRelations(ProductConcreteTransfer $productConcreteTransfer): void
     {
@@ -73,6 +64,7 @@ class ProductListManager implements ProductListManagerInterface
             $key = $productListTransfer->getKey();
             if (array_key_exists($key, $productListsAlreadyIn)) {
                 unset($productListsAlreadyIn[$key]);
+
                 continue;
             }
             $createRelation[$key] = $productListTransfer;

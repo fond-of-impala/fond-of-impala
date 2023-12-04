@@ -11,7 +11,6 @@ class ProductListConnectorPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
      * @return \Orm\Zed\ProductList\Persistence\SpyProductListQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getSpyProductListQuery(): SpyProductListQuery
     {
@@ -20,7 +19,6 @@ class ProductListConnectorPersistenceFactory extends AbstractPersistenceFactory
 
     /**
      * @return \Orm\Zed\ProductList\Persistence\SpyProductListProductConcreteQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getSpyProductListProductConcreteQuery(): SpyProductListProductConcreteQuery
     {

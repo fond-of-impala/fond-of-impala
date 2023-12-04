@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ProductListConnector\Business;
 
-use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Generated\Shared\Transfer\ProductConcreteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -13,6 +12,7 @@ class ProductListConnectorFacade extends AbstractFacade implements ProductListCo
 {
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return void
      */
     public function addProductToProductLists(ProductConcreteTransfer $productConcreteTransfer): void
@@ -22,11 +22,11 @@ class ProductListConnectorFacade extends AbstractFacade implements ProductListCo
 
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return void
      */
     public function updateProductToProductLists(ProductConcreteTransfer $productConcreteTransfer): void
     {
         $this->getFactory()->createProductListManager()->updateProductToProductLists($productConcreteTransfer);
     }
-
 }

@@ -2,10 +2,8 @@
 
 namespace FondOfImpala\Zed\ProductListConnector\Communication\Plugin\Product;
 
-use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Generated\Shared\Transfer\ProductConcreteTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\ProductExtension\Dependency\Plugin\ProductAbstractPostCreatePluginInterface;
 use Spryker\Zed\ProductExtension\Dependency\Plugin\ProductConcreteCreatePluginInterface;
 
 /**
@@ -15,6 +13,7 @@ class ProductConcreteProductListAssignerAfterCreatePlugin extends AbstractPlugin
 {
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function create(ProductConcreteTransfer $productConcreteTransfer): ProductConcreteTransfer
@@ -23,6 +22,4 @@ class ProductConcreteProductListAssignerAfterCreatePlugin extends AbstractPlugin
 
         return $productConcreteTransfer;
     }
-
-
 }

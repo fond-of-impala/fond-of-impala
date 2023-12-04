@@ -13,6 +13,7 @@ class ProductConcreteProductListAssignerPluginUpdate extends AbstractPlugin impl
 {
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
+     *
      * @return \Generated\Shared\Transfer\ProductConcreteTransfer
      */
     public function update(ProductConcreteTransfer $productConcreteTransfer): ProductConcreteTransfer

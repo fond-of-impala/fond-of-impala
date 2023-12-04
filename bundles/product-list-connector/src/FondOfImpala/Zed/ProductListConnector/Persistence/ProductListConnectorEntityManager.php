@@ -15,8 +15,8 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
 {
     /**
      * @param \Generated\Shared\Transfer\ProductListTransfer $productListTransfer
+     *
      * @return \Generated\Shared\Transfer\ProductListTransfer
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function findOrCreateProductList(ProductListTransfer $productListTransfer): ProductListTransfer
     {
@@ -33,9 +33,9 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
     }
 
     /**
-     * @param ArrayObject<\Generated\Shared\Transfer\ProductListTransfer> $productListTransferCollection
-     * @return ArrayObject<string, \Generated\Shared\Transfer\ProductListTransfer>
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @param \ArrayObject<\Generated\Shared\Transfer\ProductListTransfer> $productListTransferCollection
+     *
+     * @return \ArrayObject<string, \Generated\Shared\Transfer\ProductListTransfer>
      */
     public function findOrCreateProductLists(ArrayObject $productListTransferCollection): ArrayObject
     {
@@ -53,8 +53,8 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
 
     /**
      * @param array $keys
-     * @return array<string, ProductListTransfer>
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     *
+     * @return array<string, \Generated\Shared\Transfer\ProductListTransfer>
      */
     public function findProductListByKeys(array $keys): array
     {
@@ -73,9 +73,8 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param \Generated\Shared\Transfer\ProductListTransfer $productListTransfer
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
      */
     public function createProductToProductListRelation(ProductConcreteTransfer $productConcreteTransfer, ProductListTransfer $productListTransfer): void
     {
@@ -91,9 +90,8 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
     /**
      * @param \Generated\Shared\Transfer\ProductConcreteTransfer $productConcreteTransfer
      * @param \Generated\Shared\Transfer\ProductListTransfer $productListTransfer
+     *
      * @return void
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function deleteProductToProductListRelation(ProductConcreteTransfer $productConcreteTransfer, ProductListTransfer $productListTransfer): void
     {
@@ -102,7 +100,8 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
     }
 
     /**
-     * @param ArrayObject $productListTransferCollection
+     * @param \ArrayObject $productListTransferCollection
+     *
      * @return array
      */
     protected function resolveKeysFromProductListCollection(ArrayObject $productListTransferCollection): array
@@ -111,6 +110,7 @@ class ProductListConnectorEntityManager extends AbstractEntityManager implements
         foreach ($productListTransferCollection as $productListTransfer) {
             $keys[] = $productListTransfer->getKey();
         }
+
         return $keys;
     }
 }

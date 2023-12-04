@@ -13,8 +13,8 @@ class ProductListConnectorRepository extends AbstractRepository implements Produ
 {
     /**
      * @param int $idProductConcrete
-     * @return ArrayObject<string,\Generated\Shared\Transfer\ProductListTransfer>
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     *
+     * @return \ArrayObject<string,\Generated\Shared\Transfer\ProductListTransfer>
      */
     public function findProductListsByProductRelation(int $idProductConcrete): ArrayObject
     {
