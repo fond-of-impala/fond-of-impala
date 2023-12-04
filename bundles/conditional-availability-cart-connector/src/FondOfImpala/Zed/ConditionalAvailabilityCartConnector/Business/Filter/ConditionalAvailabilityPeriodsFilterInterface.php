@@ -11,7 +11,7 @@ interface ConditionalAvailabilityPeriodsFilterInterface
      * @param \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilities
      * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
-     * @return \ArrayObject|null
+     * @return \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>|null
      */
     public function filterFromGroupedConditionalAvailabilitiesByItem(
         ArrayObject $groupedConditionalAvailabilities,

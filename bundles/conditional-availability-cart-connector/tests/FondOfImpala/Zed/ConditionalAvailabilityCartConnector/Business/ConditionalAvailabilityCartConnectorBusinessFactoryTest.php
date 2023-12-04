@@ -9,6 +9,7 @@ use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\Quot
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleaner;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityEnsureEarliestDate;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityItemExpander;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\UnavailableSkuReader;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToConditionalAvailabilityFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Facade\ConditionalAvailabilityCartConnectorToCustomerFacadeInterface;
@@ -164,6 +165,43 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
         static::assertInstanceOf(
             ConditionalAvailabilityItemExpander::class,
             $this->businessFactory->createConditionalAvailabilityItemExpander(),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateUnavailableSkuReader(): void
+    {
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('get')
+            ->withConsecutive(
+                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER],
+                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
+                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
+                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
+                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
+                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
+            )->willReturnOnConsecutiveCalls(
+                $this->customerFacadeMock,
+                $this->conditionalAvailabilityFacadeMock,
+                $this->conditionalAvailabilityServiceMock,
+                $this->conditionalAvailabilityServiceMock,
+                $this->conditionalAvailabilityServiceMock,
+                $this->conditionalAvailabilityServiceMock,
+            );
+
+        $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
+            ->method('generateEarliestDeliveryDate')
+            ->willReturn(new DateTime());
+
+        static::assertInstanceOf(
+            UnavailableSkuReader::class,
+            $this->businessFactory->createUnavailableSkuReader(),
         );
     }
 }

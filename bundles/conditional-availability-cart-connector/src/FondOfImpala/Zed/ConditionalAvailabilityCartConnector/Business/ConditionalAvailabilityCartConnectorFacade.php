@@ -60,4 +60,16 @@ class ConditionalAvailabilityCartConnectorFacade extends AbstractFacade implemen
             ->createConditionalAvailabilityEnsureEarliestDate()
             ->ensureEarliestDate($quoteTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return array<string>
+     */
+    public function getUnavailableSkusByQuote(QuoteTransfer $quoteTransfer): array
+    {
+        return $this->getFactory()
+            ->createUnavailableSkuReader()
+            ->getByQuote($quoteTransfer);
+    }
 }
