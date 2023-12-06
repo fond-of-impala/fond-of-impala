@@ -4,7 +4,6 @@ namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communic
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface;
-use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,11 +20,6 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
     protected MockObject|Container $containerMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface
-     */
-    protected MockObject|ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface $conditionalAvailabilityPageSearchFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface
@@ -46,10 +40,6 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->conditionalAvailabilityPageSearchFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->conditionalAvailabilityFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -60,26 +50,6 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
 
         $this->factory = new ProductListConditionalAvailabilityPageSearchCommunicationFactory();
         $this->factory->setContainer($this->containerMock);
-    }
-
-    /**
-     * @return void
-     */
-    public function testGetConditionalAvailabilityPageSearchFacade(): void
-    {
-        $this->containerMock->expects(static::atLeastOnce())
-            ->method('has')
-            ->willReturn(true);
-
-        $this->containerMock->expects(static::atLeastOnce())
-            ->method('get')
-            ->with(ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH)
-            ->willReturn($this->conditionalAvailabilityPageSearchFacadeMock);
-
-        static::assertEquals(
-            $this->conditionalAvailabilityPageSearchFacadeMock,
-            $this->factory->getConditionalAvailabilityPageSearchFacade(),
-        );
     }
 
     /**
