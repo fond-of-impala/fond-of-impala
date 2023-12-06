@@ -34,6 +34,7 @@
     <transfer name="ConditionalAvailabilityPeriod">
         <property name="idConditionalAvailabilityPeriod" type="int"/>
         <property name="fkConditionalAvailability" type="int"/>
+        <property name="key" type="string" />
         <property name="conditionalAvailability" type="ConditionalAvailability" />
         <property name="quantity" type="int" />
         <property name="createdAt" type="string" />
