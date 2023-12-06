@@ -18,12 +18,6 @@
 
           }
         },
-        "store": {
-          "type": "keyword"
-        },
-        "locale": {
-          "type": "keyword"
-        },
         "sku": {
           "type": "keyword"
         },
@@ -35,9 +29,6 @@
         },
         "channel": {
           "type": "keyword"
-        },
-        "is-accessible": {
-          "type": "boolean"
         },
         "original-start-at": {
           "type": "date",

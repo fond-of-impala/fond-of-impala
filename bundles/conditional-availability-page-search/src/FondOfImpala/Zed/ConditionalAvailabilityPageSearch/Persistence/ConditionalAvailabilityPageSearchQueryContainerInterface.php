@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence;
 
 use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery;
-use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery;
 
 interface ConditionalAvailabilityPageSearchQueryContainerInterface
 {
@@ -17,6 +16,15 @@ interface ConditionalAvailabilityPageSearchQueryContainerInterface
     ): FoiConditionalAvailabilityPeriodQuery;
 
     /**
+     * @param array<string> $keys
+     *
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery
+     */
+    public function queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByKeys(
+        array $keys
+    ): FoiConditionalAvailabilityPeriodQuery;
+
+    /**
      * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery
@@ -26,11 +34,11 @@ interface ConditionalAvailabilityPageSearchQueryContainerInterface
     ): FoiConditionalAvailabilityPeriodQuery;
 
     /**
-     * @param array<int> $conditionalAvailabilityIds
+     * @param array<string> $keys
      *
-     * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery
+     * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery
      */
-    public function queryConditionalAvailabilitiesByConditionalAvailabilityIds(
-        array $conditionalAvailabilityIds
-    ): FoiConditionalAvailabilityQuery;
+    public function queryConditionalAvailabilityPeriodsByKeys(
+        array $keys
+    ): FoiConditionalAvailabilityPeriodQuery;
 }

@@ -5,9 +5,10 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 interface ConditionalAvailabilityPeriodPageSearchUnpublisherInterface
 {
     /**
-     * @param array<int> $conditionalAvailabilityIds
+     * @param string $eventName
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
      *
      * @return void
      */
-    public function unpublish(array $conditionalAvailabilityIds): void;
+    public function unpublish(string $eventName, array $eventEntityTransfers): void;
 }

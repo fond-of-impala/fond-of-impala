@@ -6,7 +6,6 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPa
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodPageSearchMapper;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\Propel\Mapper\ConditionalAvailabilityPeriodPageSearchMapperInterface;
 use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery;
-use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery;
 use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearchQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
@@ -34,14 +33,6 @@ class ConditionalAvailabilityPageSearchPersistenceFactory extends AbstractPersis
     public function getConditionalAvailabilityPeriodPropelQuery(): FoiConditionalAvailabilityPeriodQuery
     {
         return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PROPEL_QUERY_CONDITIONAL_AVAILABILITY_PERIOD);
-    }
-
-    /**
-     * @return \Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityQuery
-     */
-    public function getConditionalAvailabilityPropelQuery(): FoiConditionalAvailabilityQuery
-    {
-        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::PROPEL_QUERY_CONDITIONAL_AVAILABILITY);
     }
 
     /**

@@ -27,11 +27,9 @@
 
         <behavior name="synchronization">
             <parameter name="resource" value="conditional_availability_period"/>
-            <parameter name="locale" required="false"/>
-            <parameter name="store" required="false" />
             <parameter name="key_suffix_column" value="conditional_availability_period_key"/>
-            <parameter name="queue_group" value="sync.search.conditional_availability"/>
             <parameter name="params" value='{"type":"conditional-availability-period"}'/>
+            <parameter name="queue_group" value="sync.search.conditional_availability"/>
         </behavior>
 
         <behavior name="timestampable"/>

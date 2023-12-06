@@ -2,87 +2,115 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 
+use FondOfImpala\Zed\ConditionalAvailability\Dependency\ConditionalAvailabilityEvents;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilterInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\KeyFilterInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAvailabilityPeriodPageSearchPublisherInterface
 {
+    protected KeyFilterInterface $keyFilter;
+
+    protected ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper;
+
+    protected ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander;
+
     protected ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer;
 
     protected ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager;
 
-    protected ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander;
-
     protected ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService;
 
-    protected ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper;
+    protected IdConditionalAvailabilityFilterInterface $idConditionalAvailabilityFilter;
 
     /**
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilterInterface $idConditionalAvailabilityFilter
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\KeyFilterInterface $keyFilter
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper
      */
     public function __construct(
+        KeyFilterInterface $keyFilter,
+        IdConditionalAvailabilityFilterInterface $idConditionalAvailabilityFilter,
+        ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander,
+        ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper,
         ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer,
         ConditionalAvailabilityPageSearchEntityManagerInterface $entityManager,
-        ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander,
-        ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService,
-        ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper
+        ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingService
     ) {
+        $this->keyFilter = $keyFilter;
+        $this->idConditionalAvailabilityFilter = $idConditionalAvailabilityFilter;
+        $this->conditionalAvailabilityPeriodPageSearchExpander = $conditionalAvailabilityPeriodPageSearchExpander;
+        $this->conditionalAvailabilityPeriodPageSearchDataMapper = $conditionalAvailabilityPeriodPageSearchDataMapper;
         $this->queryContainer = $queryContainer;
         $this->entityManager = $entityManager;
-        $this->conditionalAvailabilityPeriodPageSearchExpander = $conditionalAvailabilityPeriodPageSearchExpander;
         $this->utilEncodingService = $utilEncodingService;
-        $this->conditionalAvailabilityPeriodPageSearchDataMapper = $conditionalAvailabilityPeriodPageSearchDataMapper;
     }
 
     /**
-     * @param array<int> $conditionalAvailabilityIds
+     * @param string $eventName
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
      *
      * @return void
      */
-    public function publish(array $conditionalAvailabilityIds): void
+    public function publish(string $eventName, array $eventEntityTransfers): void
     {
-        $FoiConditionalAvailabilityPeriodEntities = $this->queryContainer
+        if ($eventName !== ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_PUBLISH) {
+            $keys = $this->keyFilter->filterFromEventEntities($eventEntityTransfers);
+
+            $foiConditionalAvailabilityPeriodEntities = $this->queryContainer
+                ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByKeys($keys)
+                ->find()
+                ->getData();
+
+            $this->storeData($foiConditionalAvailabilityPeriodEntities);
+
+            return;
+        }
+
+        $conditionalAvailabilityIds = $this->idConditionalAvailabilityFilter->filterFromEventEntities(
+            $eventEntityTransfers,
+        );
+
+        $foiConditionalAvailabilityPeriodEntities = $this->queryContainer
             ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
                 $conditionalAvailabilityIds,
             )->find()
             ->getData();
 
-        if (count($FoiConditionalAvailabilityPeriodEntities) > 0) {
-            $this->entityManager->deleteConditionalAvailabilityPeriodSearchPagesByConditionalAvailabilityIds(
-                $conditionalAvailabilityIds,
-            );
-        }
-
-        $this->storeData($FoiConditionalAvailabilityPeriodEntities);
+        $this->storeData($foiConditionalAvailabilityPeriodEntities);
     }
 
     /**
-     * @param array<\Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod> $FoiConditionalAvailabilityPeriodEntities
+     * @param array<\Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod> $foiConditionalAvailabilityPeriodEntities
      *
      * @return void
      */
-    protected function storeData(array $FoiConditionalAvailabilityPeriodEntities): void
+    protected function storeData(array $foiConditionalAvailabilityPeriodEntities): void
     {
-        foreach ($FoiConditionalAvailabilityPeriodEntities as $FoiConditionalAvailabilityPeriodEntity) {
-            $this->storeDataSet($FoiConditionalAvailabilityPeriodEntity);
+        foreach ($foiConditionalAvailabilityPeriodEntities as $foiConditionalAvailabilityPeriodEntity) {
+            $this->storeDataSet($foiConditionalAvailabilityPeriodEntity);
         }
     }
 
     /**
-     * @param \Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod $FoiConditionalAvailabilityPeriodEntity
+     * @param \Orm\Zed\ConditionalAvailability\Persistence\Base\FoiConditionalAvailabilityPeriod $foiConditionalAvailabilityPeriodEntity
      *
      * @return void
      */
-    protected function storeDataSet(FoiConditionalAvailabilityPeriod $FoiConditionalAvailabilityPeriodEntity): void
+    protected function storeDataSet(FoiConditionalAvailabilityPeriod $foiConditionalAvailabilityPeriodEntity): void
     {
-        $conditionalAvailabilityPeriodData = $FoiConditionalAvailabilityPeriodEntity->toArray();
+        $conditionalAvailabilityPeriodData = $foiConditionalAvailabilityPeriodEntity->toArray();
 
         $conditionalAvailabilityPeriodPageSearchTransfer = (new ConditionalAvailabilityPeriodPageSearchTransfer())
             ->fromArray($conditionalAvailabilityPeriodData, true)
@@ -95,7 +123,7 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
              $conditionalAvailabilityPeriodPageSearchTransfer,
          );
 
-        $this->entityManager->createConditionalAvailabilityPeriodPageSearch(
+        $this->entityManager->persistConditionalAvailabilityPeriodPageSearch(
             $conditionalAvailabilityPeriodPageSearchTransfer,
         );
     }
