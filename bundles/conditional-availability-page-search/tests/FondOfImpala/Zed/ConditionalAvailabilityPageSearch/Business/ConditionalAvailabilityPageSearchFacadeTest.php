@@ -3,31 +3,23 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\ConditionalAvailability\Dependency\ConditionalAvailabilityEvents;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisherInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisherInterface;
+use Generated\Shared\Transfer\EventEntityTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPageSearchFacadeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchFacade
-     */
-    protected ConditionalAvailabilityPageSearchFacade $facade;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchBusinessFactory
-     */
     protected MockObject|ConditionalAvailabilityPageSearchBusinessFactory $factoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisherInterface
-     */
+    protected array $eventEntityTransferMocks;
+
     protected MockObject|ConditionalAvailabilityPeriodPageSearchPublisherInterface $publisherMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisherInterface
-     */
     protected MockObject|ConditionalAvailabilityPeriodPageSearchUnpublisherInterface $unpublisherMock;
+
+    protected ConditionalAvailabilityPageSearchFacade $facade;
 
     /**
      * @return void
@@ -37,6 +29,12 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
         $this->factoryMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->eventEntityTransferMocks = [
+            $this->getMockBuilder(EventEntityTransfer::class)
+                ->disableOriginalConstructor()
+                ->getMock(),
+        ];
 
         $this->publisherMock = $this->getMockBuilder(ConditionalAvailabilityPeriodPageSearchPublisherInterface::class)
             ->disableOriginalConstructor()
@@ -53,23 +51,19 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testGetConditionalAvailabilityIdsByConcreteIds(): void
-    {
-        static::assertIsArray(
-            $this->facade->getConditionalAvailabilityIdsByConcreteIds([1]),
-        );
-    }
-
-    /**
-     * @return void
-     */
     public function testPublish(): void
     {
+        $eventName = ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_PUBLISH;
+
         $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriodPageSearchPublisher')
             ->willReturn($this->publisherMock);
 
-        $this->facade->publish([1]);
+        $this->publisherMock->expects(static::atLeastOnce())
+            ->method('publish')
+            ->with($eventName, $this->eventEntityTransferMocks);
+
+        $this->facade->publish($eventName, $this->eventEntityTransferMocks);
     }
 
     /**
@@ -77,10 +71,16 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
      */
     public function testUnpublish(): void
     {
+        $eventName = ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_UNPUBLISH;
+
         $this->factoryMock->expects(static::atLeastOnce())
             ->method('createConditionalAvailabilityPeriodPageSearchUnpublisher')
             ->willReturn($this->unpublisherMock);
 
-        $this->facade->unpublish([1]);
+        $this->unpublisherMock->expects(static::atLeastOnce())
+            ->method('unpublish')
+            ->with($eventName, $this->eventEntityTransferMocks);
+
+        $this->facade->unpublish($eventName, $this->eventEntityTransferMocks);
     }
 }

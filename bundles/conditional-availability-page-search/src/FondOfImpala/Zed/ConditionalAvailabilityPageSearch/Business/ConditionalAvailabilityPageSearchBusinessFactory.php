@@ -2,6 +2,10 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business;
 
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilter;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilterInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\KeyFilter;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\KeyFilterInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapper;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpander;
@@ -11,7 +15,6 @@ use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\Conditiona
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisher;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisherInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
-use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
@@ -29,11 +32,13 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     public function createConditionalAvailabilityPeriodPageSearchPublisher(): ConditionalAvailabilityPeriodPageSearchPublisherInterface
     {
         return new ConditionalAvailabilityPeriodPageSearchPublisher(
+            $this->createKeyFilter(),
+            $this->createIdConditionalAvailabilityFilter(),
+            $this->createConditionalAvailabilityPeriodPageSearchExpander(),
+            $this->createConditionalAvailabilityPeriodPageSearchDataMapper(),
             $this->getQueryContainer(),
             $this->getEntityManager(),
-            $this->createConditionalAvailabilityPeriodPageSearchExpander(),
             $this->getUtilEncodingService(),
-            $this->createConditionalAvailabilityPeriodPageSearchDataMapper(),
         );
     }
 
@@ -42,7 +47,11 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
      */
     public function createConditionalAvailabilityPeriodPageSearchUnpublisher(): ConditionalAvailabilityPeriodPageSearchUnpublisherInterface
     {
-        return new ConditionalAvailabilityPeriodPageSearchUnpublisher($this->getEntityManager());
+        return new ConditionalAvailabilityPeriodPageSearchUnpublisher(
+            $this->createKeyFilter(),
+            $this->createIdConditionalAvailabilityFilter(),
+            $this->getEntityManager(),
+        );
     }
 
     /**
@@ -51,7 +60,6 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     protected function createConditionalAvailabilityPeriodPageSearchDataMapper(): ConditionalAvailabilityPeriodPageSearchDataMapperInterface
     {
         return new ConditionalAvailabilityPeriodPageSearchDataMapper(
-            $this->getStoreFacade(),
             $this->getConditionalAvailabilityPeriodPageSearchDataExpanderPlugins(),
         );
     }
@@ -62,17 +70,24 @@ class ConditionalAvailabilityPageSearchBusinessFactory extends AbstractBusinessF
     protected function createConditionalAvailabilityPeriodPageSearchExpander(): ConditionalAvailabilityPeriodPageSearchExpanderInterface
     {
         return new ConditionalAvailabilityPeriodPageSearchExpander(
-            $this->getStoreFacade(),
             $this->getConditionalAvailabilityPeriodPageDataExpanderPlugins(),
         );
     }
 
     /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\KeyFilterInterface
      */
-    protected function getStoreFacade(): ConditionalAvailabilityPageSearchToStoreFacadeInterface
+    protected function createKeyFilter(): KeyFilterInterface
     {
-        return $this->getProvidedDependency(ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE);
+        return new KeyFilter();
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilterInterface
+     */
+    protected function createIdConditionalAvailabilityFilter(): IdConditionalAvailabilityFilterInterface
+    {
+        return new IdConditionalAvailabilityFilter();
     }
 
     /**

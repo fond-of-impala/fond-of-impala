@@ -9,12 +9,12 @@ interface ConditionalAvailabilityPeriodPageSearchMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
-     * @param \Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearch $FoiConditionalAvailabilityPeriodPageSearch
+     * @param \Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearch $foiConditionalAvailabilityPeriodPageSearch
      *
      * @return \Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearch
      */
     public function mapTransferToEntity(
         ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer,
-        FoiConditionalAvailabilityPeriodPageSearch $FoiConditionalAvailabilityPeriodPageSearch
+        FoiConditionalAvailabilityPeriodPageSearch $foiConditionalAvailabilityPeriodPageSearch
     ): FoiConditionalAvailabilityPeriodPageSearch;
 }

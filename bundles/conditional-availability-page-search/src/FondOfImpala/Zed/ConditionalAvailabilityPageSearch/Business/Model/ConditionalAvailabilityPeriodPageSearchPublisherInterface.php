@@ -5,9 +5,10 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 interface ConditionalAvailabilityPeriodPageSearchPublisherInterface
 {
     /**
-     * @param array<int> $conditionalAvailabilityIds
+     * @param string $eventName
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
      *
      * @return void
      */
-    public function publish(array $conditionalAvailabilityIds): void;
+    public function publish(string $eventName, array $eventEntityTransfers): void;
 }

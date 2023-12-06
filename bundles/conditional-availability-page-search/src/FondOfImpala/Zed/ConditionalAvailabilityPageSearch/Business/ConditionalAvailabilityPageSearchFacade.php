@@ -16,28 +16,15 @@ class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements 
      *
      * @api
      *
-     * @param array<int> $concreteIds
-     *
-     * @return array<int>
-     */
-    public function getConditionalAvailabilityIdsByConcreteIds(array $concreteIds): array
-    {
-        return [];
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param array $conditionalAvailabilityIds
+     * @param string $eventName
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
      *
      * @return void
      */
-    public function publish(array $conditionalAvailabilityIds): void
+    public function publish(string $eventName, array $eventEntityTransfers): void
     {
         $this->getFactory()->createConditionalAvailabilityPeriodPageSearchPublisher()
-            ->publish($conditionalAvailabilityIds);
+            ->publish($eventName, $eventEntityTransfers);
     }
 
     /**
@@ -45,13 +32,14 @@ class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements 
      *
      * @api
      *
-     * @param array $conditionalAvailabilityIds
+     * @param string $eventName
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventEntityTransfers
      *
      * @return void
      */
-    public function unpublish(array $conditionalAvailabilityIds): void
+    public function unpublish(string $eventName, array $eventEntityTransfers): void
     {
         $this->getFactory()->createConditionalAvailabilityPeriodPageSearchUnpublisher()
-            ->unpublish($conditionalAvailabilityIds);
+            ->unpublish($eventName, $eventEntityTransfers);
     }
 }
