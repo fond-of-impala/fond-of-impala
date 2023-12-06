@@ -24,7 +24,7 @@ class ProductListConditionalAvailabilityPageSearchCommunicationFactoryTest exten
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface
      */
-    protected MockObject|ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface $ConditionalAvailabilityFacadeMock;
+    protected MockObject|ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface
