@@ -36,16 +36,16 @@ class KeyGeneratorTest extends Unit
         $idConditionalAvailability = 2;
 
         $startAt = (new DateTime())->add(new DateInterval('P1D'))
-            ->format('Y-m-d H:i:s');
+            ->format('Y-m-d H:i:s.u');
         $endAt = (new DateTime())->add(new DateInterval('P11D'))
-            ->format('Y-m-d H:i:s');
+            ->format('Y-m-d H:i:s.u');
         $now = new DateTime();
 
         $keyParts = [
             $idConditionalAvailability,
             $startAt,
             $endAt,
-            $now->format('Y-m-d H:i:s'),
+            $now->format('Y-m-d H:i:s.u'),
         ];
 
         $key = sha1(implode(':', $keyParts));
