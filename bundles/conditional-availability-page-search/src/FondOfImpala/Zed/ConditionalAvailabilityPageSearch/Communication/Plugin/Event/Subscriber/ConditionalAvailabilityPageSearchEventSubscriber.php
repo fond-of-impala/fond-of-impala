@@ -89,6 +89,8 @@ class ConditionalAvailabilityPageSearchEventSubscriber extends AbstractPlugin im
     }
 
     /**
+     * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
+     *
      * @return void
      */
     protected function addConditionalAvailabilityPeriodUnpublishListener(

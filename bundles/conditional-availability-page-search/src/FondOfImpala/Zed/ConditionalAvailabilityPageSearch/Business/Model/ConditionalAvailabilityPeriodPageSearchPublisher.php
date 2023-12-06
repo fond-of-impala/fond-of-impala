@@ -31,8 +31,8 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
     protected IdConditionalAvailabilityFilterInterface $idConditionalAvailabilityFilter;
 
     /**
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilterInterface $idConditionalAvailabilityFilter
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\KeyFilterInterface $keyFilter
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Filter\IdConditionalAvailabilityFilterInterface $idConditionalAvailabilityFilter
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpanderInterface $conditionalAvailabilityPeriodPageSearchExpander
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchDataMapperInterface $conditionalAvailabilityPeriodPageSearchDataMapper
      * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface $queryContainer
