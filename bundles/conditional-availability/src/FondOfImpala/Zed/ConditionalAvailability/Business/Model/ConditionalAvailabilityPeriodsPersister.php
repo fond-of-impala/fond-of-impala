@@ -2,18 +2,26 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailability\Business\Model;
 
+use DateTime;
+use FondOfImpala\Zed\ConditionalAvailability\Business\Generator\KeyGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
 
 class ConditionalAvailabilityPeriodsPersister implements ConditionalAvailabilityPeriodsPersisterInterface
 {
+    protected KeyGeneratorInterface $keyGenerator;
+
     protected ConditionalAvailabilityEntityManagerInterface $entityManager;
 
     /**
+     * @param \FondOfImpala\Zed\ConditionalAvailability\Business\Generator\KeyGeneratorInterface $keyGenerator
      * @param \FondOfImpala\Zed\ConditionalAvailability\Persistence\ConditionalAvailabilityEntityManagerInterface $entityManager
      */
-    public function __construct(ConditionalAvailabilityEntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        KeyGeneratorInterface $keyGenerator,
+        ConditionalAvailabilityEntityManagerInterface $entityManager
+    ) {
+        $this->keyGenerator = $keyGenerator;
         $this->entityManager = $entityManager;
     }
 
@@ -40,10 +48,14 @@ class ConditionalAvailabilityPeriodsPersister implements ConditionalAvailability
             ->getConditionalAvailabilityPeriodCollection()
             ->getConditionalAvailabilityPeriods();
 
+        $now = new DateTime();
+
         foreach ($conditionalAvailabilityPeriodTransfers as $conditionalAvailabilityPeriodTransfer) {
-            $conditionalAvailabilityPeriodTransfer->setFkConditionalAvailability(
-                $conditionalAvailabilityTransfer->getIdConditionalAvailability(),
-            );
+            $fkConditionalAvailability = $conditionalAvailabilityTransfer->getIdConditionalAvailability();
+            $key = $this->keyGenerator->generate($conditionalAvailabilityPeriodTransfer, $now);
+
+            $conditionalAvailabilityPeriodTransfer->setKey($key)
+                ->setFkConditionalAvailability($fkConditionalAvailability);
 
             $this->entityManager->createConditionalAvailabilityPeriod($conditionalAvailabilityPeriodTransfer);
         }
