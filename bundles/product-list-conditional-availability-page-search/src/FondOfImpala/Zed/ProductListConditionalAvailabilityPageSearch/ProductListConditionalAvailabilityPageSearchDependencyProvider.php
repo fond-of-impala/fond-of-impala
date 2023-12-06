@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch;
 
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge;
-use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -18,11 +17,6 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
      * @var string
      */
     public const FACADE_EVENT_BEHAVIOR = 'FACADE_EVENT_BEHAVIOR';
-
-    /**
-     * @var string
-     */
-    public const FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH = 'FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH';
 
     /**
      * @var string
@@ -56,7 +50,6 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
         $container = parent::provideCommunicationLayerDependencies($container);
 
         $container = $this->addEventBehaviorFacade($container);
-        $container = $this->addConditionalAvailabilityPageSearchFacade($container);
 
         return $this->addConditionalAvailabilityFacade($container);
     }
@@ -72,22 +65,6 @@ class ProductListConditionalAvailabilityPageSearchDependencyProvider extends Abs
             Container $container
         ): ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge => new ProductListConditionalAvailabilityPageSearchToProductListFacadeBridge(
             $container->getLocator()->productList()->facade(),
-        );
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    protected function addConditionalAvailabilityPageSearchFacade(Container $container): Container
-    {
-        $container[static::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH] = static fn (
-            Container $container
-        ): ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge => new ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeBridge(
-            $container->getLocator()->conditionalAvailabilityPageSearch()->facade(),
         );
 
         return $container;

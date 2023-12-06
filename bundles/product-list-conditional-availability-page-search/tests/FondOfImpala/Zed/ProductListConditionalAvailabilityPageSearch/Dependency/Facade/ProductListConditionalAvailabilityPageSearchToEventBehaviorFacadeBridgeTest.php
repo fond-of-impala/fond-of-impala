@@ -71,4 +71,23 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
             ),
         );
     }
+
+    /**
+     * @return void
+     */
+    public function testExecuteResolvedPluginsBySources(): void
+    {
+        $resources = ['foo'];
+        $ids = [1, 2, 4, 5];
+
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
+            ->method('executeResolvedPluginsBySources')
+            ->with($resources, $ids, []);
+
+        $this->bridge->executeResolvedPluginsBySources(
+            $resources,
+            $ids,
+            [],
+        );
+    }
 }

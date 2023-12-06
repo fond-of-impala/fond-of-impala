@@ -26,4 +26,23 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge im
     {
         return $this->eventBehaviorFacade->getEventTransferForeignKeys($eventTransfers, $foreignKeyColumnName);
     }
+
+    /**
+     * @param array<string> $resources
+     * @param array<int> $ids
+     * @param array<\Spryker\Zed\EventBehavior\Dependency\Plugin\EventResourcePluginInterface> $resourcePublisherPlugins
+     *
+     * @return void
+     */
+    public function executeResolvedPluginsBySources(
+        array $resources,
+        array $ids = [],
+        array $resourcePublisherPlugins = []
+    ): void {
+        $this->eventBehaviorFacade->executeResolvedPluginsBySources(
+            $resources,
+            $ids,
+            $resourcePublisherPlugins,
+        );
+    }
 }
