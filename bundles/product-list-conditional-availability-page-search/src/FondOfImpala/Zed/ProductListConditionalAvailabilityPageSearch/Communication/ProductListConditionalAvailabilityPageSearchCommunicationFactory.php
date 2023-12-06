@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication;
 
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface;
-use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
@@ -13,16 +12,6 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
  */
 class ProductListConditionalAvailabilityPageSearchCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface
-     */
-    public function getConditionalAvailabilityPageSearchFacade(): ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityPageSearchFacadeInterface
-    {
-        return $this->getProvidedDependency(
-            ProductListConditionalAvailabilityPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY_PAGE_SEARCH,
-        );
-    }
-
     /**
      * @return \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeInterface
      */

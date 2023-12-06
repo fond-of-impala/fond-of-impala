@@ -42,11 +42,16 @@
 
     <table name="foi_conditional_availability_period" phpName="FoiConditionalAvailabilityPeriod">
         <column name="fk_conditional_availability" type="INTEGER" required="true" primaryKey="true"/>
+        <column name="key" size="255" type="VARCHAR"/>
         <column name="start_at" required="true" type="TIMESTAMP" primaryKey="true"/>
         <column name="end_at" required="true" type="TIMESTAMP" primaryKey="true"/>
         <column name="original_start_at" type="TIMESTAMP"/>
         <column name="quantity" type="INTEGER" required="true"/>
         <column name="created_at" required="true" type="TIMESTAMP"/>
+
+        <!--<unique name="foi_conditional_availability_period-unique-key">
+            <unique-column name="key"/>
+        </unique>-->
 
         <index name="index-foi_conditional_availability-fk_conditional_availability">
             <index-column name="fk_conditional_availability"/>
@@ -60,6 +65,7 @@
 
         <behavior name="event">
             <parameter name="foi_conditional_availability_period_all" column="*"/>
+            <parameter name="foi_conditional_availability_period_key" column="key" keep-additional="true"/>
         </behavior>
     </table>
 </database>

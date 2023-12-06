@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace FondOfImpala\Zed\ConditionalAvailability\Business;
 
+use FondOfImpala\Zed\ConditionalAvailability\Business\Generator\KeyGenerator;
+use FondOfImpala\Zed\ConditionalAvailability\Business\Generator\KeyGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPeriodsPersister;
 use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPeriodsPersisterInterface;
 use FondOfImpala\Zed\ConditionalAvailability\Business\Model\ConditionalAvailabilityPluginExecutor;
@@ -64,7 +66,10 @@ class ConditionalAvailabilityBusinessFactory extends AbstractBusinessFactory
      */
     public function createConditionalAvailabilityPeriodsPersister(): ConditionalAvailabilityPeriodsPersisterInterface
     {
-        return new ConditionalAvailabilityPeriodsPersister($this->getEntityManager());
+        return new ConditionalAvailabilityPeriodsPersister(
+            $this->createKeyGenerator(),
+            $this->getEntityManager(),
+        );
     }
 
     /**
@@ -85,5 +90,13 @@ class ConditionalAvailabilityBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(
             ConditionalAvailabilityDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_POST_SAVE,
         );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ConditionalAvailability\Business\Generator\KeyGeneratorInterface
+     */
+    protected function createKeyGenerator(): KeyGeneratorInterface
+    {
+        return new KeyGenerator();
     }
 }
