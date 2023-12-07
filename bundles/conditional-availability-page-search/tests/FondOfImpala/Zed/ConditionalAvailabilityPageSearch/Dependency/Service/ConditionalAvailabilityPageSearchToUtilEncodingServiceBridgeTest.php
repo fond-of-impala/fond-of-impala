@@ -8,15 +8,9 @@ use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 class ConditionalAvailabilityPageSearchToUtilEncodingServiceBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge
-     */
-    protected ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge $bridge;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
-     */
     protected MockObject|UtilEncodingServiceInterface $utilEncodingServiceMock;
+
+    protected ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge $bridge;
 
     /**
      * @return void

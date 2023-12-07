@@ -7,7 +7,16 @@ use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 interface ConditionalAvailabilityPageSearchEntityManagerInterface
 {
     /**
-     * @param array $conditionalAvailabilityIds
+     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+     *
+     * @return void
+     */
+    public function persistConditionalAvailabilityPeriodPageSearch(
+        ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+    ): void;
+
+    /**
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */
@@ -16,11 +25,11 @@ interface ConditionalAvailabilityPageSearchEntityManagerInterface
     ): void;
 
     /**
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+     * @param array<string> $keys
      *
      * @return void
      */
-    public function createConditionalAvailabilityPeriodPageSearch(
-        ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+    public function deleteConditionalAvailabilityPeriodSearchPagesByKeys(
+        array $keys
     ): void;
 }

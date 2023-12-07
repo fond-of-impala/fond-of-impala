@@ -6,7 +6,6 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisher;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisher;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
-use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManager;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainer;
@@ -15,35 +14,15 @@ use Spryker\Zed\Kernel\Container;
 
 class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchBusinessFactory
-     */
-    protected ConditionalAvailabilityPageSearchBusinessFactory $factory;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainer
-     */
     protected MockObject|ConditionalAvailabilityPageSearchQueryContainer $queryContainerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchEntityManager
-     */
     protected MockObject|ConditionalAvailabilityPageSearchEntityManager $entityManagerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface
-     */
-    protected MockObject|ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacadeMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface
-     */
     protected MockObject|ConditionalAvailabilityPageSearchToUtilEncodingServiceInterface $utilEncodingServiceMock;
+
+    protected ConditionalAvailabilityPageSearchBusinessFactory $factory;
 
     /**
      * @return void
@@ -59,10 +38,6 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
             ->getMock();
 
         $this->containerMock = $this->getMockBuilder(Container::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->storeFacadeMock = $this->getMockBuilder(ConditionalAvailabilityPageSearchToStoreFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -88,17 +63,13 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
-                [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],
                 [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER],
-                [ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING],
-                [ConditionalAvailabilityPageSearchDependencyProvider::FACADE_STORE],
                 [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER],
+                [ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING],
             )->willReturnOnConsecutiveCalls(
-                $this->storeFacadeMock,
+                [],
                 [],
                 $this->utilEncodingServiceMock,
-                $this->storeFacadeMock,
-                [],
             );
 
         static::assertInstanceOf(

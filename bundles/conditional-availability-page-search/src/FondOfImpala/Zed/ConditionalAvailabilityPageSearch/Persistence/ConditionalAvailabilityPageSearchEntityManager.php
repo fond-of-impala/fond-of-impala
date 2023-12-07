@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence;
 
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
-use Orm\Zed\ConditionalAvailabilityPageSearch\Persistence\FoiConditionalAvailabilityPeriodPageSearch;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -14,7 +13,31 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManager implements ConditionalAvailabilityPageSearchEntityManagerInterface
 {
     /**
-     * @param array $conditionalAvailabilityIds
+     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+     *
+     * @return void
+     */
+    public function persistConditionalAvailabilityPeriodPageSearch(
+        ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+    ): void {
+        $conditionalAvailabilityPeriodKey = $conditionalAvailabilityPeriodPageSearchTransfer->getConditionalAvailabilityPeriodKey();
+
+        $conditionalAvailabilityPeriodPageSearch = $this->getFactory()->createConditionalAvailabilityPeriodPageSearchQuery()
+            ->filterByConditionalAvailabilityPeriodKey($conditionalAvailabilityPeriodKey)
+            ->findOneOrCreate();
+
+        $foiConditionalAvailabilityPeriodPageSearch = $this->getFactory()
+            ->createConditionalAvailabilityPeriodPageSearchMapper()
+            ->mapTransferToEntity(
+                $conditionalAvailabilityPeriodPageSearchTransfer,
+                $conditionalAvailabilityPeriodPageSearch,
+            );
+
+        $foiConditionalAvailabilityPeriodPageSearch->save();
+    }
+
+    /**
+     * @param array<int> $conditionalAvailabilityIds
      *
      * @return void
      */
@@ -32,20 +55,19 @@ class ConditionalAvailabilityPageSearchEntityManager extends AbstractEntityManag
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
+     * @param array<string> $keys
      *
      * @return void
      */
-    public function createConditionalAvailabilityPeriodPageSearch(
-        ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransfer
-    ): void {
-        $FoiConditionalAvailabilityPeriodPageSearch = $this->getFactory()
-            ->createConditionalAvailabilityPeriodPageSearchMapper()
-            ->mapTransferToEntity(
-                $conditionalAvailabilityPeriodPageSearchTransfer,
-                new FoiConditionalAvailabilityPeriodPageSearch(),
-            );
+    public function deleteConditionalAvailabilityPeriodSearchPagesByKeys(array $keys): void
+    {
+        $conditionalAvailabilityPeriodPageSearchEntities = $this->getFactory()
+            ->createConditionalAvailabilityPeriodPageSearchQuery()
+            ->filterByConditionalAvailabilityPeriodKey_In($keys)
+            ->find();
 
-        $FoiConditionalAvailabilityPeriodPageSearch->save();
+        foreach ($conditionalAvailabilityPeriodPageSearchEntities as $conditionalAvailabilityPeriodPageSearchEntity) {
+            $conditionalAvailabilityPeriodPageSearchEntity->delete();
+        }
     }
 }

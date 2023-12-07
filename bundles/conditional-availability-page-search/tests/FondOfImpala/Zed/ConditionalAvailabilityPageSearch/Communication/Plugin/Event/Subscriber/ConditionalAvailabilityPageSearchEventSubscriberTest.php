@@ -9,15 +9,9 @@ use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 
 class ConditionalAvailabilityPageSearchEventSubscriberTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\Plugin\Event\Subscriber\ConditionalAvailabilityPageSearchEventSubscriber
-     */
-    protected ConditionalAvailabilityPageSearchEventSubscriber $subscriber;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
     protected MockObject|EventCollectionInterface $eventCollectionMock;
+
+    protected ConditionalAvailabilityPageSearchEventSubscriber $subscriber;
 
     /**
      * @return void

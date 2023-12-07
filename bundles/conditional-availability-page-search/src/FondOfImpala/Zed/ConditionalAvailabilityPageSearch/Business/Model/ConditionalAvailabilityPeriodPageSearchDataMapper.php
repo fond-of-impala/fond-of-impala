@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model;
 
-use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface;
 use Generated\Shared\Search\ConditionalAvailabilityPeriodIndexMap;
 
 class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAvailabilityPeriodPageSearchDataMapperInterface
@@ -45,11 +44,6 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
     /**
      * @var string
      */
-    protected const DATA_KEY_STORE = 'store';
-
-    /**
-     * @var string
-     */
     protected const SEARCH_RESULT_DATA_KEY_SKU = 'sku';
 
     /**
@@ -82,22 +76,17 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
      */
     protected const SEARCH_RESULT_DATA_KEY_END_AT = 'end_at';
 
-    protected ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade;
-
     /**
      * @var array<\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface>
      */
     protected array $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins;
 
     /**
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade
      * @param array<\FondOfImpala\Zed\ConditionalAvailabilityPageSearchExtension\Dependency\Plugin\ConditionalAvailabilityPeriodPageSearchDataExpanderPluginInterface> $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins
      */
     public function __construct(
-        ConditionalAvailabilityPageSearchToStoreFacadeInterface $storeFacade,
         array $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins
     ) {
-        $this->storeFacade = $storeFacade;
         $this->conditionalAvailabilityPeriodPageSearchDataExpanderPlugins = $conditionalAvailabilityPeriodPageSearchDataExpanderPlugins;
     }
 
@@ -109,15 +98,7 @@ class ConditionalAvailabilityPeriodPageSearchDataMapper implements ConditionalAv
     public function mapConditionalAvailabilityPeriodDataToSearchData(
         array $data
     ): array {
-        $store = $this->storeFacade->getCurrentStore()->getName();
-
-        if (isset($data[static::DATA_KEY_STORE])) {
-            $store = $data[static::DATA_KEY_STORE];
-        }
-
         $searchData = [
-            ConditionalAvailabilityPeriodIndexMap::STORE => $store,
-            ConditionalAvailabilityPeriodIndexMap::LOCALE => null,
             ConditionalAvailabilityPeriodIndexMap::SKU => $data[static::DATA_KEY_SKU],
             ConditionalAvailabilityPeriodIndexMap::QUANTITY => $data[static::DATA_KEY_QUANTITY],
             ConditionalAvailabilityPeriodIndexMap::WAREHOUSE_GROUP => $data[static::DATA_KEY_WAREHOUSE_GROUP],

@@ -13,7 +13,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConfig getConfig()
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Persistence\ConditionalAvailabilityPageSearchQueryContainerInterface getQueryContainer()
  * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\ConditionalAvailabilityPageSearchFacadeInterface getFacade()
- * @method \FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Communication\ConditionalAvailabilityPageSearchCommunicationFactory getFactory()
  */
 class ConditionalAvailabilityPeriodEventResourceQueryContainerPlugin extends AbstractPlugin implements EventResourceQueryContainerPluginInterface
 {
@@ -48,6 +47,7 @@ class ConditionalAvailabilityPeriodEventResourceQueryContainerPlugin extends Abs
      */
     public function queryData(array $ids = []): ?ModelCriteria
     {
-        return $this->getQueryContainer()->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($ids);
+        return $this->getQueryContainer()->queryConditionalAvailabilityPeriodsByConditionalAvailabilityIds($ids)
+            ->groupByFkConditionalAvailability();
     }
 }
