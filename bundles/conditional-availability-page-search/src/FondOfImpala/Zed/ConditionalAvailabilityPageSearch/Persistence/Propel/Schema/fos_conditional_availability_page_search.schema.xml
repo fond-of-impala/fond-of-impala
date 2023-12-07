@@ -10,7 +10,7 @@
         <column name="start_at" required="true" type="TIMESTAMP" primaryKey="true"/>
         <column name="end_at" required="true" type="TIMESTAMP" primaryKey="true"/>
         <column name="original_start_at" type="TIMESTAMP"/>
-        <column name="conditional_availability_period_key" type="VARCHAR" required="true"/>
+        <column name="conditional_availability_period_key" type="VARCHAR" required="true" primaryKey="true"/>
         <column name="structured_data" type="LONGVARCHAR" required="true"/>
         <column name="data" type="LONGVARCHAR" required="false"/>
         <column name="key" type="VARCHAR" required="true"/>
