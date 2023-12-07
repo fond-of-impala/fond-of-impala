@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/conditional-availability": "^1.1.1",
+    "fond-of-impala/conditional-availability": "^1.1.1 || ^2.0.0",
     "spryker/product-page-search": "^3.24.0"
   },
   "require-dev": {
