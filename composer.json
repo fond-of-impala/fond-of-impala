@@ -108,6 +108,7 @@
     "spryker/price-product": "^4.0.0",
     "spryker/product": "^6.4.0",
     "spryker/product-list": "^1.2.0",
+    "spryker/product-list-extension": "^1.1.0",
     "spryker/product-management-extension": "^1.0.0",
     "spryker/product-page-search": "^3.24.0",
     "spryker/product-page-search-extension": "^1.4.0",

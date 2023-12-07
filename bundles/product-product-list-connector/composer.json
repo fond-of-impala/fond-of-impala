@@ -16,7 +16,8 @@
   },
   "require": {
     "php": ">=8.0",
-    "spryker/product-list": "^1.0.0"
+    "spryker/product-list": "^1.2.0",
+    "spryker/product-list-extension": "^1.1.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
