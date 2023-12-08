@@ -41,10 +41,13 @@ class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin imp
         $productImages = $productAbstractPageSearchTransfer->getProductImages();
 
         $regrouped = [];
+
         foreach ($imageSetsByLocale as $imageSet) {
             foreach ($productImages as $productImage) {
                 if ($productImage['fk_product_image_set'] === $imageSet->getIdProductImageSet()) {
-                    $regrouped[($imageSet->getName() ?? static::IMAGE_GROUP_NAME_EMPTY)][] = $productImage;
+                    $key = $imageSet->getName();
+
+                    $regrouped[$key === null || $key === '' ? $key : static::IMAGE_GROUP_NAME_EMPTY][] = $productImage;
                 }
             }
         }
