@@ -76,4 +76,31 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
 
         $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
     }
+
+    /**
+     * @return void
+     */
+    public function testExpandProductPageDataWithoutName(): void
+    {
+        $productData = [
+            ProductPageSearchConfig::PRODUCT_ABSTRACT_PAGE_LOAD_DATA => $this->productPayloadTransferMock,
+            'fk_locale' => 1,
+        ];
+
+        $imageSets = [
+            1 => [$this->spyProductImageSetMock],
+        ];
+
+        $productImage = [
+            'fk_product_image_set' => 44,
+        ];
+
+        $this->productPayloadTransferMock->expects(static::atLeastOnce())->method('getImages')->willReturn($imageSets);
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())->method('getIdProductImageSet')->willReturn(44);
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())->method('getName')->willReturn('');
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())->method('setGroupedProductImages');
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())->method('getProductImages')->willReturn([$productImage]);
+
+        $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
+    }
 }
