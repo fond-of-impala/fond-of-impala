@@ -10,19 +10,10 @@ use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 
 class StockStatusDataLoadExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\ProductPageSearch\DataExpander\StockStatusDataLoadExpanderPlugin;
-     */
     protected StockStatusDataLoadExpanderPlugin $expander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPageSearchTransfer
-     */
     protected MockObject|ProductPageSearchTransfer $productAbstractPageSearchTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPayloadTransfer
-     */
     protected MockObject|ProductPayloadTransfer $productPayloadTransferMock;
 
     /**

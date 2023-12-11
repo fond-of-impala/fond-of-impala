@@ -14,8 +14,8 @@ use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\S
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -69,7 +69,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     {
         return new StockStatusTrigger(
             $this->createProductAbstractReader(),
-            $this->getProductPageSearchFacade(),
+            $this->getEventBehaviorFacade(),
             $this->getRepository(),
         );
     }
@@ -95,10 +95,10 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     }
 
     /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
+     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface
      */
-    public function getProductPageSearchFacade(): ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
+    public function getEventBehaviorFacade(): ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface
     {
-        return $this->getProvidedDependency(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT_PAGE_SEARCH);
+        return $this->getProvidedDependency(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR);
     }
 }

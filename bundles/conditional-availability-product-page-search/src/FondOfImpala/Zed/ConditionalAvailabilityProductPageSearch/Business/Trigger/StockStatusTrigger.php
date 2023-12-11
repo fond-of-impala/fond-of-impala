@@ -3,38 +3,29 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger;
 
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface;
 
 class StockStatusTrigger implements StockStatusTriggerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
-     */
-    protected ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface $productPageSearchFacade;
-
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface
-     */
     protected ProductAbstractReaderInterface $productAbstractReader;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface
-     */
+    protected ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacade;
+
     protected ConditionalAvailabilityProductPageSearchRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface $productAbstractReader
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface $productPageSearchFacade
+     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacade
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface $repository
      */
     public function __construct(
         ProductAbstractReaderInterface $productAbstractReader,
-        ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface $productPageSearchFacade,
+        ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacade,
         ConditionalAvailabilityProductPageSearchRepositoryInterface $repository
     ) {
         $this->productAbstractReader = $productAbstractReader;
-        $this->productPageSearchFacade = $productPageSearchFacade;
+        $this->eventBehaviorFacade = $eventBehaviorFacade;
         $this->repository = $repository;
     }
 
@@ -69,9 +60,14 @@ class StockStatusTrigger implements StockStatusTriggerInterface
             return;
         }
 
+        $this->eventBehaviorFacade->executeResolvedPluginsBySources(['product_concrete'], $productConcreteIds);
+
         $productAbstractIds = $this->productAbstractReader->getProductAbstractIdsByConcreteIds($productConcreteIds);
 
-        $this->productPageSearchFacade->publishProductConcretes($productConcreteIds);
-        $this->productPageSearchFacade->publish($productAbstractIds);
+        if (count($productAbstractIds) === 0) {
+            return;
+        }
+
+        $this->eventBehaviorFacade->executeResolvedPluginsBySources(['product_abstract'], $productAbstractIds);
     }
 }

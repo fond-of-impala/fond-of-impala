@@ -17,49 +17,22 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 class StockStatusQueryExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query\BoolQuery
-     */
     protected MockObject|BoolQuery $boolQueryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Dependency\Client\ConditionalAvailabilityProductPageSearchToCustomerClientInterface
-     */
     protected MockObject|ConditionalAvailabilityProductPageSearchToCustomerClientInterface $customerClientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
-     */
     protected MockObject|CustomerTransfer $customerTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchFactory
-     */
     protected MockObject|ConditionalAvailabilityProductPageSearchFactory $factoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query\MatchQuery
-     */
     protected MockObject|MatchQuery $matchQueryMock;
 
-    /**
-     * @var \FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\Plugin\SearchExtension\StockStatusQueryExpanderPlugin
-     */
     protected StockStatusQueryExpanderPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query
-     */
-    protected MockObject|Query $searchQueryMock;
+    protected MockObject|QueryInterface $searchQueryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
-     */
-    protected MockObject|QueryInterface $queryMock;
+    protected MockObject|Query $queryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchElasticsearch\Query\QueryBuilderInterface
-     */
     protected MockObject|QueryBuilderInterface $queryBuilderMock;
 
     /**

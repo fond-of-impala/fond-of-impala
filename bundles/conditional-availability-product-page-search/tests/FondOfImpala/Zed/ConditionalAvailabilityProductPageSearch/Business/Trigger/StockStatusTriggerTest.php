@@ -4,16 +4,16 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Tri
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class StockStatusTriggerTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface
      */
-    protected MockObject|ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface $productPageSearchFacadeMock;
+    protected MockObject|ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface
@@ -41,7 +41,7 @@ class StockStatusTriggerTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productPageSearchFacadeMock = $this->getMockBuilder(ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -51,7 +51,7 @@ class StockStatusTriggerTest extends Unit
 
         $this->trigger = new StockStatusTrigger(
             $this->productAbstractReaderMock,
-            $this->productPageSearchFacadeMock,
+            $this->eventBehaviorFacadeMock,
             $this->repositoryMock,
         );
     }
@@ -68,18 +68,61 @@ class StockStatusTriggerTest extends Unit
             ->method('findProductConcreteIdsToTrigger')
             ->willReturn($productConcreteIds);
 
-        $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
-            ->method('publishProductConcretes')
-            ->with($productConcreteIds);
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
+            ->method('executeResolvedPluginsBySources')
+            ->withConsecutive(
+                [['product_concrete'], $productConcreteIds],
+                [['product_abstract'], $productAbstractIds],
+            );
 
         $this->productAbstractReaderMock->expects(static::atLeastOnce())
             ->method('getProductAbstractIdsByConcreteIds')
             ->with($productConcreteIds)
             ->willReturn($productAbstractIds);
 
-        $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
-            ->method('publish')
-            ->with($productAbstractIds);
+        $this->trigger->trigger();
+    }
+
+    /**
+     * @return void
+     */
+    public function testTriggerWithoutProductConcreteIds(): void
+    {
+        $productConcreteIds = [];
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('findProductConcreteIdsToTrigger')
+            ->willReturn($productConcreteIds);
+
+        $this->eventBehaviorFacadeMock->expects(static::never())
+            ->method('executeResolvedPluginsBySources');
+
+        $this->productAbstractReaderMock->expects(static::never())
+            ->method('getProductAbstractIdsByConcreteIds');
+
+        $this->trigger->trigger();
+    }
+
+    /**
+     * @return void
+     */
+    public function testTriggerWithoutProductAbstractIds(): void
+    {
+        $productConcreteIds = [1];
+        $productAbstractIds = [];
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('findProductConcreteIdsToTrigger')
+            ->willReturn($productConcreteIds);
+
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
+            ->method('executeResolvedPluginsBySources')
+            ->with(['product_concrete'], $productConcreteIds);
+
+        $this->productAbstractReaderMock->expects(static::atLeastOnce())
+            ->method('getProductAbstractIdsByConcreteIds')
+            ->with($productConcreteIds)
+            ->willReturn($productAbstractIds);
 
         $this->trigger->trigger();
     }
@@ -96,18 +139,17 @@ class StockStatusTriggerTest extends Unit
             ->method('findProductConcreteIdsForDeltaTrigger')
             ->willReturn($productConcreteIds);
 
-        $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
-            ->method('publishProductConcretes')
-            ->with($productConcreteIds);
+        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
+            ->method('executeResolvedPluginsBySources')
+            ->withConsecutive(
+                [['product_concrete'], $productConcreteIds],
+                [['product_abstract'], $productAbstractIds],
+            );
 
         $this->productAbstractReaderMock->expects(static::atLeastOnce())
             ->method('getProductAbstractIdsByConcreteIds')
             ->with($productConcreteIds)
             ->willReturn($productAbstractIds);
-
-        $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
-            ->method('publish')
-            ->with($productAbstractIds);
 
         $this->trigger->triggerDelta();
     }

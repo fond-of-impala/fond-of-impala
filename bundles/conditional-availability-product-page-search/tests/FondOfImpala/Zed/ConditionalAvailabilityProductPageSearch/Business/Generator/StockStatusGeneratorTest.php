@@ -14,19 +14,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class StockStatusGeneratorTest extends Unit
 {
-    /**
-     * @var (\Generated\Shared\Transfer\ConditionalAvailabilityPeriodCollectionTransfer&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
-     */
     protected MockObject|ConditionalAvailabilityPeriodCollectionTransfer $conditionalAvailabilityPeriodCollectionTransferMock;
 
-    /**
-     * @var array<\PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer>
-     */
     protected array $conditionalAvailabilityPeriodTransferMocks;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGenerator
-     */
     protected StockStatusGenerator $stockStatusGenerator;
 
     /**

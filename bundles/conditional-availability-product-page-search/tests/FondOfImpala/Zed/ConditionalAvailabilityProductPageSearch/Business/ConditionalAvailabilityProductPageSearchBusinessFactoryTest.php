@@ -6,11 +6,11 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReader;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTriggerInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger\StockStatusTrigger;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
@@ -38,9 +38,9 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
     protected ConditionalAvailabilityProductPageSearchBusinessFactory $factory;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface
      */
-    protected MockObject|ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface $productPageSearchFacadeMock;
+    protected MockObject|ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepository
@@ -70,7 +70,7 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productPageSearchFacadeMock = $this->getMockBuilder(ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -155,18 +155,18 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
             ->method('has')
             ->withConsecutive(
                 [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT],
-                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT_PAGE_SEARCH],
+                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR],
             )->willReturnOnConsecutiveCalls(true, true);
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
                 [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT],
-                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT_PAGE_SEARCH],
-            )->willReturn($this->productFacadeMock, $this->productPageSearchFacadeMock);
+                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_EVENT_BEHAVIOR],
+            )->willReturn($this->productFacadeMock, $this->eventBehaviorFacadeMock);
 
         static::assertInstanceOf(
-            StockStatusTriggerInterface::class,
+            StockStatusTrigger::class,
             $this->factory->createStockStatusTrigger(),
         );
     }

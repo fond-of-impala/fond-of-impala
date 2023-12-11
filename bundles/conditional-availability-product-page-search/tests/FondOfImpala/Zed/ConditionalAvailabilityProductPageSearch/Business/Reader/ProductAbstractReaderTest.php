@@ -8,14 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductAbstractReaderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface
-     */
     protected ProductAbstractReaderInterface $reader;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
-     */
     protected MockObject|ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacadeMock;
 
     /**

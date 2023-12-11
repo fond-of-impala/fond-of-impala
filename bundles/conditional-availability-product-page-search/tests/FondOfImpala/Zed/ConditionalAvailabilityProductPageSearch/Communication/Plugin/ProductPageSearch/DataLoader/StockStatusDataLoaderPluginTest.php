@@ -9,19 +9,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class StockStatusDataLoaderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\ProductPageSearch\DataLoader\StockStatusDataLoaderPlugin;
-     */
     protected StockStatusDataLoaderPlugin $expander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ConditionalAvailabilityProductPageSearchFacade
-     */
     protected MockObject|ConditionalAvailabilityProductPageSearchFacade $facadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPageLoadTransfer
-     */
     protected MockObject|ProductPageLoadTransfer $pageLoadTransferMock;
 
     /**
