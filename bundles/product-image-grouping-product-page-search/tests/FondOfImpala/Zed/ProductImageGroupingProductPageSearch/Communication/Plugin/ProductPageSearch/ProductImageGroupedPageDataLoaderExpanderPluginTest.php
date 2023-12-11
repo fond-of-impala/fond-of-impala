@@ -55,6 +55,9 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
      */
     public function testExpandProductPageData(): void
     {
+        $key = 'front';
+        $idProductImageSet = 44;
+
         $productData = [
             ProductPageSearchConfig::PRODUCT_ABSTRACT_PAGE_LOAD_DATA => $this->productPayloadTransferMock,
             'fk_locale' => 1,
@@ -65,14 +68,32 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
         ];
 
         $productImage = [
-            'fk_product_image_set' => 44,
+            'fk_product_image_set' => $idProductImageSet,
         ];
 
-        $this->productPayloadTransferMock->expects(static::atLeastOnce())->method('getImages')->willReturn($imageSets);
-        $this->spyProductImageSetMock->expects(static::atLeastOnce())->method('getIdProductImageSet')->willReturn(44);
-        $this->spyProductImageSetMock->expects(static::atLeastOnce())->method('getName')->willReturn('front');
-        $this->pageSearchTransferMock->expects(static::atLeastOnce())->method('setGroupedProductImages');
-        $this->pageSearchTransferMock->expects(static::atLeastOnce())->method('getProductImages')->willReturn([$productImage]);
+        $this->productPayloadTransferMock->expects(static::atLeastOnce())
+            ->method('getImages')
+            ->willReturn($imageSets);
+
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())
+            ->method('getProductImages')
+            ->willReturn([$productImage]);
+
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())
+            ->method('getIdProductImageSet')
+            ->willReturn($idProductImageSet);
+
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())
+            ->method('getName')
+            ->willReturn($key);
+
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())
+            ->method('setGroupedProductImages')
+            ->with(
+                static::callback(
+                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == [$key]
+                ),
+            )->willReturn($this->pageSearchTransferMock);
 
         $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
     }
@@ -80,8 +101,11 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
     /**
      * @return void
      */
-    public function testExpandProductPageDataWithoutName(): void
+    public function testExpandProductPageDataWithEmptyImageSetName(): void
     {
+        $key = '';
+        $idProductImageSet = 44;
+
         $productData = [
             ProductPageSearchConfig::PRODUCT_ABSTRACT_PAGE_LOAD_DATA => $this->productPayloadTransferMock,
             'fk_locale' => 1,
@@ -92,14 +116,80 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
         ];
 
         $productImage = [
-            'fk_product_image_set' => 44,
+            'fk_product_image_set' => $idProductImageSet,
         ];
 
-        $this->productPayloadTransferMock->expects(static::atLeastOnce())->method('getImages')->willReturn($imageSets);
-        $this->spyProductImageSetMock->expects(static::atLeastOnce())->method('getIdProductImageSet')->willReturn(44);
-        $this->spyProductImageSetMock->expects(static::atLeastOnce())->method('getName')->willReturn('');
-        $this->pageSearchTransferMock->expects(static::atLeastOnce())->method('setGroupedProductImages');
-        $this->pageSearchTransferMock->expects(static::atLeastOnce())->method('getProductImages')->willReturn([$productImage]);
+        $this->productPayloadTransferMock->expects(static::atLeastOnce())
+            ->method('getImages')
+            ->willReturn($imageSets);
+
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())
+            ->method('getProductImages')
+            ->willReturn([$productImage]);
+
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())
+            ->method('getIdProductImageSet')
+            ->willReturn($idProductImageSet);
+
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())
+            ->method('getName')
+            ->willReturn($key);
+
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())
+            ->method('setGroupedProductImages')
+            ->with(
+                static::callback(
+                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*']
+                ),
+            )->willReturn($this->pageSearchTransferMock);
+
+        $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
+    }
+
+    /**
+     * @return void
+     */
+    public function testExpandProductPageDataWithNullableImageSetName(): void
+    {
+        $key = null;
+        $idProductImageSet = 44;
+
+        $productData = [
+            ProductPageSearchConfig::PRODUCT_ABSTRACT_PAGE_LOAD_DATA => $this->productPayloadTransferMock,
+            'fk_locale' => 1,
+        ];
+
+        $imageSets = [
+            1 => [$this->spyProductImageSetMock],
+        ];
+
+        $productImage = [
+            'fk_product_image_set' => $idProductImageSet,
+        ];
+
+        $this->productPayloadTransferMock->expects(static::atLeastOnce())
+            ->method('getImages')
+            ->willReturn($imageSets);
+
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())
+            ->method('getProductImages')
+            ->willReturn([$productImage]);
+
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())
+            ->method('getIdProductImageSet')
+            ->willReturn($idProductImageSet);
+
+        $this->spyProductImageSetMock->expects(static::atLeastOnce())
+            ->method('getName')
+            ->willReturn($key);
+
+        $this->pageSearchTransferMock->expects(static::atLeastOnce())
+            ->method('setGroupedProductImages')
+            ->with(
+                static::callback(
+                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*']
+                ),
+            )->willReturn($this->pageSearchTransferMock);
 
         $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
     }
