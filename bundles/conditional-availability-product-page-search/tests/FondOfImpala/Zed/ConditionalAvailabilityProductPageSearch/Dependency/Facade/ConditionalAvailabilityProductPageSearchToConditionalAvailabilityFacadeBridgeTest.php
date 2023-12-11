@@ -10,24 +10,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
-     */
     protected ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
-     */
     protected MockObject|ConditionalAvailabilityCollectionTransfer $conditionalAvailabilityCollectionTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer
-     */
     protected MockObject|ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface
-     */
     protected MockObject|ConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacadeMock;
 
     /**
@@ -68,26 +56,6 @@ class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBri
 
         $conditionalAvailabilityCollectionTransfer =
             $this->bridge->findConditionalAvailabilities($this->conditionalAvailabilityCriteriaFilterTransferMock);
-
-        static::assertEquals(
-            $this->conditionalAvailabilityCollectionTransferMock,
-            $conditionalAvailabilityCollectionTransfer,
-        );
-    }
-
-    /**
-     * @return void
-     */
-    public function testGetConditionalAvailabilitiesByIds(): void
-    {
-        $conditionalAvailabilityIds = [1];
-        $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
-            ->method('getConditionalAvailabilitiesByIds')
-            ->with($conditionalAvailabilityIds)
-            ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
-
-        $conditionalAvailabilityCollectionTransfer = $this->bridge
-            ->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
 
         static::assertEquals(
             $this->conditionalAvailabilityCollectionTransferMock,

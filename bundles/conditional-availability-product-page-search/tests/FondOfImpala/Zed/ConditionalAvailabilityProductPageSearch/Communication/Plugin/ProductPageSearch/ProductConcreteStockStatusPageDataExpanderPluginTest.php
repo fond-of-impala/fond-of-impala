@@ -10,24 +10,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductConcreteStockStatusPageDataExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\ConditionalAvailabilityProductPageSearchFacade
-     */
     protected MockObject|ConditionalAvailabilityProductPageSearchFacade $facadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\ProductPageSearch\ProductConcreteStockStatusPageDataExpanderPlugin
-     */
     protected ProductConcreteStockStatusPageDataExpanderPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected MockObject|ProductConcreteTransfer $productConcreteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductConcretePageSearchTransfer
-     */
     protected MockObject|ProductConcretePageSearchTransfer $productConcretePageSearchTransferMock;
 
     /**

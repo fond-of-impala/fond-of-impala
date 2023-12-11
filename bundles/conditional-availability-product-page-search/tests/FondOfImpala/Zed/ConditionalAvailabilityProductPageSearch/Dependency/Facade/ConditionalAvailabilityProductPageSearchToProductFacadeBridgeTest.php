@@ -8,14 +8,8 @@ use Spryker\Zed\Product\Business\ProductFacadeInterface;
 
 class ConditionalAvailabilityProductPageSearchToProductFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
-     */
     protected ConditionalAvailabilityProductPageSearchToProductFacadeInterface $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\Spryker\Zed\Product\Business\ProductFacadeInterface
-     */
     protected MockObject|ProductFacadeInterface $productFacadeMock;
 
     /**

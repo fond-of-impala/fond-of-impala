@@ -4,15 +4,16 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConditionalAvailabilityProductPageSearchConfig extends AbstractBundleConfig
 {
     /**
-     * @api
-     *
-     * @return string|null
+     * @return string
      */
-    public function getEventQueueName(): ?string
+    public function getDuration(): string
     {
-        return null;
+        return 'PT1M';
     }
 }

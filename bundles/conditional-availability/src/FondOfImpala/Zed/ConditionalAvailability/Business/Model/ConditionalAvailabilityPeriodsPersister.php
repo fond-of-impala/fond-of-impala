@@ -55,7 +55,8 @@ class ConditionalAvailabilityPeriodsPersister implements ConditionalAvailability
             $key = $this->keyGenerator->generate($conditionalAvailabilityPeriodTransfer, $now);
 
             $conditionalAvailabilityPeriodTransfer->setKey($key)
-                ->setFkConditionalAvailability($fkConditionalAvailability);
+                ->setFkConditionalAvailability($fkConditionalAvailability)
+                ->setCreatedAt($now->format('Y-m-d H:i:s.u'));
 
             $this->entityManager->createConditionalAvailabilityPeriod($conditionalAvailabilityPeriodTransfer);
         }

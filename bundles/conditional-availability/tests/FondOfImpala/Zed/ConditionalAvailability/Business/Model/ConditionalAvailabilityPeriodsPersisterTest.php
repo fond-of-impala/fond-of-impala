@@ -131,6 +131,14 @@ class ConditionalAvailabilityPeriodsPersisterTest extends Unit
             ->willReturn($this->conditionalAvailabilityPeriodTransferMocks[0]);
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
+            ->method('setCreatedAt')
+            ->with(
+                static::callback(
+                    static fn (string $createdAt): bool => true,
+                ),
+            )->willReturn($this->conditionalAvailabilityPeriodTransferMocks[0]);
+
+        $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
             ->method('setKey')
             ->with($key)
             ->willReturn($this->conditionalAvailabilityPeriodTransferMocks[0]);

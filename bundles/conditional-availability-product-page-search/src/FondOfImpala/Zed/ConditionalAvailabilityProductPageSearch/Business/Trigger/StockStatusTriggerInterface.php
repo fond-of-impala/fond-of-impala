@@ -8,4 +8,9 @@ interface StockStatusTriggerInterface
      * @return void
      */
     public function trigger(): void;
+
+    /**
+     * @return void
+     */
+    public function triggerDelta(): void;
 }
