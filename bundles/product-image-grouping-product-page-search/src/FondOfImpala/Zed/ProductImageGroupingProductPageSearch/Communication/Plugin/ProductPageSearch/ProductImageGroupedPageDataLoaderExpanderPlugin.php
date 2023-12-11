@@ -47,7 +47,7 @@ class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin imp
                 if ($productImage['fk_product_image_set'] === $imageSet->getIdProductImageSet()) {
                     $key = $imageSet->getName();
 
-                    $regrouped[$key === null || $key === '' ? $key : static::IMAGE_GROUP_NAME_EMPTY][] = $productImage;
+                    $regrouped[$key === null || $key === '' ? static::IMAGE_GROUP_NAME_EMPTY : $key][] = $productImage;
                 }
             }
         }
