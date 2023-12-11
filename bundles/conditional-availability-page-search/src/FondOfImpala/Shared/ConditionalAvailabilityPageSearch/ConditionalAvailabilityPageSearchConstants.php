@@ -22,6 +22,11 @@ interface ConditionalAvailabilityPageSearchConstants
     /**
      * @var string
      */
+    public const PUBLISH_CONDITIONAL_AVAILABILITY = 'publish.conditional_availability';
+
+    /**
+     * @var string
+     */
     public const PARAMETER_SKU = 'sku';
 
     /**
