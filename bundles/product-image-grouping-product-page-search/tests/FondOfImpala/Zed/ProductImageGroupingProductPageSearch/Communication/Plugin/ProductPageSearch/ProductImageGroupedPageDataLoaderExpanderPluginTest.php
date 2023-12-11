@@ -87,13 +87,12 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
             ->method('getName')
             ->willReturn($key);
 
-
         $this->pageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setGroupedProductImages')
             ->with(
                 static::callback(
                     static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == [$key]
-                )
+                ),
             )->willReturn($this->pageSearchTransferMock);
 
         $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
@@ -141,7 +140,7 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
             ->with(
                 static::callback(
                     static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*']
-                )
+                ),
             )->willReturn($this->pageSearchTransferMock);
 
         $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
@@ -189,7 +188,7 @@ class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
             ->with(
                 static::callback(
                     static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*']
-                )
+                ),
             )->willReturn($this->pageSearchTransferMock);
 
         $this->plugin->expandProductPageData($productData, $this->pageSearchTransferMock);
