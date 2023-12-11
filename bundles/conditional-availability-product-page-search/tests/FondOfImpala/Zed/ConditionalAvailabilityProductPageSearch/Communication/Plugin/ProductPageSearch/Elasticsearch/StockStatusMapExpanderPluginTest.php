@@ -10,24 +10,12 @@ use Spryker\Zed\ProductPageSearchExtension\Dependency\PageMapBuilderInterface;
 
 class StockStatusMapExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PageMapTransfer
-     */
     protected MockObject|LocaleTransfer $localTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PageMapTransfer
-     */
     protected MockObject|PageMapTransfer $pageMapTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\ProductPageSearchExtension\Dependency\PageMapBuilderInterface
-     */
     protected MockObject|PageMapBuilderInterface $pageMapBuilderMock;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Communication\Plugin\ProductPageSearch\Elasticsearch\StockStatusMapExpanderPlugin
-     */
     protected StockStatusMapExpanderPlugin $plugin;
 
     /**

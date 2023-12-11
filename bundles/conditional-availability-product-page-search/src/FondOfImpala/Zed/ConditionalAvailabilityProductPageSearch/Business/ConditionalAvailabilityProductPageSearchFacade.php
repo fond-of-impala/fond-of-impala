@@ -53,4 +53,16 @@ class ConditionalAvailabilityProductPageSearchFacade extends AbstractFacade impl
     {
         $this->getFactory()->createStockStatusTrigger()->trigger();
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function triggerStockStatusDelta(): void
+    {
+        $this->getFactory()->createStockStatusTrigger()->triggerDelta();
+    }
 }

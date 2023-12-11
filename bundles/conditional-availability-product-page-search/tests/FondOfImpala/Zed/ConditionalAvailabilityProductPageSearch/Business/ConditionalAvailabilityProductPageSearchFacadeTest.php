@@ -149,4 +149,19 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
 
         $this->facade->triggerStockStatus();
     }
+
+    /**
+     * @return void
+     */
+    public function testTriggerStockStatusDelta(): void
+    {
+        $this->factoryMock->expects(static::atLeastOnce())
+            ->method('createStockStatusTrigger')
+            ->willReturn($this->stockStatusTriggerMock);
+
+        $this->stockStatusTriggerMock->expects(static::atLeastOnce())
+            ->method('triggerDelta');
+
+        $this->facade->triggerStockStatusDelta();
+    }
 }

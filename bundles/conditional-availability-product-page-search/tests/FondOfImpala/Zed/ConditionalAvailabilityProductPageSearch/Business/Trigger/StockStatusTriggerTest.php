@@ -61,11 +61,11 @@ class StockStatusTriggerTest extends Unit
      */
     public function testTrigger(): void
     {
-        $productConcreteIds = [1];
-        $productAbstractIds = [1];
+        $productConcreteIds = [1, 3];
+        $productAbstractIds = [2];
 
         $this->repositoryMock->expects(static::atLeastOnce())
-            ->method('findConcreteProductIdsToTrigger')
+            ->method('findProductConcreteIdsToTrigger')
             ->willReturn($productConcreteIds);
 
         $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
@@ -78,9 +78,37 @@ class StockStatusTriggerTest extends Unit
             ->willReturn($productAbstractIds);
 
         $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
-            ->method('publishProductConcretes')
+            ->method('publish')
             ->with($productAbstractIds);
 
         $this->trigger->trigger();
+    }
+
+    /**
+     * @return void
+     */
+    public function testTriggerDelta(): void
+    {
+        $productConcreteIds = [1, 3];
+        $productAbstractIds = [2];
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('findProductConcreteIdsForDeltaTrigger')
+            ->willReturn($productConcreteIds);
+
+        $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
+            ->method('publishProductConcretes')
+            ->with($productConcreteIds);
+
+        $this->productAbstractReaderMock->expects(static::atLeastOnce())
+            ->method('getProductAbstractIdsByConcreteIds')
+            ->with($productConcreteIds)
+            ->willReturn($productAbstractIds);
+
+        $this->productPageSearchFacadeMock->expects(static::atLeastOnce())
+            ->method('publish')
+            ->with($productAbstractIds);
+
+        $this->trigger->triggerDelta();
     }
 }

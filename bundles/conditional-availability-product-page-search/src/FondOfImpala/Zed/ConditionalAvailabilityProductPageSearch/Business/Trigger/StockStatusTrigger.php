@@ -43,15 +43,35 @@ class StockStatusTrigger implements StockStatusTriggerInterface
      */
     public function trigger(): void
     {
-        $productConcreteIds = $this->repository->findConcreteProductIdsToTrigger();
+        $productConcreteIds = $this->repository->findProductConcreteIdsToTrigger();
 
+        $this->triggerByProductConcreteIds($productConcreteIds);
+    }
+
+    /**
+     * @return void
+     */
+    public function triggerDelta(): void
+    {
+        $productConcreteIds = $this->repository->findProductConcreteIdsForDeltaTrigger();
+
+        $this->triggerByProductConcreteIds($productConcreteIds);
+    }
+
+    /**
+     * @param array<int> $productConcreteIds
+     *
+     * @return void
+     */
+    protected function triggerByProductConcreteIds(array $productConcreteIds): void
+    {
         if (count($productConcreteIds) === 0) {
             return;
         }
 
+        $productAbstractIds = $this->productAbstractReader->getProductAbstractIdsByConcreteIds($productConcreteIds);
+
         $this->productPageSearchFacade->publishProductConcretes($productConcreteIds);
-        $this->productPageSearchFacade->publish(
-            $this->productAbstractReader->getProductAbstractIdsByConcreteIds($productConcreteIds),
-        );
+        $this->productPageSearchFacade->publish($productAbstractIds);
     }
 }

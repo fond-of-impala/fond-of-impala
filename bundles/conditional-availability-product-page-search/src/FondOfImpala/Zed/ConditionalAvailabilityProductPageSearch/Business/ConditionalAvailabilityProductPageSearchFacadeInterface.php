@@ -9,7 +9,7 @@ interface ConditionalAvailabilityProductPageSearchFacadeInterface
 {
     /**
      * Specification:
-     *  - Expand product page transfer with stock status data.
+     *  - Expand product page transfer with stock status data
      *
      * @api
      *
@@ -21,7 +21,7 @@ interface ConditionalAvailabilityProductPageSearchFacadeInterface
 
     /**
      * Specification:
-     * - Expands ProductConcretePageSearchTransfer with stock status data and returns the modified object.
+     * - Expands ProductConcretePageSearchTransfer with stock status data
      *
      * @api
      *
@@ -35,12 +35,21 @@ interface ConditionalAvailabilityProductPageSearchFacadeInterface
 
     /**
      * Specification:
-     * - Retrieve fk products to be triggered
-     * - trigger concrete products and abstract products
+     * - Trigger concrete and abstract products with periods that starts today
      *
      * @api
      *
      * @return void
      */
     public function triggerStockStatus(): void;
+
+    /**
+     * Specification:
+     * - Trigger concrete and abstract products by stock status delta
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function triggerStockStatusDelta(): void;
 }
