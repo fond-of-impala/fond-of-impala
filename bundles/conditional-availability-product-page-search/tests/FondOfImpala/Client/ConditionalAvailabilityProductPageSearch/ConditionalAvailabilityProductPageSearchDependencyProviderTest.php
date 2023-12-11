@@ -12,25 +12,15 @@ use Spryker\Shared\Kernel\BundleProxy;
 
 class ConditionalAvailabilityProductPageSearchDependencyProviderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
-     */
     protected MockObject|BundleProxy $bundleProxyMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Customer\CustomerClientInterface
-     */
     protected MockObject|CustomerClientInterface $customerClientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Locator
-     */
     protected MockObject|Locator $locatorMock;
+
+    protected ConditionalAvailabilityProductPageSearchDependencyProvider $dependencyProvider;
 
     /**
      * @return void

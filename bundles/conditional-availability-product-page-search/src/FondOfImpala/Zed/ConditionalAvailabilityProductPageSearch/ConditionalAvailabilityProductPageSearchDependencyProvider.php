@@ -4,10 +4,10 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch;
 
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeBridge;
+use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeBridge;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeBridge;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -31,11 +31,6 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
     /**
      * @var string
      */
-    public const FACADE_PRODUCT_PAGE_SEARCH = 'FACADE_PRODUCT_PAGE_SEARCH';
-
-    /**
-     * @var string
-     */
     public const FACADE_CONDITIONAL_AVAILABILITY = 'FACADE_CONDITIONAL_AVAILABILITY';
 
     /**
@@ -46,10 +41,11 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
-        $container = $this->addConditionalAvailabilityFacade($container);
-        $container = $this->addProductFacade($container);
 
-        return $this->addProductPageSearchFacade($container);
+        $container = $this->addConditionalAvailabilityFacade($container);
+        $container = $this->addEventBehaviorFacade($container);
+
+        return $this->addProductFacade($container);
     }
 
     /**
@@ -57,12 +53,12 @@ class ConditionalAvailabilityProductPageSearchDependencyProvider extends Abstrac
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addProductPageSearchFacade(Container $container): Container
+    protected function addEventBehaviorFacade(Container $container): Container
     {
-        $container[static::FACADE_PRODUCT_PAGE_SEARCH] = static fn (
+        $container[static::FACADE_EVENT_BEHAVIOR] = static fn (
             Container $container
-        ): ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeInterface => new ConditionalAvailabilityProductPageSearchToProductPageSearchFacadeBridge(
-            $container->getLocator()->productPageSearch()->facade(),
+        ): ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface => new ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeBridge(
+            $container->getLocator()->eventBehavior()->facade(),
         );
 
         return $container;
