@@ -12,6 +12,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  * @codeCoverageIgnore
  *
  * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchPersistenceFactory getFactory()
+ * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchConfig getConfig()
  */
 class ConditionalAvailabilityProductPageSearchRepository extends AbstractRepository implements ConditionalAvailabilityProductPageSearchRepositoryInterface
 {
@@ -41,7 +42,11 @@ class ConditionalAvailabilityProductPageSearchRepository extends AbstractReposit
      */
     public function findProductConcreteIdsForDeltaTrigger(): array
     {
-        $delta = (new DateTime())->sub(new DateInterval('PT3M'));
+        $duration = $this->getFactory()
+            ->getConfig()
+            ->getDuration();
+
+        $delta = (new DateTime())->sub(new DateInterval($duration));
 
         /** @var \Propel\Runtime\Collection\ArrayCollection $collection */
         $collection = $this->getFactory()

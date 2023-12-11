@@ -7,6 +7,8 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
  * @codeCoverageIgnore
+ *
+ * @method \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchConfig getConfig()
  */
 class ConditionalAvailabilityProductPageSearchPersistenceFactory extends AbstractPersistenceFactory
 {
