@@ -134,8 +134,8 @@ class ConditionalAvailabilityPeriodsPersisterTest extends Unit
             ->method('setCreatedAt')
             ->with(
                 static::callback(
-                    static fn(string $createdAt): bool => true
-                )
+                    static fn (string $createdAt): bool => true,
+                ),
             )->willReturn($this->conditionalAvailabilityPeriodTransferMocks[0]);
 
         $this->conditionalAvailabilityPeriodTransferMocks[0]->expects(static::atLeastOnce())
