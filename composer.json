@@ -26,6 +26,7 @@
     "fond-of-impala/company-type": "*",
     "fond-of-impala/company-type-converter": "*",
     "fond-of-impala/company-type-converter-extension": "*",
+    "fond-of-impala/company-type-data-import": "*",
     "fond-of-impala/company-type-role": "*",
     "fond-of-impala/company-users-bulk-rest-api": "*",
     "fond-of-impala/company-users-bulk-rest-api-business-central-connector": "*",
@@ -62,7 +63,8 @@
     "fond-of-impala/price-product-price-list-search-rest-api": "*",
     "fond-of-impala/product-image-grouping-product-page-search": "*",
     "fond-of-impala/product-list-conditional-availability-page-search": "*",
-    "fond-of-impala/product-list-price-product-price-list-page-search": "*"
+    "fond-of-impala/product-list-price-product-price-list-page-search": "*",
+    "fond-of-impala/product-product-list-connector": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -147,6 +149,8 @@
       "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/src/FondOfImpala/Zed/CompanyTypeConverter",
       "FondOfImpala\\Shared\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/src/FondOfImpala/Shared/CompanyTypeConverterExtension",
       "FondOfImpala\\Zed\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/src/FondOfImpala/Zed/CompanyTypeConverterExtension",
+      "FondOfImpala\\Shared\\CompanyTyepDataImport\\": "bundles/company-type-data-import/src/FondOfImpala/Shared/CompanyTyepDataImport",
+      "FondOfImpala\\Zed\\CompanyTypeDataImport\\": "bundles/company-type-data-import/src/FondOfImpala/Zed/CompanyTypeDataImport",
       "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Shared/CompanyTypeRole",
       "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/src/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Client\\CompanyUsersBulkRestApi\\": "bundles/company-users-bulk-rest-api/src/FondOfImpala/Client/CompanyUsersBulkRestApi",
@@ -234,7 +238,9 @@
       "FondOfImpala\\Zed\\ProductListConditionalAvailabilityPageSearch\\": "bundles/product-list-conditional-availability-page-search/src/FondOfImpala/Zed/ProductListConditionalAvailabilityPageSearch",
       "FondOfImpala\\Client\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Client/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Shared\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Shared/ProductListPriceProductPriceListPageSearch",
-      "FondOfImpala\\Zed\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Zed/ProductListPriceProductPriceListPageSearch"
+      "FondOfImpala\\Zed\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Zed/ProductListPriceProductPriceListPageSearch",
+      "FondOfImpala\\Shared\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Shared/ProductProductListConnector",
+      "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Zed/ProductProductListConnector"
     }
   },
   "autoload-dev": {
@@ -258,6 +264,8 @@
       "FondOfImpala\\Zed\\CompanyTypeConverter\\": "bundles/company-type-converter/tests/FondOfImpala/Zed/CompanyTypeConverter",
       "FondOfImpala\\Shared\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/tests/FondOfImpala/Shared/CompanyTypeConverterExtension",
       "FondOfImpala\\Zed\\CompanyTypeConverterExtension\\": "bundles/company-type-converter-extension/tests/FondOfImpala/Zed/CompanyTypeConverterExtension",
+      "FondOfImpala\\Shared\\CompanyTyepDataImport\\": "bundles/company-type-data-import/tests/FondOfImpala/Shared/CompanyTyepDataImport",
+      "FondOfImpala\\Zed\\CompanyTypeDataImport\\": "bundles/company-type-data-import/tests/FondOfImpala/Zed/CompanyTypeDataImport",
       "FondOfImpala\\Shared\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Shared/CompanyTypeRole",
       "FondOfImpala\\Zed\\CompanyTypeRole\\": "bundles/company-type-role/tests/FondOfImpala/Zed/CompanyTypeRole",
       "FondOfImpala\\Client\\CompanyUsersBulkRestApi\\": "bundles/company-users-bulk-rest-api/tests/FondOfImpala/Client/CompanyUsersBulkRestApi",
@@ -346,6 +354,8 @@
       "FondOfImpala\\Client\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/tests/FondOfImpala/Client/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Shared\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/tests/FondOfImpala/Shared/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Zed\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/tests/FondOfImpala/Zed/ProductListPriceProductPriceListPageSearch",
+      "FondOfImpala\\Shared\\ProductProductListConnector\\": "bundles/product-product-list-connector/tests/FondOfImpala/Shared/ProductProductListConnector",
+      "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/tests/FondOfImpala/Zed/ProductProductListConnector",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }

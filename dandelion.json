@@ -39,6 +39,10 @@
       "path": "bundles/company-type-converter-extension",
       "version": "1.0.0-beta"
     },
+    "company-type-data-import": {
+      "path": "bundles/company-type-data-import",
+      "version": "1.0.0-beta"
+    },
     "company-type-role": {
       "path": "bundles/company-type-role",
       "version": "2.0.0-beta"
