@@ -78,8 +78,6 @@
     "fond-of-oryx/price-list-extension": "^1.0.0",
     "fond-of-spryker/collaborative-cart": "dev-master",
     "fond-of-spryker/company-extension": "dev-master",
-    "fond-of-spryker/company-type": "dev-master",
-    "fond-of-spryker/company-type-converter-extension": "dev-master",
     "fond-of-spryker/company-user-carts-rest-api": "dev-master",
     "fond-of-spryker/company-user-reference": "dev-master",
     "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
