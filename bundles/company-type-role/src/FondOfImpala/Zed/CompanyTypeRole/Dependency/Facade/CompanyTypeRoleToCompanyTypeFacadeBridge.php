@@ -2,19 +2,19 @@
 
 namespace FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade;
 
-use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
+use FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeRoleToCompanyTypeFacadeBridge implements CompanyTypeRoleToCompanyTypeFacadeInterface
 {
     /**
-     * @var \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
+     * @var \FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface
      */
     protected $companyTypeFacade;
 
     /**
-     * @param \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade
+     * @param \FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade
      */
     public function __construct(CompanyTypeFacadeInterface $companyTypeFacade)
     {
