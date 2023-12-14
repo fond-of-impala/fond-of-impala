@@ -112,6 +112,7 @@
     "spryker/product-management-extension": "^1.0.0",
     "spryker/product-page-search": "^3.24.0",
     "spryker/product-page-search-extension": "^1.4.0",
+    "spryker/publisher-extension": "^1.0.0",
     "spryker/quote-extension": "^1.2.0",
     "spryker/sales": "^11.0.0",
     "spryker/sales-extension": "^1.3",
