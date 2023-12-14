@@ -157,6 +157,14 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     }
 
     /**
+     * @return array<string, array<string, array<string>>>
+     */
+    public function getGroupedPermissionKeys(): array
+    {
+        return $this->get(CompanyTypeRoleConstants::PERMISSION_KEYS, []);
+    }
+
+    /**
      * @param array<string> $permissionKeys
      *
      * @return \Generated\Shared\Transfer\PermissionCollectionTransfer

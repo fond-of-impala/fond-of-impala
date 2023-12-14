@@ -64,7 +64,7 @@ class CompanyRoleAssignerTest extends Unit
     protected $availablePermissionCollectionMock;
 
     /**
-     * @var \ArrayObject|\Generated\Shared\Transfer\PermissionTransfer[]|\PHPUnit\Framework\MockObject\MockObject[]
+     * @var \ArrayObject<\Generated\Shared\Transfer\PermissionTransfer|\PHPUnit\Framework\MockObject\MockObject>
      */
     protected $availablePermissionMocks;
 
@@ -74,7 +74,7 @@ class CompanyRoleAssignerTest extends Unit
     protected $companyRolePermissionCollectionMock;
 
     /**
-     * @var \ArrayObject|\Generated\Shared\Transfer\PermissionTransfer[]|\PHPUnit\Framework\MockObject\MockObject[]
+     * @var \ArrayObject<\Generated\Shared\Transfer\PermissionTransfer|\PHPUnit\Framework\MockObject\MockObject>
      */
     protected $companyRolePermissionMocks;
 

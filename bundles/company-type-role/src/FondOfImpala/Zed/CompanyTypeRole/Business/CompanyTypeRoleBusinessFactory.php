@@ -2,24 +2,26 @@
 
 namespace FondOfImpala\Zed\CompanyTypeRole\Business;
 
-use FondOfImpala\Zed\CompanyTypeRole\Business\Builder\CompanyRoleCriteriaFilterBuilder;
-use FondOfImpala\Zed\CompanyTypeRole\Business\Builder\CompanyRoleCriteriaFilterBuilderInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\CompanyTypeRoleExportValidator\CompanyTypeRoleExportValidator;
 use FondOfImpala\Zed\CompanyTypeRole\Business\CompanyTypeRoleExportValidator\CompanyTypeRoleExportValidatorInterface;
-use FondOfImpala\Zed\CompanyTypeRole\Business\Filter\CompanyTypeNameFilter;
-use FondOfImpala\Zed\CompanyTypeRole\Business\Filter\CompanyTypeNameFilterInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Generator\AssignPermissionKeyGenerator;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Generator\AssignPermissionKeyGeneratorInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Intersection\PermissionIntersection;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Intersection\PermissionIntersectionInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Mapper\PermissionKeyMapper;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Mapper\PermissionKeyMapperInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssigner;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssignerInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\PermissionReader;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\PermissionReaderInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\AssignableCompanyRoleReader;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\AssignableCompanyRoleReaderInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyRoleReader;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyRoleReaderInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyUserReader;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyUserReaderInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\PermissionReader as NewPermissionReader;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\PermissionReaderInterface as NewPermissionReaderInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Synchronizer\CompanyRoleSynchronizer;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Synchronizer\CompanyRoleSynchronizerInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Synchronizer\PermissionSynchronizer;
@@ -77,13 +79,41 @@ class CompanyTypeRoleBusinessFactory extends AbstractBusinessFactory
     public function createPermissionSynchronizer(): PermissionSynchronizerInterface
     {
         return new PermissionSynchronizer(
-            $this->createCompanyTypeNameFilter(),
-            $this->createPermissionIntersection(),
-            $this->createCompanyRoleCriteriaFilterBuilder(),
+            $this->createCompanyRoleReader(),
             $this->getCompanyRoleFacade(),
-            $this->getPermissionFacade(),
-            $this->getConfig(),
         );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyRoleReaderInterface
+     */
+    protected function createCompanyRoleReader(): CompanyRoleReaderInterface
+    {
+        return new CompanyRoleReader(
+            $this->createNewPermissionReader(),
+            $this->createPermissionKeyMapper(),
+            $this->getRepository(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\PermissionReaderInterface
+     */
+    protected function createNewPermissionReader(): NewPermissionReaderInterface
+    {
+        return new NewPermissionReader(
+            $this->createPermissionIntersection(),
+            $this->getConfig(),
+            $this->getPermissionFacade(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Mapper\PermissionKeyMapperInterface
+     */
+    protected function createPermissionKeyMapper(): PermissionKeyMapperInterface
+    {
+        return new PermissionKeyMapper();
     }
 
     /**
@@ -132,27 +162,11 @@ class CompanyTypeRoleBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Filter\CompanyTypeNameFilterInterface
-     */
-    protected function createCompanyTypeNameFilter(): CompanyTypeNameFilterInterface
-    {
-        return new CompanyTypeNameFilter($this->getCompanyTypeFacade());
-    }
-
-    /**
      * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Intersection\PermissionIntersectionInterface
      */
     protected function createPermissionIntersection(): PermissionIntersectionInterface
     {
         return new PermissionIntersection();
-    }
-
-    /**
-     * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Builder\CompanyRoleCriteriaFilterBuilderInterface
-     */
-    protected function createCompanyRoleCriteriaFilterBuilder(): CompanyRoleCriteriaFilterBuilderInterface
-    {
-        return new CompanyRoleCriteriaFilterBuilder();
     }
 
     /**

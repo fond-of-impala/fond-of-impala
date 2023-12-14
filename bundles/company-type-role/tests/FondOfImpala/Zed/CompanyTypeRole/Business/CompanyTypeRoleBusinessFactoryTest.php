@@ -158,21 +158,18 @@ class CompanyTypeRoleBusinessFactoryTest extends Unit
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->withConsecutive(
-                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_ROLE],
                 [CompanyTypeRoleDependencyProvider::FACADE_PERMISSION],
+                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_ROLE],
             )->willReturnOnConsecutiveCalls(true, true, true);
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->withConsecutive(
-                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_ROLE],
                 [CompanyTypeRoleDependencyProvider::FACADE_PERMISSION],
+                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_ROLE],
             )->willReturnOnConsecutiveCalls(
-                $this->companyTypeFacadeMock,
-                $this->companyRoleFacadeMock,
                 $this->permissionFacadeMock,
+                $this->companyRoleFacadeMock,
             );
 
         $permissionSynchronizer = $this->companyTypeRoleBusinessFactory->createPermissionSynchronizer();
