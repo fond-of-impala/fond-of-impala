@@ -2,18 +2,18 @@
 
 namespace FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade;
 
-use FondOfImpala\Zed\Company\Business\CompanyFacadeInterface;
+use FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
 
 class CompanyUserCompanyAssignerToCompanyFacadeBridge implements CompanyUserCompanyAssignerToCompanyFacadeInterface
 {
     /**
-     * @var \FondOfImpala\Zed\Company\Business\CompanyFacadeInterface
+     * @var \FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface
      */
     protected $companyFacade;
 
     /**
-     * @param \FondOfImpala\Zed\Company\Business\CompanyFacadeInterface $companyFacade
+     * @param \FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface $companyFacade
      */
     public function __construct(CompanyFacadeInterface $companyFacade)
     {

@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\Company\Business\CompanyFacadeInterface;
+use FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
 
 class CompanyUserCompanyAssignerToCompanyFacadeBridgeTest extends Unit
@@ -14,7 +14,7 @@ class CompanyUserCompanyAssignerToCompanyFacadeBridgeTest extends Unit
     protected $companyUserCompanyAssignerToCompanyFacadeBridge;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\Company\Business\CompanyFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface
      */
     protected $companyFacadeInterfaceMock;
 
