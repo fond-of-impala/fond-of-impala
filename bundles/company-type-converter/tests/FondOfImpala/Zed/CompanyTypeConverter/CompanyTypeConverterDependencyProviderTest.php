@@ -3,12 +3,12 @@
 namespace FondOfImpala\Zed\CompanyTypeConverter;
 
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyRoleFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeRoleFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToPermissionFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeRole\Business\CompanyTypeRoleFacadeInterface;
-use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\CompanyRole\Business\CompanyRoleFacadeInterface;
 use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;

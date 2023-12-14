@@ -11,7 +11,7 @@ interface CompanyTypeConverterToCompanyTypeRoleFacadeInterface
      * @param \Generated\Shared\Transfer\CompanyTypeTransfer $companyTypeTransfer
      * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getPermissionKeysByCompanyTypeAndCompanyRole(
         CompanyTypeTransfer $companyTypeTransfer,

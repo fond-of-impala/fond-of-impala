@@ -51,7 +51,7 @@ class CompanyTypeConverterConfigTest extends Unit
 
         $this->companyTypeConverterConfig = new class ($this->companyTypeDefaultRolesMapping) extends CompanyTypeConverterConfig {
             /**
-             * @var string[]
+             * @var array<string>
              */
             protected $companyTypeConverterConfig;
 

@@ -176,7 +176,7 @@ class CompanyTypeRoleWriter implements CompanyTypeRoleWriterInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyRoleCollectionTransfer $companyRoleCollectionTransfer
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function getCurrentCompanyRoleNames(CompanyRoleCollectionTransfer $companyRoleCollectionTransfer): array
     {
@@ -192,7 +192,7 @@ class CompanyTypeRoleWriter implements CompanyTypeRoleWriterInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function getRequestedCompanyRoleNames(CompanyTransfer $companyTransfer): array
     {
