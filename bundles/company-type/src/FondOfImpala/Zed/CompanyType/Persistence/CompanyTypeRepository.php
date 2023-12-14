@@ -24,18 +24,18 @@ class CompanyTypeRepository extends AbstractRepository implements CompanyTypeRep
      */
     public function getById(int $idCompanyType): ?CompanyTypeTransfer
     {
-        $fosCompanyType = $this->getFactory()
+        $foiCompanyType = $this->getFactory()
             ->createCompanyTypeQuery()
             ->filterByIdCompanyType($idCompanyType)
             ->findOne();
 
-        if ($fosCompanyType === null) {
+        if ($foiCompanyType === null) {
             return null;
         }
 
         return $this->getFactory()
             ->createCompanyTypeMapper()
-            ->mapEntityToTransfer($fosCompanyType, new CompanyTypeTransfer());
+            ->mapEntityToTransfer($foiCompanyType, new CompanyTypeTransfer());
     }
 
     /**
@@ -49,18 +49,18 @@ class CompanyTypeRepository extends AbstractRepository implements CompanyTypeRep
      */
     public function getByName(string $name): ?CompanyTypeTransfer
     {
-        $fosCompanyType = $this->getFactory()
+        $foiCompanyType = $this->getFactory()
             ->createCompanyTypeQuery()
             ->filterByName($name)
             ->findOne();
 
-        if ($fosCompanyType === null) {
+        if ($foiCompanyType === null) {
             return null;
         }
 
         return $this->getFactory()
             ->createCompanyTypeMapper()
-            ->mapEntityToTransfer($fosCompanyType, new CompanyTypeTransfer());
+            ->mapEntityToTransfer($foiCompanyType, new CompanyTypeTransfer());
     }
 
     /**
@@ -72,7 +72,7 @@ class CompanyTypeRepository extends AbstractRepository implements CompanyTypeRep
      */
     public function getAll(): CompanyTypeCollectionTransfer
     {
-        $fosCompanyTypes = $this->buildQueryFromCriteria(
+        $foiCompanyTypes = $this->buildQueryFromCriteria(
             $this->getFactory()->createCompanyTypeQuery(),
         )->find();
 
@@ -80,8 +80,8 @@ class CompanyTypeRepository extends AbstractRepository implements CompanyTypeRep
 
         $companyTypeCollectionTransfer = new CompanyTypeCollectionTransfer();
 
-        foreach ($fosCompanyTypes as $fosCompanyType) {
-            $companyTypeTransfer = $companyTypeMapper->mapEntityTransferToTransfer($fosCompanyType, new CompanyTypeTransfer());
+        foreach ($foiCompanyTypes as $foiCompanyType) {
+            $companyTypeTransfer = $companyTypeMapper->mapEntityTransferToTransfer($foiCompanyType, new CompanyTypeTransfer());
             $companyTypeCollectionTransfer->addCompanyType($companyTypeTransfer);
         }
 

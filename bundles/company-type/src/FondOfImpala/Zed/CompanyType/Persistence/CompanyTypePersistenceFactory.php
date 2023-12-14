@@ -7,7 +7,7 @@ use FondOfImpala\Zed\CompanyType\Persistence\Mapper\CompanyMapperInterface;
 use FondOfImpala\Zed\CompanyType\Persistence\Mapper\CompanyTypeMapper;
 use FondOfImpala\Zed\CompanyType\Persistence\Mapper\CompanyTypeMapperInterface;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
-use Orm\Zed\CompanyType\Persistence\FosCompanyTypeQuery;
+use Orm\Zed\CompanyType\Persistence\FoiCompanyTypeQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
@@ -18,11 +18,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class CompanyTypePersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\CompanyType\Persistence\FosCompanyTypeQuery
+     * @return \Orm\Zed\CompanyType\Persistence\FoiCompanyTypeQuery
      */
-    public function createCompanyTypeQuery(): FosCompanyTypeQuery
+    public function createCompanyTypeQuery(): FoiCompanyTypeQuery
     {
-        return FosCompanyTypeQuery::create();
+        return FoiCompanyTypeQuery::create();
     }
 
     /**

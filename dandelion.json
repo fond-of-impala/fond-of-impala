@@ -25,7 +25,7 @@
     },
     "company-type": {
       "path": "bundles/company-type",
-      "version": "1.0.0-beta"
+      "version": "2.0.0-beta"
     },
     "company-type-converter": {
       "path": "bundles/company-type-converter",
@@ -37,7 +37,7 @@
     },
     "company-type-role": {
       "path": "bundles/company-type-role",
-      "version": "1.0.0-beta"
+      "version": "2.0.0-beta"
     },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",

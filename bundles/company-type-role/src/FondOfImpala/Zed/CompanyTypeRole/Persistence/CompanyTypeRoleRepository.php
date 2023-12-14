@@ -68,7 +68,7 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
                 ->innerJoinPermission()
             ->endUse()
             ->useCompanyQuery()
-                ->useFosCompanyTypeQuery()
+                ->useFoiCompanyTypeQuery()
                     ->filterByName($companyTypeName)
                 ->endUse()
             ->endUse()

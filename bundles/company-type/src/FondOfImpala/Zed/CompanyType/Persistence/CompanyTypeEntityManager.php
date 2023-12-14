@@ -19,18 +19,18 @@ class CompanyTypeEntityManager extends AbstractEntityManager implements CompanyT
      */
     public function persist(CompanyTypeTransfer $companyTypeTransfer): CompanyTypeTransfer
     {
-        $fosCompanyType = $this->getFactory()
+        $foiCompanyType = $this->getFactory()
             ->createCompanyTypeQuery()
             ->filterByIdCompanyType($companyTypeTransfer->getIdCompanyType())
             ->findOneOrCreate();
 
-        $fosCompanyType = $this->getFactory()
+        $foiCompanyType = $this->getFactory()
             ->createCompanyTypeMapper()
-            ->mapTransferToEntity($companyTypeTransfer, $fosCompanyType);
+            ->mapTransferToEntity($companyTypeTransfer, $foiCompanyType);
 
-        $fosCompanyType->save();
+        $foiCompanyType->save();
 
-        $companyTypeTransfer->setIdCompanyType($fosCompanyType->getIdCompanyType());
+        $companyTypeTransfer->setIdCompanyType($foiCompanyType->getIdCompanyType());
 
         return $companyTypeTransfer;
     }

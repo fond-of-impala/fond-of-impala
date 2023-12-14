@@ -4,17 +4,17 @@
           namespace="Orm\Zed\CompanyType\Persistence"
           package="src.Orm.Zed.CompanyType.Persistence">
 
-    <table name="fos_company_type" phpName="FosCompanyType">
+    <table name="foi_company_type" phpName="FoiCompanyType">
         <column name="id_company_type" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="name" required="true" size="255" type="VARCHAR"/>
 
-        <unique name="fos_company_type-name">
+        <unique name="foi_company_type-name">
             <unique-column name="name"/>
         </unique>
 
         <behavior name="timestampable"/>
 
-        <id-method-parameter value="fos_company_type_pk_seq"/>
+        <id-method-parameter value="foi_company_type_pk_seq"/>
     </table>
 
 </database>
