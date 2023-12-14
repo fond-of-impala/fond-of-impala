@@ -3,14 +3,14 @@
 namespace FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
+use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use Generated\Shared\Transfer\CompanyTypeResponseTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeConverterToCompanyTypeFacadeBridgeTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
      */
     protected $companyTypeFacadeMock;
 

@@ -8,7 +8,7 @@ use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverter
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeRoleFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToPermissionFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeRole\Business\CompanyTypeRoleFacadeInterface;
-use FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
+use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\CompanyRole\Business\CompanyRoleFacadeInterface;
 use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;
@@ -34,7 +34,7 @@ class CompanyTypeConverterDependencyProviderTest extends Unit
     protected $bundleProxyMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
      */
     protected $companyTypeFacadeMock;
 

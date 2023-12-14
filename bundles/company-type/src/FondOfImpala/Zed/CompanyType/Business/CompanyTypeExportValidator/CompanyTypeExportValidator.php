@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\EventEntityTransfer;
 /**
  * Class CompanyTypeExportValidator
  *
- * @package FondOfSpryker\Zed\CompanyType\Business\CompanyTypeExportValidator
+ * @package FondOfImpala\Zed\CompanyType\Business\CompanyTypeExportValidator
  */
 class CompanyTypeExportValidator implements CompanyTypeExportValidatorInterface
 {
