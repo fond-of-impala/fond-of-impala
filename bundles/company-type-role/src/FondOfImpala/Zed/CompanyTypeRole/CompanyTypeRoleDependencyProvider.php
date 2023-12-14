@@ -7,10 +7,14 @@ use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyR
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyUserFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPermissionFacadeBridge;
+use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPropelFacadeBridge;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -37,6 +41,11 @@ class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const FACADE_COMPANY_USER = 'FACADE_COMPANY_USER';
+
+    /**
+     * @var string
+     */
+    public const FACADE_PROPEL = 'FACADE_PROPEL';
 
     /**
      * @var string
@@ -149,7 +158,9 @@ class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
-        return $this->addCompanyUserQuery($container);
+        $container = $this->addCompanyUserQuery($container);
+
+        return $this->addPropelFacade($container);
     }
 
     /**
@@ -161,6 +172,22 @@ class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container[static::PROPEL_QUERY_COMPANY_USER] = static function () {
             return SpyCompanyUserQuery::create();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addPropelFacade(Container $container): Container
+    {
+        $container[static::FACADE_PROPEL] = static function (Container $container) {
+            return new CompanyTypeRoleToPropelFacadeBridge(
+                $container->getLocator()->propel()->facade(),
+            );
         };
 
         return $container;

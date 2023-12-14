@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <transfers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns="spryker:transfer-01"
-           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
     <transfer name="EventEntity">
         <property name="name" type="string"/>
         <property name="id" type="int"/>
@@ -31,5 +31,18 @@
     <transfer name="AssignableCompanyRoleCriteriaFilter">
         <property name="idCustomer" type="int"/>
         <property name="idCompany" type="int"/>
+    </transfer>
+
+    <transfer name="SyncableCompanyRole">
+        <property name="ids" type="int[]"/>
+        <property name="name" type="string"/>
+        <property name="companyType" type="string"/>
+        <property name="permissions" type="PermissionCollection" />
+    </transfer>
+
+    <transfer name="PermissionSet">
+        <property name="entries" type="PermissionCollection" />
+        <property name="companyType" type="string"/>
+        <property name="companyRoleName" type="string"/>
     </transfer>
 </transfers>
