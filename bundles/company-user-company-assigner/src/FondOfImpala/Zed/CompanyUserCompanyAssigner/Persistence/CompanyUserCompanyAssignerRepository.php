@@ -273,6 +273,7 @@ class CompanyUserCompanyAssignerRepository extends AbstractRepository implements
      */
     public function getCompanyRoleCollectionByCompanyId(int $idCompany): CompanyRoleCollectionTransfer
     {
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
         $collection = $this->getFactory()
             ->getCompanyRoleQuery()
             ->filterByFkCompany($idCompany)
