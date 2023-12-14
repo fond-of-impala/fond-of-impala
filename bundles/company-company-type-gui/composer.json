@@ -1,11 +1,22 @@
 {
-  "name": "fond-of-impala/product-product-list-connector",
-  "description": "Product product list connector bundle",
+  "name": "fond-of-impala/company-company-type-gui",
+  "description": "Company company type module",
   "license": "MIT",
   "authors": [
     {
-      "name": "Julian Hyatt",
-      "email": "dev@jzit.de"
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    }
+  ],
+  "repositories": [
+    {
+      "name": "fond-of-impala/company-type",
+      "type":"path",
+      "options": {
+        "symlink": false
+      },
+      "packagist.org": false,
+      "url":"../company-type"
     }
   ],
   "scripts": {
@@ -16,8 +27,8 @@
   },
   "require": {
     "php": ">=8.0",
-    "spryker/product-list": "^1.2.0",
-    "spryker/product-list-extension": "^1.1.0"
+    "fond-of-impala/company-type": "dev-main",
+    "spryker/company-gui-extension": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
@@ -35,7 +46,7 @@
     "psr-4": {
       "FondOfImpala\\": "tests/FondOfImpala/",
       "Generated\\": "src/Generated/",
-      "Orm\\": "src/Orm/"
+      "Orm\\Zed\\": "src/Orm/Zed/"
     }
   },
   "config": {

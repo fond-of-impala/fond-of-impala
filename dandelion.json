@@ -15,6 +15,10 @@
       "path": "bundles/company-cart-search-rest-api",
       "version": "1.0.0"
     },
+    "company-company-type-gui": {
+      "path": "bundles/company-company-type-gui",
+      "version": "1.0.0-beta"
+    },
     "company-price-list": {
       "path": "bundles/company-price-list",
       "version": "1.0.0-beta"
