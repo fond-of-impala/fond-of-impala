@@ -8,17 +8,6 @@
       "email": "daniel-rose@gmx.de"
     }
   ],
-  "repositories": [
-    {
-      "name": "fond-of-impala/company-type",
-      "type":"path",
-      "options": {
-        "symlink": false
-      },
-      "packagist.org": false,
-      "url":"../company-type"
-    }
-  ],
   "scripts": {
     "ci": "make ci",
     "codeception": "make codeception",
@@ -27,7 +16,7 @@
   },
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/company-type": "dev-main",
+    "fond-of-impala/company-type": "^1.0.0",
     "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
     "spryker/company-role": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",

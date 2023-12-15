@@ -8,26 +8,15 @@
       "email": "gengjozsef86@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "name": "fond-of-impala/company-type",
-      "type":"path",
-      "options": {
-        "symlink": false
-      },
-      "packagist.org": false,
-      "url":"../company-type"
-    }
-  ],
   "require": {
     "php": ">=8.0",
     "spryker/company": "^1.0.0",
     "spryker/company-role": "^1.0",
     "spryker/permission": "^1.2",
     "spryker/company-user": "^2.0.0",
-    "fond-of-impala/company-type-role": "dev-main",
-    "fond-of-impala/company-type-converter-extension": "dev-main",
-    "fond-of-impala/company-type": "dev-main"
+    "fond-of-impala/company-type-role": "^1.0.0",
+    "fond-of-impala/company-type-converter-extension": "^1.0.0",
+    "fond-of-impala/company-type": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
