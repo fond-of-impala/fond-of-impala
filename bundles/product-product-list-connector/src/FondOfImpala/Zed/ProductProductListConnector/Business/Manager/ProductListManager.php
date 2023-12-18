@@ -58,7 +58,7 @@ class ProductListManager implements ProductListManagerInterface
     {
         $productListCollection = $productConcreteTransfer->getProductListCollection();
 
-        if ($productListCollection === null){
+        if ($productListCollection === null) {
             return;
         }
 
@@ -73,6 +73,7 @@ class ProductListManager implements ProductListManagerInterface
             if (array_key_exists($key, $productListsAlreadyIn)) {
                 unset($productListsAlreadyIn[$key]);
                 $productListCollection->addProductList($productListTransfer);
+
                 continue;
             }
             $createRelation[$key] = $productListTransfer;
