@@ -15,6 +15,10 @@
       "path": "bundles/company-cart-search-rest-api",
       "version": "1.0.0"
     },
+    "company-company-type-gui": {
+      "path": "bundles/company-company-type-gui",
+      "version": "1.0.0"
+    },
     "company-price-list": {
       "path": "bundles/company-price-list",
       "version": "1.0.0-beta"
@@ -25,19 +29,27 @@
     },
     "company-type": {
       "path": "bundles/company-type",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "company-type-converter": {
       "path": "bundles/company-type-converter",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "company-type-converter-extension": {
       "path": "bundles/company-type-converter-extension",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
+    },
+    "company-type-data-import": {
+      "path": "bundles/company-type-data-import",
+      "version": "1.0.0"
     },
     "company-type-role": {
       "path": "bundles/company-type-role",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
+    },
+    "company-user-company-assigner": {
+      "path": "bundles/company-user-company-assigner",
+      "version": "1.0.0"
     },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",

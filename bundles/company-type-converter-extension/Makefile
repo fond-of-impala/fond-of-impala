@@ -28,3 +28,11 @@ codeception:
 
 .PHONY: ci
 ci: phpcs codeception phpstan
+
+.PHONY: clean
+clean:
+	rm -Rf composer.lock
+	rm -Rf ./vendor
+	find ./tests/_output/ -not -name .gitignore -delete
+	rm -Rf src/Generated/*
+	rm -Rf src/Orm/*

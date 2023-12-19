@@ -14,9 +14,9 @@
     "spryker/company-role": "^1.0",
     "spryker/permission": "^1.2",
     "spryker/company-user": "^2.0.0",
-    "fond-of-impala/company-type-role": "dev-main",
-    "fond-of-impala/company-type-converter-extension": "dev-main",
-    "fond-of-spryker/company-type": "dev-master"
+    "fond-of-impala/company-type-role": "^1.0.0",
+    "fond-of-impala/company-type-converter-extension": "^1.0.0",
+    "fond-of-impala/company-type": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

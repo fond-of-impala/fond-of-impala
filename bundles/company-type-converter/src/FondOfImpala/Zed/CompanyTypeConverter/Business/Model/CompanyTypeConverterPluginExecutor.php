@@ -7,18 +7,18 @@ use Generated\Shared\Transfer\CompanyTransfer;
 class CompanyTypeConverterPluginExecutor implements CompanyTypeConverterPluginExecutorInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface[]
+     * @var array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface>
      */
     protected $companyTypeConverterPreSavePlugins;
 
     /**
-     * @var \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface[]
+     * @var array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface>
      */
     protected $companyTypeConverterPostSavePlugins;
 
     /**
-     * @param \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface[] $companyTypeConverterPreSavePlugins
-     * @param \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface[] $companyTypeConverterPostSavePlugins
+     * @param array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface> $companyTypeConverterPreSavePlugins
+     * @param array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface> $companyTypeConverterPostSavePlugins
      */
     public function __construct(
         array $companyTypeConverterPreSavePlugins = [],

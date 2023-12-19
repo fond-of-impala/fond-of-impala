@@ -199,7 +199,7 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
     }
 
     /**
-     * @return \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface[]
+     * @return array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface>
      */
     protected function getCompanyTypeConverterPreSavePlugins(): array
     {
@@ -207,7 +207,7 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
     }
 
     /**
-     * @return \FondOfSpryker\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface[]
+     * @return array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface>
      */
     protected function getCompanyTypeConverterPostSavePlugins(): array
     {

@@ -7,7 +7,7 @@
     <table name="spy_company" phpName="SpyCompany">
         <column name="fk_company_type" required="false" type="INTEGER"/>
 
-        <foreign-key name="spy_company-fos_company_type" foreignTable="fos_company_type" phpName="FosCompanyType">
+        <foreign-key name="spy_company-foi_company_type" foreignTable="foi_company_type" phpName="FoiCompanyType">
             <reference local="fk_company_type" foreign="id_company_type"/>
         </foreign-key>
     </table>

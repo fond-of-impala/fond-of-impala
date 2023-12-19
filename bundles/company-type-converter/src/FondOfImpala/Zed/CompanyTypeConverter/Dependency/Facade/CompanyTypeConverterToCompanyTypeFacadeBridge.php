@@ -2,19 +2,19 @@
 
 namespace FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade;
 
-use FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
+use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use Generated\Shared\Transfer\CompanyTypeResponseTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeConverterToCompanyTypeFacadeBridge implements CompanyTypeConverterToCompanyTypeFacadeInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface
+     * @var \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
      */
     protected $companyTypeFacade;
 
     /**
-     * @param \FondOfSpryker\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade
+     * @param \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade
      */
     public function __construct(CompanyTypeFacadeInterface $companyTypeFacade)
     {
