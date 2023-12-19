@@ -62,14 +62,13 @@ class BulkManager implements BulkManagerInterface
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        PermissionCheckerInterface                          $permissionChecker,
-        CompanyUsersBulkRestApiToEventFacadeInterface       $eventFacade,
+        PermissionCheckerInterface $permissionChecker,
+        CompanyUsersBulkRestApiToEventFacadeInterface $eventFacade,
         CompanyUsersBulkRestApiToCompanyUserFacadeInterface $companyUserFacade,
-        BulkDataPluginExecutionerInterface                  $pluginExecutioner,
-        CompanyUsersBulkRestApiRepositoryInterface          $repository,
-        LoggerInterface                                     $logger
-    )
-    {
+        BulkDataPluginExecutionerInterface $pluginExecutioner,
+        CompanyUsersBulkRestApiRepositoryInterface $repository,
+        LoggerInterface $logger
+    ) {
         $this->permissionChecker = $permissionChecker;
         $this->eventFacade = $eventFacade;
         $this->companyUserFacade = $companyUserFacade;
@@ -85,8 +84,7 @@ class BulkManager implements BulkManagerInterface
      */
     public function handleBulkRequest(
         RestCompanyUsersBulkRequestTransfer $restCompanyUsersBulkRequestTransfer
-    ): RestCompanyUsersBulkResponseTransfer
-    {
+    ): RestCompanyUsersBulkResponseTransfer {
         try {
             $restCompanyUsersBulkRequestTransfer = $this->pluginExecutioner->executePreHandlePlugins($restCompanyUsersBulkRequestTransfer);
 
@@ -204,8 +202,7 @@ class BulkManager implements BulkManagerInterface
      */
     protected function prepareData(
         RestCompanyUsersBulkItemCollectionTransfer $restCompanyUsersBulkItemCollectionTransfer
-    ): CompanyUsersBulkPreparationCollectionTransfer
-    {
+    ): CompanyUsersBulkPreparationCollectionTransfer {
         $collection = new CompanyUsersBulkPreparationCollectionTransfer();
 
         foreach ($restCompanyUsersBulkItemCollectionTransfer->getItems() as $item) {
@@ -225,6 +222,7 @@ class BulkManager implements BulkManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\CompanyUsersBulkPreparationCollectionTransfer $collection
+     *
      * @return \Generated\Shared\Transfer\CompanyUsersBulkPreparationCollectionTransfer
      */
     protected function incompleteDataCleanup(CompanyUsersBulkPreparationCollectionTransfer $collection): CompanyUsersBulkPreparationCollectionTransfer
@@ -234,6 +232,7 @@ class BulkManager implements BulkManagerInterface
         foreach ($collection->getItems() as $itemTransfer) {
             if ($itemTransfer->getCompany() === null || $itemTransfer->getCustomer() === null) {
                 $this->logger->warning(sprintf('Customer or Company not found! Data: %s', json_encode($itemTransfer->getItem()->toArray())));
+
                 continue;
             }
             $cleanupCollection->addItem($itemTransfer);
@@ -274,9 +273,9 @@ class BulkManager implements BulkManagerInterface
      * @param \Generated\Shared\Transfer\CompanyUsersBulkCompanyTransfer $companyTransfer
      * @param string $role
      *
-     * @return \Generated\Shared\Transfer\CompanyRoleTransfer
      * @throws \Exception
      *
+     * @return \Generated\Shared\Transfer\CompanyRoleTransfer
      */
     protected function resolveRole(CompanyUsersBulkCompanyTransfer $companyTransfer, string $role): CompanyRoleTransfer
     {

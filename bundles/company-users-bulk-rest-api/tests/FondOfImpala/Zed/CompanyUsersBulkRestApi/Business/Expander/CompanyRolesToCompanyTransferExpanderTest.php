@@ -89,7 +89,7 @@ class CompanyRolesToCompanyTransferExpanderTest extends Unit
 
         $this->companyUsersBulkPreparationTransferMock
             ->expects(static::atLeastOnce())
-            ->method('getCompanyOrFail')
+            ->method('getCompany')
             ->willReturn($this->companyTransferMock);
 
         $this->companyTransferMock

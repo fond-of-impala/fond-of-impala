@@ -33,7 +33,7 @@ class CompanyRolesToCompanyTransferExpander implements ExpanderInterface
 
         foreach ($companyUsersBulkPreparationCollectionTransfer->getItems() as $item) {
             $companyTransfer = $item->getCompany();
-            if ($companyTransfer === null){
+            if ($companyTransfer === null) {
                 continue;
             }
             $idCompany = $companyTransfer->getIdCompany();
@@ -67,7 +67,7 @@ class CompanyRolesToCompanyTransferExpander implements ExpanderInterface
         $prepared = [];
         foreach ($companyUsersBulkPreparationCollectionTransfer->getItems() as $companyUsersBulkPreparationTransfer) {
             $companyTransfer = $companyUsersBulkPreparationTransfer->getCompany();
-            if ($companyTransfer === null){
+            if ($companyTransfer === null) {
                 continue;
             }
             $prepared[] = $companyTransfer->getIdCompany();
