@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ProductProductListConnector\Business\Manager;
 use FondOfImpala\Zed\ProductProductListConnector\Persistence\ProductProductListConnectorEntityManagerInterface;
 use FondOfImpala\Zed\ProductProductListConnector\Persistence\ProductProductListConnectorRepositoryInterface;
 use Generated\Shared\Transfer\ProductConcreteTransfer;
+use Generated\Shared\Transfer\ProductListCollectionTransfer;
 
 class ProductListManager implements ProductListManagerInterface
 {
@@ -55,15 +56,23 @@ class ProductListManager implements ProductListManagerInterface
      */
     protected function manageProductToProductListRelations(ProductConcreteTransfer $productConcreteTransfer): void
     {
-        $productLists = $this->entityManager->findOrCreateProductLists($productConcreteTransfer->getProductLists());
+        $productListCollection = $productConcreteTransfer->getProductListCollection();
+
+        if ($productListCollection === null) {
+            return;
+        }
+
+        $productLists = $this->entityManager->findOrCreateProductLists($productListCollection->getProductLists());
         $productListsAlreadyIn = $this->repository->findProductListsByProductRelation($productConcreteTransfer->getIdProductConcrete())->getArrayCopy();
 
         $createRelation = [];
+        $productListCollection = new ProductListCollectionTransfer();
 
         foreach ($productLists->getArrayCopy() as $productListTransfer) {
             $key = $productListTransfer->getKey();
             if (array_key_exists($key, $productListsAlreadyIn)) {
                 unset($productListsAlreadyIn[$key]);
+                $productListCollection->addProductList($productListTransfer);
 
                 continue;
             }
@@ -72,12 +81,13 @@ class ProductListManager implements ProductListManagerInterface
 
         foreach ($createRelation as $productList) {
             $this->entityManager->createProductToProductListRelation($productConcreteTransfer, $productList);
+            $productListCollection->addProductList($productList);
         }
 
         foreach ($productListsAlreadyIn as $productList) {
             $this->entityManager->deleteProductToProductListRelation($productConcreteTransfer, $productList);
         }
 
-        $productConcreteTransfer->setProductLists($productLists);
+        $productConcreteTransfer->setProductListCollection($productListCollection);
     }
 }

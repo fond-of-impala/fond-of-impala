@@ -12,13 +12,11 @@
         <property name="productListProductConcreteRelation" type="ProductListProductConcreteRelation"/>
     </transfer>
 
-    <transfer name="ProductAbstract">
-        <property name="idProductAbstract" type="int" />
+    <transfer name="ProductListCollection">
         <property name="productLists" type="ProductList[]" singular="productList" />
-        <property name="productListIds" type="int[]" singular="productListId" />
     </transfer>
 
     <transfer name="ProductConcrete">
-        <property name="productLists" type="ProductList[]" singular="productList" />
+        <property name="productListCollection" type="ProductListCollection" />
     </transfer>
 </transfers>
