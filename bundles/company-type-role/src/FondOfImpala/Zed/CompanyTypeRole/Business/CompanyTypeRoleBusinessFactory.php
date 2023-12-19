@@ -12,6 +12,8 @@ use FondOfImpala\Zed\CompanyTypeRole\Business\Mapper\PermissionKeyMapper;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Mapper\PermissionKeyMapperInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssigner;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssignerInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleDeleter;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleDeleterInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\PermissionReader;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\PermissionReaderInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\AssignableCompanyRoleReader;
@@ -139,6 +141,18 @@ class CompanyTypeRoleBusinessFactory extends AbstractBusinessFactory
             $this->createCompanyUserReader(),
             $this->getCompanyRoleFacade(),
             $this->getPermissionFacade(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleDeleterInterface
+     */
+    public function createCompanyRoleDeleter(): CompanyRoleDeleterInterface
+    {
+        return new CompanyRoleDeleter(
+            $this->getCompanyUserFacade(),
+            $this->getCompanyRoleFacade(),
+            $this->getRepository()
         );
     }
 

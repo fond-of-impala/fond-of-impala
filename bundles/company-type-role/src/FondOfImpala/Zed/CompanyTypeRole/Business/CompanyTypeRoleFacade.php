@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\CompanyTypeRole\Business;
 use Generated\Shared\Transfer\AssignableCompanyRoleCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
+use Generated\Shared\Transfer\CompanyRoleResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 use Generated\Shared\Transfer\EventEntityTransfer;
@@ -19,15 +20,16 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     /**
      * {@inheritDoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\CompanyResponseTransfer $companyResponseTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyResponseTransfer
+     * @api
+     *
      */
     public function assignPredefinedCompanyRolesToNewCompany(
         CompanyResponseTransfer $companyResponseTransfer
-    ): CompanyResponseTransfer {
+    ): CompanyResponseTransfer
+    {
         return $this->getFactory()->createCompanyRoleAssigner()
             ->assignPredefinedCompanyRolesToNewCompany($companyResponseTransfer);
     }
@@ -35,11 +37,11 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     /**
      * {@inheritDoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\EventEntityTransfer $transfer
      *
      * @return bool
+     * @api
+     *
      */
     public function validateCompanyTypeRoleForExport(EventEntityTransfer $transfer): bool
     {
@@ -51,17 +53,18 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     /**
      * {@inheritDoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\CompanyTypeTransfer $companyTypeTransfer
      * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
      *
      * @return array<string>
+     * @api
+     *
      */
     public function getPermissionKeysByCompanyTypeAndCompanyRole(
         CompanyTypeTransfer $companyTypeTransfer,
         CompanyRoleTransfer $companyRoleTransfer
-    ): array {
+    ): array
+    {
         return $this->getFactory()
             ->createPermissionReader()
             ->getCompanyTypeRolePermissionKeys($companyTypeTransfer, $companyRoleTransfer);
@@ -70,9 +73,9 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     /**
      * {@inheritDoc}
      *
+     * @return void
      * @api
      *
-     * @return void
      */
     public function syncPermissions(): void
     {
@@ -82,9 +85,9 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     /**
      * {@inheritDoc}
      *
+     * @return void
      * @api
      *
-     * @return void
      */
     public function syncCompanyRoles(): void
     {
@@ -94,17 +97,29 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     /**
      * {@inheritDoc}
      *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\AssignableCompanyRoleCriteriaFilterTransfer $assignableCompanyRoleCriteriaFilterTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyRoleCollectionTransfer
+     * @api
+     *
      */
     public function getAssignableCompanyRoles(
         AssignableCompanyRoleCriteriaFilterTransfer $assignableCompanyRoleCriteriaFilterTransfer
-    ): CompanyRoleCollectionTransfer {
+    ): CompanyRoleCollectionTransfer
+    {
         return $this->getFactory()->createAssignableCompanyRoleReader()->getByAssignableCompanyRoleCriteriaFilter(
             $assignableCompanyRoleCriteriaFilterTransfer,
+        );
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
+     * @return \Generated\Shared\Transfer\CompanyRoleResponseTransfer
+     */
+    public function deleteCompanyRoleAndCompanyUserByCompanyRole(CompanyRoleTransfer $companyRoleTransfer): CompanyRoleResponseTransfer
+    {
+        return $this->getFactory()->createCompanyRoleDeleter()->deleteCompanyRoleAndCompanyUserByCompanyRole(
+            $companyRoleTransfer,
         );
     }
 }

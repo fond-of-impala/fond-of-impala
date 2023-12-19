@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyTypeRole\Persistence;
 
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
+use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 
 interface CompanyTypeRoleRepositoryInterface
 {
@@ -34,4 +35,13 @@ interface CompanyTypeRoleRepositoryInterface
     public function findCompanyRolesByCompanyRoleIds(
         array $companyRoleIds
     ): CompanyRoleCollectionTransfer;
+
+    /**
+     * @param int $companyRoleId
+     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function findCompanyUserIdsByCompanyRoleId(
+        int $companyRoleId
+    ): CompanyUserCollectionTransfer;
 }

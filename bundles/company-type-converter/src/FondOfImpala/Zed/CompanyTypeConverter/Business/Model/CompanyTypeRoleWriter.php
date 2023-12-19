@@ -167,7 +167,7 @@ class CompanyTypeRoleWriter implements CompanyTypeRoleWriterInterface
             $companyRoleTransfer = (new CompanyRoleTransfer())
                 ->setIdCompanyRole($roleTransfer->getIdCompanyRole());
 
-            return $this->companyRoleFacade->delete($companyRoleTransfer);
+            return $this->companyTypeRoleFacade->deleteCompanyRoleAndCompanyUserByCompanyRole($companyRoleTransfer);
         }
 
         return null;

@@ -3,9 +3,12 @@
 namespace FondOfImpala\Zed\CompanyTypeRole\Persistence;
 
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
+use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
+use Generated\Shared\Transfer\CompanyUserTransfer;
 use Orm\Zed\CompanyRole\Persistence\Base\SpyCompanyRoleQuery;
 use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
 use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
+use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Permission\Persistence\Map\SpyPermissionTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 use Spryker\Zed\Propel\PropelConfig;
@@ -115,5 +118,28 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
         }
 
         return $companyRoleCollectionTransfer;
+    }
+
+    /**
+     * @param int $companyRoleId
+     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function findCompanyUserIdsByCompanyRoleId(
+        int $companyRoleId
+    ): CompanyUserCollectionTransfer {
+        $spyCompanyUsers = SpyCompanyUserQuery::create()
+            ->useSpyCompanyRoleToCompanyUserQuery()
+                ->filterByFkCompanyRole($companyRoleId)
+            ->endUse()
+            ->find();
+
+        $collection = new CompanyUserCollectionTransfer();
+
+        foreach ($spyCompanyUsers as $spyCompanyUser) {
+            $collection->addCompanyUser((new CompanyUserTransfer())->fromArray($spyCompanyUser->toArray(), true));
+        }
+
+        return $collection;
     }
 }
