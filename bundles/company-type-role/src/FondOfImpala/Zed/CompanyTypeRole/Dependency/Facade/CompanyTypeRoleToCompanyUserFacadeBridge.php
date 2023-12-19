@@ -40,8 +40,7 @@ class CompanyTypeRoleToCompanyUserFacadeBridge implements CompanyTypeRoleToCompa
      */
     public function getCompanyUserCollection(
         CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer
-    ): CompanyUserCollectionTransfer
-    {
+    ): CompanyUserCollectionTransfer {
         return $this->companyUserFacade->getCompanyUserCollection($companyUserCriteriaFilterTransfer);
     }
 
@@ -50,11 +49,11 @@ class CompanyTypeRoleToCompanyUserFacadeBridge implements CompanyTypeRoleToCompa
      * - Executes CompanyUserPreDeletePluginInterface plugins before delete company user.
      * - Deletes a company user.
      *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyUserResponseTransfer
-     * @api
-     *
      */
     public function deleteCompanyUser(CompanyUserTransfer $companyUserTransfer): CompanyUserResponseTransfer
     {

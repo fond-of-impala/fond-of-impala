@@ -21,6 +21,7 @@ interface CompanyTypeConverterToCompanyTypeRoleFacadeInterface
 
     /**
      * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
+     *
      * @return \Generated\Shared\Transfer\CompanyRoleResponseTransfer
      */
     public function deleteCompanyRoleAndCompanyUserByCompanyRole(CompanyRoleTransfer $companyRoleTransfer): CompanyRoleResponseTransfer;

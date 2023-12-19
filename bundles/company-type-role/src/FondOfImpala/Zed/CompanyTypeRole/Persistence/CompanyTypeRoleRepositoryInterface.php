@@ -38,8 +38,10 @@ interface CompanyTypeRoleRepositoryInterface
 
     /**
      * @param int $companyRoleId
-     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
+     *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
      */
     public function findCompanyUserIdsByCompanyRoleId(
         int $companyRoleId

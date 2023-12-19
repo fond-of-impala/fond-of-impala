@@ -4,11 +4,15 @@ namespace FondOfImpala\Zed\CompanyTypeRole\Business;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssignerInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleDeleter;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\AssignableCompanyRoleReaderInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Synchronizer\PermissionSynchronizerInterface;
 use Generated\Shared\Transfer\AssignableCompanyRoleCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
+use Generated\Shared\Transfer\CompanyRoleResponseTransfer;
+use Generated\Shared\Transfer\CompanyRoleTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyTypeRoleFacadeTest extends Unit
 {
@@ -52,6 +56,12 @@ class CompanyTypeRoleFacadeTest extends Unit
      */
     protected $assignableCompanyRoleReaderMock;
 
+    protected CompanyRoleDeleter|MockObject $companyRoleDeleterMock;
+
+    protected CompanyRoleTransfer|MockObject $companyRoleTransferMock;
+
+    protected CompanyRoleResponseTransfer|MockObject $companyRoleResponseTransferMock;
+
     /**
      * @return void
      */
@@ -84,6 +94,18 @@ class CompanyTypeRoleFacadeTest extends Unit
             ->getMock();
 
         $this->assignableCompanyRoleReaderMock = $this->getMockBuilder(AssignableCompanyRoleReaderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyRoleDeleterMock = $this->getMockBuilder(CompanyRoleDeleter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyRoleTransferMock = $this->getMockBuilder(CompanyRoleTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyRoleResponseTransferMock = $this->getMockBuilder(CompanyRoleResponseTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -146,6 +168,25 @@ class CompanyTypeRoleFacadeTest extends Unit
             $this->companyTypeRoleFacade->getAssignableCompanyRoles(
                 $this->assignableCompanyRoleCriteriaFilterTransferMock,
             ),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeleteCompanyRoleAndCompanyUserByCompanyRole(): void
+    {
+        $this->companyTypeRoleBusinessFactoryMock->expects(static::atLeastOnce())
+            ->method('createCompanyRoleDeleter')
+            ->willReturn($this->companyRoleDeleterMock);
+
+        $this->companyRoleDeleterMock->expects(static::atLeastOnce())
+            ->method('deleteCompanyRoleAndCompanyUserByCompanyRole')
+            ->with($this->companyRoleTransferMock)
+            ->willReturn($this->companyRoleResponseTransferMock);
+
+        $this->companyTypeRoleFacade->deleteCompanyRoleAndCompanyUserByCompanyRole(
+            $this->companyRoleTransferMock,
         );
     }
 }

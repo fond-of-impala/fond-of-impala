@@ -4,8 +4,10 @@ namespace FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyTypeRole\Business\CompanyTypeRoleFacadeInterface;
+use Generated\Shared\Transfer\CompanyRoleResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyTypeConverterToCompanyTypeRoleFacadeBridgeTest extends Unit
 {
@@ -19,10 +21,9 @@ class CompanyTypeConverterToCompanyTypeRoleFacadeBridgeTest extends Unit
      */
     protected $companyTypeTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyRoleTransfer
-     */
-    protected $companyRoleTransferMock;
+    protected CompanyRoleResponseTransfer|MockObject $companyRoleResponseTransferMock;
+
+    protected CompanyRoleTransfer|MockObject $companyRoleTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeRoleFacadeBridge
@@ -45,6 +46,10 @@ class CompanyTypeConverterToCompanyTypeRoleFacadeBridgeTest extends Unit
             ->getMock();
 
         $this->companyRoleTransferMock = $this->getMockBuilder(CompanyRoleTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->companyRoleResponseTransferMock = $this->getMockBuilder(CompanyRoleResponseTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -77,5 +82,21 @@ class CompanyTypeConverterToCompanyTypeRoleFacadeBridgeTest extends Unit
         $this->assertNotEmpty($permissionKeysResult);
         $this->assertEquals($permissionKeys, $permissionKeysResult);
         $this->assertTrue(is_array($permissionKeysResult));
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeleteCompanyRoleAndCompanyUserByCompanyRole(): void
+    {
+        $this->companyTypeRoleFacadeMock->expects($this->atLeastOnce())
+            ->method('deleteCompanyRoleAndCompanyUserByCompanyRole')
+            ->with($this->companyRoleTransferMock)
+            ->willReturn($this->companyRoleResponseTransferMock);
+
+        $this->companyTypeConverterToCompanyTypeRoleFacadeBridge
+            ->deleteCompanyRoleAndCompanyUserByCompanyRole(
+                $this->companyRoleTransferMock,
+            );
     }
 }

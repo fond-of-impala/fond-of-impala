@@ -152,7 +152,7 @@ class CompanyTypeRoleBusinessFactory extends AbstractBusinessFactory
         return new CompanyRoleDeleter(
             $this->getCompanyUserFacade(),
             $this->getCompanyRoleFacade(),
-            $this->getRepository()
+            $this->getRepository(),
         );
     }
 

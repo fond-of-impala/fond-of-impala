@@ -25,8 +25,7 @@ class CompanyRoleDeleter implements CompanyRoleDeleterInterface
         CompanyTypeRoleToCompanyUserFacadeInterface $companyUserFacade,
         CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade,
         CompanyTypeRoleRepositoryInterface $repository
-    )
-    {
+    ) {
         $this->companyUserFacade = $companyUserFacade;
         $this->companyRoleFacade = $companyRoleFacade;
         $this->repository = $repository;
@@ -34,13 +33,14 @@ class CompanyRoleDeleter implements CompanyRoleDeleterInterface
 
     /**
      * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
+     *
      * @return \Generated\Shared\Transfer\CompanyRoleResponseTransfer
      */
     public function deleteCompanyRoleAndCompanyUserByCompanyRole(CompanyRoleTransfer $companyRoleTransfer): CompanyRoleResponseTransfer
     {
         $companyUserCollection = $this->repository->findCompanyUserIdsByCompanyRoleId($companyRoleTransfer->getIdCompanyRole());
 
-        foreach ($companyUserCollection->getCompanyUsers() as $companyUser){
+        foreach ($companyUserCollection->getCompanyUsers() as $companyUser) {
             $this->companyUserFacade->deleteCompanyUser($companyUser);
         }
 

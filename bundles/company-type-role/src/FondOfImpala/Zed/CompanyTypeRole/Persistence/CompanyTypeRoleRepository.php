@@ -122,8 +122,8 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
 
     /**
      * @param int $companyRoleId
+     *
      * @return \Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findCompanyUserIdsByCompanyRoleId(
         int $companyRoleId
