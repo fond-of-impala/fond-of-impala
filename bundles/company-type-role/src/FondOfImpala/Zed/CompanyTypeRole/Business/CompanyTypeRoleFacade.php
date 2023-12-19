@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\CompanyTypeRole\Business;
 use Generated\Shared\Transfer\AssignableCompanyRoleCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
+use Generated\Shared\Transfer\CompanyRoleResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 use Generated\Shared\Transfer\EventEntityTransfer;
@@ -105,6 +106,18 @@ class CompanyTypeRoleFacade extends AbstractFacade implements CompanyTypeRoleFac
     ): CompanyRoleCollectionTransfer {
         return $this->getFactory()->createAssignableCompanyRoleReader()->getByAssignableCompanyRoleCriteriaFilter(
             $assignableCompanyRoleCriteriaFilterTransfer,
+        );
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyRoleResponseTransfer
+     */
+    public function deleteCompanyRoleAndCompanyUserByCompanyRole(CompanyRoleTransfer $companyRoleTransfer): CompanyRoleResponseTransfer
+    {
+        return $this->getFactory()->createCompanyRoleDeleter()->deleteCompanyRoleAndCompanyUserByCompanyRole(
+            $companyRoleTransfer,
         );
     }
 }

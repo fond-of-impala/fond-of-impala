@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade;
 
 use FondOfImpala\Zed\CompanyTypeRole\Business\CompanyTypeRoleFacadeInterface;
+use Generated\Shared\Transfer\CompanyRoleResponseTransfer;
 use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 
@@ -33,5 +34,15 @@ class CompanyTypeConverterToCompanyTypeRoleFacadeBridge implements CompanyTypeCo
     ): array {
         return $this->companyTypeRoleFacade
             ->getPermissionKeysByCompanyTypeAndCompanyRole($companyTypeTransfer, $companyRoleTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyRoleTransfer $companyRoleTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyRoleResponseTransfer
+     */
+    public function deleteCompanyRoleAndCompanyUserByCompanyRole(CompanyRoleTransfer $companyRoleTransfer): CompanyRoleResponseTransfer
+    {
+        return $this->companyTypeRoleFacade->deleteCompanyRoleAndCompanyUserByCompanyRole($companyRoleTransfer);
     }
 }

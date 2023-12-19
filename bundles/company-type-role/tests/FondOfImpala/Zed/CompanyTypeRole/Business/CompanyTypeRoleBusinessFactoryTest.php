@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\CompanyTypeRole\Business;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssigner;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleAssignerInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Business\Model\CompanyRoleDeleter;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Model\PermissionReader;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Reader\AssignableCompanyRoleReader;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Synchronizer\PermissionSynchronizer;
@@ -215,6 +216,34 @@ class CompanyTypeRoleBusinessFactoryTest extends Unit
         static::assertInstanceOf(
             AssignableCompanyRoleReader::class,
             $this->companyTypeRoleBusinessFactory->createAssignableCompanyRoleReader(),
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateCompanyRoleDeleter(): void
+    {
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->withConsecutive(
+                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_USER],
+                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_ROLE],
+            )->willReturnOnConsecutiveCalls(true, true);
+
+        $this->containerMock->expects(static::atLeastOnce())
+            ->method('get')
+            ->withConsecutive(
+                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_USER],
+                [CompanyTypeRoleDependencyProvider::FACADE_COMPANY_ROLE],
+            )->willReturnOnConsecutiveCalls(
+                $this->companyUserFacadeMock,
+                $this->companyRoleFacadeMock,
+            );
+
+        static::assertInstanceOf(
+            CompanyRoleDeleter::class,
+            $this->companyTypeRoleBusinessFactory->createCompanyRoleDeleter(),
         );
     }
 }
