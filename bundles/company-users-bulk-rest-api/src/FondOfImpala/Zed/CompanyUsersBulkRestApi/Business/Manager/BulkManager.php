@@ -137,13 +137,13 @@ class BulkManager implements BulkManagerInterface
                 $roleCollection = (new CompanyRoleCollectionTransfer())->addRole($role);
                 foreach ($company->getCompanyBusinessUnits() as $companyBusinessUnit) {
                     $companyUserTransfer = $this->createDummyCompanyUserTransfer()
-                    ->setCustomerReference($customer->getCustomerReference())
-                    ->setFkCustomer($customer->getIdCustomer())
-                    ->setCompanyRoleCollection($roleCollection)
-                    ->setFkCompany($company->getIdCompany())
-                    ->setCompany((new CompanyTransfer())->fromArray($company->toArray(), true))
-                    ->setCustomer((new CustomerTransfer())->fromArray($customer->toArray(), true))
-                    ->setFkCompanyBusinessUnit($companyBusinessUnit->getIdCompanyBusinessUnit());
+                        ->setCustomerReference($customer->getCustomerReference())
+                        ->setFkCustomer($customer->getIdCustomer())
+                        ->setCompanyRoleCollection($roleCollection)
+                        ->setFkCompany($company->getIdCompany())
+                        ->setCompany((new CompanyTransfer())->fromArray($company->toArray(), true))
+                        ->setCustomer((new CustomerTransfer())->fromArray($customer->toArray(), true))
+                        ->setFkCompanyBusinessUnit($companyBusinessUnit->getIdCompanyBusinessUnit());
 
                     if ($this->repository->isCompanyUserAlreadyAvailable($companyUserTransfer) === true) {
                         continue;
@@ -206,11 +206,39 @@ class BulkManager implements BulkManagerInterface
         $collection = new CompanyUsersBulkPreparationCollectionTransfer();
 
         foreach ($restCompanyUsersBulkItemCollectionTransfer->getItems() as $item) {
+            $company = $item->getCompany();
+            $customer = $item->getCustomer();
+
+            if ($company === null || $customer === null) {
+                continue;
+            }
+
             $preparedItem = (new CompanyUsersBulkPreparationTransfer())->setItem($item);
             $collection->addItem($preparedItem);
         }
 
-        return $this->pluginExecutioner->executeExpand($collection);
+        return $this->incompleteDataCleanup($this->pluginExecutioner->executeExpand($collection));
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUsersBulkPreparationCollectionTransfer $collection
+     *
+     * @return \Generated\Shared\Transfer\CompanyUsersBulkPreparationCollectionTransfer
+     */
+    protected function incompleteDataCleanup(CompanyUsersBulkPreparationCollectionTransfer $collection): CompanyUsersBulkPreparationCollectionTransfer
+    {
+        $cleanupCollection = new CompanyUsersBulkPreparationCollectionTransfer();
+
+        foreach ($collection->getItems() as $itemTransfer) {
+            if ($itemTransfer->getCompany() === null || $itemTransfer->getCustomer() === null) {
+                $this->logger->warning(sprintf('Customer or company not found! Data: %s', json_encode($itemTransfer->getItem()->toArray())));
+
+                continue;
+            }
+            $cleanupCollection->addItem($itemTransfer);
+        }
+
+        return $cleanupCollection;
     }
 
     /**

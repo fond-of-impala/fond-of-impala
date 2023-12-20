@@ -343,8 +343,18 @@ class BulkManagerTest extends Unit
 
         $this->companyUsersBulkPreparationTransferMock
             ->expects(static::atLeastOnce())
+            ->method('getCompany')
+            ->willReturn($this->companyTransferMock);
+
+        $this->companyUsersBulkPreparationTransferMock
+            ->expects(static::atLeastOnce())
             ->method('getCompanyOrFail')
             ->willReturn($this->companyTransferMock);
+
+        $this->companyUsersBulkPreparationTransferMock
+            ->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
 
         $this->companyUsersBulkPreparationTransferMock
             ->expects(static::atLeastOnce())
@@ -448,8 +458,18 @@ class BulkManagerTest extends Unit
 
         $this->companyUsersBulkPreparationTransferMock
             ->expects(static::atLeastOnce())
+            ->method('getCompany')
+            ->willReturn($this->companyTransferMock);
+
+        $this->companyUsersBulkPreparationTransferMock
+            ->expects(static::atLeastOnce())
             ->method('getCompanyOrFail')
             ->willReturn($this->companyTransferMock);
+
+        $this->companyUsersBulkPreparationTransferMock
+            ->expects(static::atLeastOnce())
+            ->method('getCustomer')
+            ->willReturn($this->customerTransferMock);
 
         $this->companyUsersBulkPreparationTransferMock
             ->expects(static::atLeastOnce())

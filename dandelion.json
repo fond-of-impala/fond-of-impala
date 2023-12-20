@@ -53,7 +53,7 @@
     },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",
-      "version": "1.1.1"
+      "version": "1.2.0"
     },
     "company-users-bulk-rest-api-business-central-connector": {
       "path": "bundles/company-users-bulk-rest-api-business-central-connector",

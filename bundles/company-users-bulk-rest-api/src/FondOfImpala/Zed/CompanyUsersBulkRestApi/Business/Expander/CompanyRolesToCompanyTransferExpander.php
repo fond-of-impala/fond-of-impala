@@ -32,7 +32,10 @@ class CompanyRolesToCompanyTransferExpander implements ExpanderInterface
         $companyRolesCollection = $this->repository->findCompanyRolesByCompanyIds($companyIds);
 
         foreach ($companyUsersBulkPreparationCollectionTransfer->getItems() as $item) {
-            $companyTransfer = $item->getCompanyOrFail();
+            $companyTransfer = $item->getCompany();
+            if ($companyTransfer === null) {
+                continue;
+            }
             $idCompany = $companyTransfer->getIdCompany();
             $companyRoles = [];
             foreach ($companyTransfer->getCompanyRoles() as $companyRole) {
@@ -63,7 +66,11 @@ class CompanyRolesToCompanyTransferExpander implements ExpanderInterface
     {
         $prepared = [];
         foreach ($companyUsersBulkPreparationCollectionTransfer->getItems() as $companyUsersBulkPreparationTransfer) {
-            $prepared[] = $companyUsersBulkPreparationTransfer->getCompanyOrFail()->getIdCompany();
+            $companyTransfer = $companyUsersBulkPreparationTransfer->getCompany();
+            if ($companyTransfer === null) {
+                continue;
+            }
+            $prepared[] = $companyTransfer->getIdCompany();
         }
 
         return $prepared;
