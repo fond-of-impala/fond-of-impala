@@ -231,7 +231,7 @@ class BulkManager implements BulkManagerInterface
 
         foreach ($collection->getItems() as $itemTransfer) {
             if ($itemTransfer->getCompany() === null || $itemTransfer->getCustomer() === null) {
-                $this->logger->warning(sprintf('Customer or Company not found! Data: %s', json_encode($itemTransfer->getItem()->toArray())));
+                $this->logger->warning(sprintf('Customer or company not found! Data: %s', json_encode($itemTransfer->getItem()->toArray())));
 
                 continue;
             }
