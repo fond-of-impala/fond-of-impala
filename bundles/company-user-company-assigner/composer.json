@@ -43,7 +43,7 @@
     "psr-4": {
       "FondOfImpala\\": "tests/FondOfImpala/",
       "Generated\\": "src/Generated/",
-      "Orm\\Zed\\": "src/Orm/Zed/"
+      "Orm\\": "src/Orm/"
     }
   },
   "config": {
