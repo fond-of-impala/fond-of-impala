@@ -126,7 +126,7 @@ class CompanyTypeExportValidatorTest extends Unit
 
         $isValid = $this->companyTypeExportValidator->validate($this->eventEntityTransferMock);
 
-        $this->isTrue(is_bool($isValid));
+        $this->isTrue();
         $this->assertEquals(true, $isValid);
     }
 
@@ -169,7 +169,7 @@ class CompanyTypeExportValidatorTest extends Unit
 
          $isValid = $this->companyTypeExportValidator->validate($this->eventEntityTransferMock);
 
-         $this->isTrue(is_bool($isValid));
+         $this->isTrue();
          $this->assertEquals(true, $isValid);
     }
 }

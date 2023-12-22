@@ -7,10 +7,7 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class CompanyTypeToZedRequestClientBridge implements CompanyTypeToZedRequestClientInterface
 {
-    /**
-     * @var \Spryker\Client\ZedRequest\ZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected ZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \Spryker\Client\ZedRequest\ZedRequestClientInterface $zedRequestClient

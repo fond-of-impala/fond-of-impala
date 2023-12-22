@@ -12,15 +12,9 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeReader implements CompanyTypeReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\CompanyTypeConfig
-     */
-    protected $companyTypeConfig;
+    protected CompanyTypeConfig $companyTypeConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Persistence\CompanyTypeRepositoryInterface
-     */
-    protected $companyTypeRepository;
+    protected CompanyTypeRepositoryInterface $companyTypeRepository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\Persistence\CompanyTypeRepositoryInterface $companyTypeRepository

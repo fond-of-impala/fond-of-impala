@@ -9,15 +9,9 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeAssigner implements CompanyTypeAssignerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\CompanyTypeConfig
-     */
-    protected $companyTypeConfig;
+    protected CompanyTypeConfig $companyTypeConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Persistence\CompanyTypeRepositoryInterface
-     */
-    protected $companyTypeRepository;
+    protected CompanyTypeRepositoryInterface $companyTypeRepository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\CompanyTypeConfig $companyTypeConfig

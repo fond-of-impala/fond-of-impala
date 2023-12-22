@@ -34,11 +34,9 @@ class CompanyTypeDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addCompanyBusinesssUnitFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_BUSINESS_UNIT] = function (Container $container) {
-            return new CompanyTypeToCompanyBusinessUnitFacadeBridge(
-                $container->getLocator()->companyBusinessUnit()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_BUSINESS_UNIT] = fn (Container $container): CompanyTypeToCompanyBusinessUnitFacadeBridge => new CompanyTypeToCompanyBusinessUnitFacadeBridge(
+            $container->getLocator()->companyBusinessUnit()->facade(),
+        );
 
         return $container;
     }

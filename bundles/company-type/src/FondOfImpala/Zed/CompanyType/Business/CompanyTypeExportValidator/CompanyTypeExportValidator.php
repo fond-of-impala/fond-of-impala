@@ -26,20 +26,11 @@ class CompanyTypeExportValidator implements CompanyTypeExportValidatorInterface
      */
     protected const EVENT_ENTITY_TYPE_COMPANY = 'spy_company';
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Dependency\Facade\CompanyTypeToCompanyBusinessUnitFacadeInterface
-     */
-    protected $companyBusinessUnitFacade;
+    protected CompanyTypeToCompanyBusinessUnitFacadeInterface $companyBusinessUnitFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\CompanyTypeConfig
-     */
-    protected $companyTypeConfig;
+    protected CompanyTypeConfig $companyTypeConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Business\Model\CompanyTypeReaderInterface
-     */
-    protected $companyTypeReader;
+    protected CompanyTypeReaderInterface $companyTypeReader;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\Business\Model\CompanyTypeReaderInterface $companyTypeReader
