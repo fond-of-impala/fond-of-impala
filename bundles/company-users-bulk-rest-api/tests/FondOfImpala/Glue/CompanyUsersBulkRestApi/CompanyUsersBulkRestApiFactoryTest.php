@@ -59,10 +59,7 @@ class CompanyUsersBulkRestApiFactoryTest extends Unit
             ->getMock();
 
         $this->factory = new class ($this->restResourceBuilderMock) extends CompanyUsersBulkRestApiFactory {
-            /**
-             * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-             */
-            protected $restResourceBuilder;
+            protected RestResourceBuilderInterface $restResourceBuilder;
 
             /**
              * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

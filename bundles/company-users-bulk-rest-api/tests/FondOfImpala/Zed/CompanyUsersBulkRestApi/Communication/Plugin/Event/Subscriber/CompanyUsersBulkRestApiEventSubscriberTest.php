@@ -43,7 +43,7 @@ class CompanyUsersBulkRestApiEventSubscriberTest extends Unit
         $this->eventCollectionMock
             ->expects(static::exactly(2))
             ->method('addListenerQueued')
-            ->willReturnCallback(static function (string $eventName, EventBaseHandlerInterface $eventHandler) {
+            ->willReturnCallback(static function (string $eventName, EventBaseHandlerInterface $eventHandler): void {
                 if ($eventName === CompanyUsersBulkRestApiConstants::BULK_ASSIGN) {
                     static::assertInstanceOf(CompanyUsersBulkRestApiCompanyUserCreatorListener::class, $eventHandler);
 

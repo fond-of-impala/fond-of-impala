@@ -32,9 +32,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractDependencyProvid
      */
     protected function addZedRequestClient(Container $container): Container
     {
-        $container[static::CLIENT_ZED_REQUEST] = static function (Container $container) {
-            return new CompanyUsersBulkRestApiToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
-        };
+        $container[static::CLIENT_ZED_REQUEST] = static fn (Container $container): CompanyUsersBulkRestApiToZedRequestClientBridge => new CompanyUsersBulkRestApiToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
 
         return $container;
     }

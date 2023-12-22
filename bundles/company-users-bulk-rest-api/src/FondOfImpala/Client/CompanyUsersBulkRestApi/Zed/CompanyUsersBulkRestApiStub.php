@@ -13,10 +13,7 @@ class CompanyUsersBulkRestApiStub implements CompanyUsersBulkRestApiStubInterfac
      */
     public const BULK_PROCESS = '/company-users-bulk-rest-api/gateway/bulk-process';
 
-    /**
-     * @var \FondOfImpala\Client\CompanyUsersBulkRestApi\Dependency\Client\CompanyUsersBulkRestApiToZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected CompanyUsersBulkRestApiToZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \FondOfImpala\Client\CompanyUsersBulkRestApi\Dependency\Client\CompanyUsersBulkRestApiToZedRequestClientInterface $zedRequestClient
