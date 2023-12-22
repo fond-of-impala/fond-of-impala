@@ -34,11 +34,9 @@ class CompanyCompanyTypeGuiDependencyProvider extends AbstractBundleDependencyPr
      */
     protected function addCompanyTypeFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_TYPE] = function (Container $container) {
-            return new CompanyCompanyTypeGuiToCompanyTypeFacadeBridge(
-                $container->getLocator()->companyType()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_TYPE] = fn (Container $container): CompanyCompanyTypeGuiToCompanyTypeFacadeBridge => new CompanyCompanyTypeGuiToCompanyTypeFacadeBridge(
+            $container->getLocator()->companyType()->facade(),
+        );
 
         return $container;
     }

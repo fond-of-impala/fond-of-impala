@@ -54,7 +54,7 @@ class OnlyClaimedSearchQuoteQueryExpanderPlugin extends AbstractPlugin implement
         QueryJoinCollectionTransfer $queryJoinCollectionTransfer
     ): QueryJoinCollectionTransfer {
         $onlyClaimed = null;
-        $callbackFilter = static function (string $value) {
+        $callbackFilter = static function (string $value): ?bool {
             if (strtolower($value) === 'true') {
                 return true;
             }

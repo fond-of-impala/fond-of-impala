@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\CompanyCartSearchRestApi;
 
 use Orm\Zed\Company\Persistence\Base\SpyCompanyQuery;
 use Orm\Zed\Permission\Persistence\Base\SpyPermissionQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -43,7 +44,7 @@ class CompanyCartSearchRestApiDependencyProvider extends AbstractBundleDependenc
      */
     protected function addCompanyQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY] = static fn () => SpyCompanyQuery::create();
+        $container[static::PROPEL_QUERY_COMPANY] = static fn (): Criteria => SpyCompanyQuery::create();
 
         return $container;
     }
@@ -55,7 +56,7 @@ class CompanyCartSearchRestApiDependencyProvider extends AbstractBundleDependenc
      */
     protected function addPermissionQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PERMISSION] = static fn () => SpyPermissionQuery::create();
+        $container[static::PROPEL_QUERY_PERMISSION] = static fn (): Criteria => SpyPermissionQuery::create();
 
         return $container;
     }
