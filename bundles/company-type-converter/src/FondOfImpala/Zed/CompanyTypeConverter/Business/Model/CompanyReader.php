@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CompanyTransfer;
 
 class CompanyReader implements CompanyReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyFacadeInterface
-     */
-    protected $companyFacade;
+    protected CompanyTypeConverterToCompanyFacadeInterface $companyFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyFacadeInterface $companyFacade

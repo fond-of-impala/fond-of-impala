@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeConverterToCompanyTypeFacadeBridge implements CompanyTypeConverterToCompanyTypeFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeFacadeInterface $companyTypeFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade

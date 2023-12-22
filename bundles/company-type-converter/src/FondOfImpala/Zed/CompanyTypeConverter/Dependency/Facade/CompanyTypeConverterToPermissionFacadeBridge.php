@@ -8,10 +8,7 @@ use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
 
 class CompanyTypeConverterToPermissionFacadeBridge implements CompanyTypeConverterToPermissionFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Permission\Business\PermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected PermissionFacadeInterface $permissionFacade;
 
     /**
      * @param \Spryker\Zed\Permission\Business\PermissionFacadeInterface $permissionFacade

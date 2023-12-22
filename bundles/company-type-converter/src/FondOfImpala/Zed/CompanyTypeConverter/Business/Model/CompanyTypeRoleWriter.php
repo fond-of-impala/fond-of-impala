@@ -20,30 +20,15 @@ use Generated\Shared\Transfer\PermissionTransfer;
 
 class CompanyTypeRoleWriter implements CompanyTypeRoleWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyTypeConverterToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeRoleFacadeInterface
-     */
-    protected $companyTypeRoleFacade;
+    protected CompanyTypeConverterToCompanyTypeRoleFacadeInterface $companyTypeRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\CompanyTypeConverterConfig
-     */
-    protected $config;
+    protected CompanyTypeConverterConfig $config;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CompanyTypeConverterToPermissionFacadeInterface $permissionFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyRoleFacadeInterface $companyRoleFacade

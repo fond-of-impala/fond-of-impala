@@ -9,12 +9,12 @@ class CompanyTypeConverterPluginExecutor implements CompanyTypeConverterPluginEx
     /**
      * @var array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface>
      */
-    protected $companyTypeConverterPreSavePlugins;
+    protected array $companyTypeConverterPreSavePlugins;
 
     /**
      * @var array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPostSavePluginInterface>
      */
-    protected $companyTypeConverterPostSavePlugins;
+    protected array $companyTypeConverterPostSavePlugins;
 
     /**
      * @param array<\FondOfImpala\Zed\CompanyTypeConverterExtension\Dependency\Plugin\CompanyTypeConverterPreSavePluginInterface> $companyTypeConverterPreSavePlugins

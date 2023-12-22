@@ -81,11 +81,9 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addPermissionFacade(Container $container): Container
     {
-        $container[static::FACADE_PERMISSION] = function (Container $container) {
-            return new CompanyTypeConverterToPermissionFacadeBridge(
-                $container->getLocator()->permission()->facade(),
-            );
-        };
+        $container[static::FACADE_PERMISSION] = fn (Container $container): CompanyTypeConverterToPermissionFacadeBridge => new CompanyTypeConverterToPermissionFacadeBridge(
+            $container->getLocator()->permission()->facade(),
+        );
 
         return $container;
     }
@@ -97,11 +95,9 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY] = function (Container $container) {
-            return new CompanyTypeConverterToCompanyFacadeBridge(
-                $container->getLocator()->company()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY] = fn (Container $container): CompanyTypeConverterToCompanyFacadeBridge => new CompanyTypeConverterToCompanyFacadeBridge(
+            $container->getLocator()->company()->facade(),
+        );
 
         return $container;
     }
@@ -113,11 +109,9 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyTypeRoleFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_TYPE_ROLE] = function (Container $container) {
-            return new CompanyTypeConverterToCompanyTypeRoleFacadeBridge(
-                $container->getLocator()->companyTypeRole()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_TYPE_ROLE] = fn (Container $container): CompanyTypeConverterToCompanyTypeRoleFacadeBridge => new CompanyTypeConverterToCompanyTypeRoleFacadeBridge(
+            $container->getLocator()->companyTypeRole()->facade(),
+        );
 
         return $container;
     }
@@ -129,11 +123,9 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyRoleFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_ROLE] = function (Container $container) {
-            return new CompanyTypeConverterToCompanyRoleFacadeBridge(
-                $container->getLocator()->companyRole()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_ROLE] = fn (Container $container): CompanyTypeConverterToCompanyRoleFacadeBridge => new CompanyTypeConverterToCompanyRoleFacadeBridge(
+            $container->getLocator()->companyRole()->facade(),
+        );
 
         return $container;
     }
@@ -145,11 +137,9 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyTypeFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_TYPE] = function (Container $container) {
-            return new CompanyTypeConverterToCompanyTypeFacadeBridge(
-                $container->getLocator()->companyType()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_TYPE] = fn (Container $container): CompanyTypeConverterToCompanyTypeFacadeBridge => new CompanyTypeConverterToCompanyTypeFacadeBridge(
+            $container->getLocator()->companyType()->facade(),
+        );
 
         return $container;
     }
@@ -161,11 +151,9 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyUserFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_USER] = function (Container $container) {
-            return new CompanyTypeConverterToCompanyUserFacadeBridge(
-                $container->getLocator()->companyUser()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_USER] = fn (Container $container): CompanyTypeConverterToCompanyUserFacadeBridge => new CompanyTypeConverterToCompanyUserFacadeBridge(
+            $container->getLocator()->companyUser()->facade(),
+        );
 
         return $container;
     }
@@ -177,9 +165,7 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyTypeConverterPreSavePlugins(Container $container): Container
     {
-        $container[static::COMPANY_TYPE_CONVERTER_PRE_SAVE_PLUGINS] = function () {
-            return $this->getCompanyTypeConverterPreSavePlugins();
-        };
+        $container[static::COMPANY_TYPE_CONVERTER_PRE_SAVE_PLUGINS] = fn (): array => $this->getCompanyTypeConverterPreSavePlugins();
 
         return $container;
     }
@@ -191,9 +177,7 @@ class CompanyTypeConverterDependencyProvider extends AbstractBundleDependencyPro
      */
     protected function addCompanyTypeConverterPostSavePlugins(Container $container): Container
     {
-        $container[static::COMPANY_TYPE_CONVERTER_POST_SAVE_PLUGINS] = function () {
-            return $this->getCompanyTypeConverterPostSavePlugins();
-        };
+        $container[static::COMPANY_TYPE_CONVERTER_POST_SAVE_PLUGINS] = fn (): array => $this->getCompanyTypeConverterPostSavePlugins();
 
         return $container;
     }
