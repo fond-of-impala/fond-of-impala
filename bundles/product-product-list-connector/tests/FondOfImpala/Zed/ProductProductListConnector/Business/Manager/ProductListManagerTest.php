@@ -32,7 +32,7 @@ class ProductListManagerTest extends Unit
     /**
      * @return void
      */
-    public function _before()
+    public function _before(): void
     {
         parent::_before();
 
