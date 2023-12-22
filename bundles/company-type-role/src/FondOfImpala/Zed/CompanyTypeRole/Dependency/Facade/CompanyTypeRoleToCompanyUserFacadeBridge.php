@@ -10,10 +10,7 @@ use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;
 
 class CompanyTypeRoleToCompanyUserFacadeBridge implements CompanyTypeRoleToCompanyUserFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUserFacadeInterface $companyUserFacade;
 
     /**
      * @param \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface $companyUserFacade

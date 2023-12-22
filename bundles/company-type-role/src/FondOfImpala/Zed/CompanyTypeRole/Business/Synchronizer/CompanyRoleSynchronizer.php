@@ -15,25 +15,13 @@ use Generated\Shared\Transfer\CompanyTransfer;
 
 class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyFacadeInterface
-     */
-    protected $companyFacade;
+    protected CompanyTypeRoleToCompanyFacadeInterface $companyFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig
-     */
-    protected $config;
+    protected CompanyTypeRoleConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyFacadeInterface $companyFacade

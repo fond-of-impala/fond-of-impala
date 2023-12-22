@@ -10,15 +10,9 @@ use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 
 class CompanyUserReader implements CompanyUserReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyTypeRoleToCompanyUserFacadeInterface $companyUserFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyTypeRoleRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyUserFacadeInterface $companyUserFacade

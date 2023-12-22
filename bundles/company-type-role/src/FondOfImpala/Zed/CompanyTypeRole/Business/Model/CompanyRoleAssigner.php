@@ -14,25 +14,13 @@ use Generated\Shared\Transfer\PermissionCollectionTransfer;
 
 class CompanyRoleAssigner implements CompanyRoleAssignerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig
-     */
-    protected $companyTypeRoleConfig;
+    protected CompanyTypeRoleConfig $companyTypeRoleConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CompanyTypeRoleToPermissionFacadeInterface $permissionFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig $companyTypeRoleConfig

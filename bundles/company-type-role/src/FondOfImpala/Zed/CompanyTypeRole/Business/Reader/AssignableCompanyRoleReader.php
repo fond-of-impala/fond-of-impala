@@ -12,25 +12,13 @@ use Generated\Shared\Transfer\CompanyRoleTransfer;
 
 class AssignableCompanyRoleReader implements AssignableCompanyRoleReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Business\Generator\AssignPermissionKeyGeneratorInterface
-     */
-    protected $assignPermissionKeyGenerator;
+    protected AssignPermissionKeyGeneratorInterface $assignPermissionKeyGenerator;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyUserReaderInterface
-     */
-    protected $companyUserReader;
+    protected CompanyUserReaderInterface $companyUserReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CompanyTypeRoleToPermissionFacadeInterface $permissionFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Business\Generator\AssignPermissionKeyGeneratorInterface $assignPermissionKeyGenerator

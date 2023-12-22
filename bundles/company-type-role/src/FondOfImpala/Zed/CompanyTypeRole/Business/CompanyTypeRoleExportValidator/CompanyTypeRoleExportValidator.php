@@ -24,20 +24,11 @@ class CompanyTypeRoleExportValidator implements CompanyTypeRoleExportValidatorIn
      */
     protected const ENTITY_TRANSFER_NAME_COMPANY_USER = 'spy_company_user';
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig
-     */
-    protected $companyTypeRoleConfig;
+    protected CompanyTypeRoleConfig $companyTypeRoleConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyTypeRoleToCompanyUserFacadeInterface $companyUserFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyUserFacadeInterface $companyUserFacade
