@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CompanyTransfer;
 
 class CompanyUserCompanyAssignerToCompanyFacadeBridge implements CompanyUserCompanyAssignerToCompanyFacadeInterface
 {
-    /**
-     * @var \FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface
-     */
-    protected $companyFacade;
+    protected CompanyFacadeInterface $companyFacade;
 
     /**
      * @param \FondOfSpryker\Zed\Company\Business\CompanyFacadeInterface $companyFacade

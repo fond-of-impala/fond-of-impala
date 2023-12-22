@@ -8,15 +8,9 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 class CompanyRoleNameMapper implements CompanyRoleNameMapperInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Filter\CompanyRoleNameFilterInterface
-     */
-    protected $companyRoleNameFilter;
+    protected CompanyRoleNameFilterInterface $companyRoleNameFilter;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\CompanyUserCompanyAssignerConfig
-     */
-    protected $config;
+    protected CompanyUserCompanyAssignerConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Filter\CompanyRoleNameFilterInterface $companyRoleNameFilter

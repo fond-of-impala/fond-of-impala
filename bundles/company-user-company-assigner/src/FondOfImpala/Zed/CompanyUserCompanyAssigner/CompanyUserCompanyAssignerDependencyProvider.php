@@ -12,6 +12,7 @@ use Orm\Zed\Company\Persistence\Base\SpyCompanyQuery;
 use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery;
 use Orm\Zed\CompanyType\Persistence\Base\FoiCompanyTypeQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -122,11 +123,9 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyBusinessUnitFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_BUSINESS_UNIT] = static function (Container $container) {
-            return new CompanyUserCompanyAssignerToCompanyBusinessUnitFacadeBridge(
-                $container->getLocator()->companyBusinessUnit()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_BUSINESS_UNIT] = static fn (Container $container): CompanyUserCompanyAssignerToCompanyBusinessUnitFacadeBridge => new CompanyUserCompanyAssignerToCompanyBusinessUnitFacadeBridge(
+            $container->getLocator()->companyBusinessUnit()->facade(),
+        );
 
         return $container;
     }
@@ -138,11 +137,9 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyTypeFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_TYPE] = static function (Container $container) {
-            return new CompanyUserCompanyAssignerToCompanyTypeFacadeBridge(
-                $container->getLocator()->companyType()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_TYPE] = static fn (Container $container): CompanyUserCompanyAssignerToCompanyTypeFacadeBridge => new CompanyUserCompanyAssignerToCompanyTypeFacadeBridge(
+            $container->getLocator()->companyType()->facade(),
+        );
 
         return $container;
     }
@@ -154,11 +151,9 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyRoleFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_ROLE] = static function (Container $container) {
-            return new CompanyUserCompanyAssignerToCompanyRoleFacadeBridge(
-                $container->getLocator()->companyRole()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_ROLE] = static fn (Container $container): CompanyUserCompanyAssignerToCompanyRoleFacadeBridge => new CompanyUserCompanyAssignerToCompanyRoleFacadeBridge(
+            $container->getLocator()->companyRole()->facade(),
+        );
 
         return $container;
     }
@@ -170,11 +165,9 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY] = static function (Container $container) {
-            return new CompanyUserCompanyAssignerToCompanyFacadeBridge(
-                $container->getLocator()->company()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY] = static fn (Container $container): CompanyUserCompanyAssignerToCompanyFacadeBridge => new CompanyUserCompanyAssignerToCompanyFacadeBridge(
+            $container->getLocator()->company()->facade(),
+        );
 
         return $container;
     }
@@ -186,11 +179,9 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyUserFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_USER] = static function (Container $container) {
-            return new CompanyUserCompanyAssignerToCompanyUserFacadeBridge(
-                $container->getLocator()->companyUser()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_USER] = static fn (Container $container): CompanyUserCompanyAssignerToCompanyUserFacadeBridge => new CompanyUserCompanyAssignerToCompanyUserFacadeBridge(
+            $container->getLocator()->companyUser()->facade(),
+        );
 
         return $container;
     }
@@ -202,9 +193,7 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyRoleQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY_ROLE] = static function () {
-            return SpyCompanyRoleQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY_ROLE] = static fn (): Criteria => SpyCompanyRoleQuery::create();
 
         return $container;
     }
@@ -216,9 +205,7 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyUserQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY_USER] = static function () {
-            return SpyCompanyUserQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY_USER] = static fn (): Criteria => SpyCompanyUserQuery::create();
 
         return $container;
     }
@@ -230,9 +217,7 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyTypeQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY_TYPE] = static function () {
-            return FoiCompanyTypeQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY_TYPE] = static fn (): Criteria => FoiCompanyTypeQuery::create();
 
         return $container;
     }
@@ -244,9 +229,7 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addCompanyQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY] = static function () {
-            return SpyCompanyQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY] = static fn (): Criteria => SpyCompanyQuery::create();
 
         return $container;
     }
@@ -258,11 +241,9 @@ class CompanyUserCompanyAssignerDependencyProvider extends AbstractBundleDepende
      */
     protected function addEventFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT] = static function (Container $container) {
-            return new CompanyUserCompanyAssignerToEventFacadeBridge(
-                $container->getLocator()->event()->facade(),
-            );
-        };
+        $container[static::FACADE_EVENT] = static fn (Container $container): CompanyUserCompanyAssignerToEventFacadeBridge => new CompanyUserCompanyAssignerToEventFacadeBridge(
+            $container->getLocator()->event()->facade(),
+        );
 
         return $container;
     }

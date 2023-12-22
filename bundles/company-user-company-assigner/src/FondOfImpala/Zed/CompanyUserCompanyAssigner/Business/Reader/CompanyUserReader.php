@@ -9,20 +9,11 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 class CompanyUserReader implements CompanyUserReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Mapper\CompanyRoleNameMapperInterface
-     */
-    protected $companyRoleNameMapper;
+    protected CompanyRoleNameMapperInterface $companyRoleNameMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyUserCompanyAssignerToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Persistence\CompanyUserCompanyAssignerRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUserCompanyAssignerRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Mapper\CompanyRoleNameMapperInterface $companyRoleNameMapper

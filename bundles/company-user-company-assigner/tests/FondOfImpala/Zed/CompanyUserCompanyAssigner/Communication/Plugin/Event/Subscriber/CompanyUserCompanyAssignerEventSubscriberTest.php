@@ -46,9 +46,7 @@ class CompanyUserCompanyAssignerEventSubscriberTest extends Unit
                 [
                     CompanyUserCompanyAssignerEvents::MANUFACTURER_USER_MARK_FOR_ASSIGMENT,
                     static::callback(
-                        static function (EventBaseHandlerInterface $eventBaseHandler) {
-                            return $eventBaseHandler instanceof AssignManufacturerUserToNonManufacturerCompaniesListener;
-                        },
+                        static fn (EventBaseHandlerInterface $eventBaseHandler): bool => $eventBaseHandler instanceof AssignManufacturerUserToNonManufacturerCompaniesListener,
                     ),
                     0,
                     null,
@@ -57,9 +55,7 @@ class CompanyUserCompanyAssignerEventSubscriberTest extends Unit
                 [
                     CompanyUserCompanyAssignerEvents::MANUFACTURER_COMPANY_USER_COMPANY_ROLE_UPDATE,
                     static::callback(
-                        static function (EventBaseHandlerInterface $eventBaseHandler) {
-                            return $eventBaseHandler instanceof UpdateNonManufacturerUsersCompanyRole;
-                        },
+                        static fn (EventBaseHandlerInterface $eventBaseHandler): bool => $eventBaseHandler instanceof UpdateNonManufacturerUsersCompanyRole,
                     ),
                     0,
                     null,

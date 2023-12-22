@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 class CompanyRoleNameFilter implements CompanyRoleNameFilterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Persistence\CompanyUserCompanyAssignerRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUserCompanyAssignerRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserCompanyAssigner\Persistence\CompanyUserCompanyAssignerRepositoryInterface $repository

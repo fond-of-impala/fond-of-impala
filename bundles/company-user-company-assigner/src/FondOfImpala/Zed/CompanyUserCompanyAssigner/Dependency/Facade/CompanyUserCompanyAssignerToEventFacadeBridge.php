@@ -7,10 +7,7 @@ use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class CompanyUserCompanyAssignerToEventFacadeBridge implements CompanyUserCompanyAssignerToEventFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Event\Business\EventFacadeInterface
-     */
-    protected $eventFacade;
+    protected EventFacadeInterface $eventFacade;
 
     /**
      * @param \Spryker\Zed\Event\Business\EventFacadeInterface $eventFacade

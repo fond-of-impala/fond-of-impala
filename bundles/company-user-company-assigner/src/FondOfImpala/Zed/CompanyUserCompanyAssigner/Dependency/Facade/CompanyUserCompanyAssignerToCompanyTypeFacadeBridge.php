@@ -11,10 +11,7 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyUserCompanyAssignerToCompanyTypeFacadeBridge implements CompanyUserCompanyAssignerToCompanyTypeFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeFacadeInterface $companyTypeFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade
