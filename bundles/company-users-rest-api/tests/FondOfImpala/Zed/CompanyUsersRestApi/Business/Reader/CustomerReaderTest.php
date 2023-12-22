@@ -104,7 +104,7 @@ class CustomerReaderTest extends Unit
         try {
             $this->customerReader->getByRestCustomer($this->restCustomerTransferMock);
             static::fail();
-        } catch (Exception $exception) {
+        } catch (Exception) {
         }
     }
 }

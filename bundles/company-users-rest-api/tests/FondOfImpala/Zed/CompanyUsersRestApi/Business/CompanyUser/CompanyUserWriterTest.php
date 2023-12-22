@@ -322,9 +322,7 @@ class CompanyUserWriterTest extends Unit
             ->method('findCompanyByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyTransfer $companyTransfer) use ($companyUuid) {
-                        return $companyTransfer->getUuid() === $companyUuid;
-                    },
+                    static fn (CompanyTransfer $companyTransfer): bool => $companyTransfer->getUuid() === $companyUuid,
                 ),
             )->willReturn($this->companyResponseTransferMock);
 
@@ -460,9 +458,7 @@ class CompanyUserWriterTest extends Unit
             ->method('findCompanyByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyTransfer $companyTransfer) use ($companyUuid) {
-                        return $companyTransfer->getUuid() === $companyUuid;
-                    },
+                    static fn (CompanyTransfer $companyTransfer): bool => $companyTransfer->getUuid() === $companyUuid,
                 ),
             )->willReturn($this->companyResponseTransferMock);
 
@@ -602,9 +598,7 @@ class CompanyUserWriterTest extends Unit
             ->method('findCompanyByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyTransfer $companyTransfer) use ($companyUuid) {
-                        return $companyUuid === $companyTransfer->getUuid();
-                    },
+                    static fn (CompanyTransfer $companyTransfer): bool => $companyUuid === $companyTransfer->getUuid(),
                 ),
             )->willReturn($this->companyResponseTransferMock);
 
@@ -646,9 +640,7 @@ class CompanyUserWriterTest extends Unit
             ->method('findCompanyByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyTransfer $companyTransfer) use ($companyUuid) {
-                        return $companyUuid === $companyTransfer->getUuid();
-                    },
+                    static fn (CompanyTransfer $companyTransfer): bool => $companyUuid === $companyTransfer->getUuid(),
                 ),
             )->willReturn($this->companyResponseTransferMock);
 
@@ -719,9 +711,7 @@ class CompanyUserWriterTest extends Unit
             ->method('findCompanyByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyTransfer $companyTransfer) use ($companyUuid) {
-                        return $companyUuid === $companyTransfer->getUuid();
-                    },
+                    static fn (CompanyTransfer $companyTransfer): bool => $companyUuid === $companyTransfer->getUuid(),
                 ),
             )->willReturn($this->companyResponseTransferMock);
 
@@ -833,9 +823,7 @@ class CompanyUserWriterTest extends Unit
             ->method('findCompanyByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyTransfer $companyTransfer) use ($companyUuid) {
-                        return $companyUuid === $companyTransfer->getUuid();
-                    },
+                    static fn (CompanyTransfer $companyTransfer): bool => $companyUuid === $companyTransfer->getUuid(),
                 ),
             )->willReturn($this->companyResponseTransferMock);
 

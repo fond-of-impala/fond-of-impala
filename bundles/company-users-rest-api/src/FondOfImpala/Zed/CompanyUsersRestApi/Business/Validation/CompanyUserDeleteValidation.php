@@ -10,15 +10,9 @@ use Generated\Shared\Transfer\RestDeleteCompanyUserRequestTransfer;
 
 class CompanyUserDeleteValidation implements CompanyUserDeleteValidationInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Persistence\CompanyUsersRestApiRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUsersRestApiRepositoryInterface $repository;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig
-     */
-    protected $config;
+    protected CompanyUsersRestApiConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Persistence\CompanyUsersRestApiRepositoryInterface $repository

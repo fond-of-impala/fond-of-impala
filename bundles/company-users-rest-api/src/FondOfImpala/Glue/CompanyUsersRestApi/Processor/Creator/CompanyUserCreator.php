@@ -17,20 +17,11 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CompanyUserCreator implements CompanyUserCreatorInterface
 {
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
-    /**
-     * @var \FondOfImpala\Client\CompanyUsersRestApi\CompanyUsersRestApiClientInterface
-     */
-    protected $client;
+    protected CompanyUsersRestApiClientInterface $client;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Validation\RestApiErrorInterface
-     */
-    protected $restApiError;
+    protected RestApiErrorInterface $restApiError;
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

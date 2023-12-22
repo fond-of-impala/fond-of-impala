@@ -106,9 +106,7 @@ class CompanyRoleCollectionReaderTest extends Unit
             ->method('findCompanyRoleByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyRoleTransfer $companyRoleTransfer) use ($uuid) {
-                        return $companyRoleTransfer->getUuid() === $uuid;
-                    },
+                    static fn (CompanyRoleTransfer $companyRoleTransfer): bool => $companyRoleTransfer->getUuid() === $uuid,
                 ),
             )->willReturn($this->companyRoleResponseTransferMock);
 
@@ -204,9 +202,7 @@ class CompanyRoleCollectionReaderTest extends Unit
             ->method('findCompanyRoleByUuid')
             ->with(
                 static::callback(
-                    static function (CompanyRoleTransfer $companyRoleTransfer) use ($uuid) {
-                        return $companyRoleTransfer->getUuid() === $uuid;
-                    },
+                    static fn (CompanyRoleTransfer $companyRoleTransfer): bool => $companyRoleTransfer->getUuid() === $uuid,
                 ),
             )->willReturn($this->companyRoleResponseTransferMock);
 

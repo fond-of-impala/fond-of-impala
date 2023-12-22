@@ -79,11 +79,9 @@ class RestResponseBuilderTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getDetail() === CompanyUsersRestApiConfig::RESPONSE_DETAIL_COULD_NOT_DELETE_COMPANY_USER
-                            && $restErrorMessageTransfer->getCode() === CompanyUsersRestApiConfig::RESPONSE_CODE_COULD_NOT_DELETE_COMPANY_USER
-                            && $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getDetail() === CompanyUsersRestApiConfig::RESPONSE_DETAIL_COULD_NOT_DELETE_COMPANY_USER
+                        && $restErrorMessageTransfer->getCode() === CompanyUsersRestApiConfig::RESPONSE_CODE_COULD_NOT_DELETE_COMPANY_USER
+                        && $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST,
                 ),
             )->willReturn($this->restResponseMock);
 
@@ -106,11 +104,9 @@ class RestResponseBuilderTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getDetail() === CompanyUsersRestApiConfig::RESPONSE_DETAIL_COULD_NOT_UPDATE_COMPANY_USER
-                            && $restErrorMessageTransfer->getCode() === CompanyUsersRestApiConfig::RESPONSE_CODE_COULD_NOT_UPDATE_COMPANY_USER
-                            && $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getDetail() === CompanyUsersRestApiConfig::RESPONSE_DETAIL_COULD_NOT_UPDATE_COMPANY_USER
+                        && $restErrorMessageTransfer->getCode() === CompanyUsersRestApiConfig::RESPONSE_CODE_COULD_NOT_UPDATE_COMPANY_USER
+                        && $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST,
                 ),
             )->willReturn($this->restResponseMock);
 

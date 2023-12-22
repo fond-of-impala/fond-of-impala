@@ -11,20 +11,11 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CompanyUserUpdater implements CompanyUserUpdaterInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Mapper\RestWriteCompanyUserRequestMapperInterface
-     */
-    protected $restWriteCompanyUserRequestMapper;
+    protected RestWriteCompanyUserRequestMapperInterface $restWriteCompanyUserRequestMapper;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Builder\RestResponseBuilderInterface
-     */
-    protected $restResponseBuilder;
+    protected RestResponseBuilderInterface $restResponseBuilder;
 
-    /**
-     * @var \FondOfImpala\Client\CompanyUsersRestApi\CompanyUsersRestApiClientInterface
-     */
-    protected $client;
+    protected CompanyUsersRestApiClientInterface $client;
 
     /**
      * @param \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Mapper\RestWriteCompanyUserRequestMapperInterface $restWriteCompanyUserRequestMapper

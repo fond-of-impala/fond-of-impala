@@ -37,11 +37,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyUserReferenceClient(Container $container): Container
     {
-        $container[static::CLIENT_COMPANY_USER_REFERENCE] = static function (Container $container) {
-            return new CompanyUsersRestApiToCompanyUserReferenceClientBridge(
-                $container->getLocator()->companyUserReference()->client(),
-            );
-        };
+        $container[static::CLIENT_COMPANY_USER_REFERENCE] = static fn (Container $container): CompanyUsersRestApiToCompanyUserReferenceClientBridge => new CompanyUsersRestApiToCompanyUserReferenceClientBridge(
+            $container->getLocator()->companyUserReference()->client(),
+        );
 
         return $container;
     }

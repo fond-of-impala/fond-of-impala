@@ -10,10 +10,7 @@ use Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer;
 
 class CompanyRoleCollectionReader implements CompanyRoleCollectionReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyUsersRestApiToCompanyRoleFacadeInterface $companyRoleFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyRoleFacadeInterface $companyRoleFacade

@@ -12,22 +12,22 @@ class CompanyUserPluginExecutor implements CompanyUserPluginExecutorInterface
     /**
      * @var array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPostCreatePluginInterface>
      */
-    protected $companyUserPostCreatePlugins;
+    protected array $companyUserPostCreatePlugins;
 
     /**
      * @var array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreCreatePluginInterface>
      */
-    protected $companyUserPreCreatePlugins;
+    protected array $companyUserPreCreatePlugins;
 
     /**
      * @var array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreDeleteValidationPluginInterface>
      */
-    protected $companyUserPreDeletePlugins;
+    protected array $companyUserPreDeletePlugins;
 
     /**
      * @var array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreUpdateValidationPluginInterface>
      */
-    protected $companyUserPreUpdatePlugins;
+    protected array $companyUserPreUpdatePlugins;
 
     /**
      * @param array<\FondOfOryx\Zed\CompanyUsersRestApiExtension\Dependency\Plugin\CompanyUserPreCreatePluginInterface> $companyUserPreCreatePlugins

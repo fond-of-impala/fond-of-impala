@@ -8,10 +8,7 @@ use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;
 
 class CompanyUsersRestApiToCompanyUserFacadeBridge implements CompanyUsersRestApiToCompanyUserFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUserFacadeInterface $companyUserFacade;
 
     /**
      * @param \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface $companyUserFacade
