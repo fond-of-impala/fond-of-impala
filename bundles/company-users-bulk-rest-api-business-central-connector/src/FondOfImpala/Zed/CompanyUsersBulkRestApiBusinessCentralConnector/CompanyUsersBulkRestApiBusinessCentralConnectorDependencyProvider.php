@@ -32,9 +32,7 @@ class CompanyUsersBulkRestApiBusinessCentralConnectorDependencyProvider extends 
      */
     protected function addSpyCompanyQuery(Container $container): Container
     {
-        $container[static::QUERY_SPY_COMPANY] = static function () {
-            return new SpyCompanyQuery();
-        };
+        $container[static::QUERY_SPY_COMPANY] = static fn (): SpyCompanyQuery => new SpyCompanyQuery();
 
         return $container;
     }
