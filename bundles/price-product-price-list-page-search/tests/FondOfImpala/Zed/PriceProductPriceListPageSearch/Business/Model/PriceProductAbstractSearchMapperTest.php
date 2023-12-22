@@ -26,7 +26,7 @@ class PriceProductAbstractSearchMapperTest extends Unit
     protected MockObject|StoreTransfer $storeTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject[]|\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
     protected array $priceProductAbstractPriceListPageDataExpanderPluginMocks;
 

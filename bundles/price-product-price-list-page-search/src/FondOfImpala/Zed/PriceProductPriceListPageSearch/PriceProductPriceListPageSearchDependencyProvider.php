@@ -8,6 +8,7 @@ use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProd
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeBridge;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceBridge;
 use Orm\Zed\PriceProductPriceList\Persistence\FoiPriceProductPriceListQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -123,7 +124,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
      */
     protected function addPropelPriceProductPriceListQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRICE_PRODUCT_PRICE_LIST] = static fn () => FoiPriceProductPriceListQuery::create();
+        $container[static::PROPEL_QUERY_PRICE_PRODUCT_PRICE_LIST] = static fn (): Criteria => FoiPriceProductPriceListQuery::create();
 
         return $container;
     }
@@ -171,7 +172,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface>
      */
     protected function getPriceProductAbstractPriceListPageSearchDataExpanderPlugins(): array
     {
@@ -195,7 +196,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface>
      */
     protected function getPriceProductConcretePriceListPageSearchDataExpanderPlugins(): array
     {
@@ -219,7 +220,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface>
      */
     protected function getPriceProductAbstractPriceListPageDataExpanderPlugins(): array
     {
@@ -241,7 +242,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface>
      */
     protected function getPriceProductConcretePriceListPageDataExpanderPlugins(): array
     {

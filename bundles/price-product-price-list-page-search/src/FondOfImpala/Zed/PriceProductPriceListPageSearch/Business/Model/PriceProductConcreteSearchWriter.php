@@ -39,7 +39,7 @@ class PriceProductConcreteSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */
@@ -64,7 +64,7 @@ class PriceProductConcreteSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
      * @return void
      */
@@ -80,8 +80,8 @@ class PriceProductConcreteSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[] $priceProductPriceListPageSearchTransfers
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[] $existingPageSearchEntities
+     * @param array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer> $priceProductPriceListPageSearchTransfers
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch> $existingPageSearchEntities
      * @param bool $mergePrices
      *
      * @return void
@@ -132,7 +132,7 @@ class PriceProductConcreteSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[] $priceProductConcretePriceListPageSearchEntities
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch> $priceProductConcretePriceListPageSearchEntities
      *
      * @return array
      */

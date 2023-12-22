@@ -5,14 +5,14 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model;
 interface PriceProductConcreteSearchWriterInterface
 {
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */
     public function publishConcretePriceProductPriceList(array $priceProductPriceListIds): void;
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
      * @return void
      */
