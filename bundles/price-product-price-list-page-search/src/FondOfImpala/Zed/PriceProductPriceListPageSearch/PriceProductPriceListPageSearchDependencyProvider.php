@@ -87,9 +87,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container = $this->addEventBehaviorFacade($container);
-
-        return $container;
+        return $this->addEventBehaviorFacade($container);
     }
 
     /**
@@ -101,9 +99,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
-        $container = $this->addPropelPriceProductPriceListQuery($container);
-
-        return $container;
+        return $this->addPropelPriceProductPriceListQuery($container);
     }
 
     /**
