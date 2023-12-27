@@ -10,7 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 class PriceProductAbstractSearchExpanderTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject[]|\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
     protected array $priceProductAbstractPriceListPageDataExpanderPluginMocks;
 

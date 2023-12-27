@@ -21,7 +21,7 @@ class PriceProductPriceListAbstractListener extends AbstractPlugin implements Ev
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\EventEntityTransfer[] $transfers
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $transfers
      * @param string $eventName
      *
      * @return void

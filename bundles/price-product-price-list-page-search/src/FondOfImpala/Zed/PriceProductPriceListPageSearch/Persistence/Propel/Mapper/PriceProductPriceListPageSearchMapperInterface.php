@@ -7,7 +7,7 @@ interface PriceProductPriceListPageSearchMapperInterface
     /**
      * @param array $priceProductPriceListsData
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function mapDataArrayToTransferArray(array $priceProductPriceListsData): array;
 }

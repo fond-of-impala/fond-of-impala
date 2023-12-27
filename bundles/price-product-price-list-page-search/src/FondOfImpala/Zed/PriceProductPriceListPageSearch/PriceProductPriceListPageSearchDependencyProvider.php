@@ -171,7 +171,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface>
      */
     protected function getPriceProductAbstractPriceListPageSearchDataExpanderPlugins(): array
     {
@@ -195,7 +195,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface>
      */
     protected function getPriceProductConcretePriceListPageSearchDataExpanderPlugins(): array
     {
@@ -219,7 +219,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface>
      */
     protected function getPriceProductAbstractPriceListPageDataExpanderPlugins(): array
     {
@@ -241,7 +241,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface>
      */
     protected function getPriceProductConcretePriceListPageDataExpanderPlugins(): array
     {
