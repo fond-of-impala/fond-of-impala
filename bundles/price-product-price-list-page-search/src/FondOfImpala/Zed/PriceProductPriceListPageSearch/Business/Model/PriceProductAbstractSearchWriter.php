@@ -53,7 +53,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
         }
 
         $priceKeys = array_map(
-            fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
+            static fn(PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
             $priceProductPriceListPageSearchTransfers,
         );
 
@@ -162,7 +162,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
         }
 
         $priceKeys = array_map(
-            fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
+            static fn(PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
             $priceProductPriceListPageSearchTransfers,
         );
 
