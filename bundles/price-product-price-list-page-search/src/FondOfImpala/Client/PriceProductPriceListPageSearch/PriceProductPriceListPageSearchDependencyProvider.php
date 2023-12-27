@@ -9,6 +9,9 @@ use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependencyProvider
 {
     /**

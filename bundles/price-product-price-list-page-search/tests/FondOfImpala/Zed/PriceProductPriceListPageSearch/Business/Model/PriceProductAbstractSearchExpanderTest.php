@@ -14,14 +14,8 @@ class PriceProductAbstractSearchExpanderTest extends Unit
      */
     protected array $priceProductAbstractPriceListPageDataExpanderPluginMocks;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
-     */
     protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceProductAbstractSearchExpander
-     */
     protected PriceProductAbstractSearchExpander $priceProductAbstractSearchExpander;
 
     /**

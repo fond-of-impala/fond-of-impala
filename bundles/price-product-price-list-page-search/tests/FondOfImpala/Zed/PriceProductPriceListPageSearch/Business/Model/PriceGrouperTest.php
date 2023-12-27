@@ -9,25 +9,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceGrouperTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceGrouper
-     */
     protected PriceGrouper $priceGrouper;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
-     */
     protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchValueTransfer
-     */
     protected MockObject|PriceProductPriceListPageSearchValueTransfer $priceProductPriceListPageSearchValueTransferMock;
-
-    /**
-     * @var array
-     */
-    protected array $priceTransfers;
 
     /**
      * @return void
@@ -44,10 +30,6 @@ class PriceGrouperTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->priceTransfers = [
-            $this->priceProductPriceListPageSearchValueTransferMock,
-        ];
-
         $this->priceGrouper = new PriceGrouper();
     }
 
@@ -58,7 +40,7 @@ class PriceGrouperTest extends Unit
     {
         $this->priceProductPriceListPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('getUngroupedPrices')
-            ->willReturn($this->priceTransfers);
+            ->willReturn([$this->priceProductPriceListPageSearchValueTransferMock]);
 
         $this->priceProductPriceListPageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setPrices')
@@ -68,6 +50,12 @@ class PriceGrouperTest extends Unit
             ->method('getGrossPrice')
             ->willReturn(1);
 
-        static::assertEquals($this->priceProductPriceListPageSearchTransferMock, $this->priceGrouper->groupPricesData($this->priceProductPriceListPageSearchTransferMock, ['prices' => []]));
+        static::assertEquals(
+            $this->priceProductPriceListPageSearchTransferMock,
+            $this->priceGrouper->groupPricesData(
+                $this->priceProductPriceListPageSearchTransferMock,
+                ['prices' => []],
+            ),
+        );
     }
 }

@@ -7,14 +7,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductPriceListPageSearchFacadeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchFacade
-     */
     protected PriceProductPriceListPageSearchFacade $priceProductPriceListPageSearchFacade;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchBusinessFactory
-     */
     protected MockObject|PriceProductPriceListPageSearchBusinessFactory $priceProductPriceListPageSearchBusinessFactoryMock;
 
     /**

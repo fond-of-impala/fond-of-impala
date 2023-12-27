@@ -8,15 +8,9 @@ use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 
 class PriceProductPriceListPageSearchEventSubscriberTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Communication\Plugin\Event\Subscriber\PriceProductPriceListPageSearchEventSubscriber
-     */
     protected PriceProductPriceListPageSearchEventSubscriber $priceProductPriceListPageSearchEventSubscriber;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
-    protected MockObject|EventCollectionInterface $eventCollectionInterfaceMock;
+    protected MockObject|EventCollectionInterface $eventCollectionMock;
 
     /**
      * @return void
@@ -25,7 +19,7 @@ class PriceProductPriceListPageSearchEventSubscriberTest extends Unit
     {
         parent::_before();
 
-        $this->eventCollectionInterfaceMock = $this->getMockBuilder(EventCollectionInterface::class)
+        $this->eventCollectionMock = $this->getMockBuilder(EventCollectionInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -37,6 +31,15 @@ class PriceProductPriceListPageSearchEventSubscriberTest extends Unit
      */
     public function testGetSubscribedEvents(): void
     {
-        $this->priceProductPriceListPageSearchEventSubscriber->getSubscribedEvents($this->eventCollectionInterfaceMock);
+        $this->eventCollectionMock->expects(static::exactly(8))
+            ->method('addListenerQueued')
+            ->willReturn($this->eventCollectionMock);
+
+        static::assertEquals(
+            $this->eventCollectionMock,
+            $this->priceProductPriceListPageSearchEventSubscriber->getSubscribedEvents(
+                $this->eventCollectionMock,
+            ),
+        );
     }
 }

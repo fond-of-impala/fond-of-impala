@@ -7,10 +7,7 @@ use Elastica\Query;
 
 class PriceProductAbstractPriceListSearchQueryPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\PriceProductAbstractPriceListSearchQueryPlugin
-     */
-    protected PriceProductAbstractPriceListSearchQueryPlugin $priceProductAbstractPriceListSearchQueryPlugin;
+    protected PriceProductAbstractPriceListSearchQueryPlugin $plugin;
 
     /**
      * @return void
@@ -19,7 +16,7 @@ class PriceProductAbstractPriceListSearchQueryPluginTest extends Unit
     {
         parent::_before();
 
-        $this->priceProductAbstractPriceListSearchQueryPlugin = new PriceProductAbstractPriceListSearchQueryPlugin();
+        $this->plugin = new PriceProductAbstractPriceListSearchQueryPlugin();
     }
 
     /**
@@ -27,7 +24,7 @@ class PriceProductAbstractPriceListSearchQueryPluginTest extends Unit
      */
     public function testGetSearchQuery(): void
     {
-        static::assertInstanceOf(Query::class, $this->priceProductAbstractPriceListSearchQueryPlugin->getSearchQuery());
+        static::assertInstanceOf(Query::class, $this->plugin->getSearchQuery());
     }
 
     /**
@@ -35,8 +32,8 @@ class PriceProductAbstractPriceListSearchQueryPluginTest extends Unit
      */
     public function testSearchString(): void
     {
-        $this->priceProductAbstractPriceListSearchQueryPlugin->setSearchString('');
+        $this->plugin->setSearchString('');
 
-        static::assertSame('', $this->priceProductAbstractPriceListSearchQueryPlugin->getSearchString());
+        static::assertSame('', $this->plugin->getSearchString());
     }
 }
