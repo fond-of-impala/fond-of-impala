@@ -18,7 +18,7 @@ class ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearc
     }
 
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearc
     }
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
      * @return void
      */

@@ -87,7 +87,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPlugin extends Abst
     }
 
     /**
-     * @return int[]
+     * @return array<int>
      */
     protected function getBlacklistIds(): array
     {
@@ -101,7 +101,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPlugin extends Abst
     }
 
     /**
-     * @return int[]
+     * @return array<int>
      */
     protected function getWhitelistIds(): array
     {

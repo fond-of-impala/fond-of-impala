@@ -15,7 +15,7 @@ class ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest 
     protected MockObject|EventBehaviorFacadeInterface $facadeMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject[]|\Generated\Shared\Transfer\EventEntityTransfer[]
+     * @var array<\Generated\Shared\Transfer\EventEntityTransfer>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
     protected array $eventTransfers;
 
