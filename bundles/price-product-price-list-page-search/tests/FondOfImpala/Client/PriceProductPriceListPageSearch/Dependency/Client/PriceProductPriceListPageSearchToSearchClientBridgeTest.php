@@ -11,34 +11,15 @@ use Spryker\Client\Search\SearchClientInterface;
 
 class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientBridge
-     */
-    protected PriceProductPriceListPageSearchToSearchClientBridge $priceProductPriceListPageSearchToSearchClientBridge;
+    protected PriceProductPriceListPageSearchToSearchClientBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\SearchClientInterface
-     */
-    protected MockObject|SearchClientInterface $searchClientInterfaceMock;
+    protected MockObject|SearchClientInterface $searchClientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryInterface
-     */
-    protected MockObject|QueryInterface $queryInterfaceMock;
+    protected MockObject|QueryInterface $queryMock;
 
-    private ?array $searchQueryExpanders = null;
+    protected MockObject|QueryExpanderPluginInterface $queryExpanderPluginMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface
-     */
-    protected MockObject|QueryExpanderPluginInterface $queryExpanderPluginInterfaceMock;
-
-    private ?array $resultSets = null;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet
-     */
-    private MockObject|ResultSet $resultSetMock;
+    protected MockObject|ResultSet $resultSetMock;
 
     /**
      * @return void
@@ -47,15 +28,15 @@ class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
     {
         parent::_before();
 
-        $this->searchClientInterfaceMock = $this->getMockBuilder(SearchClientInterface::class)
+        $this->searchClientMock = $this->getMockBuilder(SearchClientInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->queryInterfaceMock = $this->getMockBuilder(QueryInterface::class)
+        $this->queryMock = $this->getMockBuilder(QueryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->queryExpanderPluginInterfaceMock = $this->getMockBuilder(QueryExpanderPluginInterface::class)
+        $this->queryExpanderPluginMock = $this->getMockBuilder(QueryExpanderPluginInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -63,15 +44,9 @@ class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->searchQueryExpanders = [
-            $this->queryExpanderPluginInterfaceMock,
-        ];
-
-        $this->resultSets = [
-            $this->resultSetMock,
-        ];
-
-        $this->priceProductPriceListPageSearchToSearchClientBridge = new PriceProductPriceListPageSearchToSearchClientBridge($this->searchClientInterfaceMock);
+        $this->bridge = new PriceProductPriceListPageSearchToSearchClientBridge(
+            $this->searchClientMock,
+        );
     }
 
     /**
@@ -79,11 +54,15 @@ class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
      */
     public function testSearch(): void
     {
-        $this->searchClientInterfaceMock->expects(static::atLeastOnce())
+        $this->searchClientMock->expects(static::atLeastOnce())
             ->method('search')
-            ->willReturn($this->resultSets);
+            ->with($this->queryMock, [], [])
+            ->willReturn([$this->resultSetMock]);
 
-        static::assertIsArray($this->priceProductPriceListPageSearchToSearchClientBridge->search($this->queryInterfaceMock, $this->searchQueryExpanders));
+        static::assertEquals(
+            [$this->resultSetMock],
+            $this->bridge->search($this->queryMock),
+        );
     }
 
     /**
@@ -91,10 +70,14 @@ class PriceProductPriceListPageSearchToSearchClientBridgeTest extends Unit
      */
     public function testExpandQuery(): void
     {
-        $this->searchClientInterfaceMock->expects(static::atLeastOnce())
+        $this->searchClientMock->expects(static::atLeastOnce())
             ->method('expandQuery')
-            ->willReturn($this->queryInterfaceMock);
+            ->with($this->queryMock, [$this->queryExpanderPluginMock], [])
+            ->willReturn($this->queryMock);
 
-        static::assertInstanceOf(QueryInterface::class, $this->priceProductPriceListPageSearchToSearchClientBridge->expandQuery($this->queryInterfaceMock, $this->searchQueryExpanders));
+        static::assertEquals(
+            $this->queryMock,
+            $this->bridge->expandQuery($this->queryMock, [$this->queryExpanderPluginMock]),
+        );
     }
 }

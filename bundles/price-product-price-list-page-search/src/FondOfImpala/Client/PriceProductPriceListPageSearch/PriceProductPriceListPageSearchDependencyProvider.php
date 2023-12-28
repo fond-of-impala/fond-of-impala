@@ -9,6 +9,9 @@ use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependencyProvider
 {
     /**
@@ -87,7 +90,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_SEARCH] = fn (Container $container): PriceProductPriceListPageSearchToSearchClientBridge => new PriceProductPriceListPageSearchToSearchClientBridge(
+        $container[static::CLIENT_SEARCH] = static fn (Container $container): PriceProductPriceListPageSearchToSearchClientBridge => new PriceProductPriceListPageSearchToSearchClientBridge(
             $container->getLocator()->search()->client(),
         );
 

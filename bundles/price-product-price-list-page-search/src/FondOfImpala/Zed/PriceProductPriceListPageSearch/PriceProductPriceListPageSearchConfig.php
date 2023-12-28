@@ -4,6 +4,9 @@ namespace FondOfImpala\Zed\PriceProductPriceListPageSearch;
 
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceProductPriceListPageSearchConfig extends AbstractBundleConfig
 {
     /**

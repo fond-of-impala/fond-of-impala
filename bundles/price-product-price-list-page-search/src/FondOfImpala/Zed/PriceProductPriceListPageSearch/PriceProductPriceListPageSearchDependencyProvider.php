@@ -8,9 +8,13 @@ use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProd
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeBridge;
 use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceBridge;
 use Orm\Zed\PriceProductPriceList\Persistence\FoiPriceProductPriceListQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
@@ -83,9 +87,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
-        $container = $this->addEventBehaviorFacade($container);
-
-        return $container;
+        return $this->addEventBehaviorFacade($container);
     }
 
     /**
@@ -97,9 +99,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
-        $container = $this->addPropelPriceProductPriceListQuery($container);
-
-        return $container;
+        return $this->addPropelPriceProductPriceListQuery($container);
     }
 
     /**
@@ -123,7 +123,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractBundleDe
      */
     protected function addPropelPriceProductPriceListQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRICE_PRODUCT_PRICE_LIST] = static fn () => FoiPriceProductPriceListQuery::create();
+        $container[static::PROPEL_QUERY_PRICE_PRODUCT_PRICE_LIST] = static fn (): Criteria => FoiPriceProductPriceListQuery::create();
 
         return $container;
     }
