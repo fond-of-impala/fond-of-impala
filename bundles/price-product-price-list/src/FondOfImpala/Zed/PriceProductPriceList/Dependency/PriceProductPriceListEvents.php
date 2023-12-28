@@ -62,7 +62,7 @@ interface PriceProductPriceListEvents
      *
      * @var string
      */
-    public const PRICE_PRODUCT_CONCRETE_PRICE_LIST_PUBLISH = 'PriceProductPriceList.price_product_concrete_price_list.publish.publish';
+    public const PRICE_PRODUCT_CONCRETE_PRICE_LIST_PUBLISH = 'PriceProductPriceList.price_product_concrete_price_list.publish';
 
     /**
      * Specification:

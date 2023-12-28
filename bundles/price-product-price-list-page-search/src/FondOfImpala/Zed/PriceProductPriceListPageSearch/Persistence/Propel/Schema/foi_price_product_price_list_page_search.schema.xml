@@ -64,7 +64,6 @@
 
         <behavior name="synchronization">
             <parameter name="resource" value="price_product_concrete_price_list"/>
-            <parameter name="locale" required="false"/>
             <parameter name="store" required="false" />
             <parameter name="key_suffix_column" value="price_key"/>
             <parameter name="queue_group" value="sync.search.price_product_price_list"/>
