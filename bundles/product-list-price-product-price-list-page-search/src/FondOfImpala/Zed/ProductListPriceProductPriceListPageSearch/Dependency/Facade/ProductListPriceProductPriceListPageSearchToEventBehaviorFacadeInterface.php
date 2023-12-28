@@ -5,7 +5,7 @@ namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency
 interface ProductListPriceProductPriceListPageSearchToEventBehaviorFacadeInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\EventEntityTransfer[] $eventTransfers
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $eventTransfers
      * @param string $foreignKeyColumnName
      *
      * @return array
