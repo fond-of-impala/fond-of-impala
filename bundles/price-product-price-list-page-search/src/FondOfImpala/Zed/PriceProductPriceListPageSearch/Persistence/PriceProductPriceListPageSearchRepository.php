@@ -25,9 +25,9 @@ use Spryker\Zed\PropelOrm\Business\Model\Formatter\PropelArraySetFormatter;
 class PriceProductPriceListPageSearchRepository extends AbstractRepository implements PriceProductPriceListPageSearchRepositoryInterface
 {
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceProductPriceListByIds(array $priceProductPriceListIds): array
     {
@@ -50,7 +50,7 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     /**
      * @param int $idPriceList
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceProductAbstractPriceListByIdPriceList(int $idPriceList): array
     {
@@ -74,7 +74,7 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     /**
      * @param int $idPriceList
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceProductConcretePriceListByIdPriceList(int $idPriceList): array
     {
@@ -167,9 +167,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param string[] $priceKeys
+     * @param array<string> $priceKeys
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch>
      */
     public function findExistingPriceProductAbstractPriceListEntitiesByPriceKeys(array $priceKeys): array
     {
@@ -181,9 +181,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch>
      */
     public function findExistingPriceProductAbstractPriceListEntitiesByProductAbstractIds(array $productAbstractIds): array
     {
@@ -195,9 +195,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceListProductAbstractPricesDataByProductAbstractIds(array $productAbstractIds): array
     {
@@ -218,9 +218,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
 
     /**
      * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
-     * @param int[] $priceProductConcretePriceListPageSearchIds
+     * @param array<int> $priceProductConcretePriceListPageSearchIds
      *
-     * @return \Generated\Shared\Transfer\FoiPriceProductConcretePriceListPageSearchEntityTransfer[]
+     * @return array<\Generated\Shared\Transfer\FoiPriceProductConcretePriceListPageSearchEntityTransfer>
      */
     public function findFilteredPriceProductConcretePriceListPageSearchEntities(
         FilterTransfer $filterTransfer,
@@ -237,9 +237,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
 
     /**
      * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
-     * @param int[] $priceProductAbstractPriceListPageSearchIds
+     * @param array<int> $priceProductAbstractPriceListPageSearchIds
      *
-     * @return \Generated\Shared\Transfer\FoiPriceProductAbstractPriceListPageSearchEntityTransfer[]
+     * @return array<\Generated\Shared\Transfer\FoiPriceProductAbstractPriceListPageSearchEntityTransfer>
      */
     public function findFilteredPriceProductAbstractPriceListPageSearchEntities(
         FilterTransfer $filterTransfer,
@@ -255,9 +255,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceListProductConcretePricesDataByIds(array $priceProductPriceListIds): array
     {
@@ -278,9 +278,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param string[] $priceKeys
+     * @param array<string> $priceKeys
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch>
      */
     public function findExistingPriceProductConcretePriceListEntitiesByPriceKeys(array $priceKeys): array
     {
@@ -292,9 +292,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceListProductConcretePricesDataByProductIds(array $productIds): array
     {
@@ -314,9 +314,9 @@ class PriceProductPriceListPageSearchRepository extends AbstractRepository imple
     }
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch>
      */
     public function findExistingPriceProductConcretePriceListEntitiesByProductIds(array $productIds): array
     {

@@ -39,7 +39,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */
@@ -53,7 +53,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
         }
 
         $priceKeys = array_map(
-            fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
+            static fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
             $priceProductPriceListPageSearchTransfers,
         );
 
@@ -64,7 +64,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */
@@ -80,8 +80,8 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[] $priceProductPriceListPageSearchTransfers
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[] $existingPageSearchEntities
+     * @param array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer> $priceProductPriceListPageSearchTransfers
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch> $existingPageSearchEntities
      * @param bool $mergePrices
      *
      * @return void
@@ -132,7 +132,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
     }
 
     /**
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[] $priceProductAbstractPriceListPageSearchEntities
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch> $priceProductAbstractPriceListPageSearchEntities
      *
      * @return array
      */
@@ -162,7 +162,7 @@ class PriceProductAbstractSearchWriter extends AbstractPriceProductSearchWriter 
         }
 
         $priceKeys = array_map(
-            fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
+            static fn (PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer) => $priceProductPriceListPageSearchTransfer->getPriceKey(),
             $priceProductPriceListPageSearchTransfers,
         );
 

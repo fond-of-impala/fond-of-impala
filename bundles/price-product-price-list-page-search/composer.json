@@ -12,10 +12,11 @@
     "php": ">=8.0",
     "fond-of-impala/price-product-price-list": "^1.0.0",
     "fond-of-impala/price-product-price-list-page-search-extension": "^1.0.0",
-    "spryker/search": "^8.10.0",
-    "spryker/synchronization-extension": "^1.0.0",
     "spryker/event": "^1.0.0 || ^2.0.0",
-    "spryker/event-behavior": "^1.0.0"
+    "spryker/event-behavior": "^1.0.0",
+    "spryker/publisher-extension": "^1.0.0",
+    "spryker/search": "^8.10.0",
+    "spryker/synchronization-extension": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

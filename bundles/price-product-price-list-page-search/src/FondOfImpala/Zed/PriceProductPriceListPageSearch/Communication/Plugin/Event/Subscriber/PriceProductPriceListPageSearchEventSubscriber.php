@@ -20,144 +20,133 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class PriceProductPriceListPageSearchEventSubscriber extends AbstractPlugin implements EventSubscriberInterface
 {
     /**
-     * @api
-     *
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
      * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
     public function getSubscribedEvents(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
-        $this->addAbstractPriceProductPriceListCreateListener($eventCollection);
-        $this->addAbstractPriceProductPriceListUpdateListener($eventCollection);
-        $this->addAbstractPriceProductPriceListDeleteListener($eventCollection);
-        $this->addAbstractPriceProductPriceListPublishListener($eventCollection);
+        $eventCollection = $this->addAbstractPriceProductPriceListCreateListener($eventCollection);
+        $eventCollection = $this->addAbstractPriceProductPriceListUpdateListener($eventCollection);
+        $eventCollection = $this->addAbstractPriceProductPriceListDeleteListener($eventCollection);
+        $eventCollection = $this->addAbstractPriceProductPriceListPublishListener($eventCollection);
 
-        $this->addConcretePriceProductPriceListCreateListener($eventCollection);
-        $this->addConcretePriceProductPriceListUpdateListener($eventCollection);
-        $this->addConcretePriceProductPriceListDeleteListener($eventCollection);
-        $this->addConcretePriceProductPriceListPublishListener($eventCollection);
+        $eventCollection = $this->addConcretePriceProductPriceListCreateListener($eventCollection);
+        $eventCollection = $this->addConcretePriceProductPriceListUpdateListener($eventCollection);
+        $eventCollection = $this->addConcretePriceProductPriceListDeleteListener($eventCollection);
 
-        return $eventCollection;
+        return $this->addConcretePriceProductPriceListPublishListener($eventCollection);
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addConcretePriceProductPriceListCreateListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addConcretePriceProductPriceListCreateListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::ENTITY_FOS_PRICE_PRODUCT_PRICE_LIST_CREATE,
             new PriceProductPriceListConcreteListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addConcretePriceProductPriceListUpdateListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addConcretePriceProductPriceListUpdateListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::ENTITY_FOS_PRICE_PRODUCT_PRICE_LIST_UPDATE,
             new PriceProductPriceListConcreteListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addConcretePriceProductPriceListDeleteListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addConcretePriceProductPriceListDeleteListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::ENTITY_FOS_PRICE_PRODUCT_PRICE_LIST_DELETE,
             new PriceProductPriceListConcreteDeleteListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addAbstractPriceProductPriceListCreateListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addAbstractPriceProductPriceListCreateListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::ENTITY_FOS_PRICE_PRODUCT_PRICE_LIST_CREATE,
             new PriceProductPriceListAbstractListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addAbstractPriceProductPriceListUpdateListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addAbstractPriceProductPriceListUpdateListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::ENTITY_FOS_PRICE_PRODUCT_PRICE_LIST_UPDATE,
             new PriceProductPriceListAbstractListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addAbstractPriceProductPriceListDeleteListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addAbstractPriceProductPriceListDeleteListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::ENTITY_FOS_PRICE_PRODUCT_PRICE_LIST_DELETE,
             new PriceProductPriceListAbstractDeleteListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addAbstractPriceProductPriceListPublishListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addAbstractPriceProductPriceListPublishListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::PRICE_PRODUCT_ABSTRACT_PRICE_LIST_PUBLISH,
             new PriceProductPriceListAbstractListener(),
         );
-
-        return $this;
     }
 
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
      *
-     * @return $this
+     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
      */
-    protected function addConcretePriceProductPriceListPublishListener(EventCollectionInterface $eventCollection)
-    {
-        $eventCollection->addListenerQueued(
+    protected function addConcretePriceProductPriceListPublishListener(
+        EventCollectionInterface $eventCollection
+    ): EventCollectionInterface {
+        return $eventCollection->addListenerQueued(
             PriceProductPriceListEvents::PRICE_PRODUCT_CONCRETE_PRICE_LIST_PUBLISH,
             new PriceProductPriceListAbstractListener(),
         );
-
-        return $this;
     }
 }

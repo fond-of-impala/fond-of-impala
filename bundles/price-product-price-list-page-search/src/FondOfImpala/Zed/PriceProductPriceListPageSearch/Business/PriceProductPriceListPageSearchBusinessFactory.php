@@ -109,7 +109,7 @@ class PriceProductPriceListPageSearchBusinessFactory extends AbstractBusinessFac
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface>
      */
     protected function getPriceProductConcretePriceListPageDataExpanderPlugins(): array
     {
@@ -117,7 +117,7 @@ class PriceProductPriceListPageSearchBusinessFactory extends AbstractBusinessFac
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface>
      */
     protected function getPriceProductAbstractPriceListPageDataExpanderPlugins(): array
     {
@@ -125,7 +125,7 @@ class PriceProductPriceListPageSearchBusinessFactory extends AbstractBusinessFac
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface>
      */
     protected function getPriceProductConcretePriceListPageSearchDataExpanderPlugins(): array
     {
@@ -133,7 +133,7 @@ class PriceProductPriceListPageSearchBusinessFactory extends AbstractBusinessFac
     }
 
     /**
-     * @return \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface[]
+     * @return array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageSearchDataExpanderPluginInterface>
      */
     protected function getPriceProductAbstractPriceListPageSearchDataExpanderPlugins(): array
     {

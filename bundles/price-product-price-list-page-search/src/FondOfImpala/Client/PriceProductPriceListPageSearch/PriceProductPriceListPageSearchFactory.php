@@ -23,7 +23,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
     /**
      * @param string $searchString
      * @param array $requestParameters
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[] $queryExpanderPlugins
+     * @param array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface> $queryExpanderPlugins
      *
      * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
@@ -38,15 +38,13 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
             $searchQuery->setSearchString($searchString);
         }
 
-        $searchQuery = $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
-
-        return $searchQuery;
+        return $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
     }
 
     /**
      * @param string $searchString
      * @param array $requestParameters
-     * @param \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[] $queryExpanderPlugins
+     * @param array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface> $queryExpanderPlugins
      *
      * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
      */
@@ -61,13 +59,11 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
             $searchQuery->setSearchString($searchString);
         }
 
-        $searchQuery = $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
-
-        return $searchQuery;
+        return $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     public function getPriceProductAbstractPriceListSearchQueryExpanderPlugins(): array
     {
@@ -75,7 +71,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     public function getPriceProductAbstractPriceListSearchCountQueryExpanderPlugins(): array
     {
@@ -83,7 +79,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     public function getPriceProductAbstractPriceListSearchResultFormatters(): array
     {
@@ -101,7 +97,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     public function getPriceProductConcretePriceListSearchQueryExpanderPlugins(): array
     {
@@ -109,7 +105,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     public function getPriceProductConcretePriceListSearchCountQueryExpanderPlugins(): array
     {
@@ -117,7 +113,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface[]
+     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     public function getPriceProductConcretePriceListSearchResultFormatters(): array
     {

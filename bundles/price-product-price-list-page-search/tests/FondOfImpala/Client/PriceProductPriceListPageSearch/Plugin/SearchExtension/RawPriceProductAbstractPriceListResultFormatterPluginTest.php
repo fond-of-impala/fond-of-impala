@@ -12,29 +12,10 @@ use ReflectionMethod;
 
 class RawPriceProductAbstractPriceListResultFormatterPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\RawPriceProductAbstractPriceListResultFormatterPlugin
-     */
     protected RawPriceProductAbstractPriceListResultFormatterPlugin $rawPriceProductAbstractPriceListResultFormatterPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet
-     */
     protected MockObject|ResultSet $resultSetMock;
 
-    /**
-     * @var array
-     */
-    protected array $requestParameters;
-
-    /**
-     * @var array
-     */
-    protected array $results;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Result
-     */
     protected MockObject|Result $resultMock;
 
     /**
@@ -48,17 +29,9 @@ class RawPriceProductAbstractPriceListResultFormatterPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->requestParameters = [
-
-        ];
-
         $this->resultMock = $this->getMockBuilder(Result::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->results = [
-            $this->resultMock,
-        ];
 
         $this->rawPriceProductAbstractPriceListResultFormatterPlugin = new RawPriceProductAbstractPriceListResultFormatterPlugin();
     }
@@ -68,7 +41,10 @@ class RawPriceProductAbstractPriceListResultFormatterPluginTest extends Unit
      */
     public function testGetName(): void
     {
-        static::assertSame('price_product_abstract_price_lists', $this->rawPriceProductAbstractPriceListResultFormatterPlugin->getName());
+        static::assertEquals(
+            'price_product_abstract_price_lists',
+            $this->rawPriceProductAbstractPriceListResultFormatterPlugin->getName(),
+        );
     }
 
     /**
@@ -80,13 +56,18 @@ class RawPriceProductAbstractPriceListResultFormatterPluginTest extends Unit
 
         $this->resultSetMock->expects(static::atLeastOnce())
             ->method('getResults')
-            ->willReturn($this->results);
+            ->willReturn([$this->resultMock]);
 
         $this->resultMock->expects(static::atLeastOnce())
             ->method('getSource')
             ->willReturn([PriceProductPriceListIndexMap::SEARCH_RESULT_DATA => []]);
 
-        static::assertIsArray($reflectionMethod->invokeArgs($this->rawPriceProductAbstractPriceListResultFormatterPlugin, [$this->resultSetMock, $this->requestParameters]));
+        static::assertIsArray(
+            $reflectionMethod->invokeArgs(
+                $this->rawPriceProductAbstractPriceListResultFormatterPlugin,
+                [$this->resultSetMock, []],
+            ),
+        );
     }
 
     /**

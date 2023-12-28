@@ -9,19 +9,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class PriceProductPriceListPageSearchMapperTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\Propel\Mapper\PriceProductPriceListPageSearchMapper
-     */
     protected PriceProductPriceListPageSearchMapper $priceProductPriceListPageSearchMapper;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
-     */
     protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
-    /**
-     * @var array
-     */
     protected array $priceProductPriceListsData;
 
     /**

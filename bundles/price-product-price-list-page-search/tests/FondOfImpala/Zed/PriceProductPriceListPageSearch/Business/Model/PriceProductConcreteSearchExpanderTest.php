@@ -10,18 +10,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 class PriceProductConcreteSearchExpanderTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject[]|\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageDataExpanderPluginInterface>|array<\PHPUnit\Framework\MockObject\MockObject>
      */
     protected array $priceProductConcretePriceListPageDataExpanderPluginMocks;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
-     */
     protected MockObject|PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\Model\PriceProductConcreteSearchExpander
-     */
     protected PriceProductConcreteSearchExpander $priceProductConcreteSearchExpander;
 
     /**
