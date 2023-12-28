@@ -7,13 +7,13 @@ use FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProd
 class PriceProductConcreteSearchMapper extends AbstractPriceProductSearchMapper
 {
     /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface>
      */
     protected array $priceProductConcretePriceListPageDataExpanderPlugins;
 
     /**
      * @param \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacade
-     * @param \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface[] $priceProductConcretePriceListPageDataExpanderPlugins
+     * @param array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductConcretePriceListPageSearchDataExpanderPluginInterface> $priceProductConcretePriceListPageDataExpanderPlugins
      */
     public function __construct(
         PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacade,

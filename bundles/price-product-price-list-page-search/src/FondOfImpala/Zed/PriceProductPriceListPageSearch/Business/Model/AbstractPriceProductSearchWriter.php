@@ -42,7 +42,7 @@ abstract class AbstractPriceProductSearchWriter
 
     /**
      * @param \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer $priceProductPriceListPageSearchTransfer
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[] $existingPageSearchEntities
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch> $existingPageSearchEntities
      * @param bool $mergePrices
      *
      * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer
@@ -85,7 +85,7 @@ abstract class AbstractPriceProductSearchWriter
     }
 
     /**
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[] $existingPageSearchEntities
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch> $existingPageSearchEntities
      * @param string $priceKey
      *
      * @return array

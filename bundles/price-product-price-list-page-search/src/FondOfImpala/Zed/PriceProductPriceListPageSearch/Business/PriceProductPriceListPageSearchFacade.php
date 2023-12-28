@@ -16,7 +16,7 @@ class PriceProductPriceListPageSearchFacade extends AbstractFacade implements Pr
      *
      * @api
      *
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */
@@ -31,7 +31,7 @@ class PriceProductPriceListPageSearchFacade extends AbstractFacade implements Pr
      *
      * @api
      *
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */
@@ -49,7 +49,7 @@ class PriceProductPriceListPageSearchFacade extends AbstractFacade implements Pr
      *
      * @api
      *
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
      * @return void
      */
@@ -67,7 +67,7 @@ class PriceProductPriceListPageSearchFacade extends AbstractFacade implements Pr
      *
      * @api
      *
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */

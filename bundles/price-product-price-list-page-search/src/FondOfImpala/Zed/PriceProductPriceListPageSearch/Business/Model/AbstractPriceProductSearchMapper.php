@@ -77,16 +77,13 @@ abstract class AbstractPriceProductSearchMapper implements PriceProductSearchMap
 
         $searchData = [
             PriceProductPriceListIndexMap::STORE => $store,
-            PriceProductPriceListIndexMap::LOCALE => null,
             PriceProductPriceListIndexMap::ID_PRICE_LIST => $data[static::DATA_KEY_ID_PRICE_LIST],
             PriceProductPriceListIndexMap::SKU => $data[static::DATA_KEY_SKU],
             PriceProductPriceListIndexMap::PRICE_LIST_NAME => $data[static::DATA_KEY_PRICE_LIST_NAME],
             PriceProductPriceListIndexMap::SEARCH_RESULT_DATA => $this->mapDataToSearchResultData($data),
         ];
 
-        $searchData = $this->expandSearchData($data, $searchData);
-
-        return $searchData;
+        return $this->expandSearchData($data, $searchData);
     }
 
     /**
