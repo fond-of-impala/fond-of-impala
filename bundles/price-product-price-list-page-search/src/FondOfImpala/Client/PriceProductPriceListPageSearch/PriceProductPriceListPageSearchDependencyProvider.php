@@ -90,7 +90,7 @@ class PriceProductPriceListPageSearchDependencyProvider extends AbstractDependen
      */
     protected function addSearchClient(Container $container): Container
     {
-        $container[static::CLIENT_SEARCH] = static fn(Container $container): PriceProductPriceListPageSearchToSearchClientBridge => new PriceProductPriceListPageSearchToSearchClientBridge(
+        $container[static::CLIENT_SEARCH] = static fn (Container $container): PriceProductPriceListPageSearchToSearchClientBridge => new PriceProductPriceListPageSearchToSearchClientBridge(
             $container->getLocator()->search()->client(),
         );
 

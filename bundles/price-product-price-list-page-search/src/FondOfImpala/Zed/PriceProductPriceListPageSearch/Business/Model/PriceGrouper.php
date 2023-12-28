@@ -83,7 +83,7 @@ class PriceGrouper implements PriceGrouperInterface
      */
     protected function filterPriceData(array $priceData, string $excludeKey): array
     {
-        $priceData = array_filter($priceData, static function ($v, $k) use ($excludeKey) : bool {
+        $priceData = array_filter($priceData, static function ($v, $k) use ($excludeKey): bool {
             if ($k === $excludeKey) {
                 return true;
             }
