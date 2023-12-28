@@ -8,14 +8,8 @@ use Spryker\Service\UtilEncoding\UtilEncodingServiceInterface;
 
 class PriceProductPriceListPageSearchToUtilEncodingServiceBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceBridge
-     */
     protected PriceProductPriceListPageSearchToUtilEncodingServiceBridge $priceProductPriceListPageSearchToUtilEncodingServiceBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Service\UtilEncoding\UtilEncodingServiceInterface
-     */
     private MockObject|UtilEncodingServiceInterface $utilEncodingServiceInterfaceMock;
 
     /**

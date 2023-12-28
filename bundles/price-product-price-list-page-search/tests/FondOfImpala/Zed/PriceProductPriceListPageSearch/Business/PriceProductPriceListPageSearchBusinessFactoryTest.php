@@ -15,34 +15,16 @@ use Spryker\Zed\Kernel\Container;
 
 class PriceProductPriceListPageSearchBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Business\PriceProductPriceListPageSearchBusinessFactory
-     */
     protected PriceProductPriceListPageSearchBusinessFactory $priceProductPriceListPageSearchBusinessFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchRepository
-     */
     protected MockObject|PriceProductPriceListPageSearchRepository $priceProductPriceListPageSearchRepositoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Persistence\PriceProductPriceListPageSearchEntityManager
-     */
     protected MockObject|PriceProductPriceListPageSearchEntityManager $priceProductPriceListPageSearchEntityManagerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeInterface
-     */
     protected MockObject|PriceProductPriceListPageSearchToStoreFacadeInterface $storeFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Service\PriceProductPriceListPageSearchToUtilEncodingServiceInterface
-     */
     protected MockObject|PriceProductPriceListPageSearchToUtilEncodingServiceInterface $utilEncodingServiceMock;
 
     /**

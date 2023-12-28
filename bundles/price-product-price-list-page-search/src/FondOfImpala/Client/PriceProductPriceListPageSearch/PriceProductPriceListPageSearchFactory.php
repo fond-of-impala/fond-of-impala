@@ -38,9 +38,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
             $searchQuery->setSearchString($searchString);
         }
 
-        $searchQuery = $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
-
-        return $searchQuery;
+        return $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
     }
 
     /**
@@ -61,9 +59,7 @@ class PriceProductPriceListPageSearchFactory extends AbstractFactory
             $searchQuery->setSearchString($searchString);
         }
 
-        $searchQuery = $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
-
-        return $searchQuery;
+        return $this->getSearchClient()->expandQuery($searchQuery, $queryExpanderPlugins, $requestParameters);
     }
 
     /**

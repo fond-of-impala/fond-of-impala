@@ -10,20 +10,11 @@ use Spryker\Zed\Kernel\Container;
 
 class PriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Communication\PriceProductPriceListPageSearchCommunicationFactory
-     */
     protected PriceProductPriceListPageSearchCommunicationFactory $priceProductPriceListPageSearchCommunicationFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToEventBehaviorFacadeInterface
-     */
-    protected MockObject|PriceProductPriceListPageSearchToEventBehaviorFacadeInterface $priceProductPriceListPageSearchToEventBehaviorFacadeInterfaceMock;
+    protected MockObject|PriceProductPriceListPageSearchToEventBehaviorFacadeBridge $eventBehaviorFacadeMock;
 
     /**
      * @return void
@@ -36,7 +27,7 @@ class PriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->priceProductPriceListPageSearchToEventBehaviorFacadeInterfaceMock = $this->getMockBuilder(PriceProductPriceListPageSearchToEventBehaviorFacadeBridge::class)
+        $this->eventBehaviorFacadeMock = $this->getMockBuilder(PriceProductPriceListPageSearchToEventBehaviorFacadeBridge::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -55,7 +46,7 @@ class PriceProductPriceListPageSearchCommunicationFactoryTest extends Unit
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
-            ->willReturn($this->priceProductPriceListPageSearchToEventBehaviorFacadeInterfaceMock);
+            ->willReturn($this->eventBehaviorFacadeMock);
 
         static::assertInstanceOf(
             PriceProductPriceListPageSearchToEventBehaviorFacadeBridge::class,

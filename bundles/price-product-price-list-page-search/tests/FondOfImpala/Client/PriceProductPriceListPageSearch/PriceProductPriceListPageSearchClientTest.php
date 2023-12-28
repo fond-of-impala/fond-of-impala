@@ -10,44 +10,23 @@ use Spryker\Glue\Kernel\Container;
 
 class PriceProductPriceListPageSearchClientTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchClient
-     */
     protected PriceProductPriceListPageSearchClient $priceProductPriceListPageSearchClient;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\PriceProductPriceListPageSearchFactory
-     */
     protected MockObject|PriceProductPriceListPageSearchFactory $priceProductPriceListPageSearchFactoryMock;
 
-    /**
-     * @var string
-     */
     protected string $search;
 
-    /**
-     * @var array
-     */
     protected array $requestParameters;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientInterface
-     */
     protected MockObject|PriceProductPriceListPageSearchToSearchClientInterface $priceProductPriceListPageSearchToSearchClientInterfaceMock;
 
     /**
-     * @var array
+     * @var array<\Elastica\ResultSet|\PHPUnit\Framework\MockObject\MockObject>
      */
     protected array $resultSets;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet
-     */
     protected MockObject|ResultSet $resultSetMock;
 
     /**
@@ -75,9 +54,7 @@ class PriceProductPriceListPageSearchClientTest extends Unit
 
         $this->search = 'search';
 
-        $this->requestParameters = [
-
-        ];
+        $this->requestParameters = [];
 
         $this->resultSets = [
             $this->resultSetMock,
@@ -100,7 +77,10 @@ class PriceProductPriceListPageSearchClientTest extends Unit
             ->method('search')
             ->willReturn($this->resultSets);
 
-        static::assertIsArray($this->priceProductPriceListPageSearchClient->searchAbstract($this->search, $this->requestParameters));
+        static::assertEquals(
+            $this->resultSets,
+            $this->priceProductPriceListPageSearchClient->searchAbstract($this->search, $this->requestParameters),
+        );
     }
 
     /**
@@ -120,7 +100,10 @@ class PriceProductPriceListPageSearchClientTest extends Unit
             ->method('getTotalHits')
             ->willReturn(1);
 
-        static::assertSame(1, $this->priceProductPriceListPageSearchClient->searchAbstractCount($this->search, $this->requestParameters));
+        static::assertEquals(
+            1,
+            $this->priceProductPriceListPageSearchClient->searchAbstractCount($this->search, $this->requestParameters),
+        );
     }
 
     /**
@@ -136,7 +119,10 @@ class PriceProductPriceListPageSearchClientTest extends Unit
             ->method('search')
             ->willReturn($this->resultSets);
 
-        static::assertIsArray($this->priceProductPriceListPageSearchClient->searchConcrete($this->search, $this->requestParameters));
+        static::assertEquals(
+            $this->resultSets,
+            $this->priceProductPriceListPageSearchClient->searchConcrete($this->search, $this->requestParameters),
+        );
     }
 
     /**
@@ -156,6 +142,9 @@ class PriceProductPriceListPageSearchClientTest extends Unit
             ->method('getTotalHits')
             ->willReturn(1);
 
-        static::assertSame(1, $this->priceProductPriceListPageSearchClient->searchConcreteCount($this->search, $this->requestParameters));
+        static::assertEquals(
+            1,
+            $this->priceProductPriceListPageSearchClient->searchConcreteCount($this->search, $this->requestParameters),
+        );
     }
 }
