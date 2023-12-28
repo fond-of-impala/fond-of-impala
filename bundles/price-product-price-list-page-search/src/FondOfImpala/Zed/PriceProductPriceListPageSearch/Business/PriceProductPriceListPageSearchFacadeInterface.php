@@ -12,7 +12,7 @@ interface PriceProductPriceListPageSearchFacadeInterface
      *
      * @api
      *
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */
@@ -54,7 +54,7 @@ interface PriceProductPriceListPageSearchFacadeInterface
      *
      * @api
      *
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */
@@ -68,7 +68,7 @@ interface PriceProductPriceListPageSearchFacadeInterface
      *
      * @api
      *
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
      * @return void
      */
@@ -82,7 +82,7 @@ interface PriceProductPriceListPageSearchFacadeInterface
      *
      * @api
      *
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
      * @return void
      */

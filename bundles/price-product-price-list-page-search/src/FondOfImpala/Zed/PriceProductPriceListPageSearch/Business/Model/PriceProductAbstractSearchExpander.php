@@ -7,12 +7,12 @@ use Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer;
 class PriceProductAbstractSearchExpander implements PriceProductAbstractSearchExpanderInterface
 {
     /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface>
      */
     protected array $priceProductAbstractPriceListPageDataExpanderPlugins;
 
     /**
-     * @param \FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface[] $priceProductAbstractPriceListPageDataExpanderPlugins
+     * @param array<\FondOfImpala\Zed\PriceProductPriceListPageSearchExtension\Dependency\Plugin\PriceProductAbstractPriceListPageDataExpanderPluginInterface> $priceProductAbstractPriceListPageDataExpanderPlugins
      */
     public function __construct(
         array $priceProductAbstractPriceListPageDataExpanderPlugins

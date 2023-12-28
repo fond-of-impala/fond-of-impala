@@ -7,54 +7,54 @@ use Generated\Shared\Transfer\FilterTransfer;
 interface PriceProductPriceListPageSearchRepositoryInterface
 {
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceProductPriceListByIds(array $priceProductPriceListIds): array;
 
     /**
      * @param int $idPriceList
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceProductAbstractPriceListByIdPriceList(int $idPriceList): array;
 
     /**
      * @param int $idPriceList
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceProductConcretePriceListByIdPriceList(int $idPriceList): array;
 
     /**
-     * @param string[] $priceKeys
+     * @param array<string> $priceKeys
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch>
      */
     public function findExistingPriceProductAbstractPriceListEntitiesByPriceKeys(array $priceKeys): array;
 
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch>
      */
     public function findExistingPriceProductAbstractPriceListEntitiesByProductAbstractIds(
         array $productAbstractIds
     ): array;
 
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceListProductAbstractPricesDataByProductAbstractIds(array $productAbstractIds): array;
 
     /**
      * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
-     * @param int[] $priceProductConcretePriceListPageSearchIds
+     * @param array<int> $priceProductConcretePriceListPageSearchIds
      *
-     * @return \Generated\Shared\Transfer\FoiPriceProductConcretePriceListPageSearchEntityTransfer[]
+     * @return array<\Generated\Shared\Transfer\FoiPriceProductConcretePriceListPageSearchEntityTransfer>
      */
     public function findFilteredPriceProductConcretePriceListPageSearchEntities(
         FilterTransfer $filterTransfer,
@@ -63,9 +63,9 @@ interface PriceProductPriceListPageSearchRepositoryInterface
 
     /**
      * @param \Generated\Shared\Transfer\FilterTransfer $filterTransfer
-     * @param int[] $priceProductAbstractPriceListPageSearchIds
+     * @param array<int> $priceProductAbstractPriceListPageSearchIds
      *
-     * @return \Generated\Shared\Transfer\FoiPriceProductAbstractPriceListPageSearchEntityTransfer[]
+     * @return array<\Generated\Shared\Transfer\FoiPriceProductAbstractPriceListPageSearchEntityTransfer>
      */
     public function findFilteredPriceProductAbstractPriceListPageSearchEntities(
         FilterTransfer $filterTransfer,
@@ -73,30 +73,30 @@ interface PriceProductPriceListPageSearchRepositoryInterface
     ): array;
 
     /**
-     * @param int[] $priceProductPriceListIds
+     * @param array<int> $priceProductPriceListIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceListProductConcretePricesDataByIds(array $priceProductPriceListIds): array;
 
     /**
-     * @param string[] $priceKeys
+     * @param array<string> $priceKeys
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch>
      */
     public function findExistingPriceProductConcretePriceListEntitiesByPriceKeys(array $priceKeys): array;
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
-     * @return \Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer[]
+     * @return array<\Generated\Shared\Transfer\PriceProductPriceListPageSearchTransfer>
      */
     public function findPriceListProductConcretePricesDataByProductIds(array $productIds): array;
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
-     * @return \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[]
+     * @return array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch>
      */
     public function findExistingPriceProductConcretePriceListEntitiesByProductIds(array $productIds): array;
 }

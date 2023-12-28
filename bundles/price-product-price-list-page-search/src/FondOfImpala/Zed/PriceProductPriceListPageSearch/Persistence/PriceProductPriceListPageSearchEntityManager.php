@@ -48,7 +48,7 @@ class PriceProductPriceListPageSearchEntityManager extends AbstractEntityManager
     }
 
     /**
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch[] $priceProductAbstractPriceListPageSearchEntities
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductAbstractPriceListPageSearch> $priceProductAbstractPriceListPageSearchEntities
      *
      * @return void
      */
@@ -95,7 +95,7 @@ class PriceProductPriceListPageSearchEntityManager extends AbstractEntityManager
     }
 
     /**
-     * @param \Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch[] $priceProductConcretePriceListPageSearchEntities
+     * @param array<\Orm\Zed\PriceProductPriceListPageSearch\Persistence\FoiPriceProductConcretePriceListPageSearch> $priceProductConcretePriceListPageSearchEntities
      *
      * @return void
      */
