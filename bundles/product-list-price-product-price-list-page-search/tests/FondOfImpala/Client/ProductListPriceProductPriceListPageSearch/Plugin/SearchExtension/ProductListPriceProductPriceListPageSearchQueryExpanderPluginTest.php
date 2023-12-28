@@ -48,7 +48,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPluginTest extends 
     protected MockObject|CustomerProductListCollectionTransfer $customerProductListCollectionTransferMock;
 
     /**
-     * @var int[]
+     * @var array<int>
      */
     protected array $blacklistIds;
 
@@ -58,7 +58,7 @@ class ProductListPriceProductPriceListPageSearchQueryExpanderPluginTest extends 
     protected MockObject|BoolQuery $boolQueryMock;
 
     /**
-     * @var int[]
+     * @var array<int>
      */
     protected array $whitelistIds;
 

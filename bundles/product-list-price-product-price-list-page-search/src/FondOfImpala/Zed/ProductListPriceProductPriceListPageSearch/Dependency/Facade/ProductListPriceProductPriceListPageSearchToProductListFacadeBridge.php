@@ -19,7 +19,7 @@ class ProductListPriceProductPriceListPageSearchToProductListFacadeBridge implem
     /**
      * @param int $idProduct
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getProductBlacklistIdsByIdProduct(int $idProduct): array
     {
@@ -29,7 +29,7 @@ class ProductListPriceProductPriceListPageSearchToProductListFacadeBridge implem
     /**
      * @param int $idProduct
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getProductWhitelistIdsByIdProduct(int $idProduct): array
     {
@@ -39,7 +39,7 @@ class ProductListPriceProductPriceListPageSearchToProductListFacadeBridge implem
     /**
      * @param int $idProductAbstract
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getProductBlacklistIdsByIdProductAbstract(int $idProductAbstract): array
     {
@@ -49,7 +49,7 @@ class ProductListPriceProductPriceListPageSearchToProductListFacadeBridge implem
     /**
      * @param int $idProductAbstract
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getProductWhitelistIdsByIdProductAbstract(int $idProductAbstract): array
     {

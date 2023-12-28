@@ -16,7 +16,7 @@ class ProductListPriceProductAbstractPriceListPageSearchListener extends Abstrac
     use DatabaseTransactionHandlerTrait;
 
     /**
-     * @param \Spryker\Shared\Kernel\Transfer\TransferInterface[] $transfers
+     * @param array<\Spryker\Shared\Kernel\Transfer\TransferInterface> $transfers
      * @param string $eventName
      *
      * @return void
