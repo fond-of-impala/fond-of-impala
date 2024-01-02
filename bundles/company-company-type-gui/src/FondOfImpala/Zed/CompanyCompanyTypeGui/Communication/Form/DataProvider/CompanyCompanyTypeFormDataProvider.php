@@ -7,10 +7,7 @@ use FondOfImpala\Zed\CompanyCompanyTypeGui\Dependency\Facade\CompanyCompanyTypeG
 
 class CompanyCompanyTypeFormDataProvider
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyCompanyTypeGui\Dependency\Facade\CompanyCompanyTypeGuiToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyCompanyTypeGuiToCompanyTypeFacadeInterface $companyTypeFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyCompanyTypeGui\Dependency\Facade\CompanyCompanyTypeGuiToCompanyTypeFacadeInterface $companyTypeFacade

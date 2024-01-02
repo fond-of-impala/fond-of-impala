@@ -19,35 +19,17 @@ class CompanyTypeConverter implements CompanyTypeConverterInterface
 {
     use TransactionTrait;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeConverterPluginExecutorInterface
-     */
-    protected $companyTypeConverterPluginExecutor;
+    protected CompanyTypeConverterPluginExecutorInterface $companyTypeConverterPluginExecutor;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyTypeConverterToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyTypeConverterToCompanyUserFacadeInterface $companyUserFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\CompanyTypeConverterConfig
-     */
-    protected $config;
+    protected CompanyTypeConverterConfig $config;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeRoleWriterInterface
-     */
-    protected $companyTypeRoleWriter;
+    protected CompanyTypeRoleWriterInterface $companyTypeRoleWriter;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade
@@ -80,9 +62,7 @@ class CompanyTypeConverter implements CompanyTypeConverterInterface
      */
     public function convertCompanyType(CompanyTransfer $companyTransfer): CompanyResponseTransfer
     {
-        return $this->getTransactionHandler()->handleTransaction(function () use ($companyTransfer) {
-            return $this->executeConvertCompanyTypeTransaction($companyTransfer);
-        });
+        return $this->getTransactionHandler()->handleTransaction(fn (): CompanyResponseTransfer => $this->executeConvertCompanyTypeTransaction($companyTransfer));
     }
 
     /**

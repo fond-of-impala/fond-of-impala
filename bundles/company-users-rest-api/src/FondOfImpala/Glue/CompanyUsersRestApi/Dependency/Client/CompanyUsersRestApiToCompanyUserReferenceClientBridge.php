@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 class CompanyUsersRestApiToCompanyUserReferenceClientBridge implements CompanyUsersRestApiToCompanyUserReferenceClientInterface
 {
-    /**
-     * @var \FondOfSpryker\Client\CompanyUserReference\CompanyUserReferenceClientInterface
-     */
-    protected $companyUserReferenceClient;
+    protected CompanyUserReferenceClientInterface $companyUserReferenceClient;
 
     /**
      * @param \FondOfSpryker\Client\CompanyUserReference\CompanyUserReferenceClientInterface $companyUserReferenceClient

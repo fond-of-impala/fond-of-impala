@@ -10,20 +10,11 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CompanyUserDeleter implements CompanyUserDeleterInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Mapper\RestDeleteCompanyUserRequestMapperInterface
-     */
-    protected $restDeleteCompanyUserRequestMapper;
+    protected RestDeleteCompanyUserRequestMapperInterface $restDeleteCompanyUserRequestMapper;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Builder\RestResponseBuilderInterface
-     */
-    protected $restResponseBuilder;
+    protected RestResponseBuilderInterface $restResponseBuilder;
 
-    /**
-     * @var \FondOfImpala\Client\CompanyUsersRestApi\CompanyUsersRestApiClientInterface
-     */
-    protected $client;
+    protected CompanyUsersRestApiClientInterface $client;
 
     /**
      * @param \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Mapper\RestDeleteCompanyUserRequestMapperInterface $restDeleteCompanyUserRequestMapper

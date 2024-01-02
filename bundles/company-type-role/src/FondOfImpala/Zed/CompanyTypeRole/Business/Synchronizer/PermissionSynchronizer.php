@@ -7,15 +7,9 @@ use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyR
 
 class PermissionSynchronizer implements PermissionSynchronizerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyRoleReaderInterface
-     */
-    protected $companyRoleReader;
+    protected CompanyRoleReaderInterface $companyRoleReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\CompanyRoleReaderInterface $companyRoleReader

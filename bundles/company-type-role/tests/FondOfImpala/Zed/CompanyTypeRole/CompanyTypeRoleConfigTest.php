@@ -54,15 +54,9 @@ class CompanyTypeRoleConfigTest extends Unit
         parent::_before();
 
         $this->companyTypeRoleConfig = new class ($this->validCompanyTypeNames, $this->predefinedPermissionKeys) extends CompanyTypeRoleConfig {
-            /**
-             * @var array
-             */
-            protected $validCompanyTypeNames;
+            protected array $validCompanyTypeNames;
 
-            /**
-             * @var array
-             */
-            protected $predefinedPermissionKeys;
+            protected array $predefinedPermissionKeys;
 
             /**
              * @param array $validCompanyTypeNames

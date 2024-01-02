@@ -32,9 +32,7 @@ class CompanyTypeDependencyProvider extends AbstractDependencyProvider
      */
     protected function addZedRequestClient(Container $container): Container
     {
-        $container[static::CLIENT_ZED_REQUEST] = static function (Container $container) {
-            return new CompanyTypeToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
-        };
+        $container[static::CLIENT_ZED_REQUEST] = static fn (Container $container): CompanyTypeToZedRequestClientBridge => new CompanyTypeToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
 
         return $container;
     }

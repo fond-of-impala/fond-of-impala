@@ -14,30 +14,15 @@ use Generated\Shared\Transfer\RestCustomerTransfer;
 
 class CustomerWriter implements CustomerWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Mapper\CustomerMapperInterface
-     */
-    protected $customerMapper;
+    protected CustomerMapperInterface $customerMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Generator\RandomPasswordGeneratorInterface
-     */
-    protected $randomPasswordGenerator;
+    protected RandomPasswordGeneratorInterface $randomPasswordGenerator;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Generator\RestorePasswordKeyGeneratorInterface
-     */
-    protected $restorePasswordKeyGenerator;
+    protected RestorePasswordKeyGeneratorInterface $restorePasswordKeyGenerator;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Generator\RestorePasswordLinkGeneratorInterface
-     */
-    protected $restorePasswordLinkGenerator;
+    protected RestorePasswordLinkGeneratorInterface $restorePasswordLinkGenerator;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCustomerFacadeInterface
-     */
-    protected $customerFacade;
+    protected CompanyUsersRestApiToCustomerFacadeInterface $customerFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Mapper\CustomerMapperInterface $customerMapper

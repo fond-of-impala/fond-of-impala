@@ -6,10 +6,7 @@ use FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig;
 
 class RestorePasswordLinkGenerator implements RestorePasswordLinkGeneratorInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig
-     */
-    protected $config;
+    protected CompanyUsersRestApiConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig $config

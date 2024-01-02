@@ -25,40 +25,19 @@ use Generated\Shared\Transfer\CustomerTransfer;
 
 class CompanyUser implements CompanyUserInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyFacadeInterface
-     */
-    protected $companyFacade;
+    protected CompanyUserCompanyAssignerToCompanyFacadeInterface $companyFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyUserCompanyAssignerToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyUserCompanyAssignerToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\CompanyUserCompanyAssignerConfig
-     */
-    protected $companyUserCompanyAssignerConfig;
+    protected CompanyUserCompanyAssignerConfig $companyUserCompanyAssignerConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUserCompanyAssignerToCompanyUserFacadeInterface $companyUserFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Persistence\CompanyUserCompanyAssignerRepositoryInterface
-     */
-    protected $companyUserCompanyAssignerRepository;
+    protected CompanyUserCompanyAssignerRepositoryInterface $companyUserCompanyAssignerRepository;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyBusinessUnitFacadeInterface
-     */
-    protected $companyBusinessUnitFacade;
+    protected CompanyUserCompanyAssignerToCompanyBusinessUnitFacadeInterface $companyBusinessUnitFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserCompanyAssigner\CompanyUserCompanyAssignerConfig $companyUserCompanyAssignerConfig

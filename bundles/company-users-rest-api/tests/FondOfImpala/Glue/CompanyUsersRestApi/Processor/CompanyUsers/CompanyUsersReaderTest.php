@@ -177,9 +177,7 @@ class CompanyUsersReaderTest extends Unit
             ->method('findActiveCompanyUsersByCustomerReference')
             ->with(
                 static::callback(
-                    static function (CustomerTransfer $customerTransfer) use ($customerReference) {
-                        return $customerTransfer->getCustomerReference() === $customerReference;
-                    },
+                    static fn (CustomerTransfer $customerTransfer): bool => $customerTransfer->getCustomerReference() === $customerReference,
                 ),
             )->willReturn($this->companyUserCollectionTransferMock);
 

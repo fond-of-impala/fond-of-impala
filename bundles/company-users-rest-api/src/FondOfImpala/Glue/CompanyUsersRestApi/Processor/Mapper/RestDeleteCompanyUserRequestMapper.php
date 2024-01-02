@@ -9,15 +9,9 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class RestDeleteCompanyUserRequestMapper implements RestDeleteCompanyUserRequestMapperInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Filter\IdCustomerFilterInterface
-     */
-    protected $idCustomerFilter;
+    protected IdCustomerFilterInterface $idCustomerFilter;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Filter\CompanyUserReferenceFilterInterface
-     */
-    protected $companyUserReferenceFilter;
+    protected CompanyUserReferenceFilterInterface $companyUserReferenceFilter;
 
     /**
      * @param \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Filter\IdCustomerFilterInterface $idCustomerFilter

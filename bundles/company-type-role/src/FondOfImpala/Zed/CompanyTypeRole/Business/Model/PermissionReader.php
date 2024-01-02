@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class PermissionReader implements PermissionReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig
-     */
-    protected $config;
+    protected CompanyTypeRoleConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig $config

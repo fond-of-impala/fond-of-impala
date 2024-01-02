@@ -14,6 +14,7 @@ use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiTo
 use FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Service\CompanyUsersRestApiToUtilTextServiceBridge;
 use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleToCompanyUserQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -143,9 +144,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyUserPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY_USER] = static function () {
-            return SpyCompanyUserQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY_USER] = static fn (): Criteria => SpyCompanyUserQuery::create();
 
         return $container;
     }
@@ -157,9 +156,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyRoleToCompanyUserPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY_ROLE_TO_COMPANY_USER] = static function () {
-            return SpyCompanyRoleToCompanyUserQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY_ROLE_TO_COMPANY_USER] = static fn (): Criteria => SpyCompanyRoleToCompanyUserQuery::create();
 
         return $container;
     }
@@ -171,11 +168,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyRoleFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_ROLE] = static function (Container $container) {
-            return new CompanyUsersRestApiToCompanyRoleFacadeBridge(
-                $container->getLocator()->companyRole()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_ROLE] = static fn (Container $container): CompanyUsersRestApiToCompanyRoleFacadeBridge => new CompanyUsersRestApiToCompanyRoleFacadeBridge(
+            $container->getLocator()->companyRole()->facade(),
+        );
 
         return $container;
     }
@@ -187,11 +182,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addUtilTextService(Container $container): Container
     {
-        $container[static::SERVICE_UTIL_TEXT] = static function (Container $container) {
-            return new CompanyUsersRestApiToUtilTextServiceBridge(
-                $container->getLocator()->utilText()->service(),
-            );
-        };
+        $container[static::SERVICE_UTIL_TEXT] = static fn (Container $container): CompanyUsersRestApiToUtilTextServiceBridge => new CompanyUsersRestApiToUtilTextServiceBridge(
+            $container->getLocator()->utilText()->service(),
+        );
 
         return $container;
     }
@@ -203,11 +196,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCustomerFacade(Container $container): Container
     {
-        $container[static::FACADE_CUSTOMER] = static function (Container $container) {
-            return new CompanyUsersRestApiToCustomerFacadeBridge(
-                $container->getLocator()->customer()->facade(),
-            );
-        };
+        $container[static::FACADE_CUSTOMER] = static fn (Container $container): CompanyUsersRestApiToCustomerFacadeBridge => new CompanyUsersRestApiToCustomerFacadeBridge(
+            $container->getLocator()->customer()->facade(),
+        );
 
         return $container;
     }
@@ -219,11 +210,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY] = static function (Container $container) {
-            return new CompanyUsersRestApiToCompanyFacadeBridge(
-                $container->getLocator()->company()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY] = static fn (Container $container): CompanyUsersRestApiToCompanyFacadeBridge => new CompanyUsersRestApiToCompanyFacadeBridge(
+            $container->getLocator()->company()->facade(),
+        );
 
         return $container;
     }
@@ -235,11 +224,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyBusinessUnitFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_BUSINESS_UNIT] = static function (Container $container) {
-            return new CompanyUsersRestApiToCompanyBusinessUnitFacadeBridge(
-                $container->getLocator()->companyBusinessUnit()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_BUSINESS_UNIT] = static fn (Container $container): CompanyUsersRestApiToCompanyBusinessUnitFacadeBridge => new CompanyUsersRestApiToCompanyBusinessUnitFacadeBridge(
+            $container->getLocator()->companyBusinessUnit()->facade(),
+        );
 
         return $container;
     }
@@ -251,11 +238,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyUserFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_USER] = static function (Container $container) {
-            return new CompanyUsersRestApiToCompanyUserFacadeBridge(
-                $container->getLocator()->companyUser()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_USER] = static fn (Container $container): CompanyUsersRestApiToCompanyUserFacadeBridge => new CompanyUsersRestApiToCompanyUserFacadeBridge(
+            $container->getLocator()->companyUser()->facade(),
+        );
 
         return $container;
     }
@@ -267,11 +252,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addCompanyUserReferenceFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_USER_REFERENCE] = static function (Container $container) {
-            return new CompanyUsersRestApiToCompanyUserReferenceFacadeBridge(
-                $container->getLocator()->companyUserReference()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_USER_REFERENCE] = static fn (Container $container): CompanyUsersRestApiToCompanyUserReferenceFacadeBridge => new CompanyUsersRestApiToCompanyUserReferenceFacadeBridge(
+            $container->getLocator()->companyUserReference()->facade(),
+        );
 
         return $container;
     }
@@ -283,11 +266,9 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
      */
     protected function addPermissionFacade(Container $container): Container
     {
-        $container[static::FACADE_PERMISSION] = static function (Container $container) {
-            return new CompanyUsersRestApiToPermissionFacadeBridge(
-                $container->getLocator()->permission()->facade(),
-            );
-        };
+        $container[static::FACADE_PERMISSION] = static fn (Container $container): CompanyUsersRestApiToPermissionFacadeBridge => new CompanyUsersRestApiToPermissionFacadeBridge(
+            $container->getLocator()->permission()->facade(),
+        );
 
         return $container;
     }
@@ -301,9 +282,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $self = $this;
 
-        $container[static::PLUGINS_COMPANY_USER_POST_CREATE] = static function () use ($self) {
-            return $self->getCompanyUserPostCreatePlugins();
-        };
+        $container[static::PLUGINS_COMPANY_USER_POST_CREATE] = static fn (): array => $self->getCompanyUserPostCreatePlugins();
 
         return $container;
     }
@@ -325,9 +304,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $self = $this;
 
-        $container[static::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION] = static function () use ($self) {
-            return $self->getCompanyUserPreDeleteValidationPlugins();
-        };
+        $container[static::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION] = static fn (): array => $self->getCompanyUserPreDeleteValidationPlugins();
 
         return $container;
     }
@@ -349,9 +326,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $self = $this;
 
-        $container[static::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION] = static function () use ($self) {
-            return $self->getCompanyUserPreUpdateValidationPlugins();
-        };
+        $container[static::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION] = static fn (): array => $self->getCompanyUserPreUpdateValidationPlugins();
 
         return $container;
     }
@@ -373,9 +348,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $self = $this;
 
-        $container[static::PLUGINS_COMPANY_USER_PRE_CREATE] = static function () use ($self) {
-            return $self->getCompanyUserPreCreatePlugins();
-        };
+        $container[static::PLUGINS_COMPANY_USER_PRE_CREATE] = static fn (): array => $self->getCompanyUserPreCreatePlugins();
 
         return $container;
     }
@@ -397,9 +370,7 @@ class CompanyUsersRestApiDependencyProvider extends AbstractBundleDependencyProv
     {
         $self = $this;
 
-        $container[static::PLUGINS_COMPANY_USER_QUERY_EXPANDER] = static function () use ($self) {
-            return $self->getCompanyUserQueryExpanderPlugins();
-        };
+        $container[static::PLUGINS_COMPANY_USER_QUERY_EXPANDER] = static fn (): array => $self->getCompanyUserQueryExpanderPlugins();
 
         return $container;
     }

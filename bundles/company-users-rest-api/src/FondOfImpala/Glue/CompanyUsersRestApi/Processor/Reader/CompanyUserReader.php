@@ -16,30 +16,15 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CompanyUserReader implements CompanyUserReaderInterface
 {
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
-    /**
-     * @var \FondOfImpala\Client\CompanyUsersRestApi\CompanyUsersRestApiClientInterface
-     */
-    protected $client;
+    protected CompanyUsersRestApiClientInterface $client;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Mapper\CompanyUsersMapperInterface
-     */
-    protected $companyUserMapper;
+    protected CompanyUsersMapperInterface $companyUserMapper;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Processor\Validation\RestApiErrorInterface
-     */
-    protected $restApiError;
+    protected RestApiErrorInterface $restApiError;
 
-    /**
-     * @var \FondOfImpala\Glue\CompanyUsersRestApi\Dependency\Client\CompanyUsersRestApiToCompanyUserReferenceClientInterface
-     */
-    protected $companyUserReferenceClient;
+    protected CompanyUsersRestApiToCompanyUserReferenceClientInterface $companyUserReferenceClient;
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

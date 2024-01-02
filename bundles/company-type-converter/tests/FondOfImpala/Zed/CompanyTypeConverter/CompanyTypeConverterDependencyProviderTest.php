@@ -161,16 +161,8 @@ class CompanyTypeConverterDependencyProviderTest extends Unit
             $this->containerMock[CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE],
         );
 
-        $this->isTrue(
-            is_array(
-                $this->containerMock[CompanyTypeConverterDependencyProvider::COMPANY_TYPE_CONVERTER_POST_SAVE_PLUGINS],
-            ),
-        );
+        $this->isTrue();
 
-        $this->isTrue(
-            is_array(
-                $this->containerMock[CompanyTypeConverterDependencyProvider::COMPANY_TYPE_CONVERTER_PRE_SAVE_PLUGINS],
-            ),
-        );
+        $this->isTrue();
     }
 }

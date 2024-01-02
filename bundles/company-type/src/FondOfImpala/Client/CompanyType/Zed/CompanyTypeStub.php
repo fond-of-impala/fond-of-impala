@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeStub implements CompanyTypeStubInterface
 {
-    /**
-     * @var \FondOfImpala\Client\CompanyType\Dependency\Client\CompanyTypeToZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected CompanyTypeToZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \FondOfImpala\Client\CompanyType\Dependency\Client\CompanyTypeToZedRequestClientInterface $zedRequestClient

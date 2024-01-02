@@ -7,10 +7,7 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class CompanyUsersBulkRestApiToZedRequestClientBridge implements CompanyUsersBulkRestApiToZedRequestClientInterface
 {
-    /**
-     * @var \Spryker\Client\ZedRequest\ZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected ZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \Spryker\Client\ZedRequest\ZedRequestClientInterface $zedRequestClient

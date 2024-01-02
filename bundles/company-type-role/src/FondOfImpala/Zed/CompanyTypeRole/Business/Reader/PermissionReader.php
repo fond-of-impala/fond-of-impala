@@ -10,20 +10,11 @@ use Generated\Shared\Transfer\PermissionSetTransfer;
 
 class PermissionReader implements PermissionReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Business\Intersection\PermissionIntersectionInterface
-     */
-    protected $permissionIntersection;
+    protected PermissionIntersectionInterface $permissionIntersection;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig
-     */
-    protected $config;
+    protected CompanyTypeRoleConfig $config;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CompanyTypeRoleToPermissionFacadeInterface $permissionFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Business\Intersection\PermissionIntersectionInterface $permissionIntersection

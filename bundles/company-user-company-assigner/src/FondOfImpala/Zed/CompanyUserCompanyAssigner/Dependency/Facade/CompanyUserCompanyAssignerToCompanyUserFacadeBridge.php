@@ -10,10 +10,7 @@ use Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface;
 
 class CompanyUserCompanyAssignerToCompanyUserFacadeBridge implements CompanyUserCompanyAssignerToCompanyUserFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUserFacadeInterface $companyUserFacade;
 
     /**
      * @param \Spryker\Zed\CompanyUser\Business\CompanyUserFacadeInterface $companyUserFacade

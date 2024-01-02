@@ -6,10 +6,7 @@ use Spryker\Zed\Propel\Business\PropelFacadeInterface;
 
 class CompanyTypeRoleToPropelFacadeBridge implements CompanyTypeRoleToPropelFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Propel\Business\PropelFacadeInterface
-     */
-    protected $propelFacade;
+    protected PropelFacadeInterface $propelFacade;
 
     /**
      * @param \Spryker\Zed\Propel\Business\PropelFacadeInterface $propelFacade

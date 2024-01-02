@@ -8,10 +8,7 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 class CompanyUsersRestApiToCompanyUserReferenceFacadeBridge implements CompanyUsersRestApiToCompanyUserReferenceFacadeInterface
 {
-    /**
-     * @var \FondOfSpryker\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacade;
+    protected CompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
     /**
      * @param \FondOfSpryker\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface $companyUserReferenceFacade

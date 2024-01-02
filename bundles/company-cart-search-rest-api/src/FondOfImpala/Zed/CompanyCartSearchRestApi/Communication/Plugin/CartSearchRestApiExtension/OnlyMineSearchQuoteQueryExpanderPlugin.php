@@ -58,7 +58,7 @@ class OnlyMineSearchQuoteQueryExpanderPlugin extends AbstractPlugin implements S
     ): QueryJoinCollectionTransfer {
         $onlyMine = null;
         $idCustomer = null;
-        $callbackFilter = static function (string $value) {
+        $callbackFilter = static function (string $value): ?bool {
             if (strtolower($value) === 'true') {
                 return true;
             }

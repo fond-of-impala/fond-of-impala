@@ -165,9 +165,7 @@ class AssignableCompanyRoleReaderTest extends Unit
             ->method('getCompanyRoleCollection')
             ->with(
                 static::callback(
-                    static function (CompanyRoleCriteriaFilterTransfer $companyRoleCriteriaFilterTransfer) use ($idCompany) {
-                        return $companyRoleCriteriaFilterTransfer->getIdCompany() === $idCompany;
-                    },
+                    static fn (CompanyRoleCriteriaFilterTransfer $companyRoleCriteriaFilterTransfer): bool => $companyRoleCriteriaFilterTransfer->getIdCompany() === $idCompany,
                 ),
             )->willReturn($this->companyRoleCollectionTransferMock);
 

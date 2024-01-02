@@ -12,35 +12,17 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 
 class ManufacturerUserAssigner implements ManufacturerUserAssignerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Mapper\CompanyRoleNameMapperInterface
-     */
-    protected $companyRoleNameMapper;
+    protected CompanyRoleNameMapperInterface $companyRoleNameMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\CompanyUserCompanyAssignerConfig
-     */
-    protected $config;
+    protected CompanyUserCompanyAssignerConfig $config;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Persistence\CompanyUserCompanyAssignerRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUserCompanyAssignerRepositoryInterface $repository;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyUserCompanyAssignerToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Mapper\CompanyUserMapperInterface
-     */
-    protected $companyUserMapper;
+    protected CompanyUserMapperInterface $companyUserMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUserCompanyAssignerToCompanyUserFacadeInterface $companyUserFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Mapper\CompanyRoleNameMapperInterface $companyRoleNameMapper

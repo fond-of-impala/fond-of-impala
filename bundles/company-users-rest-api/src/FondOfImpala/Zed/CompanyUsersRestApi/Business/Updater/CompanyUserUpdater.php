@@ -14,30 +14,15 @@ use Generated\Shared\Transfer\RestWriteCompanyUserResponseTransfer;
 
 class CompanyUserUpdater implements CompanyUserUpdaterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface
-     */
-    protected $companyUserReader;
+    protected CompanyUserReaderInterface $companyUserReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyRoleCollectionReaderInterface
-     */
-    protected $companyRoleCollectionReader;
+    protected CompanyRoleCollectionReaderInterface $companyRoleCollectionReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface
-     */
-    protected $pluginExecutor;
+    protected CompanyUserPluginExecutorInterface $pluginExecutor;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface $companyUserReader

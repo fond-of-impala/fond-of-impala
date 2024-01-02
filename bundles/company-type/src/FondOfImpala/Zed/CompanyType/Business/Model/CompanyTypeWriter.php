@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CompanyTypeTransfer;
 
 class CompanyTypeWriter implements CompanyTypeWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Persistence\CompanyTypeEntityManagerInterface
-     */
-    protected $companyTypeEntityManager;
+    protected CompanyTypeEntityManagerInterface $companyTypeEntityManager;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\Persistence\CompanyTypeEntityManagerInterface $companyTypeEntityManager

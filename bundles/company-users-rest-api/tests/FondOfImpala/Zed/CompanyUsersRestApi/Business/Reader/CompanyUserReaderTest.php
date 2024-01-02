@@ -216,9 +216,7 @@ class CompanyUserReaderTest extends Unit
             ->method('findCompanyUserByCompanyUserReference')
             ->with(
                 static::callback(
-                    static function (CompanyUserTransfer $companyUserTransfer) use ($companyUserReferenceToDelete) {
-                        return $companyUserTransfer->getCompanyUserReference() === $companyUserReferenceToDelete;
-                    },
+                    static fn (CompanyUserTransfer $companyUserTransfer): bool => $companyUserTransfer->getCompanyUserReference() === $companyUserReferenceToDelete,
                 ),
             )->willReturn($this->companyUserResponseTransferMock);
 
@@ -275,9 +273,7 @@ class CompanyUserReaderTest extends Unit
             ->method('findCompanyUserByCompanyUserReference')
             ->with(
                 static::callback(
-                    static function (CompanyUserTransfer $companyUserTransfer) use ($companyUserReferenceToDelete) {
-                        return $companyUserTransfer->getCompanyUserReference() === $companyUserReferenceToDelete;
-                    },
+                    static fn (CompanyUserTransfer $companyUserTransfer): bool => $companyUserTransfer->getCompanyUserReference() === $companyUserReferenceToDelete,
                 ),
             )->willReturn($this->companyUserResponseTransferMock);
 

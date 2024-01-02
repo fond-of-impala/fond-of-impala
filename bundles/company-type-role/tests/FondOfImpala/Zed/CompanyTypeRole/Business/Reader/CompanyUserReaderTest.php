@@ -90,11 +90,9 @@ class CompanyUserReaderTest extends Unit
             ->method('getCompanyUserCollection')
             ->with(
                 static::callback(
-                    static function (CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer) use ($companyUserIds) {
-                        return $companyUserCriteriaFilterTransfer->getCompanyUserIds() === $companyUserIds
-                            && $companyUserCriteriaFilterTransfer->getIdCompany() === null
-                            && $companyUserCriteriaFilterTransfer->getIsActive() === true;
-                    },
+                    static fn (CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer): bool => $companyUserCriteriaFilterTransfer->getCompanyUserIds() === $companyUserIds
+                        && $companyUserCriteriaFilterTransfer->getIdCompany() === null
+                        && $companyUserCriteriaFilterTransfer->getIsActive() === true,
                 ),
             )->willReturn($this->companyUserCollectionTransferMock);
 

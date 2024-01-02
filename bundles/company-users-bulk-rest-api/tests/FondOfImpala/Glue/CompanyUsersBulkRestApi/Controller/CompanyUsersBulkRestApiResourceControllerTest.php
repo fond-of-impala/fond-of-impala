@@ -71,10 +71,7 @@ class CompanyUsersBulkRestApiResourceControllerTest extends Unit
             ->getMock();
 
         $this->controller = new class ($this->factoryMock) extends CompanyUsersBulkResourceController {
-            /**
-             * @var \Spryker\Glue\Kernel\AbstractFactory
-             */
-            protected $abstractFactory;
+            protected AbstractFactory $abstractFactory;
 
             /**
              * @param \Spryker\Glue\Kernel\AbstractFactory $abstractFactory

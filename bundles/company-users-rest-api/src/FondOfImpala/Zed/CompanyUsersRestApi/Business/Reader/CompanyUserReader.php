@@ -13,15 +13,9 @@ use Generated\Shared\Transfer\RestWriteCompanyUserRequestTransfer;
 
 class CompanyUserReader implements CompanyUserReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacade;
+    protected CompanyUsersRestApiToCompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Persistence\CompanyUsersRestApiRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUsersRestApiRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserReferenceFacadeInterface $companyUserReferenceFacade

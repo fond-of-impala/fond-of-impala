@@ -109,10 +109,7 @@ class CompanyUsersResourceControllerTest extends Unit
 
         $this->controller = new class ($this->factoryMock) extends CompanyUsersResourceController
         {
-            /**
-             * @var \Spryker\Glue\Kernel\AbstractFactory
-             */
-            protected $mockedFactory;
+            protected AbstractFactory $mockedFactory;
 
             /**
              * @param \Spryker\Glue\Kernel\AbstractFactory $mockedFactory

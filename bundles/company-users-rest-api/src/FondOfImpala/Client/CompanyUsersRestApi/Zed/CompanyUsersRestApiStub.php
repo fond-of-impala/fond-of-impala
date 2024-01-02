@@ -16,10 +16,7 @@ use Generated\Shared\Transfer\RestWriteCompanyUserResponseTransfer;
 
 class CompanyUsersRestApiStub implements CompanyUsersRestApiStubInterface
 {
-    /**
-     * @var \FondOfImpala\Client\CompanyUsersRestApi\Dependency\Client\CompanyUsersRestApiToZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected CompanyUsersRestApiToZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \FondOfImpala\Client\CompanyUsersRestApi\Dependency\Client\CompanyUsersRestApiToZedRequestClientInterface $zedRequestClient

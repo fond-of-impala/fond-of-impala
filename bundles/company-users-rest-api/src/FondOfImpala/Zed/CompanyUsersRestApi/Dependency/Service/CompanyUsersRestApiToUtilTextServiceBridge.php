@@ -6,10 +6,7 @@ use Spryker\Service\UtilText\UtilTextServiceInterface;
 
 class CompanyUsersRestApiToUtilTextServiceBridge implements CompanyUsersRestApiToUtilTextServiceInterface
 {
-    /**
-     * @var \Spryker\Service\UtilText\UtilTextServiceInterface
-     */
-    protected $utilTextService;
+    protected UtilTextServiceInterface $utilTextService;
 
     /**
      * @param \Spryker\Service\UtilText\UtilTextServiceInterface $utilTextService

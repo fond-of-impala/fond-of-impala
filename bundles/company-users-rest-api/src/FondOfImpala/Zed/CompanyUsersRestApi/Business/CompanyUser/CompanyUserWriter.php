@@ -27,60 +27,27 @@ use Generated\Shared\Transfer\RestCompanyUsersResponseTransfer;
 
 class CompanyUserWriter implements CompanyUserWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyFacadeInterface
-     */
-    protected $companyFacade;
+    protected CompanyUsersRestApiToCompanyFacadeInterface $companyFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyBusinessUnitFacadeInterface
-     */
-    protected $companyBusinessUnitFacade;
+    protected CompanyUsersRestApiToCompanyBusinessUnitFacadeInterface $companyBusinessUnitFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCompanyUserFacadeInterface
-     */
-    protected $companyUserFacade;
+    protected CompanyUsersRestApiToCompanyUserFacadeInterface $companyUserFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Mapper\CompanyUserMapperInterface
-     */
-    protected $companyUserMapper;
+    protected CompanyUserMapperInterface $companyUserMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutorInterface
-     */
-    protected $companyUserPluginExecutor;
+    protected CompanyUserPluginExecutorInterface $companyUserPluginExecutor;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Validation\RestApiErrorInterface
-     */
-    protected $apiError;
+    protected RestApiErrorInterface $apiError;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReaderInterface
-     */
-    protected $companyUserReader;
+    protected CompanyUserReaderInterface $companyUserReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig
-     */
-    protected $companyUsersRestApiConfig;
+    protected CompanyUsersRestApiConfig $companyUsersRestApiConfig;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CompanyUsersRestApiToPermissionFacadeInterface $permissionFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CustomerReaderInterface
-     */
-    protected $customerReader;
+    protected CustomerReaderInterface $customerReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Writer\CustomerWriterInterface
-     */
-    protected $customerWriter;
+    protected CustomerWriterInterface $customerWriter;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CustomerReaderInterface $customerReader

@@ -11,15 +11,9 @@ use Generated\Shared\Transfer\RestCustomerTransfer;
 
 class CustomerReader implements CustomerReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Business\Mapper\CustomerMapperInterface
-     */
-    protected $customerMapper;
+    protected CustomerMapperInterface $customerMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade\CompanyUsersRestApiToCustomerFacadeInterface
-     */
-    protected $customerFacade;
+    protected CompanyUsersRestApiToCustomerFacadeInterface $customerFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Business\Mapper\CustomerMapperInterface $customerMapper
@@ -44,7 +38,7 @@ class CustomerReader implements CustomerReaderInterface
 
         try {
             return $this->customerFacade->getCustomer($customerTransfer);
-        } catch (Exception $exception) {
+        } catch (Exception) {
             return null;
         }
     }

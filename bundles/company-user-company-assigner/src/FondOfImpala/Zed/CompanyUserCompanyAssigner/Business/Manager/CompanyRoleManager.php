@@ -23,30 +23,15 @@ class CompanyRoleManager implements CompanyRoleManagerInterface
      */
     protected const KEY_ID_COMPANY_USER = 'id_company_user';
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Reader\CompanyUserReaderInterface
-     */
-    protected $companyUserReader;
+    protected CompanyUserReaderInterface $companyUserReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyRoleFacadeInterface
-     */
-    protected $companyRoleFacade;
+    protected CompanyUserCompanyAssignerToCompanyRoleFacadeInterface $companyRoleFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Dependency\Facade\CompanyUserCompanyAssignerToCompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyUserCompanyAssignerToCompanyTypeFacadeInterface $companyTypeFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\CompanyUserCompanyAssignerConfig
-     */
-    protected $config;
+    protected CompanyUserCompanyAssignerConfig $config;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserCompanyAssigner\Persistence\CompanyUserCompanyAssignerRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUserCompanyAssignerRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Reader\CompanyUserReaderInterface $companyUserReader

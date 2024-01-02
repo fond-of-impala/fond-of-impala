@@ -11,10 +11,7 @@ class RandomPasswordGenerator implements RandomPasswordGeneratorInterface
      */
     public const PASSWORD_LENGTH = 20;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Service\CompanyUsersRestApiToUtilTextServiceInterface
-     */
-    protected $utilTextService;
+    protected CompanyUsersRestApiToUtilTextServiceInterface $utilTextService;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Service\CompanyUsersRestApiToUtilTextServiceInterface $utilTextService

@@ -10,20 +10,11 @@ use Generated\Shared\Transfer\SyncableCompanyRoleTransfer;
 
 class CompanyRoleReader implements CompanyRoleReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\PermissionReaderInterface
-     */
-    protected $permissionReader;
+    protected PermissionReaderInterface $permissionReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Business\Mapper\PermissionKeyMapperInterface
-     */
-    protected $permissionKeyMapper;
+    protected PermissionKeyMapperInterface $permissionKeyMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyTypeRoleRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Business\Reader\PermissionReaderInterface $permissionReader

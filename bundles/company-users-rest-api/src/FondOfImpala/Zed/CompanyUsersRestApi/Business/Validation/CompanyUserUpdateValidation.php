@@ -12,15 +12,9 @@ use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleToCompanyUserTableMap;
 
 class CompanyUserUpdateValidation implements CompanyUserUpdateValidationInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\Persistence\CompanyUsersRestApiRepositoryInterface
-     */
-    protected $repository;
+    protected CompanyUsersRestApiRepositoryInterface $repository;
 
-    /**
-     * @var \FondOfImpala\Zed\CompanyUsersRestApi\CompanyUsersRestApiConfig
-     */
-    protected $config;
+    protected CompanyUsersRestApiConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUsersRestApi\Persistence\CompanyUsersRestApiRepositoryInterface $repository

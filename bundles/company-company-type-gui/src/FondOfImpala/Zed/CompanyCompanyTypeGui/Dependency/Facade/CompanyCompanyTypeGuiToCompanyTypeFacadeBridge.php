@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\CompanyTypeCollectionTransfer;
 
 class CompanyCompanyTypeGuiToCompanyTypeFacadeBridge implements CompanyCompanyTypeGuiToCompanyTypeFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface
-     */
-    protected $companyTypeFacade;
+    protected CompanyTypeFacadeInterface $companyTypeFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface $companyTypeFacade

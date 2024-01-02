@@ -12,10 +12,7 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 
 class CompanyUsersMapper implements CompanyUsersMapperInterface
 {
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

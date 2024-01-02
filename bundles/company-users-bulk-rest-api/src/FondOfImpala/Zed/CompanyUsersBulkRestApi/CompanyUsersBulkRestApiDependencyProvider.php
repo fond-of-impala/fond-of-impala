@@ -10,6 +10,7 @@ use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\Permission\Persistence\SpyPermissionQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -116,9 +117,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addSpyCustomerQuery(Container $container): Container
     {
-        $container[static::QUERY_SPY_CUSTOMER] = static function () {
-            return new SpyCustomerQuery();
-        };
+        $container[static::QUERY_SPY_CUSTOMER] = static fn (): SpyCustomerQuery => new SpyCustomerQuery();
 
         return $container;
     }
@@ -130,9 +129,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addSpyCompanyUserQuery(Container $container): Container
     {
-        $container[static::QUERY_SPY_COMPANY_USER] = static function () {
-            return new SpyCompanyUserQuery();
-        };
+        $container[static::QUERY_SPY_COMPANY_USER] = static fn (): SpyCompanyUserQuery => new SpyCompanyUserQuery();
 
         return $container;
     }
@@ -144,9 +141,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addSpyCompanyQuery(Container $container): Container
     {
-        $container[static::QUERY_SPY_COMPANY] = static function () {
-            return new SpyCompanyQuery();
-        };
+        $container[static::QUERY_SPY_COMPANY] = static fn (): SpyCompanyQuery => new SpyCompanyQuery();
 
         return $container;
     }
@@ -158,9 +153,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addPermissionQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PERMISSION] = static function () {
-            return SpyPermissionQuery::create();
-        };
+        $container[static::PROPEL_QUERY_PERMISSION] = static fn (): Criteria => SpyPermissionQuery::create();
 
         return $container;
     }
@@ -172,9 +165,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addSpyCompanyBusinessUnitQuery(Container $container): Container
     {
-        $container[static::QUERY_SPY_COMPANY_BUSINESS_UNIT] = static function () {
-            return new SpyCompanyBusinessUnitQuery();
-        };
+        $container[static::QUERY_SPY_COMPANY_BUSINESS_UNIT] = static fn (): SpyCompanyBusinessUnitQuery => new SpyCompanyBusinessUnitQuery();
 
         return $container;
     }
@@ -186,9 +177,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addSpyCompanyRoleQuery(Container $container): Container
     {
-        $container[static::QUERY_SPY_COMPANY_ROLE] = static function () {
-            return new SpyCompanyRoleQuery();
-        };
+        $container[static::QUERY_SPY_COMPANY_ROLE] = static fn (): SpyCompanyRoleQuery => new SpyCompanyRoleQuery();
 
         return $container;
     }
@@ -200,9 +189,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addEventFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT] = static function (Container $container) {
-            return new CompanyUsersBulkRestApiToEventFacadeBridge($container->getLocator()->event()->facade());
-        };
+        $container[static::FACADE_EVENT] = static fn (Container $container): CompanyUsersBulkRestApiToEventFacadeBridge => new CompanyUsersBulkRestApiToEventFacadeBridge($container->getLocator()->event()->facade());
 
         return $container;
     }
@@ -214,9 +201,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addCompanyUserFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_USER] = static function (Container $container) {
-            return new CompanyUsersBulkRestApiToCompanyUserFacadeBridge($container->getLocator()->companyUser()->facade());
-        };
+        $container[static::FACADE_COMPANY_USER] = static fn (Container $container): CompanyUsersBulkRestApiToCompanyUserFacadeBridge => new CompanyUsersBulkRestApiToCompanyUserFacadeBridge($container->getLocator()->companyUser()->facade());
 
         return $container;
     }
@@ -229,9 +214,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
     protected function addDataExpanderPlugins(Container $container): Container
     {
         $self = $this;
-        $container[static::PLUGINS_DATA_EXPANDER] = static function (Container $container) use ($self) {
-            return $self->getDataExpanderPlugins();
-        };
+        $container[static::PLUGINS_DATA_EXPANDER] = static fn (Container $container): array => $self->getDataExpanderPlugins();
 
         return $container;
     }
@@ -252,9 +235,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
     protected function addDataPostExpanderPlugins(Container $container): Container
     {
         $self = $this;
-        $container[static::PLUGINS_DATA_POST_EXPANDER] = static function (Container $container) use ($self) {
-            return $self->getDataPostExpanderPlugins();
-        };
+        $container[static::PLUGINS_DATA_POST_EXPANDER] = static fn (Container $container): array => $self->getDataPostExpanderPlugins();
 
         return $container;
     }
@@ -275,9 +256,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
     protected function addPreHandlingPlugins(Container $container): Container
     {
         $self = $this;
-        $container[static::PLUGINS_PRE_HANDLING] = static function (Container $container) use ($self) {
-            return $self->getPreHandlingPlugins();
-        };
+        $container[static::PLUGINS_PRE_HANDLING] = static fn (Container $container): array => $self->getPreHandlingPlugins();
 
         return $container;
     }
@@ -298,9 +277,7 @@ class CompanyUsersBulkRestApiDependencyProvider extends AbstractBundleDependency
     protected function addPostHandlingPlugins(Container $container): Container
     {
         $self = $this;
-        $container[static::PLUGINS_POST_HANDLING] = static function (Container $container) use ($self) {
-            return $self->getPostHandlingPlugins();
-        };
+        $container[static::PLUGINS_POST_HANDLING] = static fn (Container $container): array => $self->getPostHandlingPlugins();
 
         return $container;
     }

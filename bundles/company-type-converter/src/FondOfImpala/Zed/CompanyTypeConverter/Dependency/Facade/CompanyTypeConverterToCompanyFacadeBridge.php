@@ -7,10 +7,7 @@ use Spryker\Zed\Company\Business\CompanyFacadeInterface;
 
 class CompanyTypeConverterToCompanyFacadeBridge implements CompanyTypeConverterToCompanyFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Company\Business\CompanyFacadeInterface
-     */
-    protected $companyFacade;
+    protected CompanyFacadeInterface $companyFacade;
 
     /**
      * @param \Spryker\Zed\Company\Business\CompanyFacadeInterface $companyFacade
