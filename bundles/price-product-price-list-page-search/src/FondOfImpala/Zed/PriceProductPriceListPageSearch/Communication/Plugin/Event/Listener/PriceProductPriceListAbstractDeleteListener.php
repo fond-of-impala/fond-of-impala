@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\PriceProductPriceListPageSearch\Communication\Plugin\Event\Listener;
 
+use Orm\Zed\PriceProductPriceList\Persistence\Map\FoiPriceProductPriceListTableMap;
 use Spryker\Zed\Event\Dependency\Plugin\EventBulkHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
@@ -15,11 +16,6 @@ use Spryker\Zed\PropelOrm\Business\Transaction\DatabaseTransactionHandlerTrait;
 class PriceProductPriceListAbstractDeleteListener extends AbstractPlugin implements EventBulkHandlerInterface
 {
     use DatabaseTransactionHandlerTrait;
-
-    /**
-     * @var string
-     */
-    protected const COL_FK_PRODUCT_ABSTRACT = 'foi_price_product_price_list.fk_product_abstract';
 
     /**
      * {@inheritDoc}
@@ -39,7 +35,7 @@ class PriceProductPriceListAbstractDeleteListener extends AbstractPlugin impleme
             ->getEventBehaviorFacade()
             ->getEventTransferForeignKeys(
                 $transfers,
-                static::COL_FK_PRODUCT_ABSTRACT,
+                FoiPriceProductPriceListTableMap::COL_FK_PRODUCT_ABSTRACT,
             );
 
         if (!$productAbstractIds) {

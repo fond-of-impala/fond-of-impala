@@ -12,30 +12,11 @@ use ReflectionMethod;
 
 class RawPriceProductConcretePriceListResultFormatterPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\RawPriceProductConcretePriceListResultFormatterPlugin
-     */
     protected RawPriceProductConcretePriceListResultFormatterPlugin $rawPriceProductConcretePriceListSearchResultFormatterPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\ResultSet
-     */
     protected MockObject|ResultSet $resultSetMock;
 
-    /**
-     * @var array
-     */
-    protected array $requestParameters;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Result
-     */
     protected MockObject|Result $resultMock;
-
-    /**
-     * @var array
-     */
-    protected array $results;
 
     /**
      * @return void
@@ -48,17 +29,9 @@ class RawPriceProductConcretePriceListResultFormatterPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->requestParameters = [
-
-        ];
-
         $this->resultMock = $this->getMockBuilder(Result::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->results = [
-            $this->resultMock,
-        ];
 
         $this->rawPriceProductConcretePriceListSearchResultFormatterPlugin = new RawPriceProductConcretePriceListResultFormatterPlugin();
     }
@@ -68,7 +41,10 @@ class RawPriceProductConcretePriceListResultFormatterPluginTest extends Unit
      */
     public function testGetName(): void
     {
-        static::assertSame('price_product_concrete_price_lists', $this->rawPriceProductConcretePriceListSearchResultFormatterPlugin->getName());
+        static::assertEquals(
+            'price_product_concrete_price_lists',
+            $this->rawPriceProductConcretePriceListSearchResultFormatterPlugin->getName(),
+        );
     }
 
     /**
@@ -76,17 +52,22 @@ class RawPriceProductConcretePriceListResultFormatterPluginTest extends Unit
      */
     public function testFormatSearchResult(): void
     {
-        $foo = $this->getReflectionMethodByName('formatSearchResult');
+        $reflectionMethodByName = $this->getReflectionMethodByName('formatSearchResult');
 
         $this->resultSetMock->expects(static::atLeastOnce())
             ->method('getResults')
-            ->willReturn($this->results);
+            ->willReturn([$this->resultMock]);
 
         $this->resultMock->expects(static::atLeastOnce())
             ->method('getSource')
             ->willReturn([PriceProductPriceListIndexMap::SEARCH_RESULT_DATA => []]);
 
-        static::assertIsArray($foo->invokeArgs($this->rawPriceProductConcretePriceListSearchResultFormatterPlugin, [$this->resultSetMock, $this->requestParameters]));
+        static::assertIsArray(
+            $reflectionMethodByName->invokeArgs(
+                $this->rawPriceProductConcretePriceListSearchResultFormatterPlugin,
+                [$this->resultSetMock, []],
+            ),
+        );
     }
 
     /**

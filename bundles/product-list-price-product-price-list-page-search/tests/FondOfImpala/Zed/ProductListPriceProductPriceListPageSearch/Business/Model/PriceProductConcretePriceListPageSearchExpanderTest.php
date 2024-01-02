@@ -31,12 +31,12 @@ class PriceProductConcretePriceListPageSearchExpanderTest extends Unit
     protected int $idProduct;
 
     /**
-     * @var int[]
+     * @var array<int>
      */
     protected array $whitelistIds;
 
     /**
-     * @var int[]
+     * @var array<int>
      */
     protected array $blacklistIds;
 

@@ -9,19 +9,10 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class PriceProductPriceListPageSearchToStoreFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToStoreFacadeBridge
-     */
     protected PriceProductPriceListPageSearchToStoreFacadeBridge $priceProductPriceListPageSearchToStoreFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Store\Business\StoreFacadeInterface
-     */
     protected MockObject|StoreFacadeInterface $storeFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\StoreTransfer
-     */
     protected MockObject|StoreTransfer $storeTransferMock;
 
     /**

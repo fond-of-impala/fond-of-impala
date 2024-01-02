@@ -5,14 +5,14 @@ namespace FondOfImpala\Zed\ProductListPriceProductPriceListPageSearch\Dependency
 interface ProductListPriceProductPriceListPageSearchToPriceProductPriceListPageSearchFacadeInterface
 {
     /**
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */
     public function publishAbstractPriceProductByByProductAbstractIds(array $productAbstractIds): void;
 
     /**
-     * @param int[] $productIds
+     * @param array<int> $productIds
      *
      * @return void
      */

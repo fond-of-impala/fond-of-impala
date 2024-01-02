@@ -54,7 +54,7 @@ class CustomerPriceListQueryExpanderPlugin extends AbstractPlugin implements Que
     }
 
     /**
-     * @return int[]
+     * @return array<int>
      */
     protected function getCustomerPriceListIds(): array
     {

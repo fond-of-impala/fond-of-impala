@@ -9,24 +9,12 @@ use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class PriceProductPriceListPageSearchToEventBehaviorFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\PriceProductPriceListPageSearch\Dependency\Facade\PriceProductPriceListPageSearchToEventBehaviorFacadeBridge
-     */
     protected PriceProductPriceListPageSearchToEventBehaviorFacadeBridge $priceProductPriceListPageSearchToEventBehaviorFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
-     */
     protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeInterfaceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
-     */
     protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
-    /**
-     * @var array
-     */
     protected array $eventTransfers;
 
     /**
