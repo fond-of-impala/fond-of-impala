@@ -67,3 +67,10 @@ ci-bundle:
 .PHONY: rector
 rector:
 	./vendor/bin/rector
+
+.PHONY: clean
+clean:
+	find ./bundles -type d -name vendor -exec rm -rf {} +
+	find ./bundles -type d -name Generated -exec rm -rf {} +
+	find ./bundles -type d -name Orm -exec rm -rf {} +
+	find ./bundles -type f -name composer.lock -exec rm -rf {} +
