@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="RestCompany">
+        <property name="externalReference" type="string"/>
+        <property name="debtorNumber" type="string"/>
+        <property name="blockedFor" type="bool"/>
+    </transfer>
+
+    <transfer name="RestCompaniesResponseAttributes">
+        <property name="debtorNumber" type="string"/>
+        <property name="isBlocked" type="bool"/>
+    </transfer>
+</transfers>
