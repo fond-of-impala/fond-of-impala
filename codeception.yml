@@ -1,6 +1,11 @@
 namespace: fond-of-impala/fond-of-impala
 
 include:
+  - bundles/allowed-product-quantity
+  - bundles/allowed-product-quantity-cart-connector
+  - bundles/allowed-product-quantity-checkout-connector
+  - bundles/allowed-product-quantity-gui
+  - bundles/allowed-product-quantity-search
   - bundles/collaborative-cart-search-rest-api
   - bundles/company-business-unit-price-list
   - bundles/company-cart-search-rest-api
@@ -48,6 +53,7 @@ include:
   - bundles/product-image-grouping-product-page-search
   - bundles/product-list-conditional-availability-page-search
   - bundles/product-product-list-connector
+  - bundles/product-management
   - bundles/product-list-price-product-price-list-page-search
 
 suites:

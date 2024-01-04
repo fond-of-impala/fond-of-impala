@@ -1,0 +1,52 @@
+{
+  "name": "fond-of-impala/product-management",
+  "description": "Extend Spryker Product Management Module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    },
+    {
+      "name": "Jozsef Geng",
+      "email": "gengjozsef86@gmail.com"
+    },
+    {
+      "name": "Markus Nörenberg",
+      "email": "noerenberg.markus@gmail.com"
+    },
+    {
+      "name": "Pascal Fischer",
+      "email": "p-fischer@gmx.net"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "spryker/product": "^6.0.0",
+    "spryker/product-management": "^0.19.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
