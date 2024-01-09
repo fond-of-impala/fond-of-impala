@@ -17,6 +17,7 @@ class ProductFormEditTabs extends SprykerProductFormEditTabs
      */
     public function __construct(array $productAbstractFormEditTabsExpanderPlugins = [])
     {
+        parent::__construct($productAbstractFormEditTabsExpanderPlugins);
         $this->productAbstractFormTabsExpanderPlugins = $productAbstractFormEditTabsExpanderPlugins;
     }
 
@@ -27,7 +28,7 @@ class ProductFormEditTabs extends SprykerProductFormEditTabs
      */
     protected function executeExpanderPlugins(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
-        $tabsViewTransfer = null;
+        $tabsViewTransfer = parent::executeExpanderPlugins($tabsViewTransfer);
 
         foreach ($this->productAbstractFormTabsExpanderPlugins as $productAbstractFormTabsExpanderPlugin) {
             $tabsViewTransfer = $productAbstractFormTabsExpanderPlugin->expand($tabsViewTransfer);

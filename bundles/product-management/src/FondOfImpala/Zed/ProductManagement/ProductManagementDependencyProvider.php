@@ -24,7 +24,7 @@ class ProductManagementDependencyProvider extends SprykerProductManagementDepend
      */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
-        $container = null;
+        $container = parent::provideCommunicationLayerDependencies($container);
 
         $container = $this->addProductAbstractFormTabsExpanderPlugins($container);
         $container = $this->addProductAbstractFormTransferMapperExpanderPlugins($container);

@@ -48,7 +48,7 @@ class ProductFormTransferMapper extends SprykerProductFormTransferMapper
      */
     public function buildProductAbstractTransfer(FormInterface $form, $idProductAbstract): ProductAbstractTransfer
     {
-        $productAbstractTransfer = null;
+        $productAbstractTransfer = parent::buildProductAbstractTransfer($form, $idProductAbstract);
 
         $formData = $form->getData();
 

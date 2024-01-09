@@ -117,7 +117,7 @@ class ProductManagementCommunicationFactory extends SprykerProductManagementComm
     }
 
     /**
-     * @return array<\FondOfImpala\Zed\ProductManagement\Dependency\Plugin\ProductAbstractFormTabsExpanderPluginInterface>
+     * @return array<\FondOfImpala\Zed\ProductManagement\Dependency\Plugin\ProductAbstractFormTransferMapperExpanderPluginInterface>
      */
     public function getProductAbstractFormTransferMapperExpanderPlugins(): array
     {

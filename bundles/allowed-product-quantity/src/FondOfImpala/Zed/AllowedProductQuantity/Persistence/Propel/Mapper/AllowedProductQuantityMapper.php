@@ -5,7 +5,7 @@ namespace FondOfImpala\Zed\AllowedProductQuantity\Persistence\Propel\Mapper;
 use FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityRepository;
 use Generated\Shared\Transfer\AllowedProductQuantityTransfer;
 use Orm\Zed\AllowedProductQuantity\Persistence\FoiAllowedProductQuantity;
-use Propel\Runtime\Collection\ObjectCollection;
+use Propel\Runtime\Collection\Collection;
 
 class AllowedProductQuantityMapper implements AllowedProductQuantityMapperInterface
 {
@@ -36,11 +36,11 @@ class AllowedProductQuantityMapper implements AllowedProductQuantityMapperInterf
     }
 
     /**
-     * @param \Propel\Runtime\Collection\ObjectCollection $entityCollection
+     * @param \Propel\Runtime\Collection\Collection $entityCollection
      *
      * @return array<string, \Generated\Shared\Transfer\AllowedProductQuantityTransfer>
      */
-    public function mapEntityCollectionToGroupedTransfers(ObjectCollection $entityCollection): array
+    public function mapEntityCollectionToGroupedTransfers(Collection $entityCollection): array
     {
         $groupedTransfers = [];
 

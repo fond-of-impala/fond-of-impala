@@ -28,7 +28,7 @@ class ProductFormAddTabs extends SprykerProductFormAddTabs
      */
     protected function build(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
-        $tabsViewTransfer = null;
+        $tabsViewTransfer = parent::build($tabsViewTransfer);
 
         return $this->executeExpanderPlugins($tabsViewTransfer);
     }

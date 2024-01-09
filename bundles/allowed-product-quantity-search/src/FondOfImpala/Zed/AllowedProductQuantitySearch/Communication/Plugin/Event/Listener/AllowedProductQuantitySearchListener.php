@@ -22,7 +22,7 @@ class AllowedProductQuantitySearchListener extends AbstractPlugin implements Eve
      *
      * @api
      *
-     * @param array<\Spryker\Shared\Kernel\Transfer\TransferInterface> $transfers
+     * @param array<\Generated\Shared\Transfer\EventEntityTransfer> $transfers $transfers
      * @param string $eventName
      *
      * @return void
