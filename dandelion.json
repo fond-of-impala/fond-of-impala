@@ -143,6 +143,26 @@
       "path": "bundles/jellyfish-sales-order-purchaser",
       "version": "1.0.0"
     },
+    "navision-company": {
+      "path": "bundles/navision-company",
+      "version": "1.0.0"
+    },
+    "navision-company-business-unit": {
+      "path": "bundles/navision-company-business-unit",
+      "version": "1.0.0"
+    },
+    "navision-company-rest-api": {
+      "path": "bundles/navision-company-rest-api",
+      "version": "1.0.0"
+    },
+    "navision-company-unit-address": {
+      "path": "bundles/navision-company-unit-address",
+      "version": "1.0.0"
+    },
+    "navision-company-user": {
+      "path": "bundles/navision-company-user",
+      "version": "1.0.0"
+    },
     "permission-cart-search-rest-api": {
       "path": "bundles/permission-cart-search-rest-api",
       "version": "1.0.0"
