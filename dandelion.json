@@ -3,6 +3,26 @@
   "pathToSplitshLite": "/usr/local/bin/splitsh-lite",
   "pathToTempDirectory": "/home/dandelion/project/tmp/",
   "repositories": {
+    "allowed-product-quantity": {
+      "path": "bundles/allowed-product-quantity",
+      "version": "1.0.0"
+    },
+    "allowed-product-quantity-cart-connector": {
+      "path": "bundles/allowed-product-quantity-cart-connector",
+      "version": "1.0.0"
+    },
+    "allowed-product-quantity-checkout-connector": {
+      "path": "bundles/allowed-product-quantity-checkout-connector",
+      "version": "1.0.0"
+    },
+    "allowed-product-quantity-gui": {
+      "path": "bundles/allowed-product-quantity-gui",
+      "version": "1.0.0"
+    },
+    "allowed-product-quantity-search": {
+      "path": "bundles/allowed-product-quantity-search",
+      "version": "1.0.0"
+    },
     "collaborative-cart-search-rest-api": {
       "path": "bundles/collaborative-cart-search-rest-api",
       "version": "1.0.0"
@@ -190,6 +210,10 @@
     "product-list-conditional-availability-page-search": {
       "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.2.0"
+    },
+    "product-management": {
+      "path": "bundles/product-management",
+      "version": "1.0.0"
     },
     "product-product-list-connector": {
       "path": "bundles/product-product-list-connector",
