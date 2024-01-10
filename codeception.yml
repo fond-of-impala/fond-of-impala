@@ -40,6 +40,10 @@ include:
   - bundles/customer-price-product-price-list-page-search
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/jellyfish-sales-order-purchaser
+  - bundles/navision-company
+  - bundles/navision-company-business-unit
+  - bundles/navision-company-unit-address
+  - bundles/navision-company-user
   - bundles/permission-cart-search-rest-api
   - bundles/price-list
   - bundles/price-list-api
