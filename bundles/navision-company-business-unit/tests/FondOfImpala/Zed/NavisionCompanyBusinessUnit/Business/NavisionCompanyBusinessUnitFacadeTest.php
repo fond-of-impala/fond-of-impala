@@ -45,8 +45,8 @@ class NavisionCompanyBusinessUnitFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testFindCompanyBusinessUnitByUuid(): void
+    public function testFindCompanyBusinessUnitByExternalReference(): void
     {
-        $this->assertInstanceOf(CompanyBusinessUnitResponseTransfer::class, $this->navisionCompanyBusinessUnitFacade->findCompanyBusinessUnitByUuid($this->companyBusinessUnitTransferMock));
+        $this->assertInstanceOf(CompanyBusinessUnitResponseTransfer::class, $this->navisionCompanyBusinessUnitFacade->findCompanyBusinessUnitByExternalReference($this->companyBusinessUnitTransferMock));
     }
 }

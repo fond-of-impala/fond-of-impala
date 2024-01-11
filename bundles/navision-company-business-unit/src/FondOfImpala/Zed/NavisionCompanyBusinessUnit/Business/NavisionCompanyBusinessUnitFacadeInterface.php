@@ -18,7 +18,7 @@ interface NavisionCompanyBusinessUnitFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
      */
-    public function findCompanyBusinessUnitByUuid(
+    public function findCompanyBusinessUnitByExternalReference(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitResponseTransfer;
 }
