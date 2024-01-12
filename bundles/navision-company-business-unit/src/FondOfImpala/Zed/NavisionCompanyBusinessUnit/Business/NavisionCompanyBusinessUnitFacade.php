@@ -21,7 +21,7 @@ class NavisionCompanyBusinessUnitFacade extends AbstractFacade implements Navisi
      *
      * @return \Generated\Shared\Transfer\CompanyBusinessUnitResponseTransfer
      */
-    public function findCompanyBusinessUnitByUuid(
+    public function findCompanyBusinessUnitByExternalReference(
         CompanyBusinessUnitTransfer $companyBusinessUnitTransfer
     ): CompanyBusinessUnitResponseTransfer {
         return $this->getFactory()->createCompanyBusinessUnitReader()
