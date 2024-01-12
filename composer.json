@@ -17,6 +17,11 @@
     }
   ],
   "replace": {
+    "fond-of-impala/allowed-product-quantity": "*",
+    "fond-of-impala/allowed-product-quantity-cart-connector": "*",
+    "fond-of-impala/allowed-product-quantity-checkout-connector": "*",
+    "fond-of-impala/allowed-product-quantity-gui": "*",
+    "fond-of-impala/allowed-product-quantity-search": "*",
     "fond-of-impala/collaborative-cart-search-rest-api": "*",
     "fond-of-impala/company-business-unit-price-list": "*",
     "fond-of-impala/company-cart-search-rest-api": "*",
@@ -70,6 +75,7 @@
     "fond-of-impala/product-image-grouping-product-page-search": "*",
     "fond-of-impala/product-list-conditional-availability-page-search": "*",
     "fond-of-impala/product-list-price-product-price-list-page-search": "*",
+    "fond-of-impala/product-management": "*",
     "fond-of-impala/product-product-list-connector": "*"
   },
   "require": {
@@ -115,6 +121,7 @@
     "spryker/permission-extension": "^1.0.0",
     "spryker/price-product": "^4.0.0",
     "spryker/product": "^6.4.0",
+    "spryker/product-management": "^0.19.0",
     "spryker/product-list": "^1.2.0",
     "spryker/product-list-extension": "^1.1.0",
     "spryker/product-management-extension": "^1.0.0",
@@ -136,6 +143,16 @@
   },
   "autoload": {
     "psr-4": {
+      "FondOfImpala\\Shared\\AllowedProductQuantity\\": "bundles/allowed-product-quantity/src/FondOfImpala/Shared/AllowedProductQuantity",
+      "FondOfImpala\\Zed\\AllowedProductQuantity\\": "bundles/allowed-product-quantity/src/FondOfImpala/Zed/AllowedProductQuantity",
+      "FondOfImpala\\Shared\\AllowedProductQuantityCartConnector\\": "bundles/allowed-product-quantity-cart-connector/src/FondOfImpala/Shared/AllowedProductQuantityCartConnector",
+      "FondOfImpala\\Zed\\AllowedProductQuantityCartConnector\\": "bundles/allowed-product-quantity-cart-connector/src/FondOfImpala/Zed/AllowedProductQuantityCartConnector",
+      "FondOfImpala\\Shared\\AllowedProductQuanityCheckoutConnector\\": "bundles/allowed-product-quantity-checkout-connector/src/FondOfImpala/Shared/AllowedProductQuanityCheckoutConnector",
+      "FondOfImpala\\Zed\\AllowedProductQuantityCheckoutConnector\\": "bundles/allowed-product-quantity-checkout-connector/src/FondOfImpala/Zed/AllowedProductQuantityCheckoutConnector",
+      "FondOfImpala\\Shared\\AllowedProductQuantityGui\\": "bundles/allowed-product-quantity-gui/src/FondOfImpala/Shared/AllowedProductQuantityGui",
+      "FondOfImpala\\Zed\\AllowedProductQuantityGui\\": "bundles/allowed-product-quantity-gui/src/FondOfImpala/Zed/AllowedProductQuantityGui",
+      "FondOfImpala\\Shared\\AllowedProductQuantitySearch\\": "bundles/allowed-product-quantity-search/src/FondOfImpala/Shared/AllowedProductQuantitySearch",
+      "FondOfImpala\\Zed\\AllowedProductQuantitySearch\\": "bundles/allowed-product-quantity-search/src/FondOfImpala/Zed/AllowedProductQuantitySearch",
       "FondOfImpala\\Glue\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/src/FondOfImpala/Glue/CollaborativeCartSearchRestApi",
       "FondOfImpala\\Shared\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/src/FondOfImpala/Shared/CollaborativeCartSearchRestApi",
       "FondOfImpala\\Zed\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/src/FondOfImpala/Zed/CollaborativeCartSearchRestApi",
@@ -257,12 +274,23 @@
       "FondOfImpala\\Client\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Client/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Shared\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Shared/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Zed\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/src/FondOfImpala/Zed/ProductListPriceProductPriceListPageSearch",
+      "FondOfImpala\\Zed\\ProductManagement\\": "bundles/product-management/src/FondOfImpala/Zed/ProductManagement",
       "FondOfImpala\\Shared\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Shared/ProductProductListConnector",
       "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Zed/ProductProductListConnector"
     }
   },
   "autoload-dev": {
     "psr-4": {
+      "FondOfImpala\\Shared\\AllowedProductQuantity\\": "bundles/allowed-product-quantity/tests/FondOfImpala/Shared/AllowedProductQuantity",
+      "FondOfImpala\\Zed\\AllowedProductQuantity\\": "bundles/allowed-product-quantity/tests/FondOfImpala/Zed/AllowedProductQuantity",
+      "FondOfImpala\\Shared\\AllowedProductQuantityCartConnector\\": "bundles/allowed-product-quantity-cart-connector/tests/FondOfImpala/Shared/AllowedProductQuantityCartConnector",
+      "FondOfImpala\\Zed\\AllowedProductQuantityCartConnector\\": "bundles/allowed-product-quantity-cart-connector/tests/FondOfImpala/Zed/AllowedProductQuantityCartConnector",
+      "FondOfImpala\\Shared\\AllowedProductQuanityCheckoutConnector\\": "bundles/allowed-product-quantity-checkout-connector/tests/FondOfImpala/Shared/AllowedProductQuanityCheckoutConnector",
+      "FondOfImpala\\Zed\\AllowedProductQuantityCheckoutConnector\\": "bundles/allowed-product-quantity-checkout-connector/tests/FondOfImpala/Zed/AllowedProductQuantityCheckoutConnector",
+      "FondOfImpala\\Shared\\AllowedProductQuantityGui\\": "bundles/allowed-product-quantity-gui/tests/FondOfImpala/Shared/AllowedProductQuantityGui",
+      "FondOfImpala\\Zed\\AllowedProductQuantityGui\\": "bundles/allowed-product-quantity-gui/tests/FondOfImpala/Zed/AllowedProductQuantityGui",
+      "FondOfImpala\\Shared\\AllowedProductQuantitySearch\\": "bundles/allowed-product-quantity-search/tests/FondOfImpala/Shared/AllowedProductQuantitySearch",
+      "FondOfImpala\\Zed\\AllowedProductQuantitySearch\\": "bundles/allowed-product-quantity-search/tests/FondOfImpala/Zed/AllowedProductQuantitySearch",
       "FondOfImpala\\Glue\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/tests/FondOfImpala/Glue/CollaborativeCartSearchRestApi",
       "FondOfImpala\\Shared\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/tests/FondOfImpala/Shared/CollaborativeCartSearchRestApi",
       "FondOfImpala\\Zed\\CollaborativeCartSearchRestApi\\": "bundles/collaborative-cart-search-rest-api/tests/FondOfImpala/Zed/CollaborativeCartSearchRestApi",
@@ -384,6 +412,7 @@
       "FondOfImpala\\Client\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/tests/FondOfImpala/Client/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Shared\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/tests/FondOfImpala/Shared/ProductListPriceProductPriceListPageSearch",
       "FondOfImpala\\Zed\\ProductListPriceProductPriceListPageSearch\\": "bundles/product-list-price-product-price-list-page-search/tests/FondOfImpala/Zed/ProductListPriceProductPriceListPageSearch",
+      "FondOfImpala\\Zed\\ProductManagement\\": "bundles/product-management/tests/FondOfImpala/Zed/ProductManagement",
       "FondOfImpala\\Shared\\ProductProductListConnector\\": "bundles/product-product-list-connector/tests/FondOfImpala/Shared/ProductProductListConnector",
       "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/tests/FondOfImpala/Zed/ProductProductListConnector",
       "Generated\\": "src/Generated/",

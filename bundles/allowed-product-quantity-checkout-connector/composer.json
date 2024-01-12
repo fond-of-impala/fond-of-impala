@@ -1,0 +1,40 @@
+{
+  "name": "fond-of-impala/allowed-product-quantity-checkout-connector",
+  "description": "Allowed product quantity checkout connector module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "spryker/checkout-extension": "^1.2.0",
+    "fond-of-impala/allowed-product-quantity-cart-connector": "^1.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
