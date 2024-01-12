@@ -15,7 +15,7 @@ class CustomerReferenceFilter implements CustomerReferenceFilterInterface
     {
         $getUserMethod = 'getUser';
 
-        if (method_exists($restRequest, 'getRestUser')) {
+        if (method_exists($restRequest, 'getRestUser')) { // @phpstan-ignore-line
             $getUserMethod = 'getRestUser';
         }
 
