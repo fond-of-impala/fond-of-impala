@@ -10,13 +10,13 @@
   ],
   "require": {
     "php": ">=8.0",
+    "fond-of-impala/company-user-reference": "^1.0.0",
     "spryker/quote": "^2.0.0",
-    "fond-of-impala/company-user-reference": "^1.0.0"
+    "spryker/uuid-behavior": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
     "spryker/code-sniffer": "*",
-    "spryker/uuid-behavior": "^1.0.0",
     "spryker-sdk/phpstan-spryker": "*"
   },
   "minimum-stability": "dev",
