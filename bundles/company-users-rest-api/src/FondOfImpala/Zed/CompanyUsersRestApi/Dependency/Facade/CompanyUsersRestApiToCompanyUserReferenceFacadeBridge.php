@@ -2,7 +2,7 @@
 
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade;
 
-use FondOfSpryker\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface;
+use FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 
@@ -11,7 +11,7 @@ class CompanyUsersRestApiToCompanyUserReferenceFacadeBridge implements CompanyUs
     protected CompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
     /**
-     * @param \FondOfSpryker\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface $companyUserReferenceFacade
+     * @param \FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface $companyUserReferenceFacade
      */
     public function __construct(CompanyUserReferenceFacadeInterface $companyUserReferenceFacade)
     {

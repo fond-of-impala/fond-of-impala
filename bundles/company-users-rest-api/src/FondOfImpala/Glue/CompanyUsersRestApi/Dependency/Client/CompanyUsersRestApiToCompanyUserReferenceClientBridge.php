@@ -2,7 +2,7 @@
 
 namespace FondOfImpala\Glue\CompanyUsersRestApi\Dependency\Client;
 
-use FondOfSpryker\Client\CompanyUserReference\CompanyUserReferenceClientInterface;
+use FondOfImpala\Client\CompanyUserReference\CompanyUserReferenceClientInterface;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 
@@ -11,7 +11,7 @@ class CompanyUsersRestApiToCompanyUserReferenceClientBridge implements CompanyUs
     protected CompanyUserReferenceClientInterface $companyUserReferenceClient;
 
     /**
-     * @param \FondOfSpryker\Client\CompanyUserReference\CompanyUserReferenceClientInterface $companyUserReferenceClient
+     * @param \FondOfImpala\Client\CompanyUserReference\CompanyUserReferenceClientInterface $companyUserReferenceClient
      */
     public function __construct(CompanyUserReferenceClientInterface $companyUserReferenceClient)
     {

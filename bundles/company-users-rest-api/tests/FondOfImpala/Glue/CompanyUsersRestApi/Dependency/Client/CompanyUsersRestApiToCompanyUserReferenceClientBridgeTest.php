@@ -3,7 +3,7 @@
 namespace FondOfImpala\Glue\CompanyUsersRestApi\Dependency\Client;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Client\CompanyUserReference\CompanyUserReferenceClientInterface;
+use FondOfImpala\Client\CompanyUserReference\CompanyUserReferenceClientInterface;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 
@@ -15,7 +15,7 @@ class CompanyUsersRestApiToCompanyUserReferenceClientBridgeTest extends Unit
     protected $companyUsersRestApiToCompanyUserReferenceClientBridge;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Client\CompanyUserReference\CompanyUserReferenceClientInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CompanyUserReference\CompanyUserReferenceClientInterface
      */
     protected $companyUserReferenceClientInterfaceMock;
 
