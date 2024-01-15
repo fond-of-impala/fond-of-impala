@@ -93,7 +93,6 @@
     "fond-of-spryker/company": "dev-master",
     "fond-of-spryker/company-extension": "dev-master",
     "fond-of-spryker/company-user-carts-rest-api": "dev-master",
-    "fond-of-spryker/company-user-reference": "dev-master",
     "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
     "spryker/api": "^0.4.0",
     "spryker/api-extension": "^0.1.0",
