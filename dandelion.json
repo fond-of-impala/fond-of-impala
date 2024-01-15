@@ -71,6 +71,10 @@
       "path": "bundles/company-user-company-assigner",
       "version": "1.0.0"
     },
+    "company-user-reference": {
+      "path": "bundles/company-user-reference",
+      "version": "1.0.0"
+    },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",
       "version": "1.2.0"

@@ -18,6 +18,7 @@ include:
   - bundles/company-type-converter-extension
   - bundles/company-type-role
   - bundles/company-user-company-assigner
+  - bundles/company-company-user-reference
   - bundles/company-users-bulk-rest-api
   - bundles/company-users-bulk-rest-api-business-central-connector
   - bundles/company-users-bulk-rest-api-extension

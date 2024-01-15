@@ -1,0 +1,43 @@
+{
+  "name": "fond-of-impala/company-user-reference",
+  "description": "Company user reference bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "spryker/store": "^1.1.0",
+    "spryker/sequence-number": "^1.0.0 || ^2.0.0 || ^3.0.0",
+    "spryker/company": "^1.2.0",
+    "spryker/company-business-unit": "^1.6.0 || ^2.0.0",
+    "spryker/company-user-extension": "^1.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
