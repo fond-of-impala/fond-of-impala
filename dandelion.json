@@ -71,6 +71,10 @@
       "path": "bundles/company-user-company-assigner",
       "version": "1.0.0"
     },
+    "company-user-quote": {
+      "path": "bundles/company-user-quote",
+      "version": "1.0.0"
+    },
     "company-user-reference": {
       "path": "bundles/company-user-reference",
       "version": "1.0.0"
