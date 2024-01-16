@@ -2,7 +2,7 @@
 
 namespace FondOfImpala\Glue\ConditionalAvailabilityCartConnector\Plugin\CompanyUserCartsRestApi;
 
-use FondOfSpryker\Glue\CompanyUserCartsRestApi\Dependency\Plugin\RestCartItemExpanderPluginInterface;
+use FondOfImpala\Glue\CompanyUserCartsRestApi\Dependency\Plugin\RestCartItemExpanderPluginInterface;
 use Generated\Shared\Transfer\RestCartItemTransfer;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
