@@ -4,42 +4,26 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Exp
 
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
-use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
 use Generated\Shared\Transfer\ProductPayloadTransfer;
 
 class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface
-     */
     protected StockStatusGeneratorInterface $stockStatusGenerator;
 
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
-     */
-    protected ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacade;
-
-    /**
-     * @var \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface
-     */
     protected ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade;
 
     /**
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface $stockStatusGenerator
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacade
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
      */
     public function __construct(
         StockStatusGeneratorInterface $stockStatusGenerator,
-        ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacade,
         ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface $conditionalAvailabilityFacade
     ) {
-        $this->productFacade = $productFacade;
-        $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
         $this->stockStatusGenerator = $stockStatusGenerator;
+        $this->conditionalAvailabilityFacade = $conditionalAvailabilityFacade;
     }
 
     /**
@@ -49,7 +33,7 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
      */
     public function expand(ProductPageLoadTransfer $productPageLoadTransfer): ProductPageLoadTransfer
     {
-        $updatedPayloadTransfers = $this->updatePayloadTransfers($productPageLoadTransfer->getPayloadTransfers());
+        $updatedPayloadTransfers = $this->expandPayloadTransfers($productPageLoadTransfer->getPayloadTransfers());
 
         $productPageLoadTransfer->setPayloadTransfers($updatedPayloadTransfers);
 
@@ -61,12 +45,9 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
      *
      * @return array<\Generated\Shared\Transfer\ProductPayloadTransfer>
      */
-    protected function updatePayloadTransfers(array $payloadTransfers): array
+    protected function expandPayloadTransfers(array $payloadTransfers): array
     {
         foreach ($payloadTransfers as $payloadTransfer) {
-            $groupedStockStatusRawValues = [];
-            $stockStatus = [];
-
             if (
                 !$payloadTransfer instanceof ProductPayloadTransfer
                 || $payloadTransfer->getIdProductAbstract() === null
@@ -74,28 +55,16 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
                 continue;
             }
 
-            $productConcreteTransfers = $this->productFacade->getConcreteProductsByAbstractProductId(
-                $payloadTransfer->getIdProductAbstract(),
+            $stockStatus = [];
+
+            $conditionalAvailabilityCollectionTransfer = $this->conditionalAvailabilityFacade
+                ->findConditionalAvailabilitiesByProductAbstractIds([$payloadTransfer->getIdProductAbstract()]);
+
+            $groupedRawValues = $this->getGroupedRawValuesByConditionalAvailabilityCollection(
+                $conditionalAvailabilityCollectionTransfer,
             );
 
-            foreach ($productConcreteTransfers as $productConcreteTransfer) {
-                $conditionalAvailabilityCriteriaFilterTransfer = (new ConditionalAvailabilityCriteriaFilterTransfer())
-                    ->setSkus([$productConcreteTransfer->getSku()]);
-
-                $conditionalAvailabilityCollectionTransfer = $this->conditionalAvailabilityFacade
-                    ->findConditionalAvailabilities($conditionalAvailabilityCriteriaFilterTransfer);
-
-                $currentGroupedStockStatusRawValues = $this->getGroupedStockStatusRawValuesByConditionalAvailabilityCollection(
-                    $conditionalAvailabilityCollectionTransfer,
-                );
-
-                $groupedStockStatusRawValues = $this->combineGroupedStockStatusRawValues(
-                    $groupedStockStatusRawValues,
-                    $currentGroupedStockStatusRawValues,
-                );
-            }
-
-            foreach ($groupedStockStatusRawValues as $channel => $stockStatusRawValue) {
+            foreach ($groupedRawValues as $channel => $stockStatusRawValue) {
                 $stockStatus[] = $this->stockStatusGenerator->generateByRawValueAndChannel(
                     $stockStatusRawValue,
                     $channel,
@@ -113,53 +82,31 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
      *
      * @return array<string, int>
      */
-    protected function getGroupedStockStatusRawValuesByConditionalAvailabilityCollection(
+    protected function getGroupedRawValuesByConditionalAvailabilityCollection(
         ConditionalAvailabilityCollectionTransfer $conditionalAvailabilityCollectionTransfer
     ): array {
-        $productConcreteStockStatus = [];
-        $conditionalAvailabilityTransfers = $conditionalAvailabilityCollectionTransfer->getConditionalAvailabilities();
+        $groupedRawValues = [];
 
-        foreach ($conditionalAvailabilityTransfers as $conditionalAvailabilityTransfer) {
+        foreach ($conditionalAvailabilityCollectionTransfer->getConditionalAvailabilities() as $conditionalAvailabilityTransfer) {
+            $channel = $conditionalAvailabilityTransfer->getChannel();
             $conditionalAvailabilityPeriodCollectionTransfer = $conditionalAvailabilityTransfer
                 ->getConditionalAvailabilityPeriodCollection();
 
-            if ($conditionalAvailabilityPeriodCollectionTransfer === null) {
+            if ($channel === null || $conditionalAvailabilityPeriodCollectionTransfer === null) {
                 continue;
             }
 
-            $productConcreteStockStatus[$conditionalAvailabilityTransfer->getChannel()]
-                = $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
-                    $conditionalAvailabilityPeriodCollectionTransfer,
-                );
+            $rawValue = $this->stockStatusGenerator->generateRawValueByConditionalAvailabilityPeriodCollection(
+                $conditionalAvailabilityPeriodCollectionTransfer,
+            );
+
+            if (array_key_exists($channel, $groupedRawValues) && $groupedRawValues[$channel] >= $rawValue) {
+                continue;
+            }
+
+            $groupedRawValues[$channel] = $rawValue;
         }
 
-        return $productConcreteStockStatus;
-    }
-
-    /**
-     * @param array<string, int> $aGroupedStockStatusRawValues
-     * @param array<string, int> $bGroupedStockStatusRawValues
-     *
-     * @return array<string, int>
-     */
-    protected function combineGroupedStockStatusRawValues(
-        array $aGroupedStockStatusRawValues,
-        array $bGroupedStockStatusRawValues
-    ): array {
-        foreach ($bGroupedStockStatusRawValues as $channel => $productConcreteStockStatusValue) {
-            if (!array_key_exists($channel, $aGroupedStockStatusRawValues)) {
-                $aGroupedStockStatusRawValues[$channel] = $productConcreteStockStatusValue;
-
-                continue;
-            }
-
-            if ($aGroupedStockStatusRawValues[$channel] >= $productConcreteStockStatusValue) {
-                continue;
-            }
-
-            $aGroupedStockStatusRawValues[$channel] = $productConcreteStockStatusValue;
-        }
-
-        return $aGroupedStockStatusRawValues;
+        return $groupedRawValues;
     }
 }

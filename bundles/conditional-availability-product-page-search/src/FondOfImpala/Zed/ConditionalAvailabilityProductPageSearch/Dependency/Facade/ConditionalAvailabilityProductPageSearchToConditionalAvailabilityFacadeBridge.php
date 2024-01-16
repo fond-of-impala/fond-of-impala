@@ -31,13 +31,15 @@ class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBri
     }
 
     /**
-     * @param array<int>$conditionalAvailabilityIds
+     * @param array<int> $productAbstractIds
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */
-    public function getConditionalAvailabilitiesByIds(
-        array $conditionalAvailabilityIds
+    public function findConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
     ): ConditionalAvailabilityCollectionTransfer {
-        return $this->conditionalAvailabilityFacade->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
+        return $this->conditionalAvailabilityFacade->findConditionalAvailabilitiesByProductAbstractIds(
+            $productAbstractIds,
+        );
     }
 }

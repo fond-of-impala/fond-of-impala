@@ -44,22 +44,4 @@ class ConditionalAvailabilityProductPageSearchToProductFacadeBridgeTest extends 
             $this->bridge->getProductAbstractIdsByProductConcreteIds($productConcreteIds),
         );
     }
-
-    /**
-     * @return void
-     */
-    public function testGetConcreteProductsByAbstractProductId(): void
-    {
-        $productConcreteIds = [1];
-        $productAbstractId = 1;
-        $this->productFacadeMock->expects(static::atLeastOnce())
-            ->method('getConcreteProductsByAbstractProductId')
-            ->with($productAbstractId)
-            ->willReturn($productConcreteIds);
-
-        static::assertEquals(
-            $productConcreteIds,
-            $this->bridge->getConcreteProductsByAbstractProductId($productAbstractId),
-        );
-    }
 }
