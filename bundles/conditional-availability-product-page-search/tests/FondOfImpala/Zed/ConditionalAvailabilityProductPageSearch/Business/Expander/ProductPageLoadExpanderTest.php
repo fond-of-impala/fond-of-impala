@@ -26,11 +26,6 @@ class ProductPageLoadExpanderTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
      */
-    protected MockObject|ConditionalAvailabilityProductPageSearchToProductFacadeInterface $productFacadeMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
-     */
     protected MockObject|ConditionalAvailabilityProductPageSearchToProductFacadeInterface $conditionalAvailabilityFacadeMock;
 
     /**
@@ -79,10 +74,6 @@ class ProductPageLoadExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productFacadeMock = $this->getMockBuilder(ConditionalAvailabilityProductPageSearchToProductFacadeInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->conditionalAvailabilityFacadeMock = $this->getMockBuilder(ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -113,7 +104,6 @@ class ProductPageLoadExpanderTest extends Unit
 
         $this->expander = new ProductPageLoadExpander(
             $this->stockStatusGeneratorMock,
-            $this->productFacadeMock,
             $this->conditionalAvailabilityFacadeMock,
         );
     }
@@ -123,7 +113,7 @@ class ProductPageLoadExpanderTest extends Unit
      */
     public function testExpand(): void
     {
-        $idProductConcrete = 1;
+        $idProductAbstract = 1;
         $channel = 'foo';
         $stockStatus = 'bar';
 
@@ -133,24 +123,20 @@ class ProductPageLoadExpanderTest extends Unit
 
         $this->productPayloadTransferMock->expects(static::atLeastOnce())
             ->method('getIdProductAbstract')
-            ->willReturn($idProductConcrete);
-
-        $this->productFacadeMock->expects(static::atLeastOnce())
-            ->method('getConcreteProductsByAbstractProductId')
-            ->with($idProductConcrete)
-            ->willReturn([$this->productConcreteTransfer]);
-
-        $this->productConcreteTransfer->expects(static::atLeastOnce())
-            ->method('getSku')
-            ->willReturn($idProductConcrete);
+            ->willReturn($idProductAbstract);
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
-            ->method('findConditionalAvailabilities')
+            ->method('findConditionalAvailabilitiesByProductAbstractIds')
+            ->with([$idProductAbstract])
             ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
 
         $this->conditionalAvailabilityCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilities')
             ->willReturn(new ArrayObject([$this->conditionalAvailabilityTransferMock]));
+
+        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
+            ->method('getChannel')
+            ->willReturn($channel);
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityPeriodCollection')
@@ -160,10 +146,6 @@ class ProductPageLoadExpanderTest extends Unit
             ->method('generateRawValueByConditionalAvailabilityPeriodCollection')
             ->with($this->conditionalAvailabilityPeriodCollectionTransferMock)
             ->willReturn(ConditionalAvailabilityProductPageSearchConfig::STOCK_STATUS_IN_STOCK);
-
-        $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
-            ->method('getChannel')
-            ->willReturn($channel);
 
         $this->stockStatusGeneratorMock->expects(static::atLeastOnce())
             ->method('generateByRawValueAndChannel')

@@ -128,17 +128,13 @@ class ConditionalAvailabilityProductPageSearchBusinessFactoryTest extends Unit
     {
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
-            ->withConsecutive(
-                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT],
-                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
-            )->willReturnOnConsecutiveCalls(true, true);
+            ->with(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY)
+            ->willReturn(true);
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT],
-                [ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
-            )->willReturn($this->productFacadeMock, $this->conditionalAvailabilityFacadeMock);
+            ->with(ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY)
+            ->willReturn($this->conditionalAvailabilityFacadeMock);
 
         static::assertInstanceOf(
             ProductPageLoadExpander::class,

@@ -49,7 +49,6 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     {
         return new ProductPageLoadExpander(
             $this->createStockStatusGenerator(),
-            $this->getProductFacade(),
             $this->getConditionalAvailabilityFacade(),
         );
     }

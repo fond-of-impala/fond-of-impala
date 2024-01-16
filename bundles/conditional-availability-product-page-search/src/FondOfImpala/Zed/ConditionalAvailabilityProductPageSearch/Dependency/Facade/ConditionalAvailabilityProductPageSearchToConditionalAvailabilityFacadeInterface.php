@@ -15,4 +15,13 @@ interface ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacad
     public function findConditionalAvailabilities(
         ConditionalAvailabilityCriteriaFilterTransfer $conditionalAvailabilityCriteriaFilterTransfer
     ): ConditionalAvailabilityCollectionTransfer;
+
+    /**
+     * @param array<int> $productAbstractIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function findConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ConditionalAvailabilityCollectionTransfer;
 }

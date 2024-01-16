@@ -29,18 +29,4 @@ class ConditionalAvailabilityProductPageSearchToProductFacadeBridge implements C
     {
         return $this->productFacade->getProductAbstractIdsByProductConcreteIds($productConcreteIds);
     }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param int $idProductAbstract
-     *
-     * @return array<\Generated\Shared\Transfer\ProductConcreteTransfer>
-     */
-    public function getConcreteProductsByAbstractProductId(int $idProductAbstract): array
-    {
-        return $this->productFacade->getConcreteProductsByAbstractProductId($idProductAbstract);
-    }
 }
