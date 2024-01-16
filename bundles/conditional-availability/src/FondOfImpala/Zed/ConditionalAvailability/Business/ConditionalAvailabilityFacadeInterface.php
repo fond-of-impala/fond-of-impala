@@ -148,11 +148,27 @@ interface ConditionalAvailabilityFacadeInterface
      * Specifications:
      * - Retrieves conditional availabilities by ids
      *
+     * @api
+     *
      * @param array<int> $conditionalAvailabilityIds
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */
     public function getConditionalAvailabilitiesByIds(
         array $conditionalAvailabilityIds
+    ): ConditionalAvailabilityCollectionTransfer;
+
+    /**
+     * Specifications:
+     * - Retrieves conditional availabilities by product abstract ids
+     *
+     * @api
+     *
+     * @param array<int> $productAbstractIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function findConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
     ): ConditionalAvailabilityCollectionTransfer;
 }

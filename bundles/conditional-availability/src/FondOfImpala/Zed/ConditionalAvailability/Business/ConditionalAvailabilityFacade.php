@@ -160,8 +160,7 @@ class ConditionalAvailabilityFacade extends AbstractFacade implements Conditiona
     }
 
     /**
-     * Specifications:
-     * - Retrieves conditional availabilities by ids
+     * {@inheritDoc}
      *
      * @param array<int> $conditionalAvailabilityIds
      *
@@ -171,5 +170,20 @@ class ConditionalAvailabilityFacade extends AbstractFacade implements Conditiona
         array $conditionalAvailabilityIds
     ): ConditionalAvailabilityCollectionTransfer {
         return $this->getRepository()->getConditionalAvailabilitiesByIds($conditionalAvailabilityIds);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param array<int> $productAbstractIds
+     *
+     * @api
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function findConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ConditionalAvailabilityCollectionTransfer {
+        return $this->getRepository()->findConditionalAvailabilitiesByProductAbstractIds($productAbstractIds);
     }
 }

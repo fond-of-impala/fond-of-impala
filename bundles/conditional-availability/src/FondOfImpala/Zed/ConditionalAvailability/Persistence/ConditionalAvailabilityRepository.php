@@ -235,4 +235,32 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
                 new ConditionalAvailabilityCollectionTransfer(),
             );
     }
+
+    /**
+     * @param array<int> $productAbstractIds
+     *
+     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     */
+    public function findConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ConditionalAvailabilityCollectionTransfer {
+        $query = $this->getFactory()
+            ->createConditionalAvailabilityQuery();
+
+        /** @var \Propel\Runtime\Collection\ObjectCollection $entityCollection */
+        $entityCollection = $query->useSpyProductQuery()
+                ->filterByFkProductAbstract_In($productAbstractIds)
+            ->endUse()
+            ->useFoiConditionalAvailabilityPeriodQuery()
+                ->addAscendingOrderByColumn(FoiConditionalAvailabilityPeriodTableMap::COL_START_AT)
+            ->endUse()
+            ->with(static::RELATION_ALIAS_FOI_CONDITIONAL_AVAILABILITY_PERIOD)->find();
+
+        return $this->getFactory()
+            ->createConditionalAvailabilityMapper()
+            ->mapEntityCollectionToTransferCollection(
+                $entityCollection,
+                new ConditionalAvailabilityCollectionTransfer(),
+            );
+    }
 }
