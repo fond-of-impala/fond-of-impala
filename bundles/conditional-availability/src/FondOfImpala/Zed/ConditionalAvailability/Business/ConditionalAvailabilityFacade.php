@@ -175,9 +175,9 @@ class ConditionalAvailabilityFacade extends AbstractFacade implements Conditiona
     /**
      * {@inheritDoc}
      *
-     * @param array<int> $productAbstractIds
-     *
      * @api
+     *
+     * @param array<int> $productAbstractIds
      *
      * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
      */
