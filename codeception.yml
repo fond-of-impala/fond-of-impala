@@ -6,8 +6,11 @@ include:
   - bundles/allowed-product-quantity-checkout-connector
   - bundles/allowed-product-quantity-gui
   - bundles/allowed-product-quantity-search
+  - bundles/cart-validation
+  - bundles/collaborative-cart
   - bundles/collaborative-cart-search-rest-api
   - bundles/company-business-unit-price-list
+  - bundles/company-business-unit-quote-connector
   - bundles/company-cart-search-rest-api
   - bundles/company-price-list
   - bundles/company-price-list-gui
@@ -17,8 +20,11 @@ include:
   - bundles/company-type-data-import
   - bundles/company-type-converter-extension
   - bundles/company-type-role
+  - bundles/company-user-carts-rest-api
   - bundles/company-user-company-assigner
+  - bundles/company-user-quote
   - bundles/company-user-reference
+  - bundles/company-user-reference-quote-connector
   - bundles/company-users-bulk-rest-api
   - bundles/company-users-bulk-rest-api-business-central-connector
   - bundles/company-users-bulk-rest-api-extension

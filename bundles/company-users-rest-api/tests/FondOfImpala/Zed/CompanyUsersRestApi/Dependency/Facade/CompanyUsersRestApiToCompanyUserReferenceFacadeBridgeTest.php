@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Dependency\Facade;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface;
+use FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 
@@ -15,7 +15,7 @@ class CompanyUsersRestApiToCompanyUserReferenceFacadeBridgeTest extends Unit
     protected $companyUsersRestApiToCompanyUserReferenceFacadeBridge;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface
      */
     protected $companyUserReferenceFacadeInterfaceMock;
 
