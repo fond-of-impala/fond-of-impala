@@ -1,0 +1,124 @@
+openapi: 3.0.0
+
+info:
+  title: Collaborative Carts
+  version: 1.0.0
+
+tags:
+  - name: "collaborative-carts"
+
+servers:
+  - url: '{protocoll}://{domain}/'
+    variables:
+      domain:
+        description: Domain
+        default: glue.localhost
+      protocoll:
+        default: http
+        enum:
+          - https
+          - http
+
+paths:
+  /collaborative-carts:
+    post:
+      tags:
+        - 'collaborative-carts'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaborativeCartsRequest'
+      responses:
+        201:
+          description: 'Expected response to a valid request.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollaborativeCartsResponse'
+        422:
+          description: 'Unprocessable entity.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      operationId: 'claim-or-release-cart'
+
+components:
+  schemas:
+    CollaborativeCartsRequest:
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                cartId:
+                  type: string
+                  nullable: false
+                  description: Uuid
+                  example: 0ecacb48-9a32-5822-959c-407b3f828202
+                action:
+                  type: string
+                  nullable: false
+                  description: Action
+                  enum:
+                    - claim
+                    - release
+                  example: claim
+    CollaborativeCartsResponse:
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              properties:
+                cartId:
+                  type: string
+                  nullable: false
+                  description: Uuid
+                  example: 0ecacb48-9a32-5822-959c-407b3f828202
+                companyUserReference:
+                  type: string
+                  nullable: false
+                  description: Company user reference
+                  example: PS--CU-1
+                customerReference:
+                  type: string
+                  nullable: false
+                  description: Customer reference
+                  example: PS--1
+                originalCompanyUserReference:
+                  type: string
+                  nullable: true
+                  description: Original company user reference
+                  example: PS--CU-2
+                originalCustomerReference:
+                  type: string
+                  nullable: true
+                  description: Original ustomer reference
+                  example: PS--2
+                action:
+                  type: string
+                  nullable: false
+                  description: Action
+                  enum:
+                    - claim
+                    - release
+                  example: claim
+    ErrorMessage:
+      properties:
+        code:
+          type: string
+          nullable: false
+          description: Code
+        detail:
+          type: string
+          nullable: false
+          description: Detail
+        status:
+          type: integer
+          nullable: false
+          description: Status
