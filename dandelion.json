@@ -33,7 +33,7 @@
     },
     "collaborative-cart-search-rest-api": {
       "path": "bundles/collaborative-cart-search-rest-api",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "collaborative-carts-rest-api": {
       "path": "bundles/collaborative-carts-rest-api",
@@ -133,7 +133,7 @@
     },
     "conditional-availability-cart-connector": {
       "path": "bundles/conditional-availability-cart-connector",
-      "version": "2.1.0"
+      "version": "2.2.0"
     },
     "conditional-availability-checkout-connector": {
       "path": "bundles/conditional-availability-checkout-connector",
