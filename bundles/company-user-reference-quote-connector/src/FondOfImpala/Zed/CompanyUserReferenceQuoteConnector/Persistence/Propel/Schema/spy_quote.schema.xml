@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd" name="zed"
+          namespace="Orm\Zed\Quote\Persistence"
+          package="src.Orm.Zed.Quote.Persistence">
+
+    <table name="spy_quote" phpName="SpyQuote">
+        <column name="company_user_reference" required="false" type="VARCHAR" size="255"/>
+
+        <index name="spy_quote-company_user_reference">
+            <index-column name="company_user_reference"/>
+        </index>
+    </table>
+</database>

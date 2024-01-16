@@ -27,12 +27,20 @@
       "path": "bundles/cart-validation",
       "version": "1.0.0"
     },
+    "collaborative-cart": {
+      "path": "bundles/collaborative-cart",
+      "version": "1.0.0"
+    },
     "collaborative-cart-search-rest-api": {
       "path": "bundles/collaborative-cart-search-rest-api",
       "version": "1.0.0"
     },
     "company-business-unit-price-list": {
       "path": "bundles/company-business-unit-price-list",
+      "version": "1.0.0"
+    },
+    "company-business-unit-quote-connector": {
+      "path": "bundles/company-business-unit-quote-connector",
       "version": "1.0.0"
     },
     "company-cart-search-rest-api": {
@@ -79,8 +87,16 @@
       "path": "bundles/company-user-company-assigner",
       "version": "1.0.0"
     },
+    "company-user-quote": {
+      "path": "bundles/company-user-quote",
+      "version": "1.0.0"
+    },
     "company-user-reference": {
       "path": "bundles/company-user-reference",
+      "version": "1.0.0"
+    },
+    "company-user-reference-quote-connector": {
+      "path": "bundles/company-user-reference-quote-connector",
       "version": "1.0.0"
     },
     "company-users-bulk-rest-api": {
