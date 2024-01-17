@@ -39,6 +39,10 @@
       "path": "bundles/collaborative-carts-rest-api",
       "version": "1.0.0"
     },
+    "company-business-units-carts-rest-api": {
+      "path": "bundles/company-business-units-carts-rest-api",
+      "version": "1.0.0"
+    },
     "company-business-unit-price-list": {
       "path": "bundles/company-business-unit-price-list",
       "version": "1.0.0"
