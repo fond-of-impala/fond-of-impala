@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade;
 
+use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
@@ -66,21 +67,19 @@ class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBri
     /**
      * @return void
      */
-    public function testFindConditionalAvailabilitiesByProductAbstractIds(): void
+    public function testFindGroupedConditionalAvailabilitiesByProductAbstractIds(): void
     {
         $productAbstractIds = [1, 4, 9];
+        $groupedConditionalAvailabilityTransfers = new ArrayObject();
 
         $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
-            ->method('findConditionalAvailabilitiesByProductAbstractIds')
+            ->method('findGroupedConditionalAvailabilitiesByProductAbstractIds')
             ->with($productAbstractIds)
-            ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
-
-        $conditionalAvailabilityCollectionTransfer =
-            $this->bridge->findConditionalAvailabilitiesByProductAbstractIds($productAbstractIds);
+            ->willReturn($groupedConditionalAvailabilityTransfers);
 
         static::assertEquals(
-            $this->conditionalAvailabilityCollectionTransferMock,
-            $conditionalAvailabilityCollectionTransfer,
+            $groupedConditionalAvailabilityTransfers,
+            $this->bridge->findGroupedConditionalAvailabilitiesByProductAbstractIds($productAbstractIds),
         );
     }
 }

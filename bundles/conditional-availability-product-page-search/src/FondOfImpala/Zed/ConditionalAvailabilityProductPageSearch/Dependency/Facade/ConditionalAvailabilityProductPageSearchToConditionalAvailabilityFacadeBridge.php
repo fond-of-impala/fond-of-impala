@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade;
 
+use ArrayObject;
 use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityCriteriaFilterTransfer;
@@ -33,12 +34,12 @@ class ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeBri
     /**
      * @param array<int> $productAbstractIds
      *
-     * @return \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer
+     * @return \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>>
      */
-    public function findConditionalAvailabilitiesByProductAbstractIds(
+    public function findGroupedConditionalAvailabilitiesByProductAbstractIds(
         array $productAbstractIds
-    ): ConditionalAvailabilityCollectionTransfer {
-        return $this->conditionalAvailabilityFacade->findConditionalAvailabilitiesByProductAbstractIds(
+    ): ArrayObject {
+        return $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilitiesByProductAbstractIds(
             $productAbstractIds,
         );
     }
