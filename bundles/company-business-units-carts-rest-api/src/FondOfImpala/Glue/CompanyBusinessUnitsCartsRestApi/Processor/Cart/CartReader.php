@@ -92,7 +92,7 @@ class CartReader implements CartReaderInterface
         RestRequestInterface $restRequest
     ): RestCompanyBusinessUnitCartListTransfer {
         return (new RestCompanyBusinessUnitCartListTransfer())
-            ->setIdCustomer($restRequest->getRestUser()->getSurrogateIdentifier())
+            ->setIdCustomer((string)$restRequest->getRestUser()->getSurrogateIdentifier())
             ->setCompanyBusinessUnitUuid($this->findCompanyBusinessUnitIdentifier($restRequest));
     }
 
