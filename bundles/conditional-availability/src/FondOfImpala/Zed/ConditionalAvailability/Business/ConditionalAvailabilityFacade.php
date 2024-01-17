@@ -186,4 +186,19 @@ class ConditionalAvailabilityFacade extends AbstractFacade implements Conditiona
     ): ConditionalAvailabilityCollectionTransfer {
         return $this->getRepository()->findConditionalAvailabilitiesByProductAbstractIds($productAbstractIds);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param array<int> $productAbstractIds
+     *
+     * @return \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>>
+     */
+    public function findGroupedConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ArrayObject {
+        return $this->getRepository()->findGroupedConditionalAvailabilitiesByProductAbstractIds($productAbstractIds);
+    }
 }

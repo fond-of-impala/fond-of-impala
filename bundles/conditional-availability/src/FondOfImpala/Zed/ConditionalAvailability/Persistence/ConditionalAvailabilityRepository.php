@@ -30,6 +30,11 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
     /**
      * @var string
      */
+    public const VIRTUAL_COLUMN_ID_PRODUCT_ABSTRACT = 'id_product_abstract';
+
+    /**
+     * @var string
+     */
     protected const RELATION_ALIAS_FOI_CONDITIONAL_AVAILABILITY_PERIOD = 'FoiConditionalAvailabilityPeriod';
 
     /**
@@ -188,7 +193,11 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
 
         return $this->getFactory()
             ->createConditionalAvailabilityMapper()
-            ->mapEntityCollectionToGroupedTransfers($foiConditionalAvailabilityCollection, new ArrayObject());
+            ->mapEntityCollectionToGroupedTransfers(
+                $foiConditionalAvailabilityCollection,
+                new ArrayObject(),
+                static::VIRTUAL_COLUMN_SKU,
+            );
     }
 
     /**
@@ -261,6 +270,39 @@ class ConditionalAvailabilityRepository extends AbstractRepository implements Co
             ->mapEntityCollectionToTransferCollection(
                 $entityCollection,
                 new ConditionalAvailabilityCollectionTransfer(),
+            );
+    }
+
+    /**
+     * @param array<int> $productAbstractIds
+     *
+     * @return \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>>
+     */
+    public function findGroupedConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ArrayObject {
+        $query = $this->getFactory()
+            ->createConditionalAvailabilityQuery();
+
+        /** @var \Propel\Runtime\Collection\ObjectCollection $entityCollection */
+        $entityCollection = $query->useSpyProductQuery()
+            ->filterByFkProductAbstract_In($productAbstractIds)
+            ->endUse()
+            ->useFoiConditionalAvailabilityPeriodQuery()
+            ->addAscendingOrderByColumn(FoiConditionalAvailabilityPeriodTableMap::COL_START_AT)
+            ->endUse()
+            ->with(static::RELATION_ALIAS_FOI_CONDITIONAL_AVAILABILITY_PERIOD)
+            ->withColumn(
+                SpyProductTableMap::COL_FK_PRODUCT_ABSTRACT,
+                static::VIRTUAL_COLUMN_ID_PRODUCT_ABSTRACT,
+            )->find();
+
+        return $this->getFactory()
+            ->createConditionalAvailabilityMapper()
+            ->mapEntityCollectionToGroupedTransfers(
+                $entityCollection,
+                new ArrayObject(),
+                static::VIRTUAL_COLUMN_ID_PRODUCT_ABSTRACT,
             );
     }
 }

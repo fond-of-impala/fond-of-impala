@@ -125,7 +125,7 @@
     },
     "conditional-availability": {
       "path": "bundles/conditional-availability",
-      "version": "2.2.0"
+      "version": "2.3.0"
     },
     "conditional-availability-bulk-api": {
       "path": "bundles/conditional-availability-bulk-api",

@@ -70,4 +70,13 @@ interface ConditionalAvailabilityRepositoryInterface
     public function findConditionalAvailabilitiesByProductAbstractIds(
         array $productAbstractIds
     ): ConditionalAvailabilityCollectionTransfer;
+
+    /**
+     * @param array<int> $productAbstractIds
+     *
+     * @return \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>>
+     */
+    public function findGroupedConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ArrayObject;
 }
