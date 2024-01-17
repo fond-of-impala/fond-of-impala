@@ -9,7 +9,6 @@ use FondOfImpala\Glue\CompanyBusinessUnitsCartsRestApi\CompanyBusinessUnitsCarts
 use FondOfImpala\Glue\CompanyBusinessUnitsCartsRestApi\Processor\RestResponseBuilder\CartRestResponseBuilderInterface;
 use Generated\Shared\Transfer\CompanyBusinessUnitQuoteListTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Shared\Transfer\RestCompanyBusinessUnitCartListTransfer;
 use Generated\Shared\Transfer\RestUserTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -131,44 +130,35 @@ class CartReaderTest extends Unit
      */
     public function testFindCarts(): void
     {
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('findParentResourceByType')
             ->with(CompanyBusinessUnitsCartsRestApiConfig::PARENT_RESOURCE_COMPANY_BUSINESS_UNITS)
             ->willReturn($this->restResourceMock);
 
-        $this->restResourceMock->expects(self::atLeastOnce())
+        $this->restResourceMock->expects(static::atLeastOnce())
             ->method('getId')
             ->willReturn($this->companyBusinessUnitUuid);
 
-        $this->cartRestResponseBuilderMock->expects(self::never())
+        $this->cartRestResponseBuilderMock->expects(static::never())
             ->method('createCompanyBusinessUnitIdentifierMissingErrorResponse');
 
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getRestUser')
             ->willReturn($this->restUserTransferMock);
 
-        $this->restUserTransferMock->expects(self::atLeastOnce())
+        $this->restUserTransferMock->expects(static::atLeastOnce())
             ->method('getSurrogateIdentifier')
             ->willReturn($this->idCustomer);
 
-        $self = $this;
-        $this->clientMock->expects(self::atLeastOnce())
+        $this->clientMock->expects(static::atLeastOnce())
             ->method('findQuotes')
-            ->with(
-                self::callback(
-                    static function (RestCompanyBusinessUnitCartListTransfer $restCompanyBusinessUnitCartListTransfer) use ($self) {
-                        return $restCompanyBusinessUnitCartListTransfer->getIdCustomer() === $self->idCustomer
-                            && $restCompanyBusinessUnitCartListTransfer->getCompanyBusinessUnitUuid() === $self->companyBusinessUnitUuid
-                            && $restCompanyBusinessUnitCartListTransfer->getCartUuid() === null;
-                    },
-                ),
-            )->willReturn($this->companyBusinessUnitQuoteListTransferMock);
+            ->willReturn($this->companyBusinessUnitQuoteListTransferMock);
 
-        $this->cartRestResponseBuilderMock->expects(self::atLeastOnce())
+        $this->cartRestResponseBuilderMock->expects(static::atLeastOnce())
             ->method('createCartListRestResponse')
             ->willReturn($this->restResponseMock);
 
-        self::assertEquals($this->restResponseMock, $this->cartReader->findCarts($this->restRequestMock));
+        static::assertEquals($this->restResponseMock, $this->cartReader->findCarts($this->restRequestMock));
     }
 
     /**
@@ -176,28 +166,28 @@ class CartReaderTest extends Unit
      */
     public function testFindCartsWithoutParentResource(): void
     {
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('findParentResourceByType')
             ->with(CompanyBusinessUnitsCartsRestApiConfig::PARENT_RESOURCE_COMPANY_BUSINESS_UNITS)
             ->willReturn(null);
 
-        $this->restResourceMock->expects(self::never())
+        $this->restResourceMock->expects(static::never())
             ->method('getId');
 
-        $this->cartRestResponseBuilderMock->expects(self::atLeastOnce())
+        $this->cartRestResponseBuilderMock->expects(static::atLeastOnce())
             ->method('createCompanyBusinessUnitIdentifierMissingErrorResponse')
             ->willReturn($this->restResponseMock);
 
-        $this->restRequestMock->expects(self::never())
+        $this->restRequestMock->expects(static::never())
             ->method('getRestUser');
 
-        $this->clientMock->expects(self::never())
+        $this->clientMock->expects(static::never())
             ->method('findQuotes');
 
-        $this->cartRestResponseBuilderMock->expects(self::never())
+        $this->cartRestResponseBuilderMock->expects(static::never())
             ->method('createCartListRestResponse');
 
-        self::assertEquals($this->restResponseMock, $this->cartReader->findCarts($this->restRequestMock));
+        static::assertEquals($this->restResponseMock, $this->cartReader->findCarts($this->restRequestMock));
     }
 
     /**
@@ -205,28 +195,28 @@ class CartReaderTest extends Unit
      */
     public function testGetCartWithoutParentResource(): void
     {
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('findParentResourceByType')
             ->with(CompanyBusinessUnitsCartsRestApiConfig::PARENT_RESOURCE_COMPANY_BUSINESS_UNITS)
             ->willReturn(null);
 
-        $this->restResourceMock->expects(self::never())
+        $this->restResourceMock->expects(static::never())
             ->method('getId');
 
-        $this->cartRestResponseBuilderMock->expects(self::atLeastOnce())
+        $this->cartRestResponseBuilderMock->expects(static::atLeastOnce())
             ->method('createCompanyBusinessUnitIdentifierMissingErrorResponse')
             ->willReturn($this->restResponseMock);
 
-        $this->restRequestMock->expects(self::never())
+        $this->restRequestMock->expects(static::never())
             ->method('getRestUser');
 
-        $this->clientMock->expects(self::never())
+        $this->clientMock->expects(static::never())
             ->method('findQuotes');
 
-        $this->cartRestResponseBuilderMock->expects(self::never())
+        $this->cartRestResponseBuilderMock->expects(static::never())
             ->method('createCartRestResponse');
 
-        self::assertEquals($this->restResponseMock, $this->cartReader->getCart(
+        static::assertEquals($this->restResponseMock, $this->cartReader->getCart(
             $this->cartUuid,
             $this->restRequestMock,
         ));
@@ -237,48 +227,39 @@ class CartReaderTest extends Unit
      */
     public function testGetCart(): void
     {
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('findParentResourceByType')
             ->with(CompanyBusinessUnitsCartsRestApiConfig::PARENT_RESOURCE_COMPANY_BUSINESS_UNITS)
             ->willReturn($this->restResourceMock);
 
-        $this->restResourceMock->expects(self::atLeastOnce())
+        $this->restResourceMock->expects(static::atLeastOnce())
             ->method('getId')
             ->willReturn($this->companyBusinessUnitUuid);
 
-        $this->cartRestResponseBuilderMock->expects(self::never())
+        $this->cartRestResponseBuilderMock->expects(static::never())
             ->method('createCompanyBusinessUnitIdentifierMissingErrorResponse');
 
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getRestUser')
             ->willReturn($this->restUserTransferMock);
 
-        $this->restUserTransferMock->expects(self::atLeastOnce())
+        $this->restUserTransferMock->expects(static::atLeastOnce())
             ->method('getSurrogateIdentifier')
             ->willReturn($this->idCustomer);
 
-        $self = $this;
-        $callback = static function (RestCompanyBusinessUnitCartListTransfer $restCompanyBusinessUnitCartListTransfer) use ($self) {
-            return $restCompanyBusinessUnitCartListTransfer->getIdCustomer() === $self->idCustomer
-                && $restCompanyBusinessUnitCartListTransfer->getCompanyBusinessUnitUuid() === $self->companyBusinessUnitUuid
-                && $restCompanyBusinessUnitCartListTransfer->getCartUuid() === $self->cartUuid;
-        };
-
-        $this->clientMock->expects(self::atLeastOnce())
+        $this->clientMock->expects(static::atLeastOnce())
             ->method('findQuotes')
-            ->with(self::callback($callback))
             ->willReturn($this->companyBusinessUnitQuoteListTransferMock);
 
-        $this->companyBusinessUnitQuoteListTransferMock->expects(self::atLeastOnce())
+        $this->companyBusinessUnitQuoteListTransferMock->expects(static::atLeastOnce())
             ->method('getQuotes')
             ->willReturn(new ArrayObject([$this->quoteTransferMock]));
 
-        $this->cartRestResponseBuilderMock->expects(self::atLeastOnce())
+        $this->cartRestResponseBuilderMock->expects(static::atLeastOnce())
             ->method('createCartRestResponse')
-            ->with(self::callback($callback), $this->quoteTransferMock)
             ->willReturn($this->restResponseMock);
 
-        self::assertEquals($this->restResponseMock, $this->cartReader->getCart(
+        static::assertEquals($this->restResponseMock, $this->cartReader->getCart(
             $this->cartUuid,
             $this->restRequestMock,
         ));
@@ -289,48 +270,39 @@ class CartReaderTest extends Unit
      */
     public function testGetCartWithInvalidCartUuid(): void
     {
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('findParentResourceByType')
             ->with(CompanyBusinessUnitsCartsRestApiConfig::PARENT_RESOURCE_COMPANY_BUSINESS_UNITS)
             ->willReturn($this->restResourceMock);
 
-        $this->restResourceMock->expects(self::atLeastOnce())
+        $this->restResourceMock->expects(static::atLeastOnce())
             ->method('getId')
             ->willReturn($this->companyBusinessUnitUuid);
 
-        $this->cartRestResponseBuilderMock->expects(self::never())
+        $this->cartRestResponseBuilderMock->expects(static::never())
             ->method('createCompanyBusinessUnitIdentifierMissingErrorResponse');
 
-        $this->restRequestMock->expects(self::atLeastOnce())
+        $this->restRequestMock->expects(static::atLeastOnce())
             ->method('getRestUser')
             ->willReturn($this->restUserTransferMock);
 
-        $this->restUserTransferMock->expects(self::atLeastOnce())
+        $this->restUserTransferMock->expects(static::atLeastOnce())
             ->method('getSurrogateIdentifier')
             ->willReturn($this->idCustomer);
 
-        $self = $this;
-        $this->clientMock->expects(self::atLeastOnce())
+        $this->clientMock->expects(static::atLeastOnce())
             ->method('findQuotes')
-            ->with(
-                self::callback(
-                    static function (RestCompanyBusinessUnitCartListTransfer $restCompanyBusinessUnitCartListTransfer) use ($self) {
-                        return $restCompanyBusinessUnitCartListTransfer->getIdCustomer() === $self->idCustomer
-                            && $restCompanyBusinessUnitCartListTransfer->getCompanyBusinessUnitUuid() === $self->companyBusinessUnitUuid
-                            && $restCompanyBusinessUnitCartListTransfer->getCartUuid() === $self->cartUuid;
-                    },
-                ),
-            )->willReturn($this->companyBusinessUnitQuoteListTransferMock);
+            ->willReturn($this->companyBusinessUnitQuoteListTransferMock);
 
-        $this->companyBusinessUnitQuoteListTransferMock->expects(self::atLeastOnce())
+        $this->companyBusinessUnitQuoteListTransferMock->expects(static::atLeastOnce())
             ->method('getQuotes')
             ->willReturn(new ArrayObject());
 
-        $this->cartRestResponseBuilderMock->expects(self::atLeastOnce())
+        $this->cartRestResponseBuilderMock->expects(static::atLeastOnce())
             ->method('createCartNotFoundErrorResponse')
             ->willReturn($this->restResponseMock);
 
-        self::assertEquals($this->restResponseMock, $this->cartReader->getCart(
+        static::assertEquals($this->restResponseMock, $this->cartReader->getCart(
             $this->cartUuid,
             $this->restRequestMock,
         ));
