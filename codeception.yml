@@ -10,6 +10,7 @@ include:
   - bundles/collaborative-cart
   - bundles/collaborative-cart-search-rest-api
   - bundles/collaborative-carts-rest-api
+  - bundles/company-business-units-carts-rest-api
   - bundles/company-business-unit-price-list
   - bundles/company-business-unit-quote-connector
   - bundles/company-cart-search-rest-api
