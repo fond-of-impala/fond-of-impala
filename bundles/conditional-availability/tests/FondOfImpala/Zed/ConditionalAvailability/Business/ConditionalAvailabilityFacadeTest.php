@@ -363,4 +363,24 @@ class ConditionalAvailabilityFacadeTest extends Unit
             $this->conditionalAvailabilityFacade->findConditionalAvailabilitiesByProductAbstractIds($productAbstractIds),
         );
     }
+
+    /**
+     * @return void
+     */
+    public function testFindGroupedConditionalAvailabilitiesByProductAbstractIds(): void
+    {
+        $productAbstractIds = [1, 4, 8];
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('findGroupedConditionalAvailabilitiesByProductAbstractIds')
+            ->with($productAbstractIds)
+            ->willReturn($this->arrayObjectMock);
+
+        static::assertEquals(
+            $this->arrayObjectMock,
+            $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilitiesByProductAbstractIds(
+                $productAbstractIds,
+            ),
+        );
+    }
 }

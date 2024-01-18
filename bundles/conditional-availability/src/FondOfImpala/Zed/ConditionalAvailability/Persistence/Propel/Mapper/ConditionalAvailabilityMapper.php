@@ -73,19 +73,21 @@ class ConditionalAvailabilityMapper implements ConditionalAvailabilityMapperInte
 
     /**
      * @param \Propel\Runtime\Collection\ObjectCollection $foiConditionalAvailabilities
-     * @param \ArrayObject $groupedConditionalAvailabilityTransfers
+     * @param \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>> $groupedConditionalAvailabilityTransfers
+     * @param string $groupByVirtualColumn
      *
-     * @return \ArrayObject
+     * @return \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>>
      */
     public function mapEntityCollectionToGroupedTransfers(
         ObjectCollection $foiConditionalAvailabilities,
-        ArrayObject $groupedConditionalAvailabilityTransfers
+        ArrayObject $groupedConditionalAvailabilityTransfers,
+        string $groupByVirtualColumn
     ): ArrayObject {
         foreach ($foiConditionalAvailabilities as $foiConditionalAvailability) {
-            $sku = $foiConditionalAvailability->getVirtualColumn(static::VIRTUAL_COLUMN_SKU);
+            $virtualColumn = (string)$foiConditionalAvailability->getVirtualColumn($groupByVirtualColumn);
 
-            if (!$groupedConditionalAvailabilityTransfers->offsetExists($sku)) {
-                $groupedConditionalAvailabilityTransfers->offsetSet($sku, new ArrayObject());
+            if (!$groupedConditionalAvailabilityTransfers->offsetExists($virtualColumn)) {
+                $groupedConditionalAvailabilityTransfers->offsetSet($virtualColumn, new ArrayObject());
             }
 
             $conditionalAvailabilityTransfer = $this->mapEntityToTransfer(
@@ -93,7 +95,7 @@ class ConditionalAvailabilityMapper implements ConditionalAvailabilityMapperInte
                 new ConditionalAvailabilityTransfer(),
             );
 
-            $groupedConditionalAvailabilityTransfers->offsetGet($sku)
+            $groupedConditionalAvailabilityTransfers->offsetGet($virtualColumn)
                 ->append($conditionalAvailabilityTransfer);
         }
 

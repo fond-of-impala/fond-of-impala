@@ -171,4 +171,18 @@ interface ConditionalAvailabilityFacadeInterface
     public function findConditionalAvailabilitiesByProductAbstractIds(
         array $productAbstractIds
     ): ConditionalAvailabilityCollectionTransfer;
+
+    /**
+     * Specifications:
+     * - Retrieves grouped conditional availabilities by product abstract ids
+     *
+     * @api
+     *
+     * @param array<int> $productAbstractIds
+     *
+     * @return \ArrayObject<string, \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer>>
+     */
+    public function findGroupedConditionalAvailabilitiesByProductAbstractIds(
+        array $productAbstractIds
+    ): ArrayObject;
 }
