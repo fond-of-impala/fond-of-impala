@@ -9,14 +9,43 @@
     </transfer>
 
     <transfer name="Quote">
-        <property name="voucherDiscounts" singular="voucherDiscount" type="Discount[]"/>
+        <property name="voucherDiscounts" type="Discount[]" singular="voucherDiscount"/>
+        <property name="cartRuleDiscounts" type="Discount[]"/>
     </transfer>
 
     <transfer name="Totals">
         <property name="taxTotal" type="TaxTotal"/>
     </transfer>
 
+    <transfer name="TaxTotal">
+        <property name="amount" type="int"/>
+    </transfer>
+
     <transfer name="Item">
         <property name="groupKey" type="string" />
     </transfer>
+
+    <transfer name="RestItemsAttributes">
+        <property name="calculations" type="RestCartItemCalculations"/>
+    </transfer>
+
+    <transfer name="RestCartsAttributes">
+        <property name="name" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="priceMode" type="string" />
+        <property name="filters" type="string"/>
+        <property name="comment" type="string"/>
+        <property name="currency" type="string"/>
+        <property name="store" type="string"/>
+        <property name="discounts" type="RestCartsDiscounts[]" singular="discount"/>
+        <property name="totals" type="RestCartsTotals"/>
+    </transfer>
+
+    <transfer name="RestCartsTotals">
+        <property name="taxTotal" type="int" />
+    </transfer>
+
+    <transfer name="Discount" />
+    <transfer name="RestCartItemCalculations"/>
+    <transfer name="RestCartsDiscounts"/>
 </transfers>
