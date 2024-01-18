@@ -116,23 +116,29 @@ class ProductPageLoadExpanderTest extends Unit
         $idProductAbstract = 1;
         $channel = 'foo';
         $stockStatus = 'bar';
+        $groupedConditionalAvailabilityTransfers = new ArrayObject();
+
+        $groupedConditionalAvailabilityTransfers->offsetSet(
+            (string)$idProductAbstract,
+            new ArrayObject([$this->conditionalAvailabilityTransferMock]),
+        );
 
         $this->productPageLoadTransferMock->expects(static::atLeastOnce())
             ->method('getPayloadTransfers')
             ->willReturn([$this->productPayloadTransferMock]);
 
+        $this->productPageLoadTransferMock->expects(static::atLeastOnce())
+            ->method('getProductAbstractIds')
+            ->willReturn([$idProductAbstract]);
+
+        $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
+            ->method('findGroupedConditionalAvailabilitiesByProductAbstractIds')
+            ->with([$idProductAbstract])
+            ->willReturn($groupedConditionalAvailabilityTransfers);
+
         $this->productPayloadTransferMock->expects(static::atLeastOnce())
             ->method('getIdProductAbstract')
             ->willReturn($idProductAbstract);
-
-        $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
-            ->method('findConditionalAvailabilitiesByProductAbstractIds')
-            ->with([$idProductAbstract])
-            ->willReturn($this->conditionalAvailabilityCollectionTransferMock);
-
-        $this->conditionalAvailabilityCollectionTransferMock->expects(static::atLeastOnce())
-            ->method('getConditionalAvailabilities')
-            ->willReturn(new ArrayObject([$this->conditionalAvailabilityTransferMock]));
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
             ->method('getChannel')
@@ -157,6 +163,11 @@ class ProductPageLoadExpanderTest extends Unit
         $this->productPayloadTransferMock->expects(static::atLeastOnce())
             ->method('setStockStatus')
             ->with([$stockStatus])
+            ->willReturnSelf();
+
+        $this->productPageLoadTransferMock->expects(static::atLeastOnce())
+            ->method('setPayloadTransfers')
+            ->with([$this->productPayloadTransferMock])
             ->willReturnSelf();
 
         static::assertEquals(

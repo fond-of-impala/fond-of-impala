@@ -2,9 +2,9 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander;
 
+use ArrayObject;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Generator\StockStatusGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToConditionalAvailabilityFacadeInterface;
-use Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
 use Generated\Shared\Transfer\ProductPayloadTransfer;
 
@@ -33,36 +33,38 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
      */
     public function expand(ProductPageLoadTransfer $productPageLoadTransfer): ProductPageLoadTransfer
     {
-        $updatedPayloadTransfers = $this->expandPayloadTransfers($productPageLoadTransfer->getPayloadTransfers());
+        $productAbstractIds = $productPageLoadTransfer->getProductAbstractIds();
+        $payloadTransfers = $productPageLoadTransfer->getPayloadTransfers();
 
-        $productPageLoadTransfer->setPayloadTransfers($updatedPayloadTransfers);
+        if (count($productAbstractIds) === 0 || count($payloadTransfers) === 0) {
+            return $productPageLoadTransfer;
+        }
 
-        return $productPageLoadTransfer;
-    }
+        $groupedConditionalAvailabilityTransfers = $this->conditionalAvailabilityFacade
+            ->findGroupedConditionalAvailabilitiesByProductAbstractIds($productAbstractIds);
 
-    /**
-     * @param array<\Generated\Shared\Transfer\ProductPayloadTransfer> $payloadTransfers
-     *
-     * @return array<\Generated\Shared\Transfer\ProductPayloadTransfer>
-     */
-    protected function expandPayloadTransfers(array $payloadTransfers): array
-    {
         foreach ($payloadTransfers as $payloadTransfer) {
+            if (!$payloadTransfer instanceof ProductPayloadTransfer) {
+                continue;
+            }
+
+            $idProductAbstract = (string)$payloadTransfer->getIdProductAbstract();
+
             if (
-                !$payloadTransfer instanceof ProductPayloadTransfer
-                || $payloadTransfer->getIdProductAbstract() === null
+                $idProductAbstract === ''
+                || !$groupedConditionalAvailabilityTransfers->offsetExists($idProductAbstract)
             ) {
                 continue;
             }
 
             $stockStatus = [];
-
-            $conditionalAvailabilityCollectionTransfer = $this->conditionalAvailabilityFacade
-                ->findConditionalAvailabilitiesByProductAbstractIds([$payloadTransfer->getIdProductAbstract()]);
-
-            $groupedRawValues = $this->getGroupedRawValuesByConditionalAvailabilityCollection(
-                $conditionalAvailabilityCollectionTransfer,
+            $groupedRawValues = $this->getGroupedRawValuesByConditionalAvailabilities(
+                $groupedConditionalAvailabilityTransfers->offsetGet($idProductAbstract),
             );
+
+            if (count($groupedRawValues) === 0) {
+                continue;
+            }
 
             foreach ($groupedRawValues as $channel => $stockStatusRawValue) {
                 $stockStatus[] = $this->stockStatusGenerator->generateByRawValueAndChannel(
@@ -74,20 +76,20 @@ class ProductPageLoadExpander implements ProductPageLoadExpanderInterface
             $payloadTransfer->setStockStatus($stockStatus);
         }
 
-        return $payloadTransfers;
+        return $productPageLoadTransfer->setPayloadTransfers($payloadTransfers);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ConditionalAvailabilityCollectionTransfer $conditionalAvailabilityCollectionTransfer
+     * @param \ArrayObject<\Generated\Shared\Transfer\ConditionalAvailabilityTransfer> $conditionalAvailabilityTransfers
      *
      * @return array<string, int>
      */
-    protected function getGroupedRawValuesByConditionalAvailabilityCollection(
-        ConditionalAvailabilityCollectionTransfer $conditionalAvailabilityCollectionTransfer
+    protected function getGroupedRawValuesByConditionalAvailabilities(
+        ArrayObject $conditionalAvailabilityTransfers
     ): array {
         $groupedRawValues = [];
 
-        foreach ($conditionalAvailabilityCollectionTransfer->getConditionalAvailabilities() as $conditionalAvailabilityTransfer) {
+        foreach ($conditionalAvailabilityTransfers as $conditionalAvailabilityTransfer) {
             $channel = $conditionalAvailabilityTransfer->getChannel();
             $conditionalAvailabilityPeriodCollectionTransfer = $conditionalAvailabilityTransfer
                 ->getConditionalAvailabilityPeriodCollection();

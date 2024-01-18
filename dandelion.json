@@ -173,7 +173,7 @@
     },
     "conditional-availability-product-page-search": {
       "path": "bundles/conditional-availability-product-page-search",
-      "version": "1.7.0"
+      "version": "1.8.0"
     },
     "conditional-availability-sales-connector": {
       "path": "bundles/conditional-availability-sales-connector",
