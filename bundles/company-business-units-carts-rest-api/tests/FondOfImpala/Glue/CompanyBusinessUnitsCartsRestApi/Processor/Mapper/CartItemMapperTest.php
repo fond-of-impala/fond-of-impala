@@ -65,25 +65,25 @@ class CartItemMapperTest extends Unit
     {
         $itemTransferData = [];
 
-        $this->itemTransferMock->expects(self::atLeastOnce())
+        $this->itemTransferMock->expects(static::atLeastOnce())
             ->method('toArray')
             ->willReturn($itemTransferData);
 
-        $this->restItemsAttributesTransferMock->expects(self::atLeastOnce())
+        $this->restItemsAttributesTransferMock->expects(static::atLeastOnce())
             ->method('fromArray')
             ->with($itemTransferData, true)
             ->willReturn($this->restItemsAttributesTransferMock);
 
-        $this->restItemsAttributesTransferMock->expects(self::atLeastOnce())
+        $this->restItemsAttributesTransferMock->expects(static::atLeastOnce())
             ->method('getCalculations')
             ->willReturn(null);
 
-        $this->restItemsAttributesTransferMock->expects(self::atLeastOnce())
+        $this->restItemsAttributesTransferMock->expects(static::atLeastOnce())
             ->method('setCalculations')
-            ->with(self::isInstanceOf(RestCartItemCalculationsTransfer::class))
+            ->with(static::isInstanceOf(RestCartItemCalculationsTransfer::class))
             ->willReturn($this->restItemsAttributesTransferMock);
 
-        self::assertEquals(
+        static::assertEquals(
             $this->restItemsAttributesTransferMock,
             $this->cartItemMapper->mapItemTransferToRestItemsAttributesTransfer(
                 $this->itemTransferMock,
