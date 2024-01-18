@@ -378,7 +378,9 @@ class ConditionalAvailabilityFacadeTest extends Unit
 
         static::assertEquals(
             $this->arrayObjectMock,
-            $this->conditionalAvailabilityFacade->findConditionalAvailabilitiesByProductAbstractIds($productAbstractIds),
+            $this->conditionalAvailabilityFacade->findGroupedConditionalAvailabilitiesByProductAbstractIds(
+                $productAbstractIds,
+            ),
         );
     }
 }
