@@ -120,7 +120,7 @@ class ProductPageLoadExpanderTest extends Unit
 
         $groupedConditionalAvailabilityTransfers->offsetSet(
             (string)$idProductAbstract,
-            new ArrayObject([$this->conditionalAvailabilityTransferMock])
+            new ArrayObject([$this->conditionalAvailabilityTransferMock]),
         );
 
         $this->productPageLoadTransferMock->expects(static::atLeastOnce())
