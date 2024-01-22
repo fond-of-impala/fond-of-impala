@@ -21,20 +21,6 @@ interface ConditionalAvailabilityProductPageSearchFacadeInterface
 
     /**
      * Specification:
-     * - Expands ProductConcretePageSearchTransfer with stock status data
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
-     */
-    public function expandProductConcretePageSearchTransferWithStockStatus(
-        ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
-    ): ProductConcretePageSearchTransfer;
-
-    /**
-     * Specification:
      * - Trigger concrete and abstract products with periods that starts today
      *
      * @api

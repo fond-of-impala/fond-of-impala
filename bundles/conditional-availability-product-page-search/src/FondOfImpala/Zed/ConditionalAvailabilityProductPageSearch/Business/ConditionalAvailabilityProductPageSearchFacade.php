@@ -30,23 +30,6 @@ class ConditionalAvailabilityProductPageSearchFacade extends AbstractFacade impl
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductConcretePageSearchTransfer
-     */
-    public function expandProductConcretePageSearchTransferWithStockStatus(
-        ProductConcretePageSearchTransfer $productConcretePageSearchTransfer
-    ): ProductConcretePageSearchTransfer {
-        return $this->getFactory()
-            ->createProductConcretePageSearchExpander()
-            ->expand($productConcretePageSearchTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
      * @return void
      */
     public function triggerStockStatus(): void

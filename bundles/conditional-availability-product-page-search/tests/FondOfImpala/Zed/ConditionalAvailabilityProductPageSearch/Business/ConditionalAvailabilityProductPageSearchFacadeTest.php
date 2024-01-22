@@ -24,11 +24,6 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
     protected ConditionalAvailabilityProductPageSearchFacade $facade;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface
-     */
-    protected MockObject|ProductAbstractReaderInterface $productAbstractReaderMock;
-
-    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface
      */
     protected MockObject|ProductPageLoadExpanderInterface $productPageLoadExpanderMock;
@@ -37,11 +32,6 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPageLoadTransfer
      */
     protected MockObject|ProductPageLoadTransfer $productPageLoadTransferMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpanderInterface
-     */
-    protected MockObject|ProductConcretePageSearchExpanderInterface $productConcretePageSearchExpanderMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductConcretePageSearchTransfer
@@ -64,23 +54,11 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productAbstractReaderMock = $this->getMockBuilder(ProductAbstractReaderInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->productConcretePageSearchExpanderMock = $this->getMockBuilder(ProductConcretePageSearchExpanderInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->productPageLoadExpanderMock = $this->getMockBuilder(ProductPageLoadExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->productPageLoadTransferMock = $this->getMockBuilder(ProductPageLoadTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->productConcretePageSearchExpanderMock = $this->getMockBuilder(ProductConcretePageSearchExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -113,26 +91,6 @@ class ConditionalAvailabilityProductPageSearchFacadeTest extends Unit
         $productPageLoadTransfer = $this->facade->expandProductPageData($this->productPageLoadTransferMock);
 
         static::assertEquals($this->productPageLoadTransferMock, $productPageLoadTransfer);
-    }
-
-    /**
-     * @return void
-     */
-    public function testExpandProductConcretePageSearchTransferWithStockStatus(): void
-    {
-        $this->factoryMock->expects(static::atLeastOnce())
-            ->method('createProductConcretePageSearchExpander')
-            ->willReturn($this->productConcretePageSearchExpanderMock);
-
-        $this->productConcretePageSearchExpanderMock->expects(static::atLeastOnce())
-            ->method('expand')
-            ->with($this->productConcretePageSearchTransferMock)
-            ->willReturn($this->productConcretePageSearchTransferMock);
-
-        $productConcretePageSearchTransferMock = $this->facade
-            ->expandProductConcretePageSearchTransferWithStockStatus($this->productConcretePageSearchTransferMock);
-
-        static::assertEquals($this->productConcretePageSearchTransferMock, $productConcretePageSearchTransferMock);
     }
 
     /**

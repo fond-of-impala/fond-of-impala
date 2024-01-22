@@ -24,25 +24,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface
-     */
-    public function createProductAbstractReader(): ProductAbstractReaderInterface
-    {
-        return new ProductAbstractReader($this->getProductFacade());
-    }
-
-    /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductConcretePageSearchExpanderInterface
-     */
-    public function createProductConcretePageSearchExpander(): ProductConcretePageSearchExpanderInterface
-    {
-        return new ProductConcretePageSearchExpander(
-            $this->createStockStatusGenerator(),
-            $this->getConditionalAvailabilityFacade(),
-        );
-    }
-
-    /**
      * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Expander\ProductPageLoadExpanderInterface
      */
     public function createProductPageLoadExpander(): ProductPageLoadExpanderInterface
@@ -67,7 +48,6 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     public function createStockStatusTrigger(): StockStatusTriggerInterface
     {
         return new StockStatusTrigger(
-            $this->createProductAbstractReader(),
             $this->getEventBehaviorFacade(),
             $this->getRepository(),
         );
@@ -80,16 +60,6 @@ class ConditionalAvailabilityProductPageSearchBusinessFactory extends AbstractBu
     {
         return $this->getProvidedDependency(
             ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY,
-        );
-    }
-
-    /**
-     * @return \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToProductFacadeInterface
-     */
-    protected function getProductFacade(): ConditionalAvailabilityProductPageSearchToProductFacadeInterface
-    {
-        return $this->getProvidedDependency(
-            ConditionalAvailabilityProductPageSearchDependencyProvider::FACADE_PRODUCT,
         );
     }
 
