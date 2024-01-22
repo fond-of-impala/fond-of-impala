@@ -4,7 +4,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence;
 
 use DateInterval;
 use DateTime;
-use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityTableMap;
+use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -19,19 +19,21 @@ class ConditionalAvailabilityProductPageSearchRepository extends AbstractReposit
     /**
      * @return array<int>
      */
-    public function findProductConcreteIdsToTrigger(): array
+    public function findProductAbstractIdsToTrigger(): array
     {
         /** @var \Propel\Runtime\Collection\ArrayCollection $collection */
         $collection = $this->getFactory()
             ->createFoiConditionalAvailabilityQuery()
-            ->select(FoiConditionalAvailabilityTableMap::COL_FK_PRODUCT)
             ->useFoiConditionalAvailabilityPeriodQuery()
                     ->filterByStartAt(date('Y-m-d 00:00:00'), Criteria::GREATER_EQUAL)
                     ->filterByStartAt(date('Y-m-d 23:59:59'), Criteria::LESS_EQUAL)
                     ->filterByCreatedAt(date('Y-m-d 00:00:00'), Criteria::LESS_THAN)
             ->endUse()
-            ->groupByFkProduct()
-            ->orderByFkProduct()
+            ->useSpyProductQuery()
+                ->select(SpyProductTableMap::COL_FK_PRODUCT_ABSTRACT)
+                ->orderByFkProductAbstract()
+                ->groupByFkProductAbstract()
+            ->endUse()
             ->find();
 
         return $collection->toArray();
@@ -40,7 +42,7 @@ class ConditionalAvailabilityProductPageSearchRepository extends AbstractReposit
     /**
      * @return array<int>
      */
-    public function findProductConcreteIdsForDeltaTrigger(): array
+    public function findProductAbstractIdsForDeltaTrigger(): array
     {
         $duration = $this->getFactory()
             ->getConfig()
@@ -51,12 +53,14 @@ class ConditionalAvailabilityProductPageSearchRepository extends AbstractReposit
         /** @var \Propel\Runtime\Collection\ArrayCollection $collection */
         $collection = $this->getFactory()
             ->createFoiConditionalAvailabilityQuery()
-            ->select(FoiConditionalAvailabilityTableMap::COL_FK_PRODUCT)
             ->useFoiConditionalAvailabilityPeriodQuery()
                 ->filterByCreatedAt($delta, Criteria::GREATER_EQUAL)
             ->endUse()
-            ->groupByFkProduct()
-            ->orderByFkProduct()
+            ->useSpyProductQuery()
+                ->select(SpyProductTableMap::COL_FK_PRODUCT_ABSTRACT)
+                ->orderByFkProductAbstract()
+                ->groupByFkProductAbstract()
+            ->endUse()
             ->find();
 
         return $collection->toArray();

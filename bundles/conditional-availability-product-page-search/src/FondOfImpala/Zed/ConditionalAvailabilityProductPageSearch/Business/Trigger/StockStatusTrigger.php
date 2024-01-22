@@ -2,29 +2,23 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Trigger;
 
-use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface;
 
 class StockStatusTrigger implements StockStatusTriggerInterface
 {
-    protected ProductAbstractReaderInterface $productAbstractReader;
-
     protected ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacade;
 
     protected ConditionalAvailabilityProductPageSearchRepositoryInterface $repository;
 
     /**
-     * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business\Reader\ProductAbstractReaderInterface $productAbstractReader
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Dependency\Facade\ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacade
      * @param \FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence\ConditionalAvailabilityProductPageSearchRepositoryInterface $repository
      */
     public function __construct(
-        ProductAbstractReaderInterface $productAbstractReader,
         ConditionalAvailabilityProductPageSearchToEventBehaviorFacadeInterface $eventBehaviorFacade,
         ConditionalAvailabilityProductPageSearchRepositoryInterface $repository
     ) {
-        $this->productAbstractReader = $productAbstractReader;
         $this->eventBehaviorFacade = $eventBehaviorFacade;
         $this->repository = $repository;
     }
@@ -34,9 +28,9 @@ class StockStatusTrigger implements StockStatusTriggerInterface
      */
     public function trigger(): void
     {
-        $productConcreteIds = $this->repository->findProductConcreteIdsToTrigger();
+        $productAbstractIds = $this->repository->findProductAbstractIdsToTrigger();
 
-        $this->triggerByProductConcreteIds($productConcreteIds);
+        $this->triggerByProductAbstractIds($productAbstractIds);
     }
 
     /**
@@ -44,26 +38,18 @@ class StockStatusTrigger implements StockStatusTriggerInterface
      */
     public function triggerDelta(): void
     {
-        $productConcreteIds = $this->repository->findProductConcreteIdsForDeltaTrigger();
+        $productAbstractIds = $this->repository->findProductAbstractIdsForDeltaTrigger();
 
-        $this->triggerByProductConcreteIds($productConcreteIds);
+        $this->triggerByProductAbstractIds($productAbstractIds);
     }
 
     /**
-     * @param array<int> $productConcreteIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */
-    protected function triggerByProductConcreteIds(array $productConcreteIds): void
+    protected function triggerByProductAbstractIds(array $productAbstractIds): void
     {
-        if (count($productConcreteIds) === 0) {
-            return;
-        }
-
-        $this->eventBehaviorFacade->executeResolvedPluginsBySources(['product_concrete'], $productConcreteIds);
-
-        $productAbstractIds = $this->productAbstractReader->getProductAbstractIdsByConcreteIds($productConcreteIds);
-
         if (count($productAbstractIds) === 0) {
             return;
         }

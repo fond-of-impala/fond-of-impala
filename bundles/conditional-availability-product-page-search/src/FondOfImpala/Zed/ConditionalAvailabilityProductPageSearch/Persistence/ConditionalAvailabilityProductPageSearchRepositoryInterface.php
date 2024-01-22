@@ -10,10 +10,10 @@ interface ConditionalAvailabilityProductPageSearchRepositoryInterface
     /**
      * @return array<int>
      */
-    public function findProductConcreteIdsToTrigger(): array;
+    public function findProductAbstractIdsToTrigger(): array;
 
     /**
      * @return array<int>
      */
-    public function findProductConcreteIdsForDeltaTrigger(): array;
+    public function findProductAbstractIdsForDeltaTrigger(): array;
 }
