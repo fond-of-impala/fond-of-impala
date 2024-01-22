@@ -4,7 +4,6 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Persistence;
 
 use DateInterval;
 use DateTime;
-use Orm\Zed\ConditionalAvailability\Persistence\Map\FoiConditionalAvailabilityTableMap;
 use Orm\Zed\Product\Persistence\Map\SpyProductTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;

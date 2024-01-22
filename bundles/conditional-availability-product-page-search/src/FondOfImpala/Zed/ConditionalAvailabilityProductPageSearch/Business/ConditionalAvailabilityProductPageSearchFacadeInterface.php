@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityProductPageSearch\Business;
 
-use Generated\Shared\Transfer\ProductConcretePageSearchTransfer;
 use Generated\Shared\Transfer\ProductPageLoadTransfer;
 
 interface ConditionalAvailabilityProductPageSearchFacadeInterface
