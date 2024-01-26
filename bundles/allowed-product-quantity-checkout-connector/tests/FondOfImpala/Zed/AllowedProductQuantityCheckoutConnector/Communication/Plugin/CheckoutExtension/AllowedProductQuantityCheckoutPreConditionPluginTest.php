@@ -5,23 +5,15 @@ namespace FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Communication
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantityCheckoutPreConditionPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Communication\Plugin\CheckoutExtension\AllowedProductQuantityCheckoutPreConditionPlugin
-     */
-    protected $allowedProductQuantityCheckoutPreConditionPlugin;
+    protected AllowedProductQuantityCheckoutPreConditionPlugin $allowedProductQuantityCheckoutPreConditionPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    protected $checkoutResponseTransferMock;
+    protected MockObject|CheckoutResponseTransfer $checkoutResponseTransferMock;
 
     /**
      * @return void

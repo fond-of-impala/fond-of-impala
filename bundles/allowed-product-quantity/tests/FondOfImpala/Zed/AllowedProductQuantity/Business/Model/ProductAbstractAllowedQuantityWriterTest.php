@@ -12,22 +12,19 @@ class ProductAbstractAllowedQuantityWriterTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityEntityManagerInterface
      */
-    protected $entityManagerMock;
+    protected MockObject|AllowedProductQuantityEntityManagerInterface $entityManagerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityTransfer
      */
-    protected $allowedProductQuantityTransferMock;
+    protected MockObject|AllowedProductQuantityTransfer $allowedProductQuantityTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Business\Model\ProductAbstractAllowedQuantityWriter
-     */
-    protected $productAbstractAllowedQuantityWriter;
+    protected ProductAbstractAllowedQuantityWriter $productAbstractAllowedQuantityWriter;
 
     /**
      * @return void

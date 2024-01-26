@@ -5,36 +5,22 @@ namespace FondOfImpala\Zed\AllowedProductQuantityCartConnector;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacadeInterface;
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Dependency\Facade\AllowedProductQuantityCartConnectorToAllowedProductQuantityFacadeBridge;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Kernel\Locator;
 
 class AllowedProductQuantityCartConnectorDependencyProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\AllowedProductQuantityCartConnectorDependencyProvider
-     */
-    protected $allowedProductQuantityCartConnectorDependencyProvider;
+    protected AllowedProductQuantityCartConnectorDependencyProvider $allowedProductQuantityCartConnectorDependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Locator
-     */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
-     */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacadeInterface
-     */
-    protected $allowedProductQuantityFacadeMock;
+    protected MockObject|AllowedProductQuantityFacadeInterface $allowedProductQuantityFacadeMock;
 
     /**
      * @return void

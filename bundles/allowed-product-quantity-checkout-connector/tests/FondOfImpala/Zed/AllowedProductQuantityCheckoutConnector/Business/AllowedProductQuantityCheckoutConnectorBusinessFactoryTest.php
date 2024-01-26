@@ -6,24 +6,16 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\AllowedProductQuantityCheckoutConnectorDependencyProvider;
 use FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\Model\CheckoutPreConditionCheckerInterface;
 use FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Dependency\Facade\AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class AllowedProductQuantityCheckoutConnectorBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\AllowedProductQuantityCheckoutConnectorBusinessFactory
-     */
-    protected $allowedProductQuantityCheckoutConnectorBusinessFactory;
+    protected AllowedProductQuantityCheckoutConnectorBusinessFactory $allowedProductQuantityCheckoutConnectorBusinessFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Dependency\Facade\AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterface
-     */
-    protected $allowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterfaceMock;
+    protected MockObject|AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterface $allowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterfaceMock;
 
     /**
      * @return void

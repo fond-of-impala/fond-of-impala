@@ -6,15 +6,9 @@ use Codeception\Test\Unit;
 
 class AllowedProductQuantitySearchWriterTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Business\Model\AllowedProductQuantitySearchWriter
-     */
-    protected $allowedProductQuantitySearchWriter;
+    protected AllowedProductQuantitySearchWriter $allowedProductQuantitySearchWriter;
 
-    /**
-     * @var array
-     */
-    protected $allowedProductQuantityIds;
+    protected array $allowedProductQuantityIds;
 
     /**
      * @return void

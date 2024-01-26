@@ -9,20 +9,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedQuantityProductAbstractAfterUpdatePluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Communication\Plugin\Product\AllowedQuantityProductAbstractAfterUpdatePlugin
-     */
-    protected $allowedQuantityProductAbstractAfterUpdatePlugin;
+    protected AllowedQuantityProductAbstractAfterUpdatePlugin $allowedQuantityProductAbstractAfterUpdatePlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacade
-     */
-    protected $allowedProductQuantityFacadeMock;
+    protected MockObject|AllowedProductQuantityFacade $allowedProductQuantityFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    private ?MockObject $productAbstractTransferMock = null;
+    private MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
     /**
      * @return void

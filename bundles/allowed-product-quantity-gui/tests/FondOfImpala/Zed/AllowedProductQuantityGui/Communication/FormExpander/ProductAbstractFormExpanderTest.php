@@ -5,34 +5,20 @@ namespace FondOfImpala\Zed\AllowedProductQuantityGui\Communication\FormExpander;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\AllowedQuantityForm;
 use FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\DataProvider\AllowedQuantityFormDataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ProductAbstractFormExpanderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityGui\Communication\FormExpander\ProductAbstractFormExpander
-     */
-    protected $productAbstractFormExpander;
+    protected ProductAbstractFormExpander $productAbstractFormExpander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\AllowedQuantityForm
-     */
-    protected $allowedQuantityFormMock;
+    protected MockObject|AllowedQuantityForm $allowedQuantityFormMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\DataProvider\AllowedQuantityFormDataProvider
-     */
-    protected $allowedQuantityFormDataProviderMock;
+    protected MockObject|AllowedQuantityFormDataProvider $allowedQuantityFormDataProviderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Form\FormBuilderInterface
-     */
-    protected $formBuilderInterfaceMock;
+    protected MockObject|FormBuilderInterface $formBuilderInterfaceMock;
 
-    /**
-     * @var array
-     */
-    protected $options;
+    protected array $options;
 
     /**
      * @return void

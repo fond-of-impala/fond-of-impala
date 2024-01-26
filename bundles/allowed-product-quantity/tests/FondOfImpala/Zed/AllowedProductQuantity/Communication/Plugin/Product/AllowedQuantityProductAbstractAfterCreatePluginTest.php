@@ -5,23 +5,15 @@ namespace FondOfImpala\Zed\AllowedProductQuantity\Communication\Plugin\Product;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacade;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedQuantityProductAbstractAfterCreatePluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Communication\Plugin\Product\AllowedQuantityProductAbstractAfterCreatePlugin
-     */
-    protected $allowedQuantityProductAbstractAfterCreatePlugin;
+    protected AllowedQuantityProductAbstractAfterCreatePlugin $allowedQuantityProductAbstractAfterCreatePlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacade
-     */
-    protected $allowedProductQuantityFacadeMock;
+    protected MockObject|AllowedProductQuantityFacade $allowedProductQuantityFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
     /**
      * @return void

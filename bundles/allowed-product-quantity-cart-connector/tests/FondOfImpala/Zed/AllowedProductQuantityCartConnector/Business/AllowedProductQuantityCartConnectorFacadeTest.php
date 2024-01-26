@@ -8,38 +8,21 @@ use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\Item
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\QuoteValidatorInterface;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantityCartConnectorFacadeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorBusinessFactory
-     */
-    protected $factoryMock;
+    protected MockObject|AllowedProductQuantityCartConnectorBusinessFactory $factoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\QuoteValidatorInterface
-     */
-    protected $quoteValidatorMock;
+    protected MockObject|QuoteValidatorInterface $quoteValidatorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\ItemValidatorInterface
-     */
-    protected $itemValidatorMock;
+    protected MockObject|ItemValidatorInterface $itemValidatorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorFacade
-     */
-    protected $facade;
+    protected AllowedProductQuantityCartConnectorFacade $facade;
 
     /**
      * @return void

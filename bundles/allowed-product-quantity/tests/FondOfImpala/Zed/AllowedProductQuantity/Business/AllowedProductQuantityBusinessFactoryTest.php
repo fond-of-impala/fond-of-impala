@@ -10,20 +10,17 @@ use FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityRe
 
 class AllowedProductQuantityBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityBusinessFactory
-     */
-    protected $allowedProductQuantityBusinessFactory;
+    protected AllowedProductQuantityBusinessFactory $allowedProductQuantityBusinessFactory;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityEntityManager
      */
-    protected $allowedProductQuantityEntityManagerMock;
+    protected MockObject|AllowedProductQuantityEntityManager $allowedProductQuantityEntityManagerMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityRepository
      */
-    protected $allowedProductQuantityRepositoryMock;
+    protected MockObject|AllowedProductQuantityRepository $allowedProductQuantityRepositoryMock;
 
     /**
      * @return void

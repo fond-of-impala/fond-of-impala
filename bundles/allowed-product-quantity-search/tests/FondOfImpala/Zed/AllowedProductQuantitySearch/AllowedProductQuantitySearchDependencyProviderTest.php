@@ -3,19 +3,14 @@
 namespace FondOfImpala\Zed\AllowedProductQuantitySearch;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class AllowedProductQuantitySearchDependencyProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\AllowedProductQuantitySearchDependencyProvider
-     */
-    protected $allowedProductQuantitySearchDependencyProvider;
+    protected AllowedProductQuantitySearchDependencyProvider $allowedProductQuantitySearchDependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void

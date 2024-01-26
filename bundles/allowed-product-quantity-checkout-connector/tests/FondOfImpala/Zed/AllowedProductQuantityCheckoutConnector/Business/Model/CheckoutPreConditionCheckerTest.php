@@ -8,48 +8,25 @@ use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CheckoutPreConditionCheckerTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\Model\CheckoutPreConditionChecker
-     */
-    protected $checkoutPreConditionChecker;
+    protected CheckoutPreConditionChecker $checkoutPreConditionChecker;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Dependency\Facade\AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterface
-     */
-    protected $allowedProductQuantityCartConnectorFacadeMock;
+    protected MockObject|AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeInterface $allowedProductQuantityCartConnectorFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    protected $checkoutResponseTransferMock;
+    protected MockObject|CheckoutResponseTransfer $checkoutResponseTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
-    /**
-     * @var array
-     */
-    protected $itemTransferMocks;
+    protected array $itemTransferMocks;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\MessageTransfer
-     */
-    protected $messageTransferMock;
+    protected MockObject|MessageTransfer $messageTransferMock;
 
-    /**
-     * @var array
-     */
-    protected $messageTransferMocks;
+    protected array $messageTransferMocks;
 
     /**
      * @return void

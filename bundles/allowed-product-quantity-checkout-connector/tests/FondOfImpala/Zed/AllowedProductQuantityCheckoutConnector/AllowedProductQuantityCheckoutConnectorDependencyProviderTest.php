@@ -3,19 +3,14 @@
 namespace FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class AllowedProductQuantityCheckoutConnectorDependencyProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\AllowedProductQuantityCheckoutConnectorDependencyProvider
-     */
-    protected $allowedProductQuantityCheckoutConnectorDependencyProvider;
+    protected AllowedProductQuantityCheckoutConnectorDependencyProvider $allowedProductQuantityCheckoutConnectorDependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void

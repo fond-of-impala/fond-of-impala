@@ -39,6 +39,7 @@ class ItemsValidator implements ItemsValidatorInterface
             if ($groupKey === null) {
                 continue;
             }
+
             if (!isset($allowedProductQuantities[$abstractSku])) {
                 continue;
             }
@@ -70,6 +71,7 @@ class ItemsValidator implements ItemsValidatorInterface
             if ($groupKey === null) {
                 continue;
             }
+
             if (!isset($allowedProductQuantities[$abstractSku])) {
                 continue;
             }

@@ -6,38 +6,21 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityGui\Dependency\Facade\AllowedProductQuantityGuiToAllowedProductQuantityFacadeInterface;
 use Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer;
 use Generated\Shared\Transfer\AllowedProductQuantityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedQuantityFormDataProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\DataProvider\AllowedQuantityFormDataProvider
-     */
-    protected $allowedQuantityFormDataProvider;
+    protected AllowedQuantityFormDataProvider $allowedQuantityFormDataProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityGui\Dependency\Facade\AllowedProductQuantityGuiToAllowedProductQuantityFacadeInterface
-     */
-    protected $allowedProductQuantityFacadeMock;
+    protected MockObject|AllowedProductQuantityGuiToAllowedProductQuantityFacadeInterface $allowedProductQuantityFacadeMock;
 
-    /**
-     * @var int
-     */
-    protected $idProductAbstract;
+    protected int $idProductAbstract;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer
-     */
-    protected $allowedProductQuantityResponseTransferMock;
+    protected MockObject|AllowedProductQuantityResponseTransfer $allowedProductQuantityResponseTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityTransfer
-     */
-    protected $allowedProductQuantityTransferMock;
+    protected MockObject|AllowedProductQuantityTransfer $allowedProductQuantityTransferMock;
 
-    /**
-     * @var array
-     */
-    protected $options;
+    protected array $options;
 
     /**
      * @return void

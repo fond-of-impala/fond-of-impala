@@ -3,24 +3,16 @@
 namespace FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class AllowedQuantityFormTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\AllowedQuantityForm
-     */
-    protected $allowedQuantityForm;
+    protected AllowedQuantityForm $allowedQuantityForm;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Form\FormBuilderInterface
-     */
-    protected $formBuilderInterfaceMock;
+    protected MockObject|FormBuilderInterface $formBuilderInterfaceMock;
 
-    /**
-     * @var array
-     */
-    protected $options;
+    protected array $options;
 
     /**
      * @return void

@@ -8,18 +8,13 @@ use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Reader\Allowed
 use Generated\Shared\Transfer\AllowedProductQuantityTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ItemsValidatorTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Reader\AllowedProductQuantityReaderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $allowedProductQuantityReaderMock;
+    protected AllowedProductQuantityReaderInterface|MockObject $allowedProductQuantityReaderMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\ItemValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $itemValidatorMock;
+    protected ItemValidatorInterface|MockObject $itemValidatorMock;
 
     /**
      * @var \ArrayObject<\Generated\Shared\Transfer\ItemTransfer|\PHPUnit\Framework\MockObject\MockObject>
@@ -31,15 +26,9 @@ class ItemsValidatorTest extends Unit
      */
     protected $allowedProductQuantityTransferMocks;
 
-    /**
-     * @var \Generated\Shared\Transfer\MessageTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $messageTransferMock;
+    protected MessageTransfer|MockObject $messageTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\ItemsValidator
-     */
-    protected $itemsValidator;
+    protected ItemsValidator $itemsValidator;
 
     /**
      * @return void

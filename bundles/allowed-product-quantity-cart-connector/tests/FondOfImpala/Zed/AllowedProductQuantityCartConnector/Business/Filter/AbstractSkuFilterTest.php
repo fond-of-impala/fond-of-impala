@@ -5,18 +5,13 @@ namespace FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Filter;
 use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AbstractSkuFilterTest extends Unit
 {
-    /**
-     * @var \Generated\Shared\Transfer\ItemTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $itemTransferMock;
+    protected ItemTransfer|MockObject $itemTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Filter\AbstractSkuFilter
-     */
-    protected $abstractSkuFilter;
+    protected AbstractSkuFilter $abstractSkuFilter;
 
     /**
      * @return void

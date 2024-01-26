@@ -8,24 +8,16 @@ use FondOfImpala\Zed\AllowedProductQuantityGui\Communication\FormExpander\Produc
 use FondOfImpala\Zed\AllowedProductQuantityGui\Communication\TabExpander\ProductAbstractTabExpanderInterface;
 use FondOfImpala\Zed\AllowedProductQuantityGui\Communication\ViewExpander\ProductAbstractViewExpanderInterface;
 use FondOfImpala\Zed\AllowedProductQuantityGui\Dependency\Facade\AllowedProductQuantityGuiToAllowedProductQuantityFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class AllowedProductQuantityGuiCommunicationFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityGui\Communication\AllowedProductQuantityGuiCommunicationFactory
-     */
-    protected $allowedProductQuantityGuiCommunicationFactory;
+    protected AllowedProductQuantityGuiCommunicationFactory $allowedProductQuantityGuiCommunicationFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityGui\Dependency\Facade\AllowedProductQuantityGuiToAllowedProductQuantityFacadeInterface
-     */
-    protected $allowedProductQuantityGuiToAllowedProductQuantityFacadeInterfaceMock;
+    protected MockObject|AllowedProductQuantityGuiToAllowedProductQuantityFacadeInterface $allowedProductQuantityGuiToAllowedProductQuantityFacadeInterfaceMock;
 
     /**
      * @return void

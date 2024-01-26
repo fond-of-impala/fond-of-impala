@@ -7,10 +7,7 @@ use FondOfImpala\Zed\AllowedProductQuantitySearch\Business\Model\AllowedProductQ
 
 class AllowedProductQuantitySearchBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Business\AllowedProductQuantitySearchBusinessFactory
-     */
-    protected $allowedProductQuantitySearchBusinessFactory;
+    protected AllowedProductQuantitySearchBusinessFactory $allowedProductQuantitySearchBusinessFactory;
 
     /**
      * @return void

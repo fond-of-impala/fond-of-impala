@@ -10,25 +10,13 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ItemValidatorTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Reader\AllowedProductQuantityReaderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $allowedProductQuantityReaderMock;
+    protected AllowedProductQuantityReaderInterface|MockObject $allowedProductQuantityReaderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityTransfer
-     */
-    private ?MockObject $allowedProductQuantityTransferMock = null;
+    private MockObject|AllowedProductQuantityTransfer $allowedProductQuantityTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\ItemValidator
-     */
-    protected $itemValidator;
+    protected ItemValidator $itemValidator;
 
     /**
      * @return void

@@ -4,28 +4,17 @@ namespace FondOfImpala\Zed\AllowedProductQuantitySearch\Business;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantitySearch\Business\Model\AllowedProductQuantitySearchWriterInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantitySearchFacadeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Business\AllowedProductQuantitySearchFacade
-     */
-    protected $allowedProductQuantitySearchFacade;
+    protected AllowedProductQuantitySearchFacade $allowedProductQuantitySearchFacade;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantitySearch\Business\AllowedProductQuantitySearchBusinessFactory
-     */
-    protected $allowedProductQuantitySearchBusinessFactoryMock;
+    protected MockObject|AllowedProductQuantitySearchBusinessFactory $allowedProductQuantitySearchBusinessFactoryMock;
 
-    /**
-     * @var array
-     */
-    protected $allowedProductQuantityIds;
+    protected array $allowedProductQuantityIds;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantitySearch\Business\Model\AllowedProductQuantitySearchWriterInterface
-     */
-    protected $allowedProductQuantitySearchWriterInterfaceMock;
+    protected MockObject|AllowedProductQuantitySearchWriterInterface $allowedProductQuantitySearchWriterInterfaceMock;
 
     /**
      * @return void

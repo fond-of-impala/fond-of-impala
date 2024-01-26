@@ -6,33 +6,19 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\Model\CheckoutPreConditionChecker;
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantityCheckoutConnectorFacadeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\AllowedProductQuantityCheckoutConnectorFacade
-     */
-    protected $allowedProductQuantityCheckoutConnectorFacade;
+    protected AllowedProductQuantityCheckoutConnectorFacade $allowedProductQuantityCheckoutConnectorFacade;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
-    protected $checkoutResponseTransferMock;
+    protected MockObject|CheckoutResponseTransfer $checkoutResponseTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\AllowedProductQuantityCheckoutConnectorBusinessFactory
-     */
-    protected $allowedProductQuantityCheckoutConnectorBusinessFactoryMock;
+    protected MockObject|AllowedProductQuantityCheckoutConnectorBusinessFactory $allowedProductQuantityCheckoutConnectorBusinessFactoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Business\Model\CheckoutPreConditionChecker
-     */
-    protected $checkoutPreConditionCheckerMock;
+    protected MockObject|CheckoutPreConditionChecker $checkoutPreConditionCheckerMock;
 
     /**
      * @return void

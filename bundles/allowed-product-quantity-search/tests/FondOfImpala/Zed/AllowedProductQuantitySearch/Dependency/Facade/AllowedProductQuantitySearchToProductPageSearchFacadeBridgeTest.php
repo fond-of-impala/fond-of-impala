@@ -3,19 +3,14 @@
 namespace FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface;
 
 class AllowedProductQuantitySearchToProductPageSearchFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToProductPageSearchFacadeBridge
-     */
-    protected $allowedProductQuantitySearchToProductPageSearchFacadeBridge;
+    protected AllowedProductQuantitySearchToProductPageSearchFacadeBridge $allowedProductQuantitySearchToProductPageSearchFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface
-     */
-    protected $productPageSearchFacadeInterface;
+    protected MockObject|ProductPageSearchFacadeInterface $productPageSearchFacadeInterface;
 
     /**
      * @var array

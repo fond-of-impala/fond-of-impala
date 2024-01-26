@@ -4,34 +4,23 @@ namespace FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\EventEntityTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class AllowedProductQuantitySearchToEventBehaviorFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToEventBehaviorFacadeBridge
-     */
-    protected $allowedProductQuantitySearchToEventBehaviorFacadeBridge;
+    protected AllowedProductQuantitySearchToEventBehaviorFacadeBridge $allowedProductQuantitySearchToEventBehaviorFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
-     */
-    protected $eventBehaviorFacadeInterfaceMock;
+    protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeInterfaceMock;
 
     /**
      * @var array
      */
     protected $eventTransfers;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
-     */
-    protected $eventEntityTransferMock;
+    protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
-    /**
-     * @var string
-     */
-    protected $foreignKeyColumnName;
+    protected string $foreignKeyColumnName;
 
     /**
      * @return void

@@ -7,33 +7,19 @@ use FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacad
 use Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer;
 use Generated\Shared\Transfer\AllowedProductQuantityTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedQuantityProductAbstractReadPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Communication\Plugin\Product\AllowedQuantityProductAbstractReadPlugin
-     */
-    protected $allowedQuantityProductAbstractReadPlugin;
+    protected AllowedQuantityProductAbstractReadPlugin $allowedQuantityProductAbstractReadPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacade
-     */
-    protected $allowedProductQuantityFacadeMock;
+    protected MockObject|AllowedProductQuantityFacade $allowedProductQuantityFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer
-     */
-    protected $allowedProductQuantityResponseTransferMock;
+    protected MockObject|AllowedProductQuantityResponseTransfer $allowedProductQuantityResponseTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityTransfer
-     */
-    protected $allowedProductQuantityTransferMock;
+    protected MockObject|AllowedProductQuantityTransfer $allowedProductQuantityTransferMock;
 
     /**
      * @return void

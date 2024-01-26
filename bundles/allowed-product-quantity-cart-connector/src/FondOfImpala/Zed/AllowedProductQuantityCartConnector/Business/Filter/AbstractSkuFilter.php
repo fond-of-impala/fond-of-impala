@@ -31,6 +31,7 @@ class AbstractSkuFilter implements AbstractSkuFilterInterface
             if ($abstractSku === null) {
                 continue;
             }
+
             if (in_array($abstractSku, $abstractSkus, true)) {
                 continue;
             }

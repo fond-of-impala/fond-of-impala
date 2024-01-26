@@ -5,34 +5,20 @@ namespace FondOfImpala\Zed\AllowedProductQuantitySearch\Communication\Plugin\Pro
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\LocaleTransfer;
 use Generated\Shared\Transfer\PageMapTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Search\Business\Model\Elasticsearch\DataMapper\PageMapBuilderInterface;
 
 class AllowedQuantityProductPageMapExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Communication\Plugin\ProductPageSearch\AllowedQuantityProductPageMapExpanderPlugin
-     */
-    protected $allowedQuantityProductPageMapExpanderPlugin;
+    protected AllowedQuantityProductPageMapExpanderPlugin $allowedQuantityProductPageMapExpanderPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\PageMapTransfer
-     */
-    protected $pageMapTransferMock;
+    protected MockObject|PageMapTransfer $pageMapTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Search\Business\Model\Elasticsearch\DataMapper\PageMapBuilderInterface
-     */
-    protected $pageMapBuilderInterfaceMock;
+    protected MockObject|PageMapBuilderInterface $pageMapBuilderInterfaceMock;
 
-    /**
-     * @var array
-     */
-    protected $productData;
+    protected array $productData;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\LocaleTransfer
-     */
-    protected $localeTransferMock;
+    protected MockObject|LocaleTransfer $localeTransferMock;
 
     /**
      * @return void

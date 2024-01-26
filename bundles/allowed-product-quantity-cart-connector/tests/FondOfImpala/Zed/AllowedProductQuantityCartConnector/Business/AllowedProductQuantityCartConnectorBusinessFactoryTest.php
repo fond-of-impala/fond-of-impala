@@ -7,29 +7,18 @@ use FondOfImpala\Zed\AllowedProductQuantityCartConnector\AllowedProductQuantityC
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\AllowedProductQuantityCartConnectorDependencyProvider;
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\QuoteValidator;
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Dependency\Facade\AllowedProductQuantityCartConnectorToAllowedProductQuantityFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class AllowedProductQuantityCartConnectorBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorBusinessFactory
-     */
-    protected $allowedProductQuantityCartConnectorBusinessFactory;
+    protected AllowedProductQuantityCartConnectorBusinessFactory $allowedProductQuantityCartConnectorBusinessFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\AllowedProductQuantityCartConnectorConfig
-     */
-    protected $configMock;
+    protected MockObject|AllowedProductQuantityCartConnectorConfig $configMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\Dependency\Facade\AllowedProductQuantityCartConnectorToAllowedProductQuantityFacadeInterface
-     */
-    protected $allowedProductQuantityFacadeMock;
+    protected MockObject|AllowedProductQuantityCartConnectorToAllowedProductQuantityFacadeInterface $allowedProductQuantityFacadeMock;
 
     /**
      * @return void

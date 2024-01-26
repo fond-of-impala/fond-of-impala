@@ -9,48 +9,25 @@ use FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityRe
 use Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer;
 use Generated\Shared\Transfer\AllowedProductQuantityTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantityFacadeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityBusinessFactory
-     */
-    protected $factoryMock;
+    protected MockObject|AllowedProductQuantityBusinessFactory $factoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\Model\ProductAbstractAllowedQuantityWriterInterface
-     */
-    protected $productAbstractAllowedQuantityWriterMock;
+    protected MockObject|ProductAbstractAllowedQuantityWriterInterface $productAbstractAllowedQuantityWriterMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\Model\ProductAbstractAllowedQuantityReaderInterface
-     */
-    protected $productAbstractAllowedQuantityReaderMock;
+    protected MockObject|ProductAbstractAllowedQuantityReaderInterface $productAbstractAllowedQuantityReaderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer
-     */
-    protected $allowedProductQuantityResponseTransferMock;
+    protected MockObject|AllowedProductQuantityResponseTransfer $allowedProductQuantityResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\AllowedProductQuantityTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $allowedProductQuantityTransferMock;
+    protected AllowedProductQuantityTransfer|MockObject $allowedProductQuantityTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityRepository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $repositoryMock;
+    protected AllowedProductQuantityRepository|MockObject $repositoryMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacade
-     */
-    protected $allowedProductQuantityFacade;
+    protected AllowedProductQuantityFacade $allowedProductQuantityFacade;
 
     /**
      * @return void

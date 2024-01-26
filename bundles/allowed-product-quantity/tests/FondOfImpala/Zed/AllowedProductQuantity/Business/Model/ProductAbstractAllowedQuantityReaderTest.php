@@ -10,25 +10,13 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductAbstractAllowedQuantityReaderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Persistence\AllowedProductQuantityRepositoryInterface
-     */
-    protected $repositoryMock;
+    protected MockObject|AllowedProductQuantityRepositoryInterface $repositoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityTransfer
-     */
-    private ?MockObject $allowedProductQuantityTransferMock = null;
+    private MockObject|AllowedProductQuantityTransfer $allowedProductQuantityTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantity\Business\Model\ProductAbstractAllowedQuantityReader
-     */
-    protected $productAbstractAllowedQuantityReader;
+    protected ProductAbstractAllowedQuantityReader $productAbstractAllowedQuantityReader;
 
     /**
      * @return void

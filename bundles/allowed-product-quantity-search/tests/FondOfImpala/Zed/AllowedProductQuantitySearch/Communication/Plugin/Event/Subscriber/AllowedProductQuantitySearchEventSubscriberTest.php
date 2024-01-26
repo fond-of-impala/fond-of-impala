@@ -3,19 +3,14 @@
 namespace FondOfImpala\Zed\AllowedProductQuantitySearch\Communication\Plugin\Event\Subscriber;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 
 class AllowedProductQuantitySearchEventSubscriberTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Communication\Plugin\Event\Subscriber\AllowedProductQuantitySearchEventSubscriber
-     */
-    protected $allowedProductQuantitySearchEventSubscriber;
+    protected AllowedProductQuantitySearchEventSubscriber $allowedProductQuantitySearchEventSubscriber;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
-    protected $eventCollectionInterfaceMock;
+    protected MockObject|EventCollectionInterface $eventCollectionInterfaceMock;
 
     /**
      * @return void

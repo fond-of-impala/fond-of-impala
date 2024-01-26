@@ -6,23 +6,15 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Form\AllowedQuantityForm;
 use Generated\Shared\Transfer\AllowedProductQuantityTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedQuantityProductAbstractFormTransferMapperExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityGui\Communication\Plugin\ProductManagement\AllowedQuantityProductAbstractFormTransferMapperExpanderPlugin
-     */
-    protected $allowedQuantityProductAbstractFormTransferMapperExpanderPlugin;
+    protected AllowedQuantityProductAbstractFormTransferMapperExpanderPlugin $allowedQuantityProductAbstractFormTransferMapperExpanderPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
-    /**
-     * @var array
-     */
-    protected $formData;
+    protected array $formData;
 
     /**
      * @return void

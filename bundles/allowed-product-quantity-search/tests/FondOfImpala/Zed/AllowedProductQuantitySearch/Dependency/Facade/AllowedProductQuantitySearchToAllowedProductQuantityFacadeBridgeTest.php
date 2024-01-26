@@ -6,28 +6,17 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacadeInterface;
 use Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantitySearchToAllowedProductQuantityFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToAllowedProductQuantityFacadeBridge
-     */
-    protected $allowedProductQuantitySearchToAllowedProductQuantityFacadeBridge;
+    protected AllowedProductQuantitySearchToAllowedProductQuantityFacadeBridge $allowedProductQuantitySearchToAllowedProductQuantityFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantity\Business\AllowedProductQuantityFacadeInterface
-     */
-    protected $allowedProductQuantityFacadeInterface;
+    protected MockObject|AllowedProductQuantityFacadeInterface $allowedProductQuantityFacadeInterface;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    protected $productAbstractTransferMock;
+    protected MockObject|ProductAbstractTransfer $productAbstractTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\AllowedProductQuantityResponseTransfer
-     */
-    protected $allowedProductQuantityResponseTransferMock;
+    protected MockObject|AllowedProductQuantityResponseTransfer $allowedProductQuantityResponseTransferMock;
 
     /**
      * @return void

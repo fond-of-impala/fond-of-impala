@@ -6,28 +6,17 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QuoteValidatorTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\ItemsValidatorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $itemsValidatorMock;
+    protected ItemsValidatorInterface|MockObject $itemsValidatorMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected QuoteTransfer|MockObject $quoteTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ItemTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $itemTransferMock;
+    protected ItemTransfer|MockObject $itemTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\Validator\QuoteValidator
-     */
-    protected $quoteValidator;
+    protected QuoteValidator $quoteValidator;
 
     /**
      * @return void

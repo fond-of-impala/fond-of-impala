@@ -6,33 +6,19 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorFacadeInterface;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCheckoutConnector\Dependency\Facade\AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeBridge
-     */
-    protected $allowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeBridge;
+    protected AllowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeBridge $allowedProductQuantityCheckoutConnectorToAllowedProductQuantityCartConnectorFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorFacadeInterface
-     */
-    protected $allowedProductQuantityCartConnectorFacadeInterfaceMock;
+    protected MockObject|AllowedProductQuantityCartConnectorFacadeInterface $allowedProductQuantityCartConnectorFacadeInterfaceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\MessageTransfer
-     */
-    protected $messageTransferMock;
+    protected MockObject|MessageTransfer $messageTransferMock;
 
-    /**
-     * @var array
-     */
-    protected $messageTransferMocks;
+    protected array $messageTransferMocks;
 
     /**
      * @return void

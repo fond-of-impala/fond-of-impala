@@ -5,23 +5,15 @@ namespace FondOfImpala\Zed\AllowedProductQuantityCartConnector\Communication\Plu
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorFacade;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AllowedProductQuantityPostReloadItemsPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityCartConnector\Communication\Plugin\CartExtension\AllowedProductQuantityPostReloadItemsPlugin
-     */
-    protected $allowedProductQuantityPostReloadItemsPlugin;
+    protected AllowedProductQuantityPostReloadItemsPlugin $allowedProductQuantityPostReloadItemsPlugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantityCartConnector\Business\AllowedProductQuantityCartConnectorFacade
-     */
-    protected $allowedProductQuantityCartConnectorFacadeMock;
+    protected MockObject|AllowedProductQuantityCartConnectorFacade $allowedProductQuantityCartConnectorFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
     /**
      * @return void

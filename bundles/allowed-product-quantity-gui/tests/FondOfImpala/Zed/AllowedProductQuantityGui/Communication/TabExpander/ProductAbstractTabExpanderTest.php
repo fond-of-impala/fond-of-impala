@@ -4,18 +4,13 @@ namespace FondOfImpala\Zed\AllowedProductQuantityGui\Communication\TabExpander;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\TabsViewTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductAbstractTabExpanderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantityGui\Communication\TabExpander\ProductAbstractTabExpander
-     */
-    protected $productAbstractTabExpander;
+    protected ProductAbstractTabExpander $productAbstractTabExpander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\TabsViewTransfer
-     */
-    protected $tabsViewTransferMock;
+    protected MockObject|TabsViewTransfer $tabsViewTransferMock;
 
     /**
      * @return void

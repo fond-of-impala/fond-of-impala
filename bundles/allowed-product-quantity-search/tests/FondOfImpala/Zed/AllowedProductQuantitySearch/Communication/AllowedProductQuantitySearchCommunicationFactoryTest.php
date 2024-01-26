@@ -7,34 +7,20 @@ use FondOfImpala\Zed\AllowedProductQuantitySearch\AllowedProductQuantitySearchDe
 use FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToAllowedProductQuantityFacadeInterface;
 use FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToEventBehaviorFacadeInterface;
 use FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToProductPageSearchFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class AllowedProductQuantitySearchCommunicationFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\AllowedProductQuantitySearch\Communication\AllowedProductQuantitySearchCommunicationFactory
-     */
-    protected $allowedProductQuantitySearchCommunicationFactory;
+    protected AllowedProductQuantitySearchCommunicationFactory $allowedProductQuantitySearchCommunicationFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToAllowedProductQuantityFacadeInterface
-     */
-    protected $allowedProductQuantitySearchToAllowedProductQuantityFacadeInterfaceMock;
+    protected MockObject|AllowedProductQuantitySearchToAllowedProductQuantityFacadeInterface $allowedProductQuantitySearchToAllowedProductQuantityFacadeInterfaceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToEventBehaviorFacadeInterface
-     */
-    protected $allowedProductQuantitySearchToEventBehaviorFacadeInterfaceMock;
+    protected MockObject|AllowedProductQuantitySearchToEventBehaviorFacadeInterface $allowedProductQuantitySearchToEventBehaviorFacadeInterfaceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\AllowedProductQuantitySearch\Dependency\Facade\AllowedProductQuantitySearchToProductPageSearchFacadeInterface
-     */
-    protected $allowedProductQuantitySearchToProductPageSearchFacadeInterfaceMock;
+    protected MockObject|AllowedProductQuantitySearchToProductPageSearchFacadeInterface $allowedProductQuantitySearchToProductPageSearchFacadeInterfaceMock;
 
     /**
      * @return void
