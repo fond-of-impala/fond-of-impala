@@ -6,33 +6,19 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface;
 use FondOfImpala\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CartValidationFacadeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CartValidation\Business\CartValidationBusinessFactory
-     */
-    protected $businessFactoryMock;
+    protected MockObject|CartValidationBusinessFactory $businessFactoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearerInterface
-     */
-    protected $quoteValidationMessageClearerMock;
+    protected MockObject|QuoteValidationMessageClearerInterface $quoteValidationMessageClearerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CartValidation\Business\Clearer\QuoteItemValidationMessageClearerInterface
-     */
-    protected $quoteItemValidationMessageClearerMock;
+    protected MockObject|QuoteItemValidationMessageClearerInterface $quoteItemValidationMessageClearerMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CartValidation\Business\CartValidationFacade
-     */
-    protected $facade;
+    protected CartValidationFacade $facade;
 
     /**
      * @return void

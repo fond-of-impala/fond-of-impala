@@ -8,10 +8,7 @@ use FondOfImpala\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClear
 
 class CartValidationBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CartValidation\Business\CartValidationBusinessFactory
-     */
-    protected $businessFactory;
+    protected CartValidationBusinessFactory $businessFactory;
 
     /**
      * @return void

@@ -6,10 +6,7 @@ use Spryker\Client\Locale\LocaleClientInterface;
 
 class CartValidationToLocaleClientBridge implements CartValidationToLocaleClientInterface
 {
-    /**
-     * @var \Spryker\Client\Locale\LocaleClientInterface
-     */
-    protected $localeClient;
+    protected LocaleClientInterface $localeClient;
 
     /**
      * @param \Spryker\Client\Locale\LocaleClientInterface $localeClient

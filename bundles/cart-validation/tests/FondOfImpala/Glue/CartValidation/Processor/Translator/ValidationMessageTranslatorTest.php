@@ -9,6 +9,7 @@ use FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToLocaleCli
 use Generated\Shared\Transfer\MessageTransfer;
 use Generated\Shared\Transfer\RestCartsAttributesTransfer;
 use Generated\Shared\Transfer\RestItemsAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResource;
 
 class ValidationMessageTranslatorTest extends Unit
@@ -16,12 +17,12 @@ class ValidationMessageTranslatorTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface
      */
-    protected $glossaryStorageClientInterfaceMock;
+    protected MockObject|GlossaryStorageClientInterface $glossaryStorageClientInterfaceMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Locale\LocaleClientInterface
      */
-    protected $localeClientInterfaceMock;
+    protected MockObject|LocaleClientInterface $localeClientInterfaceMock;
 
     /**
      * @var array<\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResource>|array<\PHPUnit\Framework\MockObject\MockObject>
@@ -33,25 +34,13 @@ class ValidationMessageTranslatorTest extends Unit
      */
     protected $messageTransferMocks;
 
-    /**
-     * @var array
-     */
-    protected $relationships;
+    protected array $relationships;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestCartsAttributesTransfer|\PHPUnit\Framework\MockObject\MockObject|mixed
-     */
-    protected $restCartsAttributesTransferMock;
+    protected MockObject|RestCartsAttributesTransfer $restCartsAttributesTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestItemsAttributesTransfer
-     */
-    protected $restItemsAttributesTransferMock;
+    protected MockObject|RestItemsAttributesTransfer $restItemsAttributesTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CartValidation\Processor\Translator\ValidationMessageTranslator
-     */
-    protected $validationMessageTranslator;
+    protected ValidationMessageTranslator $validationMessageTranslator;
 
     /**
      * @return void

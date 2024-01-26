@@ -6,10 +6,7 @@ use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
 
 class CartValidationToGlossaryStorageClientBridge implements CartValidationToGlossaryStorageClientInterface
 {
-    /**
-     * @var \Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface
-     */
-    protected $glossaryStorageClient;
+    protected GlossaryStorageClientInterface $glossaryStorageClient;
 
     /**
      * @param \Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface $glossaryStorageClient

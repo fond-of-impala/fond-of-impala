@@ -42,11 +42,9 @@ class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addGlossaryStorageClient(Container $container): Container
     {
-        $container[static::CLIENT_GLOSSARY_STORAGE] = static function (Container $container) {
-            return new CartValidationToGlossaryStorageClientBridge(
-                $container->getLocator()->glossaryStorage()->client(),
-            );
-        };
+        $container[static::CLIENT_GLOSSARY_STORAGE] = static fn (Container $container): CartValidationToGlossaryStorageClientBridge => new CartValidationToGlossaryStorageClientBridge(
+            $container->getLocator()->glossaryStorage()->client(),
+        );
 
         return $container;
     }
@@ -58,11 +56,9 @@ class CartValidationDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addLocaleClient(Container $container): Container
     {
-        $container[static::CLIENT_LOCALE] = static function (Container $container) {
-            return new CartValidationToLocaleClientBridge(
-                $container->getLocator()->locale()->client(),
-            );
-        };
+        $container[static::CLIENT_LOCALE] = static fn (Container $container): CartValidationToLocaleClientBridge => new CartValidationToLocaleClientBridge(
+            $container->getLocator()->locale()->client(),
+        );
 
         return $container;
     }

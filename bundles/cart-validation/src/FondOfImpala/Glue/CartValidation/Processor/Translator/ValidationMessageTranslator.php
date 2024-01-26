@@ -12,15 +12,9 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 
 class ValidationMessageTranslator implements ValidationMessageTranslatorInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface
-     */
-    protected $glossaryStorageClient;
+    protected CartValidationToGlossaryStorageClientInterface $glossaryStorageClient;
 
-    /**
-     * @var \FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface
-     */
-    protected $localeClient;
+    protected CartValidationToLocaleClientInterface $localeClient;
 
     /**
      * @param \FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface $glossaryStorageClient

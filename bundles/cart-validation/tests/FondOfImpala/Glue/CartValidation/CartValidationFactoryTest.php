@@ -6,29 +6,18 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface;
 use FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface;
 use FondOfImpala\Glue\CartValidation\Processor\Translator\ValidationMessageTranslator;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\Kernel\Container;
 
 class CartValidationFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Glue\CartValidation\CartValidationFactory
-     */
-    protected $cartValidationFactory;
+    protected CartValidationFactory $cartValidationFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface
-     */
-    protected $glossaryStorageClientInterfaceMock;
+    protected MockObject|CartValidationToGlossaryStorageClientInterface $glossaryStorageClientInterfaceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface
-     */
-    protected $localeClientInterfaceMock;
+    protected MockObject|CartValidationToLocaleClientInterface $localeClientInterfaceMock;
 
     /**
      * @return void

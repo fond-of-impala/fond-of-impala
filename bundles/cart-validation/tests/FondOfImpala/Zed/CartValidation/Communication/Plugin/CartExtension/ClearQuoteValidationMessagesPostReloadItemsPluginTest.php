@@ -5,23 +5,15 @@ namespace FondOfImpala\Zed\CartValidation\Communication\Plugin\CartExtension;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CartValidation\Business\CartValidationFacade;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ClearQuoteValidationMessagesPostReloadItemsPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CartValidation\Business\CartValidationFacade
-     */
-    protected $cartValidationFacadeMock;
+    protected MockObject|CartValidationFacade $cartValidationFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CartValidation\Communication\Plugin\CartExtension\ClearQuoteValidationMessagesPostReloadItemsPlugin
-     */
-    protected $plugin;
+    protected ClearQuoteValidationMessagesPostReloadItemsPlugin $plugin;
 
     /**
      * @return void

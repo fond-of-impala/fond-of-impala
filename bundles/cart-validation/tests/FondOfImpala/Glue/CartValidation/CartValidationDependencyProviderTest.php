@@ -3,19 +3,14 @@
 namespace FondOfImpala\Glue\CartValidation;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\Kernel\Container;
 
 class CartValidationDependencyProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Glue\CartValidation\CartValidationDependencyProvider
-     */
-    protected $cartValidationDependencyProvider;
+    protected CartValidationDependencyProvider $cartValidationDependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
     /**
      * @return void

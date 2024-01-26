@@ -6,28 +6,17 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QuoteValidationMessageClearerTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CartValidation\Business\Clearer\QuoteValidationMessageClearer
-     */
-    protected $quoteItemValidationMessageClearer;
+    protected QuoteValidationMessageClearer $quoteItemValidationMessageClearer;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
-     */
-    protected $itemTransferMock;
+    protected MockObject|ItemTransfer $itemTransferMock;
 
-    /**
-     * @var array
-     */
-    protected $itemTransferMocks;
+    protected array $itemTransferMocks;
 
     /**
      * @return void
@@ -60,9 +49,7 @@ class QuoteValidationMessageClearerTest extends Unit
             ->method('setValidationMessages')
             ->with(
                 static::callback(
-                    static function (ArrayObject $validationMessages) {
-                        return $validationMessages->count() === 0;
-                    },
+                    static fn (ArrayObject $validationMessages): bool => $validationMessages->count() === 0,
                 ),
             )->willReturn($this->quoteTransferMock);
 
