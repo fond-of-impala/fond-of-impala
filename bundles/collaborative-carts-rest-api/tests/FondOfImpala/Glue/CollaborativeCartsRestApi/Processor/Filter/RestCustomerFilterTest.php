@@ -4,24 +4,16 @@ namespace FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Filter;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\RestUserTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class RestCustomerFilterTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
-     */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestUserTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restUserTransferMock;
+    protected MockObject|RestUserTransfer $restUserTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Filter\RestCustomerFilter
-     */
-    protected $restCustomerFilter;
+    protected RestCustomerFilter $restCustomerFilter;
 
     /**
      * @return void

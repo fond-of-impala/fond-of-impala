@@ -8,38 +8,21 @@ use Generated\Shared\Transfer\ClaimCartRequestTransfer;
 use Generated\Shared\Transfer\QuoteResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ReleaseCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QuoteReaderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ClaimCartRequestTransfer
-     */
-    protected $claimCartRequestTransferMock;
+    protected MockObject|ClaimCartRequestTransfer $claimCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartRequestTransferMock;
+    protected MockObject|ReleaseCartRequestTransfer $releaseCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|CollaborativeCartToQuoteFacadeInterface $quoteFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteResponseTransfer
-     */
-    protected $quoteResponseTransferMock;
+    protected MockObject|QuoteResponseTransfer $quoteResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReader
-     */
-    protected $quoteReader;
+    protected QuoteReader $quoteReader;
 
     /**
      * @return void
@@ -253,8 +236,6 @@ class QuoteReaderTest extends Unit
     public function testGetByReleaseCartRequestWithoutExistingQuote(): void
     {
         $idQuote = 1;
-        $customerReference = 'DE-1';
-        $originalCustomerReference = 'DE-2';
 
         $this->releaseCartRequestTransferMock->expects(static::atLeastOnce())
             ->method('getIdQuote')

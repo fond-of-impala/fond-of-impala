@@ -13,25 +13,13 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CartReleaser implements CartReleaserInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestReleaseCartRequestMapperInterface
-     */
-    protected $restReleaseCartRequestMapper;
+    protected RestReleaseCartRequestMapperInterface $restReleaseCartRequestMapper;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Expander\RestReleaseCartRequestExpanderInterface
-     */
-    protected $restReleaseCartRequestExpander;
+    protected RestReleaseCartRequestExpanderInterface $restReleaseCartRequestExpander;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Builder\CollaborativeCartRestResponseBuilderInterface
-     */
-    protected $collaborativeCartRestResponseBuilder;
+    protected CollaborativeCartRestResponseBuilderInterface $collaborativeCartRestResponseBuilder;
 
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiClientInterface
-     */
-    protected $client;
+    protected CollaborativeCartsRestApiClientInterface $client;
 
     /**
      * @param \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestReleaseCartRequestMapperInterface $restReleaseCartRequestMapper

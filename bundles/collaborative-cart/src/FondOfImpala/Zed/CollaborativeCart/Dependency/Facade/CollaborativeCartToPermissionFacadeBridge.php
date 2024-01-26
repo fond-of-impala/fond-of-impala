@@ -6,10 +6,7 @@ use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
 
 class CollaborativeCartToPermissionFacadeBridge implements CollaborativeCartToPermissionFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Permission\Business\PermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected PermissionFacadeInterface $permissionFacade;
 
     /**
      * @param \Spryker\Zed\Permission\Business\PermissionFacadeInterface $permissionFacade

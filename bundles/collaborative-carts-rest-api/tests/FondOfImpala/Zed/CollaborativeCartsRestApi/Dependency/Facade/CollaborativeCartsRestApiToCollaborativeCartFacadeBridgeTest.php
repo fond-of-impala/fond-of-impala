@@ -8,38 +8,24 @@ use Generated\Shared\Transfer\ClaimCartRequestTransfer;
 use Generated\Shared\Transfer\ClaimCartResponseTransfer;
 use Generated\Shared\Transfer\ReleaseCartRequestTransfer;
 use Generated\Shared\Transfer\ReleaseCartResponseTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CollaborativeCartsRestApiToCollaborativeCartFacadeBridgeTest extends Unit
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Quote\Business\QuoteFacade
      */
-    protected $collaborativeCartFacadeMock;
+    protected MockObject|QuoteFacade $collaborativeCartFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ClaimCartRequestTransfer
-     */
-    protected $claimCartRequestTransferMock;
+    protected MockObject|ClaimCartRequestTransfer $claimCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ClaimCartResponseTransfer
-     */
-    protected $claimCartResponseTransferMock;
+    protected MockObject|ClaimCartResponseTransfer $claimCartResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartRequestTransferMock;
+    protected MockObject|ReleaseCartRequestTransfer $releaseCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ReleaseCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartResponseTransferMock;
+    protected MockObject|ReleaseCartResponseTransfer $releaseCartResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeBridge
-     */
-    protected $collaborativeCartsRestApiToCollaborativeCartFacadeBridge;
+    protected CollaborativeCartsRestApiToCollaborativeCartFacadeBridge $collaborativeCartsRestApiToCollaborativeCartFacadeBridge;
 
     /**
      * @return void

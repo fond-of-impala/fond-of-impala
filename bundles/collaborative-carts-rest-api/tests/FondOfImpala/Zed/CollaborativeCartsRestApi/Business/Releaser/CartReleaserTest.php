@@ -10,48 +10,25 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ReleaseCartRequestTransfer;
 use Generated\Shared\Transfer\ReleaseCartResponseTransfer;
 use Generated\Shared\Transfer\RestReleaseCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CartReleaserTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReaderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteReaderMock;
+    protected MockObject|QuoteReaderInterface $quoteReaderMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper\ReleaseCartRequestMapperInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartRequestMapperMock;
+    protected MockObject|ReleaseCartRequestMapperInterface $releaseCartRequestMapperMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $collaborativeCartFacadeMock;
+    protected MockObject|CollaborativeCartsRestApiToCollaborativeCartFacadeInterface $collaborativeCartFacadeMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartRequestTransferMock;
+    protected MockObject|RestReleaseCartRequestTransfer $restReleaseCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartRequestTransferMock;
+    protected MockObject|ReleaseCartRequestTransfer $releaseCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ReleaseCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartResponseTransferMock;
+    protected MockObject|ReleaseCartResponseTransfer $releaseCartResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Releaser\CartReleaser
-     */
-    protected $cartReleaser;
+    protected CartReleaser $cartReleaser;
 
     /**
      * @return void

@@ -12,15 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CollaborativeCartRestResponseBuilder implements CollaborativeCartRestResponseBuilderInterface
 {
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
+    protected RestResourceBuilderInterface $restResourceBuilder;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestCollaborativeCartsResponseAttributesMapperInterface
-     */
-    protected $restCollaborativeCartsResponseAttributesMapper;
+    protected RestCollaborativeCartsResponseAttributesMapperInterface $restCollaborativeCartsResponseAttributesMapper;
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

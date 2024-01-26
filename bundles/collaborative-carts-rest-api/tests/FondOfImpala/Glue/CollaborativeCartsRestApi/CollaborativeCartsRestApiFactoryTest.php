@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\CollaborativeCartsRestApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiClient;
 use FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\CollaborativeCart\CollaborativeCartProcessor;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\AbstractClient;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\Kernel\Container;
@@ -14,22 +15,13 @@ class CollaborativeCartsRestApiFactoryTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CompanyBusinessUnitsCartsRestApi\CompanyBusinessUnitsCartsRestApiClient
      */
-    protected $clientMock;
+    protected MockObject|CompanyBusinessUnitsCartsRestApiClient $clientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilderMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\CollaborativeCartsRestApiFactory
-     */
-    protected $collaborativeCartsRestApiFactory;
+    protected CollaborativeCartsRestApiFactory $collaborativeCartsRestApiFactory;
 
     /**
      * @return void
@@ -59,10 +51,7 @@ class CollaborativeCartsRestApiFactoryTest extends Unit
              */
             protected $client;
 
-            /**
-             * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-             */
-            protected $restResourceBuilder;
+            protected RestResourceBuilderInterface $restResourceBuilder;
 
             /**
              * @param \Spryker\Client\Kernel\AbstractClient $client
@@ -79,7 +68,7 @@ class CollaborativeCartsRestApiFactoryTest extends Unit
             /**
              * @return \Spryker\Client\Kernel\AbstractClient
              */
-            public function getClient(): AbstractClient
+            protected function getClient(): AbstractClient
             {
                 return $this->client;
             }

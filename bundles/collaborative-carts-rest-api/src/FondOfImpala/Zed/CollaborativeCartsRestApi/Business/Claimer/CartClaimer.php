@@ -10,20 +10,11 @@ use Generated\Shared\Transfer\RestClaimCartResponseTransfer;
 
 class CartClaimer implements CartClaimerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReaderInterface
-     */
-    protected $quoteReader;
+    protected QuoteReaderInterface $quoteReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper\ClaimCartRequestMapperInterface
-     */
-    protected $claimCartRequestMapper;
+    protected ClaimCartRequestMapperInterface $claimCartRequestMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeInterface
-     */
-    protected $collaborativeCartFacade;
+    protected CollaborativeCartsRestApiToCollaborativeCartFacadeInterface $collaborativeCartFacade;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReaderInterface $quoteReader

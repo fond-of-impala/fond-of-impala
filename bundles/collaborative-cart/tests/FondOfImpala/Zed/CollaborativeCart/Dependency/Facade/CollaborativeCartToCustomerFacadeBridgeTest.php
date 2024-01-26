@@ -4,24 +4,19 @@ namespace FondOfImpala\Zed\CollaborativeCart\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CustomerTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
 
 class CollaborativeCartToCustomerFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Customer\Business\CustomerFacadeInterface
-     */
-    protected $customerFacadeMock;
+    protected MockObject|CustomerFacadeInterface $customerFacadeMock;
 
     /**
      * @var string
      */
     protected $customerReference;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
-     */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCustomerFacadeBridge

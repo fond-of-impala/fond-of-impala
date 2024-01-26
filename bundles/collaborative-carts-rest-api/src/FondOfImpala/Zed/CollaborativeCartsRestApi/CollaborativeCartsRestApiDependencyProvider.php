@@ -40,11 +40,9 @@ class CollaborativeCartsRestApiDependencyProvider extends AbstractBundleDependen
      */
     public function addQuoteFacade(Container $container): Container
     {
-        $container[static::FACADE_QUOTE] = static function (Container $container) {
-            return new CollaborativeCartsRestApiToQuoteFacadeBridge(
-                $container->getLocator()->quote()->facade(),
-            );
-        };
+        $container[static::FACADE_QUOTE] = static fn (Container $container): CollaborativeCartsRestApiToQuoteFacadeBridge => new CollaborativeCartsRestApiToQuoteFacadeBridge(
+            $container->getLocator()->quote()->facade(),
+        );
 
         return $container;
     }
@@ -56,11 +54,9 @@ class CollaborativeCartsRestApiDependencyProvider extends AbstractBundleDependen
      */
     public function addCollaborativeCartFacade(Container $container): Container
     {
-        $container[static::FACADE_COLLABORATIVE_CART] = static function (Container $container) {
-            return new CollaborativeCartsRestApiToCollaborativeCartFacadeBridge(
-                $container->getLocator()->collaborativeCart()->facade(),
-            );
-        };
+        $container[static::FACADE_COLLABORATIVE_CART] = static fn (Container $container): CollaborativeCartsRestApiToCollaborativeCartFacadeBridge => new CollaborativeCartsRestApiToCollaborativeCartFacadeBridge(
+            $container->getLocator()->collaborativeCart()->facade(),
+        );
 
         return $container;
     }

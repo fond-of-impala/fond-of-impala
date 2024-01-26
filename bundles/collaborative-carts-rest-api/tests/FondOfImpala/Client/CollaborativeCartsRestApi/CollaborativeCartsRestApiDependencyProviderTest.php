@@ -4,6 +4,7 @@ namespace FondOfImpala\Client\CollaborativeCartsRestApi;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientBridge;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 use Spryker\Client\Kernel\Locator;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
@@ -11,30 +12,15 @@ use Spryker\Shared\Kernel\BundleProxy;
 
 class CollaborativeCartsRestApiDependencyProviderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
-     */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiDependencyProvider
-     */
-    protected $collaborativeCartsRestApiDependencyProvider;
+    protected CollaborativeCartsRestApiDependencyProvider $collaborativeCartsRestApiDependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Locator
-     */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\ZedRequest\ZedRequestClientInterface
-     */
-    protected $zedRequestClientMock;
+    protected MockObject|ZedRequestClientInterface $zedRequestClientMock;
 
     /**
      * @return void

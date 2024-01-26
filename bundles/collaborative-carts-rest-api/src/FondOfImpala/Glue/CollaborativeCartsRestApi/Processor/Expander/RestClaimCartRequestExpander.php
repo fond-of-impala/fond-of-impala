@@ -8,10 +8,7 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class RestClaimCartRequestExpander implements RestClaimCartRequestExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Filter\RestCustomerFilterInterface
-     */
-    protected $customerReferenceFilter;
+    protected RestCustomerFilterInterface $customerReferenceFilter;
 
     /**
      * @param \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Filter\RestCustomerFilterInterface $customerReferenceFilter

@@ -7,6 +7,7 @@ use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCust
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeBridge;
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeBridge;
 use Orm\Zed\CompanyUser\Persistence\Base\SpyCompanyUserQuery;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -63,9 +64,7 @@ class CollaborativeCartDependencyProvider extends AbstractBundleDependencyProvid
     {
         $container = parent::providePersistenceLayerDependencies($container);
 
-        $container = $this->addCompanyUserQuery($container);
-
-        return $container;
+        return $this->addCompanyUserQuery($container);
     }
 
     /**
@@ -75,11 +74,9 @@ class CollaborativeCartDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addCompanyUserReferenceFacade(Container $container): Container
     {
-        $container[static::FACADE_COMPANY_USER_REFERENCE] = static function (Container $container) {
-            return new CollaborativeCartToCompanyUserReferenceFacadeBridge(
-                $container->getLocator()->companyUserReference()->facade(),
-            );
-        };
+        $container[static::FACADE_COMPANY_USER_REFERENCE] = static fn (Container $container): CollaborativeCartToCompanyUserReferenceFacadeBridge => new CollaborativeCartToCompanyUserReferenceFacadeBridge(
+            $container->getLocator()->companyUserReference()->facade(),
+        );
 
         return $container;
     }
@@ -91,11 +88,9 @@ class CollaborativeCartDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addCustomerFacade(Container $container): Container
     {
-        $container[static::FACADE_CUSTOMER] = static function (Container $container) {
-            return new CollaborativeCartToCustomerFacadeBridge(
-                $container->getLocator()->customer()->facade(),
-            );
-        };
+        $container[static::FACADE_CUSTOMER] = static fn (Container $container): CollaborativeCartToCustomerFacadeBridge => new CollaborativeCartToCustomerFacadeBridge(
+            $container->getLocator()->customer()->facade(),
+        );
 
         return $container;
     }
@@ -107,11 +102,9 @@ class CollaborativeCartDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addPermissionFacade(Container $container): Container
     {
-        $container[static::FACADE_PERMISSION] = static function (Container $container) {
-            return new CollaborativeCartToPermissionFacadeBridge(
-                $container->getLocator()->permission()->facade(),
-            );
-        };
+        $container[static::FACADE_PERMISSION] = static fn (Container $container): CollaborativeCartToPermissionFacadeBridge => new CollaborativeCartToPermissionFacadeBridge(
+            $container->getLocator()->permission()->facade(),
+        );
 
         return $container;
     }
@@ -123,11 +116,9 @@ class CollaborativeCartDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addQuoteFacade(Container $container): Container
     {
-        $container[static::FACADE_QUOTE] = static function (Container $container) {
-            return new CollaborativeCartToQuoteFacadeBridge(
-                $container->getLocator()->quote()->facade(),
-            );
-        };
+        $container[static::FACADE_QUOTE] = static fn (Container $container): CollaborativeCartToQuoteFacadeBridge => new CollaborativeCartToQuoteFacadeBridge(
+            $container->getLocator()->quote()->facade(),
+        );
 
         return $container;
     }
@@ -139,9 +130,7 @@ class CollaborativeCartDependencyProvider extends AbstractBundleDependencyProvid
      */
     protected function addCompanyUserQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY_USER] = static function () {
-            return SpyCompanyUserQuery::create();
-        };
+        $container[static::PROPEL_QUERY_COMPANY_USER] = static fn (): Criteria => SpyCompanyUserQuery::create();
 
         return $container;
     }

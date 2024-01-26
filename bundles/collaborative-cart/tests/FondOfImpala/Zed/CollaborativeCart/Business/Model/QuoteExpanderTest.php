@@ -9,43 +9,26 @@ use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QuoteExpanderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCustomerFacadeInterface
-     */
-    protected $customerFacadeMock;
+    protected MockObject|CollaborativeCartToCustomerFacadeInterface $customerFacadeMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCompanyUserReferenceFacadeInterface
      */
-    protected $companyUserReferenceFacade;
+    protected CollaborativeCartToCompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
-     */
-    protected $customerTransferMock;
+    protected MockObject|CustomerTransfer $customerTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
-    protected $companyUserResponseTransferMock;
+    protected MockObject|CompanyUserResponseTransfer $companyUserResponseTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserTransfer
-     */
-    protected $companyUserTransferMock;
+    protected MockObject|CompanyUserTransfer $companyUserTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteExpander
-     */
-    protected $quoteExpander;
+    protected QuoteExpander $quoteExpander;
 
     /**
      * @return void

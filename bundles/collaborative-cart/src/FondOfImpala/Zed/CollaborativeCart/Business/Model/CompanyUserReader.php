@@ -10,10 +10,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class CompanyUserReader implements CompanyUserReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Persistence\CollaborativeCartRepositoryInterface
-     */
-    protected $collaborativeCartRepository;
+    protected CollaborativeCartRepositoryInterface $collaborativeCartRepository;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Persistence\CollaborativeCartRepositoryInterface $collaborativeCartRepository

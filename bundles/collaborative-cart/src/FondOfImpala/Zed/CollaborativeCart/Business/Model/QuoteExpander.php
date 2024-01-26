@@ -9,15 +9,9 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class QuoteExpander implements QuoteExpanderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCustomerFacadeInterface
-     */
-    protected $customerFacade;
+    protected CollaborativeCartToCustomerFacadeInterface $customerFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacade;
+    protected CollaborativeCartToCompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCustomerFacadeInterface $customerFacade

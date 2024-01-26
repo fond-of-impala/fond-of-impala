@@ -6,28 +6,17 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface;
 use Generated\Shared\Transfer\QuoteResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QuoteWriterTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|CollaborativeCartToQuoteFacadeInterface $quoteFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteResponseTransfer
-     */
-    protected $quoteResponseTransferMock;
+    protected MockObject|QuoteResponseTransfer $quoteResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteWriter
-     */
-    protected $quoteWriter;
+    protected QuoteWriter $quoteWriter;
 
     /**
      * @return void

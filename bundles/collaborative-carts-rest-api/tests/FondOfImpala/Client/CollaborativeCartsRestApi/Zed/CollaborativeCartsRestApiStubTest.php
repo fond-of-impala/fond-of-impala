@@ -8,38 +8,21 @@ use Generated\Shared\Transfer\RestClaimCartRequestTransfer;
 use Generated\Shared\Transfer\RestClaimCartResponseTransfer;
 use Generated\Shared\Transfer\RestReleaseCartRequestTransfer;
 use Generated\Shared\Transfer\RestReleaseCartResponseTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CollaborativeCartsRestApiStubTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\Zed\CollaborativeCartsRestApiStub
-     */
-    protected $collaborativeCartsRestApiStub;
+    protected CollaborativeCartsRestApiStub $collaborativeCartsRestApiStub;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientInterface
-     */
-    protected $zedRequestClientMock;
+    protected MockObject|CollaborativeCartsRestApiToZedRequestClientInterface $zedRequestClientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestClaimCartRequestTransfer
-     */
-    protected $restClaimCartRequestTransferMock;
+    protected MockObject|RestClaimCartRequestTransfer $restClaimCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestClaimCartResponseTransfer
-     */
-    protected $restClaimCartResponseTransferMock;
+    protected MockObject|RestClaimCartResponseTransfer $restClaimCartResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartRequestTransferMock;
+    protected MockObject|RestReleaseCartRequestTransfer $restReleaseCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartResponseTransferMock;
+    protected MockObject|RestReleaseCartResponseTransfer $restReleaseCartResponseTransferMock;
 
     /**
      * @return void

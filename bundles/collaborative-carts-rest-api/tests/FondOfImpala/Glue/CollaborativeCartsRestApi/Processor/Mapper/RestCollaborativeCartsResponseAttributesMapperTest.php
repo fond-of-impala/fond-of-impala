@@ -4,18 +4,13 @@ namespace FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestCollaborativeCartsResponseAttributesMapperTest extends Unit
 {
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestCollaborativeCartsResponseAttributesMapper
-     */
-    protected $restCollaborativeCartsResponseAttributesMapper;
+    protected RestCollaborativeCartsResponseAttributesMapper $restCollaborativeCartsResponseAttributesMapper;
 
     /**
      * @return void

@@ -15,14 +15,8 @@ class OnlyClaimedSearchQuoteQueryExpanderPluginTest extends Unit
      */
     protected array $filterFieldTransferMocks;
 
-    /**
-     * @var \Generated\Shared\Transfer\QueryJoinCollectionTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
     protected MockObject|QueryJoinCollectionTransfer $queryJoinCollectionTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartSearchRestApi\Communication\Plugin\CartSearchRestApiExtension\OnlyClaimedSearchQuoteQueryExpanderPlugin
-     */
     protected OnlyClaimedSearchQuoteQueryExpanderPlugin $plugin;
 
     /**

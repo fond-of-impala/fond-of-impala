@@ -7,10 +7,7 @@ use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
 
 class CollaborativeCartToCustomerFacadeBridge implements CollaborativeCartToCustomerFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Customer\Business\CustomerFacadeInterface
-     */
-    protected $customerFacade;
+    protected CustomerFacadeInterface $customerFacade;
 
     /**
      * @param \Spryker\Zed\Customer\Business\CustomerFacadeInterface $customerFacade

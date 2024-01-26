@@ -10,43 +10,23 @@ use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyUserReaderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Persistence\CollaborativeCartRepositoryInterface
-     */
-    protected $collaborativeCartRepositoryMock;
+    protected MockObject|CollaborativeCartRepositoryInterface $collaborativeCartRepositoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ClaimCartRequestTransfer
-     */
-    protected $claimCartRequestTransferMock;
+    protected MockObject|ClaimCartRequestTransfer $claimCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserTransfer
-     */
-    protected $companyUserTransferMock;
+    protected MockObject|CompanyUserTransfer $companyUserTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserCollectionTransfer
-     */
-    protected $companyUserCollectionTransferMock;
+    protected MockObject|CompanyUserCollectionTransfer $companyUserCollectionTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserTransfer
-     */
-    protected $newCompanyUserTransferMock;
+    protected MockObject|CompanyUserTransfer $newCompanyUserTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\CompanyUserReader
-     */
-    protected $companyUserReader;
+    protected CompanyUserReader $companyUserReader;
 
     /**
      * @return void
@@ -111,12 +91,10 @@ class CompanyUserReaderTest extends Unit
             ->method('getCompanyUserCollectionByCompanyUserCriteriaFilterTransfer')
             ->with(
                 self::callback(
-                    static function (CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer) use ($newIdCustomer, $fkCompany, $fkCompanyBusinessUnit) {
-                        return $companyUserCriteriaFilterTransfer->getIdCustomer() === $newIdCustomer
-                            && $companyUserCriteriaFilterTransfer->getIdCompany() === $fkCompany
-                            && $companyUserCriteriaFilterTransfer->getIdCompanyBusinessUnit() === $fkCompanyBusinessUnit
-                            && $companyUserCriteriaFilterTransfer->getIsActive();
-                    },
+                    static fn (CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer): bool => $companyUserCriteriaFilterTransfer->getIdCustomer() === $newIdCustomer
+                        && $companyUserCriteriaFilterTransfer->getIdCompany() === $fkCompany
+                        && $companyUserCriteriaFilterTransfer->getIdCompanyBusinessUnit() === $fkCompanyBusinessUnit
+                        && $companyUserCriteriaFilterTransfer->getIsActive(),
                 ),
             )->willReturn($this->companyUserCollectionTransferMock);
 
@@ -231,12 +209,10 @@ class CompanyUserReaderTest extends Unit
             ->method('getCompanyUserCollectionByCompanyUserCriteriaFilterTransfer')
             ->with(
                 self::callback(
-                    static function (CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer) use ($newIdCustomer, $fkCompany, $fkCompanyBusinessUnit) {
-                        return $companyUserCriteriaFilterTransfer->getIdCustomer() === $newIdCustomer
-                            && $companyUserCriteriaFilterTransfer->getIdCompany() === $fkCompany
-                            && $companyUserCriteriaFilterTransfer->getIdCompanyBusinessUnit() === $fkCompanyBusinessUnit
-                            && $companyUserCriteriaFilterTransfer->getIsActive();
-                    },
+                    static fn (CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer): bool => $companyUserCriteriaFilterTransfer->getIdCustomer() === $newIdCustomer
+                        && $companyUserCriteriaFilterTransfer->getIdCompany() === $fkCompany
+                        && $companyUserCriteriaFilterTransfer->getIdCompanyBusinessUnit() === $fkCompanyBusinessUnit
+                        && $companyUserCriteriaFilterTransfer->getIsActive(),
                 ),
             )->willReturn($this->companyUserCollectionTransferMock);
 

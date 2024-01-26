@@ -8,6 +8,7 @@ use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCust
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeBridge;
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeBridge;
 use FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
 use Spryker\Zed\Kernel\Container;
@@ -17,45 +18,21 @@ use Spryker\Zed\Quote\Business\QuoteFacadeInterface;
 
 class CollaborativeCartDependencyProviderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Locator
-     */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
-     */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacadeMock;
+    protected MockObject|CompanyUserReferenceFacadeInterface $companyUserReferenceFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Customer\Business\CustomerFacadeInterface
-     */
-    protected $customerFacadeMock;
+    protected MockObject|CustomerFacadeInterface $customerFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Permission\Business\PermissionFacadeInterface
-     */
-    protected $permissionFacadeMock;
+    protected MockObject|PermissionFacadeInterface $permissionFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Quote\Business\QuoteFacadeInterface
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|QuoteFacadeInterface $quoteFacadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\CollaborativeCartDependencyProvider
-     */
-    protected $collaborativeCartDependencyProvider;
+    protected CollaborativeCartDependencyProvider $collaborativeCartDependencyProvider;
 
     /**
      * @return void

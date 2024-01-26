@@ -8,43 +8,23 @@ use Generated\Shared\Transfer\RestClaimCartRequestTransfer;
 use Generated\Shared\Transfer\RestClaimCartResponseTransfer;
 use Generated\Shared\Transfer\RestReleaseCartRequestTransfer;
 use Generated\Shared\Transfer\RestReleaseCartResponseTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CollaborativeCartsRestApiClientTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiFactory
-     */
-    protected $collaborativeCartsRestApiFactoryMock;
+    protected MockObject|CollaborativeCartsRestApiFactory $collaborativeCartsRestApiFactoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CollaborativeCartsRestApi\Zed\CollaborativeCartsRestApiStubInterface
-     */
-    protected $collaborativeCartsRestApiStubMock;
+    protected MockObject|CollaborativeCartsRestApiStubInterface $collaborativeCartsRestApiStubMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestClaimCartRequestTransfer
-     */
-    protected $restClaimCartRequestTransferMock;
+    protected MockObject|RestClaimCartRequestTransfer $restClaimCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestClaimCartResponseTransfer
-     */
-    protected $restClaimCartResponseTransferMock;
+    protected MockObject|RestClaimCartResponseTransfer $restClaimCartResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartRequestTransferMock;
+    protected MockObject|RestReleaseCartRequestTransfer $restReleaseCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartResponseTransferMock;
+    protected MockObject|RestReleaseCartResponseTransfer $restReleaseCartResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiClient
-     */
-    protected $collaborativeCartsRestApiClient;
+    protected CollaborativeCartsRestApiClient $collaborativeCartsRestApiClient;
 
     /**
      * @return void

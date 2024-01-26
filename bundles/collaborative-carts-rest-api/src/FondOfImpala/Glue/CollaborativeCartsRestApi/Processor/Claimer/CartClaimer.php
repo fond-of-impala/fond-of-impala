@@ -13,25 +13,13 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CartClaimer implements CartClaimerInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestClaimCartRequestMapperInterface
-     */
-    protected $restClaimCartRequestMapper;
+    protected RestClaimCartRequestMapperInterface $restClaimCartRequestMapper;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Expander\RestClaimCartRequestExpanderInterface
-     */
-    protected $restClaimCartRequestExpander;
+    protected RestClaimCartRequestExpanderInterface $restClaimCartRequestExpander;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Builder\CollaborativeCartRestResponseBuilderInterface
-     */
-    protected $collaborativeCartRestResponseBuilder;
+    protected CollaborativeCartRestResponseBuilderInterface $collaborativeCartRestResponseBuilder;
 
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiClientInterface
-     */
-    protected $client;
+    protected CollaborativeCartsRestApiClientInterface $client;
 
     /**
      * @param \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestClaimCartRequestMapperInterface $restClaimCartRequestMapper

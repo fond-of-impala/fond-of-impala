@@ -6,28 +6,17 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToQuoteFacadeInterface;
 use Generated\Shared\Transfer\QuoteResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class QuoteReaderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToQuoteFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|CollaborativeCartsRestApiToQuoteFacadeInterface $quoteFacadeMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteResponseTransferMock;
+    protected MockObject|QuoteResponseTransfer $quoteResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReader
-     */
-    protected $quoteReader;
+    protected QuoteReader $quoteReader;
 
     /**
      * @return void
@@ -62,9 +51,7 @@ class QuoteReaderTest extends Unit
             ->method('findQuoteByUuid')
             ->with(
                 static::callback(
-                    static function (QuoteTransfer $quoteTransfer) use ($uuid) {
-                        return $quoteTransfer->getUuid() === $uuid;
-                    },
+                    static fn (QuoteTransfer $quoteTransfer): bool => $quoteTransfer->getUuid() === $uuid,
                 ),
             )->willReturn($this->quoteResponseTransferMock);
 
@@ -93,9 +80,7 @@ class QuoteReaderTest extends Unit
             ->method('findQuoteByUuid')
             ->with(
                 static::callback(
-                    static function (QuoteTransfer $quoteTransfer) use ($uuid) {
-                        return $quoteTransfer->getUuid() === $uuid;
-                    },
+                    static fn (QuoteTransfer $quoteTransfer): bool => $quoteTransfer->getUuid() === $uuid,
                 ),
             )->willReturn($this->quoteResponseTransferMock);
 

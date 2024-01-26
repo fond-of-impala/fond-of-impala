@@ -9,10 +9,7 @@ use Generated\Shared\Transfer\CompanyUserTransfer;
 class CollaborativeCartToCompanyUserReferenceFacadeBridge implements
     CollaborativeCartToCompanyUserReferenceFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacade;
+    protected CompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
     /**
      * @param \FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface $companyUserReferenceFacade

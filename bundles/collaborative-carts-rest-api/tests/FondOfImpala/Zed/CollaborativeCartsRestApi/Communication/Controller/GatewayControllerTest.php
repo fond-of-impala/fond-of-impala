@@ -8,39 +8,25 @@ use Generated\Shared\Transfer\RestClaimCartRequestTransfer;
 use Generated\Shared\Transfer\RestClaimCartResponseTransfer;
 use Generated\Shared\Transfer\RestReleaseCartRequestTransfer;
 use Generated\Shared\Transfer\RestReleaseCartResponseTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 class GatewayControllerTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCartsRestApi\Business\CollaborativeCartsRestApiFacade
-     */
-    protected $collaborativeCartsRestApiFacadeMock;
+    protected MockObject|CollaborativeCartsRestApiFacade $collaborativeCartsRestApiFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestClaimCartRequestTransfer
-     */
-    protected $restClaimCartRequestTransferMock;
+    protected MockObject|RestClaimCartRequestTransfer $restClaimCartRequestTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ClaimCartResponseTransfer
      */
-    protected $restClaimCartResponseTransferMock;
+    protected MockObject|ClaimCartResponseTransfer $restClaimCartResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartRequestTransferMock;
+    protected MockObject|RestReleaseCartRequestTransfer $restReleaseCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartResponseTransferMock;
+    protected MockObject|RestReleaseCartResponseTransfer $restReleaseCartResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Communication\Controller\GatewayController
-     */
-    protected $gatewayController;
+    protected GatewayController $gatewayController;
 
     /**
      * @return void
@@ -70,10 +56,7 @@ class GatewayControllerTest extends Unit
             ->getMock();
 
         $this->gatewayController = new class ($this->collaborativeCartsRestApiFacadeMock) extends GatewayController {
-            /**
-             * @var \Spryker\Zed\Kernel\Business\AbstractFacade
-             */
-            protected $collaborativeCartsRestApiFacade;
+            protected AbstractFacade $collaborativeCartsRestApiFacade;
 
             /**
              *  constructor.

@@ -5,23 +5,15 @@ namespace FondOfImpala\Zed\CollaborativeCart\Communication\Plugin\QuoteExtension
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartFacade;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CollaborativeCartQuoteExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartFacade
-     */
-    protected $collaborativeCartFacadeMock;
+    protected MockObject|CollaborativeCartFacade $collaborativeCartFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Communication\Plugin\QuoteExtension\CollaborativeCartQuoteExpanderPlugin
-     */
-    protected $collaborativeCartQuoteExpanderPlugin;
+    protected CollaborativeCartQuoteExpanderPlugin $collaborativeCartQuoteExpanderPlugin;
 
     /**
      * @return void

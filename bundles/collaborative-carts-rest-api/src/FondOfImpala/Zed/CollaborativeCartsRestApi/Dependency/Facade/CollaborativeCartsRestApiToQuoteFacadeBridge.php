@@ -8,10 +8,7 @@ use Spryker\Zed\Quote\Business\QuoteFacadeInterface;
 
 class CollaborativeCartsRestApiToQuoteFacadeBridge implements CollaborativeCartsRestApiToQuoteFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Quote\Business\QuoteFacadeInterface
-     */
-    protected $quoteFacade;
+    protected QuoteFacadeInterface $quoteFacade;
 
     /**
      * @param \Spryker\Zed\Quote\Business\QuoteFacadeInterface $quoteFacade

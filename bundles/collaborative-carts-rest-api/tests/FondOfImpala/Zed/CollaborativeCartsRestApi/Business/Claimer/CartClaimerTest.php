@@ -10,48 +10,25 @@ use Generated\Shared\Transfer\ClaimCartRequestTransfer;
 use Generated\Shared\Transfer\ClaimCartResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RestClaimCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CartClaimerTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReaderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteReaderMock;
+    protected MockObject|QuoteReaderInterface $quoteReaderMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper\ClaimCartRequestMapperInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $claimCartRequestMapperMock;
+    protected MockObject|ClaimCartRequestMapperInterface $claimCartRequestMapperMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $collaborativeCartFacadeMock;
+    protected MockObject|CollaborativeCartsRestApiToCollaborativeCartFacadeInterface $collaborativeCartFacadeMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestClaimCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restClaimCartRequestTransferMock;
+    protected MockObject|RestClaimCartRequestTransfer $restClaimCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ClaimCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $claimCartRequestTransferMock;
+    protected MockObject|ClaimCartRequestTransfer $claimCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ClaimCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $claimCartResponseTransferMock;
+    protected MockObject|ClaimCartResponseTransfer $claimCartResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Claimer\CartClaimer
-     */
-    protected $cartClaimer;
+    protected CartClaimer $cartClaimer;
 
     /**
      * @return void

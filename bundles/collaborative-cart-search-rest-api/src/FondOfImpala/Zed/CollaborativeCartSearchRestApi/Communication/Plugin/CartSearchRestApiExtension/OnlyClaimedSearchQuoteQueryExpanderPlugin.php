@@ -37,7 +37,7 @@ class OnlyClaimedSearchQuoteQueryExpanderPlugin extends AbstractPlugin implement
                 continue;
             }
 
-            $requiredFilterFieldTypeCount++;
+            ++$requiredFilterFieldTypeCount;
         }
 
         return $requiredFilterFieldTypeCount === count(static::REQUIRED_FILTER_FIELD_TYPES);

@@ -12,44 +12,27 @@ use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCust
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeInterface;
 use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface;
 use FondOfImpala\Zed\CollaborativeCart\Persistence\CollaborativeCartRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class CollaborativeCartBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacadeMock;
+    protected MockObject|CollaborativeCartToCompanyUserReferenceFacadeInterface $companyUserReferenceFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCustomerFacadeInterface
-     */
-    protected $customerFacadeMock;
+    protected MockObject|CollaborativeCartToCustomerFacadeInterface $customerFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeInterface
-     */
-    protected $permissionFacadeMock;
+    protected MockObject|CollaborativeCartToPermissionFacadeInterface $permissionFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|CollaborativeCartToQuoteFacadeInterface $quoteFacadeMock;
 
     /**
      * @var \FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartBusinessFactory
      */
     protected $collaborativeCartBusinessFactory;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Persistence\CollaborativeCartRepository|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $repositoryMock;
+    protected MockObject|CollaborativeCartRepository $repositoryMock;
 
     /**
      * @return void

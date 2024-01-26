@@ -13,15 +13,9 @@ use Generated\Shared\Transfer\ReleaseCartResponseTransfer;
 
 class CartReleaser implements CartReleaserInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReaderInterface
-     */
-    protected $quoteReader;
+    protected QuoteReaderInterface $quoteReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteWriterInterface
-     */
-    protected $quoteWriter;
+    protected QuoteWriterInterface $quoteWriter;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReaderInterface $quoteReader

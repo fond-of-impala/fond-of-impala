@@ -12,65 +12,33 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RestClaimCartRequestTransfer;
 use Generated\Shared\Transfer\RestClaimCartResponseTransfer;
 use Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CartClaimerTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestClaimCartRequestMapperInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restClaimCartRequestMapperMock;
+    protected MockObject|RestClaimCartRequestMapperInterface $restClaimCartRequestMapperMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Expander\RestClaimCartRequestExpanderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restClaimCartRequestExpanderMock;
+    protected MockObject|RestClaimCartRequestExpanderInterface $restClaimCartRequestExpanderMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Builder\CollaborativeCartRestResponseBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $collaborativeCartRestResponseBuilderMock;
+    protected MockObject|CollaborativeCartRestResponseBuilderInterface $collaborativeCartRestResponseBuilderMock;
 
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiClientInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $clientMock;
+    protected MockObject|CollaborativeCartsRestApiClientInterface $clientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
-     */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCollaborativeCartsRequestAttributesTransferMock;
+    protected MockObject|RestCollaborativeCartsRequestAttributesTransfer $restCollaborativeCartsRequestAttributesTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestClaimCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restClaimCartRequestTransferMock;
+    protected MockObject|RestClaimCartRequestTransfer $restClaimCartRequestTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestClaimCartResponseTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restClaimCartResponseTransferMock;
+    protected MockObject|RestClaimCartResponseTransfer $restClaimCartResponseTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Claimer\CartClaimer
-     */
-    protected $cartClaimer;
+    protected CartClaimer $cartClaimer;
 
     /**
      * @return void

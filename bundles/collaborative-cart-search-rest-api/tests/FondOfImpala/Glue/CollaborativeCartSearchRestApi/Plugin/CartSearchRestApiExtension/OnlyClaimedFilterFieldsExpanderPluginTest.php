@@ -13,19 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OnlyClaimedFilterFieldsExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
-     */
     protected MockObject|RestRequestInterface $restRequestMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     protected MockObject|RestResourceInterface $restResourceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
-     */
     protected MockObject|Request $httpRequestMock;
 
     /**
@@ -33,9 +24,6 @@ class OnlyClaimedFilterFieldsExpanderPluginTest extends Unit
      */
     protected ArrayObject $filterFieldTransfers;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartSearchRestApi\Plugin\CartSearchRestApiExtension\OnlyClaimedFilterFieldsExpanderPlugin
-     */
     protected OnlyClaimedFilterFieldsExpanderPlugin $plugin;
 
     /**

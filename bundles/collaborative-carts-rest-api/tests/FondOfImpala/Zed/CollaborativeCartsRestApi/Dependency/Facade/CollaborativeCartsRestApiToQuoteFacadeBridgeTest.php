@@ -5,29 +5,18 @@ namespace FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\QuoteResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Quote\Business\QuoteFacade;
 
 class CollaborativeCartsRestApiToQuoteFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToQuoteFacadeBridge
-     */
-    protected $collaborativeCartsRestApiToQuoteFacadeBridge;
+    protected CollaborativeCartsRestApiToQuoteFacadeBridge $collaborativeCartsRestApiToQuoteFacadeBridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Quote\Business\QuoteFacade
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|QuoteFacade $quoteFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteResponseTransfer
-     */
-    protected $quoteResponseTransferMock;
+    protected MockObject|QuoteResponseTransfer $quoteResponseTransferMock;
 
     /**
      * @return void

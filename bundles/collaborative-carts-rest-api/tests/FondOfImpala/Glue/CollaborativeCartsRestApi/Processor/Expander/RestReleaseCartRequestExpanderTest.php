@@ -6,34 +6,20 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Filter\RestCustomerFilterInterface;
 use Generated\Shared\Transfer\RestCustomerTransfer;
 use Generated\Shared\Transfer\RestReleaseCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class RestReleaseCartRequestExpanderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Filter\RestCustomerFilterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCustomerFilterMock;
+    protected MockObject|RestCustomerFilterInterface $restCustomerFilterMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartRequestTransferMock;
+    protected MockObject|RestReleaseCartRequestTransfer $restReleaseCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
-     */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestCustomerTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCustomerTransferMock;
+    protected MockObject|RestCustomerTransfer $restCustomerTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Expander\RestReleaseCartRequestExpander
-     */
-    protected $restReleaseCartRequestExpander;
+    protected RestReleaseCartRequestExpander $restReleaseCartRequestExpander;
 
     /**
      * @return void

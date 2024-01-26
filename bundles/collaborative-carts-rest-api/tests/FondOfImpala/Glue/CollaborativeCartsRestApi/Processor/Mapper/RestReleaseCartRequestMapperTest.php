@@ -4,18 +4,13 @@ namespace FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestReleaseCartRequestMapperTest extends Unit
 {
-    /**
-     * @var \Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCollaborativeCartsRequestAttributesTransferMock;
+    protected MockObject|RestCollaborativeCartsRequestAttributesTransfer $restCollaborativeCartsRequestAttributesTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestReleaseCartRequestMapper
-     */
-    protected $restReleaseCartRequestMapper;
+    protected RestReleaseCartRequestMapper $restReleaseCartRequestMapper;
 
     /**
      * @return void

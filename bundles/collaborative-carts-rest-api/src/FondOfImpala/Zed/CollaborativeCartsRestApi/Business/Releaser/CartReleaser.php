@@ -10,20 +10,11 @@ use Generated\Shared\Transfer\RestReleaseCartResponseTransfer;
 
 class CartReleaser implements CartReleaserInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReaderInterface
-     */
-    protected $quoteReader;
+    protected QuoteReaderInterface $quoteReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper\ReleaseCartRequestMapperInterface
-     */
-    protected $releaseCartRequestMapper;
+    protected ReleaseCartRequestMapperInterface $releaseCartRequestMapper;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeInterface
-     */
-    protected $collaborativeCartFacade;
+    protected CollaborativeCartsRestApiToCollaborativeCartFacadeInterface $collaborativeCartFacade;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Reader\QuoteReaderInterface $quoteReader

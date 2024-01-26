@@ -12,20 +12,11 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CollaborativeCartProcessor implements CollaborativeCartProcessorInterface
 {
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Builder\CollaborativeCartRestResponseBuilderInterface
-     */
-    protected $collaborativeCartRestResponseBuilder;
+    protected CollaborativeCartRestResponseBuilderInterface $collaborativeCartRestResponseBuilder;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Claimer\CartClaimerInterface
-     */
-    protected $cartClaimer;
+    protected CartClaimerInterface $cartClaimer;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Releaser\CartReleaserInterface
-     */
-    protected $cartReleaser;
+    protected CartReleaserInterface $cartReleaser;
 
     /**
      * @param \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Builder\CollaborativeCartRestResponseBuilderInterface $collaborativeCartRestResponseBuilder
@@ -56,13 +47,10 @@ class CollaborativeCartProcessor implements CollaborativeCartProcessorInterface
             return $this->collaborativeCartRestResponseBuilder->createCartIdMissingErrorResponse();
         }
 
-        switch ($restCollaborativeCartsRequestAttributesTransfer->getAction()) {
-            case CollaborativeCartsRestApiConfig::ACTION_CLAIM:
-                return $this->cartClaimer->claim($restRequest, $restCollaborativeCartsRequestAttributesTransfer);
-            case CollaborativeCartsRestApiConfig::ACTION_RELEASE:
-                return $this->cartReleaser->release($restRequest, $restCollaborativeCartsRequestAttributesTransfer);
-            default:
-                return $this->collaborativeCartRestResponseBuilder->createInvalidActionErrorResponse();
-        }
+        return match ($restCollaborativeCartsRequestAttributesTransfer->getAction()) {
+            CollaborativeCartsRestApiConfig::ACTION_CLAIM => $this->cartClaimer->claim($restRequest, $restCollaborativeCartsRequestAttributesTransfer),
+            CollaborativeCartsRestApiConfig::ACTION_RELEASE => $this->cartReleaser->release($restRequest, $restCollaborativeCartsRequestAttributesTransfer),
+            default => $this->collaborativeCartRestResponseBuilder->createInvalidActionErrorResponse(),
+        };
     }
 }

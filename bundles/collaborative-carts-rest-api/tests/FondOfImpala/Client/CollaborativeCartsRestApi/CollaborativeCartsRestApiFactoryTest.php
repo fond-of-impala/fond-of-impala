@@ -5,24 +5,16 @@ namespace FondOfImpala\Client\CollaborativeCartsRestApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientInterface;
 use FondOfImpala\Client\CollaborativeCartsRestApi\Zed\CollaborativeCartsRestApiStub;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\Kernel\Container;
 
 class CollaborativeCartsRestApiFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\CollaborativeCartsRestApiFactory
-     */
-    protected $collaborativeCartsRestApiFactory;
+    protected CollaborativeCartsRestApiFactory $collaborativeCartsRestApiFactory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientInterface
-     */
-    protected $zedRequestClientMock;
+    protected MockObject|CollaborativeCartsRestApiToZedRequestClientInterface $zedRequestClientMock;
 
     /**
      * @return void

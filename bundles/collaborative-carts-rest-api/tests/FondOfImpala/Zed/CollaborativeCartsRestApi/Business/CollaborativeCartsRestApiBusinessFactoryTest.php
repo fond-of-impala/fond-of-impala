@@ -8,29 +8,18 @@ use FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Releaser\CartReleaser;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\CollaborativeCartsRestApiDependencyProvider;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeInterface;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToQuoteFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class CollaborativeCartsRestApiBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToQuoteFacadeInterface
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|CollaborativeCartsRestApiToQuoteFacadeInterface $quoteFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeInterface
-     */
-    protected $collaborativeCartFacadeMock;
+    protected MockObject|CollaborativeCartsRestApiToCollaborativeCartFacadeInterface $collaborativeCartFacadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\CollaborativeCartsRestApiBusinessFactory
-     */
-    protected $businessFactory;
+    protected CollaborativeCartsRestApiBusinessFactory $businessFactory;
 
     /**
      * @return void

@@ -6,41 +6,24 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\CollaborativeCartsRestApi\CollaborativeCartsRestApiFactory;
 use FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\CollaborativeCart\CollaborativeCartProcessorInterface;
 use Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
 
 class CollaborativeCartsResourceControllerTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
-     */
-    protected $restRequestMock;
+    protected MockObject|RestRequestInterface $restRequestMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCollaborativeCartsRequestAttributesTransferMock;
+    protected MockObject|RestCollaborativeCartsRequestAttributesTransfer $restCollaborativeCartsRequestAttributesTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\CollaborativeCartsRestApiFactory|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $factoryMock;
+    protected MockObject|CollaborativeCartsRestApiFactory $factoryMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\CollaborativeCart\CollaborativeCartProcessorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $collaborativeCartProcessorMock;
+    protected MockObject|CollaborativeCartProcessorInterface $collaborativeCartProcessorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Controller\CollaborativeCartsResourceController
-     */
-    protected $collaborativeCartsResourceController;
+    protected CollaborativeCartsResourceController $collaborativeCartsResourceController;
 
     /**
      * @return void
@@ -73,7 +56,7 @@ class CollaborativeCartsResourceControllerTest extends Unit
             /**
              * @var \Spryker\Glue\Kernel\AbstractFactory
              */
-            protected $collaborativeCartsRestApiFactory;
+            protected CollaborativeCartsRestApiFactory $collaborativeCartsRestApiFactory;
 
             /**
              * @param \FondOfImpala\Glue\CollaborativeCartsRestApi\CollaborativeCartsRestApiFactory $abstractFactory

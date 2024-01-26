@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartFacadeInterface;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToCollaborativeCartFacadeBridge;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Dependency\Facade\CollaborativeCartsRestApiToQuoteFacadeBridge;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Kernel\Locator;
@@ -13,35 +14,17 @@ use Spryker\Zed\Quote\Business\QuoteFacadeInterface;
 
 class CollaborativeCartsRestApiDependencyProviderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
-    protected $containerMock;
+    protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Locator
-     */
-    protected $locatorMock;
+    protected MockObject|Locator $locatorMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
-     */
-    protected $bundleProxyMock;
+    protected MockObject|BundleProxy $bundleProxyMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Quote\Business\QuoteFacadeInterface
-     */
-    protected $quoteFacadeMock;
+    protected MockObject|QuoteFacadeInterface $quoteFacadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $collaborativeCartFacadeMock;
+    protected MockObject|CollaborativeCartFacadeInterface $collaborativeCartFacadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\CollaborativeCartsRestApiDependencyProvider
-     */
-    protected $collaborativeCartsRestApiDependencyProvider;
+    protected CollaborativeCartsRestApiDependencyProvider $collaborativeCartsRestApiDependencyProvider;
 
     /**
      * @return void

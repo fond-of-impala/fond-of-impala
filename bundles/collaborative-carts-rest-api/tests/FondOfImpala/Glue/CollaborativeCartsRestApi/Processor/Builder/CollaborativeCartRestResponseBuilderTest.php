@@ -8,6 +8,7 @@ use FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestCollaborati
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RestCollaborativeCartsResponseAttributesTransfer;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -15,40 +16,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CollaborativeCartRestResponseBuilderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilderMock;
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Mapper\RestCollaborativeCartsResponseAttributesMapperInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCollaborativeCartsResponseAttributesMapperMock;
+    protected MockObject|RestCollaborativeCartsResponseAttributesMapperInterface $restCollaborativeCartsResponseAttributesMapperMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
-    protected $restResponseMock;
+    protected MockObject|RestResponseInterface $restResponseMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
-    protected $restResourceMock;
+    protected MockObject|RestResourceInterface $restResourceMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\RestCollaborativeCartsResponseAttributesTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restCollaborativeCartsResponseAttributesTransferMock;
+    protected MockObject|RestCollaborativeCartsResponseAttributesTransfer $restCollaborativeCartsResponseAttributesTransferMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Processor\Builder\CollaborativeCartRestResponseBuilder
-     */
-    protected $collaborativeCartRestResponseBuilder;
+    protected CollaborativeCartRestResponseBuilder $collaborativeCartRestResponseBuilder;
 
     /**
      * @return void
@@ -100,11 +80,9 @@ class CollaborativeCartRestResponseBuilderTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST
-                        && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_CODE_INVALID_ACTION
-                        && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_INVALID_ACTION;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST
+                    && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_CODE_INVALID_ACTION
+                    && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_INVALID_ACTION,
                 ),
             )
             ->willReturn($this->restResponseMock);
@@ -128,11 +106,9 @@ class CollaborativeCartRestResponseBuilderTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST
-                            && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_CODE_CART_ID_MISSING
-                            && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_CART_ID_MISSING;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getStatus() === Response::HTTP_BAD_REQUEST
+                        && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_CODE_CART_ID_MISSING
+                        && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_CART_ID_MISSING,
                 ),
             )
             ->willReturn($this->restResponseMock);
@@ -156,11 +132,9 @@ class CollaborativeCartRestResponseBuilderTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getStatus() === Response::HTTP_UNPROCESSABLE_ENTITY
-                            && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_CODE_NOT_CLAIMED
-                            && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_NOT_CLAIMED;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getStatus() === Response::HTTP_UNPROCESSABLE_ENTITY
+                        && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_CODE_NOT_CLAIMED
+                        && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_NOT_CLAIMED,
                 ),
             )
             ->willReturn($this->restResponseMock);
@@ -184,11 +158,9 @@ class CollaborativeCartRestResponseBuilderTest extends Unit
             ->method('addError')
             ->with(
                 static::callback(
-                    static function (RestErrorMessageTransfer $restErrorMessageTransfer) {
-                        return $restErrorMessageTransfer->getStatus() === Response::HTTP_UNPROCESSABLE_ENTITY
-                            && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_NOT_RELEASED
-                            && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_NOT_RELEASED;
-                    },
+                    static fn (RestErrorMessageTransfer $restErrorMessageTransfer): bool => $restErrorMessageTransfer->getStatus() === Response::HTTP_UNPROCESSABLE_ENTITY
+                        && $restErrorMessageTransfer->getCode() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_NOT_RELEASED
+                        && $restErrorMessageTransfer->getDetail() === CollaborativeCartsRestApiConfig::RESPONSE_DETAIL_NOT_RELEASED,
                 ),
             )
             ->willReturn($this->restResponseMock);

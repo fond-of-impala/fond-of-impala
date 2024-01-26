@@ -10,10 +10,7 @@ use Generated\Shared\Transfer\RestReleaseCartResponseTransfer;
 
 class CollaborativeCartsRestApiStub implements CollaborativeCartsRestApiStubInterface
 {
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientInterface
-     */
-    protected $zedRequestClient;
+    protected CollaborativeCartsRestApiToZedRequestClientInterface $zedRequestClient;
 
     /**
      * @param \FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientInterface $zedRequestClient

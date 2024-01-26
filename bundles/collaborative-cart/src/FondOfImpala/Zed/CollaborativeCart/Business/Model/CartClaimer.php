@@ -14,25 +14,13 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class CartClaimer implements CartClaimerInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReaderInterface
-     */
-    protected $quoteReader;
+    protected QuoteReaderInterface $quoteReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\CompanyUserReaderInterface
-     */
-    protected $companyUserReader;
+    protected CompanyUserReaderInterface $companyUserReader;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeInterface
-     */
-    protected $permissionFacade;
+    protected CollaborativeCartToPermissionFacadeInterface $permissionFacade;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteWriterInterface
-     */
-    protected $quoteWriter;
+    protected QuoteWriterInterface $quoteWriter;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReaderInterface $quoteReader

@@ -8,48 +8,25 @@ use FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPerm
 use Generated\Shared\Transfer\ClaimCartRequestTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CartClaimerTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReaderInterface
-     */
-    protected $quoteReaderMock;
+    protected MockObject|QuoteReaderInterface $quoteReaderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteWriterInterface
-     */
-    protected $quoteWriterMock;
+    protected MockObject|QuoteWriterInterface $quoteWriterMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Business\Model\CompanyUserReaderInterface
-     */
-    protected $companyUserReaderMock;
+    protected MockObject|CompanyUserReaderInterface $companyUserReaderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeInterface
-     */
-    protected $permissionFacadeMock;
+    protected MockObject|CollaborativeCartToPermissionFacadeInterface $permissionFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ClaimCartRequestTransfer
-     */
-    protected $claimCartRequestTransferMock;
+    protected MockObject|ClaimCartRequestTransfer $claimCartRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserTransfer
-     */
-    protected $companyUserTransferMock;
+    protected MockObject|CompanyUserTransfer $companyUserTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\CartClaimer
-     */
-    protected $cartClaimer;
+    protected CartClaimer $cartClaimer;
 
     /**
      * @return void
@@ -368,12 +345,6 @@ class CartClaimerTest extends Unit
      */
     public function testClaimWithNonExistingCompanyUser(): void
     {
-        $idCompanyUser = 1;
-        $companyUserReference = 'DE-CU-1';
-        $currentCompanyUserReference = 'DE-CU-2';
-        $customerReference = 'DE-CU-1';
-        $currentCustomerReference = 'DE-CU-2';
-
         $this->quoteReaderMock->expects(self::atLeastOnce())
             ->method('getByClaimCartRequest')
             ->with($this->claimCartRequestTransferMock)

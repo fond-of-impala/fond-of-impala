@@ -5,18 +5,13 @@ namespace FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ReleaseCartRequestTransfer;
 use Generated\Shared\Transfer\RestReleaseCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ReleaseCartRequestMapperTest extends Unit
 {
-    /**
-     * @var \Generated\Shared\Transfer\RestReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restReleaseCartRequestTransferMock;
+    protected MockObject|RestReleaseCartRequestTransfer $restReleaseCartRequestTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper\ReleaseCartRequestMapper
-     */
-    protected $claimCartRequestMapper;
+    protected ReleaseCartRequestMapper $claimCartRequestMapper;
 
     /**
      * @return void

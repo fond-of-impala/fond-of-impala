@@ -4,19 +4,14 @@ namespace FondOfImpala\Zed\CollaborativeCart\Dependency\Facade;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CollaborativeCart\Communication\Plugin\PermissionExtension\CollaborateCartPermissionPlugin;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
 
 class CollaborativeCartToPermissionFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Permission\Business\PermissionFacadeInterface
-     */
-    protected $permissionFacadeMock;
+    protected MockObject|PermissionFacadeInterface $permissionFacadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToPermissionFacadeBridge
-     */
-    protected $collaborativeCartToPermissionFacadeBridge;
+    protected CollaborativeCartToPermissionFacadeBridge $collaborativeCartToPermissionFacadeBridge;
 
     /**
      * @return void

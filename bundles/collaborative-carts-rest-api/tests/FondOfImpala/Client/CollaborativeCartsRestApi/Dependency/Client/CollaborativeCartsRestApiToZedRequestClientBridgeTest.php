@@ -3,25 +3,17 @@
 namespace FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 class CollaborativeCartsRestApiToZedRequestClientBridgeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\ZedRequest\ZedRequestClientInterface
-     */
-    protected $zedRequestClientMock;
+    protected MockObject|ZedRequestClientInterface $zedRequestClientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
-    protected $transferMock;
+    protected MockObject|TransferInterface $transferMock;
 
-    /**
-     * @var \FondOfImpala\Client\CollaborativeCartsRestApi\Dependency\Client\CollaborativeCartsRestApiToZedRequestClientBridge
-     */
-    protected $collaborativeCartsRestApiToZedRequestClientBridge;
+    protected CollaborativeCartsRestApiToZedRequestClientBridge $collaborativeCartsRestApiToZedRequestClientBridge;
 
     /**
      * @return void

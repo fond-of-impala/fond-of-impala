@@ -5,18 +5,13 @@ namespace FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ClaimCartRequestTransfer;
 use Generated\Shared\Transfer\RestClaimCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ClaimCartRequestMapperTest extends Unit
 {
-    /**
-     * @var \Generated\Shared\Transfer\RestClaimCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $restClaimCartRequestTransferMock;
+    protected MockObject|RestClaimCartRequestTransfer $restClaimCartRequestTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Mapper\ClaimCartRequestMapper
-     */
-    protected $claimCartRequestMapper;
+    protected ClaimCartRequestMapper $claimCartRequestMapper;
 
     /**
      * @return void

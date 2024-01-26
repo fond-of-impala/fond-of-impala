@@ -6,28 +6,17 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CollaborativeCartToCompanyUserReferenceFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface
-     */
-    protected $companyUserReferenceFacadeMock;
+    protected MockObject|CompanyUserReferenceFacadeInterface $companyUserReferenceFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserTransfer
-     */
-    protected $companyUserTransferMock;
+    protected MockObject|CompanyUserTransfer $companyUserTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyUserResponseTransfer
-     */
-    protected $companyUserResponseTransferMock;
+    protected MockObject|CompanyUserResponseTransfer $companyUserResponseTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToCompanyUserReferenceFacadeBridge
-     */
-    protected $collaborativeCartToCompanyUserReferenceFacadeBridge;
+    protected CollaborativeCartToCompanyUserReferenceFacadeBridge $collaborativeCartToCompanyUserReferenceFacadeBridge;
 
     /**
      * @return void

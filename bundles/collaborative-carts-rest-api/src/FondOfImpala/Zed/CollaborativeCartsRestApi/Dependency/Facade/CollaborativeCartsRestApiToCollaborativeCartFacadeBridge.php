@@ -10,10 +10,7 @@ use Generated\Shared\Transfer\ReleaseCartResponseTransfer;
 
 class CollaborativeCartsRestApiToCollaborativeCartFacadeBridge implements CollaborativeCartsRestApiToCollaborativeCartFacadeInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartFacadeInterface
-     */
-    protected $collaborativeCartFacade;
+    protected CollaborativeCartFacadeInterface $collaborativeCartFacade;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Business\CollaborativeCartFacadeInterface $collaborativeCartFacade

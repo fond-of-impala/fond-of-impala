@@ -7,10 +7,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class QuoteWriter implements QuoteWriterInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface
-     */
-    protected $quoteFacade;
+    protected CollaborativeCartToQuoteFacadeInterface $quoteFacade;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface $quoteFacade

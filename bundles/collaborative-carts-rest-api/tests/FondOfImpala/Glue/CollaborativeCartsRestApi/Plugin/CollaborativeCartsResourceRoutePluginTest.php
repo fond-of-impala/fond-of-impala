@@ -6,19 +6,14 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\CollaborativeCartsRestApi\CollaborativeCartsRestApiConfig;
 use FondOfImpala\Glue\CollaborativeCartsRestApi\Plugin\GlueApplication\CollaborativeCartsResourceRoutePlugin;
 use Generated\Shared\Transfer\RestCollaborativeCartsRequestAttributesTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 
 class CollaborativeCartsResourceRoutePluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface
-     */
-    protected $resourceRouteCollectionMock;
+    protected MockObject|ResourceRouteCollectionInterface $resourceRouteCollectionMock;
 
-    /**
-     * @var \FondOfImpala\Glue\CollaborativeCartsRestApi\Plugin\GlueApplication\CollaborativeCartsResourceRoutePlugin
-     */
-    protected $collaborativeCartsResourceRoutePlugin;
+    protected CollaborativeCartsResourceRoutePlugin $collaborativeCartsResourceRoutePlugin;
 
     /**
      * @return void

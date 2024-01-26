@@ -8,33 +8,19 @@ use FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteWriterInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ReleaseCartRequestTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CartReleaserTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteReaderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteReaderMock;
+    protected MockObject|QuoteReaderInterface $quoteReaderMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteWriterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $quoteWriterMock;
+    protected MockObject|QuoteWriterInterface $quoteWriterMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected $quoteTransferMock;
+    protected MockObject|QuoteTransfer $quoteTransferMock;
 
-    /**
-     * @var \Generated\Shared\Transfer\ReleaseCartRequestTransfer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $releaseCartRequestTransferMock;
+    protected MockObject|ReleaseCartRequestTransfer $releaseCartRequestTransferMock;
 
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Business\Releaser\CartReleaser
-     */
-    protected $cartReleaser;
+    protected CartReleaser $cartReleaser;
 
     /**
      * @return void
@@ -100,9 +86,7 @@ class CartReleaserTest extends Unit
             ->method('setCustomer')
             ->with(
                 static::callback(
-                    static function (CustomerTransfer $customerTransfer) use ($originalCustomerReference) {
-                        return $customerTransfer->getCustomerReference() === $originalCustomerReference;
-                    },
+                    static fn (CustomerTransfer $customerTransfer): bool => $customerTransfer->getCustomerReference() === $originalCustomerReference,
                 ),
             )->willReturn($this->quoteTransferMock);
 
@@ -189,9 +173,7 @@ class CartReleaserTest extends Unit
             ->method('setCustomer')
             ->with(
                 static::callback(
-                    static function (CustomerTransfer $customerTransfer) use ($originalCustomerReference) {
-                        return $customerTransfer->getCustomerReference() === $originalCustomerReference;
-                    },
+                    static fn (CustomerTransfer $customerTransfer): bool => $customerTransfer->getCustomerReference() === $originalCustomerReference,
                 ),
             )->willReturn($this->quoteTransferMock);
 

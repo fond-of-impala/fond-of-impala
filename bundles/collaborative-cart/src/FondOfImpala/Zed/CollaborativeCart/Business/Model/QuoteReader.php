@@ -9,10 +9,7 @@ use Generated\Shared\Transfer\ReleaseCartRequestTransfer;
 
 class QuoteReader implements QuoteReaderInterface
 {
-    /**
-     * @var \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface
-     */
-    protected $quoteFacade;
+    protected CollaborativeCartToQuoteFacadeInterface $quoteFacade;
 
     /**
      * @param \FondOfImpala\Zed\CollaborativeCart\Dependency\Facade\CollaborativeCartToQuoteFacadeInterface $quoteFacade
