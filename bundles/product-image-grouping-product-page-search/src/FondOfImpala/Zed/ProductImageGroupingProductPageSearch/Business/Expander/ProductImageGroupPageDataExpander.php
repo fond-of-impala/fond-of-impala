@@ -5,7 +5,6 @@ namespace FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Expand
 use FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Validator\UrlValidatorInterface;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
-use function PHPUnit\Framework\stringStartsWith;
 
 class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterface
 {
@@ -14,6 +13,9 @@ class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterf
      */
     protected const IMAGE_GROUP_NAME_EMPTY = '*';
 
+    /**
+     * @var string
+     */
     protected const EXTERNAL_URL_PREFIX = 'external_url';
 
     protected UrlValidatorInterface $urlValidator;
@@ -29,12 +31,12 @@ class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterf
     /**
      * {@inheritDoc}
      *
+     * @api
+     *
      * @param array<string, mixed> $productData
      * @param \Generated\Shared\Transfer\ProductPageSearchTransfer $productAbstractPageSearchTransfer
      *
      * @return \Generated\Shared\Transfer\ProductPageSearchTransfer
-     * @api
-     *
      */
     public function expandProductPageData(array $productData, ProductPageSearchTransfer $productAbstractPageSearchTransfer): ProductPageSearchTransfer
     {
@@ -62,6 +64,7 @@ class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterf
 
     /**
      * @param array $productImage
+     *
      * @return array
      */
     protected function validateProductImageUrls(array $productImage): array

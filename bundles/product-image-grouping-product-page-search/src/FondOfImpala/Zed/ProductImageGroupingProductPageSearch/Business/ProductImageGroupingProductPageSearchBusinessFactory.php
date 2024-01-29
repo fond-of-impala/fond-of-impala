@@ -13,14 +13,16 @@ class ProductImageGroupingProductPageSearchBusinessFactory extends AbstractBusin
     /**
      * @return \FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Expander\ProductPageDataExpanderInterface
      */
-    public function createProductImageGroupPageDataExpander(): ProductPageDataExpanderInterface{
+    public function createProductImageGroupPageDataExpander(): ProductPageDataExpanderInterface
+    {
         return new ProductImageGroupPageDataExpander($this->createUrlValidator());
     }
 
     /**
      * @return \FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Validator\UrlValidatorInterface
      */
-    public function createUrlValidator(): UrlValidatorInterface{
+    public function createUrlValidator(): UrlValidatorInterface
+    {
         return new UrlValidator();
     }
 }
