@@ -8,12 +8,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\ProductPageSearchExtension\Dependency\PageMapBuilderInterface;
 use Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductAbstractMapExpanderPluginInterface;
 
-/**
- * @method \Spryker\Zed\ProductPageSearch\Persistence\ProductPageSearchQueryContainerInterface getQueryContainer()
- * @method \Spryker\Zed\ProductPageSearch\Communication\ProductPageSearchCommunicationFactory getFactory()
- * @method \Spryker\Zed\ProductPageSearch\Business\ProductPageSearchFacadeInterface getFacade()
- * @method \Spryker\Zed\ProductPageSearch\ProductPageSearchConfig getConfig()
- */
 class ProductImageGroupMapExpanderPlugin extends AbstractPlugin implements ProductAbstractMapExpanderPluginInterface
 {
     /**
@@ -43,7 +37,7 @@ class ProductImageGroupMapExpanderPlugin extends AbstractPlugin implements Produ
         PageMapBuilderInterface $pageMapBuilder,
         array $productData,
         LocaleTransfer $localeTransfer
-    ) {
+    ): PageMapTransfer {
         $pageMapBuilder->addSearchResultData($pageMapTransfer, static::KEY, $productData[static::VALUE]);
 
         return $pageMapTransfer;
