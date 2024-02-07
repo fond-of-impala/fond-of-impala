@@ -18,7 +18,7 @@ class CompanyProductListsAssignmentEventListener extends AbstractPlugin implemen
      *
      * @return void
      */
-    public function handle(TransferInterface $transfer, $eventName)
+    public function handle(TransferInterface $transfer, $eventName): void
     {
         if (
             !($transfer instanceof RestProductListsBulkRequestAssignmentTransfer)

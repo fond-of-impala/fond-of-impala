@@ -7,9 +7,6 @@ use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class ProductListsBulkRestApiToEventFacadeBridge implements ProductListsBulkRestApiToEventFacadeInterface
 {
-    /**
-     * @var \Spryker\Zed\Event\Business\EventFacadeInterface
-     */
     protected EventFacadeInterface $eventFacade;
 
     /**

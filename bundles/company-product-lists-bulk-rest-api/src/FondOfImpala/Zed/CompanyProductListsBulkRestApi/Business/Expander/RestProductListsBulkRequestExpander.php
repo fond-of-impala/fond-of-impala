@@ -73,8 +73,10 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             }
 
             $debtorNumber = $restProductListsBulkRequestItemCompanyTransfer->getDebtorNumber();
-
-            if ($debtorNumber === null || !isset($companyIds[$debtorNumber])) {
+            if ($debtorNumber === null) {
+                continue;
+            }
+            if (!isset($companyIds[$debtorNumber])) {
                 continue;
             }
 

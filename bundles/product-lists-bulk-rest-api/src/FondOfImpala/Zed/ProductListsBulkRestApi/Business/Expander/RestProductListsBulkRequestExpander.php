@@ -100,8 +100,10 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             }
 
             $key = $restProductListsBulkRequestAssignmentProductListTransfer->getKey();
-
-            if ($key === null || !isset($productListIds[$key])) {
+            if ($key === null) {
+                continue;
+            }
+            if (!isset($productListIds[$key])) {
                 continue;
             }
 

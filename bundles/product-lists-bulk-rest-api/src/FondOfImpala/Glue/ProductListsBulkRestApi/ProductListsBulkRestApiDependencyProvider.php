@@ -31,7 +31,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addRestProductListsBulkRequestAssignmentMapperPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_MAPPER] = fn () => $this->getRestProductListsBulkRequestAssignmentMapperPlugins();
+        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_MAPPER] = fn (): array => $this->getRestProductListsBulkRequestAssignmentMapperPlugins();
 
         return $container;
     }

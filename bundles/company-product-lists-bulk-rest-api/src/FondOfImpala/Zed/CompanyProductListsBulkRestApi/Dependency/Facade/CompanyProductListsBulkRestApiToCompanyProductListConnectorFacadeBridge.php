@@ -7,9 +7,6 @@ use Generated\Shared\Transfer\CompanyProductListRelationTransfer;
 
 class CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeBridge implements CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeInterface
 {
-    /**
-     * @var \FondOfOryx\Zed\CompanyProductListConnector\Business\CompanyProductListConnectorFacadeInterface
-     */
     protected CompanyProductListConnectorFacadeInterface $companyProductListConnectorFacade;
 
     /**
