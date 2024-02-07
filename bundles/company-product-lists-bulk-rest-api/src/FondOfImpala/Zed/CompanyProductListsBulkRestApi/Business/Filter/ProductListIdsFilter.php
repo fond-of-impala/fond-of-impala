@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter;
 
 use ArrayObject;
-use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 
 class ProductListIdsFilter implements ProductListIdsFilterInterface
 {
@@ -18,7 +17,7 @@ class ProductListIdsFilter implements ProductListIdsFilterInterface
         $productListIds = [];
 
         foreach ($restProductListsBulkRequestAssignmentProductListTransfers as $restProductListsBulkRequestAssignmentProductListTransfer) {
-            $productListId = $restProductListsBulkRequestAssignmentProductListTransfer->getIdProductList();
+            $productListId = $restProductListsBulkRequestAssignmentProductListTransfer->getId();
 
             if ($productListId === null) {
                 continue;

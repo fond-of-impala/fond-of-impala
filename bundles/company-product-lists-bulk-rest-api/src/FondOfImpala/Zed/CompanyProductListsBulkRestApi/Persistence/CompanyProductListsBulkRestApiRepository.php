@@ -17,13 +17,15 @@ class CompanyProductListsBulkRestApiRepository extends AbstractRepository implem
   */
     public function getCompanyIdsByUuids(array $uuids): array
     {
-        $query = $this->getFactory()
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = $this->getFactory()
             ->getCompanyQuery()
             ->clear()
             ->filterByUuid_In($uuids)
-            ->select([SpyCompanyTableMap::COL_ID_COMPANY]);
+            ->select([SpyCompanyTableMap::COL_ID_COMPANY, SpyCompanyTableMap::COL_UUID])
+            ->find();
 
-        return $query->find()->toKeyValue(
+        return $collection->toKeyValue(
             SpyCompanyTableMap::COL_UUID,
             SpyCompanyTableMap::COL_ID_COMPANY,
         );
@@ -36,13 +38,15 @@ class CompanyProductListsBulkRestApiRepository extends AbstractRepository implem
      */
     public function getCompanyIdsByDebtorNumbers(array $debtorNumbers): array
     {
-        $query = $this->getFactory()
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = $this->getFactory()
             ->getCompanyQuery()
             ->clear()
             ->filterByDebtorNumber_In($debtorNumbers)
-            ->select([SpyCompanyTableMap::COL_ID_COMPANY]);
+            ->select([SpyCompanyTableMap::COL_ID_COMPANY, SpyCompanyTableMap::COL_DEBTOR_NUMBER])
+            ->find();
 
-        return $query->find()->toKeyValue(
+        return $collection->toKeyValue(
             SpyCompanyTableMap::COL_DEBTOR_NUMBER,
             SpyCompanyTableMap::COL_ID_COMPANY,
         );

@@ -4,17 +4,23 @@ namespace FondOfImpala\Client\ProductListsBulkRestApi;
 
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkResponseTransfer;
+use Spryker\Client\Kernel\AbstractClient;
 
-class ProductListsBulkRestApiClient implements ProductListsBulkRestApiClientInterface
+/**
+ * @method \FondOfImpala\Client\ProductListsBulkRestApi\ProductListsBulkRestApiFactory getFactory()
+ */
+class ProductListsBulkRestApiClient extends AbstractClient implements ProductListsBulkRestApiClientInterface
 {
- /**
-  * @param \Generated\Shared\Transfer\RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
-  *
-  * @return \Generated\Shared\Transfer\RestProductListsBulkResponseTransfer
-  */
+    /**
+     * @param \Generated\Shared\Transfer\RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
+     *
+     * @return \Generated\Shared\Transfer\RestProductListsBulkResponseTransfer
+     */
     public function bulkProcess(
         RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
     ): RestProductListsBulkResponseTransfer {
-        // TODO: Implement bulkProcess() method.
+        return $this->getFactory()
+            ->createZedProductListsBulkRestApiStub()
+            ->bulkProcess($restProductListsBulkRequestTransfer);
     }
 }

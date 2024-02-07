@@ -7,9 +7,11 @@ use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
+/**
+ * @method \FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\CompanyProductListsBulkRestApiFacadeInterface getFacade()
+ */
 class CompanyProductListsAssignmentEventListener extends AbstractPlugin implements EventHandlerInterface
 {
-
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface $transfer
      * @param string $eventName
@@ -24,7 +26,7 @@ class CompanyProductListsAssignmentEventListener extends AbstractPlugin implemen
         ) {
             return;
         }
+
+        $this->getFacade()->persistCompanyProductListRelation($transfer);
     }
-
-
 }

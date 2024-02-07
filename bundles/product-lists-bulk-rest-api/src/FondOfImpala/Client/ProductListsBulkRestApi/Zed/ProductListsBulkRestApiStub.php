@@ -15,6 +15,9 @@ class ProductListsBulkRestApiStub implements ProductListsBulkRestApiStubInterfac
 
     protected ProductListsBulkRestApiToZedRequestClientInterface $zedRequestClient;
 
+    /**
+     * @param \FondOfImpala\Client\ProductListsBulkRestApi\Dependency\Client\ProductListsBulkRestApiToZedRequestClientInterface $zedRequestClient
+     */
     public function __construct(ProductListsBulkRestApiToZedRequestClientInterface $zedRequestClient)
     {
         $this->zedRequestClient = $zedRequestClient;

@@ -18,12 +18,15 @@ class ProductListsBulkRestApiRepository extends AbstractRepository implements Pr
      */
     public function getProductListIdsByKeys(array $keys): array
     {
-        $query = $this->getFactory()
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = $this->getFactory()
             ->getProductListQuery()
             ->clear()
-            ->filterByKey_In($keys);
+            ->filterByKey_In($keys)
+            ->select([SpyProductListTableMap::COL_ID_PRODUCT_LIST, SpyProductListTableMap::COL_KEY])
+            ->find();
 
-        return $query->find()->toKeyValue(
+        return $collection->toKeyValue(
             SpyProductListTableMap::COL_KEY,
             SpyProductListTableMap::COL_ID_PRODUCT_LIST
         );
@@ -36,12 +39,15 @@ class ProductListsBulkRestApiRepository extends AbstractRepository implements Pr
      */
     public function getProductListIdsByUuids(array $uuids): array
     {
-        $query = $this->getFactory()
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = $this->getFactory()
             ->getProductListQuery()
             ->clear()
-            ->filterByUuid_In($uuids);
+            ->filterByUuid_In($uuids)
+            ->select([SpyProductListTableMap::COL_ID_PRODUCT_LIST, SpyProductListTableMap::COL_UUID])
+            ->find();
 
-        return $query->find()->toKeyValue(
+        return $collection->toKeyValue(
             SpyProductListTableMap::COL_UUID,
             SpyProductListTableMap::COL_ID_PRODUCT_LIST
         );

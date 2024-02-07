@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Client\ProductListsBulkRestApi;
 
+use FondOfImpala\Client\ProductListsBulkRestApi\Dependency\Client\ProductListsBulkRestApiToZedRequestClientBridge;
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 
@@ -31,7 +32,11 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractDependencyProvid
      */
     protected function addZedRequestClient(Container $container): Container
     {
-        $container[static::CLIENT_ZED_REQUEST] = static fn (Container $container): CompanyUsersBulkRestApiToZedRequestClientBridge => new CompanyUsersBulkRestApiToZedRequestClientBridge($container->getLocator()->zedRequest()->client());
+        $container[static::CLIENT_ZED_REQUEST] = static fn (
+            Container $container
+        ): ProductListsBulkRestApiToZedRequestClientBridge => new ProductListsBulkRestApiToZedRequestClientBridge(
+            $container->getLocator()->zedRequest()->client()
+        );
 
         return $container;
     }

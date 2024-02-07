@@ -2,16 +2,16 @@
 
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Filter;
 
-use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequest;
+use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class CustomerReferenceFilter implements CustomerReferenceFilterInterface
 {
     /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequest $restRequest
+     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
      *
      * @return string|null
      */
-    public function filterFromRestRequest(RestRequest $restRequest): ?string
+    public function filterFromRestRequest(RestRequestInterface $restRequest): ?string
     {
         $getUserMethod = 'getUser';
 

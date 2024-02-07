@@ -7,6 +7,9 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 use Spryker\Glue\Kernel\Controller\AbstractController;
 
+/**
+ * @method \FondOfImpala\Glue\ProductListsBulkRestApi\ProductListsBulkRestApiFactory getFactory()
+ */
 class ProductListsBulkResourceController extends AbstractController
 {
     /**
@@ -20,7 +23,7 @@ class ProductListsBulkResourceController extends AbstractController
         RestProductListsBulkRequestAttributesTransfer $restProductListsBulkRequestAttributesTransfer
     ): RestResponseInterface {
         return $this->getFactory()
-            ->createCompanyUsersBulkProcessor()
+            ->createProductListsBulkProcessor()
             ->process($restRequest, $restProductListsBulkRequestAttributesTransfer);
     }
 }
