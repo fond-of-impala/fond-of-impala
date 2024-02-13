@@ -26,7 +26,7 @@ class GroupedIdentifierFilter implements GroupedIdentifierFilterInterface
     public function filterFromRestProductListsBulkRequestAssignments(
         ArrayObject $restProductListsBulkRequestAssignmentTransfers
     ): array {
-        $groupedIdentifier = ['uuid' => [], 'debtorNumber' => []];
+        $groupedIdentifier = ['customerReference' => [], 'email' => []];
 
         foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestItemTransfer) {
             $restProductListsBulkRequestAssignmentCustomerTransfer = $restProductListsBulkRequestItemTransfer->getCustomer();

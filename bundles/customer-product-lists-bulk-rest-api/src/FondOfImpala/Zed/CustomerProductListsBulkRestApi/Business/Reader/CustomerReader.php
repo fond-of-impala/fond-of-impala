@@ -43,16 +43,16 @@ class CustomerReader implements CustomerReaderInterface
      */
     public function getIdsByGroupedIdentifier(array $groupedIdentifiers): array
     {
-        $companyIds = [];
+        $customerIds = [];
 
         if (count($groupedIdentifiers['customerReference']) > 0) {
-            $companyIds = array_merge($companyIds, $this->getIdsByCustomerReferences($groupedIdentifiers['customerReference']));
+            $customerIds = array_merge($customerIds, $this->getIdsByCustomerReferences($groupedIdentifiers['customerReference']));
         }
 
         if (count($groupedIdentifiers['email']) === 0) {
-            return $companyIds;
+            return $customerIds;
         }
 
-        return array_merge($companyIds, $this->getIdsByEmails($groupedIdentifiers['email']));
+        return array_merge($customerIds, $this->getIdsByEmails($groupedIdentifiers['email']));
     }
 }
