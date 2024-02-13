@@ -11,15 +11,24 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 class CompanyProductListsBulkRestApiRepository extends AbstractRepository implements CompanyProductListsBulkRestApiRepositoryInterface
 {
  /**
+  * @param string $customerReference
   * @param array<string> $uuids
   *
   * @return array<string, int>
   */
-    public function getCompanyIdsByUuids(array $uuids): array
-    {
+    public function getCompanyIdsByCustomerReferenceAndUuids(
+        string $customerReference,
+        array $uuids
+    ): array {
         /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
         $collection = $this->getFactory()
             ->getCompanyQuery()
+            ->useCompanyUserQuery()
+                ->filterByIsActive(true)
+                ->useCustomerQuery()
+                    ->filterByCustomerReference($customerReference)
+                ->endUse()
+            ->endUse()
             ->clear()
             ->filterByUuid_In($uuids)
             ->select([SpyCompanyTableMap::COL_ID_COMPANY, SpyCompanyTableMap::COL_UUID])
@@ -32,15 +41,24 @@ class CompanyProductListsBulkRestApiRepository extends AbstractRepository implem
     }
 
     /**
+     * @param string $customerReference
      * @param array<string> $debtorNumbers
      *
      * @return array<string, int>
      */
-    public function getCompanyIdsByDebtorNumbers(array $debtorNumbers): array
-    {
+    public function getCompanyIdsByCustomerReferenceAndDebtorNumbers(
+        string $customerReference,
+        array $debtorNumbers
+    ): array {
         /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
         $collection = $this->getFactory()
             ->getCompanyQuery()
+            ->useCompanyUserQuery()
+                ->filterByIsActive(true)
+                ->useCustomerQuery()
+                    ->filterByCustomerReference($customerReference)
+                ->endUse()
+            ->endUse()
             ->clear()
             ->filterByDebtorNumber_In($debtorNumbers)
             ->select([SpyCompanyTableMap::COL_ID_COMPANY, SpyCompanyTableMap::COL_DEBTOR_NUMBER])

@@ -19,6 +19,11 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
     /**
      * @var string
      */
+    public const PLUGINS_PRODUCT_LIST_IDS_REDUCER = 'PLUGINS_PRODUCT_LIST_IDS_REDUCER';
+
+    /**
+     * @var string
+     */
     public const PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER = 'PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER';
 
     /**
@@ -36,6 +41,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
         $container = parent::provideBusinessLayerDependencies($container);
 
         $container = $this->addEventFacade($container);
+        $container = $this->addProductListIdsReducerPlugins($container);
 
         return $this->addRestProductListsBulkRequestExpanderPlugins($container);
     }
@@ -56,6 +62,31 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
         return $container;
     }
 
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addProductListIdsReducerPlugins(Container $container): Container
+    {
+        $container[static::PLUGINS_PRODUCT_LIST_IDS_REDUCER] = fn (): array => $this->getProductListIdsReducerPlugins();
+
+        return $container;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getProductListIdsReducerPlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
     protected function addRestProductListsBulkRequestExpanderPlugins(Container $container): Container
     {
         $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER] = fn (): array => $this->getRestProductListsBulkRequestExpanderPlugins();

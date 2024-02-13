@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CustomerProductListsBulkRestApi\Persistence;
 
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
+use Orm\Zed\ProductList\Persistence\Map\SpyProductListTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -50,5 +51,26 @@ class CustomerProductListsBulkRestApiRepository extends AbstractRepository imple
             SpyCustomerTableMap::COL_EMAIL,
             SpyCustomerTableMap::COL_ID_CUSTOMER,
         );
+    }
+
+    /**
+     * @param string $customerReference
+     *
+     * @return array<int>
+     */
+    public function getProductListIdsByCustomerReference(string $customerReference): array
+    {
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = $this->getFactory()
+            ->getCustomerQuery()
+            ->filterByCustomerReference($customerReference)
+            ->useSpyProductListCustomerQuery()
+                ->useSpyProductListQuery()
+                    ->select([SpyProductListTableMap::COL_ID_PRODUCT_LIST])
+                ->endUse()
+            ->endUse()
+            ->find();
+
+        return $collection->getData();
     }
 }

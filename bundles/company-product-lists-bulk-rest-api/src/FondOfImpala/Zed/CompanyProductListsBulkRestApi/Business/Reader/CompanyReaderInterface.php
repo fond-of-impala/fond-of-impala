@@ -5,23 +5,29 @@ namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader;
 interface CompanyReaderInterface
 {
     /**
+     * @param string $customerReference
      * @param array<string> $uuids
      *
      * @return array<int>
      */
-    public function getIdsByUuids(array $uuids): array;
+    public function getIdsByCustomerReferenceAndUuids(string $customerReference, array $uuids): array;
 
     /**
+     * @param string $customerReference
      * @param array<string> $debtorNumbers
      *
      * @return array<int>
      */
-    public function getIdsByDebtorNumbers(array $debtorNumbers): array;
+    public function getIdsByCustomerReferenceAndDebtorNumbers(string $customerReference, array $debtorNumbers): array;
 
     /**
+     * @param string $customerReference
      * @param array<string, array<string>> $groupedIdentifiers
      *
      * @return array<string, int>
      */
-    public function getIdsByGroupedIdentifier(array $groupedIdentifiers): array;
+    public function getIdsByCustomerReferenceAndGroupedIdentifier(
+        string $customerReference,
+        array $groupedIdentifiers
+    ): array;
 }

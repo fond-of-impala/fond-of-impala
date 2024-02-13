@@ -17,4 +17,11 @@ interface CustomerProductListsBulkRestApiRepositoryInterface
      * @return array<string, int>
      */
     public function getCustomerIdsByEmails(array $emails): array;
+
+    /**
+     * @param string $customerReference
+     *
+     * @return array<int>
+     */
+    public function getProductListIdsByCustomerReference(string $customerReference): array;
 }

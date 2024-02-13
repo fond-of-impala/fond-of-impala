@@ -14,15 +14,23 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
     protected ProductListReaderInterface $productListReader;
 
     /**
+     * @var array<\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\ProductListIdsReducerPluginInterface>
+     */
+    protected array $productListIdsReducerPlugins;
+
+    /**
      * @param \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface $groupedIdentifierFilter
      * @param \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Reader\ProductListReaderInterface $productListReader
+     * @param array<\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\ProductListIdsReducerPluginInterface> $productListIdsReducerPlugins
      */
     public function __construct(
         GroupedIdentifierFilterInterface $groupedIdentifierFilter,
-        ProductListReaderInterface $productListReader
+        ProductListReaderInterface $productListReader,
+        array $productListIdsReducerPlugins = []
     ) {
         $this->groupedIdentifierFilter = $groupedIdentifierFilter;
         $this->productListReader = $productListReader;
+        $this->productListIdsReducerPlugins = $productListIdsReducerPlugins;
     }
 
     /**
@@ -38,6 +46,10 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
         );
 
         $productListIds = $this->productListReader->getIdsByGroupedIdentifier($groupedIdentifier);
+
+        foreach ($this->productListIdsReducerPlugins as $plugin) {
+            $productListIds = $plugin->reduce($productListIds, $restProductListsBulkRequestTransfer);
+        }
 
         $restProductListsBulkRequestAssignmentTransfers = $this->expandRestProductListsBulkRequestAssignments(
             $restProductListsBulkRequestTransfer->getAssignments(),

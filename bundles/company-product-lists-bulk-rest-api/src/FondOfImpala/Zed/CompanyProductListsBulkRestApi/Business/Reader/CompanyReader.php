@@ -17,42 +17,50 @@ class CompanyReader implements CompanyReaderInterface
     }
 
     /**
+     * @param string $customerReference
      * @param array<string> $uuids
      *
-     * @return array<string, int>
+     * @return array<int>
      */
-    public function getIdsByUuids(array $uuids): array
+    public function getIdsByCustomerReferenceAndUuids(string $customerReference, array $uuids): array
     {
-        return $this->repository->getCompanyIdsByUuids($uuids);
+        return $this->repository->getCompanyIdsByCustomerReferenceAndUuids($customerReference, $uuids);
     }
 
     /**
+     * @param string $customerReference
      * @param array<string> $debtorNumbers
      *
-     * * @return array<string, int>
+     * @return array<int>
      */
-    public function getIdsByDebtorNumbers(array $debtorNumbers): array
+    public function getIdsByCustomerReferenceAndDebtorNumbers(string $customerReference, array $debtorNumbers): array
     {
-        return $this->repository->getCompanyIdsByDebtorNumbers($debtorNumbers);
+        return $this->repository->getCompanyIdsByCustomerReferenceAndDebtorNumbers($customerReference, $debtorNumbers);
     }
 
     /**
+     * @param string $customerReference
      * @param array<string, array<string>> $groupedIdentifiers
      *
      * @return array<string, int>
      */
-    public function getIdsByGroupedIdentifier(array $groupedIdentifiers): array
-    {
+    public function getIdsByCustomerReferenceAndGroupedIdentifier(
+        string $customerReference,
+        array $groupedIdentifiers
+    ): array {
         $companyIds = [];
 
         if (count($groupedIdentifiers['uuid']) > 0) {
-            $companyIds += $this->getIdsByUuids($groupedIdentifiers['uuid']);
+            $companyIds += $this->getIdsByCustomerReferenceAndUuids($customerReference, $groupedIdentifiers['uuid']);
         }
 
         if (count($groupedIdentifiers['debtorNumber']) === 0) {
             return $companyIds;
         }
 
-        return $companyIds + $this->getIdsByDebtorNumbers($groupedIdentifiers['debtorNumber']);
+        return $companyIds + $this->getIdsByCustomerReferenceAndDebtorNumbers(
+            $customerReference,
+            $groupedIdentifiers['debtorNumber']
+        );
     }
 }
