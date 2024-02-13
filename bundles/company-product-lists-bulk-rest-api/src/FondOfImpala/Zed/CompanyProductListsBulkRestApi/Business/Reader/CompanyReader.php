@@ -46,13 +46,13 @@ class CompanyReader implements CompanyReaderInterface
         $companyIds = [];
 
         if (count($groupedIdentifiers['uuid']) > 0) {
-            $companyIds = array_merge($companyIds, $this->getIdsByUuids($groupedIdentifiers['uuid']));
+            $companyIds += $this->getIdsByUuids($groupedIdentifiers['uuid']);
         }
 
         if (count($groupedIdentifiers['debtorNumber']) === 0) {
             return $companyIds;
         }
 
-        return array_merge($companyIds, $this->getIdsByDebtorNumbers($groupedIdentifiers['debtorNumber']));
+        return $companyIds + $this->getIdsByDebtorNumbers($groupedIdentifiers['debtorNumber']);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Communication\Plugin\Event\Listener;
 
+use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\ProductListsBulkRestApiEvents;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventHandlerInterface;
@@ -22,7 +23,7 @@ class CompanyProductListsAssignmentEventListener extends AbstractPlugin implemen
     {
         if (
             !($transfer instanceof RestProductListsBulkRequestAssignmentTransfer)
-            || $eventName !== 'ProductListsBulkRestApiEvents::ASSIGNMENT_PROCESS'
+            || $eventName !== ProductListsBulkRestApiEvents::ASSIGNMENT_PROCESS
         ) {
             return;
         }

@@ -64,24 +64,24 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
                 continue;
             }
 
-            $uuid = $restProductListsBulkRequestItemCustomerTransfer->getUuid();
+            $customerReference = $restProductListsBulkRequestItemCustomerTransfer->getCustomerReference();
 
-            if ($uuid !== null && isset($customerIds[$uuid])) {
-                $restProductListsBulkRequestItemCustomerTransfer->setId($customerIds[$uuid]);
+            if ($customerReference !== null && isset($customerIds[$customerReference])) {
+                $restProductListsBulkRequestItemCustomerTransfer->setId($customerIds[$customerReference]);
 
                 continue;
             }
 
-            $debtorNumber = $restProductListsBulkRequestItemCustomerTransfer->getDebtorNumber();
-            if ($debtorNumber === null) {
+            $email = $restProductListsBulkRequestItemCustomerTransfer->getEmail();
+            if ($email === null) {
                 continue;
             }
 
-            if (!isset($customerIds[$debtorNumber])) {
+            if (!isset($customerIds[$email])) {
                 continue;
             }
 
-            $restProductListsBulkRequestItemCustomerTransfer->setId($customerIds[$debtorNumber]);
+            $restProductListsBulkRequestItemCustomerTransfer->setId($customerIds[$email]);
         }
 
         return $restProductListsBulkRequestAssignmentTransfers;
