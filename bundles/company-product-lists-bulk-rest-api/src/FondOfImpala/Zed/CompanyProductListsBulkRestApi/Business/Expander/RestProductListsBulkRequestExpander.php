@@ -76,6 +76,7 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             if ($debtorNumber === null) {
                 continue;
             }
+
             if (!isset($companyIds[$debtorNumber])) {
                 continue;
             }

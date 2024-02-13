@@ -25,6 +25,7 @@ class ProductListsBulkRestApiFacade extends AbstractFacade implements ProductLis
 
     /**
      * @param \Generated\Shared\Transfer\RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\RestProductListsBulkResponseTransfer
      */
     public function bulkProcess(

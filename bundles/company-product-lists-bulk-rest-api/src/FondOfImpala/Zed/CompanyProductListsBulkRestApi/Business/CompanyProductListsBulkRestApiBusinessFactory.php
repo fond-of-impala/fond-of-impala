@@ -42,7 +42,7 @@ class CompanyProductListsBulkRestApiBusinessFactory extends AbstractBusinessFact
     {
         return new RestProductListsBulkRequestExpander(
             $this->createGroupedIdentifierFilter(),
-            $this->createCompanyReader()
+            $this->createCompanyReader(),
         );
     }
 
@@ -53,7 +53,7 @@ class CompanyProductListsBulkRestApiBusinessFactory extends AbstractBusinessFact
     {
         return new CompanyProductListRelationMapper(
             $this->createProductListIdsFilter(),
-            $this->createProductListReader()
+            $this->createProductListReader(),
         );
     }
 
@@ -71,7 +71,7 @@ class CompanyProductListsBulkRestApiBusinessFactory extends AbstractBusinessFact
     protected function createProductListReader(): ProductListReaderInterface
     {
         return new ProductListReader(
-            $this->getCompanyProductListConnectorFacade()
+            $this->getCompanyProductListConnectorFacade(),
         );
     }
 
@@ -97,7 +97,7 @@ class CompanyProductListsBulkRestApiBusinessFactory extends AbstractBusinessFact
     protected function getCompanyProductListConnectorFacade(): CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeInterface
     {
         return $this->getProvidedDependency(
-            CompanyProductListsBulkRestApiDependencyProvider::FACADE_COMPANY_PRODUCT_LIST_CONNECTOR
+            CompanyProductListsBulkRestApiDependencyProvider::FACADE_COMPANY_PRODUCT_LIST_CONNECTOR,
         );
     }
 }

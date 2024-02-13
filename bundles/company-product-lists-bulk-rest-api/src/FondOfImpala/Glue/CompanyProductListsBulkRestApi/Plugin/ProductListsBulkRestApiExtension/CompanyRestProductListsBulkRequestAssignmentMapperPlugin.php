@@ -10,13 +10,12 @@ use Spryker\Glue\Kernel\AbstractPlugin;
 
 class CompanyRestProductListsBulkRequestAssignmentMapperPlugin extends AbstractPlugin implements RestProductListsBulkRequestAssignmentMapperPluginInterface
 {
-
-    /**
-     * @param \Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer
-     * @param \Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
-     *
-     * @return RestProductListsBulkRequestAssignmentTransfer
-     */
+ /**
+  * @param \Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer
+  * @param \Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
+  *
+  * @return \Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
+  */
     public function mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
         RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer,
         RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
@@ -27,12 +26,12 @@ class CompanyRestProductListsBulkRequestAssignmentMapperPlugin extends AbstractP
             return $restProductListsBulkRequestAssignmentTransfer;
         }
 
-        $restProductListsBulkRequestAssignmentCompanyTransfer =  (new RestProductListsBulkRequestAssignmentCompanyTransfer())
+        $restProductListsBulkRequestAssignmentCompanyTransfer = (new RestProductListsBulkRequestAssignmentCompanyTransfer())
             ->setDebtorNumber($restProductListsBulkAssignmentCompanyTransfer->getDebtorNumber())
             ->setUuid($restProductListsBulkAssignmentCompanyTransfer->getId());
 
         return $restProductListsBulkRequestAssignmentTransfer->setCompany(
-            $restProductListsBulkRequestAssignmentCompanyTransfer
+            $restProductListsBulkRequestAssignmentCompanyTransfer,
         );
     }
 }

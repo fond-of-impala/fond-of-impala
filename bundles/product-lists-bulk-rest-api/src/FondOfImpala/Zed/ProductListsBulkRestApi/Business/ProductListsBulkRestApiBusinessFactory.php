@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business;
 
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Dependency\Facade\CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpander;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilter;
@@ -27,7 +26,7 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new BulkProcessor(
             $this->getEventFacade(),
-            $this->getRestProductListsBulkRequestExpanderPlugins()
+            $this->getRestProductListsBulkRequestExpanderPlugins(),
         );
     }
 
@@ -38,7 +37,7 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new RestProductListsBulkRequestExpander(
             $this->createGroupedIdentifierFilter(),
-            $this->createProductListReader()
+            $this->createProductListReader(),
         );
     }
 
@@ -64,7 +63,7 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     protected function getRestProductListsBulkRequestExpanderPlugins(): array
     {
         return $this->getProvidedDependency(
-            ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER
+            ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER,
         );
     }
 
@@ -74,7 +73,7 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     protected function getEventFacade(): ProductListsBulkRestApiToEventFacadeInterface
     {
         return $this->getProvidedDependency(
-            ProductListsBulkRestApiDependencyProvider::FACADE_EVENT
+            ProductListsBulkRestApiDependencyProvider::FACADE_EVENT,
         );
     }
 }

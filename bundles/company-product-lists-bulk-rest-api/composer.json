@@ -1,5 +1,5 @@
 {
-  "name": "fond-of-impala/companyproduct-lists-bulk-rest-api",
+  "name": "fond-of-impala/company-product-lists-bulk-rest-api",
   "description": "Company product lists bulk rest api",
   "license": "MIT",
   "authors": [
@@ -15,7 +15,9 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0"
+    "php": ">=8.0",
+    "fond-of-impala/product-lists-bulk-rest-api-extension": "^1.0.0",
+    "fond-of-oryx/company-product-list-connector": "^1.0.0 || ^2.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

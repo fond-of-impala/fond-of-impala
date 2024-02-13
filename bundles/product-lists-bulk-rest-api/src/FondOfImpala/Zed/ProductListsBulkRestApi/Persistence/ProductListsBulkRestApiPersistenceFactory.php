@@ -10,8 +10,6 @@ class ProductListsBulkRestApiPersistenceFactory extends AbstractPersistenceFacto
 {
     /**
      * @return \Orm\Zed\ProductList\Persistence\Base\SpyProductListQuery
-     *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getProductListQuery(): SpyProductListQuery
     {

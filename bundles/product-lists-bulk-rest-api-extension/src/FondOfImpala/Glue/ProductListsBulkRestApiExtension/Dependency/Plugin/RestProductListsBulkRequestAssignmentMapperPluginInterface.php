@@ -11,10 +11,10 @@ interface RestProductListsBulkRequestAssignmentMapperPluginInterface
      * @param \Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer
      * @param \Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
      *
-     * @return RestProductListsBulkRequestAssignmentTransfer
+     * @return \Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
      */
     public function mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
         RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer,
-        RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer,
+        RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
     ): RestProductListsBulkRequestAssignmentTransfer;
 }

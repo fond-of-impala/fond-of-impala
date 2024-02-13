@@ -26,7 +26,7 @@ class CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeBridge im
         CompanyProductListRelationTransfer $companyProductListRelationTransfer
     ): void {
         $this->companyProductListConnectorFacade->persistCompanyProductListRelation(
-            $companyProductListRelationTransfer
+            $companyProductListRelationTransfer,
         );
     }
 

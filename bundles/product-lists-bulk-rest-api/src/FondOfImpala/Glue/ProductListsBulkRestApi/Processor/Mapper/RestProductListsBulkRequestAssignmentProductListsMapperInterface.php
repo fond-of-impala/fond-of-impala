@@ -3,8 +3,6 @@
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper;
 
 use ArrayObject;
-use Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer;
-
 
 interface RestProductListsBulkRequestAssignmentProductListsMapperInterface
 {

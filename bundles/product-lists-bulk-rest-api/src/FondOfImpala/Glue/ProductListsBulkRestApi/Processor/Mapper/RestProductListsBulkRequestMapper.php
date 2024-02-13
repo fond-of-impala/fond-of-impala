@@ -2,9 +2,6 @@
 
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper;
 
-use Generated\Shared\Transfer\RestCompanyUsersBulkRequestAttributesTransfer;
-use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentCustomerTransfer;
-use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAttributesTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 
@@ -21,7 +18,6 @@ class RestProductListsBulkRequestMapper implements RestProductListsBulkRequestMa
         $this->restProductListsBulkRequestAssignmentMapper = $restProductListsBulkRequestAssignmentMapper;
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\RestProductListsBulkRequestAttributesTransfer $restProductListsBulkRequestAttributesTransfer
      *
@@ -35,7 +31,7 @@ class RestProductListsBulkRequestMapper implements RestProductListsBulkRequestMa
 
         foreach ($restProductListsBulkAssignmentTransfers as $restProductListsBulkAssignmentTransfer) {
             $restProductListsBulkRequestAssignmentTransfer = $this->restProductListsBulkRequestAssignmentMapper->fromRestProductListsBulkAssignment(
-                $restProductListsBulkAssignmentTransfer
+                $restProductListsBulkAssignmentTransfer,
             );
 
             $restProductListsBulkRequestTransfer->addAssignment($restProductListsBulkRequestAssignmentTransfer);

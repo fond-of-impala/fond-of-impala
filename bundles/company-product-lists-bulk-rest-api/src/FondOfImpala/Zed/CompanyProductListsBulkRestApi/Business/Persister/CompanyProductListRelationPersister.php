@@ -24,7 +24,6 @@ class CompanyProductListRelationPersister implements CompanyProductListRelationP
         $this->companyProductListConnectorFacade = $companyProductListConnectorFacade;
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
      *
@@ -35,7 +34,7 @@ class CompanyProductListRelationPersister implements CompanyProductListRelationP
     ): void {
         $companyProductListRelationTransfer = $this->companyProductListRelationMapper
             ->fromRestProductListsBulkRequestAssignmentTransfer(
-                $restProductListsBulkRequestAssignmentTransfer
+                $restProductListsBulkRequestAssignmentTransfer,
             );
 
         if ($companyProductListRelationTransfer === null) {
@@ -43,7 +42,7 @@ class CompanyProductListRelationPersister implements CompanyProductListRelationP
         }
 
         $this->companyProductListConnectorFacade->persistCompanyProductListRelation(
-            $companyProductListRelationTransfer
+            $companyProductListRelationTransfer,
         );
     }
 }

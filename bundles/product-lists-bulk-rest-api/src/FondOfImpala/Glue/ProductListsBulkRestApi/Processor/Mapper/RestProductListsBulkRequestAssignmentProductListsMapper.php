@@ -30,7 +30,7 @@ class RestProductListsBulkRequestAssignmentProductListsMapper implements RestPro
                 ->setKey($key);
 
             $restProductListsBulkRequestAssignmentProductListTransfers->append(
-                $restProductListsBulkRequestAssignmentProductListTransfer
+                $restProductListsBulkRequestAssignmentProductListTransfer,
             );
         }
 

@@ -25,7 +25,6 @@ class BulkProcessor implements BulkProcessorInterface
         $this->restProductListsBulkRequestExpanderPlugins = $restProductListsBulkRequestExpanderPlugins;
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
      *
@@ -41,7 +40,7 @@ class BulkProcessor implements BulkProcessorInterface
         foreach ($restProductListsBulkRequestTransfer->getAssignments() as $restProductListsBulkRequestAssignmentTransfer) {
             $this->eventFacade->trigger(
                 ProductListsBulkRestApiEvents::ASSIGNMENT_PROCESS,
-                $restProductListsBulkRequestAssignmentTransfer
+                $restProductListsBulkRequestAssignmentTransfer,
             );
         }
 

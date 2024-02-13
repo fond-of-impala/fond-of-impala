@@ -6,10 +6,6 @@ use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Builder\RestResponseBuil
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Builder\RestResponseBuilderInterface;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Filter\CustomerReferenceFilter;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Filter\CustomerReferenceFilterInterface;
-use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentCompanyMapper;
-use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentCompanyMapperInterface;
-use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentCustomerMapper;
-use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentCustomerMapperInterface;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentMapper;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentMapperInterface;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper\RestProductListsBulkRequestAssignmentProductListsMapper;
@@ -34,7 +30,7 @@ class ProductListsBulkRestApiFactory extends AbstractFactory
             $this->createCustomerReferenceFilter(),
             $this->createRestProductListsBulkRequestMapper(),
             $this->createRestResponseBuilder(),
-            $this->getClient()
+            $this->getClient(),
         );
     }
 
@@ -44,7 +40,7 @@ class ProductListsBulkRestApiFactory extends AbstractFactory
     protected function createRestProductListsBulkRequestMapper(): RestProductListsBulkRequestMapperInterface
     {
         return new RestProductListsBulkRequestMapper(
-            $this->createRestProductListsBulkRequestAssignmentMapper()
+            $this->createRestProductListsBulkRequestAssignmentMapper(),
         );
     }
 
@@ -89,7 +85,7 @@ class ProductListsBulkRestApiFactory extends AbstractFactory
     protected function createRestResponseBuilder(): RestResponseBuilderInterface
     {
         return new RestResponseBuilder(
-            $this->getResourceBuilder()
+            $this->getResourceBuilder(),
         );
     }
 }

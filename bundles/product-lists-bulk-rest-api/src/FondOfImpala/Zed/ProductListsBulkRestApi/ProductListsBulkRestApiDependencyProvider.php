@@ -47,10 +47,10 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addEventFacade(Container $container): Container
     {
-        $container[static::FACADE_EVENT] = static fn(
+        $container[static::FACADE_EVENT] = static fn (
             Container $container
         ): ProductListsBulkRestApiToEventFacadeInterface => new ProductListsBulkRestApiToEventFacadeBridge(
-            $container->getLocator()->event()->facade()
+            $container->getLocator()->event()->facade(),
         );
 
         return $container;
@@ -58,7 +58,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
 
     protected function addRestProductListsBulkRequestExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER] = fn(): array => $this->getRestProductListsBulkRequestExpanderPlugins();
+        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER] = fn (): array => $this->getRestProductListsBulkRequestExpanderPlugins();
 
         return $container;
     }
@@ -85,11 +85,12 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addProductListQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRODUCT_LIST] = static fn(): BaseSpyProductListQuery => SpyProductListQuery::create();
+        $container[static::PROPEL_QUERY_PRODUCT_LIST] = static fn (): BaseSpyProductListQuery => SpyProductListQuery::create();
 
         return $container;
     }

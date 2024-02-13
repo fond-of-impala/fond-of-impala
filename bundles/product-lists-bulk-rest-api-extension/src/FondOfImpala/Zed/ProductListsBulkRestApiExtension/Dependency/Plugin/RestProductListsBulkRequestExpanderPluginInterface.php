@@ -4,7 +4,8 @@ namespace FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin;
 
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 
-interface RestProductListsBulkRequestExpanderPluginInterface {
+interface RestProductListsBulkRequestExpanderPluginInterface
+{
     /**
      * @param \Generated\Shared\Transfer\RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
      *

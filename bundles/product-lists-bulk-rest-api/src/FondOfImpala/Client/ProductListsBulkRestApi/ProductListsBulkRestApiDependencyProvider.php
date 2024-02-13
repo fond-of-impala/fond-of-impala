@@ -35,7 +35,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractDependencyProvid
         $container[static::CLIENT_ZED_REQUEST] = static fn (
             Container $container
         ): ProductListsBulkRestApiToZedRequestClientBridge => new ProductListsBulkRestApiToZedRequestClientBridge(
-            $container->getLocator()->zedRequest()->client()
+            $container->getLocator()->zedRequest()->client(),
         );
 
         return $container;

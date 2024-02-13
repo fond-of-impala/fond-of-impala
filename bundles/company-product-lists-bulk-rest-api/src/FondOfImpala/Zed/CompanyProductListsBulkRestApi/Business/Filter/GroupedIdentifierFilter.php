@@ -48,7 +48,7 @@ class GroupedIdentifierFilter implements GroupedIdentifierFilterInterface
                 continue;
             }
 
-            $groupedIdentifier['debtorNumber'] = $debtorNumber;
+            $groupedIdentifier['debtorNumber'][] = $debtorNumber;
         }
 
         return $groupedIdentifier;

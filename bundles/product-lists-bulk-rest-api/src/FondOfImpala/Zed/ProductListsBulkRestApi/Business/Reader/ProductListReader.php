@@ -49,10 +49,10 @@ class ProductListReader implements ProductListReaderInterface
             $companyIds = array_merge($companyIds, $this->getIdsByUuids($groupedIdentifiers['uuid']));
         }
 
-        if (count($groupedIdentifiers['debtorNumber']) === 0) {
+        if (count($groupedIdentifiers['key']) === 0) {
             return $companyIds;
         }
 
-        return array_merge($companyIds, $this->getIdsByKeys($groupedIdentifiers['debtorNumber']));
+        return array_merge($companyIds, $this->getIdsByKeys($groupedIdentifiers['key']));
     }
 }

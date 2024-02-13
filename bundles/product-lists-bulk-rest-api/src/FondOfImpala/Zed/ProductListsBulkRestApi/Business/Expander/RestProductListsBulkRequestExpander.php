@@ -60,20 +60,20 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
         foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestAssignmentTransfer) {
             $restProductListsBulkRequestAssignmentProductListTransfer = $this->expandRestProductListsBulkRequestAssignmentProductLists(
                 $restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign(),
-                $productListIds
+                $productListIds,
             );
 
             $restProductListsBulkRequestAssignmentTransfer->setProductListsToAssign(
-                $restProductListsBulkRequestAssignmentProductListTransfer
+                $restProductListsBulkRequestAssignmentProductListTransfer,
             );
 
             $restProductListsBulkRequestAssignmentProductListTransfer = $this->expandRestProductListsBulkRequestAssignmentProductLists(
                 $restProductListsBulkRequestAssignmentTransfer->getProductListsToUnassign(),
-                $productListIds
+                $productListIds,
             );
 
             $restProductListsBulkRequestAssignmentTransfer->setProductListsToUnassign(
-                $restProductListsBulkRequestAssignmentProductListTransfer
+                $restProductListsBulkRequestAssignmentProductListTransfer,
             );
         }
 
@@ -103,6 +103,7 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             if ($key === null) {
                 continue;
             }
+
             if (!isset($productListIds[$key])) {
                 continue;
             }

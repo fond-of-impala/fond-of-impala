@@ -42,11 +42,11 @@ class CompanyProductListRelationMapper implements CompanyProductListRelationMapp
         $idCompany = $restProductListsBulkRequestAssignmentCompanyTransfer->getId();
 
         $productListIdsToAssign = $this->productListIdsFilter->filterFromRestProductListsBulkRequestAssignmentProductLists(
-            $restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign()
+            $restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign(),
         );
 
         $productListIdsToUnassign = $this->productListIdsFilter->filterFromRestProductListsBulkRequestAssignmentProductLists(
-            $restProductListsBulkRequestAssignmentTransfer->getProductListsToUnassign()
+            $restProductListsBulkRequestAssignmentTransfer->getProductListsToUnassign(),
         );
 
         if ($idCompany === null || (count($productListIdsToAssign) === 0 && count($productListIdsToUnassign) === 0)) {

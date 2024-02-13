@@ -26,7 +26,6 @@ class RestProductListsBulkRequestAssignmentMapper implements RestProductListsBul
         $this->restProductListsBulkRequestAssignmentMapperPlugins = $restProductListsBulkRequestAssignmentMapperPlugins;
     }
 
-
     /**
      * @param \Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer
      *
@@ -39,20 +38,20 @@ class RestProductListsBulkRequestAssignmentMapper implements RestProductListsBul
 
         $restProductListsBulkRequestAssignmentTransfer->setProductListsToAssign(
             $this->restProductListsBulkRequestAssignmentProductListsMapper->fromRestProductListsBulkAssignmentProductLists(
-                $restProductListsBulkAssignmentTransfer->getProductListsToAssign()
-            )
+                $restProductListsBulkAssignmentTransfer->getProductListsToAssign(),
+            ),
         );
 
         $restProductListsBulkRequestAssignmentTransfer->setProductListsToUnassign(
             $this->restProductListsBulkRequestAssignmentProductListsMapper->fromRestProductListsBulkAssignmentProductLists(
-                $restProductListsBulkAssignmentTransfer->getProductListsToUnassign()
-            )
+                $restProductListsBulkAssignmentTransfer->getProductListsToUnassign(),
+            ),
         );
 
         foreach ($this->restProductListsBulkRequestAssignmentMapperPlugins as $plugin) {
             $restProductListsBulkRequestAssignmentTransfer = $plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $restProductListsBulkAssignmentTransfer,
-                $restProductListsBulkRequestAssignmentTransfer
+                $restProductListsBulkRequestAssignmentTransfer,
             );
         }
 

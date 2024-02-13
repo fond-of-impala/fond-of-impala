@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Client\ProductListsBulkRestApi;
 
-use FondOfImpala\Client\ProductListsBulkRestApi\ProductListsBulkRestApiDependencyProvider;
 use FondOfImpala\Client\ProductListsBulkRestApi\Dependency\Client\ProductListsBulkRestApiToZedRequestClientInterface;
 use FondOfImpala\Client\ProductListsBulkRestApi\Zed\ProductListsBulkRestApiStub;
 use FondOfImpala\Client\ProductListsBulkRestApi\Zed\ProductListsBulkRestApiStubInterface;

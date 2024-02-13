@@ -10,12 +10,11 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class ProductListsBulkRestApiRepository extends AbstractRepository implements ProductListsBulkRestApiRepositoryInterface
 {
-
-    /**
-     * @param array<string> $keys
-     *
-     * @return array<string, int>
-     */
+ /**
+  * @param array<string> $keys
+  *
+  * @return array<string, int>
+  */
     public function getProductListIdsByKeys(array $keys): array
     {
         /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
@@ -28,7 +27,7 @@ class ProductListsBulkRestApiRepository extends AbstractRepository implements Pr
 
         return $collection->toKeyValue(
             SpyProductListTableMap::COL_KEY,
-            SpyProductListTableMap::COL_ID_PRODUCT_LIST
+            SpyProductListTableMap::COL_ID_PRODUCT_LIST,
         );
     }
 
@@ -49,7 +48,7 @@ class ProductListsBulkRestApiRepository extends AbstractRepository implements Pr
 
         return $collection->toKeyValue(
             SpyProductListTableMap::COL_UUID,
-            SpyProductListTableMap::COL_ID_PRODUCT_LIST
+            SpyProductListTableMap::COL_ID_PRODUCT_LIST,
         );
     }
 }

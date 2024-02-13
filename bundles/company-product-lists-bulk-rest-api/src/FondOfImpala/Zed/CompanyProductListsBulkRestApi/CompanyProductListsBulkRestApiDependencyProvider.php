@@ -35,6 +35,7 @@ class CompanyProductListsBulkRestApiDependencyProvider extends AbstractBundleDep
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addCompanyProductListConnectorFacade(Container $container): Container
@@ -42,7 +43,7 @@ class CompanyProductListsBulkRestApiDependencyProvider extends AbstractBundleDep
         $container[static::FACADE_COMPANY_PRODUCT_LIST_CONNECTOR] = static fn (
             Container $container
         ): CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeInterface => new CompanyProductListsBulkRestApiToCompanyProductListConnectorFacadeBridge(
-            $container->getLocator()->companyProductListConnector()->facade()
+            $container->getLocator()->companyProductListConnector()->facade(),
         );
 
         return $container;

@@ -30,15 +30,14 @@ class GroupedIdentifierFilter implements GroupedIdentifierFilterInterface
 
         foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestItemTransfer) {
             $tempGroupedIdentifier = $this->filterFromRestProductListsBulkRequestAssignmentProductLists(
-                $restProductListsBulkRequestItemTransfer->getProductListsToAssign()
+                $restProductListsBulkRequestItemTransfer->getProductListsToAssign(),
             );
 
             $groupedIdentifier['uuid'] = array_unique(array_merge($groupedIdentifier['uuid'], $tempGroupedIdentifier['uuid']));
             $groupedIdentifier['key'] = array_unique(array_merge($groupedIdentifier['key'], $tempGroupedIdentifier['key']));
 
-
             $tempGroupedIdentifier = $this->filterFromRestProductListsBulkRequestAssignmentProductLists(
-                $restProductListsBulkRequestItemTransfer->getProductListsToUnassign()
+                $restProductListsBulkRequestItemTransfer->getProductListsToUnassign(),
             );
 
             $groupedIdentifier['uuid'] = array_unique(array_merge($groupedIdentifier['uuid'], $tempGroupedIdentifier['uuid']));
