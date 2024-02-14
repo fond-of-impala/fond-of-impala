@@ -30,11 +30,17 @@ class RestProductListsBulkRequestAssignmentChecker implements RestProductListsBu
         foreach ($this->restProductListsBulkRequestAssignmentPreCheckPlugins as $plugin) {
             $preCheckResult = $plugin->check($restProductListsBulkRequestAssignmentTransfer);
 
-            if (!$preCheckResult && $plugin->terminateOnFailure()) {
-                return false;
+            if (!$plugin->terminateOnFailure()) {
+                $valid = $valid || $preCheckResult;
+
+                continue;
             }
 
-            $valid = $valid || $preCheckResult;
+            if ($preCheckResult) {
+                continue;
+            }
+
+            return false;
         }
 
         return $valid;

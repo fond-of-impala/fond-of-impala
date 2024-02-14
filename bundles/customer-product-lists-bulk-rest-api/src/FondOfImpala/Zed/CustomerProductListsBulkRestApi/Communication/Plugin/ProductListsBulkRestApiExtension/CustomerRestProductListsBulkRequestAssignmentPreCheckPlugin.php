@@ -16,9 +16,9 @@ class CustomerRestProductListsBulkRequestAssignmentPreCheckPlugin extends Abstra
     public function check(RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer): bool
     {
         if ($restProductListsBulkRequestAssignmentTransfer->getCustomer() === null) {
-            return true;
+            return false;
         }
-        return $restProductListsBulkRequestAssignmentTransfer->getCustomer()->getId() === null;
+        return $restProductListsBulkRequestAssignmentTransfer->getCustomer()->getId() !== null;
     }
 
     /**

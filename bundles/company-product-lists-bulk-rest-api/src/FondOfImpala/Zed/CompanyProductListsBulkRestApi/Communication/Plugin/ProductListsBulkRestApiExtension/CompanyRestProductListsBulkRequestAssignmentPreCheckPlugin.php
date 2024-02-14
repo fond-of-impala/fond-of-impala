@@ -16,8 +16,9 @@ class CompanyRestProductListsBulkRequestAssignmentPreCheckPlugin extends Abstrac
     public function check(RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer): bool
     {
         if ($restProductListsBulkRequestAssignmentTransfer->getCompany() === null) {
-            return true;
+            return false;
         }
+
         return $restProductListsBulkRequestAssignmentTransfer->getCompany()->getId() === null;
     }
 

@@ -101,7 +101,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
     }
 
     /**
-     * @return array
+     * @return array<\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestExpanderPluginInterface>
      */
     protected function getRestProductListsBulkRequestExpanderPlugins(): array
     {
