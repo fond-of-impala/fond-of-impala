@@ -29,7 +29,7 @@ class CustomerReader implements CustomerReaderInterface
     /**
      * @param array<string> $emails
      *
-     * * @return array<string, int>
+     * @return array<string, int>
      */
     public function getIdsByEmails(array $emails): array
     {

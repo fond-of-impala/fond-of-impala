@@ -1,28 +1,28 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Expander;
+namespace FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Expander;
 
 use ArrayObject;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader\CompanyReaderInterface;
+use FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface;
+use FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Reader\CustomerReaderInterface;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 
 class RestProductListsBulkRequestExpander implements RestProductListsBulkRequestExpanderInterface
 {
     protected GroupedIdentifierFilterInterface $groupedIdentifierFilter;
 
-    protected CompanyReaderInterface $companyReader;
+    protected CustomerReaderInterface $customerReader;
 
     /**
-     * @param \FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface $groupedIdentifierFilter
-     * @param \FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader\CompanyReaderInterface $companyReader
+     * @param \FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface $groupedIdentifierFilter
+     * @param \FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Reader\CustomerReaderInterface $customerReader
      */
     public function __construct(
         GroupedIdentifierFilterInterface $groupedIdentifierFilter,
-        CompanyReaderInterface $companyReader
+        CustomerReaderInterface $customerReader
     ) {
         $this->groupedIdentifierFilter = $groupedIdentifierFilter;
-        $this->companyReader = $companyReader;
+        $this->customerReader = $customerReader;
     }
 
     /**
@@ -37,11 +37,11 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             $restProductListsBulkRequestTransfer,
         );
 
-        $companyIds = [];
+        $customerIds = [];
         $customerReference = $restProductListsBulkRequestTransfer->getCustomerReference();
 
         if ($customerReference !== null) {
-            $companyIds = $this->companyReader->getIdsByCustomerReferenceAndGroupedIdentifier(
+            $customerIds = $this->customerReader->getIdsByCustomerReferenceAndGroupedIdentifier(
                 $customerReference,
                 $groupedIdentifier,
             );
@@ -49,7 +49,7 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
 
         $restProductListsBulkRequestAssignmentTransfers = $this->expandRestProductListsBulkRequestAssignments(
             $restProductListsBulkRequestTransfer->getAssignments(),
-            $companyIds,
+            $customerIds,
         );
 
         return $restProductListsBulkRequestTransfer->setAssignments($restProductListsBulkRequestAssignmentTransfers);
@@ -57,39 +57,39 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
 
     /**
      * @param \ArrayObject<\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer> $restProductListsBulkRequestAssignmentTransfers
-     * @param array<string, int> $companyIds
+     * @param array<string, int> $customerIds
      *
      * @return \ArrayObject<\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer>
      */
     protected function expandRestProductListsBulkRequestAssignments(
         ArrayObject $restProductListsBulkRequestAssignmentTransfers,
-        array $companyIds
+        array $customerIds
     ): ArrayObject {
         foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestItemTransfer) {
-            $restProductListsBulkRequestItemCompanyTransfer = $restProductListsBulkRequestItemTransfer->getCompany();
+            $restProductListsBulkRequestItemCustomerTransfer = $restProductListsBulkRequestItemTransfer->getCustomer();
 
-            if ($restProductListsBulkRequestItemCompanyTransfer === null) {
+            if ($restProductListsBulkRequestItemCustomerTransfer === null) {
                 continue;
             }
 
-            $uuid = $restProductListsBulkRequestItemCompanyTransfer->getUuid();
+            $customerReference = $restProductListsBulkRequestItemCustomerTransfer->getCustomerReference();
 
-            if ($uuid !== null && isset($companyIds[$uuid])) {
-                $restProductListsBulkRequestItemCompanyTransfer->setId($companyIds[$uuid]);
+            if ($customerReference !== null && isset($customerIds[$customerReference])) {
+                $restProductListsBulkRequestItemCustomerTransfer->setId($customerIds[$customerReference]);
 
                 continue;
             }
 
-            $debtorNumber = $restProductListsBulkRequestItemCompanyTransfer->getDebtorNumber();
-            if ($debtorNumber === null) {
+            $email = $restProductListsBulkRequestItemCustomerTransfer->getEmail();
+            if ($email === null) {
                 continue;
             }
 
-            if (!isset($companyIds[$debtorNumber])) {
+            if (!isset($customerIds[$email])) {
                 continue;
             }
 
-            $restProductListsBulkRequestItemCompanyTransfer->setId($companyIds[$debtorNumber]);
+            $restProductListsBulkRequestItemCustomerTransfer->setId($customerIds[$email]);
         }
 
         return $restProductListsBulkRequestAssignmentTransfers;

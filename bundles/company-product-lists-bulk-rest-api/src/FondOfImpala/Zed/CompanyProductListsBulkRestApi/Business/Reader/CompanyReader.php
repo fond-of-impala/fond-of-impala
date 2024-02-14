@@ -60,7 +60,7 @@ class CompanyReader implements CompanyReaderInterface
 
         return $companyIds + $this->getIdsByCustomerReferenceAndDebtorNumbers(
             $customerReference,
-            $groupedIdentifiers['debtorNumber']
+            $groupedIdentifiers['debtorNumber'],
         );
     }
 }

@@ -29,7 +29,7 @@ class ProductListReader implements ProductListReaderInterface
     /**
      * @param array<string> $keys
      *
-     * * @return array<string, int>
+     * @return array<string, int>
      */
     public function getIdsByKeys(array $keys): array
     {
