@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business;
 
+use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentChecker;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpander;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface;
@@ -63,6 +64,16 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
      * @return \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface
      */
     protected function createRestProductListsBulkRequestAssignmentChecker(): RestProductListsBulkRequestAssignmentCheckerInterface
+    {
+        return new RestProductListsBulkRequestAssignmentChecker(
+            $this->getRestProductListsBulkRequestAssignmentPreCheckPlugins(),
+        );
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentPreCheckPluginInterface>
+     */
+    protected function getRestProductListsBulkRequestAssignmentPreCheckPlugins(): array
     {
         return $this->getProvidedDependency(
             ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK,
