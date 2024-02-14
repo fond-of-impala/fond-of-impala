@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business;
 
+use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpander;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilter;
@@ -25,6 +26,7 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     public function createBulkProcessor(): BulkProcessorInterface
     {
         return new BulkProcessor(
+            $this->createRestProductListsBulkRequestAssignmentChecker(),
             $this->getEventFacade(),
             $this->getRestProductListsBulkRequestExpanderPlugins(),
         );
@@ -55,6 +57,16 @@ class ProductListsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     protected function createProductListReader(): ProductListReaderInterface
     {
         return new ProductListReader($this->getRepository());
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface
+     */
+    protected function createRestProductListsBulkRequestAssignmentChecker(): RestProductListsBulkRequestAssignmentCheckerInterface
+    {
+        return $this->getProvidedDependency(
+            ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK,
+        );
     }
 
     /**

@@ -29,6 +29,11 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
     /**
      * @var string
      */
+    public const PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK = 'PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK';
+
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_PRODUCT_LIST = 'PROPEL_QUERY_PRODUCT_LIST';
 
     /**
@@ -36,14 +41,15 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
 
         $container = $this->addEventFacade($container);
         $container = $this->addProductListIdsReducerPlugins($container);
+        $container = $this->addRestProductListsBulkRequestExpanderPlugins($container);
 
-        return $this->addRestProductListsBulkRequestExpanderPlugins($container);
+        return $this->addRestProductListsBulkRequestAssignmentPreCheckPlugins($container);
     }
 
     /**
@@ -89,7 +95,9 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addRestProductListsBulkRequestExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER] = fn (): array => $this->getRestProductListsBulkRequestExpanderPlugins();
+        $container[
+            static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER
+        ] = fn (): array => $this->getRestProductListsBulkRequestExpanderPlugins();
 
         return $container;
     }
@@ -98,6 +106,28 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      * @return array
      */
     protected function getRestProductListsBulkRequestExpanderPlugins(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addRestProductListsBulkRequestAssignmentPreCheckPlugins(Container $container): Container
+    {
+        $container[
+            static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK
+        ] = fn (): array => $this->getRestProductListsBulkRequestAssignmentPreCheckPlugins();
+
+        return $container;
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentPreCheckPluginInterface>
+     */
+    public function getRestProductListsBulkRequestAssignmentPreCheckPlugins(): array
     {
         return [];
     }
@@ -121,7 +151,9 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addProductListQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_PRODUCT_LIST] = static fn (): BaseSpyProductListQuery => SpyProductListQuery::create();
+        $container[
+            static::PROPEL_QUERY_PRODUCT_LIST
+        ] = static fn (): BaseSpyProductListQuery => SpyProductListQuery::create();
 
         return $container;
     }

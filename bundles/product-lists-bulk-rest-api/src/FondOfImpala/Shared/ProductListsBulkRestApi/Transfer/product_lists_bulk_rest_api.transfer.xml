@@ -60,5 +60,7 @@
 
     <transfer name="RestProductListsBulkResponse">
         <property name="isSuccessful" type="bool"/>
+        <property name="currentCount" type="int" />
+        <property name="actualCount" type="int" />
     </transfer>
 </transfers>

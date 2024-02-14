@@ -81,6 +81,7 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             }
 
             $debtorNumber = $restProductListsBulkRequestItemCompanyTransfer->getDebtorNumber();
+
             if ($debtorNumber === null) {
                 continue;
             }
