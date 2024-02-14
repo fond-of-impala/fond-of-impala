@@ -1,16 +1,16 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader;
+namespace FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Reader;
 
 interface CompanyReaderInterface
 {
     /**
      * @param string $customerReference
-     * @param array<string> $uuids
+     * @param array<string> $debtorNumbers
      *
      * @return array<int>
      */
-    public function getIdsByCustomerReferenceAndUuids(string $customerReference, array $uuids): array;
+    public function getIdsByCustomerReferenceAndDebtorNumbers(string $customerReference, array $debtorNumbers): array;
 
     /**
      * @param string $customerReference

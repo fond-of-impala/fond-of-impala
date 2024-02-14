@@ -95,9 +95,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addRestProductListsBulkRequestExpanderPlugins(Container $container): Container
     {
-        $container[
-            static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER
-        ] = fn (): array => $this->getRestProductListsBulkRequestExpanderPlugins();
+        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER] = fn (): array => $this->getRestProductListsBulkRequestExpanderPlugins();
 
         return $container;
     }
@@ -117,9 +115,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     public function addRestProductListsBulkRequestAssignmentPreCheckPlugins(Container $container): Container
     {
-        $container[
-            static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK
-        ] = fn (): array => $this->getRestProductListsBulkRequestAssignmentPreCheckPlugins();
+        $container[static::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK] = fn (): array => $this->getRestProductListsBulkRequestAssignmentPreCheckPlugins();
 
         return $container;
     }
@@ -151,9 +147,7 @@ class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addProductListQuery(Container $container): Container
     {
-        $container[
-            static::PROPEL_QUERY_PRODUCT_LIST
-        ] = static fn (): BaseSpyProductListQuery => SpyProductListQuery::create();
+        $container[static::PROPEL_QUERY_PRODUCT_LIST] = static fn (): BaseSpyProductListQuery => SpyProductListQuery::create();
 
         return $container;
     }

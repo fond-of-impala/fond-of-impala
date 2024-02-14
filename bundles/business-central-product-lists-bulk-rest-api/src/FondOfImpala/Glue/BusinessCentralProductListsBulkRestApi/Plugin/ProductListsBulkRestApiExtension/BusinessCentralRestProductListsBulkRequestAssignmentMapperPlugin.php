@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Glue\CompanyProductListsBulkRestApi\Plugin\ProductListsBulkRestApiExtension;
+namespace FondOfImpala\Glue\BusinessCentralProductListsBulkRestApi\Plugin\ProductListsBulkRestApiExtension;
 
 use FondOfImpala\Glue\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentMapperPluginInterface;
 use Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer;
@@ -8,7 +8,7 @@ use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentCompanyTransf
 use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
-class CompanyRestProductListsBulkRequestAssignmentMapperPlugin extends AbstractPlugin implements RestProductListsBulkRequestAssignmentMapperPluginInterface
+class BusinessCentralRestProductListsBulkRequestAssignmentMapperPlugin extends AbstractPlugin implements RestProductListsBulkRequestAssignmentMapperPluginInterface
 {
  /**
   * @param \Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer $restProductListsBulkAssignmentTransfer
@@ -27,13 +27,12 @@ class CompanyRestProductListsBulkRequestAssignmentMapperPlugin extends AbstractP
         }
 
         $restProductListsBulkRequestAssignmentCompanyTransfer = $restProductListsBulkRequestAssignmentTransfer->getCompany();
-
         if ($restProductListsBulkRequestAssignmentCompanyTransfer === null) {
             $restProductListsBulkRequestAssignmentCompanyTransfer = new RestProductListsBulkRequestAssignmentCompanyTransfer();
         }
 
-        $restProductListsBulkRequestAssignmentCompanyTransfer = $restProductListsBulkRequestAssignmentCompanyTransfer->setUuid(
-            $restProductListsBulkAssignmentCompanyTransfer->getId(),
+        $restProductListsBulkRequestAssignmentCompanyTransfer = $restProductListsBulkRequestAssignmentCompanyTransfer->setDebtorNumber(
+            $restProductListsBulkAssignmentCompanyTransfer->getDebtorNumber(),
         );
 
         return $restProductListsBulkRequestAssignmentTransfer->setCompany(

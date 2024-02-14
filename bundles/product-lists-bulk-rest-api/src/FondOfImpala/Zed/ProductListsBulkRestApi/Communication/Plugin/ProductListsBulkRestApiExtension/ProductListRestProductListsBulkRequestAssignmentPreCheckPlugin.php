@@ -18,20 +18,20 @@ class ProductListRestProductListsBulkRequestAssignmentPreCheckPlugin extends Abs
     ): bool {
         $validProductListsCount = 0;
 
-        foreach ($restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign() as $transfer)  {
+        foreach ($restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign() as $transfer) {
             if ($transfer->getId() === null) {
                 continue;
             }
 
-            $validProductListsCount++;
+            ++$validProductListsCount;
         }
 
-        foreach ($restProductListsBulkRequestAssignmentTransfer->getProductListsToUnassign() as $transfer)  {
+        foreach ($restProductListsBulkRequestAssignmentTransfer->getProductListsToUnassign() as $transfer) {
             if ($transfer->getId() === null) {
                 continue;
             }
 
-            $validProductListsCount++;
+            ++$validProductListsCount;
         }
 
         return $validProductListsCount > 0;

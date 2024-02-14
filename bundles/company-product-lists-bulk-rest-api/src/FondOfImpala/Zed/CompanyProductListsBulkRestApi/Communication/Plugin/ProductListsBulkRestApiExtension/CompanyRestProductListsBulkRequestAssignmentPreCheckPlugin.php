@@ -13,11 +13,12 @@ class CompanyRestProductListsBulkRequestAssignmentPreCheckPlugin extends Abstrac
      *
      * @return bool
      */
-    public function check(
-        RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer
-    ): bool {
-        return $restProductListsBulkRequestAssignmentTransfer->getCompany() === null
-            || $restProductListsBulkRequestAssignmentTransfer->getCompany()->getId() === null;
+    public function check(RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer): bool
+    {
+        if ($restProductListsBulkRequestAssignmentTransfer->getCompany() === null) {
+            return true;
+        }
+        return $restProductListsBulkRequestAssignmentTransfer->getCompany()->getId() === null;
     }
 
     /**

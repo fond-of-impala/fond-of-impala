@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter;
+namespace FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Filter;
 
 use ArrayObject;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
@@ -26,7 +26,7 @@ class GroupedIdentifierFilter implements GroupedIdentifierFilterInterface
     public function filterFromRestProductListsBulkRequestAssignments(
         ArrayObject $restProductListsBulkRequestAssignmentTransfers
     ): array {
-        $groupedIdentifier = ['uuid' => []];
+        $groupedIdentifier = ['debtorNumber' => []];
 
         foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestItemTransfer) {
             $restProductListsBulkRequestAssignmentCompanyTransfer = $restProductListsBulkRequestItemTransfer->getCompany();
@@ -35,13 +35,13 @@ class GroupedIdentifierFilter implements GroupedIdentifierFilterInterface
                 continue;
             }
 
-            $uuid = $restProductListsBulkRequestAssignmentCompanyTransfer->getUuid();
+            $debtorNumber = $restProductListsBulkRequestAssignmentCompanyTransfer->getDebtorNumber();
 
-            if ($uuid === null) {
+            if ($debtorNumber === null) {
                 continue;
             }
 
-            $groupedIdentifier['uuid'][] = $uuid;
+            $groupedIdentifier['debtorNumber'][] = $debtorNumber;
         }
 
         return $groupedIdentifier;

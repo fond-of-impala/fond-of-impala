@@ -1,10 +1,10 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Expander;
+namespace FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Expander;
 
 use ArrayObject;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader\CompanyReaderInterface;
+use FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface;
+use FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Reader\CompanyReaderInterface;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 
 class RestProductListsBulkRequestExpander implements RestProductListsBulkRequestExpanderInterface
@@ -14,8 +14,8 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
     protected CompanyReaderInterface $companyReader;
 
     /**
-     * @param \FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface $groupedIdentifierFilter
-     * @param \FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader\CompanyReaderInterface $companyReader
+     * @param \FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface $groupedIdentifierFilter
+     * @param \FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\Reader\CompanyReaderInterface $companyReader
      */
     public function __construct(
         GroupedIdentifierFilterInterface $groupedIdentifierFilter,
@@ -72,15 +72,17 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
                 continue;
             }
 
-            $uuid = $restProductListsBulkRequestItemCompanyTransfer->getUuid();
-            if ($uuid === null) {
-                continue;
-            }
-            if (!isset($companyIds[$uuid])) {
+            $debtorNumber = $restProductListsBulkRequestItemCompanyTransfer->getDebtorNumber();
+
+            if ($debtorNumber === null) {
                 continue;
             }
 
-            $restProductListsBulkRequestItemCompanyTransfer->setId($companyIds[$uuid]);
+            if (!isset($companyIds[$debtorNumber])) {
+                continue;
+            }
+
+            $restProductListsBulkRequestItemCompanyTransfer->setId($companyIds[$debtorNumber]);
         }
 
         return $restProductListsBulkRequestAssignmentTransfers;

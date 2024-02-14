@@ -2,8 +2,6 @@
 
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor;
 
-use Exception;
-use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentChecker;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\ProductListsBulkRestApiEvents;
@@ -68,7 +66,7 @@ class BulkProcessor implements BulkProcessorInterface
 
         foreach ($restProductListsBulkRequestTransfer->getAssignments() as $restProductListsBulkRequestAssignmentTransfer) {
             $preCheckResult = $this->restProductListsBulkRequestAssignmentChecker->preCheck(
-                $restProductListsBulkRequestAssignmentTransfer
+                $restProductListsBulkRequestAssignmentTransfer,
             );
 
             if (!$preCheckResult) {
@@ -80,7 +78,7 @@ class BulkProcessor implements BulkProcessorInterface
                 $restProductListsBulkRequestAssignmentTransfer,
             );
 
-            $currentCount++;
+            ++$currentCount;
         }
 
         return (new RestProductListsBulkResponseTransfer())
