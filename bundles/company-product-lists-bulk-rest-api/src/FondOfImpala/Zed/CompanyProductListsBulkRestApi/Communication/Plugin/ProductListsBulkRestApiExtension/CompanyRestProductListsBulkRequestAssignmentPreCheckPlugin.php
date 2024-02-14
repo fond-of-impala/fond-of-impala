@@ -19,7 +19,7 @@ class CompanyRestProductListsBulkRequestAssignmentPreCheckPlugin extends Abstrac
             return false;
         }
 
-        return $restProductListsBulkRequestAssignmentTransfer->getCompany()->getId() === null;
+        return $restProductListsBulkRequestAssignmentTransfer->getCompany()->getId() !== null;
     }
 
     /**
