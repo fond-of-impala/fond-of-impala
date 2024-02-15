@@ -7,5 +7,5 @@ interface OrderBudgetsBulkRestApiEvents
     /**
      * @var string
      */
-    public const ASSIGNMENT_PROCESS = 'OrderBudgetsBulkRestApi.assignment.process';
+    public const PERSIST_PROCESS = 'OrderBudgetsBulkRestApi.persist.process';
 }

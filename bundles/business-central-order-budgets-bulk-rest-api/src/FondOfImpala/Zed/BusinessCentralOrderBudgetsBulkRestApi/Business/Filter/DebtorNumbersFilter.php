@@ -16,7 +16,7 @@ class DebtorNumbersFilter implements DebtorNumbersFilterInterface
         RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransfer
     ): array {
         return $this->filterFromRestOrderBudgetsBulkRequestOrderBudgets(
-            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets()
+            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets(),
         );
     }
 

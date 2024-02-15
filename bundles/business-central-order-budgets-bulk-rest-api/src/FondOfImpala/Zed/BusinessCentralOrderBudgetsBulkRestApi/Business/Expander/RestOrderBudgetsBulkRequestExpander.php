@@ -34,7 +34,7 @@ class RestOrderBudgetsBulkRequestExpander implements RestOrderBudgetsBulkRequest
         RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransfer
     ): RestOrderBudgetsBulkRequestTransfer {
         $debtorNumbers = $this->debtorNumbersFilter->filterFromRestOrderBudgetsBulkRequest(
-            $restOrderBudgetsBulkRequestTransfer
+            $restOrderBudgetsBulkRequestTransfer,
         );
 
         $orderBudgetIds = [];

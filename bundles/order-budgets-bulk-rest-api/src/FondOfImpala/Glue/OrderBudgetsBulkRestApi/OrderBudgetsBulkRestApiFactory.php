@@ -6,10 +6,10 @@ use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Builder\RestResponseBuil
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Builder\RestResponseBuilderInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Filter\CustomerReferenceFilter;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Filter\CustomerReferenceFilterInterface;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestOrderBudgetMapper;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestOrderBudgetMapperInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestMapper;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestMapperInterface;
+use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestOrderBudgetMapper;
+use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestOrderBudgetMapperInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\OrderBudgetsBulk\OrderBudgetsBulkProcessor;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\OrderBudgetsBulk\OrderBudgetsBulkProcessorInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
@@ -58,7 +58,7 @@ class OrderBudgetsBulkRestApiFactory extends AbstractFactory
     protected function getRestOrderBudgetsBulkRequestOrderBudgetMapperPlugins(): array
     {
         return $this->getProvidedDependency(
-            OrderBudgetsBulkRestApiDependencyProvider::PLUGINS_REST_ORDER_BUDGETS_BULK_REQUEST_ORDER_BUDGET_MAPPER
+            OrderBudgetsBulkRestApiDependencyProvider::PLUGINS_REST_ORDER_BUDGETS_BULK_REQUEST_ORDER_BUDGET_MAPPER,
         );
     }
 

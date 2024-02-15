@@ -27,4 +27,9 @@
         <property name="currentCount" type="int" />
         <property name="actualCount" type="int" />
     </transfer>
+
+    <transfer name="OrderBudget">
+        <property name="idOrderBudget" type="int"/>
+        <property name="initialBudget" type="int" />
+    </transfer>
 </transfers>

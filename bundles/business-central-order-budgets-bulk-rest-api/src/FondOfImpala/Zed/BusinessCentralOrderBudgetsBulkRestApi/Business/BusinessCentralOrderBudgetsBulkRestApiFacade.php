@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business;
 
-use FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\BusinessCentralOrderBudgetsBulkRestApiFacadeInterface;
 use Generated\Shared\Transfer\RestOrderBudgetsBulkRequestTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 

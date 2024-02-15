@@ -14,7 +14,7 @@ class BusinessCentralOrderBudgetsBulkRestApiPersistenceFactory extends AbstractP
     public function getCompanyQuery(): SpyCompanyQuery
     {
         return $this->getProvidedDependency(
-            BusinessCentralOrderBudgetsBulkRestApiDependencyProvider::PROPEL_QUERY_COMPANY
+            BusinessCentralOrderBudgetsBulkRestApiDependencyProvider::PROPEL_QUERY_COMPANY,
         );
     }
 }

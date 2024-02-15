@@ -2,12 +2,14 @@
 
 namespace FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business;
 
-use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Checker\RestOrderBudgetsBulkRequestAssignmentChecker;
-use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Checker\RestOrderBudgetsBulkRequestAssignmentCheckerInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Expander\RestOrderBudgetsBulkRequestExpander;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Expander\RestOrderBudgetsBulkRequestExpanderInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Filter\UuidsFilter;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Filter\UuidsFilterInterface;
+use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Mapper\OrderBudgetMapper;
+use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Mapper\OrderBudgetMapperInterface;
+use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Persister\OrderBudgetPersister;
+use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Persister\OrderBudgetPersisterInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Processor\BulkProcessor;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Processor\BulkProcessorInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Reader\OrderBudgetReader;
@@ -60,6 +62,25 @@ class OrderBudgetsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Persister\OrderBudgetPersisterInterface
+     */
+    public function createOrderBudgetPersister(): OrderBudgetPersisterInterface
+    {
+        return new OrderBudgetPersister(
+            $this->createOrderBudgetMapper(),
+            $this->getOrderBudgetFacade(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Mapper\OrderBudgetMapperInterface
+     */
+    protected function createOrderBudgetMapper(): OrderBudgetMapperInterface
+    {
+        return new OrderBudgetMapper();
+    }
+
+    /**
      * @return array<\FondOfImpala\Zed\OrderBudgetsBulkRestApiExtension\Dependency\Plugin\RestOrderBudgetsBulkRequestExpanderPluginInterface>
      */
     protected function getRestOrderBudgetsBulkRequestExpanderPlugins(): array
@@ -76,6 +97,13 @@ class OrderBudgetsBulkRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return $this->getProvidedDependency(
             OrderBudgetsBulkRestApiDependencyProvider::FACADE_EVENT,
+        );
+    }
+
+    protected function getOrderBudgetFacade()
+    {
+        return $this->getProvidedDependency(
+            OrderBudgetsBulkRestApiDependencyProvider::FACADE_ORDER_BUDGET,
         );
     }
 }

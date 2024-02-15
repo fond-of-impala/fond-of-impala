@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Processor;
 
-use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Checker\RestOrderBudgetsBulkRequestAssignmentCheckerInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Dependency\Facade\OrderBudgetsBulkRestApiToEventFacadeInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Dependency\OrderBudgetsBulkRestApiEvents;
 use Generated\Shared\Transfer\RestOrderBudgetsBulkRequestTransfer;
@@ -61,7 +60,7 @@ class BulkProcessor implements BulkProcessorInterface
 
         foreach ($restOrderBudgetsBulkRequestTransfer->getOrderBudgets() as $restOrderBudgetsBulkRequestOrderBudgetTransfer) {
             $this->eventFacade->trigger(
-                OrderBudgetsBulkRestApiEvents::ASSIGNMENT_PROCESS,
+                OrderBudgetsBulkRestApiEvents::PERSIST_PROCESS,
                 $restOrderBudgetsBulkRequestOrderBudgetTransfer,
             );
 

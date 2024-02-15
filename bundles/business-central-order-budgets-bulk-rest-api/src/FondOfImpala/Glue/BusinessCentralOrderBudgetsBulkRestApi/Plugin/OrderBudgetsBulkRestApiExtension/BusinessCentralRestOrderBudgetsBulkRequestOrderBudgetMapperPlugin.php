@@ -33,7 +33,7 @@ class BusinessCentralRestOrderBudgetsBulkRequestOrderBudgetMapperPlugin extends 
         }
 
         $restOrderBudgetsBulkRequestCompanyTransfer->setDebtorNumber(
-            $restOrderBudgetsBulkCompanyTransfer->getDebtorNumber()
+            $restOrderBudgetsBulkCompanyTransfer->getDebtorNumber(),
         );
 
         return $restOrderBudgetsBulkRequestOrderBudgetTransfer->setCompany($restOrderBudgetsBulkRequestCompanyTransfer);

@@ -18,8 +18,8 @@ class RestOrderBudgetsBulkRequestExpander implements RestOrderBudgetsBulkRequest
      * @param \FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Reader\OrderBudgetReaderInterface $orderBudgetReader
      */
     public function __construct(
-        UuidsFilterInterface       $uuidsFilter,
-        OrderBudgetReaderInterface $orderBudgetReader,
+        UuidsFilterInterface $uuidsFilter,
+        OrderBudgetReaderInterface $orderBudgetReader
     ) {
         $this->uuidsFilter = $uuidsFilter;
         $this->orderBudgetReader = $orderBudgetReader;

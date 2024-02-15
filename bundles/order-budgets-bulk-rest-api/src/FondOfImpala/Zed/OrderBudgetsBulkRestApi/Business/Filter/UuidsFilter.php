@@ -16,7 +16,7 @@ class UuidsFilter implements UuidsFilterInterface
         RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransfer
     ): array {
         return $this->filterFromRestOrderBudgetsBulkRequestOrderBudgets(
-            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets()
+            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets(),
         );
     }
 

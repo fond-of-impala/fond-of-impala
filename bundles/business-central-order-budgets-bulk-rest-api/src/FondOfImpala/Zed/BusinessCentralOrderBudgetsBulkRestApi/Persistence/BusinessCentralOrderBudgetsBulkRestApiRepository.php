@@ -2,7 +2,7 @@
 
 namespace FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Persistence;
 
-use FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Persistence\BusinessCentralOrderBudgetsBulkRestApiRepositoryInterface;
+use FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Communication\Plugin\PermissionExtension\CanBulkPersistOrderBudgetsPermissionPlugin;
 use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Orm\Zed\CompanyBusinessUnit\Persistence\Map\SpyCompanyBusinessUnitTableMap;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -23,9 +23,9 @@ class BusinessCentralOrderBudgetsBulkRestApiRepository extends AbstractRepositor
         string $customerReference,
         array $debtorNumbers
     ): array {
-        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
-        $collection = $this->getFactory()
+        $query = $this->getFactory()
             ->getCompanyQuery()
+            ->clear()
             ->useCompanyBusinessUnitQuery()
                 ->filterByFkOrderBudget(null, Criteria::ISNOTNULL)
             ->endUse()
@@ -33,11 +33,21 @@ class BusinessCentralOrderBudgetsBulkRestApiRepository extends AbstractRepositor
                 ->useCustomerQuery()
                     ->filterByCustomerReference($customerReference)
                 ->endUse()
+                ->useSpyCompanyRoleToCompanyUserQuery()
+                    ->useCompanyRoleQuery()
+                        ->useSpyCompanyRoleToPermissionQuery()
+                            ->usePermissionQuery()
+                                ->filterByKey(CanBulkPersistOrderBudgetsPermissionPlugin::KEY)
+                            ->endUse()
+                        ->endUse()
+                    ->endUse()
+                ->endUse()
             ->endUse()
-            ->clear()
             ->filterByDebtorNumber_In($debtorNumbers)
-            ->select([SpyCompanyBusinessUnitTableMap::COL_FK_ORDER_BUDGET, SpyCompanyTableMap::COL_DEBTOR_NUMBER])
-            ->find();
+            ->select([SpyCompanyBusinessUnitTableMap::COL_FK_ORDER_BUDGET, SpyCompanyTableMap::COL_DEBTOR_NUMBER]);
+
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = $query->find();
 
         return $collection->toKeyValue(
             SpyCompanyTableMap::COL_DEBTOR_NUMBER,
