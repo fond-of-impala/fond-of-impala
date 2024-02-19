@@ -48,7 +48,7 @@ class RestOrderBudgetsBulkRequestMapperTest extends Unit
             ->getMock();
 
         $this->restOrderBudgetsBulkRequestMapper = new RestOrderBudgetsBulkRequestMapper(
-            $this->restOrderBudgetsBulkRequestOrderBudgetMapperMock
+            $this->restOrderBudgetsBulkRequestOrderBudgetMapperMock,
         );
     }
 
@@ -67,17 +67,17 @@ class RestOrderBudgetsBulkRequestMapperTest extends Unit
             ->willReturn($this->restOrderBudgetsBulkRequestOrderBudgetTransferMock);
 
         $restOrderBudgetsBulkRequestTransfer = $this->restOrderBudgetsBulkRequestMapper->fromRestOrderBudgetsBulkRequestAttributes(
-            $this->restOrderBudgetsBulkRequestAttributesTransferMock
+            $this->restOrderBudgetsBulkRequestAttributesTransferMock,
         );
 
         static::assertCount(
             1,
-            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets()
+            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets(),
         );
 
         static::assertEquals(
             $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
-            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets()->offsetGet(0)
+            $restOrderBudgetsBulkRequestTransfer->getOrderBudgets()->offsetGet(0),
         );
     }
 }

@@ -41,13 +41,13 @@ class OrderBudgetsBulkRestApiEventSubscriberTest extends Unit
                 static::callback(
                     static fn (
                         EventBaseHandlerInterface $eventBaseHandler
-                    ): bool => $eventBaseHandler instanceof OrderBudgetPersistProcessListener
+                    ): bool => $eventBaseHandler instanceof OrderBudgetPersistProcessListener,
                 ),
             )->willReturn($this->eventCollectionMock);
 
         static::assertEquals(
             $this->eventCollectionMock,
-            $this->subscriber->getSubscribedEvents($this->eventCollectionMock)
+            $this->subscriber->getSubscribedEvents($this->eventCollectionMock),
         );
     }
 }

@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper;
 
-use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApiExtension\Dependency\Plugin\RestOrderBudgetsBulkRequestOrderBudgetMapperPluginInterface;
 use Generated\Shared\Transfer\RestOrderBudgetsBulkOrderBudgetTransfer;
@@ -18,7 +17,6 @@ class RestOrderBudgetsBulkRequestOrderBudgetMapperTest extends Unit
     protected RestOrderBudgetsBulkRequestOrderBudgetTransfer|MockObject $restOrderBudgetsBulkRequestOrderBudgetTransferMock;
 
     protected RestOrderBudgetsBulkRequestOrderBudgetMapper $restOrderBudgetsBulkRequestOrderBudgetMapper;
-
 
     /**
      * @return void
@@ -65,18 +63,16 @@ class RestOrderBudgetsBulkRequestOrderBudgetMapperTest extends Unit
             ->with(
                 $this->restOrderBudgetsBulkOrderBudgetTransferMock,
                 static::callback(
-                    fn (
-                        RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransfer
-                    ) => $restOrderBudgetsBulkRequestOrderBudgetTransfer->getUuid() === $uuid
+                    static fn (RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransfer): bool => $restOrderBudgetsBulkRequestOrderBudgetTransfer->getUuid() === $uuid
                         && $restOrderBudgetsBulkRequestOrderBudgetTransfer->getInitialBudget() === $initialBudget
-                )
+                ),
             )->willReturn($this->restOrderBudgetsBulkRequestOrderBudgetTransferMock);
 
         static::assertEquals(
             $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
             $this->restOrderBudgetsBulkRequestOrderBudgetMapper->fromRestOrderBudgetsBulkOrderBudget(
-                $this->restOrderBudgetsBulkOrderBudgetTransferMock
-            )
+                $this->restOrderBudgetsBulkOrderBudgetTransferMock,
+            ),
         );
     }
 }

@@ -4,10 +4,7 @@ namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiClient;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Dependency\Client\OrderBudgetsBulkRestApiToGlossaryStorageClientInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\OrderBudgetsBulk\OrderBudgetsBulkProcessor;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Reader\CartReader;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApiExtension\Dependency\Plugin\FilterFieldsExpanderPluginInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApiExtension\Dependency\Plugin\RestOrderBudgetsBulkRequestOrderBudgetMapperPluginInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
@@ -28,9 +25,6 @@ class OrderBudgetsBulkRestApiFactoryTest extends Unit
      */
     protected array $restOrderBudgetsBulkRequestOrderBudgetMapperPluginMocks;
 
-    /**
-     * @var \FondOfImpala\Glue\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiFactory
-     */
     protected OrderBudgetsBulkRestApiFactory $factory;
 
     /**
@@ -56,7 +50,6 @@ class OrderBudgetsBulkRestApiFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-
         $this->restOrderBudgetsBulkRequestOrderBudgetMapperPluginMocks = [
             $this->getMockBuilder(RestOrderBudgetsBulkRequestOrderBudgetMapperPluginInterface::class)
                 ->disableOriginalConstructor()
@@ -64,10 +57,7 @@ class OrderBudgetsBulkRestApiFactoryTest extends Unit
         ];
 
         $this->factory = new class ($this->restResourceBuilderMock) extends OrderBudgetsBulkRestApiFactory {
-            /**
-             * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-             */
-            protected $restResourceBuilder;
+            protected RestResourceBuilderInterface $restResourceBuilder;
 
             /**
              * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

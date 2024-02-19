@@ -34,9 +34,7 @@ class OrderBudgetsBulkRestApiDependencyProvider extends AbstractBundleDependency
      */
     protected function addRestOrderBudgetsBulkRequestOrderBudgetMapperPlugins(Container $container): Container
     {
-        $container[
-            static::PLUGINS_REST_ORDER_BUDGETS_BULK_REQUEST_ORDER_BUDGET_MAPPER
-        ] = fn (): array => $this->getRestOrderBudgetsBulkRequestOrderBudgetMapperPlugins();
+        $container[static::PLUGINS_REST_ORDER_BUDGETS_BULK_REQUEST_ORDER_BUDGET_MAPPER] = fn (): array => $this->getRestOrderBudgetsBulkRequestOrderBudgetMapperPlugins();
 
         return $container;
     }

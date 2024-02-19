@@ -46,5 +46,4 @@ class OrderBudgetsBulkRestApiToEventFacadeBridgeTest extends Unit
 
         $this->bridge->trigger($eventName, $this->transferMock);
     }
-
 }

@@ -15,6 +15,7 @@ use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Processor\BulkProcessorInt
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Reader\OrderBudgetReader;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Reader\OrderBudgetReaderInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Dependency\Facade\OrderBudgetsBulkRestApiToEventFacadeInterface;
+use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Dependency\Facade\OrderBudgetsBulkRestApiToOrderBudgetFacadeInterface;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
@@ -100,7 +101,10 @@ class OrderBudgetsBulkRestApiBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    protected function getOrderBudgetFacade()
+    /**
+     * @return \FondOfImpala\Zed\OrderBudgetsBulkRestApi\Dependency\Facade\OrderBudgetsBulkRestApiToOrderBudgetFacadeInterface
+     */
+    protected function getOrderBudgetFacade(): OrderBudgetsBulkRestApiToOrderBudgetFacadeInterface
     {
         return $this->getProvidedDependency(
             OrderBudgetsBulkRestApiDependencyProvider::FACADE_ORDER_BUDGET,

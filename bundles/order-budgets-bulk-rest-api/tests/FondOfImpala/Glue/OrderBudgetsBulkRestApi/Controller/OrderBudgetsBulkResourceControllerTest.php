@@ -5,7 +5,6 @@ namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi\Controller;
 use Codeception\Test\Unit;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiFactory;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\OrderBudgetsBulk\OrderBudgetsBulkProcessorInterface;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Reader\CartReaderInterface;
 use Generated\Shared\Transfer\RestOrderBudgetsBulkRequestAttributesTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -54,10 +53,7 @@ class OrderBudgetsBulkResourceControllerTest extends Unit
             ->getMock();
 
         $this->controller = new class ($this->factoryMock) extends OrderBudgetsBulkResourceController {
-            /**
-             * @var \Spryker\Glue\Kernel\AbstractFactory
-             */
-            protected $abstractFactory;
+            protected AbstractFactory $abstractFactory;
 
             /**
              * @param \Spryker\Glue\Kernel\AbstractFactory $abstractFactory
@@ -90,14 +86,14 @@ class OrderBudgetsBulkResourceControllerTest extends Unit
             ->method('process')
             ->with(
                 $this->restRequestMock,
-                $this->restOrderBudgetsBulkRequestAttributesTransferMock
+                $this->restOrderBudgetsBulkRequestAttributesTransferMock,
             )->willReturn($this->restResponseMock);
 
         static::assertEquals(
             $this->restResponseMock,
             $this->controller->postAction(
                 $this->restRequestMock,
-                $this->restOrderBudgetsBulkRequestAttributesTransferMock
+                $this->restOrderBudgetsBulkRequestAttributesTransferMock,
             ),
         );
     }

@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Builder;
 
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
