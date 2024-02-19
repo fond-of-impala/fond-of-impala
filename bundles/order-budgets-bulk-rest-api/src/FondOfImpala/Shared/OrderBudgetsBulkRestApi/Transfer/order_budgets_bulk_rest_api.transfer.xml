@@ -8,7 +8,7 @@
 
     <transfer name="RestOrderBudgetsBulkOrderBudget">
         <property name="id" type="string"/>
-        <property name="initialBudget" type="int"/>
+        <property name="nextInitialBudget" type="int"/>
     </transfer>
 
     <transfer name="RestOrderBudgetsBulkRequest">
@@ -19,7 +19,7 @@
     <transfer name="RestOrderBudgetsBulkRequestOrderBudget">
         <property name="id" type="int"/>
         <property name="uuid" type="string"/>
-        <property name="initialBudget" type="int"/>
+        <property name="nextInitialBudget" type="int"/>
     </transfer>
 
     <transfer name="RestOrderBudgetsBulkResponse">
@@ -30,6 +30,6 @@
 
     <transfer name="OrderBudget">
         <property name="idOrderBudget" type="int"/>
-        <property name="initialBudget" type="int" />
+        <property name="nextInitialBudget" type="int" />
     </transfer>
 </transfers>
