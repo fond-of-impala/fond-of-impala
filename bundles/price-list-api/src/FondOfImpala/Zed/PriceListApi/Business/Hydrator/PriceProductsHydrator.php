@@ -48,9 +48,9 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
     }
 
     /**
-     * @param array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>> $groupedPriceProductTransfers
+     * @param array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>> $groupedPriceProductTransfers
      *
-     * @return array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>>
+     * @return array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>>
      */
     protected function hydrateWithProductAbstractIds(array $groupedPriceProductTransfers): array
     {
@@ -67,7 +67,7 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
                 continue;
             }
 
-            foreach ($groupedPriceProductTransfers[static::GROUPED_KEY_ABSTRACT][$sku] as $productTransfer){
+            foreach ($groupedPriceProductTransfers[static::GROUPED_KEY_ABSTRACT][$sku] as $productTransfer) {
                 $productTransfer->setIdProductAbstract($productId);
             }
         }
@@ -76,9 +76,9 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
     }
 
     /**
-     * @param array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>> $groupedPriceProductTransfers
+     * @param array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>> $groupedPriceProductTransfers
      *
-     * @return array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>>
+     * @return array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>>
      */
     protected function hydrateWithProductConcreteIds(array $groupedPriceProductTransfers): array
     {
@@ -95,7 +95,7 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
                 continue;
             }
 
-            foreach ($groupedPriceProductTransfers[static::GROUPED_KEY_CONCRETE][$sku] as $productTransfer){
+            foreach ($groupedPriceProductTransfers[static::GROUPED_KEY_CONCRETE][$sku] as $productTransfer) {
                 $productTransfer->setIdProduct($productId);
             }
         }
@@ -106,7 +106,7 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
     /**
      * @param array<\Generated\Shared\Transfer\PriceProductTransfer> $priceProductTransfers
      *
-     * @return array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>>
+     * @return array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>>
      */
     protected function groupPriceProducts(array $priceProductTransfers): array
     {
