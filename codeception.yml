@@ -6,6 +6,7 @@ include:
   - bundles/allowed-product-quantity-checkout-connector
   - bundles/allowed-product-quantity-gui
   - bundles/allowed-product-quantity-search
+  - bundles/business-central-order-budgets-bulk-rest-api
   - bundles/cart-validation
   - bundles/collaborative-cart
   - bundles/collaborative-cart-search-rest-api

@@ -9,6 +9,8 @@ use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Persistence\BusinessCentralOrderBudgetsBulkRestApiPersistenceFactory getFactory()
  */
 class BusinessCentralOrderBudgetsBulkRestApiRepository extends AbstractRepository implements BusinessCentralOrderBudgetsBulkRestApiRepositoryInterface

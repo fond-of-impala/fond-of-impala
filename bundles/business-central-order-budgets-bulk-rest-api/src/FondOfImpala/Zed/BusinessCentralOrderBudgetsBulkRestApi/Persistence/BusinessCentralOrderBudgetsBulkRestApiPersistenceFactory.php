@@ -6,6 +6,9 @@ use FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\BusinessCentralOrder
 use Orm\Zed\Company\Persistence\Base\SpyCompanyQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
+/**
+ * @codeCoverageIgnore
+ */
 class BusinessCentralOrderBudgetsBulkRestApiPersistenceFactory extends AbstractPersistenceFactory
 {
     /**

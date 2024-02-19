@@ -2,6 +2,9 @@
 
 namespace FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Persistence;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface BusinessCentralOrderBudgetsBulkRestApiRepositoryInterface
 {
     /**
