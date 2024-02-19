@@ -59,6 +59,10 @@ class BulkProcessor implements BulkProcessorInterface
         }
 
         foreach ($restOrderBudgetsBulkRequestTransfer->getOrderBudgets() as $restOrderBudgetsBulkRequestOrderBudgetTransfer) {
+            if ($restOrderBudgetsBulkRequestOrderBudgetTransfer->getId() === null) {
+                continue;
+            }
+
             $this->eventFacade->trigger(
                 OrderBudgetsBulkRestApiEvents::PERSIST_PROCESS,
                 $restOrderBudgetsBulkRequestOrderBudgetTransfer,
