@@ -6,6 +6,8 @@ use Orm\Zed\OrderBudget\Persistence\Map\FooOrderBudgetTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\OrderBudgetsBulkRestApi\Persistence\OrderBudgetsBulkRestApiPersistenceFactory getFactory()
  */
 class OrderBudgetsBulkRestApiRepository extends AbstractRepository implements OrderBudgetsBulkRestApiRepositoryInterface

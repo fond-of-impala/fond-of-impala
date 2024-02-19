@@ -30,10 +30,10 @@ class RestOrderBudgetsBulkRequestMapper implements RestOrderBudgetsBulkRequestMa
         $restOrderBudgetsBulkOrderBudgetTransfers = $restOrderBudgetsBulkRequestAttributesTransfer->getOrderBudgets();
 
         foreach ($restOrderBudgetsBulkOrderBudgetTransfers as $restOrderBudgetsBulkOrderBudgetTransfer) {
-            $restOrderBudgetsBulkRequestAssignmentTransfer = $this->restOrderBudgetsBulkRequestOrderBudgetMapper
+            $restOrderBudgetsBulkRequestOrderBudgetTransfer = $this->restOrderBudgetsBulkRequestOrderBudgetMapper
                 ->fromRestOrderBudgetsBulkOrderBudget($restOrderBudgetsBulkOrderBudgetTransfer);
 
-            $restOrderBudgetsBulkRequestTransfer->addOrderBudget($restOrderBudgetsBulkRequestAssignmentTransfer);
+            $restOrderBudgetsBulkRequestTransfer->addOrderBudget($restOrderBudgetsBulkRequestOrderBudgetTransfer);
         }
 
         return $restOrderBudgetsBulkRequestTransfer;

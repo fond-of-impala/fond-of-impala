@@ -6,6 +6,9 @@ use FondOfImpala\Client\OrderBudgetsBulkRestApi\Dependency\Client\OrderBudgetsBu
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class OrderBudgetsBulkRestApiDependencyProvider extends AbstractDependencyProvider
 {
     /**

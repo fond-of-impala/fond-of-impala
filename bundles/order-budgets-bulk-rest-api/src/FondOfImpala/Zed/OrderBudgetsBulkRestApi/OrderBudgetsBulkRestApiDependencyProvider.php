@@ -11,6 +11,9 @@ use Orm\Zed\OrderBudget\Persistence\FooOrderBudgetQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class OrderBudgetsBulkRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**

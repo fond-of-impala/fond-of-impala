@@ -1,0 +1,63 @@
+<?php
+
+namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Builder;
+
+use Codeception\Test\Unit;
+use FondOfImpala\Glue\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiConfig;
+use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkAttributesMapperInterface;
+use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Translator\RestOrderBudgetsBulkAttributesTranslatorInterface;
+use Generated\Shared\Transfer\QuoteListTransfer;
+use Generated\Shared\Transfer\RestOrderBudgetsBulkAttributesTransfer;
+use Generated\Shared\Transfer\RestOrderBudgetsBulkPaginationTransfer;
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
+use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
+use Symfony\Component\HttpFoundation\Response;
+
+class RestResponseBuilderTest extends Unit
+{
+    protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
+
+    protected MockObject|RestResponseInterface $restResponseMock;
+
+    protected RestResponseBuilder $restResponseBuilder;
+
+    /**
+     * @return void
+     */
+    protected function _before(): void
+    {
+        parent::_before();
+
+        $this->restResourceBuilderMock = $this->getMockBuilder(RestResourceBuilderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->restResponseMock = $this->getMockBuilder(RestResponseInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->restResponseBuilder = new RestResponseBuilder($this->restResourceBuilderMock);
+    }
+
+    /**
+     * @return void
+     */
+    public function testBuildOrderBudgetsBulkRestResponse(): void
+    {
+        $this->restResourceBuilderMock->expects(static::atLeastOnce())
+            ->method('createRestResponse')
+            ->willReturn($this->restResponseMock);
+
+        $this->restResponseMock->expects(static::atLeastOnce())
+            ->method('setStatus')
+            ->with(Response::HTTP_NO_CONTENT)
+            ->willReturn($this->restResponseMock);
+
+        static::assertEquals(
+            $this->restResponseMock,
+            $this->restResponseBuilder->buildEmptyRestResponse(),
+        );
+    }
+}

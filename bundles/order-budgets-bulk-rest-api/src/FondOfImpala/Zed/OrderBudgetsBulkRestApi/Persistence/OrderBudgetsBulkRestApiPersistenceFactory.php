@@ -6,6 +6,9 @@ use FondOfImpala\Zed\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiDependencyPr
 use Orm\Zed\OrderBudget\Persistence\Base\FooOrderBudgetQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
+/**
+ * @codeCoverageIgnore
+ */
 class OrderBudgetsBulkRestApiPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
