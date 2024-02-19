@@ -229,7 +229,7 @@
     },
     "price-list-api": {
       "path": "bundles/price-list-api",
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     "price-list-gui": {
       "path": "bundles/price-list-gui",
