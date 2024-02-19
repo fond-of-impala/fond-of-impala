@@ -28,9 +28,6 @@ class OrderBudgetsBulkRestApiFactoryTest extends Unit
      */
     protected array $restOrderBudgetsBulkRequestOrderBudgetMapperPluginMocks;
 
-    /**
-     * @var \FondOfImpala\Glue\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiFactory
-     */
     protected OrderBudgetsBulkRestApiFactory $factory;
 
     /**
@@ -64,10 +61,7 @@ class OrderBudgetsBulkRestApiFactoryTest extends Unit
         ];
 
         $this->factory = new class ($this->restResourceBuilderMock) extends OrderBudgetsBulkRestApiFactory {
-            /**
-             * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-             */
-            protected $restResourceBuilder;
+            protected RestResourceBuilderInterface $restResourceBuilder;
 
             /**
              * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder

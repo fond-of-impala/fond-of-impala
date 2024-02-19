@@ -103,7 +103,7 @@ class OrderBudgetsBulkRestApiBusinessFactoryTest extends Unit
         $this->containerMock->expects($matcher)
             ->method('get')
             ->willReturnCallback(
-                fn(string $value) => match ($matcher->getInvocationCount()) {
+                fn(string $value): MockObject|OrderBudgetsBulkRestApiToEventFacadeInterface|array => match ($matcher->getInvocationCount()) {
                     1 => $this->eventFacadeMock,
                     2 => [],
                     default => throw new LogicException(),

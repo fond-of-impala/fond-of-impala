@@ -65,9 +65,7 @@ class RestOrderBudgetsBulkRequestOrderBudgetMapperTest extends Unit
             ->with(
                 $this->restOrderBudgetsBulkOrderBudgetTransferMock,
                 static::callback(
-                    fn (
-                        RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransfer
-                    ) => $restOrderBudgetsBulkRequestOrderBudgetTransfer->getUuid() === $uuid
+                    static fn(RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransfer): bool => $restOrderBudgetsBulkRequestOrderBudgetTransfer->getUuid() === $uuid
                         && $restOrderBudgetsBulkRequestOrderBudgetTransfer->getInitialBudget() === $initialBudget
                 )
             )->willReturn($this->restOrderBudgetsBulkRequestOrderBudgetTransferMock);

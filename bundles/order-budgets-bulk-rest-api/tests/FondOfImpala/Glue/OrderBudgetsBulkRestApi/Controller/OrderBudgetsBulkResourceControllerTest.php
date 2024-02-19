@@ -54,10 +54,7 @@ class OrderBudgetsBulkResourceControllerTest extends Unit
             ->getMock();
 
         $this->controller = new class ($this->factoryMock) extends OrderBudgetsBulkResourceController {
-            /**
-             * @var \Spryker\Glue\Kernel\AbstractFactory
-             */
-            protected $abstractFactory;
+            protected AbstractFactory $abstractFactory;
 
             /**
              * @param \Spryker\Glue\Kernel\AbstractFactory $abstractFactory
