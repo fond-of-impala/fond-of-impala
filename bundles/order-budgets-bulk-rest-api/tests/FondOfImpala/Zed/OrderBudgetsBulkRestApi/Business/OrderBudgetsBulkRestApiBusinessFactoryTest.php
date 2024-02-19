@@ -3,9 +3,6 @@
 namespace FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\CompanyUsersBulkRestApi\Dependency\Facade\CompanyUsersBulkRestApiToCompanyUserFacadeInterface;
-use FondOfImpala\Zed\CompanyUsersBulkRestApi\Dependency\Facade\CompanyUsersBulkRestApiToEventFacadeInterface;
-use FondOfImpala\Zed\CompanyUsersBulkRestApi\Persistence\CompanyUsersBulkRestApiRepository;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Expander\RestOrderBudgetsBulkRequestExpander;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Persister\OrderBudgetPersister;
 use FondOfImpala\Zed\OrderBudgetsBulkRestApi\Business\Processor\BulkProcessor;
@@ -74,7 +71,7 @@ class OrderBudgetsBulkRestApiBusinessFactoryTest extends Unit
 
         static::assertInstanceOf(
             OrderBudgetPersister::class,
-            $this->factory->createOrderBudgetPersister()
+            $this->factory->createOrderBudgetPersister(),
         );
     }
 
@@ -85,7 +82,7 @@ class OrderBudgetsBulkRestApiBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             RestOrderBudgetsBulkRequestExpander::class,
-            $this->factory->createRestOrderBudgetsBulkRequestExpander()
+            $this->factory->createRestOrderBudgetsBulkRequestExpander(),
         );
     }
 
@@ -103,16 +100,16 @@ class OrderBudgetsBulkRestApiBusinessFactoryTest extends Unit
         $this->containerMock->expects($matcher)
             ->method('get')
             ->willReturnCallback(
-                fn(string $value): MockObject|OrderBudgetsBulkRestApiToEventFacadeInterface|array => match ($matcher->getInvocationCount()) {
+                fn (string $value): MockObject|OrderBudgetsBulkRestApiToEventFacadeInterface|array => match ($matcher->getInvocationCount()) {
                     1 => $this->eventFacadeMock,
                     2 => [],
                     default => throw new LogicException(),
-                }
+                },
             );
 
         static::assertInstanceOf(
             BulkProcessor::class,
-            $this->factory->createBulkProcessor()
+            $this->factory->createBulkProcessor(),
         );
     }
 }

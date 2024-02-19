@@ -4,10 +4,7 @@ namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi;
 
 use Codeception\Test\Unit;
 use FondOfImpala\Client\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiClient;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Dependency\Client\OrderBudgetsBulkRestApiToGlossaryStorageClientInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\OrderBudgetsBulk\OrderBudgetsBulkProcessor;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Reader\CartReader;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApiExtension\Dependency\Plugin\FilterFieldsExpanderPluginInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApiExtension\Dependency\Plugin\RestOrderBudgetsBulkRequestOrderBudgetMapperPluginInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
@@ -52,7 +49,6 @@ class OrderBudgetsBulkRestApiFactoryTest extends Unit
         $this->restResourceBuilderMock = $this->getMockBuilder(RestResourceBuilderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-
 
         $this->restOrderBudgetsBulkRequestOrderBudgetMapperPluginMocks = [
             $this->getMockBuilder(RestOrderBudgetsBulkRequestOrderBudgetMapperPluginInterface::class)

@@ -3,13 +3,6 @@
 namespace FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Builder;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiConfig;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkAttributesMapperInterface;
-use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Translator\RestOrderBudgetsBulkAttributesTranslatorInterface;
-use Generated\Shared\Transfer\QuoteListTransfer;
-use Generated\Shared\Transfer\RestOrderBudgetsBulkAttributesTransfer;
-use Generated\Shared\Transfer\RestOrderBudgetsBulkPaginationTransfer;
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;

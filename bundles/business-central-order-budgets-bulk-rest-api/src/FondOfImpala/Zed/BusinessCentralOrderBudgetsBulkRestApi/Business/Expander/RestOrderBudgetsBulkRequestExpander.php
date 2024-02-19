@@ -59,7 +59,7 @@ class RestOrderBudgetsBulkRequestExpander implements RestOrderBudgetsBulkRequest
      * @param \ArrayObject<\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestOrderBudgetTransfer> $restOrderBudgetsBulkRequestOrderBudgetTransfers
      * @param array<string, int> $orderBudgetIds
      *
-     * @return \ArrayObject<\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestOrderBudgetTransfer> $getOrderBudgets
+     * @return \ArrayObject<\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestOrderBudgetTransfer>
      */
     protected function expandRestOrderBudgetsBulkRequestOrderBudgets(
         ArrayObject $restOrderBudgetsBulkRequestOrderBudgetTransfers,

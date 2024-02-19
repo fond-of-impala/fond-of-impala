@@ -43,17 +43,17 @@ class OrderBudgetMapperTest extends Unit
             ->willReturn($initialBudget);
 
         $orderBudgetTransfer = $this->orderBudgetMapper->fromRestOrderBudgetsBulkRequestOrderBudget(
-            $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock
+            $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
         );
 
         static::assertEquals(
             $id,
-            $orderBudgetTransfer->getIdOrderBudget()
+            $orderBudgetTransfer->getIdOrderBudget(),
         );
 
         static::assertEquals(
             $initialBudget,
-            $orderBudgetTransfer->getInitialBudget()
+            $orderBudgetTransfer->getInitialBudget(),
         );
     }
 
@@ -72,7 +72,7 @@ class OrderBudgetMapperTest extends Unit
             ->method('getInitialBudget');
 
         $orderBudgetTransfer = $this->orderBudgetMapper->fromRestOrderBudgetsBulkRequestOrderBudget(
-            $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock
+            $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
         );
 
         static::assertEquals(null, $orderBudgetTransfer);
@@ -95,7 +95,7 @@ class OrderBudgetMapperTest extends Unit
             ->willReturn($initialBudget);
 
         $orderBudgetTransfer = $this->orderBudgetMapper->fromRestOrderBudgetsBulkRequestOrderBudget(
-            $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock
+            $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
         );
 
         static::assertEquals(null, $orderBudgetTransfer);

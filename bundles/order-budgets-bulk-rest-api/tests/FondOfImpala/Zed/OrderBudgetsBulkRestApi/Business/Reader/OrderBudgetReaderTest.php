@@ -24,7 +24,7 @@ class OrderBudgetReaderTest extends Unit
             ->getMock();
 
         $this->orderBudgetReader = new OrderBudgetReader(
-            $this->repositoryMock
+            $this->repositoryMock,
         );
     }
 
@@ -43,7 +43,7 @@ class OrderBudgetReaderTest extends Unit
 
         static::assertEquals(
             $ids,
-            $this->orderBudgetReader->getIdsByUuids($uuids)
+            $this->orderBudgetReader->getIdsByUuids($uuids),
         );
     }
 }

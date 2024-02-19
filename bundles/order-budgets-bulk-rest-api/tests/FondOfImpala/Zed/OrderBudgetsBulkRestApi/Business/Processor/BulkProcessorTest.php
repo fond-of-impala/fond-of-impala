@@ -29,6 +29,8 @@ class BulkProcessorTest extends Unit
 
     /**
      * @Override
+     *
+     * @return void
      */
     protected function _before(): void
     {
@@ -57,7 +59,7 @@ class BulkProcessorTest extends Unit
 
         $this->bulkProcessor = new BulkProcessor(
             $this->eventFacadeMock,
-            [$this->restOrderBudgetsBulkRequestExpanderPluginMock]
+            [$this->restOrderBudgetsBulkRequestExpanderPluginMock],
         );
     }
 
@@ -89,11 +91,11 @@ class BulkProcessorTest extends Unit
             ->method('trigger')
             ->with(
                 OrderBudgetsBulkRestApiEvents::PERSIST_PROCESS,
-                $this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks[1]
+                $this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks[1],
             );
 
         $restOrderBudgetsBulkResponseTransfer = $this->bulkProcessor->process(
-            $this->restOrderBudgetsBulkRequestTransferMock
+            $this->restOrderBudgetsBulkRequestTransferMock,
         );
 
         static::assertTrue($restOrderBudgetsBulkResponseTransfer->getIsSuccessful());
@@ -124,7 +126,7 @@ class BulkProcessorTest extends Unit
             ->method('trigger');
 
         $restOrderBudgetsBulkResponseTransfer = $this->bulkProcessor->process(
-            $this->restOrderBudgetsBulkRequestTransferMock
+            $this->restOrderBudgetsBulkRequestTransferMock,
         );
 
         static::assertFalse($restOrderBudgetsBulkResponseTransfer->getIsSuccessful());

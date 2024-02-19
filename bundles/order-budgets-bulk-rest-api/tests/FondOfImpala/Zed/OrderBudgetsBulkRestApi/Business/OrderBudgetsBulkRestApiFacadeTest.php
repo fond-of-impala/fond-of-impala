@@ -31,6 +31,8 @@ class OrderBudgetsBulkRestApiFacadeTest extends Unit
 
     /**
      * @Override
+     *
+     * @return void
      */
     protected function _before(): void
     {
@@ -84,7 +86,7 @@ class OrderBudgetsBulkRestApiFacadeTest extends Unit
 
         static::assertEquals(
             $this->restOrderBudgetsBulkRequestTransferMock,
-            $this->facade->expandRestOrderBudgetsBulkRequest($this->restOrderBudgetsBulkRequestTransferMock)
+            $this->facade->expandRestOrderBudgetsBulkRequest($this->restOrderBudgetsBulkRequestTransferMock),
         );
     }
 
@@ -104,7 +106,7 @@ class OrderBudgetsBulkRestApiFacadeTest extends Unit
 
         static::assertEquals(
             $this->restOrderBudgetsBulkResponseTransferMock,
-            $this->facade->bulkProcess($this->restOrderBudgetsBulkRequestTransferMock)
+            $this->facade->bulkProcess($this->restOrderBudgetsBulkRequestTransferMock),
         );
     }
 

@@ -58,7 +58,7 @@ class RestOrderBudgetsBulkRequestExpanderTest extends Unit
 
         $this->restOrderBudgetsBulkRequestExpander = new RestOrderBudgetsBulkRequestExpander(
             $this->uuidsFilterMock,
-            $this->orderBudgetReaderMock
+            $this->orderBudgetReaderMock,
         );
     }
 
@@ -114,7 +114,7 @@ class RestOrderBudgetsBulkRequestExpanderTest extends Unit
 
         static::assertEquals(
             $this->restOrderBudgetsBulkRequestTransferMock,
-            $this->restOrderBudgetsBulkRequestExpander->expand($this->restOrderBudgetsBulkRequestTransferMock)
+            $this->restOrderBudgetsBulkRequestExpander->expand($this->restOrderBudgetsBulkRequestTransferMock),
         );
     }
 }

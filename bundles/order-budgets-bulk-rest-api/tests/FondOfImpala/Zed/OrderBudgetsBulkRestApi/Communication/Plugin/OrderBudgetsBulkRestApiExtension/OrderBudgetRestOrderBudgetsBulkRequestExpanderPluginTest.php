@@ -46,7 +46,7 @@ class OrderBudgetRestOrderBudgetsBulkRequestExpanderPluginTest extends Unit
 
         static::assertEquals(
             $this->restOrderBudgetsBulkRequestTransferMock,
-            $this->plugin->expand($this->restOrderBudgetsBulkRequestTransferMock)
+            $this->plugin->expand($this->restOrderBudgetsBulkRequestTransferMock),
         );
     }
 }

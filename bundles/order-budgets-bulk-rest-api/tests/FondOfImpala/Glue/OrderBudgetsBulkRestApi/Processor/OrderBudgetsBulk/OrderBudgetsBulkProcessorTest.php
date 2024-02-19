@@ -6,7 +6,6 @@ use Codeception\Test\Unit;
 use FondOfImpala\Client\OrderBudgetsBulkRestApi\OrderBudgetsBulkRestApiClientInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Builder\RestResponseBuilderInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Filter\CustomerReferenceFilterInterface;
-
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\Mapper\RestOrderBudgetsBulkRequestMapperInterface;
 use FondOfImpala\Glue\OrderBudgetsBulkRestApi\Processor\OrderBudgetsBulk\OrderBudgetsBulkProcessor;
 use Generated\Shared\Transfer\RestOrderBudgetsBulkRequestAttributesTransfer;
@@ -14,7 +13,6 @@ use Generated\Shared\Transfer\RestOrderBudgetsBulkRequestTransfer;
 use Generated\Shared\Transfer\RestOrderBudgetsBulkResponseTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
-use Spryker\Glue\GlueApplication\Rest\Request\Data\MetadataInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 class OrderBudgetsBulkProcessorTest extends Unit
@@ -38,7 +36,6 @@ class OrderBudgetsBulkProcessorTest extends Unit
     protected RestResponseInterface|MockObject $restResponseMock;
 
     protected OrderBudgetsBulkProcessor $orderBudgetsBulkProcessor;
-
 
     /**
      * @return void
@@ -126,7 +123,7 @@ class OrderBudgetsBulkProcessorTest extends Unit
             $this->restResponseMock,
             $this->orderBudgetsBulkProcessor->process(
                 $this->restRequestMock,
-                $this->restOrderBudgetsBulkRequestAttributesTransferMock
+                $this->restOrderBudgetsBulkRequestAttributesTransferMock,
             ),
         );
     }

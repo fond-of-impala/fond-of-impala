@@ -62,12 +62,12 @@ class UuidsFilterTest extends Unit
             ->willReturn(null);
 
         $uuids = $this->uuidsFilter->filterFromRestOrderBudgetsBulkRequest(
-            $this->restOrderBudgetsBulkRequestTransferMock
+            $this->restOrderBudgetsBulkRequestTransferMock,
         );
 
         static::assertEquals(
             [$uuid],
-            $uuids
+            $uuids,
         );
     }
 }

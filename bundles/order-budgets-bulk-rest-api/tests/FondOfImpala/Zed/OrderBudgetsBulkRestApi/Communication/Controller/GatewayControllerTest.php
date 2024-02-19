@@ -15,5 +15,4 @@ class GatewayControllerTest extends Unit
 
         $this->gatewayController = new GatewayController();
     }
-
 }
