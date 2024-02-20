@@ -70,14 +70,14 @@ class BulkProcessorTest extends Unit
     {
         $id = 9;
 
-        $this->restOrderBudgetsBulkRequestTransferMock->expects(static::atLeastOnce())
-            ->method('getOrderBudgets')
-            ->willReturn(new ArrayObject($this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks));
-
         $this->restOrderBudgetsBulkRequestExpanderPluginMock->expects(static::atLeastOnce())
             ->method('expand')
             ->with($this->restOrderBudgetsBulkRequestTransferMock)
             ->willReturn($this->restOrderBudgetsBulkRequestTransferMock);
+
+        $this->restOrderBudgetsBulkRequestTransferMock->expects(static::atLeastOnce())
+            ->method('getOrderBudgets')
+            ->willReturn(new ArrayObject($this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks));
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getId')
@@ -99,8 +99,7 @@ class BulkProcessorTest extends Unit
         );
 
         static::assertTrue($restOrderBudgetsBulkResponseTransfer->getIsSuccessful());
-        static::assertEquals(2, $restOrderBudgetsBulkResponseTransfer->getActualCount());
-        static::assertEquals(1, $restOrderBudgetsBulkResponseTransfer->getCurrentCount());
+        static::assertEquals([0], $restOrderBudgetsBulkResponseTransfer->getInvalidIndexes());
     }
 
     /**
@@ -108,13 +107,12 @@ class BulkProcessorTest extends Unit
      */
     public function testProcessWithError(): void
     {
-        $this->restOrderBudgetsBulkRequestTransferMock->expects(static::atLeastOnce())
-            ->method('getOrderBudgets')
-            ->willReturn(new ArrayObject($this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks));
-
         $this->restOrderBudgetsBulkRequestExpanderPluginMock->expects(static::atLeastOnce())
             ->method('expand')
             ->willThrowException(new Exception());
+
+        $this->restOrderBudgetsBulkRequestTransferMock->expects(static::never())
+            ->method('getOrderBudgets');
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMocks[0]->expects(static::never())
             ->method('getId');

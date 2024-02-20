@@ -6,6 +6,10 @@
         <property name="orderBudgets" type="RestOrderBudgetsBulkOrderBudget[]" singular="orderBudget"/>
     </transfer>
 
+    <transfer name="RestOrderBudgetsBulk">
+        <property name="invalidIndexes" type="int[]" singular="invalidIndex"/>
+    </transfer>
+
     <transfer name="RestOrderBudgetsBulkOrderBudget">
         <property name="id" type="string"/>
         <property name="nextInitialBudget" type="int"/>
@@ -24,8 +28,7 @@
 
     <transfer name="RestOrderBudgetsBulkResponse">
         <property name="isSuccessful" type="bool"/>
-        <property name="currentCount" type="int" />
-        <property name="actualCount" type="int" />
+        <property name="invalidIndexes" type="int[]" singular="invalidIndex" />
     </transfer>
 
     <transfer name="OrderBudget">

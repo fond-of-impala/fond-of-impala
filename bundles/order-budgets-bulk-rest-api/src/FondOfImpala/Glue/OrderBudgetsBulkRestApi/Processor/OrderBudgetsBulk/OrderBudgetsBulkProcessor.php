@@ -52,8 +52,10 @@ class OrderBudgetsBulkProcessor implements OrderBudgetsBulkProcessorInterface
             ->fromRestOrderBudgetsBulkRequestAttributes($restOrderBudgetsBulkRequestAttributesTransfer)
             ->setCustomerReference($this->customerReferenceFilter->filterFromRestRequest($restRequest));
 
-        $this->client->bulkProcess($restOrderBudgetsBulkRequestTransfer);
+        $restOrderBudgetsBulkResponseTransfer = $this->client->bulkProcess($restOrderBudgetsBulkRequestTransfer);
 
-        return $this->restResponseBuilder->buildEmptyRestResponse();
+        return $this->restResponseBuilder->buildRestResponseByRestOrderBudgetsBulkResponse(
+            $restOrderBudgetsBulkResponseTransfer,
+        );
     }
 }

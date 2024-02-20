@@ -91,7 +91,7 @@ class OrderBudgetsBulkProcessorTest extends Unit
     /**
      * @return void
      */
-    public function testFind(): void
+    public function testProcess(): void
     {
         $customerReference = 'FOO-C--1';
 
@@ -116,7 +116,8 @@ class OrderBudgetsBulkProcessorTest extends Unit
             ->willReturn($this->restOrderBudgetsBulkResponseTransferMock);
 
         $this->restResponseBuilderMock->expects(static::atLeastOnce())
-            ->method('buildEmptyRestResponse')
+            ->method('buildRestResponseByRestOrderBudgetsBulkResponse')
+            ->with($this->restOrderBudgetsBulkResponseTransferMock)
             ->willReturn($this->restResponseMock);
 
         static::assertEquals(

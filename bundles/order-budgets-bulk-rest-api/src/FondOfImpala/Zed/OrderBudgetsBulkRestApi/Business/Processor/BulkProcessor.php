@@ -50,16 +50,16 @@ class BulkProcessor implements BulkProcessorInterface
     protected function executeProcess(
         RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransfer
     ): RestOrderBudgetsBulkResponseTransfer {
-        $currentCount = 0;
-        $actualCount = $restOrderBudgetsBulkRequestTransfer->getOrderBudgets()
-            ->count();
+        $invalidIndexes = [];
 
         foreach ($this->restOrderBudgetsBulkRequestExpanderPlugins as $plugin) {
             $restOrderBudgetsBulkRequestTransfer = $plugin->expand($restOrderBudgetsBulkRequestTransfer);
         }
 
-        foreach ($restOrderBudgetsBulkRequestTransfer->getOrderBudgets() as $restOrderBudgetsBulkRequestOrderBudgetTransfer) {
+        foreach ($restOrderBudgetsBulkRequestTransfer->getOrderBudgets() as $index => $restOrderBudgetsBulkRequestOrderBudgetTransfer) {
             if ($restOrderBudgetsBulkRequestOrderBudgetTransfer->getId() === null) {
+                $invalidIndexes[] = $index;
+
                 continue;
             }
 
@@ -67,13 +67,10 @@ class BulkProcessor implements BulkProcessorInterface
                 OrderBudgetsBulkRestApiEvents::PERSIST_PROCESS,
                 $restOrderBudgetsBulkRequestOrderBudgetTransfer,
             );
-
-            ++$currentCount;
         }
 
         return (new RestOrderBudgetsBulkResponseTransfer())
             ->setIsSuccessful(true)
-            ->setActualCount($actualCount)
-            ->setCurrentCount($currentCount);
+            ->setInvalidIndexes($invalidIndexes);
     }
 }
