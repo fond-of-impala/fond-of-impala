@@ -9,24 +9,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class BusinessCentralOrderBudgetsBulkRestApiFacadeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\BusinessCentralOrderBudgetsBulkRestApiFacadeInterface
-     */
     protected BusinessCentralOrderBudgetsBulkRestApiFacadeInterface $facade;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\BusinessCentralOrderBudgetsBulkRestApiBusinessFactory
-     */
     protected MockObject|BusinessCentralOrderBudgetsBulkRestApiBusinessFactory $factoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\Expander\RestOrderBudgetsBulkRequestExpanderInterface
-     */
     protected MockObject|RestOrderBudgetsBulkRequestExpanderInterface $restOrderBudgetsBulkRequestExpanderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransferMock;
 
     /**

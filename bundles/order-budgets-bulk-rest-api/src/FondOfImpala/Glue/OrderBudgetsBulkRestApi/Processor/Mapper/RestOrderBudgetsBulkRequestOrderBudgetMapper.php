@@ -31,7 +31,7 @@ class RestOrderBudgetsBulkRequestOrderBudgetMapper implements RestOrderBudgetsBu
     ): RestOrderBudgetsBulkRequestOrderBudgetTransfer {
         $restOrderBudgetsBulkRequestOrderBudgetTransfer = (new RestOrderBudgetsBulkRequestOrderBudgetTransfer())
             ->setUuid($restOrderBudgetsBulkOrderBudgetTransfer->getId())
-            ->setInitialBudget($restOrderBudgetsBulkOrderBudgetTransfer->getInitialBudget());
+            ->setNextInitialBudget($restOrderBudgetsBulkOrderBudgetTransfer->getNextInitialBudget());
 
         foreach ($this->restOrderBudgetsBulkRequestOrderBudgetMapperPlugins as $plugin) {
             $restOrderBudgetsBulkRequestOrderBudgetTransfer = $plugin->mapRestOrderBudgetsBulkOrderBudgetToRestOrderBudgetsBulkRequestOrderBudget(

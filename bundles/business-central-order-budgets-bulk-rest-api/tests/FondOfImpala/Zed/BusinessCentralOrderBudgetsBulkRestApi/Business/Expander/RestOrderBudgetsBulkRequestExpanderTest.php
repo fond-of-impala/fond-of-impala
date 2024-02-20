@@ -13,34 +13,16 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestOrderBudgetsBulkRequestExpanderTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\Reader\OrderBudgetReaderInterface
-     */
     protected MockObject|OrderBudgetReaderInterface $companyReaderMock;
 
-    /**
-     * @var \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\Expander\RestOrderBudgetsBulkRequestExpanderInterface
-     */
     protected RestOrderBudgetsBulkRequestExpanderInterface $expander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\Filter\DebtorNumbersFilterInterface
-     */
     protected MockObject|DebtorNumbersFilterInterface $debtorNumbersFilterMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestCompanyTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestCompanyTransfer $restOrderBudgetsBulkRequestCompanyTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestOrderBudgetTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransferMock;
 
     /**

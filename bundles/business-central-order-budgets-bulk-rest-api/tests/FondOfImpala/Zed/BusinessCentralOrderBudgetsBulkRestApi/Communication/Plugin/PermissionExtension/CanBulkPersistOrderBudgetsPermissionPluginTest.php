@@ -6,9 +6,6 @@ use Codeception\Test\Unit;
 
 class CanBulkPersistOrderBudgetsPermissionPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Communication\Plugin\PermissionExtension\CanBulkPersistOrderBudgetsPermissionPlugin
-     */
     protected CanBulkPersistOrderBudgetsPermissionPlugin $plugin;
 
     /**

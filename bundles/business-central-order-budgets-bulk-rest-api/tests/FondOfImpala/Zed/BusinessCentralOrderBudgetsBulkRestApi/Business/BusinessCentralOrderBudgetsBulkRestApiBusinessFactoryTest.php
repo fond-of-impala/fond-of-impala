@@ -9,9 +9,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class BusinessCentralOrderBudgetsBulkRestApiBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\BusinessCentralOrderBudgetsBulkRestApiBusinessFactory
-     */
     protected BusinessCentralOrderBudgetsBulkRestApiBusinessFactory $factory;
 
     /**

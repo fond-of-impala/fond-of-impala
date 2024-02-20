@@ -11,24 +11,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class DebtorNumbersFilterTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\Filter\DebtorNumbersFilterInterface
-     */
     protected DebtorNumbersFilterInterface $filter;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestOrderBudgetTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestCompanyTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestCompanyTransfer $restOrderBudgetsBulkRequestCompanyTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestTransfer $restOrderBudgetsBulkRequestTransferMock;
 
     /**

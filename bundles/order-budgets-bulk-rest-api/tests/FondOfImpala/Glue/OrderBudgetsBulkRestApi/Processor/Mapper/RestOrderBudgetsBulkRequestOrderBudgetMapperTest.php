@@ -48,15 +48,15 @@ class RestOrderBudgetsBulkRequestOrderBudgetMapperTest extends Unit
     public function testFromRestOrderBudgetsBulkOrderBudget(): void
     {
         $uuid = 'bccfc30e-550d-4367-902f-7b7f5bbe8520';
-        $initialBudget = 100000;
+        $nextInitialBudget = 100000;
 
         $this->restOrderBudgetsBulkOrderBudgetTransferMock->expects(static::atLeastOnce())
             ->method('getId')
             ->willReturn($uuid);
 
         $this->restOrderBudgetsBulkOrderBudgetTransferMock->expects(static::atLeastOnce())
-            ->method('getInitialBudget')
-            ->willReturn($initialBudget);
+            ->method('getNextInitialBudget')
+            ->willReturn($nextInitialBudget);
 
         $this->restOrderBudgetsBulkRequestOrderBudgetMapperPluginMock->expects(static::atLeastOnce())
             ->method('mapRestOrderBudgetsBulkOrderBudgetToRestOrderBudgetsBulkRequestOrderBudget')
@@ -64,7 +64,7 @@ class RestOrderBudgetsBulkRequestOrderBudgetMapperTest extends Unit
                 $this->restOrderBudgetsBulkOrderBudgetTransferMock,
                 static::callback(
                     static fn (RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransfer): bool => $restOrderBudgetsBulkRequestOrderBudgetTransfer->getUuid() === $uuid
-                        && $restOrderBudgetsBulkRequestOrderBudgetTransfer->getInitialBudget() === $initialBudget
+                        && $restOrderBudgetsBulkRequestOrderBudgetTransfer->getNextInitialBudget() === $nextInitialBudget
                 ),
             )->willReturn($this->restOrderBudgetsBulkRequestOrderBudgetTransferMock);
 

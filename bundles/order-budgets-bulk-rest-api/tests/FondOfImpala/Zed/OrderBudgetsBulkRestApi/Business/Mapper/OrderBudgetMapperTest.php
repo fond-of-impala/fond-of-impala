@@ -32,15 +32,15 @@ class OrderBudgetMapperTest extends Unit
     public function testFromRestOrderBudgetsBulkRequestOrderBudget(): void
     {
         $id = 6;
-        $initialBudget = 10000;
+        $nextInitialBudget = 10000;
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock->expects(static::atLeastOnce())
             ->method('getId')
             ->willReturn($id);
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock->expects(static::atLeastOnce())
-            ->method('getInitialBudget')
-            ->willReturn($initialBudget);
+            ->method('getNextInitialBudget')
+            ->willReturn($nextInitialBudget);
 
         $orderBudgetTransfer = $this->orderBudgetMapper->fromRestOrderBudgetsBulkRequestOrderBudget(
             $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
@@ -52,8 +52,8 @@ class OrderBudgetMapperTest extends Unit
         );
 
         static::assertEquals(
-            $initialBudget,
-            $orderBudgetTransfer->getInitialBudget(),
+            $nextInitialBudget,
+            $orderBudgetTransfer->getNextInitialBudget(),
         );
     }
 
@@ -69,7 +69,7 @@ class OrderBudgetMapperTest extends Unit
             ->willReturn($id);
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock->expects(static::never())
-            ->method('getInitialBudget');
+            ->method('getNextInitialBudget');
 
         $orderBudgetTransfer = $this->orderBudgetMapper->fromRestOrderBudgetsBulkRequestOrderBudget(
             $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,
@@ -84,15 +84,15 @@ class OrderBudgetMapperTest extends Unit
     public function testFromRestOrderBudgetsBulkRequestOrderBudgetWithInvalidInitialBudget(): void
     {
         $id = 5;
-        $initialBudget = null;
+        $nextInitialBudget = null;
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock->expects(static::atLeastOnce())
             ->method('getId')
             ->willReturn($id);
 
         $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock->expects(static::atLeastOnce())
-            ->method('getInitialBudget')
-            ->willReturn($initialBudget);
+            ->method('getNextInitialBudget')
+            ->willReturn($nextInitialBudget);
 
         $orderBudgetTransfer = $this->orderBudgetMapper->fromRestOrderBudgetsBulkRequestOrderBudget(
             $this->restOrderBudgetsBulkRequestOrderBudgetTransferMock,

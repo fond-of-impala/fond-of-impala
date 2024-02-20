@@ -21,13 +21,13 @@ class OrderBudgetMapper implements OrderBudgetMapperInterface
             return null;
         }
 
-        $initialBudget = $restOrderBudgetsBulkRequestOrderBudgetTransfer->getInitialBudget();
+        $nextInitialBudget = $restOrderBudgetsBulkRequestOrderBudgetTransfer->getNextInitialBudget();
 
-        if ($initialBudget === null) {
+        if ($nextInitialBudget === null) {
             return null;
         }
 
         return (new OrderBudgetTransfer())->setIdOrderBudget($idOrderBudget)
-            ->setInitialBudget($initialBudget);
+            ->setNextInitialBudget($nextInitialBudget);
     }
 }

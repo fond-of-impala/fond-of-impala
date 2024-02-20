@@ -8,14 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class OrderBudgetReaderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Business\Reader\OrderBudgetReaderInterface
-     */
     protected OrderBudgetReaderInterface $reader;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\BusinessCentralOrderBudgetsBulkRestApi\Persistence\BusinessCentralOrderBudgetsBulkRestApiRepositoryInterface
-     */
     protected MockObject|BusinessCentralOrderBudgetsBulkRestApiRepositoryInterface $repositoryMock;
 
     /**

@@ -11,29 +11,14 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class BusinessCentralRestOrderBudgetsBulkRequestOrderBudgetMapperPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Glue\BusinessCentralOrderBudgetsBulkRestApi\Plugin\OrderBudgetsBulkRestApiExtension\BusinessCentralRestOrderBudgetsBulkRequestOrderBudgetMapperPlugin
-     */
     protected BusinessCentralRestOrderBudgetsBulkRequestOrderBudgetMapperPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkCompanyTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkCompanyTransfer $restOrderBudgetsBulkCompanyTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestCompanyTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestCompanyTransfer $restOrderBudgetsBulkRequestCompanyTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkOrderBudgetTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkOrderBudgetTransfer $restOrderBudgetsBulkOrderBudgetTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestOrderBudgetsBulkRequestOrderBudgetTransfer
-     */
     protected MockObject|RestOrderBudgetsBulkRequestOrderBudgetTransfer $restOrderBudgetsBulkRequestOrderBudgetTransferMock;
 
     /**
@@ -138,8 +123,6 @@ class BusinessCentralRestOrderBudgetsBulkRequestOrderBudgetMapperPluginTest exte
      */
     public function testMapRestOrderBudgetsBulkOrderBudgetToRestOrderBudgetsBulkRequestOrderBudgetWithMissingRequestCompany(): void
     {
-        $debtorNumber = '11111';
-
         $this->restOrderBudgetsBulkOrderBudgetTransferMock->expects(static::atLeastOnce())
             ->method('getCompany')
             ->willReturn($this->restOrderBudgetsBulkCompanyTransferMock);
