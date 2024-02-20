@@ -12,15 +12,22 @@ use Spryker\Glue\Kernel\AbstractPlugin;
  */
 class AvailabilityChannelFallbackRestCompanySearchResultItemExpanderPlugin extends AbstractPlugin implements RestCompanySearchResultItemExpanderPluginInterface
 {
-    public function expand(RestCompanySearchResultItemTransfer $restCompanySearchResultItemTransfer, CompanyTransfer $companyTransfer): RestCompanySearchResultItemTransfer
-    {
+    /**
+     * @param \Generated\Shared\Transfer\RestCompanySearchResultItemTransfer $restCompanySearchResultItemTransfer
+     * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
+     *
+     * @return \Generated\Shared\Transfer\RestCompanySearchResultItemTransfer
+     */
+    public function expand(
+        RestCompanySearchResultItemTransfer $restCompanySearchResultItemTransfer,
+        CompanyTransfer $companyTransfer
+    ): RestCompanySearchResultItemTransfer {
         $channel = $companyTransfer->getAvailabilityChannel();
 
-        if ($channel === null || $channel === ''){
+        if ($channel === null || $channel === '') {
             $channel = $this->getConfig()->getFallbackAvailabilityChannel();
         }
 
         return $restCompanySearchResultItemTransfer->setAvailabilityChannel($channel);
     }
-
 }
