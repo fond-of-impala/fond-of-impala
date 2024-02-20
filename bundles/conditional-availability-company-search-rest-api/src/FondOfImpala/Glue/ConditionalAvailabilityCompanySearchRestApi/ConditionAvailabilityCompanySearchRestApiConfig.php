@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Glue\ConditionAvailabilityCompanySearchRestApi;
+namespace FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi;
 
 use FondOfImpala\Shared\ConditionalAvailabilityCompanySearchRestApi\ConditionalAvailabilityCompanySearchRestApiConstants;
 use Spryker\Glue\Kernel\AbstractBundleConfig;

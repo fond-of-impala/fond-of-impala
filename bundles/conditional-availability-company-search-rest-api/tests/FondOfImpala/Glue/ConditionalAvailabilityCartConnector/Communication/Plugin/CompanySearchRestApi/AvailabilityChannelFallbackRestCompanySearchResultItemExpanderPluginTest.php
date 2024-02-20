@@ -1,9 +1,9 @@
 <?php
 
-namespace FondOfImpala\Glue\ConditionAvailabilityCompanySearchRestApi\Communication\Plugin\CompanySearchRestApi;
+namespace FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\Communication\Plugin\CompanySearchRestApi;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Glue\ConditionAvailabilityCompanySearchRestApi\ConditionAvailabilityCompanySearchRestApiConfig;
+use FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\ConditionAvailabilityCompanySearchRestApiConfig;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\RestCompanySearchResultItemTransfer;
 use PHPUnit\Framework\MockObject\MockObject;

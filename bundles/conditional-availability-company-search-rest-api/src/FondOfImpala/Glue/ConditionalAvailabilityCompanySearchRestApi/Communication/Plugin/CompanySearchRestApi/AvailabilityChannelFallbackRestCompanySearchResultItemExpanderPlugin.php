@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfImpala\Glue\ConditionAvailabilityCompanySearchRestApi\Communication\Plugin\CompanySearchRestApi;
+namespace FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\Communication\Plugin\CompanySearchRestApi;
 
 use FondOfOryx\Glue\CompanySearchRestApiExtension\Dependency\Plugin\RestCompanySearchResultItemExpanderPluginInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
@@ -8,7 +8,7 @@ use Generated\Shared\Transfer\RestCompanySearchResultItemTransfer;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
 /**
- * @method \FondOfImpala\Glue\ConditionAvailabilityCompanySearchRestApi\ConditionAvailabilityCompanySearchRestApiConfig getConfig()
+ * @method \FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\ConditionAvailabilityCompanySearchRestApiConfig getConfig()
  */
 class AvailabilityChannelFallbackRestCompanySearchResultItemExpanderPlugin extends AbstractPlugin implements RestCompanySearchResultItemExpanderPluginInterface
 {
