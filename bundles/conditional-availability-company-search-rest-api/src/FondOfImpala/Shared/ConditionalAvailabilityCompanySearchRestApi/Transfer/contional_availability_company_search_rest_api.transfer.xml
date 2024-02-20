@@ -5,4 +5,8 @@
     <transfer name="RestCompanySearchResultItem">
         <property name="availabilityChannel" type="string" />
     </transfer>
+
+    <transfer name="Company">
+        <property name="availabilityChannel" type="string" />
+    </transfer>
 </transfers>
