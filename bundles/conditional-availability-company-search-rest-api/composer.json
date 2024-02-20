@@ -11,8 +11,7 @@
   "require": {
     "php": ">=8.0",
     "fond-of-impala/conditional-availability": "^1.0.0",
-    "fond-of-oryx/company-search-rest-api": "^1.0.0",
-    "fond-of-oryx/company-search-rest-api-extension": "^1.1.0"
+    "fond-of-oryx/company-search-rest-api": "^2.2.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
