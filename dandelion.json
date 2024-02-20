@@ -145,7 +145,10 @@
     },
     "conditional-availability-company-connector": {
       "path": "bundles/conditional-availability-company-connector",
-      "version": "1.1.0"
+      "version": "1.1.0",
+    "conditional-availability-company-search-rest-api": {
+      "path": "bundles/conditional-availability-company-search-rest-api",
+      "version": "1.0.0"
     },
     "conditional-availability-customers-rest-api": {
       "path": "bundles/conditional-availability-customers-rest-api",
