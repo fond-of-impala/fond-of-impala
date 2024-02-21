@@ -5,7 +5,7 @@ namespace FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi;
 use FondOfImpala\Shared\ConditionalAvailabilityCompanySearchRestApi\ConditionalAvailabilityCompanySearchRestApiConstants;
 use Spryker\Glue\Kernel\AbstractBundleConfig;
 
-class ConditionAvailabilityCompanySearchRestApiConfig extends AbstractBundleConfig
+class ConditionalAvailabilityCompanySearchRestApiConfig extends AbstractBundleConfig
 {
     /**
      * @return string

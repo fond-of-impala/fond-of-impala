@@ -8,7 +8,7 @@ use Generated\Shared\Transfer\RestCompanySearchResultItemTransfer;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
 /**
- * @method \FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\ConditionAvailabilityCompanySearchRestApiConfig getConfig()
+ * @method \FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\ConditionalAvailabilityCompanySearchRestApiConfig getConfig()
  */
 class AvailabilityChannelFallbackRestCompanySearchResultItemExpanderPlugin extends AbstractPlugin implements RestCompanySearchResultItemExpanderPluginInterface
 {
