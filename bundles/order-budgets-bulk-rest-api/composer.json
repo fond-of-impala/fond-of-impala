@@ -18,6 +18,7 @@
     "php": ">=8.0",
     "fond-of-impala/order-budgets-bulk-rest-api-extension": "^1.0.0",
     "fond-of-oryx/order-budget": "^2.2.0",
+    "spryker/event": "^1.0.0 || ^2.0.0",
     "spryker/glue-application": "^1.0.0",
     "spryker/glue-application-extension": "^1.0.0",
     "spryker/uuid-behavior": "^1.0.0"
