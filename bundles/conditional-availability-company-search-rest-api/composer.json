@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "fond-of-impala/conditional-availability": "^1.0.0",
+    "fond-of-impala/conditional-availability": "^2.0.0",
     "fond-of-oryx/company-search-rest-api": "^2.2.0"
   },
   "require-dev": {
