@@ -16,9 +16,11 @@
   },
   "require": {
     "php": ">=8.0",
+    "fond-of-impala/navision-company": "^1.0.0",
     "fond-of-impala/order-budgets-bulk-rest-api-extension": "^1.0.0",
     "fond-of-oryx/company-business-unit-order-budget": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/order-budget": "^2.2.0",
+    "spryker/company-role": "^1.0.0",
     "spryker/permission-extension": "^1.0.0"
   },
   "require-dev": {

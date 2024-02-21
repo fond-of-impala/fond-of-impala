@@ -23,6 +23,10 @@
       "path": "bundles/allowed-product-quantity-search",
       "version": "1.0.0"
     },
+    "business-central-order-budgets-bulk-rest-api": {
+      "path": "bundles/business-central-order-budgets-bulk-rest-api",
+      "version": "1.0.0"
+    },
     "cart-validation": {
       "path": "bundles/cart-validation",
       "version": "1.0.0"
