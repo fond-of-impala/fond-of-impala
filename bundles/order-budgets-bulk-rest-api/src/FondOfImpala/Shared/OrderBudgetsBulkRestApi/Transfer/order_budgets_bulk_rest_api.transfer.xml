@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+    <transfer name="RestOrderBudgetsBulkRequestAttributes">
+        <property name="orderBudgets" type="RestOrderBudgetsBulkOrderBudget[]" singular="orderBudget"/>
+    </transfer>
+
+    <transfer name="RestOrderBudgetsBulk">
+        <property name="invalidIndexes" type="int[]" singular="invalidIndex"/>
+    </transfer>
+
+    <transfer name="RestOrderBudgetsBulkOrderBudget">
+        <property name="id" type="string"/>
+        <property name="nextInitialBudget" type="int"/>
+    </transfer>
+
+    <transfer name="RestOrderBudgetsBulkRequest">
+        <property name="customerReference" type="string"/>
+        <property name="orderBudgets" type="RestOrderBudgetsBulkRequestOrderBudget[]" singular="orderBudget"/>
+    </transfer>
+
+    <transfer name="RestOrderBudgetsBulkRequestOrderBudget">
+        <property name="id" type="int"/>
+        <property name="uuid" type="string"/>
+        <property name="nextInitialBudget" type="int"/>
+    </transfer>
+
+    <transfer name="RestOrderBudgetsBulkResponse">
+        <property name="isSuccessful" type="bool"/>
+        <property name="invalidIndexes" type="int[]" singular="invalidIndex" />
+    </transfer>
+
+    <transfer name="OrderBudget">
+        <property name="idOrderBudget" type="int"/>
+        <property name="nextInitialBudget" type="int" />
+    </transfer>
+</transfers>
