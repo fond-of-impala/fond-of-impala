@@ -3,14 +3,14 @@
 namespace FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\Communication\Plugin\CompanySearchRestApi;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\ConditionAvailabilityCompanySearchRestApiConfig;
+use FondOfImpala\Glue\ConditionalAvailabilityCompanySearchRestApi\ConditionalAvailabilityCompanySearchRestApiConfig;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\RestCompanySearchResultItemTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class AvailabilityChannelFallbackRestCompanySearchResultItemExpanderPluginTest extends Unit
 {
-    protected ConditionAvailabilityCompanySearchRestApiConfig|MockObject $configMock;
+    protected ConditionalAvailabilityCompanySearchRestApiConfig|MockObject $configMock;
 
     protected RestCompanySearchResultItemTransfer|MockObject $restCompanySearchResultItemTransferMock;
 
@@ -23,7 +23,7 @@ class AvailabilityChannelFallbackRestCompanySearchResultItemExpanderPluginTest e
      */
     protected function _before(): void
     {
-        $this->configMock = $this->getMockBuilder(ConditionAvailabilityCompanySearchRestApiConfig::class)
+        $this->configMock = $this->getMockBuilder(ConditionalAvailabilityCompanySearchRestApiConfig::class)
             ->disableOriginalConstructor()
             ->getMock();
 
