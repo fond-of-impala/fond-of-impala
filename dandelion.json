@@ -223,6 +223,10 @@
       "path": "bundles/navision-company-user",
       "version": "1.0.0"
     },
+    "order-budgets-bulk-rest-api-extension": {
+      "path": "bundles/order-budgets-bulk-rest-api-extension",
+      "version": "1.0.0"
+    },
     "permission-cart-search-rest-api": {
       "path": "bundles/permission-cart-search-rest-api",
       "version": "1.0.0"
