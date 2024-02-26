@@ -187,6 +187,10 @@
       "path": "bundles/conditional-availability-sales-connector",
       "version": "1.0.0"
     },
+    "currency-company-search-rest-api": {
+      "path": "bundles/currency-company-search-rest-api",
+      "version": "1.0.0"
+    },
     "customer-anonymizer-company-user-connector": {
       "path": "bundles/customer-anonymizer-company-user-connector",
       "version": "1.0.1"
