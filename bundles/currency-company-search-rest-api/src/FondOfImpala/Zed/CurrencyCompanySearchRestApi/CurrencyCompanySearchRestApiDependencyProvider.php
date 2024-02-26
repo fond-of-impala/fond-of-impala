@@ -39,7 +39,7 @@ class CurrencyCompanySearchRestApiDependencyProvider extends AbstractBundleDepen
         $container[static::FACADE_CURRENCY] = static fn (
             Container $container
         ): CurrencyCompanySearchRestApiToCurrencyFacadeInterface => new CurrencyCompanySearchRestApiToCurrencyFacadeBridge(
-            $container->getLocator()->currency()->facade()
+            $container->getLocator()->currency()->facade(),
         );
 
         return $container;

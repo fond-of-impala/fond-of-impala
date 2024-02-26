@@ -47,7 +47,7 @@ class CurrencyCompanySearchRestApiToCurrencyFacadeBridgeTest extends Unit
 
         static::assertEquals(
             $this->currencyTransferMock,
-            $this->bridge->getByIdCurrency($idCurrency)
+            $this->bridge->getByIdCurrency($idCurrency),
         );
     }
 }

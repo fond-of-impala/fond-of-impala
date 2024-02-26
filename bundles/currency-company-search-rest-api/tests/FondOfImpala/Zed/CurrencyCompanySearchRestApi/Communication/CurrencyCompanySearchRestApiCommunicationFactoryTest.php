@@ -35,6 +35,9 @@ class CurrencyCompanySearchRestApiCommunicationFactoryTest extends Unit
         $this->factory->setContainer($this->containerMock);
     }
 
+    /**
+     * @return void
+     */
     public function testGetCurrencyFacade(): void
     {
         $this->containerMock->expects(static::atLeastOnce())

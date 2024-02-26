@@ -64,8 +64,8 @@ class CurrencyRestCompanySearchResultItemExpanderPluginTest extends Unit
             $this->restCompanySearchResultItemTransferMock,
             $this->plugin->expand(
                 $this->restCompanySearchResultItemTransferMock,
-                $this->companyTransferMock
-            )
+                $this->companyTransferMock,
+            ),
         );
     }
 
@@ -85,8 +85,8 @@ class CurrencyRestCompanySearchResultItemExpanderPluginTest extends Unit
             $this->restCompanySearchResultItemTransferMock,
             $this->plugin->expand(
                 $this->restCompanySearchResultItemTransferMock,
-                $this->companyTransferMock
-            )
+                $this->companyTransferMock,
+            ),
         );
     }
 }

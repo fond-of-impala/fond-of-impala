@@ -75,7 +75,7 @@ class CurrencyCompanyExpanderPluginTest extends Unit
 
         static::assertEquals(
             $this->companyTransferMock,
-            $this->plugin->expand($this->companyTransferMock)
+            $this->plugin->expand($this->companyTransferMock),
         );
     }
 }

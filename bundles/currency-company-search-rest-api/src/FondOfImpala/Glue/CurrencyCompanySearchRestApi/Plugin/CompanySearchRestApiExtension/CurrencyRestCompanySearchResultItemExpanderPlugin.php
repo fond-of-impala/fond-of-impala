@@ -9,13 +9,12 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 class CurrencyRestCompanySearchResultItemExpanderPlugin extends AbstractPlugin implements RestCompanySearchResultItemExpanderPluginInterface
 {
-
-    /**
-     * @param \Generated\Shared\Transfer\RestCompanySearchResultItemTransfer $restCompanySearchResultItemTransfer
-     * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestCompanySearchResultItemTransfer
-     */
+ /**
+  * @param \Generated\Shared\Transfer\RestCompanySearchResultItemTransfer $restCompanySearchResultItemTransfer
+  * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
+  *
+  * @return \Generated\Shared\Transfer\RestCompanySearchResultItemTransfer
+  */
     public function expand(
         RestCompanySearchResultItemTransfer $restCompanySearchResultItemTransfer,
         CompanyTransfer $companyTransfer

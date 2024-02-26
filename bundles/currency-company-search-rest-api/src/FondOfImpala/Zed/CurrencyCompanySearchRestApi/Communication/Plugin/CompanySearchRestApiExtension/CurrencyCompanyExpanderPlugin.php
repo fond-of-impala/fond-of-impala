@@ -17,7 +17,8 @@ class CurrencyCompanyExpanderPlugin extends AbstractPlugin implements CompanyExp
      *
      * @return \Generated\Shared\Transfer\CompanyTransfer
      */
-    public function expand(CompanyTransfer $companyTransfer): CompanyTransfer {
+    public function expand(CompanyTransfer $companyTransfer): CompanyTransfer
+    {
         $idCurrency = $companyTransfer->getFkCurrency();
 
         if ($idCurrency === null) {
