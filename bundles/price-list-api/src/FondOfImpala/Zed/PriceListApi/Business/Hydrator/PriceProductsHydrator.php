@@ -48,9 +48,9 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
     }
 
     /**
-     * @param array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>> $groupedPriceProductTransfers
+     * @param array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>> $groupedPriceProductTransfers
      *
-     * @return array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>>
+     * @return array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>>
      */
     protected function hydrateWithProductAbstractIds(array $groupedPriceProductTransfers): array
     {
@@ -67,16 +67,18 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
                 continue;
             }
 
-            $groupedPriceProductTransfers[static::GROUPED_KEY_ABSTRACT][$sku]->setIdProductAbstract($productId);
+            foreach ($groupedPriceProductTransfers[static::GROUPED_KEY_ABSTRACT][$sku] as $productTransfer) {
+                $productTransfer->setIdProductAbstract($productId);
+            }
         }
 
         return $groupedPriceProductTransfers;
     }
 
     /**
-     * @param array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>> $groupedPriceProductTransfers
+     * @param array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>> $groupedPriceProductTransfers
      *
-     * @return array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>>
+     * @return array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>>
      */
     protected function hydrateWithProductConcreteIds(array $groupedPriceProductTransfers): array
     {
@@ -93,7 +95,9 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
                 continue;
             }
 
-            $groupedPriceProductTransfers[static::GROUPED_KEY_CONCRETE][$sku]->setIdProduct($productId);
+            foreach ($groupedPriceProductTransfers[static::GROUPED_KEY_CONCRETE][$sku] as $productTransfer) {
+                $productTransfer->setIdProduct($productId);
+            }
         }
 
         return $groupedPriceProductTransfers;
@@ -102,7 +106,7 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
     /**
      * @param array<\Generated\Shared\Transfer\PriceProductTransfer> $priceProductTransfers
      *
-     * @return array<string, array<string, \Generated\Shared\Transfer\PriceProductTransfer>>
+     * @return array<string, array<string, array<int, \Generated\Shared\Transfer\PriceProductTransfer>>>
      */
     protected function groupPriceProducts(array $priceProductTransfers): array
     {
@@ -115,7 +119,7 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
             $sku = $priceProductTransfer->getSkuProduct();
 
             if ($sku !== null && $priceProductTransfer->getIdProduct() === null) {
-                $groupedPriceProductTransfers[static::GROUPED_KEY_CONCRETE][$sku] = $priceProductTransfer;
+                $groupedPriceProductTransfers[static::GROUPED_KEY_CONCRETE][$sku][] = $priceProductTransfer;
 
                 continue;
             }
@@ -123,7 +127,7 @@ class PriceProductsHydrator implements PriceProductsHydratorInterface
             $sku = $priceProductTransfer->getSkuProductAbstract();
 
             if ($sku !== null && $priceProductTransfer->getIdProductAbstract() === null) {
-                $groupedPriceProductTransfers[static::GROUPED_KEY_ABSTRACT][$sku] = $priceProductTransfer;
+                $groupedPriceProductTransfers[static::GROUPED_KEY_ABSTRACT][$sku][] = $priceProductTransfer;
             }
         }
 

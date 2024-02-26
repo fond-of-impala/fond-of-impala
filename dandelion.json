@@ -23,6 +23,10 @@
       "path": "bundles/allowed-product-quantity-search",
       "version": "1.0.0"
     },
+    "business-central-order-budgets-bulk-rest-api": {
+      "path": "bundles/business-central-order-budgets-bulk-rest-api",
+      "version": "1.0.0"
+    },
     "cart-validation": {
       "path": "bundles/cart-validation",
       "version": "1.0.0"
@@ -147,6 +151,10 @@
       "path": "bundles/conditional-availability-company-connector",
       "version": "1.1.0"
     },
+    "conditional-availability-company-search-rest-api": {
+      "path": "bundles/conditional-availability-company-search-rest-api",
+      "version": "1.0.0"
+    },
     "conditional-availability-customers-rest-api": {
       "path": "bundles/conditional-availability-customers-rest-api",
       "version": "1.0.0"
@@ -177,6 +185,10 @@
     },
     "conditional-availability-sales-connector": {
       "path": "bundles/conditional-availability-sales-connector",
+      "version": "1.0.0"
+    },
+    "currency-company-search-rest-api": {
+      "path": "bundles/currency-company-search-rest-api",
       "version": "1.0.0"
     },
     "customer-anonymizer-company-user-connector": {
@@ -219,6 +231,14 @@
       "path": "bundles/navision-company-user",
       "version": "1.0.0"
     },
+    "order-budgets-bulk-rest-api": {
+      "path": "bundles/order-budgets-bulk-rest-api",
+      "version": "1.0.0"
+    },
+    "order-budgets-bulk-rest-api-extension": {
+      "path": "bundles/order-budgets-bulk-rest-api-extension",
+      "version": "1.0.0"
+    },
     "permission-cart-search-rest-api": {
       "path": "bundles/permission-cart-search-rest-api",
       "version": "1.0.0"
@@ -229,7 +249,7 @@
     },
     "price-list-api": {
       "path": "bundles/price-list-api",
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     "price-list-gui": {
       "path": "bundles/price-list-gui",
