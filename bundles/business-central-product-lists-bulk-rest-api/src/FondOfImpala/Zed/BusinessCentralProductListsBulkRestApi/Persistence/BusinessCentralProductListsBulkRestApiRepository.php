@@ -6,6 +6,8 @@ use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
+ * @codeCoverageIgnore
+ *
  * @method \FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Persistence\BusinessCentralProductListsBulkRestApiPersistenceFactory getFactory()
  */
 class BusinessCentralProductListsBulkRestApiRepository extends AbstractRepository implements BusinessCentralProductListsBulkRestApiRepositoryInterface
