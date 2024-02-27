@@ -56,7 +56,7 @@ class CompanyTypeProductListsBulkRestApiFacadeTest extends Unit
 
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
-            $this->facade->expandRestProductListsBulkRequest($this->restProductListsBulkRequestTransferMock)
+            $this->facade->expandRestProductListsBulkRequest($this->restProductListsBulkRequestTransferMock),
         );
     }
 }

@@ -37,11 +37,11 @@ class CustomerReaderTest extends Unit
         $groupedIdentifiers = [
             'customerReference' => [
                 'FOO--3',
-                'FOO--4'
+                'FOO--4',
             ], 'email' => [
                 'foo@bar.com',
-                'bar@foo.com'
-            ]
+                'bar@foo.com',
+            ],
         ];
 
         $this->repositoryMock->expects(static::atLeastOnce())
@@ -58,8 +58,8 @@ class CustomerReaderTest extends Unit
             $customerReferenceMap + $emailMap,
             $this->customerReader->getIdsByCustomerReferenceAndGroupedIdentifier(
                 $customerReference,
-                $groupedIdentifiers
-            )
+                $groupedIdentifiers,
+            ),
         );
     }
 
@@ -73,8 +73,8 @@ class CustomerReaderTest extends Unit
         $groupedIdentifiers = [
             'customerReference' => [
                 'FOO--3',
-                'FOO--4'
-            ], 'email' => []
+                'FOO--4',
+            ], 'email' => [],
         ];
 
         $this->repositoryMock->expects(static::atLeastOnce())
@@ -89,9 +89,8 @@ class CustomerReaderTest extends Unit
             $customerReferenceMap,
             $this->customerReader->getIdsByCustomerReferenceAndGroupedIdentifier(
                 $customerReference,
-                $groupedIdentifiers
-            )
+                $groupedIdentifiers,
+            ),
         );
     }
-
 }

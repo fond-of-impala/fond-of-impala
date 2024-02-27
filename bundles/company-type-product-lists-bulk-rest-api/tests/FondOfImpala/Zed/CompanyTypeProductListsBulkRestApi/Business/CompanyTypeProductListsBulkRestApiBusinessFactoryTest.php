@@ -35,8 +35,7 @@ class CompanyTypeProductListsBulkRestApiBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             RestProductListsBulkRequestExpander::class,
-            $this->factory->createRestProductListsBulkRequestExpander()
+            $this->factory->createRestProductListsBulkRequestExpander(),
         );
     }
-
 }
