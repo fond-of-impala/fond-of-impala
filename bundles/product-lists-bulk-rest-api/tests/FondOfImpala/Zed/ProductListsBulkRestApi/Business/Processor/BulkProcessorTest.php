@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestExpanderPluginInterface;
@@ -14,34 +15,16 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class BulkProcessorTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor\BulkProcessorInterface
-     */
     protected BulkProcessorInterface $processor;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeInterface
-     */
     protected MockObject|ProductListsBulkRestApiToEventFacadeInterface $productListsBulkRestApiToEventFacadeMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestExpanderPluginInterface
-     */
     protected MockObject|RestProductListsBulkRequestExpanderPluginInterface $restProductListsBulkRequestExpanderPluginMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentCheckerInterface $restProductListsBulkRequestAssignmentCheckerMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestTransfer
-     */
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransferMock;
 
     /**
@@ -76,11 +59,10 @@ class BulkProcessorTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-
         $this->processor = new BulkProcessor(
             $this->restProductListsBulkRequestAssignmentCheckerMock,
             $this->productListsBulkRestApiToEventFacadeMock,
-            [$this->restProductListsBulkRequestExpanderPluginMock]
+            [$this->restProductListsBulkRequestExpanderPluginMock],
         );
     }
 
@@ -114,7 +96,7 @@ class BulkProcessorTest extends Unit
             ->method('trigger')
             ->with(
                 'ProductListsBulkRestApi.assignment.process',
-                $this->restProductListsBulkRequestAssignmentTransferMock
+                $this->restProductListsBulkRequestAssignmentTransferMock,
             );
 
         $restProductListsBulkResponseTransfer = $this->processor
@@ -195,14 +177,13 @@ class BulkProcessorTest extends Unit
             ->with($this->restProductListsBulkRequestAssignmentTransferMock)
             ->willReturn(true);
 
-
         $this->productListsBulkRestApiToEventFacadeMock->expects(static::atLeastOnce())
             ->method('trigger')
             ->with(
                 'ProductListsBulkRestApi.assignment.process',
-                $this->restProductListsBulkRequestAssignmentTransferMock
+                $this->restProductListsBulkRequestAssignmentTransferMock,
             )
-            ->willThrowException( new \Exception());
+            ->willThrowException(new Exception());
 
         $restProductListsBulkResponseTransfer = $this->processor
             ->process($this->restProductListsBulkRequestTransferMock);

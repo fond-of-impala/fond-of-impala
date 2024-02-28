@@ -11,34 +11,16 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListsBulkRestApiFacadeTest extends Unit
 {
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor\BulkProcessorInterface
-     */
     protected MockObject|BulkProcessorInterface $bulkProcessorMock;
 
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\ProductListsBulkRestApiFacadeInterface
-     */
     protected ProductListsBulkRestApiFacadeInterface $facade;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\ProductListsBulkRestApiBusinessFactory
-     */
     protected MockObject|ProductListsBulkRestApiBusinessFactory $factoryMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestTransfer
-     */
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkResponseTransfer
-     */
     protected MockObject|RestProductListsBulkResponseTransfer $restProductListsBulkResponseTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface
-     */
     protected MockObject|RestProductListsBulkRequestExpanderInterface $restProductListsBulkRequestExpanderMock;
 
     /**
@@ -63,7 +45,6 @@ class ProductListsBulkRestApiFacadeTest extends Unit
         $this->restProductListsBulkResponseTransferMock = $this->getMockBuilder(RestProductListsBulkResponseTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
-
 
         $this->restProductListsBulkRequestExpanderMock = $this->getMockBuilder(RestProductListsBulkRequestExpanderInterface::class)
             ->disableOriginalConstructor()

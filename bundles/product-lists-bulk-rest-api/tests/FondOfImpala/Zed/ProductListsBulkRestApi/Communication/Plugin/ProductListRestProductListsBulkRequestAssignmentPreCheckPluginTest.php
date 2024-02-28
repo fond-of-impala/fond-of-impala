@@ -10,14 +10,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListRestProductListsBulkRequestAssignmentPreCheckPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Communication\Plugin\ProductListsBulkRestApiExtension\ProductListRestProductListsBulkRequestAssignmentPreCheckPlugin
-     */
     protected ProductListRestProductListsBulkRequestAssignmentPreCheckPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransferMock;
 
     /**
@@ -60,7 +54,7 @@ class ProductListRestProductListsBulkRequestAssignmentPreCheckPluginTest extends
 
         $this->restProductListsBulkRequestAssignmentProductListTransferMock->expects(static::atLeastOnce())
             ->method('getId')
-            ->willReturnOnConsecutiveCalls(1,1);
+            ->willReturnOnConsecutiveCalls(1, 1);
 
         $this->restProductListsBulkRequestAssignmentTransferMock->expects(static::atLeastOnce())
             ->method('getProductListsToUnassign')

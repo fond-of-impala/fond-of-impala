@@ -9,19 +9,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestProductListsBulkRequestAssignmentCheckerTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Checker\RestProductListsBulkRequestAssignmentCheckerInterface
-     */
     protected RestProductListsBulkRequestAssignmentCheckerInterface $checker;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentPreCheckPluginInterface
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentPreCheckPluginInterface $restProductListsBulkRequestAssignmentPreCheckPluginMock;
 
     /**
@@ -42,7 +33,7 @@ class RestProductListsBulkRequestAssignmentCheckerTest extends Unit
             ->getMock();
 
         $this->checker = new RestProductListsBulkRequestAssignmentChecker(
-            [$this->restProductListsBulkRequestAssignmentPreCheckPluginMock]
+            [$this->restProductListsBulkRequestAssignmentPreCheckPluginMock],
         );
     }
 
@@ -59,7 +50,6 @@ class RestProductListsBulkRequestAssignmentCheckerTest extends Unit
         $this->restProductListsBulkRequestAssignmentPreCheckPluginMock->expects(static::atLeastOnce())
             ->method('terminateOnFailure')
             ->willReturn(false);
-
 
         static::assertTrue($this->checker->preCheck($this->restProductListsBulkRequestAssignmentTransferMock));
     }
@@ -78,7 +68,6 @@ class RestProductListsBulkRequestAssignmentCheckerTest extends Unit
             ->method('terminateOnFailure')
             ->willReturn(true);
 
-
         static::assertFalse($this->checker->preCheck($this->restProductListsBulkRequestAssignmentTransferMock));
     }
 
@@ -95,7 +84,6 @@ class RestProductListsBulkRequestAssignmentCheckerTest extends Unit
         $this->restProductListsBulkRequestAssignmentPreCheckPluginMock->expects(static::atLeastOnce())
             ->method('terminateOnFailure')
             ->willReturn(true);
-
 
         static::assertFalse($this->checker->preCheck($this->restProductListsBulkRequestAssignmentTransferMock));
     }

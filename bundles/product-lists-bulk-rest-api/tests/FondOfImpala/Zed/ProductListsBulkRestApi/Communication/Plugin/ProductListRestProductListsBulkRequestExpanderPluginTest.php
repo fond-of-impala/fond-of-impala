@@ -9,19 +9,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListRestProductListsBulkRequestExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\ProductListsBulkRestApiFacade
-     */
     protected MockObject|ProductListsBulkRestApiFacade $facadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Communication\Plugin\ProductListsBulkRestApiExtension\ProductListRestProductListsBulkRequestExpanderPlugin
-     */
     protected ProductListRestProductListsBulkRequestExpanderPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestTransfer
-     */
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
     /**
@@ -54,7 +45,7 @@ class ProductListRestProductListsBulkRequestExpanderPluginTest extends Unit
 
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
-            $this->plugin->expand($this->restProductListsBulkRequestTransferMock)
+            $this->plugin->expand($this->restProductListsBulkRequestTransferMock),
         );
     }
 }

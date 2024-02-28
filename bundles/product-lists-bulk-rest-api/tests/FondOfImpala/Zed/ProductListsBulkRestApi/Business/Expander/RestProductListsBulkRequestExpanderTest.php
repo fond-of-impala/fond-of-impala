@@ -14,39 +14,18 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestProductListsBulkRequestExpanderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface
-     */
     protected RestProductListsBulkRequestExpanderInterface $expander;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface
-     */
     protected MockObject|GroupedIdentifierFilterInterface $groupedIdentifierFilterMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\ProductListIdsReducerPluginInterface
-     */
     protected MockObject|ProductListIdsReducerPluginInterface $productListIdsReducerPluginMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\Reader\ProductListReaderInterface
-     */
     protected MockObject|ProductListReaderInterface $productListReaderMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestTransfer
-     */
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentProductListTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentProductListTransfer $restProductListsBulkRequestAssignmentProductListTransferMock;
 
     /**
@@ -89,7 +68,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
         $this->expander = new RestProductListsBulkRequestExpander(
             $this->groupedIdentifierFilterMock,
             $this->productListReaderMock,
-            [$this->productListIdsReducerPluginMock]
+            [$this->productListIdsReducerPluginMock],
         );
     }
 
@@ -111,12 +90,12 @@ class RestProductListsBulkRequestExpanderTest extends Unit
         $key = 'key';
         $groupedIdentifiers = [
             'uuid' => [$uuid],
-            'key' => [$key]
+            'key' => [$key],
         ];
 
         $productListIds = [
             'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' => 1,
-            'key' => 1
+            'key' => 1,
         ];
 
         $this->groupedIdentifierFilterMock->expects(static::atLeastOnce())
@@ -175,7 +154,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
-            $restProductListsBulkRequestTransfer
+            $restProductListsBulkRequestTransfer,
         );
     }
 
@@ -197,12 +176,12 @@ class RestProductListsBulkRequestExpanderTest extends Unit
         $key = 'key';
         $groupedIdentifiers = [
             'uuid' => [$uuid],
-            'key' => [$key]
+            'key' => [$key],
         ];
 
         $productListIds = [
             'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' => 1,
-            'key' => 1
+            'key' => 1,
         ];
 
         $this->groupedIdentifierFilterMock->expects(static::atLeastOnce())
@@ -261,7 +240,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
-            $restProductListsBulkRequestTransfer
+            $restProductListsBulkRequestTransfer,
         );
     }
 
@@ -283,11 +262,11 @@ class RestProductListsBulkRequestExpanderTest extends Unit
         $key = 'key';
         $groupedIdentifiers = [
             'uuid' => [$uuid],
-            'key' => [$key]
+            'key' => [$key],
         ];
 
         $productListIds = [
-            'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' => 1
+            'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' => 1,
         ];
 
         $this->groupedIdentifierFilterMock->expects(static::atLeastOnce())
@@ -346,7 +325,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
-            $restProductListsBulkRequestTransfer
+            $restProductListsBulkRequestTransfer,
         );
     }
 }

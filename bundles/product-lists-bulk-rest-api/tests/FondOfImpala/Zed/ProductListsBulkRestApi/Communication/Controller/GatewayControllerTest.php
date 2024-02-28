@@ -11,24 +11,12 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 class GatewayControllerTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Business\ProductListsBulkRestApiFacade
-     */
     protected MockObject|ProductListsBulkRestApiFacade $facadeMock;
 
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Communication\Controller\GatewayController
-     */
     protected GatewayController $gatewayController;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestTransfer
-     */
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkResponseTransfer
-     */
     protected MockObject|RestProductListsBulkResponseTransfer $restProductListsBulkResponseTransferMock;
 
     /**
@@ -51,9 +39,6 @@ class GatewayControllerTest extends Unit
             ->getMock();
 
         $this->gatewayController = new class ($this->facadeMock) extends GatewayController {
-            /**
-             * @var \Spryker\Zed\Kernel\Business\AbstractFacade
-             */
             protected AbstractFacade $productListsBulkRestApiFacade;
 
             /**

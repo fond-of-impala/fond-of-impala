@@ -8,14 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListReaderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Reader\ProductListReaderInterface
-     */
     protected ProductListReaderInterface $reader;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Persistence\ProductListsBulkRestApiRepositoryInterface
-     */
     protected MockObject|ProductListsBulkRestApiRepositoryInterface $repositoryMock;
 
     /**
@@ -40,8 +34,8 @@ class ProductListReaderTest extends Unit
         $uuids = ['xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'];
         $productListIds = [
             0 => [
-                'spy_product_list.uuid' => 1
-            ]
+                'spy_product_list.uuid' => 1,
+            ],
         ];
 
         $this->repositoryMock->expects(static::atLeastOnce())
@@ -61,10 +55,10 @@ class ProductListReaderTest extends Unit
     public function testGetIdsByKeys(): void
     {
         $keys = ['key'];
-        $productListIds =  [
+        $productListIds = [
             0 => [
-                'spy_product_list.key' => 1
-            ]
+                'spy_product_list.key' => 1,
+            ],
         ];
 
         $this->repositoryMock->expects(static::atLeastOnce())
@@ -85,19 +79,19 @@ class ProductListReaderTest extends Unit
     {
         $groupedIdentifiers = [
             'uuid' => ['xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'],
-            'key' => ['key']
+            'key' => ['key'],
         ];
 
         $uuidProductListIds = [
             0 => [
-                'spy_product_list.uuid' => 1
-            ]
+                'spy_product_list.uuid' => 1,
+            ],
         ];
 
-        $keyProductListIds =  [
+        $keyProductListIds = [
             0 => [
-                'spy_product_list.key' => 1
-            ]
+                'spy_product_list.key' => 1,
+            ],
         ];
 
         $this->repositoryMock->expects(static::atLeastOnce())
@@ -123,16 +117,16 @@ class ProductListReaderTest extends Unit
     {
         $groupedIdentifiers = [
             'uuid' => ['xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'],
-            'key' => []
+            'key' => [],
         ];
 
         $uuidProductListIds = [
             0 => [
-                'spy_product_list.uuid' => 1
-            ]
+                'spy_product_list.uuid' => 1,
+            ],
         ];
 
-        $keyProductListIds =  [];
+        $keyProductListIds = [];
 
         $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getProductListIdsByUuids')
@@ -144,5 +138,4 @@ class ProductListReaderTest extends Unit
         static::assertIsArray($response);
         static::assertEquals(array_merge($uuidProductListIds, $keyProductListIds), $response);
     }
-
 }
