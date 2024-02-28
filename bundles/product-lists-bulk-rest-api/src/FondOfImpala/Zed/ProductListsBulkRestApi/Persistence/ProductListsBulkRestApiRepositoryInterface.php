@@ -2,6 +2,9 @@
 
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Persistence;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface ProductListsBulkRestApiRepositoryInterface
 {
     /**
