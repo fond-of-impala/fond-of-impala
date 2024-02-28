@@ -5,7 +5,7 @@ namespace FondOfImpala\Glue\ProductListsBulkRestApi;
 use Codeception\Test\Unit;
 use FondOfImpala\Client\ProductListsBulkRestApi\ProductListsBulkRestApiClient;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\ProductListsBulk\ProductListsBulkProcessor;
-use FondOfImpala\Glue\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestOrderBudgetMapperPluginInterface;
+use FondOfImpala\Glue\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentMapperPluginInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\Kernel\Container;
@@ -21,9 +21,9 @@ class ProductListsBulkRestApiFactoryTest extends Unit
     protected MockObject|RestResourceBuilderInterface $restResourceBuilderMock;
 
     /**
-     * @var array<\FondOfImpala\Glue\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestOrderBudgetMapperPluginInterface|\PHPUnit\Framework\MockObject\MockObject>
+     * @var array<\FondOfImpala\Glue\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentMapperPluginInterface|\PHPUnit\Framework\MockObject\MockObject>
      */
-    protected array $restProductListsBulkRequestOrderBudgetMapperPluginMocks;
+    protected array $restProductListsBulkRequestAssignmentMapperPluginMocks;
 
     protected ProductListsBulkRestApiFactory $factory;
 
@@ -50,8 +50,8 @@ class ProductListsBulkRestApiFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->restProductListsBulkRequestOrderBudgetMapperPluginMocks = [
-            $this->getMockBuilder(RestProductListsBulkRequestOrderBudgetMapperPluginInterface::class)
+        $this->restProductListsBulkRequestAssignmentMapperPluginMocks = [
+            $this->getMockBuilder(RestProductListsBulkRequestAssignmentMapperPluginInterface::class)
                 ->disableOriginalConstructor()
                 ->getMock(),
         ];
@@ -94,7 +94,7 @@ class ProductListsBulkRestApiFactoryTest extends Unit
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
             ->with(ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_MAPPER)
-            ->willReturn($this->restProductListsBulkRequestOrderBudgetMapperPluginMocks);
+            ->willReturn($this->restProductListsBulkRequestAssignmentMapperPluginMocks);
 
         static::assertInstanceOf(
             ProductListsBulkProcessor::class,

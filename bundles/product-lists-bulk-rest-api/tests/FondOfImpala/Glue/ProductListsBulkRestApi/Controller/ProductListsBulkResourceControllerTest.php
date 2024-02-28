@@ -3,8 +3,8 @@
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Controller;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Glue\ProductListsBulkRestApi\ProductListsBulkRestApiFactory;
 use FondOfImpala\Glue\ProductListsBulkRestApi\Processor\ProductListsBulk\ProductListsBulkProcessorInterface;
+use FondOfImpala\Glue\ProductListsBulkRestApi\ProductListsBulkRestApiFactory;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAttributesTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;

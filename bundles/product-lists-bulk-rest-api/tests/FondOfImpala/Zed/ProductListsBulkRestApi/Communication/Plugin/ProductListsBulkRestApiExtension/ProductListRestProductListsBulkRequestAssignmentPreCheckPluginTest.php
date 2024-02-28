@@ -14,9 +14,6 @@ class ProductListRestProductListsBulkRequestAssignmentPreCheckPluginTest extends
 
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentProductListTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentProductListTransferMock;
 
     /**

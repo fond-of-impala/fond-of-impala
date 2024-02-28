@@ -3,10 +3,8 @@
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Builder;
 
 use Codeception\Test\Unit;
-use Generated\Shared\Transfer\RestProductListsBulkResponseTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
-use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,7 +39,6 @@ class RestResponseBuilderTest extends Unit
      */
     public function testBuildEmptyRestResponse(): void
     {
-
         $this->restResourceBuilderMock->expects(static::atLeastOnce())
             ->method('createRestResponse')
             ->willReturn($this->restResponseMock);

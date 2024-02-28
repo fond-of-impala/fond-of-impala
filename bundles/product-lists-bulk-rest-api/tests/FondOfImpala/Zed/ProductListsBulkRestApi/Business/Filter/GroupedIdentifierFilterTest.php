@@ -84,8 +84,7 @@ class GroupedIdentifierFilterTest extends Unit
         $groups = $this->filter
             ->filterFromRestProductListsBulkRequest($this->restProductListsBulkRequestTransferMock);
 
-        static::assertIsArray($groups);
-        static::assertEquals(2, count($groups));
+        static::assertCount(2, $groups);
         static::assertEquals('uuid', array_key_first($groups));
     }
 
@@ -126,8 +125,7 @@ class GroupedIdentifierFilterTest extends Unit
         $groups = $this->filter
             ->filterFromRestProductListsBulkRequest($this->restProductListsBulkRequestTransferMock);
 
-        static::assertIsArray($groups);
-        static::assertEquals(2, count($groups));
+        static::assertCount(2, $groups);
         static::assertEquals('uuid', array_key_first($groups));
     }
 
@@ -170,8 +168,7 @@ class GroupedIdentifierFilterTest extends Unit
         $groups = $this->filter
             ->filterFromRestProductListsBulkRequest($this->restProductListsBulkRequestTransferMock);
 
-        static::assertIsArray($groups);
-        static::assertEquals(2, count($groups));
+        static::assertCount(2, $groups);
         static::assertEquals('uuid', array_key_first($groups));
     }
 }

@@ -106,7 +106,6 @@ class ProductListReaderTest extends Unit
 
         $response = $this->reader->getIdsByGroupedIdentifier($groupedIdentifiers);
 
-        static::assertIsArray($response);
         static::assertEquals(array_merge($uuidProductListIds, $keyProductListIds), $response);
     }
 
@@ -135,7 +134,6 @@ class ProductListReaderTest extends Unit
 
         $response = $this->reader->getIdsByGroupedIdentifier($groupedIdentifiers);
 
-        static::assertIsArray($response);
         static::assertEquals(array_merge($uuidProductListIds, $keyProductListIds), $response);
     }
 }

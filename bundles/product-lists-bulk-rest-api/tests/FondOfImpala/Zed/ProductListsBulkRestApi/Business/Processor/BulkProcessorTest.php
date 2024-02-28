@@ -10,7 +10,6 @@ use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkR
 use FondOfImpala\Zed\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestExpanderPluginInterface;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
-use Generated\Shared\Transfer\RestProductListsBulkResponseTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class BulkProcessorTest extends Unit
@@ -102,11 +101,6 @@ class BulkProcessorTest extends Unit
         $restProductListsBulkResponseTransfer = $this->processor
             ->process($this->restProductListsBulkRequestTransferMock);
 
-        static::assertInstanceOf(
-            RestProductListsBulkResponseTransfer::class,
-            $restProductListsBulkResponseTransfer,
-        );
-
         static::assertTrue($restProductListsBulkResponseTransfer->getIsSuccessful());
         static::assertEquals(1, $restProductListsBulkResponseTransfer->getCurrentCount());
         static::assertEquals(1, $restProductListsBulkResponseTransfer->getActualCount());
@@ -140,11 +134,6 @@ class BulkProcessorTest extends Unit
 
         $restProductListsBulkResponseTransfer = $this->processor
             ->process($this->restProductListsBulkRequestTransferMock);
-
-        static::assertInstanceOf(
-            RestProductListsBulkResponseTransfer::class,
-            $restProductListsBulkResponseTransfer,
-        );
 
         static::assertTrue($restProductListsBulkResponseTransfer->getIsSuccessful());
         static::assertEquals(0, $restProductListsBulkResponseTransfer->getCurrentCount());

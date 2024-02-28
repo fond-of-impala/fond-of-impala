@@ -3,9 +3,8 @@
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
-use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface;
-use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor\BulkProcessorInterface;
+use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpander;
+use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor\BulkProcessor;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeInterface;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Persistence\ProductListsBulkRestApiRepository;
 use FondOfImpala\Zed\ProductListsBulkRestApi\ProductListsBulkRestApiDependencyProvider;
@@ -14,24 +13,12 @@ use Spryker\Zed\Kernel\Container;
 
 class ProductListsBulkRestApiBusinessFactoryTest extends Unit
 {
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\ProductListsBulkRestApiBusinessFactory
-     */
     protected ProductListsBulkRestApiBusinessFactory $factory;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeInterface
-     */
     protected MockObject|ProductListsBulkRestApiToEventFacadeInterface $productListsBulkRestApiToEventFacadeMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|FondOfImpala\Zed\ProductListsBulkRestApi\Persistence\ProductListsBulkRestApiRepository
-     */
     protected MockObject|ProductListsBulkRestApiRepository $repositoryMock;
 
     /**
@@ -72,16 +59,16 @@ class ProductListsBulkRestApiBusinessFactoryTest extends Unit
             ->method('get')
             ->withConsecutive(
                 [ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK],
-                [ProductListsBulkRestApiDependencyProvider::FACADE_EVENT]
+                [ProductListsBulkRestApiDependencyProvider::FACADE_EVENT],
             )->willReturnOnConsecutiveCalls(
                 [],
                 $this->productListsBulkRestApiToEventFacadeMock,
-                []
+                [],
             );
 
         static::assertInstanceOf(
-            BulkProcessorInterface::class,
-            $this->factory->createBulkProcessor()
+            BulkProcessor::class,
+            $this->factory->createBulkProcessor(),
         );
     }
 
@@ -91,8 +78,8 @@ class ProductListsBulkRestApiBusinessFactoryTest extends Unit
     public function testCreateRestProductListsBulkRequestExpander(): void
     {
         static::assertInstanceOf(
-            RestProductListsBulkRequestExpanderInterface::class,
-            $this->factory->createRestProductListsBulkRequestExpander()
+            RestProductListsBulkRequestExpander::class,
+            $this->factory->createRestProductListsBulkRequestExpander(),
         );
     }
 }
