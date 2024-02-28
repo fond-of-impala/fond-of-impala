@@ -76,6 +76,7 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
             if ($uuid === null) {
                 continue;
             }
+
             if (!isset($companyIds[$uuid])) {
                 continue;
             }

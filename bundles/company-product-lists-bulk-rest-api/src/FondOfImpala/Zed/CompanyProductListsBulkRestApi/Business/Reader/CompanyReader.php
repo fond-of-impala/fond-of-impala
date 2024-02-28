@@ -37,10 +37,8 @@ class CompanyReader implements CompanyReaderInterface
         string $customerReference,
         array $groupedIdentifiers
     ): array {
-        $companyIds = [];
-
         if (count($groupedIdentifiers['uuid']) === 0) {
-            return $companyIds;
+            return [];
         }
 
         return $this->getIdsByCustomerReferenceAndUuids($customerReference, $groupedIdentifiers['uuid']);

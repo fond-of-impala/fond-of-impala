@@ -18,7 +18,8 @@
     "php": ">=8.0",
     "fond-of-impala/product-lists-bulk-rest-api": "^1.0.0",
     "fond-of-impala/product-lists-bulk-rest-api-extension": "^1.0.0",
-    "fond-of-oryx/customer-product-list-connector": "^1.0.0 || ^2.0.0"
+    "fond-of-oryx/customer-product-list-connector": "^1.0.0 || ^2.0.0",
+    "spryker/event": "^2.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

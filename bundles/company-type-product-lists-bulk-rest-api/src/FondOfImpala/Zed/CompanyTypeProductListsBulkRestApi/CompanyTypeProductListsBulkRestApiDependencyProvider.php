@@ -7,6 +7,9 @@ use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CompanyTypeProductListsBulkRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**

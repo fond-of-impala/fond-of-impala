@@ -57,6 +57,9 @@ class CustomerProductListRelationMapper implements CustomerProductListRelationMa
 
         $productListIds = array_unique(array_merge($productListIdsToAssign, $currentProductListIds));
         $productListIds = array_diff($productListIds, $productListIdsToUnassign);
+        $productListIds = array_values($productListIds);
+
+        sort($productListIds);
 
         return (new CustomerProductListRelationTransfer())->setProductListIds($productListIds)
             ->setIdCustomer($idCustomer);

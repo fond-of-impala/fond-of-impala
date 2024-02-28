@@ -65,8 +65,8 @@ class RestProductListsBulkRequestExpander implements RestProductListsBulkRequest
         ArrayObject $restProductListsBulkRequestAssignmentTransfers,
         array $customerIds
     ): ArrayObject {
-        foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestItemTransfer) {
-            $restProductListsBulkRequestItemCustomerTransfer = $restProductListsBulkRequestItemTransfer->getCustomer();
+        foreach ($restProductListsBulkRequestAssignmentTransfers as $restProductListsBulkRequestAssignmentTransfer) {
+            $restProductListsBulkRequestItemCustomerTransfer = $restProductListsBulkRequestAssignmentTransfer->getCustomer();
 
             if ($restProductListsBulkRequestItemCustomerTransfer === null) {
                 continue;
