@@ -9,6 +9,9 @@ use Orm\Zed\ProductList\Persistence\SpyProductListQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
