@@ -6,6 +6,9 @@ use FondOfImpala\Client\ProductListsBulkRestApi\Dependency\Client\ProductListsBu
 use Spryker\Client\Kernel\AbstractDependencyProvider;
 use Spryker\Client\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ProductListsBulkRestApiDependencyProvider extends AbstractDependencyProvider
 {
     /**
