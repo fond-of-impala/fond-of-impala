@@ -27,6 +27,10 @@
       "path": "bundles/business-central-order-budgets-bulk-rest-api",
       "version": "1.0.0"
     },
+    "business-central-product-lists-bulk-rest-api": {
+      "path": "bundles/business-central-product-lists-bulk-rest-api",
+      "version": "1.0.0"
+    },
     "cart-validation": {
       "path": "bundles/cart-validation",
       "version": "1.0.0"
@@ -43,16 +47,16 @@
       "path": "bundles/collaborative-carts-rest-api",
       "version": "1.0.0"
     },
-    "company-business-units-carts-rest-api": {
-      "path": "bundles/company-business-units-carts-rest-api",
-      "version": "1.0.0"
-    },
     "company-business-unit-price-list": {
       "path": "bundles/company-business-unit-price-list",
       "version": "1.0.0"
     },
     "company-business-unit-quote-connector": {
       "path": "bundles/company-business-unit-quote-connector",
+      "version": "1.0.0"
+    },
+    "company-business-units-carts-rest-api": {
+      "path": "bundles/company-business-units-carts-rest-api",
       "version": "1.0.0"
     },
     "company-cart-search-rest-api": {
@@ -71,6 +75,10 @@
       "path": "bundles/company-price-list-gui",
       "version": "1.0.0"
     },
+    "company-product-lists-bulk-rest-api": {
+      "path": "bundles/company-product-lists-bulk-rest-api",
+      "version": "1.0.0"
+    },
     "company-type": {
       "path": "bundles/company-type",
       "version": "1.0.0"
@@ -85,6 +93,10 @@
     },
     "company-type-data-import": {
       "path": "bundles/company-type-data-import",
+      "version": "1.0.0"
+    },
+    "company-type-product-lists-bulk-rest-api": {
+      "path": "bundles/company-type-product-lists-bulk-rest-api",
       "version": "1.0.0"
     },
     "company-type-role": {
@@ -203,6 +215,10 @@
       "path": "bundles/customer-price-product-price-list-page-search",
       "version": "1.0.0"
     },
+    "customer-product-lists-bulk-rest-api": {
+      "path": "bundles/customer-product-lists-bulk-rest-api",
+      "version": "1.0.0"
+    },
     "jellyfish-sales-order-conditional-availability": {
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
@@ -287,16 +303,24 @@
       "path": "bundles/product-list-conditional-availability-page-search",
       "version": "1.2.0"
     },
+    "product-list-price-product-price-list-page-search": {
+      "path": "bundles/product-list-price-product-price-list-page-search",
+      "version": "1.0.0"
+    },
+    "product-lists-bulk-rest-api": {
+      "path": "bundles/product-lists-bulk-rest-api",
+      "version": "1.0.0"
+    },
+    "product-lists-bulk-rest-api-extension": {
+      "path": "bundles/product-lists-bulk-rest-api-extension",
+      "version": "1.0.0"
+    },
     "product-management": {
       "path": "bundles/product-management",
       "version": "1.0.0"
     },
     "product-product-list-connector": {
       "path": "bundles/product-product-list-connector",
-      "version": "1.0.0"
-    },
-    "product-list-price-product-price-list-page-search": {
-      "path": "bundles/product-list-price-product-price-list-page-search",
       "version": "1.0.0"
     }
   },

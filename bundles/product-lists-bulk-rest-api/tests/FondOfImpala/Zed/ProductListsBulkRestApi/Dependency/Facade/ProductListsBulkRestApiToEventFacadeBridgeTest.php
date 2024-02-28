@@ -9,19 +9,10 @@ use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class ProductListsBulkRestApiToEventFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeBridge
-     */
     protected ProductListsBulkRestApiToEventFacadeBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeBridge
-     */
     protected MockObject|ProductListsBulkRestApiToEventFacadeBridge $eventFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\TransferInterface
-     */
     protected MockObject|TransferInterface $transferMock;
 
     /**

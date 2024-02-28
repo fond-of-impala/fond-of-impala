@@ -11,24 +11,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class GroupedIdentifierFilterTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface
-     */
     protected GroupedIdentifierFilterInterface $filter;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestTransfer
-     */
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransferMock;
 
-    /**
-     * @var PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentProductListTransfer
-     */
     protected MockObject|RestProductListsBulkRequestAssignmentProductListTransfer $restProductListsBulkRequestAssignmentProductListTransferMock;
 
     /**
@@ -115,8 +103,6 @@ class GroupedIdentifierFilterTest extends Unit
         $productListsToUnassign = new ArrayObject();
         $productListsToUnassign->append($this->restProductListsBulkRequestAssignmentProductListTransferMock);
 
-        $key = 'key';
-
         $this->restProductListsBulkRequestTransferMock->expects(static::atLeastOnce())
             ->method('getAssignments')
             ->willReturn($assignments);
@@ -188,5 +174,4 @@ class GroupedIdentifierFilterTest extends Unit
         static::assertEquals(2, count($groups));
         static::assertEquals('uuid', array_key_first($groups));
     }
-
 }
