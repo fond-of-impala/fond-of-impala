@@ -14,18 +14,8 @@ use Rector\Set\ValueObject\SetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/bundles/business-central-product-lists-bulk-rest-api/src',
-        __DIR__ . '/bundles/business-central-product-lists-bulk-rest-api/tests',
-        __DIR__ . '/bundles/company-type-product-lists-bulk-rest-api/src',
-        __DIR__ . '/bundles/company-type-product-lists-bulk-rest-api/tests',
-        __DIR__ . '/bundles/company-product-lists-bulk-rest-api/src',
-        __DIR__ . '/bundles/company-product-lists-bulk-rest-api/tests',
-        __DIR__ . '/bundles/customer-product-lists-bulk-rest-api/src',
-        __DIR__ . '/bundles/customer-product-lists-bulk-rest-api/tests',
-        __DIR__ . '/bundles/product-lists-bulk-rest-api/src',
-        __DIR__ . '/bundles/product-lists-bulk-rest-api/tests',
-        __DIR__ . '/bundles/product-lists-bulk-rest-api-extension/src',
-        __DIR__ . '/bundles/product-lists-bulk-rest-api-extension/tests',
+        __DIR__ . '/bundles/*/src',
+        __DIR__ . '/bundles/*/tests',
     ]);
 
     $rectorConfig->sets([
