@@ -1,11 +1,11 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Expander;
+namespace FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Expander;
 
 use ArrayObject;
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface;
-use FondOfImpala\Zed\CompanyTypeProductListsBulkRestApi\Business\Reader\CustomerReaderInterface;
+use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Filter\GroupedIdentifierFilterInterface;
+use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Reader\CustomerReaderInterface;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentCustomerTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
@@ -95,10 +95,9 @@ class RestProductListsBulkRequestExpanderTest extends Unit
     public function testExpand(): void
     {
         $customerReference = 'FOO--5';
-        $colleagueReference = 'FOO--1';
         $email = 'foo@bar.com';
-        $groupedIdentifier = ['customerReference' => [$colleagueReference], 'email' => [$email]];
-        $customerIds = [$colleagueReference => 1, $email => 10];
+        $groupedIdentifier = ['customerReference' => [$customerReference], 'email' => [$email]];
+        $customerIds = [$customerReference => 2, $email => 10];
         $restProductListsBulkRequestAssignmentTransferMocks = new ArrayObject(
             $this->restProductListsBulkRequestAssignmentTransferMocks,
         );
@@ -108,13 +107,9 @@ class RestProductListsBulkRequestExpanderTest extends Unit
             ->with($this->restProductListsBulkRequestTransferMock)
             ->willReturn($groupedIdentifier);
 
-        $this->restProductListsBulkRequestTransferMock->expects(static::atLeastOnce())
-            ->method('getCustomerReference')
-            ->willReturn($customerReference);
-
         $this->customerReaderMock->expects(static::atLeastOnce())
-            ->method('getIdsByCustomerReferenceAndGroupedIdentifier')
-            ->with($customerReference, $groupedIdentifier)
+            ->method('getIdsByGroupedIdentifier')
+            ->with($groupedIdentifier)
             ->willReturn($customerIds);
 
         $this->restProductListsBulkRequestTransferMock->expects(static::atLeastOnce())
@@ -131,11 +126,15 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getCustomerReference')
-            ->willReturn($colleagueReference);
+            ->willReturn(null);
+
+        $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[0]->expects(static::atLeastOnce())
+            ->method('getEmail')
+            ->willReturn($email);
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[0]->expects(static::atLeastOnce())
             ->method('setId')
-            ->willReturn($customerIds[$colleagueReference]);
+            ->willReturn($customerIds[$email]);
 
         $this->restProductListsBulkRequestAssignmentTransferMocks[2]->expects(static::atLeastOnce())
             ->method('getCustomer')
@@ -143,15 +142,12 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getCustomerReference')
-            ->willReturn(null);
-
-        $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[1]->expects(static::atLeastOnce())
-            ->method('getEmail')
-            ->willReturn($email);
+            ->willReturn($customerReference);
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[1]->expects(static::atLeastOnce())
             ->method('setId')
-            ->willReturn($customerIds[$email]);
+            ->with($customerIds[$customerReference])
+            ->willReturn($this->restProductListsBulkRequestAssignmentCustomerTransferMocks[1]);
 
         $this->restProductListsBulkRequestAssignmentTransferMocks[3]->expects(static::atLeastOnce())
             ->method('getCustomer')
@@ -163,7 +159,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[2]->expects(static::atLeastOnce())
             ->method('getEmail')
-            ->willReturn(null);
+            ->willReturn('bar@foo.com');
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[2]->expects(static::never())
             ->method('setId');
@@ -178,7 +174,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[3]->expects(static::atLeastOnce())
             ->method('getEmail')
-            ->willReturn('bar@foo.de');
+            ->willReturn(null);
 
         $this->restProductListsBulkRequestAssignmentCustomerTransferMocks[3]->expects(static::never())
             ->method('setId');

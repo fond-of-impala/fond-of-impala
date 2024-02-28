@@ -46,7 +46,7 @@ class CompanyRestProductListsBulkRequestExpanderPluginTest extends Unit
 
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
-            $this->plugin->expand($this->restProductListsBulkRequestTransferMock)
+            $this->plugin->expand($this->restProductListsBulkRequestTransferMock),
         );
     }
 }

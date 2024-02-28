@@ -91,7 +91,6 @@ class GroupedIdentifierFilterTest extends Unit
             ->method('getDebtorNumber')
             ->willReturn(null);
 
-
         static::assertEquals(
             [
                 'debtorNumber' => [$debtorNumber],
@@ -128,7 +127,6 @@ class GroupedIdentifierFilterTest extends Unit
         $this->restProductListsBulkRequestAssignmentCompanyTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getDebtorNumber')
             ->willReturn(null);
-
 
         static::assertEquals(
             [

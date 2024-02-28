@@ -79,7 +79,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
 
         $this->restProductListsBulkRequestExpander = new RestProductListsBulkRequestExpander(
             $this->groupedIdentifierFilterMock,
-            $this->companyReaderMock
+            $this->companyReaderMock,
         );
     }
 
@@ -93,7 +93,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
         $groupedIdentifier = ['uuid' => [$uuid]];
         $companyIds = [$uuid => 10];
         $restProductListsBulkRequestAssignmentTransferMocks = new ArrayObject(
-            $this->restProductListsBulkRequestAssignmentTransferMocks
+            $this->restProductListsBulkRequestAssignmentTransferMocks,
         );
 
         $this->groupedIdentifierFilterMock->expects(static::atLeastOnce())
@@ -160,7 +160,7 @@ class RestProductListsBulkRequestExpanderTest extends Unit
         static::assertEquals(
             $this->restProductListsBulkRequestTransferMock,
             $this->restProductListsBulkRequestExpander->expand(
-                $this->restProductListsBulkRequestTransferMock
+                $this->restProductListsBulkRequestTransferMock,
             ),
         );
     }

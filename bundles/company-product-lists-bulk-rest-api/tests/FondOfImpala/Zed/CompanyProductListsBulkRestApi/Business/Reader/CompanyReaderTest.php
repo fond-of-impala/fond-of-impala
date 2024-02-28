@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader\CompanyReader;
 use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Persistence\CompanyProductListsBulkRestApiRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -25,7 +24,7 @@ class CompanyReaderTest extends Unit
             ->getMock();
 
         $this->companyReader = new CompanyReader(
-            $this->repositoryMock
+            $this->repositoryMock,
         );
     }
 
@@ -50,7 +49,7 @@ class CompanyReaderTest extends Unit
 
         static::assertEquals(
             $companyIds,
-            $this->companyReader->getIdsByCustomerReferenceAndGroupedIdentifier($customerReference, $groupedIdentifiers)
+            $this->companyReader->getIdsByCustomerReferenceAndGroupedIdentifier($customerReference, $groupedIdentifiers),
         );
     }
 
@@ -70,7 +69,7 @@ class CompanyReaderTest extends Unit
 
         static::assertEquals(
             $companyIds,
-            $this->companyReader->getIdsByCustomerReferenceAndGroupedIdentifier($customerReference, $groupedIdentifiers)
+            $this->companyReader->getIdsByCustomerReferenceAndGroupedIdentifier($customerReference, $groupedIdentifiers),
         );
     }
 
@@ -93,7 +92,7 @@ class CompanyReaderTest extends Unit
 
         static::assertEquals(
             $companyIds,
-            $this->companyReader->getIdsByCustomerReferenceAndUuids($customerReference, $uuids)
+            $this->companyReader->getIdsByCustomerReferenceAndUuids($customerReference, $uuids),
         );
     }
 }

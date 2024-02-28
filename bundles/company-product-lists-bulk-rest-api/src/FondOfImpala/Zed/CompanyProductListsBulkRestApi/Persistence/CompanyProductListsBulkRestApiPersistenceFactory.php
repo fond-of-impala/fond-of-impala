@@ -6,6 +6,9 @@ use FondOfImpala\Zed\CompanyProductListsBulkRestApi\CompanyProductListsBulkRestA
 use Orm\Zed\Company\Persistence\Base\SpyCompanyQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CompanyProductListsBulkRestApiPersistenceFactory extends AbstractPersistenceFactory
 {
     /**

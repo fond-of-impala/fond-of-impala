@@ -91,7 +91,6 @@ class GroupedIdentifierFilterTest extends Unit
             ->method('getUuid')
             ->willReturn(null);
 
-
         static::assertEquals(
             [
                 'uuid' => [$uuid],
@@ -128,7 +127,6 @@ class GroupedIdentifierFilterTest extends Unit
         $this->restProductListsBulkRequestAssignmentCompanyTransferMocks[1]->expects(static::atLeastOnce())
             ->method('getUuid')
             ->willReturn(null);
-
 
         static::assertEquals(
             [

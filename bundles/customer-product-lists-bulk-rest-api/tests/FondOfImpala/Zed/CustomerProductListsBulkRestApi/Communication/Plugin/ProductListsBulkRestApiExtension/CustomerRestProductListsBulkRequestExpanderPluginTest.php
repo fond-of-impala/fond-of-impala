@@ -1,19 +1,19 @@
 <?php
 
-namespace FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Communication\Plugin\ProductListsBulkRestApiExtension;
+namespace FondOfImpala\Zed\CustomerProductListsBulkRestApi\Communication\Plugin\ProductListsBulkRestApiExtension;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\BusinessCentralProductListsBulkRestApi\Business\BusinessCentralProductListsBulkRestApiFacade;
+use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\CustomerProductListsBulkRestApiFacade;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class BusinessCentralRestProductListsBulkRequestExpanderPluginTest extends Unit
+class CustomerRestProductListsBulkRequestExpanderPluginTest extends Unit
 {
-    protected BusinessCentralProductListsBulkRestApiFacade|MockObject $facadeMock;
+    protected CustomerProductListsBulkRestApiFacade|MockObject $facadeMock;
 
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
-    protected BusinessCentralRestProductListsBulkRequestExpanderPlugin $plugin;
+    protected CustomerRestProductListsBulkRequestExpanderPlugin $plugin;
 
     /**
      * @return void
@@ -22,7 +22,7 @@ class BusinessCentralRestProductListsBulkRequestExpanderPluginTest extends Unit
     {
         parent::_before();
 
-        $this->facadeMock = $this->getMockBuilder(BusinessCentralProductListsBulkRestApiFacade::class)
+        $this->facadeMock = $this->getMockBuilder(CustomerProductListsBulkRestApiFacade::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -30,7 +30,7 @@ class BusinessCentralRestProductListsBulkRequestExpanderPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->plugin = new BusinessCentralRestProductListsBulkRequestExpanderPlugin();
+        $this->plugin = new CustomerRestProductListsBulkRequestExpanderPlugin();
         $this->plugin->setFacade($this->facadeMock);
     }
 

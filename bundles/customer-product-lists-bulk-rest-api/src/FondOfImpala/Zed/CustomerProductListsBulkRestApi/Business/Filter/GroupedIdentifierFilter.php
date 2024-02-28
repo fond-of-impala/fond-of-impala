@@ -36,13 +36,14 @@ class GroupedIdentifierFilter implements GroupedIdentifierFilterInterface
             }
 
             $customerReference = $restProductListsBulkRequestAssignmentCustomerTransfer->getCustomerReference();
-            $email = $restProductListsBulkRequestAssignmentCustomerTransfer->getEmail();
 
             if ($customerReference !== null) {
                 $groupedIdentifier['customerReference'][] = $customerReference;
 
                 continue;
             }
+
+            $email = $restProductListsBulkRequestAssignmentCustomerTransfer->getEmail();
 
             if ($email === null) {
                 continue;

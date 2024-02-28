@@ -1,27 +1,27 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business;
+namespace FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface;
-use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Persister\CompanyProductListRelationPersisterInterface;
+use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpanderInterface;
+use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Persister\CustomerProductListRelationPersisterInterface;
 use Generated\Shared\Transfer\RestProductListsBulkRequestAssignmentTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkRequestTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class CompanyProductListsBulkRestApiFacadeTest extends Unit
+class CustomerProductListsBulkRestApiFacadeTest extends Unit
 {
-    protected CompanyProductListsBulkRestApiBusinessFactory|MockObject $factoryMock;
+    protected CustomerProductListsBulkRestApiBusinessFactory|MockObject $factoryMock;
 
     protected MockObject|RestProductListsBulkRequestExpanderInterface $restProductListsBulkRequestExpanderMock;
 
     protected MockObject|RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransferMock;
 
+    protected CustomerProductListRelationPersisterInterface|MockObject $customerProductListRelationPersisterMock;
+
     protected RestProductListsBulkRequestAssignmentTransfer|MockObject $restProductListsBulkRequestAssignmentTransferMock;
 
-    protected MockObject|CompanyProductListRelationPersisterInterface $companyProductListRelationPersisterMock;
-
-    protected CompanyProductListsBulkRestApiFacade $facade;
+    protected CustomerProductListsBulkRestApiFacade $facade;
 
     /**
      * @return void
@@ -30,7 +30,7 @@ class CompanyProductListsBulkRestApiFacadeTest extends Unit
     {
         parent::_before();
 
-        $this->factoryMock = $this->getMockBuilder(CompanyProductListsBulkRestApiBusinessFactory::class)
+        $this->factoryMock = $this->getMockBuilder(CustomerProductListsBulkRestApiBusinessFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -42,7 +42,7 @@ class CompanyProductListsBulkRestApiFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->companyProductListRelationPersisterMock = $this->getMockBuilder(CompanyProductListRelationPersisterInterface::class)
+        $this->customerProductListRelationPersisterMock = $this->getMockBuilder(CustomerProductListRelationPersisterInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,7 +50,7 @@ class CompanyProductListsBulkRestApiFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->facade = new CompanyProductListsBulkRestApiFacade();
+        $this->facade = new CustomerProductListsBulkRestApiFacade();
         $this->facade->setFactory($this->factoryMock);
     }
 
@@ -77,16 +77,16 @@ class CompanyProductListsBulkRestApiFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testPersistCompanyProductListRelation(): void
+    public function testPersistCustomerProductListRelation(): void
     {
         $this->factoryMock->expects(static::atLeastOnce())
-            ->method('createCompanyProductListRelationPersister')
-            ->willReturn($this->companyProductListRelationPersisterMock);
+            ->method('createCustomerProductListRelationPersister')
+            ->willReturn($this->customerProductListRelationPersisterMock);
 
-        $this->companyProductListRelationPersisterMock->expects(static::atLeastOnce())
+        $this->customerProductListRelationPersisterMock->expects(static::atLeastOnce())
             ->method('persist')
             ->with($this->restProductListsBulkRequestAssignmentTransferMock);
 
-        $this->facade->persistCompanyProductListRelation($this->restProductListsBulkRequestAssignmentTransferMock);
+        $this->facade->persistCustomerProductListRelation($this->restProductListsBulkRequestAssignmentTransferMock);
     }
 }

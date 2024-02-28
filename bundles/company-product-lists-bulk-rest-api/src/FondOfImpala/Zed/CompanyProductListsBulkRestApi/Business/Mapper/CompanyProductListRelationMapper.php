@@ -57,6 +57,9 @@ class CompanyProductListRelationMapper implements CompanyProductListRelationMapp
 
         $productListIds = array_unique(array_merge($productListIdsToAssign, $currentProductListIds));
         $productListIds = array_diff($productListIds, $productListIdsToUnassign);
+        $productListIds = array_values($productListIds);
+
+        sort($productListIds);
 
         return (new CompanyProductListRelationTransfer())->setProductListIds($productListIds)
             ->setIdCompany($idCompany);

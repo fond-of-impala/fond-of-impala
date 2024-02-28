@@ -80,8 +80,8 @@ class BusinessCentralRestProductListsBulkRequestAssignmentMapperPluginTest exten
             $this->restProductListsBulkRequestAssignmentTransferMock,
             $this->plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $this->restProductListsBulkAssignmentTransferMock,
-                $this->restProductListsBulkRequestAssignmentTransferMock
-            )
+                $this->restProductListsBulkRequestAssignmentTransferMock,
+            ),
         );
     }
 
@@ -98,8 +98,8 @@ class BusinessCentralRestProductListsBulkRequestAssignmentMapperPluginTest exten
             $this->restProductListsBulkRequestAssignmentTransferMock,
             $this->plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $this->restProductListsBulkAssignmentTransferMock,
-                $this->restProductListsBulkRequestAssignmentTransferMock
-            )
+                $this->restProductListsBulkRequestAssignmentTransferMock,
+            ),
         );
     }
 
@@ -126,18 +126,18 @@ class BusinessCentralRestProductListsBulkRequestAssignmentMapperPluginTest exten
             ->method('setCompany')
             ->with(
                 static::callback(
-                    static fn(
+                    static fn (
                         RestProductListsBulkRequestAssignmentCompanyTransfer $restProductListsBulkRequestAssignmentCompanyTransfer
                     ): bool => $restProductListsBulkRequestAssignmentCompanyTransfer->getDebtorNumber() === $debtorNumber
-                )
+                ),
             )->willReturn($this->restProductListsBulkRequestAssignmentTransferMock);
 
         static::assertEquals(
             $this->restProductListsBulkRequestAssignmentTransferMock,
             $this->plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $this->restProductListsBulkAssignmentTransferMock,
-                $this->restProductListsBulkRequestAssignmentTransferMock
-            )
+                $this->restProductListsBulkRequestAssignmentTransferMock,
+            ),
         );
     }
 }

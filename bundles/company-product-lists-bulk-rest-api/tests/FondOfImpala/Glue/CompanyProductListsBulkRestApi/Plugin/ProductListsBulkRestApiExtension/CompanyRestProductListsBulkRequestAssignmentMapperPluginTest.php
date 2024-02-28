@@ -80,8 +80,8 @@ class CompanyRestProductListsBulkRequestAssignmentMapperPluginTest extends Unit
             $this->restProductListsBulkRequestAssignmentTransferMock,
             $this->plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $this->restProductListsBulkAssignmentTransferMock,
-                $this->restProductListsBulkRequestAssignmentTransferMock
-            )
+                $this->restProductListsBulkRequestAssignmentTransferMock,
+            ),
         );
     }
 
@@ -98,8 +98,8 @@ class CompanyRestProductListsBulkRequestAssignmentMapperPluginTest extends Unit
             $this->restProductListsBulkRequestAssignmentTransferMock,
             $this->plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $this->restProductListsBulkAssignmentTransferMock,
-                $this->restProductListsBulkRequestAssignmentTransferMock
-            )
+                $this->restProductListsBulkRequestAssignmentTransferMock,
+            ),
         );
     }
 
@@ -126,18 +126,18 @@ class CompanyRestProductListsBulkRequestAssignmentMapperPluginTest extends Unit
             ->method('setCompany')
             ->with(
                 static::callback(
-                    static fn(
+                    static fn (
                         RestProductListsBulkRequestAssignmentCompanyTransfer $restProductListsBulkRequestAssignmentCompanyTransfer
                     ): bool => $restProductListsBulkRequestAssignmentCompanyTransfer->getUuid() === $uuid
-                )
+                ),
             )->willReturn($this->restProductListsBulkRequestAssignmentTransferMock);
 
         static::assertEquals(
             $this->restProductListsBulkRequestAssignmentTransferMock,
             $this->plugin->mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment(
                 $this->restProductListsBulkAssignmentTransferMock,
-                $this->restProductListsBulkRequestAssignmentTransferMock
-            )
+                $this->restProductListsBulkRequestAssignmentTransferMock,
+            ),
         );
     }
 }
