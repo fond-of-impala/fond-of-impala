@@ -15,6 +15,11 @@ use Spryker\Zed\Kernel\Container;
 class ProductListsBulkRestApiBusinessFactoryTest extends Unit
 {
     /**
+     * @var PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
+     */
+    protected MockObject|Container $containerMock;
+
+    /**
      * @var \FondOfImpala\Zed\ProductListsBulkRestApi\Business\ProductListsBulkRestApiBusinessFactory
      */
     protected ProductListsBulkRestApiBusinessFactory $factory;

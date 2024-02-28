@@ -5,6 +5,9 @@ namespace FondOfImpala\Glue\ProductListsBulkRestApi;
 use Spryker\Glue\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Glue\Kernel\Container;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ProductListsBulkRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
