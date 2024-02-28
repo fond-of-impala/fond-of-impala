@@ -7,6 +7,7 @@ include:
   - bundles/allowed-product-quantity-gui
   - bundles/allowed-product-quantity-search
   - bundles/business-central-order-budgets-bulk-rest-api
+  - bundles/business-central-product-lists-bulk-rest-api
   - bundles/cart-validation
   - bundles/collaborative-cart
   - bundles/collaborative-cart-search-rest-api
@@ -17,11 +18,13 @@ include:
   - bundles/company-cart-search-rest-api
   - bundles/company-price-list
   - bundles/company-price-list-gui
+  - bundles/company-product-lists-bulk-rest-api
   - bundles/company-company-type-gui
   - bundles/company-type
   - bundles/company-type-converter
   - bundles/company-type-data-import
   - bundles/company-type-converter-extension
+  - bundles/company-type-product-lists-bulk-rest-api
   - bundles/company-type-role
   - bundles/company-user-carts-rest-api
   - bundles/company-user-company-assigner
@@ -49,6 +52,7 @@ include:
   - bundles/customer-anonymizer-company-user-connector
   - bundles/customer-price-list
   - bundles/customer-price-product-price-list-page-search
+  - bundles/customer-product-lists-bulk-rest-api
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/jellyfish-sales-order-purchaser
   - bundles/navision-company
@@ -70,6 +74,8 @@ include:
   - bundles/product-product-list-connector
   - bundles/product-management
   - bundles/product-list-price-product-price-list-page-search
+  - bundles/product-lists-bulk-rest-api
+  - bundles/product-lists-bulk-rest-api-extension
 
 suites:
   unit:
