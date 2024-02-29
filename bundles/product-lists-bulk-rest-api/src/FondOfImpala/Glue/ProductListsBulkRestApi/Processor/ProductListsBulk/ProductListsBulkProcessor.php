@@ -52,8 +52,8 @@ class ProductListsBulkProcessor implements ProductListsBulkProcessorInterface
             ->fromRestProductListsBulkRequestAttributes($restProductListsBulkRequestAttributesTransfer)
             ->setCustomerReference($this->customerReferenceFilter->filterFromRestRequest($restRequest));
 
-        $this->client->bulkProcess($restProductListsBulkRequestTransfer);
+        $restProductListsBulkResponseTransfer = $this->client->bulkProcess($restProductListsBulkRequestTransfer);
 
-        return $this->restResponseBuilder->buildEmptyRestResponse();
+        return $this->restResponseBuilder->buildByRestProductListsBulkResponse($restProductListsBulkResponseTransfer);
     }
 }

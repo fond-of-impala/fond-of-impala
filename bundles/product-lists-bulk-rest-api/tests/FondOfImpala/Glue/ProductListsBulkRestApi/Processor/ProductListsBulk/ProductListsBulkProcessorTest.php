@@ -115,7 +115,8 @@ class ProductListsBulkProcessorTest extends Unit
             ->willReturn($this->restProductListsBulkResponseTransferMock);
 
         $this->restResponseBuilderMock->expects(static::atLeastOnce())
-            ->method('buildEmptyRestResponse')
+            ->method('buildByRestProductListsBulkResponse')
+            ->with($this->restProductListsBulkResponseTransferMock)
             ->willReturn($this->restResponseMock);
 
         static::assertEquals(

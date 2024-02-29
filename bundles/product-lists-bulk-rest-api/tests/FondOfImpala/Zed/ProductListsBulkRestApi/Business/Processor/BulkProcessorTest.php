@@ -102,8 +102,7 @@ class BulkProcessorTest extends Unit
             ->process($this->restProductListsBulkRequestTransferMock);
 
         static::assertTrue($restProductListsBulkResponseTransfer->getIsSuccessful());
-        static::assertEquals(1, $restProductListsBulkResponseTransfer->getCurrentCount());
-        static::assertEquals(1, $restProductListsBulkResponseTransfer->getActualCount());
+        static::assertEquals([], $restProductListsBulkResponseTransfer->getInvalidIndexes());
     }
 
     /**
@@ -136,8 +135,7 @@ class BulkProcessorTest extends Unit
             ->process($this->restProductListsBulkRequestTransferMock);
 
         static::assertTrue($restProductListsBulkResponseTransfer->getIsSuccessful());
-        static::assertEquals(0, $restProductListsBulkResponseTransfer->getCurrentCount());
-        static::assertEquals(1, $restProductListsBulkResponseTransfer->getActualCount());
+        static::assertEquals([0], $restProductListsBulkResponseTransfer->getInvalidIndexes());
     }
 
     /**

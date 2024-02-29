@@ -56,20 +56,19 @@ class BulkProcessor implements BulkProcessorInterface
     protected function executeProcess(
         RestProductListsBulkRequestTransfer $restProductListsBulkRequestTransfer
     ): RestProductListsBulkResponseTransfer {
-        $currentCount = 0;
-        $actualCount = $restProductListsBulkRequestTransfer->getAssignments()
-            ->count();
+        $invalidIndexes = [];
 
         foreach ($this->restProductListsBulkRequestExpanderPlugins as $plugin) {
             $restProductListsBulkRequestTransfer = $plugin->expand($restProductListsBulkRequestTransfer);
         }
 
-        foreach ($restProductListsBulkRequestTransfer->getAssignments() as $restProductListsBulkRequestAssignmentTransfer) {
+        foreach ($restProductListsBulkRequestTransfer->getAssignments() as $index => $restProductListsBulkRequestAssignmentTransfer) {
             $preCheckResult = $this->restProductListsBulkRequestAssignmentChecker->preCheck(
                 $restProductListsBulkRequestAssignmentTransfer,
             );
 
             if (!$preCheckResult) {
+                $invalidIndexes[] = $index;
                 continue;
             }
 
@@ -77,13 +76,10 @@ class BulkProcessor implements BulkProcessorInterface
                 ProductListsBulkRestApiEvents::ASSIGNMENT_PROCESS,
                 $restProductListsBulkRequestAssignmentTransfer,
             );
-
-            ++$currentCount;
         }
 
         return (new RestProductListsBulkResponseTransfer())
             ->setIsSuccessful(true)
-            ->setActualCount($actualCount)
-            ->setCurrentCount($currentCount);
+            ->setInvalidIndexes($invalidIndexes);
     }
 }

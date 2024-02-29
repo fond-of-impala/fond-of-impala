@@ -2,7 +2,9 @@
 
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Builder;
 
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
+use FondOfImpala\Glue\ProductListsBulkRestApi\ProductListsBulkRestApiConfig;
+use Generated\Shared\Transfer\RestProductListsBulkResponseTransfer;
+use Generated\Shared\Transfer\RestProductListsBulkTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,30 +23,31 @@ class RestResponseBuilder implements RestResponseBuilderInterface
     }
 
     /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
-    public function buildEmptyRestResponse(): RestResponseInterface
-    {
-        return $this->restResourceBuilder->createRestResponse()
-            ->setStatus(Response::HTTP_NO_CONTENT);
-    }
-
-    /**
-     * @param string $error
-     * @param int $code
-     * @param int $status
+     * @param \Generated\Shared\Transfer\RestProductListsBulkResponseTransfer $restProductListsBulkResponseTransfer
      *
      * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    public function createRestErrorResponse(string $error, int $code, int $status = 0): RestResponseInterface
-    {
-        $restErrorMessageTransfer = (new RestErrorMessageTransfer())
-            ->setCode((string)$code)
-            ->setStatus(0)
-            ->setDetail($error);
+    public function buildByRestProductListsBulkResponse(
+        RestProductListsBulkResponseTransfer $restProductListsBulkResponseTransfer
+    ): RestResponseInterface {
+        if (!$restProductListsBulkResponseTransfer->getIsSuccessful()) {
+            return $this->restResourceBuilder->createRestResponse()
+                ->setStatus(Response::HTTP_BAD_REQUEST);
+        }
 
-        return $this->restResourceBuilder
-            ->createRestResponse()
-            ->addError($restErrorMessageTransfer);
+        $restProductListsBulkTransfer = (new RestProductListsBulkTransfer())
+            ->fromArray($restProductListsBulkResponseTransfer->toArray(), true);
+
+        $restResource = $this->restResourceBuilder->createRestResource(
+            ProductListsBulkRestApiConfig::RESOURCE_PRODUCT_LISTS_BULK,
+            null,
+            $restProductListsBulkTransfer,
+        );
+
+        $restResource->setPayload($restProductListsBulkTransfer);
+
+        return $this->restResourceBuilder->createRestResponse()
+            ->setStatus(Response::HTTP_CREATED)
+            ->addResource($restResource);
     }
 }

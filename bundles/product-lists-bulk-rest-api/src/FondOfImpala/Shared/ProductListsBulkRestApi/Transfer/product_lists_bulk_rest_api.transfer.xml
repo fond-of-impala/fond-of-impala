@@ -6,6 +6,10 @@
         <property name="assignments" type="RestProductListsBulkAssignment[]" singular="assignment"/>
     </transfer>
 
+    <transfer name="RestProductListsBulk">
+        <property name="invalidIndexes" type="int[]" singular="invalidIndex"/>
+    </transfer>
+
     <transfer name="RestProductListsBulkAssignment">
         <property name="customer" type="RestProductListsBulkAssignmentCustomer"/>
         <property name="company" type="RestProductListsBulkAssignmentCompany"/>
@@ -60,7 +64,6 @@
 
     <transfer name="RestProductListsBulkResponse">
         <property name="isSuccessful" type="bool"/>
-        <property name="currentCount" type="int" />
-        <property name="actualCount" type="int" />
+        <property name="invalidIndexes" type="int[]" singular="invalidIndex" />
     </transfer>
 </transfers>

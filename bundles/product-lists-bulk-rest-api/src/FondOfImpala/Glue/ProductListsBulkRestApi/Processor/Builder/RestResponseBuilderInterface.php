@@ -2,21 +2,17 @@
 
 namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Builder;
 
+use Generated\Shared\Transfer\RestProductListsBulkResponseTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 
 interface RestResponseBuilderInterface
 {
     /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
-    public function buildEmptyRestResponse(): RestResponseInterface;
-
-    /**
-     * @param string $error
-     * @param int $code
-     * @param int $status
+     * @param \Generated\Shared\Transfer\RestProductListsBulkResponseTransfer $restProductListsBulkResponseTransfer
      *
      * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
-    public function createRestErrorResponse(string $error, int $code, int $status = 0): RestResponseInterface;
+    public function buildByRestProductListsBulkResponse(
+        RestProductListsBulkResponseTransfer $restProductListsBulkResponseTransfer
+    ): RestResponseInterface;
 }
