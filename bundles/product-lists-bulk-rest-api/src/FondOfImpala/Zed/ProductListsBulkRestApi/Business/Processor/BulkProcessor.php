@@ -69,6 +69,7 @@ class BulkProcessor implements BulkProcessorInterface
 
             if (!$preCheckResult) {
                 $invalidIndexes[] = $index;
+
                 continue;
             }
 

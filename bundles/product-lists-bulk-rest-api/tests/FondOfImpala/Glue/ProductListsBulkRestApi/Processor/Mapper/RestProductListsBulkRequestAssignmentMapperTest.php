@@ -112,7 +112,7 @@ class RestProductListsBulkRequestAssignmentMapperTest extends Unit
             ->with(
                 $this->restProductListsBulkAssignmentTransferMock,
                 static::callback(
-                    static fn(RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer): bool => $restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign() === $restProductListsBulkRequestAssignmentProductListToAssignTransferMock
+                    static fn (RestProductListsBulkRequestAssignmentTransfer $restProductListsBulkRequestAssignmentTransfer): bool => $restProductListsBulkRequestAssignmentTransfer->getProductListsToAssign() === $restProductListsBulkRequestAssignmentProductListToAssignTransferMock
                         && $restProductListsBulkRequestAssignmentTransfer->getProductListsToUnassign() === $restProductListsBulkRequestAssignmentProductListToUnassignTransferMock
                 ),
             )->willReturn($this->restProductListsBulkRequestAssignmentTransferMock);
