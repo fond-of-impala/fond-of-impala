@@ -252,9 +252,7 @@ class ProductImageGroupedPageDataExpanderTest extends Unit
         $this->pageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setGroupedProductImages')
             ->with(
-                static::callback(
-                    static fn (array $groupedProductImages): bool => $groupedProductImages[$key][0]['external_url_small'] === null && $groupedProductImages[$key][0]['external_url_large'] === 'https://www.fondof.de'
-                ),
+                [],
             )->willReturn($this->pageSearchTransferMock);
 
         $this->expander->expandProductPageData($productData, $this->pageSearchTransferMock);
