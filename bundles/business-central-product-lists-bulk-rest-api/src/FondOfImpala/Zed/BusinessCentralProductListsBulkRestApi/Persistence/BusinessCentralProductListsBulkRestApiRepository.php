@@ -26,6 +26,7 @@ class BusinessCentralProductListsBulkRestApiRepository extends AbstractRepositor
         /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
         $collection = $this->getFactory()
             ->getCompanyQuery()
+            ->clear()
             ->useCompanyUserQuery()
                 ->filterByIsActive(true)
                 ->useCustomerQuery()
@@ -41,7 +42,6 @@ class BusinessCentralProductListsBulkRestApiRepository extends AbstractRepositor
                     ->endUse()
                 ->endUse()
             ->endUse()
-            ->clear()
             ->filterByDebtorNumber_In($debtorNumbers)
             ->select([SpyCompanyTableMap::COL_ID_COMPANY, SpyCompanyTableMap::COL_DEBTOR_NUMBER])
             ->find();
