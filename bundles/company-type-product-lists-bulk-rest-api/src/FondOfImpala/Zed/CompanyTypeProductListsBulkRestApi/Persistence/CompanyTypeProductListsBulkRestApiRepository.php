@@ -43,7 +43,6 @@ class CompanyTypeProductListsBulkRestApiRepository extends AbstractRepository im
                     INNER JOIN %s ON %s = %s
                     INNER JOIN %s ON %s = %s
                     WHERE %s = 'manufacturer' AND %s = ? AND %s = '%s'
-                    GROUP BY %s
                 )
             EOD,
             SpyCompanyTableMap::COL_ID_COMPANY,
@@ -74,7 +73,6 @@ class CompanyTypeProductListsBulkRestApiRepository extends AbstractRepository im
             SpyCustomerTableMap::COL_CUSTOMER_REFERENCE,
             SpyPermissionTableMap::COL_KEY,
             CanBulkAssignColleaguesToProductListsPermissionPlugin::KEY,
-            SpyCustomerTableMap::COL_CUSTOMER_REFERENCE,
         );
 
         /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
@@ -119,7 +117,6 @@ class CompanyTypeProductListsBulkRestApiRepository extends AbstractRepository im
                     INNER JOIN %s ON %s = %s
                     INNER JOIN %s ON %s = %s
                     WHERE %s = 'manufacturer' AND %s = ? AND %s = '%s'
-                    GROUP BY %s
                 )
             EOD,
             SpyCompanyTableMap::COL_ID_COMPANY,
@@ -150,7 +147,6 @@ class CompanyTypeProductListsBulkRestApiRepository extends AbstractRepository im
             SpyCustomerTableMap::COL_CUSTOMER_REFERENCE,
             SpyPermissionTableMap::COL_KEY,
             CanBulkAssignColleaguesToProductListsPermissionPlugin::KEY,
-            SpyCustomerTableMap::COL_CUSTOMER_REFERENCE,
         );
 
         /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
