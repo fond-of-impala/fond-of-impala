@@ -54,7 +54,11 @@ class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterf
             foreach ($productImages as $productImage) {
                 if ($productImage['fk_product_image_set'] === $imageSet->getIdProductImageSet()) {
                     $key = $imageSet->getName();
-                    $regrouped[$key === null || $key === '' ? static::IMAGE_GROUP_NAME_EMPTY : $key][] = $this->validateProductImageUrls($productImage);
+                    $productImage = $this->validateProductImageUrls($productImage);
+                    if ($productImage === null) {
+                        continue;
+                    }
+                    $regrouped[$key === null || $key === '' ? static::IMAGE_GROUP_NAME_EMPTY : $key][] = $productImage;
                 }
             }
         }
@@ -65,13 +69,13 @@ class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterf
     /**
      * @param array $productImage
      *
-     * @return array
+     * @return array|null
      */
-    protected function validateProductImageUrls(array $productImage): array
+    protected function validateProductImageUrls(array $productImage): ?array
     {
         foreach ($productImage as $key => $data) {
-            if ($data !== null && str_starts_with($key, static::EXTERNAL_URL_PREFIX)) {
-                $productImage[$key] = $this->urlValidator->isValid($data) ? $data : null;
+            if (str_starts_with($key, static::EXTERNAL_URL_PREFIX) && ($data === null || !$this->urlValidator->isValid($data))) {
+                    return null;
             }
         }
 
