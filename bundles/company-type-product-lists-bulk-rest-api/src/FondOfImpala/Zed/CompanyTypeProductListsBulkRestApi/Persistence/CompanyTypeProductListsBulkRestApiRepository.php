@@ -87,6 +87,8 @@ class CompanyTypeProductListsBulkRestApiRepository extends AbstractRepository im
             ->filterByCustomerReference($customerReference, Criteria::NOT_EQUAL)
             ->filterByCustomerReference_In($colleagueReferences)
             ->select([SpyCustomerTableMap::COL_ID_CUSTOMER, SpyCustomerTableMap::COL_CUSTOMER_REFERENCE])
+            ->groupByIdCustomer()
+            ->groupByCustomerReference()
             ->find();
 
         return $collection->toKeyValue(
@@ -161,6 +163,8 @@ class CompanyTypeProductListsBulkRestApiRepository extends AbstractRepository im
             ->filterByCustomerReference($customerReference, Criteria::NOT_EQUAL)
             ->filterByEmail_In($colleagueEmails)
             ->select([SpyCustomerTableMap::COL_ID_CUSTOMER, SpyCustomerTableMap::COL_EMAIL])
+            ->groupByIdCustomer()
+            ->groupByEmail()
             ->find();
 
         return $collection->toKeyValue(
