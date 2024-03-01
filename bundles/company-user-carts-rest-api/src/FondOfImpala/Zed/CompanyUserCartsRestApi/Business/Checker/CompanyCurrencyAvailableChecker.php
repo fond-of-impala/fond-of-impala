@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Checker;
 
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Reader\CompanyUserReaderInterface;
-use FondOfImpala\Zed\CompanyUserCartsRestApi\Communication\Plugin\PermissionExtension\ReadCompanyUserCartPermissionPlugin;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToPermissionFacadeInterface;
 use Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer;
 
@@ -49,5 +48,4 @@ class CompanyCurrencyAvailableChecker implements CompanyCurrencyAvailableChecker
 
         return $this->checkByIdCompanyUser($idCompanyUser);
     }
-
 }

@@ -13,7 +13,7 @@ class QuoteCreateExpander implements QuoteCreateExpanderInterface
     protected array $plugins;
 
     /**
-     * @param array<\FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface>
+     * @param array<\FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface> $plugins
      */
     public function __construct(array $plugins)
     {
@@ -30,7 +30,7 @@ class QuoteCreateExpander implements QuoteCreateExpanderInterface
         QuoteTransfer $quoteTransfer,
         RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer
     ): QuoteTransfer {
-        foreach ($this->plugins as $plugin){
+        foreach ($this->plugins as $plugin) {
             $quoteTransfer = $plugin->expand($quoteTransfer, $restCompanyUserCartsRequestTransfer);
         }
 

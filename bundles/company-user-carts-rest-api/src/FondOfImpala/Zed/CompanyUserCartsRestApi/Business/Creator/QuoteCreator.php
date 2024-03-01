@@ -75,16 +75,15 @@ class QuoteCreator implements QuoteCreatorInterface
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        CompanyUserReaderInterface                    $companyUserReader,
-        QuoteMapperInterface                          $quoteMapper,
-        QuoteHandlerInterface                         $quoteHandler,
-        QuoteFinderInterface                          $quoteFinder,
-        WritePermissionCheckerInterface               $writePermissionChecker,
+        CompanyUserReaderInterface $companyUserReader,
+        QuoteMapperInterface $quoteMapper,
+        QuoteHandlerInterface $quoteHandler,
+        QuoteFinderInterface $quoteFinder,
+        WritePermissionCheckerInterface $writePermissionChecker,
         CompanyUserCartsRestApiToQuoteFacadeInterface $quoteFacade,
-        QuoteCreateExpanderInterface                  $quoteCreateExpander,
-        LoggerInterface                               $logger
-    )
-    {
+        QuoteCreateExpanderInterface $quoteCreateExpander,
+        LoggerInterface $logger
+    ) {
         $this->companyUserReader = $companyUserReader;
         $this->quoteMapper = $quoteMapper;
         $this->quoteHandler = $quoteHandler;
@@ -98,15 +97,14 @@ class QuoteCreator implements QuoteCreatorInterface
     /**
      * @param \Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer
      *
-     * @return \Generated\Shared\Transfer\RestCompanyUserCartsResponseTransfer
      * @throws \Throwable
-     *
      * @throws \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Exception\QuoteNotCreatedException
+     *
+     * @return \Generated\Shared\Transfer\RestCompanyUserCartsResponseTransfer
      */
     public function createByRestCompanyUserCartsRequest(
         RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer
-    ): RestCompanyUserCartsResponseTransfer
-    {
+    ): RestCompanyUserCartsResponseTransfer {
         $self = $this;
         $restCompanyUserCartsResponseTransfer = null;
 
@@ -144,8 +142,7 @@ class QuoteCreator implements QuoteCreatorInterface
      */
     protected function executeCreateByRestCompanyUserCartsRequest(
         RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer
-    ): RestCompanyUserCartsResponseTransfer
-    {
+    ): RestCompanyUserCartsResponseTransfer {
         $companyUserTransfer = $this->companyUserReader->getByRestCompanyUserCartsRequest(
             $restCompanyUserCartsRequestTransfer,
         );

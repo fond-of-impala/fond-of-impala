@@ -64,14 +64,15 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
-        $container =  parent::provideCommunicationLayerDependencies($container);
+        $container = parent::provideCommunicationLayerDependencies($container);
+
         return $this->addCurrencyFacade($container);
     }
-
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Communication\Plugin;
 
 use Exception;
+use FondOfImpala\Shared\CompanyUserCartsRestApi\CompanyUserCartsRestApiConstants;
 use FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CurrencyTransfer;
@@ -15,14 +16,20 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class CompanyCurrencyToQuoteExpanderPlugin extends AbstractPlugin implements QuoteCreateExpanderPluginInterface
 {
-    public const COMPANY_CURRENCY_NOT_CONFIGURED = 'quote.error.company.currency.not.yet.supported';
-
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer
+     *
+     * @throws \Exception
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
     public function expand(QuoteTransfer $quoteTransfer, RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer): QuoteTransfer
     {
         $currency = $this->getCompanyCurrency($quoteTransfer->getCompanyUser()->getCompany());
 
-        if ($currency === null){
-            throw new Exception(static::COMPANY_CURRENCY_NOT_CONFIGURED, static::ERROR_CODE);
+        if ($currency === null) {
+            throw new Exception(CompanyUserCartsRestApiConstants::ERROR_MESSAGE_COMPANY_CURRENCY_NOT_SUPPORTED, static::ERROR_CODE);
         }
 
         return $quoteTransfer->setCurrency($currency);
@@ -30,9 +37,8 @@ class CompanyCurrencyToQuoteExpanderPlugin extends AbstractPlugin implements Quo
 
     /**
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
+     *
      * @return \Generated\Shared\Transfer\CurrencyTransfer|null
-     * @throws \Spryker\Zed\Currency\Business\Model\Exception\CurrencyNotFoundException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function getCompanyCurrency(CompanyTransfer $companyTransfer): ?CurrencyTransfer
     {
@@ -46,5 +52,4 @@ class CompanyCurrencyToQuoteExpanderPlugin extends AbstractPlugin implements Quo
 
         return null;
     }
-
 }

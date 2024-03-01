@@ -13,7 +13,6 @@ class CompanyUserCartsRestApiCommunicationFactory extends AbstractCommunicationF
 {
     /**
      * @return \FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCurrencyFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCurrencyFacade(): CompanyUserCartsRestApiToCurrencyFacadeInterface
     {
