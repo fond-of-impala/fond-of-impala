@@ -14,6 +14,8 @@ use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Creator\QuoteCreator;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Creator\QuoteCreatorInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Deleter\QuoteDeleter;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Deleter\QuoteDeleterInterface;
+use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpander;
+use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteExpander;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteExpanderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\ItemFinder;
@@ -63,6 +65,7 @@ class CompanyUserCartsRestApiBusinessFactory extends AbstractBusinessFactory
             $this->createQuoteFinder(),
             $this->createWritePermissionChecker(),
             $this->getQuoteFacade(),
+            $this->createQuoteCreateExpander(),
             $this->getLogger(),
         );
     }
@@ -131,6 +134,16 @@ class CompanyUserCartsRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new QuoteExpander(
             $this->getConfig(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface
+     */
+    protected function createQuoteCreateExpander(): QuoteCreateExpanderInterface
+    {
+        return new QuoteCreateExpander(
+            $this->getQuoteCreateExpanderPlugins(),
         );
     }
 
@@ -258,5 +271,13 @@ class CompanyUserCartsRestApiBusinessFactory extends AbstractBusinessFactory
     protected function getPermissionFacade(): CompanyUserCartsRestApiToPermissionFacadeInterface
     {
         return $this->getProvidedDependency(CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION);
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface>
+     */
+    protected function getQuoteCreateExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(CompanyUserCartsRestApiDependencyProvider::PLUGIN_QUOTE_CREATE_EXPANDER);
     }
 }

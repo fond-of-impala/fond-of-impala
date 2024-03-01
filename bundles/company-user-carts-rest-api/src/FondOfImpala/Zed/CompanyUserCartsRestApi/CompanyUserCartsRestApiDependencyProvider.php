@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\CompanyUserCartsRestApi;
 
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCartFacadeBridge;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCompanyUserReferenceFacadeBridge;
+use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCurrencyFacadeBridge;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToPermissionFacadeBridge;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToQuoteFacadeBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -22,6 +23,11 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
     /**
      * @var string
      */
+    public const FACADE_CURRENCY = 'FACADE_CURRENCY';
+
+    /**
+     * @var string
+     */
     public const FACADE_COMPANY_USER_REFERENCE = 'FACADE_COMPANY_USER_REFERENCE';
 
     /**
@@ -35,6 +41,11 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
     public const FACADE_QUOTE = 'FACADE_QUOTE';
 
     /**
+     * @var string
+     */
+    public const PLUGIN_QUOTE_CREATE_EXPANDER = 'PLUGIN_QUOTE_CREATE_EXPANDER';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -46,9 +57,21 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
         $container = $this->addCartFacade($container);
         $container = $this->addCompanyUserReferenceFacade($container);
         $container = $this->addPermissionFacade($container);
+        $container = $this->addQuoteCreateExpanderPlugins($container);
 
         return $this->addQuoteFacade($container);
     }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function provideCommunicationLayerDependencies(Container $container): Container
+    {
+        $container =  parent::provideCommunicationLayerDependencies($container);
+        return $this->addCurrencyFacade($container);
+    }
+
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -60,6 +83,22 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
         $container[static::FACADE_CART] = static function (Container $container) {
             return new CompanyUserCartsRestApiToCartFacadeBridge(
                 $container->getLocator()->cart()->facade(),
+            );
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCurrencyFacade(Container $container): Container
+    {
+        $container[static::FACADE_CURRENCY] = static function (Container $container) {
+            return new CompanyUserCartsRestApiToCurrencyFacadeBridge(
+                $container->getLocator()->currency()->facade(),
             );
         };
 
@@ -112,5 +151,27 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
         };
 
         return $container;
+    }
+
+    /**
+     * @param \Spryker\ZED\Kernel\Container $container
+     *
+     * @return \Spryker\ZED\Kernel\Container
+     */
+    protected function addQuoteCreateExpanderPlugins(Container $container): Container
+    {
+        $self = $this;
+
+        $container[static::PLUGIN_QUOTE_CREATE_EXPANDER] = static fn (): array => $self->getQuoteCreateExpanderPlugins();
+
+        return $container;
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface>
+     */
+    protected function getQuoteCreateExpanderPlugins(): array
+    {
+        return [];
     }
 }
