@@ -21,7 +21,8 @@
     "fond-of-oryx/company-product-list-connector": "^1.0.0 || ^2.0.0",
     "spryker/company-role": "^1.0.0",
     "spryker/event": "^2.0.0",
-    "spryker/permission-extension": "^1.0.0"
+    "spryker/permission-extension": "^1.0.0",
+    "spryker/uuid-behavior": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
