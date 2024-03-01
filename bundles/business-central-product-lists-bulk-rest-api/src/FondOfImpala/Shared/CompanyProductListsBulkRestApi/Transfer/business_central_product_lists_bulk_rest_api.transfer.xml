@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+    <transfer name="RestProductListsBulkAssignment">
+        <property name="company" type="RestProductListsBulkAssignmentCompany"/>
+    </transfer>
+
+    <transfer name="RestProductListsBulkAssignmentCompany">
+        <property name="debtorNumber" type="string"/>
+    </transfer>
+
+    <transfer name="RestProductListsBulkRequest">
+        <property name="customerReference" type="string" />
+        <property name="assignments" type="RestProductListsBulkRequestAssignment[]" singular="assignment"/>
+    </transfer>
+
+    <transfer name="RestProductListsBulkRequestAssignment">
+        <property name="company" type="RestProductListsBulkRequestAssignmentCompany"/>
+    </transfer>
+
+    <transfer name="RestProductListsBulkRequestAssignmentCompany">
+        <property name="id" type="int"/>
+        <property name="debtorNumber" type="string"/>
+    </transfer>
+</transfers>
+
