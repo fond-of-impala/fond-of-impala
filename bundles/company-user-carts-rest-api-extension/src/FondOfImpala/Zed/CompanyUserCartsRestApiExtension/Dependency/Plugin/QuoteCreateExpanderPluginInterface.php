@@ -7,6 +7,9 @@ use Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer;
 
 interface QuoteCreateExpanderPluginInterface
 {
+    /**
+     * @var int
+     */
     public const ERROR_CODE = 333;
 
     /**
