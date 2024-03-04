@@ -155,9 +155,9 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
     }
 
     /**
-     * @param \Spryker\ZED\Kernel\Container $container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
-     * @return \Spryker\ZED\Kernel\Container
+     * @return \Spryker\Zed\Kernel\Container
      */
     protected function addQuoteCreateExpanderPlugins(Container $container): Container
     {
