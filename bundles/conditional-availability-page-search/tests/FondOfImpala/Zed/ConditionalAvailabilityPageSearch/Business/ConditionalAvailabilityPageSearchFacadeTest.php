@@ -69,6 +69,42 @@ class ConditionalAvailabilityPageSearchFacadeTest extends Unit
     /**
      * @return void
      */
+    public function testPublishByKeys(): void
+    {
+        $keys = ['foo', 'bar'];
+
+        $this->factoryMock->expects(static::atLeastOnce())
+            ->method('createConditionalAvailabilityPeriodPageSearchPublisher')
+            ->willReturn($this->publisherMock);
+
+        $this->publisherMock->expects(static::atLeastOnce())
+            ->method('publishByKeys')
+            ->with($keys);
+
+        $this->facade->publishByKeys($keys);
+    }
+
+    /**
+     * @return void
+     */
+    public function testPublishByConditionalAvailabilityIds(): void
+    {
+        $conditionalAvailabilityIds = [1, 3];
+
+        $this->factoryMock->expects(static::atLeastOnce())
+            ->method('createConditionalAvailabilityPeriodPageSearchPublisher')
+            ->willReturn($this->publisherMock);
+
+        $this->publisherMock->expects(static::atLeastOnce())
+            ->method('publishByConditionalAvailabilityIds')
+            ->with($conditionalAvailabilityIds);
+
+        $this->facade->publishByConditionalAvailabilityIds($conditionalAvailabilityIds);
+    }
+
+    /**
+     * @return void
+     */
     public function testUnpublish(): void
     {
         $eventName = ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_UNPUBLISH;

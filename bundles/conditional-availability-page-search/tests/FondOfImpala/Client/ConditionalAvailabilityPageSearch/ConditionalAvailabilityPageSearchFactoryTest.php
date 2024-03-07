@@ -11,24 +11,12 @@ use Spryker\Client\Search\Dependency\Plugin\QueryInterface;
 
 class ConditionalAvailabilityPageSearchFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchFactory
-     */
     protected ConditionalAvailabilityPageSearchFactory $factory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientInterface
-     */
     protected MockObject|ConditionalAvailabilityPageSearchToSearchClientInterface $clientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\Dependency\Plugin\QueryInterface
-     */
     protected MockObject|QueryInterface $queryMock;
 
     /**
