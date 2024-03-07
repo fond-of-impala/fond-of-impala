@@ -8,14 +8,8 @@ use Spryker\Zed\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider
-     */
     protected MockObject|ProductListConditionalAvailabilityPageSearchDependencyProvider $dependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
     /**

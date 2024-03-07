@@ -11,19 +11,10 @@ use Spryker\Zed\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchBusinessFactory
-     */
     protected ProductListConditionalAvailabilityPageSearchBusinessFactory $factory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface
-     */
     protected MockObject|ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacadeMock;
 
     /**

@@ -8,14 +8,8 @@ use Spryker\Client\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchDependencyProviderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchDependencyProvider
-     */
     protected ProductListConditionalAvailabilityPageSearchDependencyProvider $dependencyProvider;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
     /**

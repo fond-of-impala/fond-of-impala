@@ -2,21 +2,21 @@
 
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Model;
 
-use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface;
+use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Reader\ProductListReaderInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Generated\Shared\Transfer\ProductListMapTransfer;
 
 class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvailabilityPeriodPageSearchExpanderInterface
 {
-    protected ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacade;
+    protected ProductListReaderInterface $productListReader;
 
     /**
-     * @param \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacade
+     * @param \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Reader\ProductListReaderInterface $productListReader
      */
     public function __construct(
-        ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacade
+        ProductListReaderInterface $productListReader
     ) {
-        $this->productListFacade = $productListFacade;
+        $this->productListReader = $productListReader;
     }
 
     /**
@@ -54,7 +54,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
     ): ConditionalAvailabilityPeriodPageSearchTransfer {
         $idProduct = $conditionalAvailabilityPeriodPageSearchTransfer->getFkProduct();
 
-        $whitelists = $this->productListFacade->getProductWhitelistIdsByIdProduct($idProduct);
+        $whitelists = $this->productListReader->getWhitelistIdsByIdProduct($idProduct);
 
         if ($whitelists) {
             $conditionalAvailabilityPeriodPageSearchTransfer->getProductListMap()->setWhitelists($whitelists);
@@ -73,7 +73,7 @@ class ConditionalAvailabilityPeriodPageSearchExpander implements ConditionalAvai
     ): ConditionalAvailabilityPeriodPageSearchTransfer {
         $idProduct = $conditionalAvailabilityPeriodPageSearchTransfer->getFkProduct();
 
-        $blacklists = $this->productListFacade->getProductBlacklistIdsByIdProduct($idProduct);
+        $blacklists = $this->productListReader->getBlacklistIdsByIdProduct($idProduct);
 
         if ($blacklists) {
             $conditionalAvailabilityPeriodPageSearchTransfer->getProductListMap()->setBlacklists($blacklists);

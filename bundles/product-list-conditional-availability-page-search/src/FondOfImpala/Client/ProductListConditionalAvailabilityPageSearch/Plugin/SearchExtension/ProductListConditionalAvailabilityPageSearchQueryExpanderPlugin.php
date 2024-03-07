@@ -98,7 +98,7 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin extends Ab
     {
         $customerProductListCollectionTransfer = $this->findCustomerProductListCollection();
 
-        if (!$customerProductListCollectionTransfer) {
+        if ($customerProductListCollectionTransfer === null) {
             return [];
         }
 
@@ -112,7 +112,7 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin extends Ab
     {
         $customerProductListCollectionTransfer = $this->findCustomerProductListCollection();
 
-        if (!$customerProductListCollectionTransfer) {
+        if ($customerProductListCollectionTransfer === null) {
             return [];
         }
 
