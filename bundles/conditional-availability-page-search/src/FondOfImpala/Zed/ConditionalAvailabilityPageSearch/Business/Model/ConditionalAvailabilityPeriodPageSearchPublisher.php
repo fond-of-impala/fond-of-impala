@@ -68,12 +68,7 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
         if ($eventName !== ConditionalAvailabilityEvents::CONDITIONAL_AVAILABILITY_PERIOD_PUBLISH) {
             $keys = $this->keyFilter->filterFromEventEntities($eventEntityTransfers);
 
-            $foiConditionalAvailabilityPeriodEntities = $this->queryContainer
-                ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByKeys($keys)
-                ->find()
-                ->getData();
-
-            $this->storeData($foiConditionalAvailabilityPeriodEntities);
+            $this->publishByKeys($keys);
 
             return;
         }
@@ -82,6 +77,31 @@ class ConditionalAvailabilityPeriodPageSearchPublisher implements ConditionalAva
             $eventEntityTransfers,
         );
 
+        $this->publishByConditionalAvailabilityIds($conditionalAvailabilityIds);
+    }
+
+    /**
+     * @param array<string> $keys
+     *
+     * @return void
+     */
+    public function publishByKeys(array $keys): void
+    {
+        $foiConditionalAvailabilityPeriodEntities = $this->queryContainer
+            ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByKeys($keys)
+            ->find()
+            ->getData();
+
+        $this->storeData($foiConditionalAvailabilityPeriodEntities);
+    }
+
+    /**
+     * @param array<int> $conditionalAvailabilityIds
+     *
+     * @return void
+     */
+    public function publishByConditionalAvailabilityIds(array $conditionalAvailabilityIds): void
+    {
         $foiConditionalAvailabilityPeriodEntities = $this->queryContainer
             ->queryConditionalAvailabilityPeriodsWithConditionalAvailabilityAndProductByConditionalAvailabilityIds(
                 $conditionalAvailabilityIds,

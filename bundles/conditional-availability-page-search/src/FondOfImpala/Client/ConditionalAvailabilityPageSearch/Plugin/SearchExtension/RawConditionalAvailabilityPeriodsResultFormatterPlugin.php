@@ -27,7 +27,7 @@ class RawConditionalAvailabilityPeriodsResultFormatterPlugin extends AbstractEla
      *
      * @return mixed
      */
-    public function formatSearchResult(ResultSet $searchResult, array $requestParameters = [])
+    protected function formatSearchResult(ResultSet $searchResult, array $requestParameters = [])
     {
         $rawConditionalAvailabilityPeriods = [];
         foreach ($searchResult->getResults() as $document) {
