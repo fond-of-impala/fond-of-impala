@@ -8,14 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge
-     */
     protected ProductListConditionalAvailabilityPageSearchToConditionalAvailabilityFacadeBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityFacadeInterface
-     */
     protected MockObject|ConditionalAvailabilityFacadeInterface $facadeMock;
 
     /**

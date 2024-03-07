@@ -3,31 +3,19 @@
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Model;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface;
+use FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Reader\ProductListReaderInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer;
 use Generated\Shared\Transfer\ProductListMapTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchExpander
-     */
     protected ConditionalAvailabilityPeriodPageSearchExpander $expander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface
-     */
-    protected MockObject|ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface $productListFacadeMock;
+    protected MockObject|ProductListReaderInterface $productListReaderMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
-     */
     protected MockObject|ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductListMapTransfer
-     */
     protected MockObject|ProductListMapTransfer $productListMapTransferMock;
 
     /**
@@ -35,7 +23,7 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
      */
     protected function _before(): void
     {
-        $this->productListFacadeMock = $this->getMockBuilder(ProductListConditionalAvailabilityPageSearchToProductListFacadeInterface::class)
+        $this->productListReaderMock = $this->getMockBuilder(ProductListReaderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -48,7 +36,7 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
             ->getMock();
 
         $this->expander = new ConditionalAvailabilityPeriodPageSearchExpander(
-            $this->productListFacadeMock,
+            $this->productListReaderMock,
         );
     }
 
@@ -73,8 +61,8 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
             ->method('getFkProduct')
             ->willReturn($fkProduct);
 
-        $this->productListFacadeMock->expects(static::atLeastOnce())
-            ->method('getProductWhitelistIdsByIdProduct')
+        $this->productListReaderMock->expects(static::atLeastOnce())
+            ->method('getWhitelistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($whitelistIds);
 
@@ -83,8 +71,8 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
             ->with($whitelistIds)
             ->willReturnSelf();
 
-        $this->productListFacadeMock->expects(static::atLeastOnce())
-            ->method('getProductBlacklistIdsByIdProduct')
+        $this->productListReaderMock->expects(static::atLeastOnce())
+            ->method('getBlacklistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($blacklistIds);
 
@@ -122,8 +110,8 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
             ->method('getFkProduct')
             ->willReturn($fkProduct);
 
-        $this->productListFacadeMock->expects(static::atLeastOnce())
-            ->method('getProductWhitelistIdsByIdProduct')
+        $this->productListReaderMock->expects(static::atLeastOnce())
+            ->method('getWhitelistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($whitelistIds);
 
@@ -132,8 +120,8 @@ class ConditionalAvailabilityPeriodPageSearchExpanderTest extends Unit
             ->with($whitelistIds)
             ->willReturnSelf();
 
-        $this->productListFacadeMock->expects(static::atLeastOnce())
-            ->method('getProductBlacklistIdsByIdProduct')
+        $this->productListReaderMock->expects(static::atLeastOnce())
+            ->method('getBlacklistIdsByIdProduct')
             ->with($fkProduct)
             ->willReturn($blacklistIds);
 

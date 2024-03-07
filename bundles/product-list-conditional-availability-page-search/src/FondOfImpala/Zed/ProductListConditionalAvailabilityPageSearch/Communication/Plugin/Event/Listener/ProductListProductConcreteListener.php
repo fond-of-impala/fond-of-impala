@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication\Plugin\Event\Listener;
 
-use FondOfImpala\Shared\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchConstants;
 use Orm\Zed\ProductList\Persistence\Map\SpyProductListProductConcreteTableMap;
 use Spryker\Zed\Event\Dependency\Plugin\EventBulkHandlerInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -32,8 +31,7 @@ class ProductListProductConcreteListener extends AbstractPlugin implements Event
         $conditionalAvailabilityIds = $this->getFactory()->getConditionalAvailabilityFacade()
             ->getConditionalAvailabilityIdsByProductConcreteIds($concreteIds);
 
-        $this->getFactory()->getEventBehaviorFacade()->executeResolvedPluginsBySources(
-            [ConditionalAvailabilityPageSearchConstants::CONDITIONAL_AVAILABILITY_PERIOD_RESOURCE_NAME],
+        $this->getFactory()->getConditionalAvailabilityPageSearchFacade()->publishByConditionalAvailabilityIds(
             $conditionalAvailabilityIds,
         );
     }

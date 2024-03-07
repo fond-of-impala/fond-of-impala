@@ -10,19 +10,10 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 class ProductListConditionalAvailabilityPeriodPageDataExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication\ConditionalAvailabilityPageSearchExtension\ProductListConditionalAvailabilityPeriodPageDataExpanderPlugin
-     */
     protected ProductListConditionalAvailabilityPeriodPageDataExpanderPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Business\ProductListConditionalAvailabilityPageSearchFacade
-     */
     protected MockObject|ProductListConditionalAvailabilityPageSearchFacade $facadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ConditionalAvailabilityPeriodPageSearchTransfer
-     */
     protected MockObject|ConditionalAvailabilityPeriodPageSearchTransfer $conditionalAvailabilityPeriodPageSearchTransferMock;
 
     /**
