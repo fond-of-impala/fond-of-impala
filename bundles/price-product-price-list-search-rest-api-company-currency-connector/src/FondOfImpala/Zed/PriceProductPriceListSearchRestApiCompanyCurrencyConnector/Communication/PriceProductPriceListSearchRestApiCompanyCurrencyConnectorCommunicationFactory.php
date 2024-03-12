@@ -10,7 +10,6 @@ class PriceProductPriceListSearchRestApiCompanyCurrencyConnectorCommunicationFac
 {
     /**
      * @return \FondOfImpala\Zed\PriceProductPriceListSearchRestApiCompanyCurrencyConnector\Dependency\Facade\PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCurrencyFacade(): PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFacadeInterface
     {

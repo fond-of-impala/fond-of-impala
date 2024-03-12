@@ -11,9 +11,11 @@ use Spryker\Client\Kernel\AbstractClient;
 class PriceProductPriceListSearchRestApiCompanyCurrencyConnectorClient extends AbstractClient implements PriceProductPriceListSearchRestApiCompanyCurrencyConnectorClientInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\CurrencyTransfer $currencyTransfer
-     * @return \Generated\Shared\Transfer\CurrencyTransfer
      * @api
+     *
+     * @param \Generated\Shared\Transfer\CurrencyTransfer $currencyTransfer
+     *
+     * @return \Generated\Shared\Transfer\CurrencyTransfer
      */
     public function getCurrencyById(CurrencyTransfer $currencyTransfer): CurrencyTransfer
     {

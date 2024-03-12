@@ -10,13 +10,13 @@ interface PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFa
      * Specification:
      *  - Reads currency from spy_currency database table.
      *
-     * @param int $idCurrency
-     *
-     * @return \Generated\Shared\Transfer\CurrencyTransfer
-     * @throws \Spryker\Zed\Currency\Business\Model\Exception\CurrencyNotFoundException
-     *
      * @api
      *
+     * @param int $idCurrency
+     *
+     * @throws \Spryker\Zed\Currency\Business\Model\Exception\CurrencyNotFoundException
+     *
+     * @return \Generated\Shared\Transfer\CurrencyTransfer
      */
     public function getByIdCurrency(int $idCurrency): CurrencyTransfer;
 }

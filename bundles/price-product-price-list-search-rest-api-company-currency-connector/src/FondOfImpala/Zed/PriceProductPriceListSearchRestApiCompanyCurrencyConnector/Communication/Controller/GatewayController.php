@@ -12,9 +12,8 @@ class GatewayController extends AbstractGatewayController
 {
     /**
      * @param \Generated\Shared\Transfer\CurrencyTransfer $currencyTransfer
+     *
      * @return \Generated\Shared\Transfer\CurrencyTransfer
-     * @throws \Spryker\Zed\Currency\Business\Model\Exception\CurrencyNotFoundException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCurrencyByIdAction(CurrencyTransfer $currencyTransfer): CurrencyTransfer
     {

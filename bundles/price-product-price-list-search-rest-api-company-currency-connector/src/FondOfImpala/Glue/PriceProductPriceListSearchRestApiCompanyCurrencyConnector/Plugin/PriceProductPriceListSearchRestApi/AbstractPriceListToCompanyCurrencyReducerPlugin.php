@@ -11,28 +11,37 @@ use Throwable;
 
 /**
  * @method \FondOfImpala\Glue\PriceProductPriceListSearchRestApiCompanyCurrencyConnector\PriceProductPriceListSearchRestApiCompanyCurrencyConnectorFactory getFactory()
- * @method \FondOfImpala\Client\PriceProductPriceListSearchRestApiCompanyCurrencyConnector\PriceProductPriceListSearchRestApiCompanyCurrencyConnectorClientInterface  getClient()
+ * @method \FondOfImpala\Client\PriceProductPriceListSearchRestApiCompanyCurrencyConnector\PriceProductPriceListSearchRestApiCompanyCurrencyConnectorClientInterface getClient()
  */
 abstract class AbstractPriceListToCompanyCurrencyReducerPlugin extends AbstractPlugin implements ReducerPluginInterface
 {
+    /**
+     * @var string
+     */
+    protected const INDEX = '';
+
+    /**
+     * @var string
+     */
     protected const INDEX_PRICES = 'prices';
 
     /**
      * @param array $data
+     *
      * @return array
      */
     public function reduce(array $data): array
     {
         $currencyCode = $this->getCurrencyCodeFromCompany($this->getCompanyTransfer());
 
-        if (array_key_exists(static::INDEX, $data)){
-            foreach ($data[static::INDEX] as $index => $priceListData){
-                if (array_key_exists(static::INDEX_PRICES, $priceListData)){
+        if (array_key_exists(static::INDEX, $data)) {
+            foreach ($data[static::INDEX] as $index => $priceListData) {
+                if (array_key_exists(static::INDEX_PRICES, $priceListData)) {
                     $prices = $priceListData[static::INDEX_PRICES];
                     unset($priceListData[static::INDEX_PRICES]);
 
                     $newPrices = [];
-                    if (array_key_exists($currencyCode, $prices)){
+                    if (array_key_exists($currencyCode, $prices)) {
                         $newPrices = $prices[$currencyCode];
                     }
                     $priceListData[static::INDEX_PRICES][$currencyCode] = $newPrices;
@@ -40,13 +49,16 @@ abstract class AbstractPriceListToCompanyCurrencyReducerPlugin extends AbstractP
                 }
             }
         }
+
         return $data;
     }
 
     /**
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
-     * @return string
+     *
      * @throws \Exception
+     *
+     * @return string
      */
     protected function getCurrencyCodeFromCompany(CompanyTransfer $companyTransfer): string
     {
@@ -54,7 +66,7 @@ abstract class AbstractPriceListToCompanyCurrencyReducerPlugin extends AbstractP
         $companyCurrency = $this->getClient()->getCurrencyById($companyCurrency);
         $currencyCode = $companyCurrency->getCode();
 
-        if ($currencyCode === null){
+        if ($currencyCode === null) {
             throw new Exception(sprintf('Could not get company currency for company with id "%s"', $companyTransfer->getIdCompany()));
         }
 
@@ -62,6 +74,8 @@ abstract class AbstractPriceListToCompanyCurrencyReducerPlugin extends AbstractP
     }
 
     /**
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\CompanyTransfer
      */
     protected function getCompanyTransfer(): CompanyTransfer
@@ -69,10 +83,10 @@ abstract class AbstractPriceListToCompanyCurrencyReducerPlugin extends AbstractP
         try {
             $customer = $this->getFactory()->getCustomerClient()->getCustomer();
             $company = $customer->getCompanyUserTransfer()->getCompany();
-        }
-        catch (Throwable $throwable){
+        } catch (Throwable $throwable) {
             throw new Exception('Could not get company');
         }
+
         return $company;
     }
 }

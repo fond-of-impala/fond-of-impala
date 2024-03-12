@@ -34,7 +34,7 @@ class PriceProductPriceListSearchRestApiCompanyCurrencyConnectorDependencyProvid
      */
     protected function addCurrencyFacade(Container $container): Container
     {
-        $container[static::FACADE_CURRENCY] = static fn(): PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFacadeBridge => new PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFacadeBridge($container->getLocator()->currency()->facade());
+        $container[static::FACADE_CURRENCY] = static fn (): PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFacadeBridge => new PriceProductPriceListSearchRestApiCompanyCurrencyConnectorToCurrencyFacadeBridge($container->getLocator()->currency()->facade());
 
         return $container;
     }

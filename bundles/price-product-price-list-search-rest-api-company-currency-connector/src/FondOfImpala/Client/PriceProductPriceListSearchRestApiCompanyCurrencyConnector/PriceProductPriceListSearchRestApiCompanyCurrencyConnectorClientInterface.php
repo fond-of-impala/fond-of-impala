@@ -7,9 +7,11 @@ use Generated\Shared\Transfer\CurrencyTransfer;
 interface PriceProductPriceListSearchRestApiCompanyCurrencyConnectorClientInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\CurrencyTransfer $currencyTransfer
-     * @return \Generated\Shared\Transfer\CurrencyTransfer
      * @api
+     *
+     * @param \Generated\Shared\Transfer\CurrencyTransfer $currencyTransfer
+     *
+     * @return \Generated\Shared\Transfer\CurrencyTransfer
      */
     public function getCurrencyById(CurrencyTransfer $currencyTransfer): CurrencyTransfer;
 }
