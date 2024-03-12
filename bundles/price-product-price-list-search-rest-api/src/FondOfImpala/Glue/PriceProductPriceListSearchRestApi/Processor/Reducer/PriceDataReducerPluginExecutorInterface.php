@@ -6,6 +6,7 @@ interface PriceDataReducerPluginExecutorInterface
 {
     /**
      * @param array $data
+     *
      * @return array
      */
     public function execute(array $data): array;

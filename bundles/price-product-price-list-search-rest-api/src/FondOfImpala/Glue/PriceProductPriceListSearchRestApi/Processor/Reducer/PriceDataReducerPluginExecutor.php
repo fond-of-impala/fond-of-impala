@@ -2,8 +2,6 @@
 
 namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Reducer;
 
-use FondOfImpala\Glue\PriceProductPriceListSearchRestApiExtension\Plugin\ReducerPluginInterface;
-
 class PriceDataReducerPluginExecutor implements PriceDataReducerPluginExecutorInterface
 {
     /**
@@ -21,13 +19,15 @@ class PriceDataReducerPluginExecutor implements PriceDataReducerPluginExecutorIn
 
     /**
      * @param array $data
+     *
      * @return array
      */
     public function execute(array $data): array
     {
-        foreach ($this->plugins as $plugin){
+        foreach ($this->plugins as $plugin) {
             $data = $plugin->reduce($data);
         }
+
         return $data;
     }
 }

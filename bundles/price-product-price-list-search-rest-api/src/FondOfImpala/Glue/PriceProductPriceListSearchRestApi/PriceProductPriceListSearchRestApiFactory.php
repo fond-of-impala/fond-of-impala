@@ -59,7 +59,6 @@ class PriceProductPriceListSearchRestApiFactory extends AbstractFactory
 
     /**
      * @return \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Reducer\PriceDataReducerPluginExecutorInterface
-     * @throws \Spryker\Glue\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function createPriceDataReducerPluginExecutor(): PriceDataReducerPluginExecutorInterface
     {
@@ -76,7 +75,6 @@ class PriceProductPriceListSearchRestApiFactory extends AbstractFactory
 
     /**
      * @return array<\FondOfImpala\Glue\PriceProductPriceListSearchRestApiExtension\Plugin\ReducerPluginInterface>
-     * @throws \Spryker\Glue\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function getReducerPlugins(): array
     {

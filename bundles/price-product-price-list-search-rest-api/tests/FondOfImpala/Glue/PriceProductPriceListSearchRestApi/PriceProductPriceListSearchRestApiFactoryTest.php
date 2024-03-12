@@ -83,8 +83,14 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
-            ->with(PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH)
-            ->willReturn($this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock);
+            ->withConsecutive(
+                [PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH],
+                [PriceProductPriceListSearchRestApiDependencyProvider::PLUGINS_REDUCER],
+            )
+            ->willReturnOnConsecutiveCalls(
+                $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock,
+                [],
+            );
 
         static::assertInstanceOf(
             PriceProductPriceListSearchReaderInterface::class,
@@ -103,8 +109,14 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
-            ->with(PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH)
-            ->willReturn($this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock);
+            ->withConsecutive(
+                [PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH],
+                [PriceProductPriceListSearchRestApiDependencyProvider::PLUGINS_REDUCER],
+            )
+            ->willReturnOnConsecutiveCalls(
+                $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock,
+                [],
+            );
 
         static::assertInstanceOf(
             PriceProductPriceListSearchReaderInterface::class,

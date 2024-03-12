@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiConfig;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductPriceListSearchResourceMapperInterface;
+use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Reducer\PriceDataReducerPluginExecutorInterface;
 use Generated\Shared\Transfer\RestPriceProductPriceListSearchAttributesTransfer;
 use Generated\Shared\Transfer\RestPriceProductPriceListSearchPaginationTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -43,6 +44,11 @@ class PriceProductAbstractPriceListSearchReaderTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface
      */
     protected MockObject|RestRequestInterface $restRequestInterfaceMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Reducer\PriceDataReducerPluginExecutorInterface
+     */
+    protected MockObject|PriceDataReducerPluginExecutorInterface $reducerPluginExecutor;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
@@ -120,6 +126,10 @@ class PriceProductAbstractPriceListSearchReaderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->reducerPluginExecutor = $this->getMockBuilder(PriceDataReducerPluginExecutorInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->requestMock = $this->getMockBuilder(Request::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -162,6 +172,7 @@ class PriceProductAbstractPriceListSearchReaderTest extends Unit
             $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock,
             $this->priceProductPriceListSearchResourceMapperInterfaceMock,
             $this->restResourceBuilderInterfaceMock,
+            $this->reducerPluginExecutor,
         );
     }
 
