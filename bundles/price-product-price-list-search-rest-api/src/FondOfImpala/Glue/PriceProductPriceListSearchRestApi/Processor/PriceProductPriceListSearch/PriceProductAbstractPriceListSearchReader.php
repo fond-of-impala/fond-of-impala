@@ -45,6 +45,6 @@ class PriceProductAbstractPriceListSearchReader extends AbstractPriceProductPric
      */
     protected function doSearch(string $searchString, array $requestParameters): array
     {
-        return $this->priceProductPriceListPageSearchClient->searchAbstract($searchString, $requestParameters);
+        return $this->reducerPluginExecutor->execute($this->priceProductPriceListPageSearchClient->searchAbstract($searchString, $requestParameters));
     }
 }
