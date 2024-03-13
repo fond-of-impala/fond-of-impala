@@ -69,6 +69,8 @@ include:
   - bundles/price-product-price-list-page-search
   - bundles/price-product-price-list-page-search-extension
   - bundles/price-product-price-list-search-rest-api
+  - bundles/price-product-price-list-search-rest-api-company-currency-connector
+  - bundles/price-product-price-list-search-rest-api-extension
   - bundles/product-image-grouping-product-page-search
   - bundles/product-list-conditional-availability-page-search
   - bundles/product-product-list-connector
