@@ -6,9 +6,6 @@ use Codeception\Test\Unit;
 
 class ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication\ConditionalAvailabilityPageSearchExtension\ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPlugin
-     */
     protected ProductListConditionalAvailabilityPeriodPageSearchDataExpanderPlugin $plugin;
 
     /**

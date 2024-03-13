@@ -9,19 +9,10 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 class ConditionalAvailabilityPageSearchToSearchClientBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\ConditionalAvailabilityPageSearch\Dependency\Client\ConditionalAvailabilityPageSearchToSearchClientBridge
-     */
     protected ConditionalAvailabilityPageSearchToSearchClientBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Search\SearchClientInterface
-     */
     protected MockObject|SearchClientInterface $searchClientMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
-     */
     protected MockObject|QueryInterface $queryMock;
 
     /**

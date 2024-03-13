@@ -17,29 +17,14 @@ use Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface;
 
 class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Plugin\SearchExtension\ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin
-     */
     protected ProductListConditionalAvailabilityPageSearchQueryExpanderPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryInterface
-     */
     protected MockObject|QueryInterface $queryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Elastica\Query
-     */
     protected MockObject|ElasticaQuery $elasticaQueryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory
-     */
     protected MockObject|ProductListConditionalAvailabilityPageSearchFactory $factoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientInterface
-     */
     protected MockObject|ProductListConditionalAvailabilityPageSearchToCustomerClientInterface $customerClientMock;
 
     /**
@@ -289,10 +274,10 @@ class ProductListConditionalAvailabilityPageSearchQueryExpanderPluginTest extend
 
         try {
             $this->plugin->expandQuery($this->queryMock);
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException $invalidArgumentException) {
             static::assertInstanceOf(
                 InvalidArgumentException::class,
-                $exception,
+                $invalidArgumentException,
             );
         }
     }

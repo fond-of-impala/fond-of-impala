@@ -10,14 +10,8 @@ use Spryker\Zed\ProductList\Dependency\ProductListEvents;
 
 class ProductListConditionalAvailabilityPageSearchEventSubscriberTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Communication\Plugin\Event\Subscriber\ProductListConditionalAvailabilityPageSearchEventSubscriber
-     */
     protected ProductListConditionalAvailabilityPageSearchEventSubscriber $subscriber;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
     protected MockObject|EventCollectionInterface $eventCollectionMock;
 
     /**

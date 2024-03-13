@@ -42,4 +42,34 @@ class ConditionalAvailabilityPageSearchFacade extends AbstractFacade implements 
         $this->getFactory()->createConditionalAvailabilityPeriodPageSearchUnpublisher()
             ->unpublish($eventName, $eventEntityTransfers);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param array<string> $keys
+     *
+     * @return void
+     */
+    public function publishByKeys(array $keys): void
+    {
+        $this->getFactory()->createConditionalAvailabilityPeriodPageSearchPublisher()
+            ->publishByKeys($keys);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param array<int> $conditionalAvailabilityIds
+     *
+     * @return void
+     */
+    public function publishByConditionalAvailabilityIds(array $conditionalAvailabilityIds): void
+    {
+        $this->getFactory()->createConditionalAvailabilityPeriodPageSearchPublisher()
+            ->publishByConditionalAvailabilityIds($conditionalAvailabilityIds);
+    }
 }

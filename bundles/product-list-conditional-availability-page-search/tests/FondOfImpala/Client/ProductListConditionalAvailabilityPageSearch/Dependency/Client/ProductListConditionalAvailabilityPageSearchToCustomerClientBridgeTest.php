@@ -9,19 +9,10 @@ use Spryker\Client\Customer\CustomerClientInterface;
 
 class ProductListConditionalAvailabilityPageSearchToCustomerClientBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientBridge
-     */
     protected ProductListConditionalAvailabilityPageSearchToCustomerClientBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Customer\CustomerClientInterface
-     */
     protected MockObject|CustomerClientInterface $customerClientInterfaceMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CustomerTransfer
-     */
     protected MockObject|CustomerTransfer $customerTransferMock;
 
     /**

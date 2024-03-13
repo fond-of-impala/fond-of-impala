@@ -9,19 +9,10 @@ use Spryker\Client\Kernel\Container;
 
 class ProductListConditionalAvailabilityPageSearchFactoryTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\ProductListConditionalAvailabilityPageSearchFactory
-     */
     protected ProductListConditionalAvailabilityPageSearchFactory $factory;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Client\Kernel\Container
-     */
     protected MockObject|Container $containerMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Client\ProductListConditionalAvailabilityPageSearch\Dependency\Client\ProductListConditionalAvailabilityPageSearchToCustomerClientInterface
-     */
     protected MockObject|ProductListConditionalAvailabilityPageSearchToCustomerClientInterface $customerClientMock;
 
     /**

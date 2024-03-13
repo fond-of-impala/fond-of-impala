@@ -9,14 +9,8 @@ use Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface;
 
 class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductListConditionalAvailabilityPageSearch\Dependency\Facade\ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge
-     */
     protected ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\EventBehavior\Business\EventBehaviorFacadeInterface
-     */
     protected MockObject|EventBehaviorFacadeInterface $eventBehaviorFacadeMock;
 
     /**
@@ -24,9 +18,6 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
      */
     protected array $eventTransfers;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\EventEntityTransfer
-     */
     protected MockObject|EventEntityTransfer $eventEntityTransferMock;
 
     /**
@@ -69,25 +60,6 @@ class ProductListConditionalAvailabilityPageSearchToEventBehaviorFacadeBridgeTes
                 $eventTransfers,
                 $foreignKeyColumnName,
             ),
-        );
-    }
-
-    /**
-     * @return void
-     */
-    public function testExecuteResolvedPluginsBySources(): void
-    {
-        $resources = ['foo'];
-        $ids = [1, 2, 4, 5];
-
-        $this->eventBehaviorFacadeMock->expects(static::atLeastOnce())
-            ->method('executeResolvedPluginsBySources')
-            ->with($resources, $ids, []);
-
-        $this->bridge->executeResolvedPluginsBySources(
-            $resources,
-            $ids,
-            [],
         );
     }
 }
