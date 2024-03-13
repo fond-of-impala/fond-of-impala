@@ -5,6 +5,7 @@ namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\PricePr
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\PriceProductPriceListSearchRestApiConfig;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductPriceListSearchResourceMapperInterface;
+use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Reducer\PriceDataReducerPluginExecutorInterface;
 use Generated\Shared\Transfer\RestPriceProductPriceListSearchAttributesTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
@@ -33,19 +34,24 @@ abstract class AbstractPriceProductPriceListSearchReader implements PriceProduct
 
     protected RestResourceBuilderInterface $restResourceBuilder;
 
+    protected PriceDataReducerPluginExecutorInterface $reducerPluginExecutor;
+
     /**
      * @param \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClient
      * @param \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Mapper\PriceProductPriceListSearchResourceMapperInterface $priceProductPriceListSearchResourceMapper
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
+     * @param \FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\Reducer\PriceDataReducerPluginExecutorInterface $reducerPluginExecutor
      */
     public function __construct(
         PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface $priceProductPriceListPageSearchClient,
         PriceProductPriceListSearchResourceMapperInterface $priceProductPriceListSearchResourceMapper,
-        RestResourceBuilderInterface $restResourceBuilder
+        RestResourceBuilderInterface $restResourceBuilder,
+        PriceDataReducerPluginExecutorInterface $reducerPluginExecutor
     ) {
         $this->priceProductPriceListPageSearchClient = $priceProductPriceListPageSearchClient;
         $this->priceProductPriceListSearchResourceMapper = $priceProductPriceListSearchResourceMapper;
         $this->restResourceBuilder = $restResourceBuilder;
+        $this->reducerPluginExecutor = $reducerPluginExecutor;
     }
 
     /**
