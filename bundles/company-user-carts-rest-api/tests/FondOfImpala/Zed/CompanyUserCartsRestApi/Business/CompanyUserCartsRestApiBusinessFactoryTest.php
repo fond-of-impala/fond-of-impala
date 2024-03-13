@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Business;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Creator\QuoteCreator;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Deleter\QuoteDeleter;
+use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\QuoteFinder;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Updater\QuoteUpdater;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\CompanyUserCartsRestApiConfig;
@@ -56,6 +57,11 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
     protected LoggerInterface|MockObject $loggerMock;
 
     /**
+     * @var \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected QuoteCreateExpanderInterface|MockObject $quoteCreateExpanderMock;
+
+    /**
      * @var \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\CompanyUserCartsRestApiBusinessFactory
      */
     protected CompanyUserCartsRestApiBusinessFactory $factory;
@@ -80,6 +86,10 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
             ->getMock();
 
         $this->companyUserReferenceFacadeMock = $this->getMockBuilder(CompanyUserCartsRestApiToCompanyUserReferenceFacadeBridge::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->quoteCreateExpanderMock = $this->getMockBuilder(QuoteCreateExpanderInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -144,6 +154,7 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
                 [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
                 [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
                 [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
+                [CompanyUserCartsRestApiDependencyProvider::PLUGIN_QUOTE_CREATE_EXPANDER],
             )->willReturnOnConsecutiveCalls(
                 $this->companyUserReferenceFacadeMock,
                 $this->cartFacadeMock,
@@ -154,6 +165,7 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
                 $this->companyUserReferenceFacadeMock,
                 $this->permissionFacadeMock,
                 $this->quoteFacadeMock,
+                [],
             );
 
         static::assertInstanceOf(

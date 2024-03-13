@@ -7,6 +7,7 @@ use Codeception\Test\Unit;
 use Exception;
 use FondOfImpala\Shared\CompanyUserCartsRestApi\CompanyUserCartsRestApiConstants;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Checker\WritePermissionCheckerInterface;
+use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\QuoteFinderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Handler\QuoteHandlerInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Mapper\QuoteMapperInterface;
@@ -59,6 +60,11 @@ class QuoteCreatorTest extends Unit
      * @var (\Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
      */
     protected LoggerInterface|MockObject $loggerMock;
+
+    /**
+     * @var \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected QuoteCreateExpanderInterface|MockObject $quoteCreateExpanderMock;
 
     /**
      * @var (\Spryker\Zed\Kernel\Persistence\EntityManager\TransactionHandlerInterface&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
@@ -118,6 +124,10 @@ class QuoteCreatorTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->quoteCreateExpanderMock = $this->getMockBuilder(QuoteCreateExpanderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->quoteFacadeMock = $this->getMockBuilder(CompanyUserCartsRestApiToQuoteFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -161,6 +171,7 @@ class QuoteCreatorTest extends Unit
             $this->quoteFinderMock,
             $this->writePermissionCheckerMock,
             $this->quoteFacadeMock,
+            $this->quoteCreateExpanderMock,
             $this->loggerMock,
             $this->transactionHandlerMock
         ) extends QuoteCreator {
@@ -176,6 +187,7 @@ class QuoteCreatorTest extends Unit
              * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\QuoteFinderInterface $quoteFinder
              * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Checker\WritePermissionCheckerInterface $writePermissionChecker
              * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToQuoteFacadeInterface $quoteFacade
+             * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface $quoteCreateExpander
              * @param \Psr\Log\LoggerInterface $logger
              * @param \Spryker\Zed\Kernel\Persistence\EntityManager\TransactionHandlerInterface $transactionHandler
              */
@@ -186,6 +198,7 @@ class QuoteCreatorTest extends Unit
                 QuoteFinderInterface $quoteFinder,
                 WritePermissionCheckerInterface $writePermissionChecker,
                 CompanyUserCartsRestApiToQuoteFacadeInterface $quoteFacade,
+                QuoteCreateExpanderInterface $quoteCreateExpander,
                 LoggerInterface $logger,
                 TransactionHandlerInterface $transactionHandler
             ) {
@@ -196,6 +209,7 @@ class QuoteCreatorTest extends Unit
                     $quoteFinder,
                     $writePermissionChecker,
                     $quoteFacade,
+                    $quoteCreateExpander,
                     $logger,
                 );
 
@@ -276,6 +290,10 @@ class QuoteCreatorTest extends Unit
 
         $this->restCompanyUserCartsResponseTransferMock->expects(static::atLeastOnce())
             ->method('getQuote')
+            ->willReturn($this->quoteTransferMock);
+
+        $this->quoteCreateExpanderMock->expects(static::atLeastOnce())
+            ->method('expand')
             ->willReturn($this->quoteTransferMock);
 
         $this->quoteFacadeMock->expects(static::atLeastOnce())
@@ -365,6 +383,10 @@ class QuoteCreatorTest extends Unit
         $this->restCompanyUserCartsResponseTransferMock->expects(static::atLeastOnce())
             ->method('getQuote')
             ->willReturn(null);
+
+        $this->quoteCreateExpanderMock->expects(static::atLeastOnce())
+            ->method('expand')
+            ->willReturn($this->quoteTransferMock);
 
         $this->quoteFacadeMock->expects(static::never())
             ->method('updateQuote');
@@ -508,6 +530,10 @@ class QuoteCreatorTest extends Unit
         $this->loggerMock->expects(static::never())
             ->method('error');
 
+        $this->quoteCreateExpanderMock->expects(static::atLeastOnce())
+            ->method('expand')
+            ->willReturn($this->quoteTransferMock);
+
         $restCompanyUserCartsResponseTransfer = $this->quoteCreator->createByRestCompanyUserCartsRequest(
             $this->restCompanyUserCartsRequestTransferMock,
         );
@@ -607,6 +633,10 @@ class QuoteCreatorTest extends Unit
 
         $this->loggerMock->expects(static::never())
             ->method('error');
+
+        $this->quoteCreateExpanderMock->expects(static::atLeastOnce())
+            ->method('expand')
+            ->willReturn($this->quoteTransferMock);
 
         $restCompanyUserCartsResponseTransfer = $this->quoteCreator->createByRestCompanyUserCartsRequest(
             $this->restCompanyUserCartsRequestTransferMock,

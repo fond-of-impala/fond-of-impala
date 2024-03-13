@@ -6,11 +6,13 @@ use ArrayObject;
 use FondOfImpala\Shared\CompanyUserCartsRestApi\CompanyUserCartsRestApiConstants;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Checker\WritePermissionCheckerInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Exception\QuoteNotCreatedException;
+use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\QuoteFinderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Handler\QuoteHandlerInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Mapper\QuoteMapperInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Reader\CompanyUserReaderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToQuoteFacadeInterface;
+use FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface;
 use Generated\Shared\Transfer\QuoteErrorTransfer;
 use Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer;
 use Generated\Shared\Transfer\RestCompanyUserCartsResponseTransfer;
@@ -53,6 +55,11 @@ class QuoteCreator implements QuoteCreatorInterface
     protected CompanyUserCartsRestApiToQuoteFacadeInterface $quoteFacade;
 
     /**
+     * @var \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface
+     */
+    protected QuoteCreateExpanderInterface $quoteCreateExpander;
+
+    /**
      * @var \Psr\Log\LoggerInterface
      */
     protected LoggerInterface $logger;
@@ -64,6 +71,7 @@ class QuoteCreator implements QuoteCreatorInterface
      * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\QuoteFinderInterface $quoteFinder
      * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Checker\WritePermissionCheckerInterface $writePermissionChecker
      * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToQuoteFacadeInterface $quoteFacade
+     * @param \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface $quoteCreateExpander
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
@@ -73,6 +81,7 @@ class QuoteCreator implements QuoteCreatorInterface
         QuoteFinderInterface $quoteFinder,
         WritePermissionCheckerInterface $writePermissionChecker,
         CompanyUserCartsRestApiToQuoteFacadeInterface $quoteFacade,
+        QuoteCreateExpanderInterface $quoteCreateExpander,
         LoggerInterface $logger
     ) {
         $this->companyUserReader = $companyUserReader;
@@ -81,14 +90,15 @@ class QuoteCreator implements QuoteCreatorInterface
         $this->quoteFinder = $quoteFinder;
         $this->writePermissionChecker = $writePermissionChecker;
         $this->quoteFacade = $quoteFacade;
+        $this->quoteCreateExpander = $quoteCreateExpander;
         $this->logger = $logger;
     }
 
     /**
      * @param \Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer $restCompanyUserCartsRequestTransfer
      *
-     * @throws \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Exception\QuoteNotCreatedException
      * @throws \Throwable
+     * @throws \FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Exception\QuoteNotCreatedException
      *
      * @return \Generated\Shared\Transfer\RestCompanyUserCartsResponseTransfer
      */
@@ -155,6 +165,17 @@ class QuoteCreator implements QuoteCreatorInterface
 
         $quoteTransfer = $this->quoteMapper->fromRestCompanyUserCartsRequest($restCompanyUserCartsRequestTransfer)
             ->setCompanyUser($companyUserTransfer);
+
+        try {
+            $quoteTransfer = $this->quoteCreateExpander->expand($quoteTransfer, $restCompanyUserCartsRequestTransfer);
+        } catch (Throwable $throwable) {
+            $quoteErrorTransfer = (new QuoteErrorTransfer())
+                ->setMessage($throwable->getCode() === QuoteCreateExpanderPluginInterface::ERROR_CODE ? $throwable->getMessage() : CompanyUserCartsRestApiConstants::ERROR_MESSAGE_QUOTE_CREATE_EXPANDER_UNEXPECTED);
+
+            return (new RestCompanyUserCartsResponseTransfer())->setIsSuccessful(false)
+                ->setErrors(new ArrayObject([$quoteErrorTransfer]));
+        }
+
         $quoteResponseTransfer = $this->quoteFacade->createQuote($quoteTransfer);
         $quoteTransfer = $quoteResponseTransfer->getQuoteTransfer();
 

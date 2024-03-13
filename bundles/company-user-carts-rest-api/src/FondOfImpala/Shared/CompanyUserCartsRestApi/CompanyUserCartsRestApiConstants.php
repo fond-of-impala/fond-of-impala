@@ -38,4 +38,14 @@ interface CompanyUserCartsRestApiConstants
      * @var string
      */
     public const ERROR_MESSAGE_PERMISSION_DENIED = 'quote.validation.error.permission_denied';
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE_COMPANY_CURRENCY_NOT_SUPPORTED = 'quote.error.company.currency.not.supported';
+
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE_QUOTE_CREATE_EXPANDER_UNEXPECTED = 'quote.create.expander.unexpected.error';
 }
