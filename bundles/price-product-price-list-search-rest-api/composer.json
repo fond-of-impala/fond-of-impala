@@ -6,11 +6,16 @@
     {
       "name": "Daniel Rose",
       "email": "daniel-rose@gmx.de"
+    },
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
     }
   ],
   "require": {
     "php": ">=8.0",
     "fond-of-impala/price-product-price-list-page-search": "^1.0.0",
+    "fond-of-impala/price-product-price-list-search-rest-api-extension": "^1.0.0",
     "spryker/glue-application": "^1.0.0"
   },
   "require-dev": {
