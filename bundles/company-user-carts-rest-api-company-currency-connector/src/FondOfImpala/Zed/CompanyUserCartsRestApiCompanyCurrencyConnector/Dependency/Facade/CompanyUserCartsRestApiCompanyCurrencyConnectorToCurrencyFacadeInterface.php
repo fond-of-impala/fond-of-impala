@@ -1,10 +1,10 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade;
+namespace FondOfImpala\Zed\CompanyUserCartsRestApiCompanyCurrencyConnector\Dependency\Facade;
 
 use Generated\Shared\Transfer\StoreWithCurrencyTransfer;
 
-interface CompanyUserCartsRestApiToCurrencyFacadeInterface
+interface CompanyUserCartsRestApiCompanyCurrencyConnectorToCurrencyFacadeInterface
 {
     /**
      * Specification:

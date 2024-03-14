@@ -1,11 +1,11 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade;
+namespace FondOfImpala\Zed\CompanyUserCartsRestApiCompanyCurrencyConnector\Dependency\Facade;
 
 use Generated\Shared\Transfer\StoreWithCurrencyTransfer;
 use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
 
-class CompanyUserCartsRestApiToCurrencyFacadeBridge implements CompanyUserCartsRestApiToCurrencyFacadeInterface
+class CompanyUserCartsRestApiCompanyCurrencyConnectorToCurrencyFacadeBridge implements CompanyUserCartsRestApiCompanyCurrencyConnectorToCurrencyFacadeInterface
 {
     /**
      * @var \Spryker\Zed\Currency\Business\CurrencyFacadeInterface

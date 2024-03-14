@@ -4,7 +4,6 @@ namespace FondOfImpala\Zed\CompanyUserCartsRestApi;
 
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCartFacadeBridge;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCompanyUserReferenceFacadeBridge;
-use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToCurrencyFacadeBridge;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToPermissionFacadeBridge;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Dependency\Facade\CompanyUserCartsRestApiToQuoteFacadeBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -19,11 +18,6 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
      * @var string
      */
     public const FACADE_CART = 'FACADE_CART';
-
-    /**
-     * @var string
-     */
-    public const FACADE_CURRENCY = 'FACADE_CURRENCY';
 
     /**
      * @var string
@@ -67,39 +61,11 @@ class CompanyUserCartsRestApiDependencyProvider extends AbstractBundleDependency
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideCommunicationLayerDependencies(Container $container): Container
-    {
-        $container = parent::provideCommunicationLayerDependencies($container);
-
-        return $this->addCurrencyFacade($container);
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addCartFacade(Container $container): Container
     {
         $container[static::FACADE_CART] = static function (Container $container) {
             return new CompanyUserCartsRestApiToCartFacadeBridge(
                 $container->getLocator()->cart()->facade(),
-            );
-        };
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    protected function addCurrencyFacade(Container $container): Container
-    {
-        $container[static::FACADE_CURRENCY] = static function (Container $container) {
-            return new CompanyUserCartsRestApiToCurrencyFacadeBridge(
-                $container->getLocator()->currency()->facade(),
             );
         };
 
