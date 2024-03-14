@@ -27,6 +27,8 @@ include:
   - bundles/company-type-product-lists-bulk-rest-api
   - bundles/company-type-role
   - bundles/company-user-carts-rest-api
+  - bundles/company-user-carts-rest-api-extension
+  - bundles/company-currency-company-user-carts-rest-api
   - bundles/company-user-company-assigner
   - bundles/company-user-quote
   - bundles/company-user-reference
