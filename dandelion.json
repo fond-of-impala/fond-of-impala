@@ -107,8 +107,8 @@
       "path": "bundles/company-user-carts-rest-api",
       "version": "1.1.0"
     },
-    "company-user-carts-rest-api-company-currency-connector": {
-      "path": "bundles/company-user-carts-rest-api-company-currency-connector",
+    "company-currency-company-user-carts-rest-api": {
+      "path": "bundles/company-currency-company-user-carts-rest-api",
       "version": "1.0.0"
     },
     "company-user-carts-rest-api-extension": {
