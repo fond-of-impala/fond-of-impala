@@ -1,12 +1,8 @@
 {
-  "name": "fond-of-impala/company-user-carts-rest-api",
-  "description": "Company user carts rest api",
+  "name": "fond-of-impala/company-user-carts-rest-api-company-currency-connector",
+  "description": "Company user carts rest api company currency connector",
   "license": "MIT",
   "authors": [
-    {
-      "name": "Daniel Rose",
-      "email": "daniel-rose@gmx.de"
-    },
     {
       "name": "Julian Hyatt",
       "email": "dev@jzit.de"
@@ -21,13 +17,7 @@
   "require": {
     "php": ">=8.0",
     "fond-of-impala/company-user-carts-rest-api-extension": "^1.0.0",
-    "fond-of-impala/company-user-reference": "^1.0.0",
-    "spryker/cart": "^7.3.0",
-    "spryker/glue-application": "^1.0.0",
-    "spryker/glue-application-extension": "^1.0.0",
-    "spryker/permission": "^1.0.0",
-    "spryker/permission-extension": "^1.0.0",
-    "spryker/quote": "^2.5.0"
+    "fond-of-impala/navision-company": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

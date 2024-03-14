@@ -1,9 +1,9 @@
 <?php
 
-namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Communication\Plugin;
+namespace FondOfImpala\Zed\CompanyUserCartsRestApiCompanyCurrencyConnector\Communication\Plugin\CompanyUserCartsRestApi;
 
 use Exception;
-use FondOfImpala\Shared\CompanyUserCartsRestApi\CompanyUserCartsRestApiConstants;
+use FondOfImpala\Shared\CompanyUserCartsRestApiCompanyCurrencyConnector\CompanyUserCartsRestApiCompanyCurrencyConnectorConstants;
 use FondOfImpala\Zed\CompanyUserCartsRestApiExtension\Dependency\Plugin\QuoteCreateExpanderPluginInterface;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CurrencyTransfer;
@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\RestCompanyUserCartsRequestTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \FondOfImpala\Zed\CompanyUserCartsRestApi\Communication\CompanyUserCartsRestApiCommunicationFactory getFactory()
+ * @method \FondOfImpala\Zed\CompanyUserCartsRestApiCompanyCurrencyConnector\Communication\CompanyUserCartsRestApiCompanyCurrencyConnectorCommunicationFactory getFactory()
  */
 class CompanyCurrencyToQuoteExpanderPlugin extends AbstractPlugin implements QuoteCreateExpanderPluginInterface
 {
@@ -29,7 +29,7 @@ class CompanyCurrencyToQuoteExpanderPlugin extends AbstractPlugin implements Quo
         $currency = $this->getCompanyCurrency($quoteTransfer->getCompanyUser()->getCompany());
 
         if ($currency === null) {
-            throw new Exception(CompanyUserCartsRestApiConstants::ERROR_MESSAGE_COMPANY_CURRENCY_NOT_SUPPORTED, static::ERROR_CODE);
+            throw new Exception(CompanyUserCartsRestApiCompanyCurrencyConnectorConstants::ERROR_MESSAGE_COMPANY_CURRENCY_NOT_SUPPORTED, static::ERROR_CODE);
         }
 
         return $quoteTransfer->setCurrency($currency);
