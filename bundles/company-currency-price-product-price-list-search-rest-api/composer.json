@@ -1,0 +1,44 @@
+{
+  "name": "fond-of-impala/company-currency-price-product-price-list-search-rest-api",
+  "description": "Company Currency Price Product Price List Search Rest Api module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "fond-of-impala/price-product-price-list-search-rest-api": "^1.1.0",
+    "fond-of-impala/price-product-price-list-search-rest-api-extension": "^1.0.0",
+    "spryker/company-user": "^1.0.0 || ^2.0.0",
+    "spryker/customer": "^6.3.0 || ^7.0.0",
+    "spryker/currency": "^3.0.0 || ^4.0.0",
+    "spryker/glue-application": "^1.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

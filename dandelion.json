@@ -303,8 +303,8 @@
       "path": "bundles/price-product-price-list-search-rest-api",
       "version": "1.1.0"
     },
-    "price-product-price-list-search-rest-api-company-currency-connector": {
-      "path": "bundles/price-product-price-list-search-rest-api-company-currency-connector",
+    "company-currency-price-product-price-list-search-rest-api": {
+      "path": "bundles/company-currency-price-product-price-list-search-rest-api",
       "version": "1.0.0"
     },
     "price-product-price-list-search-rest-api-extension": {
