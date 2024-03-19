@@ -157,7 +157,7 @@ class CompanyUserDeleterTest extends Unit
                 static::callback(
                     static fn (
                         CompanyUserCriteriaFilterTransfer $companyUserCriteriaFilterTransfer
-                    ): bool => $companyUserCriteriaFilterTransfer->getCompanyUserIds() === $companyUserIds
+                    ): bool => $companyUserCriteriaFilterTransfer->getCompanyUserIds() === $companyUserIds,
                 ),
             )->willReturn($this->companyUserCollectionTransferMock);
 

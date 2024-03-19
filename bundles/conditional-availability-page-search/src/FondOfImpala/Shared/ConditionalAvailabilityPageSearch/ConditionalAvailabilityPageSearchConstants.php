@@ -58,4 +58,14 @@ interface ConditionalAvailabilityPageSearchConstants
      * @var string
      */
     public const PARAMETER_MIN_QTY = 'min-qty';
+
+    /**
+     * @var string
+     */
+    public const EVENT_CHUNK_SIZE = 'FOND_OF_IMPALA:CONDITIONAL_AVAILABILITY_PAGE_SEARCH:EVENT_CHUNK_SIZE';
+
+    /**
+     * @var int
+     */
+    public const EVENT_CHUNK_SIZE_DEFAULT = 1000;
 }

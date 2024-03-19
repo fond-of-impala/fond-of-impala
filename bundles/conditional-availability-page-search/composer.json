@@ -17,9 +17,10 @@
     "fond-of-impala/conditional-availability-page-search-extension": "^1.0.0",
     "fond-of-impala/conditional-availability": "^2.0.0",
     "spryker/customer": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0",
-    "spryker/event": "^1.0.0 || ^2.0.0",
+    "spryker/event": "^2.3.0",
     "spryker/event-behavior": "^1.0.0",
     "spryker/publisher-extension": "^1.0.0",
+    "spryker/queue": "^1.0.0",
     "spryker/search": "^8.10.0",
     "spryker/synchronization-extension": "^1.0.0"
   },

@@ -103,7 +103,7 @@ class ConditionalAvailabilityCheckoutPreConditionPluginTest extends Unit
                     ) => $checkoutErrorTransfer->getErrorType() === ConditionalAvailabilityCheckoutConnectorConstants::ERROR_TYPE_CONDITIONAL_AVAILABILITY
                         && $checkoutErrorTransfer->getErrorCode() === ConditionalAvailabilityCheckoutConnectorConstants::ERROR_CODE_UNAVAILABLE_PRODUCT
                         && $checkoutErrorTransfer->getMessage() === ConditionalAvailabilityCheckoutConnectorConstants::MESSAGE_UNAVAILABLE_PRODUCT
-                        && $checkoutErrorTransfer->getParameters()[ConditionalAvailabilityCheckoutConnectorConstants::PARAMETER_PRODUCT_SKU] === $skus[0]
+                        && $checkoutErrorTransfer->getParameters()[ConditionalAvailabilityCheckoutConnectorConstants::PARAMETER_PRODUCT_SKU] === $skus[0],
                 ),
             )->willReturn($this->checkoutResponseTransferMock);
 

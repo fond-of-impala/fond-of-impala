@@ -119,7 +119,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
@@ -155,7 +155,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
@@ -197,7 +197,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
@@ -242,7 +242,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
@@ -281,7 +281,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
@@ -317,7 +317,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
@@ -361,7 +361,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())
@@ -398,7 +398,7 @@ class ConditionalAvailabilityWriterTest extends Unit
         $this->transactionHandlerMock->expects(static::atLeastOnce())
             ->method('handleTransaction')
             ->willReturnCallback(
-                static fn ($callable) => $callable()
+                static fn ($callable) => $callable(),
             );
 
         $this->conditionalAvailabilityTransferMock->expects(static::atLeastOnce())

@@ -92,7 +92,7 @@ class CustomerReaderTest extends Unit
                 static::callback(
                     static fn (
                         CustomerTransfer $customerTransfer
-                    ): bool => $customerTransfer->getIdCustomer() === $idCustomer
+                    ): bool => $customerTransfer->getIdCustomer() === $idCustomer,
                 ),
             )->willReturn($this->customerTransferMock);
 

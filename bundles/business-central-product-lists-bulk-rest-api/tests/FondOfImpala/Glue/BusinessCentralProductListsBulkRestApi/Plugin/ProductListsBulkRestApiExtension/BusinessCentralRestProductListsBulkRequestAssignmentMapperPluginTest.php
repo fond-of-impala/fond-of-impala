@@ -128,7 +128,7 @@ class BusinessCentralRestProductListsBulkRequestAssignmentMapperPluginTest exten
                 static::callback(
                     static fn (
                         RestProductListsBulkRequestAssignmentCompanyTransfer $restProductListsBulkRequestAssignmentCompanyTransfer
-                    ): bool => $restProductListsBulkRequestAssignmentCompanyTransfer->getDebtorNumber() === $debtorNumber
+                    ): bool => $restProductListsBulkRequestAssignmentCompanyTransfer->getDebtorNumber() === $debtorNumber,
                 ),
             )->willReturn($this->restProductListsBulkRequestAssignmentTransferMock);
 

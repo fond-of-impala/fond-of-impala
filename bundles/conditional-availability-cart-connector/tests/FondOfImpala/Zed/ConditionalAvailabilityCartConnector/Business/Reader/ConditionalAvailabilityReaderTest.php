@@ -125,7 +125,7 @@ class ConditionalAvailabilityReaderTest extends Unit
                     ): bool => $conditionalAvailabilityCriteriaFilterTransfer->getMinimumQuantity() === $minimumQuantity
                         && $conditionalAvailabilityCriteriaFilterTransfer->getWarehouseGroup() === $warehouseGroup
                         && $conditionalAvailabilityCriteriaFilterTransfer->getSkus() === $skus
-                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel
+                        && $conditionalAvailabilityCriteriaFilterTransfer->getChannel() === $availabilityChannel,
                 ),
             )->willReturn($groupedConditionalAvailabilityTransferMocks);
 
