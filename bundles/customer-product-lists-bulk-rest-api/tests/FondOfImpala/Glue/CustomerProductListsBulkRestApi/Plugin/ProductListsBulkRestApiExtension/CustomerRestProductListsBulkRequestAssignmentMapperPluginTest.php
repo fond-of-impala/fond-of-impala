@@ -68,7 +68,7 @@ class CustomerRestProductListsBulkRequestAssignmentMapperPluginTest extends Unit
             ->method('setCustomer')
             ->with(
                 static::callback(
-                    static fn (RestProductListsBulkRequestAssignmentCustomerTransfer $restProductListsBulkRequestAssignmentCustomerTransfer): bool => $restProductListsBulkRequestAssignmentCustomerTransfer->getCustomerReference() === $data['customer_reference']
+                    static fn (RestProductListsBulkRequestAssignmentCustomerTransfer $restProductListsBulkRequestAssignmentCustomerTransfer): bool => $restProductListsBulkRequestAssignmentCustomerTransfer->getCustomerReference() === $data['customer_reference'],
                 ),
             )->willReturn($this->restProductListsBulkRequestAssignmentTransferMock);
 

@@ -52,7 +52,7 @@ class ConditionalAvailabilityEnsureEarliestDateTest extends Unit
                     static fn (
                         array $currentDeliveryDates
                     ): bool => count($currentDeliveryDates) === ($countOfDeliveryDates + 1)
-                        && $currentDeliveryDates[$countOfDeliveryDates] === ConditionalAvailabilityConstants::KEY_EARLIEST_DATE
+                        && $currentDeliveryDates[$countOfDeliveryDates] === ConditionalAvailabilityConstants::KEY_EARLIEST_DATE,
                 ),
             )->willReturnSelf();
 

@@ -76,7 +76,7 @@ class RestResponseBuilderTest extends Unit
                 static::callback(
                     static fn (
                         RestProductListsBulkTransfer $restProductListsBulkTransfer
-                    ): bool => $restProductListsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes']
+                    ): bool => $restProductListsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes'],
                 ),
             )->willReturn($this->restResourceMock);
 
@@ -86,7 +86,7 @@ class RestResponseBuilderTest extends Unit
                 static::callback(
                     static fn (
                         RestProductListsBulkTransfer $restProductListsBulkTransfer
-                    ): bool => $restProductListsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes']
+                    ): bool => $restProductListsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes'],
                 ),
             )->willReturn($this->restResourceMock);
 

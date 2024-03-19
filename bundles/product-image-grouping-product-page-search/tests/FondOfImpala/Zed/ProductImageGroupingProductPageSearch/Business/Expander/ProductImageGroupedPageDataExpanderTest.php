@@ -99,7 +99,7 @@ class ProductImageGroupedPageDataExpanderTest extends Unit
             ->method('setGroupedProductImages')
             ->with(
                 static::callback(
-                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == [$key]
+                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == [$key],
                 ),
             )->willReturn($this->pageSearchTransferMock);
 
@@ -147,7 +147,7 @@ class ProductImageGroupedPageDataExpanderTest extends Unit
             ->method('setGroupedProductImages')
             ->with(
                 static::callback(
-                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*']
+                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*'],
                 ),
             )->willReturn($this->pageSearchTransferMock);
 
@@ -195,7 +195,7 @@ class ProductImageGroupedPageDataExpanderTest extends Unit
             ->method('setGroupedProductImages')
             ->with(
                 static::callback(
-                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*']
+                    static fn (array $groupedProductImages): bool => array_keys($groupedProductImages) == ['*'],
                 ),
             )->willReturn($this->pageSearchTransferMock);
 

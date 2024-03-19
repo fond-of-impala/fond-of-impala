@@ -2,6 +2,8 @@
 
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch;
 
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventFacadeBridge;
+use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Facade\ConditionalAvailabilityPageSearchToEventFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Dependency\Service\ConditionalAvailabilityPageSearchToUtilEncodingServiceBridge;
 use Orm\Zed\ConditionalAvailability\Persistence\FoiConditionalAvailabilityPeriodQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -12,6 +14,11 @@ use Spryker\Zed\Kernel\Container;
  */
 class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
+    public const FACADE_EVENT = 'FACADE_EVENT';
+
     /**
      * @var string
      */
@@ -45,6 +52,18 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
         $container = $this->addConditionalAvailabilityPeriodPageSearchDataExpanderPlugins($container);
 
         return $this->addUtilEncodingService($container);
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function provideCommunicationLayerDependencies(Container $container): Container
+    {
+        $container = parent::provideCommunicationLayerDependencies($container);
+
+        return $this->addEventFacade($container);
     }
 
     /**
@@ -129,5 +148,21 @@ class ConditionalAvailabilityPageSearchDependencyProvider extends AbstractBundle
     protected function getConditionalAvailabilityPeriodPageDataExpanderPlugins(): array
     {
         return [];
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addEventFacade(Container $container): Container
+    {
+        $container[static::FACADE_EVENT] = static fn (
+            Container $container
+        ): ConditionalAvailabilityPageSearchToEventFacadeInterface => new ConditionalAvailabilityPageSearchToEventFacadeBridge(
+            $container->getLocator()->event()->facade(),
+        );
+
+        return $container;
     }
 }

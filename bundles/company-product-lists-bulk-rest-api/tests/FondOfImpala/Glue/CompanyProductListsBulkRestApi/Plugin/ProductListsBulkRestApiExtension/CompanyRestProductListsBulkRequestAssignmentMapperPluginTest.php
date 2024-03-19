@@ -128,7 +128,7 @@ class CompanyRestProductListsBulkRequestAssignmentMapperPluginTest extends Unit
                 static::callback(
                     static fn (
                         RestProductListsBulkRequestAssignmentCompanyTransfer $restProductListsBulkRequestAssignmentCompanyTransfer
-                    ): bool => $restProductListsBulkRequestAssignmentCompanyTransfer->getUuid() === $uuid
+                    ): bool => $restProductListsBulkRequestAssignmentCompanyTransfer->getUuid() === $uuid,
                 ),
             )->willReturn($this->restProductListsBulkRequestAssignmentTransferMock);
 

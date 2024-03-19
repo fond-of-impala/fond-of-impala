@@ -74,7 +74,7 @@ class RestResponseBuilderTest extends Unit
                 OrderBudgetsBulkRestApiConfig::RESOURCE_ORDER_BUDGETS_BULK,
                 null,
                 static::callback(
-                    static fn (RestOrderBudgetsBulkTransfer $restOrderBudgetsBulkTransfer): bool => $restOrderBudgetsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes']
+                    static fn (RestOrderBudgetsBulkTransfer $restOrderBudgetsBulkTransfer): bool => $restOrderBudgetsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes'],
                 ),
             )->willReturn($this->restResourceMock);
 
@@ -82,7 +82,7 @@ class RestResponseBuilderTest extends Unit
             ->method('setPayload')
             ->with(
                 static::callback(
-                    static fn (RestOrderBudgetsBulkTransfer $restOrderBudgetsBulkTransfer): bool => $restOrderBudgetsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes']
+                    static fn (RestOrderBudgetsBulkTransfer $restOrderBudgetsBulkTransfer): bool => $restOrderBudgetsBulkTransfer->getInvalidIndexes() === $data['invalid_indexes'],
                 ),
             )->willReturn($this->restResourceMock);
 
