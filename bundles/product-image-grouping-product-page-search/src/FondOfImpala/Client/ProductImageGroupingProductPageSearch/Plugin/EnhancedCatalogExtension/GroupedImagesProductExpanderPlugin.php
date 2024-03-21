@@ -10,7 +10,6 @@ use Spryker\Client\Kernel\AbstractPlugin;
 
 class GroupedImagesProductExpanderPlugin extends AbstractPlugin implements ProductExpanderPluginInterface
 {
-
     /**
      * @param array $product
      * @param \Elastica\Result $document
@@ -31,10 +30,10 @@ class GroupedImagesProductExpanderPlugin extends AbstractPlugin implements Produ
             foreach ($images as $image) {
                 $groupedImages[$key][] = (new RestCatalogSearchProductImageTransfer())->fromArray(
                     $image,
-                    true
+                    true,
                 )->toArray(
                     true,
-                    true
+                    true,
                 );
             }
         }

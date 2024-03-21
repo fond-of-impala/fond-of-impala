@@ -4,10 +4,7 @@ namespace FondOfImpala\Client\ProductImageGroupingProductPageSearch\Plugin\Enhan
 
 use Codeception\Test\Unit;
 use Elastica\Result;
-use Elastica\ResultSet;
-use FondOfImpala\Client\ProductImageGroupingProductPageSearch\Plugin\Search\RawCatalogSearchResultFormatterPlugin;
 use FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Communication\Plugin\ProductPageSearch\ProductImageGroupMapExpanderPlugin;
-use Generated\Shared\Search\PageIndexMap;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class GroupedImagesProductExpanderPluginTest extends Unit

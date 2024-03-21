@@ -21,7 +21,7 @@ class ProductImageGroupedPageDataLoaderExpanderPlugin extends AbstractPlugin imp
      *
      * @return void
      */
-    public function expandProductPageData(array $productData, ProductPageSearchTransfer $productAbstractPageSearchTransfer)
+    public function expandProductPageData(array $productData, ProductPageSearchTransfer $productAbstractPageSearchTransfer): void
     {
         $this->getFacade()->groupProductImageData($productData, $productAbstractPageSearchTransfer);
     }
