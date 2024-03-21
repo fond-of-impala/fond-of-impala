@@ -45,7 +45,7 @@ class EnhancedCatalogFactoryTest extends Unit
 
         static::assertInstanceOf(
             RawCatalogSearchResultFormatter::class,
-            $this->factory->createRawCatalogSearchResultFormatter()
+            $this->factory->createRawCatalogSearchResultFormatter(),
         );
     }
 }

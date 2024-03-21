@@ -39,7 +39,7 @@ class RawCatalogSearchResultFormatterTest extends Unit
             ->getMock();
 
         $this->rawCatalogSearchResultFormatter = new RawCatalogSearchResultFormatter([
-            $this->productExpanderPluginMock
+            $this->productExpanderPluginMock,
         ]);
     }
 
@@ -51,8 +51,8 @@ class RawCatalogSearchResultFormatterTest extends Unit
         $source = [
             PageIndexMap::SEARCH_RESULT_DATA => [
                 'sku' => 'foo',
-                '...' => '...'
-            ]
+                '...' => '...',
+            ],
         ];
 
         $this->resultSetMock->expects(static::atLeastOnce())
@@ -70,8 +70,7 @@ class RawCatalogSearchResultFormatterTest extends Unit
 
         static::assertEquals(
             [$source[PageIndexMap::SEARCH_RESULT_DATA]],
-            $this->rawCatalogSearchResultFormatter->format($this->resultSetMock, [])
+            $this->rawCatalogSearchResultFormatter->format($this->resultSetMock, []),
         );
     }
-
 }

@@ -24,9 +24,9 @@ class RawCatalogSearchResultFormatter implements RawCatalogSearchResultFormatter
      * @param \Elastica\ResultSet $searchResult
      * @param array<string, mixed> $requestParameters
      *
-     * @return mixed
+     * @return array<mixed>
      */
-    public function format(ResultSet $searchResult, array $requestParameters)
+    public function format(ResultSet $searchResult, array $requestParameters): array
     {
         $products = [];
 
