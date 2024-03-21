@@ -48,10 +48,9 @@ class RawCatalogSearchResultFormatterPluginTest extends Unit
     {
         static::assertEquals(
             RawCatalogSearchResultFormatterPlugin::NAME,
-            $this->plugin->getName()
+            $this->plugin->getName(),
         );
     }
-
 
     /**
      * @return void
@@ -59,7 +58,7 @@ class RawCatalogSearchResultFormatterPluginTest extends Unit
     public function testFormatResult(): void
     {
         $products = [
-            ['...' => '...']
+            ['...' => '...'],
         ];
         $requestParameters = [];
 
@@ -74,7 +73,7 @@ class RawCatalogSearchResultFormatterPluginTest extends Unit
 
         static::assertEquals(
             $products,
-            $this->plugin->formatResult($this->resultSetMock, $requestParameters)
+            $this->plugin->formatResult($this->resultSetMock, $requestParameters),
         );
     }
 }

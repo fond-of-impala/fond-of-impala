@@ -34,7 +34,7 @@ class EnhancedCatalogDependencyProvider extends AbstractDependencyProvider
      */
     protected function addProductExpanderPlugins(Container $container): Container
     {
-        $container[static::PLUGINS_PRODUCT_EXPANDER] = fn () => $this->getProductExpanderPlugins();
+        $container[static::PLUGINS_PRODUCT_EXPANDER] = fn (): array => $this->getProductExpanderPlugins();
 
         return $container;
     }
