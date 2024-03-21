@@ -79,9 +79,11 @@ class ProductImageGroupPageDataExpander implements ProductPageDataExpanderInterf
             if (!str_starts_with($key, static::EXTERNAL_URL_PREFIX)) {
                 continue;
             }
+
             if (!($data === null || !$this->urlValidator->isValid($data))) {
                 continue;
             }
+
             return null;
         }
 
