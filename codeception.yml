@@ -75,6 +75,7 @@ include:
   - bundles/price-product-price-list-search-rest-api
   - bundles/company-currency-price-product-price-list-search-rest-api
   - bundles/price-product-price-list-search-rest-api-extension
+  - bundles/product-group-hash
   - bundles/product-image-grouping-product-page-search
   - bundles/product-list-conditional-availability-page-search
   - bundles/product-product-list-connector
