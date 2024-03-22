@@ -54,7 +54,7 @@ class OnePerGroupHashQueryExpanderPluginTest extends Unit
             ->method('setCollapse')
             ->with(
                 static::callback(
-                    static fn(Collapse $collapse): bool => $collapse->hasParam('field')
+                    static fn (Collapse $collapse): bool => $collapse->hasParam('field')
                         && $collapse->getParam('field') === PageIndexMap::GROUP_HASH
                         && $collapse->hasParam('inner_hits')
                         && $collapse->getParam('inner_hits')->hasParam('name')
@@ -66,7 +66,7 @@ class OnePerGroupHashQueryExpanderPluginTest extends Unit
             ->method('addAggregation')
             ->with(
                 static::callback(
-                    static fn(Cardinality $cardinality): bool => $cardinality->getName() === OnePerGroupHashQueryExpanderPlugin::AGGREGATION_NAME_TOTAL_COLLAPSED_HITS
+                    static fn (Cardinality $cardinality): bool => $cardinality->getName() === OnePerGroupHashQueryExpanderPlugin::AGGREGATION_NAME_TOTAL_COLLAPSED_HITS
                         && $cardinality->hasParam('field')
                         && $cardinality->getParam('field') === PageIndexMap::GROUP_HASH,
                 ),

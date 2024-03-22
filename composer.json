@@ -167,6 +167,7 @@
     "spryker/sales": "^11.0.0",
     "spryker/sales-extension": "^1.3",
     "spryker/search": "^8.10.0",
+    "spryker/search-extension": "^1.0.0",
     "spryker/sequence-number": "^1.0.0 || ^2.0.0 || ^3.0.0",
     "spryker/store": "^1.1.0",
     "spryker/synchronization-extension": "^1.0.0",

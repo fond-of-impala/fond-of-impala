@@ -16,7 +16,8 @@
     "php": ">=8.0",
     "fond-of-impala/enhanced-catalog-extension": "1.0.0",
     "spryker/event": "^2.0.0",
-    "spryker/product-page-search-extension": "^1.0.0",
+    "spryker/product-page-search-extension": "^1.2.0",
+    "spryker/product": "^5.1.0 || ^6.0.0",
     "spryker/search-extension": "^1.0.0"
   },
   "require-dev": {

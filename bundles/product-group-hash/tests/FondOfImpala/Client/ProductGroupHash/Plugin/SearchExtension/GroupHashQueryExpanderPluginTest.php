@@ -75,7 +75,7 @@ class GroupHashQueryExpanderPluginTest extends Unit
             ->method('addMust')
             ->with(
                 static::callback(
-                    static fn(Terms $terms): bool => $terms->hasParam(PageIndexMap::GROUP_HASH)
+                    static fn (Terms $terms): bool => $terms->hasParam(PageIndexMap::GROUP_HASH)
                         && $terms->getParam(PageIndexMap::GROUP_HASH) === $groupHashes,
                 ),
             )->willReturn($this->boolQueryMock);
