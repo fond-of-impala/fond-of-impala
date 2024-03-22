@@ -67,6 +67,10 @@
       "path": "bundles/company-company-type-gui",
       "version": "1.0.0"
     },
+    "company-currency-price-product-price-list-search-rest-api": {
+      "path": "bundles/company-currency-price-product-price-list-search-rest-api",
+      "version": "1.0.0"
+    },
     "company-price-list": {
       "path": "bundles/company-price-list",
       "version": "1.0.0"
@@ -311,12 +315,12 @@
       "path": "bundles/price-product-price-list-search-rest-api",
       "version": "1.1.0"
     },
-    "company-currency-price-product-price-list-search-rest-api": {
-      "path": "bundles/company-currency-price-product-price-list-search-rest-api",
-      "version": "1.0.0"
-    },
     "price-product-price-list-search-rest-api-extension": {
       "path": "bundles/price-product-price-list-search-rest-api-extension",
+      "version": "1.0.0"
+    },
+    "product-group-hash": {
+      "path": "bundles/product-group-hash",
       "version": "1.0.0"
     },
     "product-image-grouping-product-page-search": {

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+    <transfer name="PageMap">
+        <property name="groupHash" type="string" />
+    </transfer>
+
+    <transfer name="ProductPageSearch">
+        <property name="groupHash" type="string" />
+    </transfer>
+
+    <transfer name="ProductAbstract">
+        <property name="groupHash" type="string"/>
+        <property name="localizedAttributes" type="LocalizedAttributes[]"/>
+    </transfer>
+
+    <transfer name="LocalizedAttributes">
+        <property name="locale" type="Locale"/>
+        <property name="attributes" type="array" singular="attribute"/>
+    </transfer>
+
+    <transfer name="Locale">
+        <property name="localeName" type="string"/>
+    </transfer>
+
+    <transfer name="RestCatalogSearchAbstractProducts">
+        <property name="groupCount" type="int" />
+    </transfer>
+</transfers>
