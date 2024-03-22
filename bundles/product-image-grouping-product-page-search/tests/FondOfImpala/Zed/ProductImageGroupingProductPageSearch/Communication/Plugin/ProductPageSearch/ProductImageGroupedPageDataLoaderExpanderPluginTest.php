@@ -8,19 +8,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ProductImageGroupedPageDataLoaderExpanderPluginTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Communication\Plugin\ProductPageSearch\ProductImageGroupedPageDataLoaderExpanderPlugin
-     */
     protected ProductImageGroupedPageDataLoaderExpanderPlugin $plugin;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPageSearchTransfer
-     */
     protected MockObject|ProductPageSearchTransfer $pageSearchTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\ProductImageGroupingProductPageSearchFacade
-     */
     protected MockObject|ProductImageGroupingProductPageSearchFacade $facadeMock;
 
     /**

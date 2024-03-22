@@ -5,9 +5,6 @@ use Codeception\Test\Unit;
 
 class UrlValidatorTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Validator\UrlValidator
-     */
     protected UrlValidator $validator;
 
     /**

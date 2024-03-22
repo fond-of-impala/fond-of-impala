@@ -12,24 +12,12 @@ use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 
 class ProductImageGroupedPageDataExpanderTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Expander\ProductImageGroupPageDataExpander
-     */
     protected ProductImageGroupPageDataExpander $expander;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPageSearchTransfer
-     */
     protected MockObject|ProductPageSearchTransfer $pageSearchTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductPayloadTransfer
-     */
     protected MockObject|ProductPayloadTransfer $productPayloadTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\ProductImage\Persistence\SpyProductImageSet
-     */
     protected MockObject|SpyProductImageSet $spyProductImageSetMock;
 
     protected MockObject|UrlValidatorInterface $urlValidatorMock;
