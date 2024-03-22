@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "spryker/enhanced-catalog-extension": "^1.0.0",
+    "fond-of-impala/enhanced-catalog-extension": "^1.0.0",
     "spryker/product-page-search": "^3.24.0",
     "spryker/product-page-search-extension": "^1.4.0"
   },
