@@ -227,6 +227,10 @@
       "path": "bundles/customer-product-lists-bulk-rest-api",
       "version": "1.0.0"
     },
+    "enhanced-catalog-extension": {
+      "path": "bundles/enhanced-catalog-extension",
+      "version": "1.0.0"
+    },
     "jellyfish-sales-order-conditional-availability": {
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
