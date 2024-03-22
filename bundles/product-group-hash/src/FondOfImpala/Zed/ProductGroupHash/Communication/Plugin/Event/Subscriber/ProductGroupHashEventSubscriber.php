@@ -23,7 +23,7 @@ class ProductGroupHashEventSubscriber extends AbstractPlugin implements EventSub
         );
 
         return $eventCollection->addListener(
-            ProductEvents::PRODUCT_ABSTRACT_BEFORE_CREATE,
+            ProductEvents::PRODUCT_ABSTRACT_BEFORE_UPDATE,
             new ProductGroupHashListener(),
         );
     }

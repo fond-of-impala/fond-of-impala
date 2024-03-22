@@ -46,11 +46,11 @@ class ProductGroupHashEventSubscriberTest extends Unit
                     ?string $eventQueueName = null
                 ): LogicException|EventCollectionInterface => match (
                     [
-                    $eventName,
-                    get_class($eventHandler),
-                    $priority,
-                    $queuePoolName,
-                    $eventQueueName,
+                        $eventName,
+                        get_class($eventHandler),
+                        $priority,
+                        $queuePoolName,
+                        $eventQueueName,
                     ]
                 ) {
                     [
