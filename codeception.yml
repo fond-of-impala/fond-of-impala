@@ -55,6 +55,8 @@ include:
   - bundles/customer-price-list
   - bundles/customer-price-product-price-list-page-search
   - bundles/customer-product-lists-bulk-rest-api
+  - bundles/enhanced-catalog
+  - bundles/enhanced-catalog-extension
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/jellyfish-sales-order-purchaser
   - bundles/navision-company
