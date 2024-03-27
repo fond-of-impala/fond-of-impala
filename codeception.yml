@@ -52,6 +52,7 @@ include:
   - bundles/conditional-availability-sales-connector
   - bundles/currency-company-search-rest-api
   - bundles/customer-anonymizer-company-user-connector
+  - bundles/customer-app-rest-api
   - bundles/customer-price-list
   - bundles/customer-price-product-price-list-page-search
   - bundles/customer-product-lists-bulk-rest-api
