@@ -44,7 +44,6 @@ class CustomerAppRestApiFactory extends AbstractFactory
 
     /**
      * @return \FondOfImpala\Glue\CustomerAppRestApi\Dependency\Client\CustomerAppRestApiToCustomerClientInterface
-     * @throws \Spryker\Glue\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function getCustomerClient(): CustomerAppRestApiToCustomerClientInterface
     {

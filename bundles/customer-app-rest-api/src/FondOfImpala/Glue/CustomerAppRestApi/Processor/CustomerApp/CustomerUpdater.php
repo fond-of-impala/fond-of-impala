@@ -2,12 +2,10 @@
 
 namespace FondOfImpala\Glue\CustomerAppRestApi\Processor\CustomerApp;
 
-use Exception;
 use FondOfImpala\Glue\CustomerAppRestApi\CustomerAppRestApiConfig;
 use FondOfImpala\Glue\CustomerAppRestApi\Dependency\Client\CustomerAppRestApiToCustomerClientInterface;
 use FondOfImpala\Glue\CustomerAppRestApi\Processor\Validation\RestApiErrorInterface;
 use Generated\Shared\Transfer\CustomerResponseTransfer;
-use Generated\Shared\Transfer\RestCustomerAppAttributesTransfer;
 use Generated\Shared\Transfer\RestCustomerAppRequestAttributesTransfer;
 use JsonException;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
@@ -28,14 +26,15 @@ class CustomerUpdater implements CustomerUpdaterInterface
     /**
      * @param \FondOfImpala\Glue\CustomerAppRestApi\Dependency\Client\CustomerAppRestApiToCustomerClientInterface $customerClient
      * @param \FondOfImpala\Glue\CustomerAppRestApi\Processor\CustomerApp\CustomerAppMapperInterface $customerAppMapper
+     * @param \FondOfImpala\Glue\CustomerAppRestApi\Processor\Validation\RestApiErrorInterface $restApiError
+     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
      */
     public function __construct(
         CustomerAppRestApiToCustomerClientInterface $customerClient,
-        CustomerAppMapperInterface                  $customerAppMapper,
-        RestApiErrorInterface                       $restApiError,
-        RestResourceBuilderInterface                $restResourceBuilder
-    )
-    {
+        CustomerAppMapperInterface $customerAppMapper,
+        RestApiErrorInterface $restApiError,
+        RestResourceBuilderInterface $restResourceBuilder
+    ) {
         $this->customerClient = $customerClient;
         $this->customerAppMapper = $customerAppMapper;
         $this->restApiError = $restApiError;
@@ -45,13 +44,13 @@ class CustomerUpdater implements CustomerUpdaterInterface
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
      * @param \Generated\Shared\Transfer\RestCustomerAppRequestAttributesTransfer $restCustomerAppRequestAttributesTransfer
+     *
      * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     public function updateCustomer(
-        RestRequestInterface                     $restRequest,
+        RestRequestInterface $restRequest,
         RestCustomerAppRequestAttributesTransfer $restCustomerAppRequestAttributesTransfer
-    ): RestResponseInterface
-    {
+    ): RestResponseInterface {
         $restResponse = $this->restResourceBuilder->createRestResponse();
         $customerReference = $restRequest->getResource()->getId();
 
@@ -88,16 +87,16 @@ class CustomerUpdater implements CustomerUpdaterInterface
     /**
      * @param \Generated\Shared\Transfer\CustomerResponseTransfer $responseTransfer
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
+     *
      * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
      */
     protected function addCustomerAppTransferToResponse(
         CustomerResponseTransfer $responseTransfer,
-        RestResponseInterface    $restResponse
-    ): RestResponseInterface
-    {
+        RestResponseInterface $restResponse
+    ): RestResponseInterface {
         $customer = $responseTransfer->getCustomerTransfer();
         $restCustomerAppAttributesTransfer = $this->customerAppMapper->mapCustomerTransferToRestCustomerAppResponseAttributesTransfer(
-            $customer
+            $customer,
         );
 
         $restResource = $this->restResourceBuilder->createRestResource(

@@ -25,11 +25,11 @@ class CustomerAppSettingsCustomerTransferExpanderPlugin extends AbstractPlugin i
     {
         $appSettings = $customerTransfer->getAppSettings();
 
-        if ($appSettings !== null){
+        if ($appSettings !== null) {
             try {
                 $customerTransfer->setAppSettingsData(json_decode($appSettings, true, 512, JSON_THROW_ON_ERROR));
             } catch (JsonException $e) {
-                $this->getFactory()->getLogger()->error(sprintf('Could not decode app settings: %s', $e->getMessage()), $e->getTrace());
+                $this->getFactory()->getProvidedLogger()->error(sprintf('Could not decode app settings: %s', $e->getMessage()), $e->getTrace());
             }
         }
 

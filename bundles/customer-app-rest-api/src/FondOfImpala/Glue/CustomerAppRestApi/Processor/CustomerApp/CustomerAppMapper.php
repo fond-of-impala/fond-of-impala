@@ -12,6 +12,9 @@ class CustomerAppMapper implements CustomerAppMapperInterface
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param \Generated\Shared\Transfer\RestCustomerAppRequestAttributesTransfer $restCustomerAppRequestAttributesTransfer
+     *
+     * @throws \JsonException
+     *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
     public function mapRestCustomerAppRequestAttributesTransferToCustomerTransfer(
@@ -32,16 +35,17 @@ class CustomerAppMapper implements CustomerAppMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
+     *
      * @return \Generated\Shared\Transfer\RestCustomerAppResponseAttributesTransfer
      */
     public function mapCustomerTransferToRestCustomerAppResponseAttributesTransfer(
         CustomerTransfer $customerTransfer
-    ): RestCustomerAppResponseAttributesTransfer{
+    ): RestCustomerAppResponseAttributesTransfer {
         $restCustomerAppResponseAttributesTransfer = new RestCustomerAppResponseAttributesTransfer();
 
         $appSettings = $customerTransfer->getAppSettings();
 
-        if ($appSettings === null || $appSettings === ''){
+        if ($appSettings === null || $appSettings === '') {
             return $restCustomerAppResponseAttributesTransfer;
         }
 

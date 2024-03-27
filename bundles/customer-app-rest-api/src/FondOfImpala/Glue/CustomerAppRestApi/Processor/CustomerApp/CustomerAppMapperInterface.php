@@ -11,6 +11,7 @@ interface CustomerAppMapperInterface
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param \Generated\Shared\Transfer\RestCustomerAppRequestAttributesTransfer $restCustomerAppRequestAttributesTransfer
+     *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */
     public function mapRestCustomerAppRequestAttributesTransferToCustomerTransfer(
@@ -20,6 +21,7 @@ interface CustomerAppMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
+     *
      * @return \Generated\Shared\Transfer\RestCustomerAppResponseAttributesTransfer
      */
     public function mapCustomerTransferToRestCustomerAppResponseAttributesTransfer(
