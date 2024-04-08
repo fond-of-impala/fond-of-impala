@@ -28,7 +28,7 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     /**
      * @var string
      */
-    public const ROLE_NAME_SALES_STAFF = 'sales_staff';
+    public const ROLE_NAME_DISTRIBUTION_MANAGEMENT = 'distribution_management';
 
     /**
      * @var string
@@ -82,7 +82,7 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
         if ($companyTypeName === 'manufacturer') {
             return array_merge($predefinedRoles, [
                 $this->createCompanyRole($companyTypeName, static::ROLE_NAME_SUPER_DISTRIBUTION, false),
-                $this->createCompanyRole($companyTypeName, static::ROLE_NAME_SALES_STAFF, false),
+                $this->createCompanyRole($companyTypeName, static::ROLE_NAME_DISTRIBUTION_MANAGEMENT, false),
             ]);
         }
 

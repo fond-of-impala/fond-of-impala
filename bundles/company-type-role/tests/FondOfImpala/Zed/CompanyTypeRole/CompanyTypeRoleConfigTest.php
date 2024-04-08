@@ -43,7 +43,7 @@ class CompanyTypeRoleConfigTest extends Unit
             'administration' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'distribution' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'super_distribution' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
-            'sales_staff' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
+            'distribution_management' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'customer_service' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'order_management' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'sales_coordination' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
