@@ -24,6 +24,7 @@ class CompanyTypeRoleConfigTest extends Unit
         'x' => [
             'super_administration' => ['APermissionPlugin', 'BPermissionPlugin'],
             'customer_service' => ['APermissionPlugin', 'BPermissionPlugin'],
+            'order_management' => ['APermissionPlugin', 'BPermissionPlugin'],
             'sales_coordination' => ['APermissionPlugin', 'BPermissionPlugin'],
             'distribution' => ['APermissionPlugin', 'BPermissionPlugin'],
             'administration' => ['APermissionPlugin', 'BPermissionPlugin'],
@@ -32,6 +33,7 @@ class CompanyTypeRoleConfigTest extends Unit
         'retailer' => [
             'super_administration' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'customer_service' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
+            'order_management' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'sales_coordination' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'distribution' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'administration' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
@@ -41,7 +43,9 @@ class CompanyTypeRoleConfigTest extends Unit
             'administration' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'distribution' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'super_distribution' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
+            'distribution_management' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'customer_service' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
+            'order_management' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
             'sales_coordination' => ['APermissionPlugin', 'BPermissionPlugin', 'CPermissionPlugin'],
         ],
     ];
