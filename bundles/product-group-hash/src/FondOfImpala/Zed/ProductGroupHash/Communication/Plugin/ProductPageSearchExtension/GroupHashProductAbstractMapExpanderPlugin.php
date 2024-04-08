@@ -36,7 +36,7 @@ class GroupHashProductAbstractMapExpanderPlugin extends AbstractPlugin implement
         $pageMapBuilder->addSearchResultData(
             $pageMapTransfer,
             static::KEY_GROUP_HASH,
-            $productData[static::KEY_GROUP_HASH]
+            $productData[static::KEY_GROUP_HASH],
         );
 
         return $pageMapTransfer->setGroupHash($productData[static::KEY_GROUP_HASH]);
