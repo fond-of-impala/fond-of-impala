@@ -26,5 +26,6 @@
 
     <transfer name="RestCatalogSearchAbstractProducts">
         <property name="groupCount" type="int" />
+        <property name="groupHash" type="string"/>
     </transfer>
 </transfers>

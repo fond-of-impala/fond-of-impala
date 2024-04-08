@@ -49,6 +49,14 @@ class GroupHashProductAbstractMapExpanderPluginTest extends Unit
             GroupHashProductAbstractMapExpanderPlugin::KEY_GROUP_HASH => sha1('foo'),
         ];
 
+        $this->pageMapBuilderMock->expects(static::atLeastOnce())
+            ->method('addSearchResultData')
+            ->with(
+                $this->pageMapTransferMock,
+                GroupHashProductAbstractMapExpanderPlugin::KEY_GROUP_HASH,
+                $productData[GroupHashProductAbstractMapExpanderPlugin::KEY_GROUP_HASH],
+            )->willReturn($this->pageMapTransferMock);
+
         $this->pageMapTransferMock->expects(static::atLeastOnce())
             ->method('setGroupHash')
             ->with($productData[GroupHashProductAbstractMapExpanderPlugin::KEY_GROUP_HASH])
@@ -71,6 +79,9 @@ class GroupHashProductAbstractMapExpanderPluginTest extends Unit
     public function testExpandProductMapWithoutGroupHash(): void
     {
         $productData = [];
+
+        $this->pageMapBuilderMock->expects(static::never())
+            ->method('addSearchResultData');
 
         $this->pageMapTransferMock->expects(static::never())
             ->method('setGroupHash');
