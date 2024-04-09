@@ -87,6 +87,9 @@ class ProductGroupHashListenerTest extends Unit
             ->method('getAttributes')
             ->willReturn($attributes);
 
+        $this->productAbstractTransferMock->expects(static::never())
+            ->method('getSku');
+
         $this->productAbstractTransferMock->expects(static::atLeastOnce())
             ->method('setGroupHash')
             ->with($groupHash)
@@ -109,6 +112,9 @@ class ProductGroupHashListenerTest extends Unit
             ->method('getAttributes');
 
         $this->productAbstractTransferMock->expects(static::never())
+            ->method('getSku');
+
+        $this->productAbstractTransferMock->expects(static::never())
             ->method('setGroupHash');
 
         $this->productGroupHashListener->handle($this->productAbstractTransferMock, $eventName);
@@ -127,6 +133,8 @@ class ProductGroupHashListenerTest extends Unit
 
         $localeName = 'de_DE';
 
+        $sku = 'foo-bar';
+
         $this->productAbstractTransferMock->expects(static::atLeastOnce())
             ->method('getLocalizedAttributes')
             ->willReturn(new ArrayObject($localizedAttributesTransferMocks));
@@ -142,8 +150,14 @@ class ProductGroupHashListenerTest extends Unit
         $this->localizedAttributesTransferMock->expects(static::never())
             ->method('getAttributes');
 
-        $this->productAbstractTransferMock->expects(static::never())
-            ->method('setGroupHash');
+        $this->productAbstractTransferMock->expects(static::atLeastOnce())
+            ->method('getSku')
+            ->willReturn($sku);
+
+        $this->productAbstractTransferMock->expects(static::atLeastOnce())
+            ->method('setGroupHash')
+            ->with(sha1($sku))
+            ->willReturn($this->productAbstractTransferMock);
 
         $this->productGroupHashListener->handle($this->productAbstractTransferMock, $eventName);
     }
@@ -166,6 +180,8 @@ class ProductGroupHashListenerTest extends Unit
             'style' => 'bar',
         ];
 
+        $sku = 'foo-bar';
+
         $this->productAbstractTransferMock->expects(static::atLeastOnce())
             ->method('getLocalizedAttributes')
             ->willReturn(new ArrayObject($localizedAttributesTransferMocks));
@@ -182,8 +198,14 @@ class ProductGroupHashListenerTest extends Unit
             ->method('getAttributes')
             ->willReturn($attributes);
 
-        $this->productAbstractTransferMock->expects(static::never())
-            ->method('setGroupHash');
+        $this->productAbstractTransferMock->expects(static::atLeastOnce())
+            ->method('getSku')
+            ->willReturn($sku);
+
+        $this->productAbstractTransferMock->expects(static::atLeastOnce())
+            ->method('setGroupHash')
+            ->with(sha1($sku))
+            ->willReturn($this->productAbstractTransferMock);
 
         $this->productGroupHashListener->handle($this->productAbstractTransferMock, $eventName);
     }

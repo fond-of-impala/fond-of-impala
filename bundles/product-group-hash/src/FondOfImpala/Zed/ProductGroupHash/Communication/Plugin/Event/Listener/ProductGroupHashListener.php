@@ -31,9 +31,11 @@ class ProductGroupHashListener extends AbstractPlugin implements EventHandlerInt
 
         foreach ($transfer->getLocalizedAttributes() as $localizedAttributeTransfer) {
             $localeTransfer = $localizedAttributeTransfer->getLocale();
+
             if ($localeTransfer === null) {
                 continue;
             }
+
             if ($localeTransfer->getLocaleName() !== 'en_US') {
                 continue;
             }
@@ -41,7 +43,7 @@ class ProductGroupHashListener extends AbstractPlugin implements EventHandlerInt
             $attributes = $localizedAttributeTransfer->getAttributes();
 
             if (!isset($attributes['model'], $attributes['style'], $attributes['collection'])) {
-                continue;
+                break;
             }
 
             $groupHash = sha1(
@@ -55,7 +57,9 @@ class ProductGroupHashListener extends AbstractPlugin implements EventHandlerInt
 
             $transfer->setGroupHash($groupHash);
 
-            break;
+            return;
         }
+
+        $transfer->setGroupHash(sha1($transfer->getSku()));
     }
 }
