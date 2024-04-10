@@ -23,6 +23,16 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     /**
      * @var string
      */
+    public const ROLE_NAME_ORDER_MANAGEMENT = 'order_management';
+
+    /**
+     * @var string
+     */
+    public const ROLE_NAME_DISTRIBUTION_MANAGEMENT = 'distribution_management';
+
+    /**
+     * @var string
+     */
     public const ROLE_NAME_DISTRIBUTION = 'distribution';
 
     /**
@@ -66,10 +76,14 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
             $this->createCompanyRole($companyTypeName, static::ROLE_NAME_DISTRIBUTION, false),
             $this->createCompanyRole($companyTypeName, static::ROLE_NAME_CUSTOMER_SERVICE, false),
             $this->createCompanyRole($companyTypeName, static::ROLE_NAME_SALES_COORDINATION, false),
+            $this->createCompanyRole($companyTypeName, static::ROLE_NAME_ORDER_MANAGEMENT, false),
         ];
 
         if ($companyTypeName === 'manufacturer') {
-            return array_merge($predefinedRoles, [$this->createCompanyRole($companyTypeName, static::ROLE_NAME_SUPER_DISTRIBUTION, false)]);
+            return array_merge($predefinedRoles, [
+                $this->createCompanyRole($companyTypeName, static::ROLE_NAME_SUPER_DISTRIBUTION, false),
+                $this->createCompanyRole($companyTypeName, static::ROLE_NAME_DISTRIBUTION_MANAGEMENT, false),
+            ]);
         }
 
         $predefinedRoles = array_merge($predefinedRoles, [

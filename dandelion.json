@@ -105,7 +105,7 @@
     },
     "company-type-role": {
       "path": "bundles/company-type-role",
-      "version": "1.1.0"
+      "version": "1.2.0"
     },
     "company-user-carts-rest-api": {
       "path": "bundles/company-user-carts-rest-api",
@@ -321,7 +321,7 @@
     },
     "product-group-hash": {
       "path": "bundles/product-group-hash",
-      "version": "1.0.0"
+      "version": "1.2.0"
     },
     "product-image-grouping-product-page-search": {
       "path": "bundles/product-image-grouping-product-page-search",
