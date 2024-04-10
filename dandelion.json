@@ -219,6 +219,10 @@
       "path": "bundles/customer-anonymizer-company-user-connector",
       "version": "1.0.1"
     },
+    "customer-app-rest-api": {
+      "path": "bundles/customer-app-rest-api",
+      "version": "1.0.0"
+    },
     "customer-price-list": {
       "path": "bundles/customer-price-list",
       "version": "1.0.0"
