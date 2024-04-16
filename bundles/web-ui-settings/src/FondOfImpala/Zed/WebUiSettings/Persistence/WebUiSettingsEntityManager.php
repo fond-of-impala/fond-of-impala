@@ -4,7 +4,6 @@ namespace FondOfImpala\Zed\WebUiSettings\Persistence;
 
 use FondOfImpala\Zed\WebUiSettings\Persistence\Propel\Mapper\WebUiSettingsMapperInterface;
 use Generated\Shared\Transfer\WebUiSettingsTransfer;
-use Orm\Zed\Customer\Persistence\FoiWebUiSettings;
 use Orm\Zed\Customer\Persistence\FoiWebUiSettingsQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -15,10 +14,8 @@ class WebUiSettingsEntityManager extends AbstractEntityManager implements WebUiS
 {
     /**
      * @param \Generated\Shared\Transfer\WebUiSettingsTransfer $webUiSettingsTransfer
+     *
      * @return \Generated\Shared\Transfer\WebUiSettingsTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function updateWebUiSettingsById(WebUiSettingsTransfer $webUiSettingsTransfer): WebUiSettingsTransfer
     {
@@ -35,10 +32,8 @@ class WebUiSettingsEntityManager extends AbstractEntityManager implements WebUiS
 
     /**
      * @param \Generated\Shared\Transfer\WebUiSettingsTransfer $webUiSettingsTransfer
+     *
      * @return \Generated\Shared\Transfer\WebUiSettingsTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function createWebUiSettings(WebUiSettingsTransfer $webUiSettingsTransfer): WebUiSettingsTransfer
     {
@@ -64,5 +59,4 @@ class WebUiSettingsEntityManager extends AbstractEntityManager implements WebUiS
     {
         return $this->getFactory()->createWebUiSettingsMapper();
     }
-
 }

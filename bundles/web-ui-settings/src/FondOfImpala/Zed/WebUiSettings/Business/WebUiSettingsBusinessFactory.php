@@ -18,19 +18,21 @@ class WebUiSettingsBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \FondOfImpala\Zed\WebUiSettings\Business\Expander\QuoteExpanderInterface
      */
-    public function createQuoteExpander(): QuoteExpanderInterface{
+    public function createQuoteExpander(): QuoteExpanderInterface
+    {
         return new QuoteExpander(
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
     /**
      * @return \FondOfImpala\Zed\WebUiSettings\Business\Manager\WebUiSettingsManagerInterface
      */
-    public function createWebUiSettingsManager(): WebUiSettingsManagerInterface{
+    public function createWebUiSettingsManager(): WebUiSettingsManagerInterface
+    {
         return new WebUiSettingsManager(
             $this->getEntityManager(),
-            $this->getRepository()
+            $this->getRepository(),
         );
     }
 }

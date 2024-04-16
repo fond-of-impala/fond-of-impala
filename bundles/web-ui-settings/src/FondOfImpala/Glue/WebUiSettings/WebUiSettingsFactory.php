@@ -3,12 +3,12 @@
 namespace FondOfImpala\Glue\WebUiSettings;
 
 use FondOfImpala\Glue\WebUiSettings\Dependency\Client\WebUiSettingsToCustomerClientInterface;
-use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\WebUiSettingsMapper;
-use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\WebUiSettingsMapperInterface;
-use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\CustomerUpdater;
-use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\CustomerUpdaterInterface;
 use FondOfImpala\Glue\WebUiSettings\Processor\Validation\RestApiError;
 use FondOfImpala\Glue\WebUiSettings\Processor\Validation\RestApiErrorInterface;
+use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\CustomerUpdater;
+use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\CustomerUpdaterInterface;
+use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\WebUiSettingsMapper;
+use FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings\WebUiSettingsMapperInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
 
 class WebUiSettingsFactory extends AbstractFactory

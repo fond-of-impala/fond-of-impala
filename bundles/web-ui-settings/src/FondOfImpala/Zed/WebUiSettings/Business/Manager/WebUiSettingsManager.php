@@ -10,10 +10,12 @@ use Generated\Shared\Transfer\WebUiSettingsTransfer;
 class WebUiSettingsManager implements WebUiSettingsManagerInterface
 {
     protected WebUiSettingsEntityManagerInterface $entityManager;
+
     protected WebUiSettingsRepositoryInterface $repository;
 
     /**
      * @param \FondOfImpala\Zed\WebUiSettings\Persistence\WebUiSettingsEntityManagerInterface $entityManager
+     * @param \FondOfImpala\Zed\WebUiSettings\Persistence\WebUiSettingsRepositoryInterface $repository
      */
     public function __construct(WebUiSettingsEntityManagerInterface $entityManager, WebUiSettingsRepositoryInterface $repository)
     {
@@ -24,23 +26,24 @@ class WebUiSettingsManager implements WebUiSettingsManagerInterface
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param \Generated\Shared\Transfer\WebUiSettingsTransfer|null $webUiSettingsTransfer
+     *
      * @return \Generated\Shared\Transfer\CustomerTransfer
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function handleCustomerWebUiSettings(CustomerTransfer $customerTransfer, ?WebUiSettingsTransfer $webUiSettingsTransfer = null): CustomerTransfer
     {
-        if ($webUiSettingsTransfer === null && $customerTransfer->getWebUiSettings() === null){
+        if ($webUiSettingsTransfer === null && $customerTransfer->getWebUiSettings() === null) {
             return $customerTransfer;
         }
 
-        if ($webUiSettingsTransfer === null){
+        if ($webUiSettingsTransfer === null) {
             $webUiSettingsTransfer = $customerTransfer->getWebUiSettings();
         }
 
         $settingsTransfer = $this->repository->findWebUiSettingsByIdCustomer($customerTransfer->getIdCustomer());
 
-        if ($settingsTransfer === null){
+        if ($settingsTransfer === null) {
             $settingsTransfer = $this->entityManager->createWebUiSettings($webUiSettingsTransfer);
+
             return $customerTransfer
                 ->setWebUiSettings($settingsTransfer)
                 ->setFkWebUiSettings($settingsTransfer->getIdWebUiSettings());

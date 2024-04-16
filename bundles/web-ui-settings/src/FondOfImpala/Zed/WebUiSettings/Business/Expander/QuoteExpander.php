@@ -29,7 +29,8 @@ class QuoteExpander implements QuoteExpanderInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @return void
+     *
+     * @return string
      */
     public function resolveView(QuoteTransfer $quoteTransfer): string
     {

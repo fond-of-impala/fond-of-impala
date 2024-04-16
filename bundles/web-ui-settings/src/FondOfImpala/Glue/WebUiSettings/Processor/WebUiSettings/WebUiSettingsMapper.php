@@ -5,15 +5,12 @@ namespace FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\RestWebUiSettingsRequestAttributesTransfer;
 use Generated\Shared\Transfer\RestWebUiSettingsResponseAttributesTransfer;
-use JsonException;
 
 class WebUiSettingsMapper implements WebUiSettingsMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param \Generated\Shared\Transfer\RestWebUiSettingsRequestAttributesTransfer $restWebUiSettingsRequestAttributesTransfer
-     *
-     * @throws \JsonException
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer
      */

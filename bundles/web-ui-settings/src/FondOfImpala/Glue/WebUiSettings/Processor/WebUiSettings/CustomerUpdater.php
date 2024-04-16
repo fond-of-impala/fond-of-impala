@@ -2,9 +2,9 @@
 
 namespace FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings;
 
-use FondOfImpala\Glue\WebUiSettings\WebUiSettingsConfig;
 use FondOfImpala\Glue\WebUiSettings\Dependency\Client\WebUiSettingsToCustomerClientInterface;
 use FondOfImpala\Glue\WebUiSettings\Processor\Validation\RestApiErrorInterface;
+use FondOfImpala\Glue\WebUiSettings\WebUiSettingsConfig;
 use Generated\Shared\Transfer\CustomerResponseTransfer;
 use Generated\Shared\Transfer\RestWebUiSettingsRequestAttributesTransfer;
 use JsonException;
