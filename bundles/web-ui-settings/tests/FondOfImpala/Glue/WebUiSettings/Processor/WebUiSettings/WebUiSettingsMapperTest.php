@@ -5,7 +5,7 @@ namespace FondOfImpala\Glue\WebUiSettings\Processor\WebUiSettings;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\RestWebUiSettingsRequestAttributesTransfer;
-use JsonException;
+use Generated\Shared\Transfer\WebUiSettingsTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class WebUiSettingsMapperTest extends Unit
@@ -13,6 +13,8 @@ class WebUiSettingsMapperTest extends Unit
     protected MockObject|CustomerTransfer $customerTransferMock;
 
     protected MockObject|RestWebUiSettingsRequestAttributesTransfer $restWebUiSettingsRequestAttributesTransferMock;
+
+    protected MockObject|WebUiSettingsTransfer $webUiSettingsTransferMock;
 
     protected WebUiSettingsMapper $mapper;
 
@@ -24,6 +26,10 @@ class WebUiSettingsMapperTest extends Unit
         parent::_before();
 
         $this->customerTransferMock = $this->getMockBuilder(CustomerTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->webUiSettingsTransferMock = $this->getMockBuilder(WebUiSettingsTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -40,37 +46,15 @@ class WebUiSettingsMapperTest extends Unit
     public function testMapRestWebUiSettingsRequestAttributesTransferToCustomerTransfer(): void
     {
         $this->restWebUiSettingsRequestAttributesTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettingsData')
-            ->willReturn([]);
+            ->method('getWebUiSettings')
+            ->willReturn($this->webUiSettingsTransferMock);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('setAppSettingsData')
-            ->with([]);
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('setAppSettings')
-            ->with('[]');
+            ->method('setWebUiSettings')
+            ->with($this->webUiSettingsTransferMock)
+            ->willReturnSelf();
 
         $this->mapper->mapRestWebUiSettingsRequestAttributesTransferToCustomerTransfer($this->customerTransferMock, $this->restWebUiSettingsRequestAttributesTransferMock);
-    }
-
-    /**
-     * @return void
-     */
-    public function testMapRestWebUiSettingsRequestAttributesTransferToCustomerTransferException(): void
-    {
-        $this->restWebUiSettingsRequestAttributesTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettingsData')
-            ->willReturn(INF);
-
-        $exception = null;
-        try {
-            $this->mapper->mapRestWebUiSettingsRequestAttributesTransferToCustomerTransfer($this->customerTransferMock, $this->restWebUiSettingsRequestAttributesTransferMock);
-        } catch (JsonException $e) {
-            $exception = $e;
-        }
-
-        static::assertNotNull($exception);
     }
 
     /**
@@ -79,26 +63,12 @@ class WebUiSettingsMapperTest extends Unit
     public function testMapCustomerTransferToRestWebUiSettingsResponseAttributesTransfer(): void
     {
         $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettings')
-            ->willReturn('[]');
+            ->method('getWebUiSettings')
+            ->willReturn($this->webUiSettingsTransferMock);
 
         $restWebUiSettingsResponseAttributesTransfer = $this->mapper->mapCustomerTransferToRestWebUiSettingsResponseAttributesTransfer($this->customerTransferMock);
 
-        static::assertEquals([], $restWebUiSettingsResponseAttributesTransfer->getAppSettingsData());
-    }
-
-    /**
-     * @return void
-     */
-    public function testMapCustomerTransferToRestWebUiSettingsResponseAttributesTransferException(): void
-    {
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettings')
-            ->willReturn(INF);
-
-        $restWebUiSettingsResponseAttributesTransfer = $this->mapper->mapCustomerTransferToRestWebUiSettingsResponseAttributesTransfer($this->customerTransferMock);
-
-        static::assertEquals([], $restWebUiSettingsResponseAttributesTransfer->getAppSettingsData());
+        static::assertEquals($this->webUiSettingsTransferMock, $restWebUiSettingsResponseAttributesTransfer->getWebUiSettings());
     }
 
     /**
@@ -107,11 +77,11 @@ class WebUiSettingsMapperTest extends Unit
     public function testMapCustomerTransferToRestWebUiSettingsResponseAttributesTransferEmptySettings(): void
     {
         $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettings')
+            ->method('getWebUiSettings')
             ->willReturn(null);
 
         $restWebUiSettingsResponseAttributesTransfer = $this->mapper->mapCustomerTransferToRestWebUiSettingsResponseAttributesTransfer($this->customerTransferMock);
 
-        static::assertEquals([], $restWebUiSettingsResponseAttributesTransfer->getAppSettingsData());
+        static::assertNull($restWebUiSettingsResponseAttributesTransfer->getWebUiSettings());
     }
 }

@@ -3,18 +3,18 @@
 namespace FondOfImpala\Zed\WebUiSettings\Communication\Plugin\Customer;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\WebUiSettings\Communication\WebUiSettingsCommunicationFactory;
+use FondOfImpala\Zed\WebUiSettings\Persistence\WebUiSettingsRepository;
 use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\WebUiSettingsTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Log\LoggerInterface;
 
 class WebUiSettingsCustomerTransferExpanderPluginTest extends Unit
 {
     protected CustomerTransfer|MockObject $customerTransferMock;
 
-    protected WebUiSettingsCommunicationFactory|MockObject $factoryMock;
+    protected WebUiSettingsTransfer|MockObject $webUiSettingsTransferMock;
 
-    protected LoggerInterface|MockObject $loggerMock;
+    protected WebUiSettingsRepository|MockObject $repositoryMock;
 
     protected WebUiSettingsCustomerTransferExpanderPlugin $plugin;
 
@@ -29,36 +29,16 @@ class WebUiSettingsCustomerTransferExpanderPluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->factoryMock = $this->getMockBuilder(WebUiSettingsCommunicationFactory::class)
+        $this->webUiSettingsTransferMock = $this->getMockBuilder(WebUiSettingsTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->loggerMock = $this->getMockBuilder(LoggerInterface::class)
+        $this->repositoryMock = $this->getMockBuilder(WebUiSettingsRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->plugin = new WebUiSettingsCustomerTransferExpanderPlugin();
-        $this->plugin->setFactory($this->factoryMock);
-    }
-
-    /**
-     * @return void
-     */
-    public function testExpandTransfer(): void
-    {
-        $settings = null;
-
-        $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettings')
-            ->willReturn($settings);
-
-        $this->customerTransferMock->expects(static::never())
-            ->method('setAppSettingsData');
-
-        $this->factoryMock->expects(static::never())
-            ->method('getProvidedLogger');
-
-        $this->plugin->expandTransfer($this->customerTransferMock);
+        $this->plugin->setRepository($this->repositoryMock);
     }
 
     /**
@@ -66,18 +46,25 @@ class WebUiSettingsCustomerTransferExpanderPluginTest extends Unit
      */
     public function testExpandTransferWithData(): void
     {
-        $settings = '{}';
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('getFkWebUiSettings')
+            ->willReturn(1);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettings')
-            ->willReturn($settings);
+            ->method('getIdCustomer')
+            ->willReturn(100);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('setAppSettingsData')
-            ->with([]);
+            ->method('getWebUiSettings')
+            ->willReturn(null);
 
-        $this->factoryMock->expects(static::never())
-            ->method('getProvidedLogger');
+        $this->customerTransferMock->expects(static::atLeastOnce())
+            ->method('setWebUiSettings')
+            ->with($this->webUiSettingsTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('findWebUiSettingsByIdCustomer')
+            ->willReturn($this->webUiSettingsTransferMock);
 
         $this->plugin->expandTransfer($this->customerTransferMock);
     }
@@ -85,23 +72,20 @@ class WebUiSettingsCustomerTransferExpanderPluginTest extends Unit
     /**
      * @return void
      */
-    public function testExpandTransferWithException(): void
+    public function testExpandTransfer(): void
     {
-        $settings = '{xxx}';
-
         $this->customerTransferMock->expects(static::atLeastOnce())
-            ->method('getAppSettings')
-            ->willReturn($settings);
+            ->method('getFkWebUiSettings')
+            ->willReturn(null);
 
         $this->customerTransferMock->expects(static::never())
-            ->method('setAppSettingsData');
+            ->method('getWebUiSettings');
 
-        $this->factoryMock->expects(static::atLeastOnce())
-            ->method('getProvidedLogger')
-            ->willReturn($this->loggerMock);
+        $this->customerTransferMock->expects(static::never())
+            ->method('setWebUiSettings');
 
-        $this->loggerMock->expects(static::atLeastOnce())
-            ->method('error');
+        $this->repositoryMock->expects(static::never())
+            ->method('findWebUiSettingsByIdCustomer');
 
         $this->plugin->expandTransfer($this->customerTransferMock);
     }
