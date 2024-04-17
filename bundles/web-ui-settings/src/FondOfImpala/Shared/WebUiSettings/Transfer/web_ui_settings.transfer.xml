@@ -23,4 +23,16 @@
         <property name="view" type="string"/>
     </transfer>
 
+    <transfer name="RestCustomersAttributes">
+        <property name="webUiSettings" type="WebUiSettings" />
+    </transfer>
+
+    <transfer name="RestCustomersRequestAttributes">
+        <property name="webUiSettings" type="WebUiSettings" />
+    </transfer>
+
+    <transfer name="RestCustomersResponseAttributes">
+        <property name="webUiSettings" type="WebUiSettings" />
+    </transfer>
+
 </transfers>
