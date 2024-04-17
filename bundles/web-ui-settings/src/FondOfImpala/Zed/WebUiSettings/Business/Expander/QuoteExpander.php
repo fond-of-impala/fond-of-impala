@@ -24,6 +24,10 @@ class QuoteExpander implements QuoteExpanderInterface
      */
     public function expand(QuoteTransfer $quoteTransfer): QuoteTransfer
     {
+        if ($quoteTransfer->getView() !== null) {
+            return $quoteTransfer;
+        }
+
         return $quoteTransfer->setView($this->resolveView($quoteTransfer));
     }
 

@@ -23,4 +23,12 @@
         <property name="customSettingData" associative="true" type="array"/>
     </transfer>
 
+    <transfer name="RestCartsAttributes">
+        <property name="view" type="string"/>
+    </transfer>
+
+    <transfer name="RestCartsRequestAttributes">
+        <property name="view" type="string"/>
+    </transfer>
+
 </transfers>
