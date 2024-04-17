@@ -5,14 +5,6 @@
         <property name="webUiSettings" type="WebUiSettings"/>
     </transfer>
 
-    <transfer name="RestWebUiSettingsRequestAttributes">
-        <property name="webUiSettings" type="WebUiSettings"/>
-    </transfer>
-
-    <transfer name="RestWebUiSettingsResponseAttributes">
-        <property name="webUiSettings" type="WebUiSettings"/>
-    </transfer>
-
     <transfer name="Quote">
         <property name="view" type="string"/>
     </transfer>

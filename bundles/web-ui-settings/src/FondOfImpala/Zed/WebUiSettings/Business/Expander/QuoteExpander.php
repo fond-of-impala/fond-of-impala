@@ -36,7 +36,7 @@ class QuoteExpander implements QuoteExpanderInterface
      *
      * @return string
      */
-    public function resolveView(QuoteTransfer $quoteTransfer): string
+    protected function resolveView(QuoteTransfer $quoteTransfer): string
     {
         $customer = $quoteTransfer->getCustomer();
 
