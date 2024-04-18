@@ -26,4 +26,12 @@ class CompanyTypeConverterConfig extends AbstractBundleConfig
 
         return $companyTypeDefaultRolesMapping[$companyType];
     }
+
+    /**
+     * @return array
+     */
+    public function getNonConvertibleRoleTypeKeys(): array
+    {
+        return $this->get(CompanyTypeConverterConstants::COMPANY_TYPE_NON_CONVERTIBLE_ROLE_TYPE_KEYS, []);
+    }
 }
