@@ -60,6 +60,7 @@ class CompanyTypeConverterBusinessFactory extends AbstractBusinessFactory
     {
         return new CompanyReader(
             $this->getCompanyFacade(),
+            $this->getCompanyTypeFacade(),
         );
     }
 
