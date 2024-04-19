@@ -17,8 +17,10 @@ class CompanyReader implements CompanyReaderInterface
      * @param \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyFacadeInterface $companyFacade
      * @param \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade
      */
-    public function __construct(CompanyTypeConverterToCompanyFacadeInterface $companyFacade, CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade)
-    {
+    public function __construct(
+        CompanyTypeConverterToCompanyFacadeInterface $companyFacade,
+        CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade
+    ) {
         $this->companyFacade = $companyFacade;
         $this->companyTypeFacade = $companyTypeFacade;
     }
@@ -33,12 +35,12 @@ class CompanyReader implements CompanyReaderInterface
         $companyTransfer = $this->companyFacade->getCompanyById($companyTransfer);
 
         $companyTypeResponseTransfer = null;
-        if ($companyTransfer->getFkCompanyType() !== null && $companyTransfer->getCompanyType() === null){
+        if ($companyTransfer->getFkCompanyType() !== null && $companyTransfer->getCompanyType() === null) {
             $companyTypeTransfer = (new CompanyTypeTransfer())->setIdCompanyType($companyTransfer->getFkCompanyType());
             $companyTypeResponseTransfer = $this->companyTypeFacade->findCompanyTypeById($companyTypeTransfer);
         }
 
-        if ($companyTypeResponseTransfer === null || $companyTypeResponseTransfer->getIsSuccessful() !== true){
+        if ($companyTypeResponseTransfer === null || $companyTypeResponseTransfer->getIsSuccessful() !== true) {
             return $companyTransfer;
         }
 
