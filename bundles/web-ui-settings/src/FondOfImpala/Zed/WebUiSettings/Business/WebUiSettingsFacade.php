@@ -2,8 +2,7 @@
 
 namespace FondOfImpala\Zed\WebUiSettings\Business;
 
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\WebUiSettingsTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -12,22 +11,12 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class WebUiSettingsFacade extends AbstractFacade implements WebUiSettingsFacadeInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\WebUiSettingsTransfer $webUiSettingsTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @return \Generated\Shared\Transfer\WebUiSettingsTransfer
      */
-    public function expandQuote(QuoteTransfer $quoteTransfer): QuoteTransfer
+    public function handleWebUiSettings(WebUiSettingsTransfer $webUiSettingsTransfer): WebUiSettingsTransfer
     {
-        return $this->getFactory()->createQuoteExpander()->expand($quoteTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
-    public function handleWebUiSettings(CustomerTransfer $customerTransfer): CustomerTransfer
-    {
-        return $this->getFactory()->createWebUiSettingsManager()->handleCustomerWebUiSettings($customerTransfer);
+        return $this->getFactory()->createWebUiSettingsManager()->handle($webUiSettingsTransfer);
     }
 }

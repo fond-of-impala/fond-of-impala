@@ -2,22 +2,14 @@
 
 namespace FondOfImpala\Zed\WebUiSettings\Business;
 
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\WebUiSettingsTransfer;
 
 interface WebUiSettingsFacadeInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\WebUiSettingsTransfer $webUiSettingsTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @return \Generated\Shared\Transfer\WebUiSettingsTransfer
      */
-    public function expandQuote(QuoteTransfer $quoteTransfer): QuoteTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
-    public function handleWebUiSettings(CustomerTransfer $customerTransfer): CustomerTransfer;
+    public function handleWebUiSettings(WebUiSettingsTransfer $webUiSettingsTransfer): WebUiSettingsTransfer;
 }

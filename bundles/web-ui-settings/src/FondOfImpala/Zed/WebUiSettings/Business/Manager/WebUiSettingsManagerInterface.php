@@ -2,16 +2,14 @@
 
 namespace FondOfImpala\Zed\WebUiSettings\Business\Manager;
 
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\WebUiSettingsTransfer;
 
 interface WebUiSettingsManagerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param \Generated\Shared\Transfer\WebUiSettingsTransfer|null $webUiSettingsTransfer
+     * @param \Generated\Shared\Transfer\WebUiSettingsTransfer $webUiSettingsTransfer
      *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
+     * @return \Generated\Shared\Transfer\WebUiSettingsTransfer
      */
-    public function handleCustomerWebUiSettings(CustomerTransfer $customerTransfer, ?WebUiSettingsTransfer $webUiSettingsTransfer = null): CustomerTransfer;
+    public function handle(WebUiSettingsTransfer $webUiSettingsTransfer): WebUiSettingsTransfer;
 }
