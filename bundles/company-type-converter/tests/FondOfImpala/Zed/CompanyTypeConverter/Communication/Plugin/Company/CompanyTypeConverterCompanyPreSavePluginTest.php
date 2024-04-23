@@ -110,21 +110,13 @@ class CompanyTypeConverterCompanyPreSavePluginTest extends Unit
             ->method('findCompanyById')
             ->willReturn($this->currentCompanyTransferMock);
 
+        $this->companyTypeConverterFacadeMock->expects($this->atLeastOnce())
+            ->method('isTypeConvertable')
+            ->willReturn(true);
+
         $this->currentCompanyTransferMock->expects($this->atLeastOnce())
             ->method('getFkCompanyType')
             ->willReturn($currentIdCompanyType);
-
-        $this->currentCompanyTransferMock->expects($this->atLeastOnce())
-            ->method('getCompanyType')
-            ->willReturn($this->companyTypeTransferMock);
-
-        $this->companyTypeTransferMock->expects($this->atLeastOnce())
-            ->method('getName')
-            ->willReturn($key);
-
-        $this->configMock->expects($this->atLeastOnce())
-            ->method('getNonConvertibleRoleTypeKeys')
-            ->willReturn([]);
 
         $this->companyTransferMock->expects($this->atLeastOnce())
             ->method('setIsCompanyTypeModified')
@@ -160,6 +152,10 @@ class CompanyTypeConverterCompanyPreSavePluginTest extends Unit
             ->method('findCompanyById')
             ->willReturn($this->currentCompanyTransferMock);
 
+        $this->companyTypeConverterFacadeMock->expects($this->atLeastOnce())
+            ->method('isTypeConvertable')
+            ->willReturn(false);
+
         $this->currentCompanyTransferMock->expects($this->atLeastOnce())
             ->method('getFkCompanyType')
             ->willReturn($currentIdCompanyType);
@@ -171,10 +167,6 @@ class CompanyTypeConverterCompanyPreSavePluginTest extends Unit
         $this->companyTypeTransferMock->expects($this->atLeastOnce())
             ->method('getName')
             ->willReturn($key);
-
-        $this->configMock->expects($this->atLeastOnce())
-            ->method('getNonConvertibleRoleTypeKeys')
-            ->willReturn([$key]);
 
         $this->companyTransferMock->expects($this->never())
             ->method('setIsCompanyTypeModified');

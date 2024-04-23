@@ -13,15 +13,21 @@ use Throwable;
 class CompanyTypeBlacklistValidator implements CompanyTypeBlacklistValidatorInterface
 {
     protected CompanyTypeConverterConfig $config;
+
     protected CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade;
+
     protected LoggerInterface $logger;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade
      * @param \FondOfImpala\Zed\CompanyTypeConverter\CompanyTypeConverterConfig $config
+     * @param \Psr\Log\LoggerInterface $logger
      */
-    public function __construct(CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade, CompanyTypeConverterConfig $config, LoggerInterface $logger)
-    {
+    public function __construct(
+        CompanyTypeConverterToCompanyTypeFacadeInterface $companyTypeFacade,
+        CompanyTypeConverterConfig $config,
+        LoggerInterface $logger
+    ) {
         $this->companyTypeFacade = $companyTypeFacade;
         $this->config = $config;
         $this->logger = $logger;
@@ -30,8 +36,8 @@ class CompanyTypeBlacklistValidator implements CompanyTypeBlacklistValidatorInte
     /**
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransferFrom
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransferTo
+     *
      * @return bool
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
      */
     public function validate(CompanyTransfer $companyTransferFrom, CompanyTransfer $companyTransferTo): bool
     {
@@ -40,17 +46,17 @@ class CompanyTypeBlacklistValidator implements CompanyTypeBlacklistValidatorInte
 
         try {
             return $this->canConvert($this->resolveCompanyType($companyTransferFrom), $this->resolveCompanyType($companyTransferTo));
-
         } catch (Throwable $exception) {
             $this->logger->warning($exception->getMessage(), $exception->getTrace());
+
             return false;
         }
     }
 
     /**
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
+     *
      * @return \Generated\Shared\Transfer\CompanyTypeTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
      */
     protected function resolveCompanyType(CompanyTransfer $companyTransfer): CompanyTypeTransfer
     {
@@ -59,6 +65,7 @@ class CompanyTypeBlacklistValidator implements CompanyTypeBlacklistValidatorInte
 
         if ($companyTypeTransfer === null || $companyTypeTransfer->getIdCompanyType() !== $id) {
             $companyTypeTransfer = (new CompanyTypeTransfer())->setIdCompanyType($id);
+
             return $this->fetchCompanyType($companyTypeTransfer);
         }
 
@@ -67,8 +74,10 @@ class CompanyTypeBlacklistValidator implements CompanyTypeBlacklistValidatorInte
 
     /**
      * @param \Generated\Shared\Transfer\CompanyTypeTransfer $companyTypeTransfer
+     *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\CompanyTypeTransfer
-     * @throws \Spryker\Shared\Kernel\Transfer\Exception\RequiredTransferPropertyException
      */
     protected function fetchCompanyType(CompanyTypeTransfer $companyTypeTransfer): CompanyTypeTransfer
     {
@@ -86,6 +95,7 @@ class CompanyTypeBlacklistValidator implements CompanyTypeBlacklistValidatorInte
     /**
      * @param \Generated\Shared\Transfer\CompanyTypeTransfer $companyTypeFrom
      * @param \Generated\Shared\Transfer\CompanyTypeTransfer $companyTypeTo
+     *
      * @return bool
      */
     protected function canConvert(CompanyTypeTransfer $companyTypeFrom, CompanyTypeTransfer $companyTypeTo): bool

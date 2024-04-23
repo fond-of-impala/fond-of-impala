@@ -77,7 +77,7 @@ class CompanyTypeConverterBusinessFactory extends AbstractBusinessFactory
         return new CompanyTypeBlacklistValidator(
             $this->getCompanyTypeFacade(),
             $this->getConfig(),
-            $this->getLogger()
+            $this->getLogger(),
         );
     }
 

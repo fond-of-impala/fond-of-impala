@@ -34,6 +34,7 @@ interface CompanyTypeConverterFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransferFrom
      * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransferTo
+     *
      * @return bool
      */
     public function isTypeConvertable(CompanyTransfer $companyTransferFrom, CompanyTransfer $companyTransferTo): bool;
