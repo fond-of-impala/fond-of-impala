@@ -14,24 +14,8 @@
     "phpcs": "make phpcs",
     "phpstan": "make phpstan"
   },
-  "repositories": [
-    {
-      "name": "spryker/customer-extension",
-      "type": "vcs",
-      "url": "https://github.com/fond-of/spryker-customer-extension-fork.git"
-    },
-    {
-      "name": "spryker/customer",
-      "type": "vcs",
-      "url": "https://github.com/fond-of/spryker-customer-fork.git"
-    }
-  ],
   "require": {
-    "php": ">=8.0",
-    "spryker/customer": "dev-feature/add-update-and-add-customer-pre-post-expanding as 7.57.0",
-    "spryker/customer-extension": "dev-feature/provides-more-expander-plugin-interfaces as 1.6.0",
-    "spryker/glue-application": "^1.0.0",
-    "spryker/glue-application-extension": "^1.0.0"
+    "php": ">=8.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
