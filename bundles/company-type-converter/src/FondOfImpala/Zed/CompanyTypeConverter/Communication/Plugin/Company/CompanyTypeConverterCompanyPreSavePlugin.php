@@ -41,7 +41,7 @@ class CompanyTypeConverterCompanyPreSavePlugin extends AbstractPlugin implements
             return $companyResponseTransfer;
         }
 
-        if ($currentCompanyTransfer->getCompanyType() !== null && in_array($currentCompanyTransfer->getCompanyType()->getName(), $this->getConfig()->getNonConvertibleRoleTypeKeys(), true)) {
+        if (!$this->getFacade()->isTypeConvertable($companyTransfer, $currentCompanyTransfer)) {
             $message = (new ResponseMessageTransfer())
                 ->setText(sprintf('The current company type key "%s" is part of the non convertible role type keys and could not been converted!', $currentCompanyTransfer->getCompanyType()->getName()));
 
