@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyTypeConverter\Communication\Plugin\Company;
 
 use Generated\Shared\Transfer\CompanyResponseTransfer;
+use Generated\Shared\Transfer\ResponseMessageTransfer;
 use Spryker\Zed\CompanyExtension\Dependency\Plugin\CompanyPreSavePluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
@@ -14,7 +15,7 @@ class CompanyTypeConverterCompanyPreSavePlugin extends AbstractPlugin implements
 {
     /**
      * Specification:
-     * - Plugin is triggered after company object is saved.
+     * - Plugin is triggered before company object is saved.
      *
      * @api
      *
@@ -38,6 +39,15 @@ class CompanyTypeConverterCompanyPreSavePlugin extends AbstractPlugin implements
 
         if ($currentCompanyTransfer->getFkCompanyType() === $companyTransfer->getFkCompanyType()) {
             return $companyResponseTransfer;
+        }
+
+        if (!$this->getFacade()->isTypeConvertable($companyTransfer, $currentCompanyTransfer)) {
+            $message = (new ResponseMessageTransfer())
+                ->setText(sprintf('The current company type key "%s" is part of the non convertible role type keys and could not been converted!', $currentCompanyTransfer->getCompanyType()->getName()));
+
+            return $companyResponseTransfer
+                ->setIsSuccessful(false)
+                ->addMessage($message);
         }
 
         $companyTransfer->setIsCompanyTypeModified(true);

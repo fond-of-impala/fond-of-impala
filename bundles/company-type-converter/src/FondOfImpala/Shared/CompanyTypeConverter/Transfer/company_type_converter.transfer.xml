@@ -8,4 +8,9 @@
         <property name="fkOldCompanyType" type="int"/>
     </transfer>
 
+    <transfer name="CompanyType">
+        <property name="key" type="string"/>
+        <property name="name" type="string"/>
+    </transfer>
+
 </transfers>

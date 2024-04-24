@@ -7,3 +7,22 @@
 ```
 composer require fond-of-impala/company-type-converter
 ```
+
+## Configuration
+
+Register plugins in `CompanyDependencyProvider`
+```
+CompanyTypeConverterCompanyPreSavePlugin
+CompanyTypeConverterCompanyPostSavePlugin
+```
+
+The `CompanyTypeConverterCompanyPreSavePlugin` now supports a blacklist functionality. By default, all converts are whitelisted. After setting up the config
+
+```
+$config[CompanyTypeConverterConstants::COMPANY_TYPE_NON_CONVERTIBLE_ROLE_TYPE_KEYS] = [
+    'manufacturer' => ['retailer', 'distributor'],
+    'distributor' => ['manufacturer'],
+    'retailer' => ['manufacturer']
+];
+```
+for example the manufacturer can not be converted to a retailer or distributor. The distributor can not be converted as a manufacturer, but he could be converted to a retailer. Same goes for the retailer. He can not converted to a manufacturer but can converted to a distributor.

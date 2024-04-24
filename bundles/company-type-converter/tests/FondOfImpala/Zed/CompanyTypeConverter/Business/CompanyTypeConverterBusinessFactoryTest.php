@@ -168,8 +168,10 @@ class CompanyTypeConverterBusinessFactoryTest extends Unit
             ->method('get')
             ->withConsecutive(
                 [CompanyTypeConverterDependencyProvider::FACADE_COMPANY],
+                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE],
             )->willReturnOnConsecutiveCalls(
                 $this->companyTypeConverterToCompanyFacadeMock,
+                $this->companyTypeConverterToCompanyTypeFacadeMock,
             );
 
         $this->assertInstanceOf(

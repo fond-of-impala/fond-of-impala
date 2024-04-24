@@ -39,4 +39,15 @@ class CompanyTypeConverterFacade extends AbstractFacade implements CompanyTypeCo
     {
         return $this->getFactory()->createCompanyReader()->findCompanyById($companyTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransferFrom
+     * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransferTo
+     *
+     * @return bool
+     */
+    public function isTypeConvertable(CompanyTransfer $companyTransferFrom, CompanyTransfer $companyTransferTo): bool
+    {
+        return $this->getFactory()->createCompanyTypeBlacklistValidator()->validate($companyTransferFrom, $companyTransferTo);
+    }
 }

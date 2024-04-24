@@ -4,6 +4,8 @@ namespace FondOfImpala\Zed\CompanyTypeConverter\Business;
 
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyReader;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyReaderInterface;
+use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeBlacklistValidator;
+use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeBlacklistValidatorInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeConverter;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeConverterInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeConverterPluginExecutor;
@@ -17,6 +19,7 @@ use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverter
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeRoleFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyUserFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToPermissionFacadeInterface;
+use Spryker\Shared\Log\LoggerTrait;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -24,6 +27,8 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class CompanyTypeConverterBusinessFactory extends AbstractBusinessFactory
 {
+    use LoggerTrait;
+
     /**
      * @return \FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeConverterInterface
      */
@@ -60,6 +65,19 @@ class CompanyTypeConverterBusinessFactory extends AbstractBusinessFactory
     {
         return new CompanyReader(
             $this->getCompanyFacade(),
+            $this->getCompanyTypeFacade(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeBlacklistValidatorInterface
+     */
+    public function createCompanyTypeBlacklistValidator(): CompanyTypeBlacklistValidatorInterface
+    {
+        return new CompanyTypeBlacklistValidator(
+            $this->getCompanyTypeFacade(),
+            $this->getConfig(),
+            $this->getLogger(),
         );
     }
 

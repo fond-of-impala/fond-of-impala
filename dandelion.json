@@ -89,7 +89,7 @@
     },
     "company-type-converter": {
       "path": "bundles/company-type-converter",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "company-type-converter-extension": {
       "path": "bundles/company-type-converter-extension",
@@ -105,7 +105,7 @@
     },
     "company-type-role": {
       "path": "bundles/company-type-role",
-      "version": "1.2.0"
+      "version": "1.2.1"
     },
     "company-user-carts-rest-api": {
       "path": "bundles/company-user-carts-rest-api",
