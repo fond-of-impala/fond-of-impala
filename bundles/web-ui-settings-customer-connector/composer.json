@@ -1,0 +1,59 @@
+{
+  "name": "fond-of-impala/web-ui-settings-customer-connector",
+  "description": "Web Ui Settings Customer Connector Bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
+    }
+  ],
+  "scripts": {
+    "ci": "make ci",
+    "codeception": "make codeception",
+    "phpcs": "make phpcs",
+    "phpstan": "make phpstan"
+  },
+  "repositories": [
+    {
+      "name": "spryker/customer-extension",
+      "type": "vcs",
+      "url": "https://github.com/fond-of/spryker-customer-extension-fork.git"
+    },
+    {
+      "name": "spryker/customer",
+      "type": "vcs",
+      "url": "https://github.com/fond-of/spryker-customer-fork.git"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "fond-of-impala/web-ui-settings": "^1.0.0",
+    "spryker/customer": "dev-feature/add-update-and-add-customer-pre-post-expanding as 7.57.0",
+    "spryker/customer-extension": "dev-feature/provides-more-expander-plugin-interfaces as 1.6.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
