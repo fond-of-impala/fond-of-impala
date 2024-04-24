@@ -24,24 +24,13 @@
       "name": "spryker/customer",
       "type": "vcs",
       "url": "https://github.com/fond-of/spryker-customer-fork.git"
-    },
-    {
-      "name": "fond-of-impala/web-ui-settings",
-      "type":"path",
-      "options": {
-        "symlink": false
-      },
-      "packagist.org": false,
-      "url":"../web-ui-settings"
     }
   ],
   "require": {
-    "php": ">=8.0",
-    "fond-of-impala/web-ui-settings": "dev-main",
+    "php": ">=8.1",
+    "fond-of-impala/web-ui-settings": "^1.0.0",
     "spryker/customer": "dev-feature/add-update-and-add-customer-pre-post-expanding as 7.57.0",
-    "spryker/customer-extension": "dev-feature/provides-more-expander-plugin-interfaces as 1.6.0",
-    "spryker/glue-application": "^1.0.0",
-    "spryker/glue-application-extension": "^1.0.0"
+    "spryker/customer-extension": "dev-feature/provides-more-expander-plugin-interfaces as 1.6.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
