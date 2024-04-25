@@ -354,6 +354,14 @@
     "web-ui-settings": {
       "path": "bundles/web-ui-settings",
       "version": "1.0.0"
+    },
+    "web-ui-settings-customer-connector": {
+      "path": "bundles/web-ui-settings-customer-connector",
+      "version": "1.0.0"
+    },
+    "web-ui-settings-quote-connector": {
+      "path": "bundles/web-ui-settings-quote-connector",
+      "version": "1.0.0"
     }
   },
   "vcs": {

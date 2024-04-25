@@ -116,7 +116,9 @@
     "fond-of-impala/product-lists-bulk-rest-api-extension": "*",
     "fond-of-impala/product-management": "*",
     "fond-of-impala/product-product-list-connector": "*",
-    "fond-of-impala/web-ui-settings": "*"
+    "fond-of-impala/web-ui-settings": "*",
+    "fond-of-impala/web-ui-settings-customer-connector": "*",
+    "fond-of-impala/web-ui-settings-quote-connector": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -326,8 +328,6 @@
       "FondOfImpala\\Zed\\CurrencyCompanySearchRestApi\\": "bundles/currency-company-search-rest-api/src/FondOfImpala/Zed/CurrencyCompanySearchRestApi",
       "FondOfImpala\\Shared\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/src/FondOfImpala/Shared/CustomerAnonymizerCompanyUserConnector",
       "FondOfImpala\\Zed\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/src/FondOfImpala/Zed/CustomerAnonymizerCompanyUserConnector",
-      "FondOfImpala\\Shared\\WebUiSettings\\": "bundles/web-ui-settings/src/FondOfImpala/Shared/WebUiSettings",
-      "FondOfImpala\\Zed\\WebUiSettings\\": "bundles/web-ui-settings/src/FondOfImpala/Zed/WebUiSettings",
       "FondOfImpala\\Client\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Client/CustomerPriceList",
       "FondOfImpala\\Glue\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Glue/CustomerPriceList",
       "FondOfImpala\\Shared\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Shared/CustomerPriceList",
@@ -404,7 +404,13 @@
       "FondOfImpala\\Zed\\ProductListsBulkRestApiExtension\\": "bundles/product-lists-bulk-rest-api-extension/src/FondOfImpala/Zed/ProductListsBulkRestApiExtension",
       "FondOfImpala\\Zed\\ProductManagement\\": "bundles/product-management/src/FondOfImpala/Zed/ProductManagement",
       "FondOfImpala\\Shared\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Shared/ProductProductListConnector",
-      "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Zed/ProductProductListConnector"
+      "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/src/FondOfImpala/Zed/ProductProductListConnector",
+      "FondOfImpala\\Shared\\WebUiSettings\\": "bundles/web-ui-settings/src/FondOfImpala/Shared/WebUiSettings",
+      "FondOfImpala\\Zed\\WebUiSettings\\": "bundles/web-ui-settings/src/FondOfImpala/Zed/WebUiSettings",
+      "FondOfImpala\\Shared\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/src/FondOfImpala/Shared/WebUiSettingsCustomerConnector",
+      "FondOfImpala\\Zed\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/src/FondOfImpala/Zed/WebUiSettingsCustomerConnector",
+      "FondOfImpala\\Shared\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/src/FondOfImpala/Shared/WebUiSettingsQuoteConnector",
+      "FondOfImpala\\Zed\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/src/FondOfImpala/Zed/WebUiSettingsQuoteConnector"
     }
   },
   "autoload-dev": {
@@ -539,8 +545,6 @@
       "FondOfImpala\\Zed\\CurrencyCompanySearchRestApi\\": "bundles/currency-company-search-rest-api/tests/FondOfImpala/Zed/CurrencyCompanySearchRestApi",
       "FondOfImpala\\Shared\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/tests/FondOfImpala/Shared/CustomerAnonymizerCompanyUserConnector",
       "FondOfImpala\\Zed\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/tests/FondOfImpala/Zed/CustomerAnonymizerCompanyUserConnector",
-      "FondOfImpala\\Shared\\WebUiSettings\\": "bundles/web-ui-settings/tests/FondOfImpala/Shared/WebUiSettings",
-      "FondOfImpala\\Zed\\WebUiSettings\\": "bundles/web-ui-settings/tests/FondOfImpala/Zed/WebUiSettings",
       "FondOfImpala\\Client\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Client/CustomerPriceList",
       "FondOfImpala\\Glue\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Glue/CustomerPriceList",
       "FondOfImpala\\Shared\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Shared/CustomerPriceList",
@@ -618,6 +622,12 @@
       "FondOfImpala\\Zed\\ProductManagement\\": "bundles/product-management/tests/FondOfImpala/Zed/ProductManagement",
       "FondOfImpala\\Shared\\ProductProductListConnector\\": "bundles/product-product-list-connector/tests/FondOfImpala/Shared/ProductProductListConnector",
       "FondOfImpala\\Zed\\ProductProductListConnector\\": "bundles/product-product-list-connector/tests/FondOfImpala/Zed/ProductProductListConnector",
+      "FondOfImpala\\Shared\\WebUiSettings\\": "bundles/web-ui-settings/tests/FondOfImpala/Shared/WebUiSettings",
+      "FondOfImpala\\Zed\\WebUiSettings\\": "bundles/web-ui-settings/tests/FondOfImpala/Zed/WebUiSettings",
+      "FondOfImpala\\Shared\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/tests/FondOfImpala/Shared/WebUiSettingsCustomerConnector",
+      "FondOfImpala\\Zed\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/tests/FondOfImpala/Zed/WebUiSettingsCustomerConnector",
+      "FondOfImpala\\Shared\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Shared/WebUiSettingsQuoteConnector",
+      "FondOfImpala\\Zed\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Zed/WebUiSettingsQuoteConnector",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }

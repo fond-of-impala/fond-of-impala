@@ -84,6 +84,8 @@ include:
   - bundles/product-lists-bulk-rest-api
   - bundles/product-lists-bulk-rest-api-extension
   - bundles/web-ui-settings
+  - bundles/web-ui-settings-customer-connector
+  - bundles/web-ui-settings-quote-connector
 
 suites:
   unit:
