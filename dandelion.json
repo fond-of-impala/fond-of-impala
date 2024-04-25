@@ -350,6 +350,10 @@
     "product-product-list-connector": {
       "path": "bundles/product-product-list-connector",
       "version": "1.0.0"
+    },
+    "web-ui-settings": {
+      "path": "bundles/web-ui-settings",
+      "version": "1.0.0"
     }
   },
   "vcs": {

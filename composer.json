@@ -16,6 +16,18 @@
       "email": "dev@jzit.de"
     }
   ],
+  "repositories": [
+    {
+      "name": "spryker/customer-extension",
+      "type": "vcs",
+      "url": "https://github.com/fond-of/spryker-customer-extension-fork.git"
+    },
+    {
+      "name": "spryker/customer",
+      "type": "vcs",
+      "url": "https://github.com/fond-of/spryker-customer-fork.git"
+    }
+  ],
   "replace": {
     "fond-of-impala/allowed-product-quantity": "*",
     "fond-of-impala/allowed-product-quantity-cart-connector": "*",
@@ -103,7 +115,8 @@
     "fond-of-impala/product-lists-bulk-rest-api": "*",
     "fond-of-impala/product-lists-bulk-rest-api-extension": "*",
     "fond-of-impala/product-management": "*",
-    "fond-of-impala/product-product-list-connector": "*"
+    "fond-of-impala/product-product-list-connector": "*",
+    "fond-of-impala/web-ui-settings": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -139,7 +152,8 @@
     "spryker/company-user": "^1.0.0 || ^2.0.0",
     "spryker/company-user-extension": "^1.0.0",
     "spryker/company-roles-rest-api": "^1.0.0",
-    "spryker/customer": "^6.3.0 || ^7.0.0",
+    "spryker/customer": "dev-feature/add-update-and-add-customer-pre-post-expanding as 7.57.0",
+    "spryker/customer-extension": "dev-feature/provides-more-expander-plugin-interfaces as 1.6.0",
     "spryker/customers-rest-api-extension": "^1.0.0",
     "spryker/checkout-extension": "^1.2.0",
     "spryker/data-import": "^1.3.0",
@@ -312,6 +326,8 @@
       "FondOfImpala\\Zed\\CurrencyCompanySearchRestApi\\": "bundles/currency-company-search-rest-api/src/FondOfImpala/Zed/CurrencyCompanySearchRestApi",
       "FondOfImpala\\Shared\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/src/FondOfImpala/Shared/CustomerAnonymizerCompanyUserConnector",
       "FondOfImpala\\Zed\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/src/FondOfImpala/Zed/CustomerAnonymizerCompanyUserConnector",
+      "FondOfImpala\\Shared\\WebUiSettings\\": "bundles/web-ui-settings/src/FondOfImpala/Shared/WebUiSettings",
+      "FondOfImpala\\Zed\\WebUiSettings\\": "bundles/web-ui-settings/src/FondOfImpala/Zed/WebUiSettings",
       "FondOfImpala\\Client\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Client/CustomerPriceList",
       "FondOfImpala\\Glue\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Glue/CustomerPriceList",
       "FondOfImpala\\Shared\\CustomerPriceList\\": "bundles/customer-price-list/src/FondOfImpala/Shared/CustomerPriceList",
@@ -523,6 +539,8 @@
       "FondOfImpala\\Zed\\CurrencyCompanySearchRestApi\\": "bundles/currency-company-search-rest-api/tests/FondOfImpala/Zed/CurrencyCompanySearchRestApi",
       "FondOfImpala\\Shared\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/tests/FondOfImpala/Shared/CustomerAnonymizerCompanyUserConnector",
       "FondOfImpala\\Zed\\CustomerAnonymizerCompanyUserConnector\\": "bundles/customer-anonymizer-company-user-connector/tests/FondOfImpala/Zed/CustomerAnonymizerCompanyUserConnector",
+      "FondOfImpala\\Shared\\WebUiSettings\\": "bundles/web-ui-settings/tests/FondOfImpala/Shared/WebUiSettings",
+      "FondOfImpala\\Zed\\WebUiSettings\\": "bundles/web-ui-settings/tests/FondOfImpala/Zed/WebUiSettings",
       "FondOfImpala\\Client\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Client/CustomerPriceList",
       "FondOfImpala\\Glue\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Glue/CustomerPriceList",
       "FondOfImpala\\Shared\\CustomerPriceList\\": "bundles/customer-price-list/tests/FondOfImpala/Shared/CustomerPriceList",
