@@ -1,0 +1,20 @@
+<?php
+
+namespace FondOfImpala\Zed\WebUiSettingsCustomerConnector\Persistence\Propel\Mapper;
+
+use Generated\Shared\Transfer\WebUiSettingsTransfer;
+use Orm\Zed\Customer\Persistence\FoiWebUiSettings;
+
+interface WebUiSettingsMapperInterface
+{
+    /**
+     * @param \Orm\Zed\Customer\Persistence\FoiWebUiSettings $entity
+     * @param \Generated\Shared\Transfer\WebUiSettingsTransfer|null $webUiSettingsTransfer
+     *
+     * @return \Generated\Shared\Transfer\WebUiSettingsTransfer
+     */
+    public function fromEntityToTransfer(
+        FoiWebUiSettings $entity,
+        ?WebUiSettingsTransfer $webUiSettingsTransfer = null
+    ): WebUiSettingsTransfer;
+}

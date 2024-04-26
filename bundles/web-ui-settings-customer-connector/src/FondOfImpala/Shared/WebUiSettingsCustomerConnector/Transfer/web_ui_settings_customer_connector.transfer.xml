@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+    <transfer name="Customer">
+        <property name="fkWebUiSettings" type="int"/>
+        <property name="webUiSettings" type="WebUiSettings"/>
+    </transfer>
+
+    <transfer name="RestCustomersAttributes">
+        <property name="webUiSettings" type="WebUiSettings" />
+    </transfer>
+
+    <transfer name="RestCustomersRequestAttributes">
+        <property name="webUiSettings" type="WebUiSettings" />
+    </transfer>
+
+    <transfer name="RestCustomersResponseAttributes">
+        <property name="webUiSettings" type="WebUiSettings" />
+    </transfer>
+
+</transfers>
