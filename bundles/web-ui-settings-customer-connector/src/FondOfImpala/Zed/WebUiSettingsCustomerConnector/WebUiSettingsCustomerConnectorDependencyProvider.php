@@ -18,9 +18,9 @@ class WebUiSettingsCustomerConnectorDependencyProvider extends AbstractBundleDep
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function providePersistenceLayerDependencies(Container $container): Container
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
-        $container = parent::providePersistenceLayerDependencies($container);
+        $container = parent::provideBusinessLayerDependencies($container);
 
         return $this->addWebUiSettingsFacade($container);
     }
