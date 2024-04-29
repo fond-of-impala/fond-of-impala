@@ -12,14 +12,20 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class CompanyUserTransferCompanyTypePostMapExpanderPlugin extends AbstractPlugin implements CompanyUserTransferPostMapExpanderPluginInterface
 {
+    /**
+     * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $spyCompanyUser
+     *
+     * @return \Generated\Shared\Transfer\CompanyUserTransfer
+     */
     public function expand(CompanyUserTransfer $companyUserTransfer, SpyCompanyUser $spyCompanyUser): CompanyUserTransfer
     {
         $companyTransfer = $this->getRepository()->getCompanyByCompanyUserEntity($spyCompanyUser);
         $companyTypeTransfer = $companyTransfer->getCompanyType();
-        if ($companyTypeTransfer !== null){
+        if ($companyTypeTransfer !== null) {
             $companyUserTransfer->setCompanyTypeName($companyTypeTransfer->getName());
         }
+
         return $companyUserTransfer->setCompany($companyTransfer);
     }
-
 }

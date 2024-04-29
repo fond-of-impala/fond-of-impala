@@ -16,21 +16,23 @@ class CompanyUserSearchCompanyTypeRepository extends AbstractRepository implemen
 {
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $spyCompanyUser
+     *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\CompanyTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     public function getCompanyByCompanyUserEntity(SpyCompanyUser $spyCompanyUser): CompanyTransfer
     {
         $company = $this->getSpyCompany($spyCompanyUser);
 
-        if ($company === null){
+        if ($company === null) {
             throw new Exception(sprintf('Could not find company with id "%s"', $spyCompanyUser->getFkCompany()));
         }
 
         $companyTransfer = (new CompanyTransfer())->fromArray($company->toArray(), true);
 
         $foiCompanyType = $company->getFoiCompanyType();
-        if ($foiCompanyType !== null){
+        if ($foiCompanyType !== null) {
             $companyTypeTransfer = (new CompanyTypeTransfer())->fromArray($foiCompanyType->toArray(), true);
             $companyTransfer->setCompanyType($companyTypeTransfer);
         }
@@ -40,8 +42,10 @@ class CompanyUserSearchCompanyTypeRepository extends AbstractRepository implemen
 
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $spyCompanyUser
+     *
+     * @throws \Exception
+     *
      * @return \Orm\Zed\Company\Persistence\SpyCompany|null
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     protected function getSpyCompany(SpyCompanyUser $spyCompanyUser): ?SpyCompany
     {

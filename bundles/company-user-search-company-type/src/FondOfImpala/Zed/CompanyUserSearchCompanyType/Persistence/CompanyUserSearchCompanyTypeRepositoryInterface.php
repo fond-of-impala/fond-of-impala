@@ -9,8 +9,10 @@ interface CompanyUserSearchCompanyTypeRepositoryInterface
 {
     /**
      * @param \Orm\Zed\CompanyUser\Persistence\SpyCompanyUser $spyCompanyUser
-     * @return \Generated\Shared\Transfer\CompanyTransfer
+     *
      * @throws \Propel\Runtime\Exception\PropelException
+     *
+     * @return \Generated\Shared\Transfer\CompanyTransfer
      */
     public function getCompanyByCompanyUserEntity(SpyCompanyUser $spyCompanyUser): CompanyTransfer;
 }
