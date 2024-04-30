@@ -135,6 +135,10 @@
       "path": "bundles/company-user-reference-quote-connector",
       "version": "1.0.0"
     },
+    "company-user-search-company-type": {
+      "path": "bundles/company-user-search-company-type",
+      "version": "1.0.0"
+    },
     "company-users-bulk-rest-api": {
       "path": "bundles/company-users-bulk-rest-api",
       "version": "1.2.0"

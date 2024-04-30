@@ -49,13 +49,13 @@ class CompanyUserSearchCompanyTypeRepository extends AbstractRepository implemen
      */
     protected function getSpyCompany(SpyCompanyUser $spyCompanyUser): ?SpyCompany
     {
-        if ($spyCompanyUser->getFkCompany() === null) {
+        if ($spyCompanyUser->getFkCompany() === null) { // @phpstan-ignore-line
             throw new Exception('fkCompany is required!');
         }
 
         $company = $spyCompanyUser->getCompany();
 
-        if ($company === null) {
+        if ($company === null) { // @phpstan-ignore-line
             $company = $this->getFactory()->getCompanyQuery()->findOneByIdCompany($spyCompanyUser->getFkCompany());
         }
 
