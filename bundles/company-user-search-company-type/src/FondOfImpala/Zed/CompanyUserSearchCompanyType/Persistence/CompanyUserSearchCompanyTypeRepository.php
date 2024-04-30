@@ -23,7 +23,7 @@ class CompanyUserSearchCompanyTypeRepository extends AbstractRepository implemen
      */
     public function getCompanyByCompanyUserEntity(SpyCompanyUser $spyCompanyUser): CompanyTransfer
     {
-        $company = $this->getSpyCompany($spyCompanyUser);
+        $company = $this->getSpyCompanyFromSpyCompanyUser($spyCompanyUser);
 
         if ($company === null) {
             throw new Exception(sprintf('Could not find company with id "%s"', $spyCompanyUser->getFkCompany()));
@@ -47,7 +47,7 @@ class CompanyUserSearchCompanyTypeRepository extends AbstractRepository implemen
      *
      * @return \Orm\Zed\Company\Persistence\SpyCompany|null
      */
-    protected function getSpyCompany(SpyCompanyUser $spyCompanyUser): ?SpyCompany
+    protected function getSpyCompanyFromSpyCompanyUser(SpyCompanyUser $spyCompanyUser): ?SpyCompany
     {
         if ($spyCompanyUser->getFkCompany() === null) { // @phpstan-ignore-line
             throw new Exception('fkCompany is required!');
