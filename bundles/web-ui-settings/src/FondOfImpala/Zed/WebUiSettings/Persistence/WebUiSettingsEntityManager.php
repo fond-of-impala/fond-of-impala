@@ -4,7 +4,7 @@ namespace FondOfImpala\Zed\WebUiSettings\Persistence;
 
 use FondOfImpala\Zed\WebUiSettings\Persistence\Propel\Mapper\WebUiSettingsMapperInterface;
 use Generated\Shared\Transfer\WebUiSettingsTransfer;
-use Orm\Zed\Customer\Persistence\FoiWebUiSettingsQuery;
+use Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettingsQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -45,7 +45,7 @@ class WebUiSettingsEntityManager extends AbstractEntityManager implements WebUiS
     }
 
     /**
-     * @return \Orm\Zed\Customer\Persistence\FoiWebUiSettingsQuery
+     * @return \Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettingsQuery
      */
     protected function getQuery(): FoiWebUiSettingsQuery
     {

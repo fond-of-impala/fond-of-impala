@@ -4,15 +4,15 @@ namespace FondOfImpala\Zed\WebUiSettings\Persistence\Propel\Mapper;
 
 use Generated\Shared\Transfer\WebUiSettingsTransfer;
 use JsonException;
-use Orm\Zed\Customer\Persistence\FoiWebUiSettings;
+use Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettings;
 
 class WebUiSettingsMapper implements WebUiSettingsMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\WebUiSettingsTransfer $webUiSettingsTransfer
-     * @param \Orm\Zed\Customer\Persistence\FoiWebUiSettings|null $entity
+     * @param \Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettings|null $entity
      *
-     * @return \Orm\Zed\Customer\Persistence\FoiWebUiSettings
+     * @return \Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettings
      */
     public function fromTransferToEntity(WebUiSettingsTransfer $webUiSettingsTransfer, ?FoiWebUiSettings $entity = null): FoiWebUiSettings
     {
@@ -36,7 +36,7 @@ class WebUiSettingsMapper implements WebUiSettingsMapperInterface
     }
 
     /**
-     * @param \Orm\Zed\Customer\Persistence\FoiWebUiSettings $entity
+     * @param \Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettings $entity
      * @param \Generated\Shared\Transfer\WebUiSettingsTransfer|null $webUiSettingsTransfer
      *
      * @return \Generated\Shared\Transfer\WebUiSettingsTransfer

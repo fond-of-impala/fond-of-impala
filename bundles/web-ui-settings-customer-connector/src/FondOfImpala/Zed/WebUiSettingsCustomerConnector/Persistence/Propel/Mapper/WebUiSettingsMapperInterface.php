@@ -3,12 +3,12 @@
 namespace FondOfImpala\Zed\WebUiSettingsCustomerConnector\Persistence\Propel\Mapper;
 
 use Generated\Shared\Transfer\WebUiSettingsTransfer;
-use Orm\Zed\Customer\Persistence\FoiWebUiSettings;
+use Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettings;
 
 interface WebUiSettingsMapperInterface
 {
     /**
-     * @param \Orm\Zed\Customer\Persistence\FoiWebUiSettings $entity
+     * @param \Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettings $entity
      * @param \Generated\Shared\Transfer\WebUiSettingsTransfer|null $webUiSettingsTransfer
      *
      * @return \Generated\Shared\Transfer\WebUiSettingsTransfer

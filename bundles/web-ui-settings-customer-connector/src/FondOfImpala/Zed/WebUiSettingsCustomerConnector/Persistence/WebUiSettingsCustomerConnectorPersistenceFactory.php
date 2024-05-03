@@ -4,7 +4,7 @@ namespace FondOfImpala\Zed\WebUiSettingsCustomerConnector\Persistence;
 
 use FondOfImpala\Zed\WebUiSettingsCustomerConnector\Persistence\Propel\Mapper\WebUiSettingsMapper;
 use FondOfImpala\Zed\WebUiSettingsCustomerConnector\Persistence\Propel\Mapper\WebUiSettingsMapperInterface;
-use Orm\Zed\Customer\Persistence\FoiWebUiSettingsQuery;
+use Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettingsQuery;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 
 class WebUiSettingsCustomerConnectorPersistenceFactory extends AbstractCommunicationFactory
@@ -18,7 +18,7 @@ class WebUiSettingsCustomerConnectorPersistenceFactory extends AbstractCommunica
     }
 
     /**
-     * @return \Orm\Zed\Customer\Persistence\FoiWebUiSettingsQuery
+     * @return \Orm\Zed\WebUiSettings\Persistence\FoiWebUiSettingsQuery
      */
     public function createWebUiSettingsQuery(): FoiWebUiSettingsQuery
     {
