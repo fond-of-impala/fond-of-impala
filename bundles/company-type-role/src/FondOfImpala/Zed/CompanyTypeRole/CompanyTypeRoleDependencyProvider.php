@@ -8,6 +8,7 @@ use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyT
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyUserFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPermissionFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPropelFacadeBridge;
+use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -52,6 +53,11 @@ class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const PROPEL_QUERY_COMPANY_USER = 'PROPEL_QUERY_COMPANY_USER';
+
+    /**
+     * @var string
+     */
+    public const PROPEL_QUERY_COMPANY = 'PROPEL_QUERY_COMPANY';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -150,6 +156,7 @@ class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::providePersistenceLayerDependencies($container);
 
         $container = $this->addCompanyUserQuery($container);
+        $container = $this->addCompanyQuery($container);
 
         return $this->addPropelFacade($container);
     }
@@ -162,6 +169,18 @@ class CompanyTypeRoleDependencyProvider extends AbstractBundleDependencyProvider
     protected function addCompanyUserQuery(Container $container): Container
     {
         $container[static::PROPEL_QUERY_COMPANY_USER] = static fn (): Criteria => SpyCompanyUserQuery::create();
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCompanyQuery(Container $container): Container
+    {
+        $container[static::PROPEL_QUERY_COMPANY] = static fn (): Criteria => SpyCompanyQuery::create();
 
         return $container;
     }

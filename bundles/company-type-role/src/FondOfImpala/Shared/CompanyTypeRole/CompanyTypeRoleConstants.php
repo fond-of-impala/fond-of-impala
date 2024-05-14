@@ -18,4 +18,9 @@ interface CompanyTypeRoleConstants
      * @var string
      */
     public const VALID_COMPANY_ROLES_FOR_EXPORT = 'COMPANY_TYPE_ROLE:VALID_COMPANY_ROLES_FOR_EXPORT';
+
+    /**
+     * @var string
+     */
+    public const COMPANY_ROLE_SYNC_CHUNK_SIZE = 'COMPANY_TYPE_ROLE:COMPANY_ROLE_SYNC_CHUNK_SIZE';
 }

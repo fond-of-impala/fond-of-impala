@@ -46,4 +46,12 @@ interface CompanyTypeRoleRepositoryInterface
     public function findCompanyUserIdsByCompanyRoleId(
         int $companyRoleId
     ): CompanyUserCollectionTransfer;
+
+    /**
+     * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     *
+     * @return int
+     */
+    public function getCompanyCount(): int;
 }

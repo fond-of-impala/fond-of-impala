@@ -8,10 +8,13 @@ use FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface;
+use Generated\Shared\Transfer\CompanyCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
 use Generated\Shared\Transfer\CompanyRoleCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTransfer;
+use Generated\Shared\Transfer\FilterTransfer;
 
 class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
 {
@@ -21,21 +24,26 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
 
     protected CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade;
 
+    protected CompanyTypeRoleRepositoryInterface $repository;
+
     protected CompanyTypeRoleConfig $config;
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyFacadeInterface $companyFacade
+     * @param \FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface $repository
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade
      * @param \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig $config
      */
     public function __construct(
         CompanyTypeRoleToCompanyFacadeInterface $companyFacade,
+        CompanyTypeRoleRepositoryInterface $repository,
         CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade,
         CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade,
         CompanyTypeRoleConfig $config
     ) {
         $this->companyFacade = $companyFacade;
+        $this->repository = $repository;
         $this->companyRoleFacade = $companyRoleFacade;
         $this->companyTypeFacade = $companyTypeFacade;
         $this->config = $config;
@@ -46,16 +54,26 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
      */
     public function sync(): void
     {
-        $companyCollectionTransfer = $this->companyFacade->getCompanies();
+        $companyCount = $this->repository->getCompanyCount();
 
-        if ($companyCollectionTransfer->getCompanies()->count() === 0) {
+        if ($companyCount === 0) {
             return;
         }
 
-        foreach ($companyCollectionTransfer->getCompanies() as $companyTransfer) {
-            $companyRoleCollectionTransfer = $this->getCompanyRoleCollection($companyTransfer);
+        $offset = 0;
+        $limit = $this->config->getCompanySyncChunkSize();
+        while ($companyCount > $offset) {
+            $filter = (new FilterTransfer())->setLimit($limit)->setOffset($offset);
+            $companyCriteriaFilterTransfer = (new CompanyCriteriaFilterTransfer())->setFilter($filter);
+            $companyCollectionTransfer = $this->companyFacade->getCompanyCollection($companyCriteriaFilterTransfer);
 
-            $this->setCompanyRoles($companyTransfer, $companyRoleCollectionTransfer);
+            foreach ($companyCollectionTransfer->getCompanies() as $companyTransfer) {
+                $companyRoleCollectionTransfer = $this->getCompanyRoleCollection($companyTransfer);
+
+                $this->setCompanyRoles($companyTransfer, $companyRoleCollectionTransfer);
+            }
+            unset($companyCollectionTransfer);
+            $offset += $limit;
         }
     }
 

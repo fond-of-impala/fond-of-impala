@@ -61,6 +61,11 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     public const ROLE_NAME_SALES_COORDINATION = 'sales_coordination';
 
     /**
+     * @var int
+     */
+    public const COMPANY_ROLE_SYNC_CHUNK_SIZE_DEFAULT = 100;
+
+    /**
      * @param string $companyTypeName
      *
      * @return array<\Generated\Shared\Transfer\CompanyRoleTransfer>
@@ -176,6 +181,14 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     public function getGroupedPermissionKeys(): array
     {
         return $this->get(CompanyTypeRoleConstants::PERMISSION_KEYS, []);
+    }
+
+    /**
+     * @return int
+     */
+    public function getCompanySyncChunkSize(): int
+    {
+        return $this->get(CompanyTypeRoleConstants::COMPANY_ROLE_SYNC_CHUNK_SIZE, static::COMPANY_ROLE_SYNC_CHUNK_SIZE_DEFAULT);
     }
 
     /**
