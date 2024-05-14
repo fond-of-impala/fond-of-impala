@@ -30,6 +30,7 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
 
     /**
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyFacadeInterface $companyFacade
+     * @param \FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface $repository
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface $companyRoleFacade
      * @param \FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface $companyTypeFacade
      * @param \FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig $config
@@ -61,7 +62,7 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
 
         $offset = 0;
         $limit = $this->config->getCompanySyncChunkSize();
-        while ($companyCount > $offset){
+        while ($companyCount > $offset) {
             $filter = (new FilterTransfer())->setLimit($limit)->setOffset($offset);
             $companyCriteriaFilterTransfer = (new CompanyCriteriaFilterTransfer())->setFilter($filter);
             $companyCollectionTransfer = $this->companyFacade->getCompanyCollection($companyCriteriaFilterTransfer);
@@ -74,8 +75,6 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
             unset($companyCollectionTransfer);
             $offset += $limit;
         }
-
-
     }
 
     /**

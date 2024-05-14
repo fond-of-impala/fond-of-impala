@@ -36,7 +36,8 @@ class CompanyTypeRoleToCompanyFacadeBridge implements CompanyTypeRoleToCompanyFa
      *
      * @return \Generated\Shared\Transfer\CompanyCollectionTransfer
      */
-    public function getCompanyCollection(CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer): CompanyCollectionTransfer{
+    public function getCompanyCollection(CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer): CompanyCollectionTransfer
+    {
         return $this->companyFacade->getCompanyCollection($companyCriteriaFilterTransfer);
     }
 }

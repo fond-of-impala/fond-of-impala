@@ -48,9 +48,8 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
     public function findSyncableCompanyRoleIds(
         string $companyTypeName,
         string $companyRoleName,
-        array  $permissionKeys
-    ): array
-    {
+        array $permissionKeys
+    ): array {
         sort($permissionKeys);
 
         $havingClause = sprintf(
@@ -93,8 +92,7 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
      */
     public function findCompanyRolesByCompanyRoleIds(
         array $companyRoleIds
-    ): CompanyRoleCollectionTransfer
-    {
+    ): CompanyRoleCollectionTransfer {
         $spyCompanyRoles = SpyCompanyRoleQuery::create()
             ->filterByIdCompanyRole_In($companyRoleIds)
             ->find();
@@ -130,8 +128,7 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
      */
     public function findCompanyUserIdsByCompanyRoleId(
         int $companyRoleId
-    ): CompanyUserCollectionTransfer
-    {
+    ): CompanyUserCollectionTransfer {
         $spyCompanyUsers = SpyCompanyUserQuery::create()
             ->useSpyCompanyRoleToCompanyUserQuery()
                 ->filterByFkCompanyRole($companyRoleId)
@@ -149,8 +146,6 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
 
     /**
      * @return int
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyCount(): int
     {
