@@ -22,5 +22,5 @@ interface CompanyTypeRoleConstants
     /**
      * @var string
      */
-    public const COMPANY_SYNC_CHUNK_SIZE = 'COMPANY_TYPE_ROLE:COMPANY_SYNC_CHUNK_SIZE';
+    public const COMPANY_ROLE_SYNC_CHUNK_SIZE = 'COMPANY_TYPE_ROLE:COMPANY_ROLE_SYNC_CHUNK_SIZE';
 }

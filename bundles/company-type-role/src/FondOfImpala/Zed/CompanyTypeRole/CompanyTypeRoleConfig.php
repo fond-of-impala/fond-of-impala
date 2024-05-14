@@ -63,7 +63,7 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     /**
      * @var string
      */
-    public const COMPANY_SYNC_CHUNK_SIZE_DEFAULT = 100;
+    public const COMPANY_ROLE_SYNC_CHUNK_SIZE_DEFAULT = 100;
 
     /**
      * @param string $companyTypeName
@@ -188,7 +188,7 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
      */
     public function getCompanySyncChunkSize(): int
     {
-        return $this->get(CompanyTypeRoleConstants::COMPANY_SYNC_CHUNK_SIZE, static::COMPANY_SYNC_CHUNK_SIZE_DEFAULT);
+        return $this->get(CompanyTypeRoleConstants::COMPANY_ROLE_SYNC_CHUNK_SIZE, static::COMPANY_ROLE_SYNC_CHUNK_SIZE_DEFAULT);
     }
 
     /**
