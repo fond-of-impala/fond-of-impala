@@ -61,7 +61,7 @@ class CompanyTypeRoleConfig extends AbstractBundleConfig
     public const ROLE_NAME_SALES_COORDINATION = 'sales_coordination';
 
     /**
-     * @var string
+     * @var int
      */
     public const COMPANY_ROLE_SYNC_CHUNK_SIZE_DEFAULT = 100;
 

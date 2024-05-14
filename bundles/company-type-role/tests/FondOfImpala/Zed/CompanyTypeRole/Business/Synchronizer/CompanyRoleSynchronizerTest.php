@@ -9,6 +9,7 @@ use FondOfImpala\Zed\CompanyTypeRole\CompanyTypeRoleConfig;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyTypeFacadeInterface;
+use FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface;
 use Generated\Shared\Transfer\CompanyCollectionTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
 use Generated\Shared\Transfer\CompanyRoleResponseTransfer;
@@ -16,6 +17,7 @@ use Generated\Shared\Transfer\CompanyRoleTransfer;
 use Generated\Shared\Transfer\CompanyTransfer;
 use Generated\Shared\Transfer\CompanyTypeTransfer;
 use Generated\Shared\Transfer\ResponseMessageTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class CompanyRoleSynchronizerTest extends Unit
 {
@@ -60,6 +62,11 @@ class CompanyRoleSynchronizerTest extends Unit
     protected $companyTypeFacadeMock;
 
     /**
+     * @var \FondOfImpala\Zed\CompanyTypeRole\Persistence\CompanyTypeRoleRepositoryInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected CompanyTypeRoleRepositoryInterface|MockObject $repositoryMock;
+
+    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\CompanyTypeTransfer
      */
     protected $companyTypeTransferMock;
@@ -87,6 +94,10 @@ class CompanyRoleSynchronizerTest extends Unit
         parent::_before();
 
         $this->companyTransferMock = $this->getMockBuilder(CompanyTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->repositoryMock = $this->getMockBuilder(CompanyTypeRoleRepositoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -132,6 +143,7 @@ class CompanyRoleSynchronizerTest extends Unit
 
         $this->synchronizer = new CompanyRoleSynchronizer(
             $this->companyFacadeMock,
+            $this->repositoryMock,
             $this->companyRoleFacadeMock,
             $this->companyTypeFacadeMock,
             $this->configMock,
@@ -150,8 +162,16 @@ class CompanyRoleSynchronizerTest extends Unit
         $companyTypeName = 'company-type';
 
         $this->companyFacadeMock->expects(static::atLeastOnce())
-            ->method('getCompanies')
+            ->method('getCompanyCollection')
             ->willReturn($this->companyCollectionTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('getCompanyCount')
+            ->willReturn(2);
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getCompanySyncChunkSize')
+            ->willReturn(2);
 
         $this->companyCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getCompanies')
@@ -222,8 +242,16 @@ class CompanyRoleSynchronizerTest extends Unit
         $companyTypeName = 'company-type';
 
         $this->companyFacadeMock->expects(static::atLeastOnce())
-            ->method('getCompanies')
+            ->method('getCompanyCollection')
             ->willReturn($this->companyCollectionTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('getCompanyCount')
+            ->willReturn(10);
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getCompanySyncChunkSize')
+            ->willReturn(2);
 
         $this->companyCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getCompanies')
@@ -302,8 +330,16 @@ class CompanyRoleSynchronizerTest extends Unit
         $responseErrorMessages->append($this->responseMessageTransferMock);
 
         $this->companyFacadeMock->expects(static::atLeastOnce())
-            ->method('getCompanies')
+            ->method('getCompanyCollection')
             ->willReturn($this->companyCollectionTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('getCompanyCount')
+            ->willReturn(10);
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getCompanySyncChunkSize')
+            ->willReturn(2);
 
         $this->companyCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getCompanies')
@@ -385,8 +421,16 @@ class CompanyRoleSynchronizerTest extends Unit
         $companies->append($this->companyTransferMock);
 
         $this->companyFacadeMock->expects(static::atLeastOnce())
-            ->method('getCompanies')
+            ->method('getCompanyCollection')
             ->willReturn($this->companyCollectionTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('getCompanyCount')
+            ->willReturn(1);
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getCompanySyncChunkSize')
+            ->willReturn(2);
 
         $this->companyCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getCompanies')
@@ -418,6 +462,10 @@ class CompanyRoleSynchronizerTest extends Unit
             ->method('getRoles')
             ->willReturn(new ArrayObject());
 
+        $this->companyRoleTransferMock->expects(static::atLeastOnce())
+            ->method('getName')
+            ->willReturn('test');
+
         $this->synchronizer->sync();
     }
 
@@ -434,8 +482,16 @@ class CompanyRoleSynchronizerTest extends Unit
         $companyRoles->append($this->companyRoleTransferMock);
 
         $this->companyFacadeMock->expects(static::atLeastOnce())
-            ->method('getCompanies')
+            ->method('getCompanyCollection')
             ->willReturn($this->companyCollectionTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('getCompanyCount')
+            ->willReturn(1);
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getCompanySyncChunkSize')
+            ->willReturn(2);
 
         $this->companyCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getCompanies')
@@ -492,8 +548,16 @@ class CompanyRoleSynchronizerTest extends Unit
     public function testSyncWithNoCompanies(): void
     {
         $this->companyFacadeMock->expects(static::atLeastOnce())
-            ->method('getCompanies')
+            ->method('getCompanyCollection')
             ->willReturn($this->companyCollectionTransferMock);
+
+        $this->repositoryMock->expects(static::atLeastOnce())
+            ->method('getCompanyCount')
+            ->willReturn(1);
+
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getCompanySyncChunkSize')
+            ->willReturn(2);
 
         $this->companyCollectionTransferMock->expects(static::atLeastOnce())
             ->method('getCompanies')
