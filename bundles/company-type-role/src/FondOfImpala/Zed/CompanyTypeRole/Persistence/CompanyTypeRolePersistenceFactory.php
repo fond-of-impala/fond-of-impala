@@ -10,6 +10,7 @@ use FondOfImpala\Zed\CompanyTypeRole\Persistence\Mapper\CompanyRoleMapper;
 use FondOfImpala\Zed\CompanyTypeRole\Persistence\Mapper\CompanyRoleMapperInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Persistence\Mapper\PermissionMapper;
 use FondOfImpala\Zed\CompanyTypeRole\Persistence\Mapper\PermissionMapperInterface;
+use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyUser\Persistence\Base\SpyCompanyUserQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
@@ -51,6 +52,15 @@ class CompanyTypeRolePersistenceFactory extends AbstractPersistenceFactory
     public function getCompanyUserQuery(): SpyCompanyUserQuery
     {
         return $this->getProvidedDependency(CompanyTypeRoleDependencyProvider::PROPEL_QUERY_COMPANY_USER);
+    }
+
+    /**
+     * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function getCompanyQuery(): SpyCompanyQuery
+    {
+        return $this->getProvidedDependency(CompanyTypeRoleDependencyProvider::PROPEL_QUERY_COMPANY);
     }
 
     /**

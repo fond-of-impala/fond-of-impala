@@ -125,6 +125,7 @@ class CompanyTypeRoleBusinessFactory extends AbstractBusinessFactory
     {
         return new CompanyRoleSynchronizer(
             $this->getCompanyFacade(),
+            $this->getRepository(),
             $this->getCompanyRoleFacade(),
             $this->getCompanyTypeFacade(),
             $this->getConfig(),
