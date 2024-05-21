@@ -8,6 +8,10 @@
         <property name="stockStatus" type="array" singular="stockStatus"/>
     </transfer>
 
+    <transfer name="RestCatalogSearchAbstractProducts">
+        <property name="stockStatus" type="int"/>
+    </transfer>
+
     <transfer name="ProductConcretePageSearch">
         <property name="fkProduct" type="int"/>
         <property name="stockStatus" type="array" singular="stockStatus"/>
