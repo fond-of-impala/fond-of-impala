@@ -68,6 +68,6 @@ class OnePerGroupHashQueryExpanderPlugin extends AbstractPlugin implements Query
     {
         return isset($requestParameters[ProductGroupHashConstants::PARAMETER_ONE_PER_GROUP_HASH])
             && preg_match('/^(true|false)$/', $requestParameters[ProductGroupHashConstants::PARAMETER_ONE_PER_GROUP_HASH])
-            && ((bool)$requestParameters[ProductGroupHashConstants::PARAMETER_ONE_PER_GROUP_HASH]) === true;
+            && $requestParameters[ProductGroupHashConstants::PARAMETER_ONE_PER_GROUP_HASH] === 'true';
     }
 }

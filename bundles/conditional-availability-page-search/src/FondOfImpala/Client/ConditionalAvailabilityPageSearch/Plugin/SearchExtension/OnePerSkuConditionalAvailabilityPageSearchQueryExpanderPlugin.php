@@ -71,6 +71,6 @@ class OnePerSkuConditionalAvailabilityPageSearchQueryExpanderPlugin extends Abst
     {
         return isset($requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_ONE_PER_SKU])
             && preg_match('/^(true|false)$/', $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_ONE_PER_SKU])
-            && ((bool)$requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_ONE_PER_SKU]) === true;
+            && $requestParameters[ConditionalAvailabilityPageSearchConstants::PARAMETER_ONE_PER_SKU] === 'true';
     }
 }
