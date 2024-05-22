@@ -66,7 +66,7 @@ class StockStatusProductExpanderPlugin extends AbstractPlugin implements Product
             $pos = strpos($stockStatus, $search);
 
             if ($pos !== false && $pos === 0) {
-                 return intval(str_replace($search, '', $stockStatus));
+                 return (int)str_replace($search, '', $stockStatus);
             }
         }
 
