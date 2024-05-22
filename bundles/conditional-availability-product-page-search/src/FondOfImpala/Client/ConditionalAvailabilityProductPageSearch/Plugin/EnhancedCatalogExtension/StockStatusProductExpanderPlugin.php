@@ -9,7 +9,7 @@ use Generated\Shared\Transfer\CustomerTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
 
 /**
- *  @method \FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchFactory getFactory()
+ * @method \FondOfImpala\Client\ConditionalAvailabilityProductPageSearch\ConditionalAvailabilityProductPageSearchFactory getFactory()
  */
 class StockStatusProductExpanderPlugin extends AbstractPlugin implements ProductExpanderPluginInterface
 {
@@ -29,16 +29,16 @@ class StockStatusProductExpanderPlugin extends AbstractPlugin implements Product
 
         $customerTransfer = $this->getCustomer();
 
-        if ($customerTransfer || $customerTransfer->getAvailabilityChannel()) {
+        if (!$customerTransfer || !$customerTransfer->getAvailabilityChannel()) {
             $product['stock_status'] = 0;
 
             return $product;
         }
 
-       $product['stock_status'] = $this->getStockStatus(
-           $customerTransfer->getAvailabilityChannel(),
-           $product[ConditionalAvailabilityProductPageSearchConstants::SEARCH_KEY_STOCK_STATUS]
-       );
+        $product['stock_status'] = $this->getStockStatus(
+            $customerTransfer->getAvailabilityChannel(),
+            $product[ConditionalAvailabilityProductPageSearchConstants::SEARCH_KEY_STOCK_STATUS],
+        );
 
         return $product;
     }
@@ -54,19 +54,19 @@ class StockStatusProductExpanderPlugin extends AbstractPlugin implements Product
     }
 
     /**
-     * @param string|null $availabilityChanne
+     * @param string $availabilityChannel
      * @param array<string> $stockStatuses
      *
      * @return int
      */
-    protected function getStockStatus(?string $availabilityChannel, array $stockStatuses): int
+    protected function getStockStatus(string $availabilityChannel, array $stockStatuses): int
     {
         $search = $availabilityChannel . '-';
         foreach ($stockStatuses as $stockStatus) {
-            $pos = strpos($search, $stockStatus);
+            $pos = strpos($stockStatus, $search);
 
-            if ($pos === false  || $pos  === 0) {
-                 return str_replace($search, '',$stockStatus);
+            if ($pos !== false && $pos === 0) {
+                 return intval(str_replace($search, '', $stockStatus));
             }
         }
 
