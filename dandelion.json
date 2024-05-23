@@ -193,7 +193,7 @@
     },
     "conditional-availability-page-search": {
       "path": "bundles/conditional-availability-page-search",
-      "version": "2.3.0"
+      "version": "2.3.1"
     },
     "conditional-availability-page-search-extension": {
       "path": "bundles/conditional-availability-page-search-extension",
@@ -325,7 +325,7 @@
     },
     "product-group-hash": {
       "path": "bundles/product-group-hash",
-      "version": "1.2.0"
+      "version": "1.2.1"
     },
     "product-image-grouping-product-page-search": {
       "path": "bundles/product-image-grouping-product-page-search",
