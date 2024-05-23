@@ -37,6 +37,12 @@ class StockStatusMapExpanderPlugin extends AbstractPlugin implements ProductAbst
             return $pageMapTransfer;
         }
 
+        $pageMapBuilder->addSearchResultData(
+            $pageMapTransfer,
+            static::KEY_STOCK_STATUS,
+            $productData[static::KEY_STOCK_STATUS],
+        );
+
         return $pageMapTransfer->setStockStatus($productData[static::KEY_STOCK_STATUS]);
     }
 }
