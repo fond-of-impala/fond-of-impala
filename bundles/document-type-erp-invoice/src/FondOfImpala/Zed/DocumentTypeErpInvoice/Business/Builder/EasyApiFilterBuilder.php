@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
 {
     protected DocumentTypeErpInvoiceConfig $config;
+
     protected DocumentTypeErpInvoiceRepositoryInterface $repository;
 
     /**
@@ -23,15 +24,16 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
      * @param \FondOfImpala\Zed\DocumentTypeErpInvoice\DocumentTypeErpInvoiceConfig $config
      */
     public function __construct(
-        DocumentTypeErpInvoiceRepositoryInterface         $repository,
-        DocumentTypeErpInvoiceConfig                      $config)
-    {
+        DocumentTypeErpInvoiceRepositoryInterface $repository,
+        DocumentTypeErpInvoiceConfig $config
+    ) {
         $this->repository = $repository;
         $this->config = $config;
     }
 
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\EasyApiFilterTransfer
      */
     public function build(DocumentRequestTransfer $documentRequestTransfer): EasyApiFilterTransfer
@@ -40,7 +42,7 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
 
         $erpInvoice = $this->repository->getErpInvoiceWithPermissionCheck($documentRequestTransfer);
 
-        if ($erpInvoice === null){
+        if ($erpInvoice === null) {
             return $transfer->setError($this->createErrorMessage('Invoice document not found or missing permissions!', Response::HTTP_INTERNAL_SERVER_ERROR));
         }
 
@@ -51,7 +53,8 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
 
     /**
      * @param \Generated\Shared\Transfer\ErpInvoiceTransfer $erpInvoiceTransfer
-     * @return ArrayObject<\Generated\Shared\Transfer\EasyApiFilterConditionTransfer>
+     *
+     * @return \ArrayObject<\Generated\Shared\Transfer\EasyApiFilterConditionTransfer>
      */
     protected function createConditions(ErpInvoiceTransfer $erpInvoiceTransfer): ArrayObject
     {
@@ -67,6 +70,7 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
     /**
      * @param string $message
      * @param int $code
+     *
      * @return \Generated\Shared\Transfer\MessageTransfer
      */
     protected function createErrorMessage(string $message, int $code): MessageTransfer

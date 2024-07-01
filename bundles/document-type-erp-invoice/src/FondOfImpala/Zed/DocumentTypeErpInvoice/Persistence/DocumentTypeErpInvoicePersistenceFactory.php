@@ -10,7 +10,6 @@ class DocumentTypeErpInvoicePersistenceFactory extends AbstractPersistenceFactor
 {
     /**
      * @return \Orm\Zed\ErpInvoice\Persistence\FooErpInvoiceQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getErpInvoiceQuery(): FooErpInvoiceQuery
     {

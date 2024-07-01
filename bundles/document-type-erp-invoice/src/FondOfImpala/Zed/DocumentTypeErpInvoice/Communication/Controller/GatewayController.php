@@ -13,6 +13,7 @@ class GatewayController extends AbstractGatewayController
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\EasyApiFilterTransfer
      */
     public function getFilterAction(DocumentRequestTransfer $documentRequestTransfer): EasyApiFilterTransfer

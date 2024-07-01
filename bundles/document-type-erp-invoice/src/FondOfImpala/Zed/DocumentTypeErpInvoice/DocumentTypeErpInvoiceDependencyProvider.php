@@ -8,10 +8,14 @@ use Spryker\Zed\Kernel\Container;
 
 class DocumentTypeErpInvoiceDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const QUERY_ERP_INVOICE = 'QUERY_ERP_INVOICE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     public function providePersistenceLayerDependencies(Container $container): Container
@@ -23,6 +27,7 @@ class DocumentTypeErpInvoiceDependencyProvider extends AbstractBundleDependencyP
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addFooErpInvoiceQuery(Container $container): Container

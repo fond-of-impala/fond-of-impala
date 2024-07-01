@@ -2,10 +2,8 @@
 
 namespace FondOfImpala\Zed\DocumentTypeErpInvoice\Persistence;
 
-
 use FondOfOryx\Zed\ErpInvoicePermission\Communication\Plugin\Permission\SeeErpInvoicesPermissionPlugin;
 use Generated\Shared\Transfer\DocumentRequestTransfer;
-use Generated\Shared\Transfer\EasyApiFilterTransfer;
 use Generated\Shared\Transfer\ErpInvoiceTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -16,9 +14,8 @@ class DocumentTypeErpInvoiceRepository extends AbstractRepository implements Doc
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpInvoiceTransfer|null
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getErpInvoiceWithPermissionCheck(DocumentRequestTransfer $documentRequestTransfer): ?ErpInvoiceTransfer
     {
@@ -43,7 +40,7 @@ class DocumentTypeErpInvoiceRepository extends AbstractRepository implements Doc
             ->endUse()
             ->findOne();
 
-        if ($invoice === null){
+        if ($invoice === null) {
             return null;
         }
 
