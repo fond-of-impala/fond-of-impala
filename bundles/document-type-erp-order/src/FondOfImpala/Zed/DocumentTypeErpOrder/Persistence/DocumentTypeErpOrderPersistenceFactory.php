@@ -10,7 +10,6 @@ class DocumentTypeErpOrderPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
      * @return \Orm\Zed\ErpOrder\Persistence\ErpOrderQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getErpOrderQuery(): ErpOrderQuery
     {

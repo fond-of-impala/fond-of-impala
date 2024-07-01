@@ -9,6 +9,7 @@ interface EasyApiFilterBuilderInterface
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\EasyApiFilterTransfer
      */
     public function build(DocumentRequestTransfer $documentRequestTransfer): EasyApiFilterTransfer;

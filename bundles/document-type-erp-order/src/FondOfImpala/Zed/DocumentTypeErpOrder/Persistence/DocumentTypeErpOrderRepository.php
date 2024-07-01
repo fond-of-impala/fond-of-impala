@@ -2,10 +2,8 @@
 
 namespace FondOfImpala\Zed\DocumentTypeErpOrder\Persistence;
 
-
 use FondOfOryx\Zed\ErpOrderPermission\Communication\Plugin\Permission\SeeErpOrdersPermissionPlugin;
 use Generated\Shared\Transfer\DocumentRequestTransfer;
-use Generated\Shared\Transfer\EasyApiFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -16,9 +14,8 @@ class DocumentTypeErpOrderRepository extends AbstractRepository implements Docum
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderTransfer|null
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getErpOrder(DocumentRequestTransfer $documentRequestTransfer): ?ErpOrderTransfer
     {
@@ -35,7 +32,7 @@ class DocumentTypeErpOrderRepository extends AbstractRepository implements Docum
             ->endUse()
             ->findOne();
 
-        if ($order === null){
+        if ($order === null) {
             return null;
         }
 
@@ -44,9 +41,8 @@ class DocumentTypeErpOrderRepository extends AbstractRepository implements Docum
 
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderTransfer|null
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getErpOrderWithPermissionCheck(DocumentRequestTransfer $documentRequestTransfer): ?ErpOrderTransfer
     {
@@ -71,7 +67,7 @@ class DocumentTypeErpOrderRepository extends AbstractRepository implements Docum
             ->endUse()
             ->findOne();
 
-        if ($order === null){
+        if ($order === null) {
             return null;
         }
 

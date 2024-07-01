@@ -4,8 +4,6 @@ namespace FondOfImpala\Zed\DocumentTypeErpOrder\Business;
 
 use FondOfImpala\Zed\DocumentTypeErpOrder\Business\Builder\EasyApiFilterBuilder;
 use FondOfImpala\Zed\DocumentTypeErpOrder\Business\Builder\EasyApiFilterBuilderInterface;
-use FondOfImpala\Zed\DocumentTypeErpOrder\Dependency\Facade\DocumentTypeErpOrderToPermissionFacadeInterface;
-use FondOfImpala\Zed\DocumentTypeErpOrder\DocumentTypeErpOrderDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -21,7 +19,7 @@ class DocumentTypeErpOrderBusinessFactory extends AbstractBusinessFactory
     {
         return new EasyApiFilterBuilder(
             $this->getRepository(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 }

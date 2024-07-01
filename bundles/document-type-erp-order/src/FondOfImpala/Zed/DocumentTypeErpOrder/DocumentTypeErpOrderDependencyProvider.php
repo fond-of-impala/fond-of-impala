@@ -8,10 +8,14 @@ use Spryker\Zed\Kernel\Container;
 
 class DocumentTypeErpOrderDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const QUERY_ERP_ORDER = 'QUERY_ERP_ORDER';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     public function providePersistenceLayerDependencies(Container $container): Container
@@ -23,6 +27,7 @@ class DocumentTypeErpOrderDependencyProvider extends AbstractBundleDependencyPro
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addFooErpOrderQuery(Container $container): Container
