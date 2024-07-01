@@ -87,6 +87,7 @@
     "fond-of-impala/customer-price-list": "*",
     "fond-of-impala/customer-price-product-price-list-page-search": "*",
     "fond-of-impala/customer-product-lists-bulk-rest-api": "*",
+    "fond-of-impala/document-type-erp-delivery-note": "*",
     "fond-of-impala/document-type-erp-invoice": "*",
     "fond-of-impala/document-type-erp-order": "*",
     "fond-of-impala/enhanced-catalog": "*",
@@ -343,6 +344,10 @@
       "FondOfImpala\\Glue\\CustomerProductListsBulkRestApi\\": "bundles/customer-product-lists-bulk-rest-api/src/FondOfImpala/Glue/CustomerProductListsBulkRestApi",
       "FondOfImpala\\Shared\\CustomerProductListsBulkRestApi\\": "bundles/customer-product-lists-bulk-rest-api/src/FondOfImpala/Shared/CustomerProductListsBulkRestApi",
       "FondOfImpala\\Zed\\CustomerProductListsBulkRestApi\\": "bundles/customer-product-lists-bulk-rest-api/src/FondOfImpala/Zed/CustomerProductListsBulkRestApi",
+      "FondOfImpala\\Client\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/src/FondOfImpala/Client/DocumentTypeErpDeliveryNote",
+      "FondOfImpala\\Glue\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/src/FondOfImpala/Glue/DocumentTypeErpDeliveryNote",
+      "FondOfImpala\\Shared\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/src/FondOfImpala/Shared/DocumentTypeErpDeliveryNote",
+      "FondOfImpala\\Zed\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/src/FondOfImpala/Zed/DocumentTypeErpDeliveryNote",
       "FondOfImpala\\Client\\DocumentTypeErpInvoice\\": "bundles/document-type-erp-invoice/src/FondOfImpala/Client/DocumentTypeErpInvoice",
       "FondOfImpala\\Glue\\DocumentTypeErpInvoice\\": "bundles/document-type-erp-invoice/src/FondOfImpala/Glue/DocumentTypeErpInvoice",
       "FondOfImpala\\Shared\\DocumentTypeErpInvoice\\": "bundles/document-type-erp-invoice/src/FondOfImpala/Shared/DocumentTypeErpInvoice",
@@ -570,6 +575,10 @@
       "FondOfImpala\\Glue\\CustomerProductListsBulkRestApi\\": "bundles/customer-product-lists-bulk-rest-api/tests/FondOfImpala/Glue/CustomerProductListsBulkRestApi",
       "FondOfImpala\\Shared\\CustomerProductListsBulkRestApi\\": "bundles/customer-product-lists-bulk-rest-api/tests/FondOfImpala/Shared/CustomerProductListsBulkRestApi",
       "FondOfImpala\\Zed\\CustomerProductListsBulkRestApi\\": "bundles/customer-product-lists-bulk-rest-api/tests/FondOfImpala/Zed/CustomerProductListsBulkRestApi",
+      "FondOfImpala\\Client\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/tests/FondOfImpala/Client/DocumentTypeErpDeliveryNote",
+      "FondOfImpala\\Glue\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/tests/FondOfImpala/Glue/DocumentTypeErpDeliveryNote",
+      "FondOfImpala\\Shared\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/tests/FondOfImpala/Shared/DocumentTypeErpDeliveryNote",
+      "FondOfImpala\\Zed\\DocumentTypeErpDeliveryNote\\": "bundles/document-type-erp-delivery-note/tests/FondOfImpala/Zed/DocumentTypeErpDeliveryNote",
       "FondOfImpala\\Client\\DocumentTypeErpInvoice\\": "bundles/document-type-erp-invoice/tests/FondOfImpala/Client/DocumentTypeErpInvoice",
       "FondOfImpala\\Glue\\DocumentTypeErpInvoice\\": "bundles/document-type-erp-invoice/tests/FondOfImpala/Glue/DocumentTypeErpInvoice",
       "FondOfImpala\\Shared\\DocumentTypeErpInvoice\\": "bundles/document-type-erp-invoice/tests/FondOfImpala/Shared/DocumentTypeErpInvoice",
@@ -651,7 +660,7 @@
       "FondOfImpala\\Shared\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/tests/FondOfImpala/Shared/WebUiSettingsCustomerConnector",
       "FondOfImpala\\Zed\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/tests/FondOfImpala/Zed/WebUiSettingsCustomerConnector",
       "FondOfImpala\\Shared\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Shared/WebUiSettingsQuoteConnector",
-      "FondOfImpala\\Zed\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Zed/WebUiSettingsQuoteConnector",
+      "FondOfImpala\\Zed\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Zed/WebUiSettingsQuoteConnector"
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }
