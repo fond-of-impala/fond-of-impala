@@ -9,7 +9,10 @@
     }
   ],
   "require": {
-    "php": ">=8.2"
+    "php": ">=8.2",
+    "fond-of-oryx/erp-delivery-note": "^2.5.0",
+    "fond-of-oryx/erp-delivery-note-permission": "^2.1.0",
+    "spryker/company-role": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

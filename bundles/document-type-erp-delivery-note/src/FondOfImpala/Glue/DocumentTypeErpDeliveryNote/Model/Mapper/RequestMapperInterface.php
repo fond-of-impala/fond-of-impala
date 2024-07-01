@@ -9,6 +9,7 @@ interface RequestMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRestRequestTransfer $restRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\DocumentRequestTransfer
      */
     public function fromRestRequest(DocumentRestRequestTransfer $restRequestTransfer): DocumentRequestTransfer;

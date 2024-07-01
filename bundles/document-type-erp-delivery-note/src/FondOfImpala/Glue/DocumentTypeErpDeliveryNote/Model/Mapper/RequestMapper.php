@@ -9,9 +9,11 @@ class RequestMapper implements RequestMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRestRequestTransfer $restRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\DocumentRequestTransfer
      */
-    public function fromRestRequest(DocumentRestRequestTransfer $restRequestTransfer): DocumentRequestTransfer{
+    public function fromRestRequest(DocumentRestRequestTransfer $restRequestTransfer): DocumentRequestTransfer
+    {
         return (new DocumentRequestTransfer())->fromArray($restRequestTransfer->toArray());
     }
 }

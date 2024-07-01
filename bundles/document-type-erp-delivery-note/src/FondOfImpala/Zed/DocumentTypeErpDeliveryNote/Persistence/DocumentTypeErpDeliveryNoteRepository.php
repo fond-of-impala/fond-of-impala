@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\DocumentTypeErpDeliveryNote\Persistence;
 
-
 use FondOfOryx\Zed\ErpDeliveryNotePermission\Communication\Plugin\Permission\SeeErpDeliveryNotesPermissionPlugin;
 use Generated\Shared\Transfer\DocumentRequestTransfer;
 use Generated\Shared\Transfer\ErpDeliveryNoteTransfer;
@@ -15,9 +14,8 @@ class DocumentTypeErpDeliveryNoteRepository extends AbstractRepository implement
 {
     /**
      * @param \Generated\Shared\Transfer\DocumentRequestTransfer $documentRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpDeliveryNoteTransfer|null
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getErpDeliveryNoteWithPermissionCheck(DocumentRequestTransfer $documentRequestTransfer): ?ErpDeliveryNoteTransfer
     {
@@ -42,7 +40,7 @@ class DocumentTypeErpDeliveryNoteRepository extends AbstractRepository implement
             ->endUse()
             ->findOne();
 
-        if ($deliveryNote === null){
+        if ($deliveryNote === null) {
             return null;
         }
 

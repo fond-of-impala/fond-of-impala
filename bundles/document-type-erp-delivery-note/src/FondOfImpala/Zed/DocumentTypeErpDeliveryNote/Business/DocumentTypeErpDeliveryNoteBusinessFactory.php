@@ -19,7 +19,7 @@ class DocumentTypeErpDeliveryNoteBusinessFactory extends AbstractBusinessFactory
     {
         return new EasyApiFilterBuilder(
             $this->getRepository(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 }

@@ -10,7 +10,6 @@ class DocumentTypeErpDeliveryNotePersistenceFactory extends AbstractPersistenceF
 {
     /**
      * @return \Orm\Zed\ErpDeliveryNote\Persistence\FooErpDeliveryNoteQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getErpDeliveryNoteQuery(): FooErpDeliveryNoteQuery
     {

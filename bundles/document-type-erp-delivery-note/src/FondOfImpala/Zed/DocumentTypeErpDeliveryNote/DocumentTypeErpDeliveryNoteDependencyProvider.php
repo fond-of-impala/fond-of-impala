@@ -8,10 +8,14 @@ use Spryker\Zed\Kernel\Container;
 
 class DocumentTypeErpDeliveryNoteDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const QUERY_ERP_DELIVERY_NOTE = 'QUERY_ERP_DELIVERY_NOTE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     public function providePersistenceLayerDependencies(Container $container): Container
@@ -23,6 +27,7 @@ class DocumentTypeErpDeliveryNoteDependencyProvider extends AbstractBundleDepend
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addFooErpDeliveryNoteQuery(Container $container): Container
