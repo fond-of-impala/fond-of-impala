@@ -660,7 +660,7 @@
       "FondOfImpala\\Shared\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/tests/FondOfImpala/Shared/WebUiSettingsCustomerConnector",
       "FondOfImpala\\Zed\\WebUiSettingsCustomerConnector\\": "bundles/web-ui-settings-customer-connector/tests/FondOfImpala/Zed/WebUiSettingsCustomerConnector",
       "FondOfImpala\\Shared\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Shared/WebUiSettingsQuoteConnector",
-      "FondOfImpala\\Zed\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Zed/WebUiSettingsQuoteConnector"
+      "FondOfImpala\\Zed\\WebUiSettingsQuoteConnector\\": "bundles/web-ui-settings-quote-connector/tests/FondOfImpala/Zed/WebUiSettingsQuoteConnector",
       "Generated\\": "src/Generated/",
       "Orm\\Zed\\": "src/Orm/Zed/"
     }
