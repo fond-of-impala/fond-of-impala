@@ -24,4 +24,8 @@
         <property name="type" type="string"/>
         <property name="customerReference" type="string"/>
     </transfer>
+
+    <transfer name="Message">
+        <property name="type" type="string"/>
+    </transfer>
 </transfers>

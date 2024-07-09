@@ -8,6 +8,11 @@ use Generated\Shared\Transfer\EasyApiFilterTransfer;
 
 class DocumentTypeErpDeliveryNoteStub implements DocumentTypeErpDeliveryNoteStubInterface
 {
+    /**
+     * @var string
+     */
+    public const URL_GET_FILTER = '/document-type-erp-delivery-note/gateway/get-filter';
+
     protected DocumentTypeErpDeliveryNoteToZedRequestClientInterface $zedRequestClient;
 
     /**
@@ -27,7 +32,7 @@ class DocumentTypeErpDeliveryNoteStub implements DocumentTypeErpDeliveryNoteStub
     {
         /** @var \Generated\Shared\Transfer\EasyApiFilterTransfer $filterTransfer */
         $filterTransfer = $this->zedRequestClient
-            ->call('/document-type-erp-delivery-note/gateway/get-filter', $documentRequestTransfer);
+            ->call(static::URL_GET_FILTER, $documentRequestTransfer);
 
         return $filterTransfer;
     }

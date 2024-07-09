@@ -8,6 +8,11 @@ use Generated\Shared\Transfer\EasyApiFilterTransfer;
 
 class DocumentTypeErpOrderStub implements DocumentTypeErpOrderStubInterface
 {
+    /**
+     * @var string
+     */
+    public const URL_GET_FILTER = '/document-type-erp-order/gateway/get-filter';
+
     protected DocumentTypeErpOrderToZedRequestClientInterface $zedRequestClient;
 
     /**
@@ -27,7 +32,7 @@ class DocumentTypeErpOrderStub implements DocumentTypeErpOrderStubInterface
     {
         /** @var \Generated\Shared\Transfer\EasyApiFilterTransfer $filterTransfer */
         $filterTransfer = $this->zedRequestClient
-            ->call('/document-type-erp-order/gateway/get-filter', $documentRequestTransfer);
+            ->call(static::URL_GET_FILTER, $documentRequestTransfer);
 
         return $filterTransfer;
     }

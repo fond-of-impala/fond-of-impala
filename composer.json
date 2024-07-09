@@ -136,6 +136,8 @@
     "fond-of-oryx/company-user-search-rest-api-extension": "^1.1.0",
     "fond-of-oryx/company-users-rest-api-extension": "^1.1.0 || ^2.0.0",
     "fond-of-oryx/customer-product-list-connector": "^1.0.0 || ^2.0.0",
+    "fond-of-oryx/documents-rest-api": "^1.0.0",
+    "fond-of-oryx/easy-api": "^1.0.0",
     "fond-of-oryx/jellyfish-sales-order-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/order-budget": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/price-lists-rest-api-extension": "^1.0.0 || ^2.0.0",

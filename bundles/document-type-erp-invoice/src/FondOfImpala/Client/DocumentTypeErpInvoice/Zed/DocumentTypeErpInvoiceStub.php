@@ -8,6 +8,11 @@ use Generated\Shared\Transfer\EasyApiFilterTransfer;
 
 class DocumentTypeErpInvoiceStub implements DocumentTypeErpInvoiceStubInterface
 {
+    /**
+     * @var string
+     */
+    public const URL_GET_FILTER = '/document-type-erp-invoice/gateway/get-filter';
+
     protected DocumentTypeErpInvoiceToZedRequestClientInterface $zedRequestClient;
 
     /**
@@ -27,7 +32,7 @@ class DocumentTypeErpInvoiceStub implements DocumentTypeErpInvoiceStubInterface
     {
         /** @var \Generated\Shared\Transfer\EasyApiFilterTransfer $filterTransfer */
         $filterTransfer = $this->zedRequestClient
-            ->call('/document-type-erp-invoice/gateway/get-filter', $documentRequestTransfer);
+            ->call(static::URL_GET_FILTER, $documentRequestTransfer);
 
         return $filterTransfer;
     }
