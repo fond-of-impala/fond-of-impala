@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.2",
-    "fond-of-oryx/documents-rest-api": "^1.0.0-beta",
+    "fond-of-oryx/documents-rest-api": "^1.0.0",
     "fond-of-oryx/erp-delivery-note": "^2.5.0",
     "fond-of-oryx/erp-delivery-note-permission": "^2.1.0",
     "spryker/company-role": "^1.0.0"
