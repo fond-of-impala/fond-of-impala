@@ -55,6 +55,9 @@ include:
   - bundles/customer-price-list
   - bundles/customer-price-product-price-list-page-search
   - bundles/customer-product-lists-bulk-rest-api
+  - bundles/document-type-erp-delivery-note
+  - bundles/document-type-erp-invoice
+  - bundles/document-type-erp-order
   - bundles/enhanced-catalog
   - bundles/enhanced-catalog-extension
   - bundles/jellyfish-sales-order-conditional-availability
@@ -128,6 +131,7 @@ env:
           ide_auto_completion_source_directories:
             './bundles/*/src/': '*/*/'
             './vendor/fond-of-spryker/*/src/': '*/*/'
+            './vendor/fond-of-oryx/*/src/': '*/*/'
           supported_source_identifiers:
             - page
             - conditional-availability-period
