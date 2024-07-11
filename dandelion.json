@@ -235,6 +235,18 @@
       "path": "bundles/customer-product-lists-bulk-rest-api",
       "version": "1.0.0"
     },
+    "fond-of-impala/document-type-erp-delivery-note"fond-of-impala/document-type-erp-delivery-note: {
+      "path": "bundles/fond-of-impala/document-type-erp-delivery-note",
+      "version": "1.0.0-beta"
+    },
+    "fond-of-impala/document-type-erp-invoice": {
+      "path": "bundles/fond-of-impala/document-type-erp-invoice",
+      "version": "1.0.0-beta"
+    },
+    "fond-of-impala/document-type-erp-order": {
+      "path": "bundles/fond-of-impala/document-type-erp-order",
+      "version": "1.0.0-beta"
+    },
     "enhanced-catalog": {
       "path": "bundles/enhanced-catalog",
       "version": "1.0.0"
