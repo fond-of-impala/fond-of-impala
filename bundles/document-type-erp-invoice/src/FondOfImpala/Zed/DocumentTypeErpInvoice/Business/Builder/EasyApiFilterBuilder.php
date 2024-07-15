@@ -62,7 +62,7 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
 
         $conditions->append((new EasyApiFilterConditionTransfer())
             ->setField(EasyApiConstants::FIELD_NAME_DOCUMENT_NUMBER)
-            ->setValue($erpInvoiceTransfer->getExternalReference()));
+            ->setValue($erpInvoiceTransfer->getDocumentNumber()));
 
         return $conditions;
     }
