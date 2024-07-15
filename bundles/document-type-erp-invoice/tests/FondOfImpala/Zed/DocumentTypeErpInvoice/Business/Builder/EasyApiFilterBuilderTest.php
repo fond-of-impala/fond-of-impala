@@ -66,7 +66,7 @@ class EasyApiFilterBuilderTest extends Unit
             ->willReturn('store');
 
         $this->erpOrderTransferMock->expects(static::atLeastOnce())
-            ->method('getExternalReference')
+            ->method('getDocumentNumber')
             ->willReturn('ref');
 
         $toTest = $this->builder->build(
