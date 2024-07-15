@@ -5,7 +5,6 @@ namespace FondOfImpala\Zed\DocumentTypeErpDeliveryNote\Business\Builder;
 use ArrayObject;
 use FondOfImpala\Zed\DocumentTypeErpDeliveryNote\DocumentTypeErpDeliveryNoteConfig;
 use FondOfImpala\Zed\DocumentTypeErpDeliveryNote\Persistence\DocumentTypeErpDeliveryNoteRepositoryInterface;
-use FondOfOryx\Shared\EasyApi\EasyApiConstants;
 use Generated\Shared\Transfer\DocumentRequestTransfer;
 use Generated\Shared\Transfer\EasyApiFilterConditionTransfer;
 use Generated\Shared\Transfer\EasyApiFilterTransfer;
@@ -18,6 +17,11 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
     protected DocumentTypeErpDeliveryNoteConfig $config;
 
     protected DocumentTypeErpDeliveryNoteRepositoryInterface $repository;
+
+    /**
+     * @var string
+     */
+    public const FIELD_NAME = 'OrderNumber';
 
     /**
      * @param \FondOfImpala\Zed\DocumentTypeErpDeliveryNote\Persistence\DocumentTypeErpDeliveryNoteRepositoryInterface $repository
@@ -61,8 +65,8 @@ class EasyApiFilterBuilder implements EasyApiFilterBuilderInterface
         $conditions = new ArrayObject();
 
         $conditions->append((new EasyApiFilterConditionTransfer())
-            ->setField(EasyApiConstants::FIELD_NAME_DOCUMENT_NUMBER)
-            ->setValue($erpDeliveryNoteTransfer->getDeliveryNoteNumber()));
+            ->setField(static::FIELD_NAME)
+            ->setValue($erpDeliveryNoteTransfer->getExternalReference()));
 
         return $conditions;
     }
