@@ -291,6 +291,10 @@
       "path": "bundles/order-budgets-bulk-rest-api-extension",
       "version": "1.0.0"
     },
+    "order-confirmation-recipients-override": {
+      "path": "bundles/order-confirmation-recipients-override",
+      "version": "1.0.0"
+    },
     "permission-cart-search-rest-api": {
       "path": "bundles/permission-cart-search-rest-api",
       "version": "1.0.0"

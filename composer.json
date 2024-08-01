@@ -101,6 +101,7 @@
     "fond-of-impala/navision-company-user": "*",
     "fond-of-impala/order-budgets-bulk-rest-api": "*",
     "fond-of-impala/order-budgets-bulk-rest-api-extension": "*",
+    "fond-of-impala/order-confirmation-recipients-override": "*",
     "fond-of-impala/permission-cart-search-rest-api": "*",
     "fond-of-impala/price-list": "*",
     "fond-of-impala/price-list-api": "*",
@@ -122,7 +123,8 @@
     "fond-of-impala/product-product-list-connector": "*",
     "fond-of-impala/web-ui-settings": "*",
     "fond-of-impala/web-ui-settings-customer-connector": "*",
-    "fond-of-impala/web-ui-settings-quote-connector": "*"
+    "fond-of-impala/web-ui-settings-quote-connector": "*",
+    "fond-of-impala/web-ui-settings-rest-api": "*"
   },
   "require": {
     "php": ">=8.0",
@@ -387,6 +389,8 @@
       "FondOfImpala\\Glue\\OrderBudgetsBulkRestApiExtension\\": "bundles/order-budgets-bulk-rest-api-extension/src/FondOfImpala/Glue/OrderBudgetsBulkRestApiExtension",
       "FondOfImpala\\Shared\\OrderBudgetsBulkRestApiExtension\\": "bundles/order-budgets-bulk-rest-api-extension/src/FondOfImpala/Shared/OrderBudgetsBulkRestApiExtension",
       "FondOfImpala\\Zed\\OrderBudgetsBulkRestApiExtension\\": "bundles/order-budgets-bulk-rest-api-extension/src/FondOfImpala/Zed/OrderBudgetsBulkRestApiExtension",
+      "FondOfImpala\\Shared\\OrderConfirmationRecipientsOverride\\": "bundles/order-confirmation-recipients-override/src/FondOfImpala/Shared/OrderConfirmationRecipientsOverride",
+      "FondOfImpala\\Zed\\OrderConfirmationRecipientsOverride\\": "bundles/order-confirmation-recipients-override/src/FondOfImpala/Zed/OrderConfirmationRecipientsOverride",
       "FondOfImpala\\Shared\\PermissionCartSearchRestApi\\": "bundles/permission-cart-search-rest-api/src/FondOfImpala/Shared/PermissionCartSearchRestApi",
       "FondOfImpala\\Zed\\PermissionCartSearchRestApi\\": "bundles/permission-cart-search-rest-api/src/FondOfImpala/Zed/PermissionCartSearchRestApi",
       "FondOfImpala\\Client\\PriceList\\": "bundles/price-list/src/FondOfImpala/Client/PriceList",
@@ -618,6 +622,8 @@
       "FondOfImpala\\Glue\\OrderBudgetsBulkRestApiExtension\\": "bundles/order-budgets-bulk-rest-api-extension/tests/FondOfImpala/Glue/OrderBudgetsBulkRestApiExtension",
       "FondOfImpala\\Shared\\OrderBudgetsBulkRestApiExtension\\": "bundles/order-budgets-bulk-rest-api-extension/tests/FondOfImpala/Shared/OrderBudgetsBulkRestApiExtension",
       "FondOfImpala\\Zed\\OrderBudgetsBulkRestApiExtension\\": "bundles/order-budgets-bulk-rest-api-extension/tests/FondOfImpala/Zed/OrderBudgetsBulkRestApiExtension",
+      "FondOfImpala\\Shared\\OrderConfirmationRecipientsOverride\\": "bundles/order-confirmation-recipients-override/tests/FondOfImpala/Shared/OrderConfirmationRecipientsOverride",
+      "FondOfImpala\\Zed\\OrderConfirmationRecipientsOverride\\": "bundles/order-confirmation-recipients-override/tests/FondOfImpala/Zed/OrderConfirmationRecipientsOverride",
       "FondOfImpala\\Shared\\PermissionCartSearchRestApi\\": "bundles/permission-cart-search-rest-api/tests/FondOfImpala/Shared/PermissionCartSearchRestApi",
       "FondOfImpala\\Zed\\PermissionCartSearchRestApi\\": "bundles/permission-cart-search-rest-api/tests/FondOfImpala/Zed/PermissionCartSearchRestApi",
       "FondOfImpala\\Client\\PriceList\\": "bundles/price-list/tests/FondOfImpala/Client/PriceList",
