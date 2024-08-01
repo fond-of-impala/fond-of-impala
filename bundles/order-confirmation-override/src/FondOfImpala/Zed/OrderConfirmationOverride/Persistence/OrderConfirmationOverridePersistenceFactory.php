@@ -13,7 +13,6 @@ class OrderConfirmationOverridePersistenceFactory extends AbstractPersistenceFac
 {
     /**
      * @return \Orm\Zed\Customer\Persistence\SpyCustomerQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCustomerQuery(): SpyCustomerQuery
     {

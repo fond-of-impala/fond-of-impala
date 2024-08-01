@@ -8,8 +8,10 @@ interface OrderConfirmationOverrideRepositoryInterface
 {
     /**
      * @param array $emails
-     * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
+     *
      * @throws \Propel\Runtime\Exception\PropelException
+     *
+     * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
      */
     public function getAllowedCustomerCollectionByMails(array $emails): CustomerCollectionTransfer;
 }

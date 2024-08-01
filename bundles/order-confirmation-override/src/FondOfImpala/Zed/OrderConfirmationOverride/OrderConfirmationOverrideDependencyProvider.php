@@ -2,10 +2,8 @@
 
 namespace FondOfImpala\Zed\OrderConfirmationOverride;
 
-use Orm\Zed\Company\Persistence\SpyCompanyQuery;
-use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\Customer\Persistence\Base\SpyCustomerQuery as BaseSpyCustomerQuery;
-use Orm\Zed\Company\Persistence\Base\SpyCompanyQuery as BaseSpyCompanyQuery;
+use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 

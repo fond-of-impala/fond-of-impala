@@ -2,12 +2,9 @@
 
 namespace FondOfImpala\Zed\OrderConfirmationOverride\Persistence;
 
-use Exception;
 use FondOfImpala\Zed\OrderConfirmationOverride\OrderConfirmationOverrideConfig;
 use Generated\Shared\Transfer\CustomerCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
-use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
-use Spryker\Shared\Kernel\Transfer\Exception\NullValueException;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -19,18 +16,17 @@ class OrderConfirmationOverrideRepository extends AbstractRepository implements 
 {
     /**
      * @param array $emails
+     *
      * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     public function getAllowedCustomerCollectionByMails(array $emails): CustomerCollectionTransfer
     {
-        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
         $query = $this->getFactory()
             ->getCustomerQuery()
             ->clear();
 
         $protectedCompanyTypeIds = $this->getConfig()->getProtectedCompanyTypeIds();
-        if (count($protectedCompanyTypeIds) > 0){
+        if (count($protectedCompanyTypeIds) > 0) {
             $query
                 ->useCompanyUserQuery()
                     ->useCompanyQuery()
@@ -46,7 +42,7 @@ class OrderConfirmationOverrideRepository extends AbstractRepository implements 
         $customerCollection = new CustomerCollectionTransfer();
         /** @var \Orm\Zed\Customer\Persistence\SpyCustomer $customer */
         foreach ($collection->getData() as $customer) {
-            $customerCollection->addCustomer((new CustomerTransfer())->fromArray($customer->toArray(),true));
+            $customerCollection->addCustomer((new CustomerTransfer())->fromArray($customer->toArray(), true));
         }
 
         return $customerCollection;
@@ -57,8 +53,9 @@ class OrderConfirmationOverrideRepository extends AbstractRepository implements 
      */
     protected function getConfig(): OrderConfirmationOverrideConfig
     {
-        /** @var OrderConfirmationOverrideConfig $config */
+        /** @var \FondOfImpala\Zed\OrderConfirmationOverride\OrderConfirmationOverrideConfig $config */
         $config = $this->getFactory()->getConfig();
+
         return $config;
     }
 }

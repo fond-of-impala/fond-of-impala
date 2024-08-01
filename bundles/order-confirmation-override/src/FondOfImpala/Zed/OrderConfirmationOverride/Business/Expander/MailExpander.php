@@ -13,6 +13,9 @@ class MailExpander implements MailExpanderInterface
 {
     protected OrderConfirmationOverrideRepositoryInterface $repository;
 
+    /**
+     * @param \FondOfImpala\Zed\OrderConfirmationOverride\Persistence\OrderConfirmationOverrideRepositoryInterface $repository
+     */
     public function __construct(OrderConfirmationOverrideRepositoryInterface $repository)
     {
         $this->repository = $repository;
@@ -26,7 +29,7 @@ class MailExpander implements MailExpanderInterface
      */
     public function expand(MailTransfer $mailTransfer, OrderTransfer $orderTransfer): MailTransfer
     {
-        if ($orderTransfer->getPreventCustomerOrderConfirmationMail() === false){
+        if ($orderTransfer->getPreventCustomerOrderConfirmationMail() === false) {
             return $mailTransfer;
         }
 
@@ -36,7 +39,7 @@ class MailExpander implements MailExpanderInterface
         $newRecipients = $this->buildNewRecipients($mailTransfer->getRecipients(), $currentRecipientCollection, $allowedRecipients);
         $newBccRecipients = $this->buildNewRecipients($mailTransfer->getRecipientBccs(), $currentRecipientCollection, $allowedRecipients);
 
-        if ($newRecipients->count() === 0 && $newBccRecipients->count() > 0){
+        if ($newRecipients->count() === 0 && $newBccRecipients->count() > 0) {
             $newRecipients->append($newBccRecipients->offsetGet(0));
             $newBccRecipients->offsetUnset(0);
         }
@@ -48,14 +51,14 @@ class MailExpander implements MailExpanderInterface
 
     /**
      * @param array<string> $emailAddresses
+     *
      * @return array<string>
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     protected function getAllowedRecipients(array $emailAddresses): array
     {
         $allowedRecipients = $this->repository->getAllowedCustomerCollectionByMails($emailAddresses);
         $allowedEmailAddresses = [];
-        foreach ($allowedRecipients->getCustomers() as $customer){
+        foreach ($allowedRecipients->getCustomers() as $customer) {
             $allowedEmailAddresses[] = strtolower($customer->getEmail());
         }
 
@@ -64,6 +67,7 @@ class MailExpander implements MailExpanderInterface
 
     /**
      * @param \Generated\Shared\Transfer\MailTransfer $mailTransfer
+     *
      * @return array<string, \Generated\Shared\Transfer\MailRecipientTransfer>
      */
     protected function collectCurrentRecipients(MailTransfer $mailTransfer): array
@@ -76,6 +80,7 @@ class MailExpander implements MailExpanderInterface
 
     /**
      * @param \ArrayObject<\Generated\Shared\Transfer\MailRecipientTransfer> $mailRecipientTransfers
+     *
      * @return array<string, \Generated\Shared\Transfer\MailRecipientTransfer>
      */
     protected function prepareRecipientsData(ArrayObject $mailRecipientTransfers): array
@@ -84,6 +89,7 @@ class MailExpander implements MailExpanderInterface
         foreach ($mailRecipientTransfers as $recipient) {
             $mails[strtolower($recipient->getEmail())] = $recipient;
         }
+
         return $mails;
     }
 
@@ -91,6 +97,7 @@ class MailExpander implements MailExpanderInterface
      * @param \ArrayObject<\Generated\Shared\Transfer\MailRecipientTransfer> $currentRecipients
      * @param array<string, \Generated\Shared\Transfer\MailRecipientTransfer> $mails
      * @param array<string> $allowedRecipients
+     *
      * @return \ArrayObject<\Generated\Shared\Transfer\MailRecipientTransfer>
      */
     protected function buildNewRecipients(ArrayObject $currentRecipients, array $mails, array $allowedRecipients): ArrayObject
