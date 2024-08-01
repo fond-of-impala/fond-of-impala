@@ -19,7 +19,7 @@ class OrderConfirmationRecipientsOverrideBusinessFactory extends AbstractBusines
     {
         return new MailExpander(
             $this->getRepository(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 }

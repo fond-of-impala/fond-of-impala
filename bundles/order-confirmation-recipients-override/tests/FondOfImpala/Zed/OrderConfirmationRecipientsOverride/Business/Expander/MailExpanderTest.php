@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\OrderConfirmationRecipientsOverrideConfig;
 use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Persistence\OrderConfirmationRecipientsOverrideRepository;
 use Generated\Shared\Transfer\CustomerCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -15,6 +16,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 class MailExpanderTest extends Unit
 {
     protected OrderConfirmationRecipientsOverrideRepository|MockObject $repositoryMock;
+
+    protected OrderConfirmationRecipientsOverrideConfig|MockObject $configMock;
 
     protected MailTransfer|MockObject $mailTransferMock;
 
@@ -39,6 +42,10 @@ class MailExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->configMock = $this->getMockBuilder(OrderConfirmationRecipientsOverrideConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->mailTransferMock = $this->getMockBuilder(MailTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -59,7 +66,7 @@ class MailExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->expander = new MailExpander($this->repositoryMock);
+        $this->expander = new MailExpander($this->repositoryMock, $this->configMock);
     }
 
     /**

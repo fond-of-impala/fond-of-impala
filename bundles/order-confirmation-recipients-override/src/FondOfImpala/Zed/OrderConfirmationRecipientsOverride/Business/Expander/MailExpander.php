@@ -121,6 +121,7 @@ class MailExpander implements MailExpanderInterface
 
     /**
      * @param \ArrayObject $newRecipients
+     *
      * @return \ArrayObject
      */
     protected function addFallbackRecipient(ArrayObject $newRecipients): ArrayObject
