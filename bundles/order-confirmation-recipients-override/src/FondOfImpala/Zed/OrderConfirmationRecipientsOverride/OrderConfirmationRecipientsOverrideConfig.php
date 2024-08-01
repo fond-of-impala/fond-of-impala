@@ -17,4 +17,12 @@ class OrderConfirmationRecipientsOverrideConfig extends AbstractBundleConfig
     {
         return $this->get(OrderConfirmationRecipientsOverrideConstants::PROTECTED_COMPANY_TYPE_IDS, []);
     }
+
+    /**
+     * @return string
+     */
+    public function getFallbackRecipientMailAddress(): string
+    {
+        return $this->get(OrderConfirmationRecipientsOverrideConstants::FALLBACK_RECIPIENT_EMAIL_ADDRESS, '');
+    }
 }

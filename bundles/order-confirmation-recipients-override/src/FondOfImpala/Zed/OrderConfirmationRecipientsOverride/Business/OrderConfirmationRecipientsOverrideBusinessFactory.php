@@ -8,6 +8,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Persistence\OrderConfirmationRecipientsOverrideRepositoryInterface getRepository()
+ * @method \FondOfImpala\Zed\OrderConfirmationRecipientsOverride\OrderConfirmationRecipientsOverrideConfig getConfig()()
  */
 class OrderConfirmationRecipientsOverrideBusinessFactory extends AbstractBusinessFactory
 {
@@ -18,6 +19,7 @@ class OrderConfirmationRecipientsOverrideBusinessFactory extends AbstractBusines
     {
         return new MailExpander(
             $this->getRepository(),
+            $this->getConfig()
         );
     }
 }

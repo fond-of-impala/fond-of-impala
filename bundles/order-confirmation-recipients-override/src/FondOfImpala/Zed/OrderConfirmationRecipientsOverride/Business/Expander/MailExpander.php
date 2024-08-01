@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander;
 
 use ArrayObject;
+use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\OrderConfirmationRecipientsOverrideConfig;
 use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Persistence\OrderConfirmationRecipientsOverrideRepositoryInterface;
+use Generated\Shared\Transfer\MailRecipientTransfer;
 use Generated\Shared\Transfer\MailTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 
@@ -13,12 +15,16 @@ class MailExpander implements MailExpanderInterface
 {
     protected OrderConfirmationRecipientsOverrideRepositoryInterface $repository;
 
+    protected OrderConfirmationRecipientsOverrideConfig $config;
+
     /**
      * @param \FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Persistence\OrderConfirmationRecipientsOverrideRepositoryInterface $repository
+     * @param \FondOfImpala\Zed\OrderConfirmationRecipientsOverride\OrderConfirmationRecipientsOverrideConfig $config
      */
-    public function __construct(OrderConfirmationRecipientsOverrideRepositoryInterface $repository)
+    public function __construct(OrderConfirmationRecipientsOverrideRepositoryInterface $repository, OrderConfirmationRecipientsOverrideConfig $config)
     {
         $this->repository = $repository;
+        $this->config = $config;
     }
 
     /**
@@ -45,7 +51,7 @@ class MailExpander implements MailExpanderInterface
         }
 
         return $mailTransfer
-            ->setRecipients($newRecipients)
+            ->setRecipients($this->addFallbackRecipient($newRecipients))
             ->setRecipientBccs($newBccRecipients);
     }
 
@@ -108,6 +114,20 @@ class MailExpander implements MailExpanderInterface
             if (array_key_exists($email, $mails) && in_array($email, $allowedRecipients)) {
                 $newRecipients->append($mails[$email]);
             }
+        }
+
+        return $newRecipients;
+    }
+
+    /**
+     * @param \ArrayObject $newRecipients
+     * @return \ArrayObject
+     */
+    protected function addFallbackRecipient(ArrayObject $newRecipients): ArrayObject
+    {
+        if ($newRecipients->count() === 0) {
+            $fallbackRecipient = (new MailRecipientTransfer())->setEmail($this->config->getFallbackRecipientMailAddress());
+            $newRecipients->append($fallbackRecipient);
         }
 
         return $newRecipients;
