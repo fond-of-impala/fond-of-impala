@@ -4,6 +4,8 @@ namespace FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business;
 
 use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander\MailExpander;
 use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander\MailExpanderInterface;
+use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander\QuoteExpander;
+use FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander\QuoteExpanderInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -21,5 +23,13 @@ class OrderConfirmationRecipientsOverrideBusinessFactory extends AbstractBusines
             $this->getRepository(),
             $this->getConfig(),
         );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\OrderConfirmationRecipientsOverride\Business\Expander\QuoteExpanderInterface
+     */
+    public function createQuoteExpander(): QuoteExpanderInterface
+    {
+        return new QuoteExpander();
     }
 }

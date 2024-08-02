@@ -5,4 +5,24 @@
     <transfer name="Order">
         <property name="preventCustomerOrderConfirmationMail" type="bool"/>
     </transfer>
+
+    <transfer name="Quote">
+        <property name="preventCustomerOrderConfirmationMail" type="string"/>
+        <property name="preventCustomerOrderConfirmationMails" type="array" associative="true"/>
+        <property name="splitKey" type="string" />
+    </transfer>
+
+    <transfer name="RestSplittableCheckoutRequestAttributes">
+        <property name="preventCustomerOrderConfirmationMail" type="string"/>
+        <property name="preventCustomerOrderConfirmationMails" type="array" associative="true"/>
+    </transfer>
+
+    <transfer name="RestSplittableCheckoutRequest">
+        <property name="preventCustomerOrderConfirmationMail" type="string"/>
+        <property name="preventCustomerOrderConfirmationMails" type="array" associative="true"/>
+    </transfer>
+
+    <transfer name="RestSplittableCheckout">
+        <property name="preventCustomerOrderConfirmationMails" type="array" associative="true"/>
+    </transfer>
 </transfers>
