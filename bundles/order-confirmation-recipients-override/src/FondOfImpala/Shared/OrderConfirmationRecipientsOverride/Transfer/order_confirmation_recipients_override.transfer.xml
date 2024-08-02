@@ -25,4 +25,8 @@
     <transfer name="RestSplittableCheckout">
         <property name="preventCustomerOrderConfirmationMails" type="array" associative="true"/>
     </transfer>
+
+    <transfer name="SplittableCheckout">
+        <property name="splittedQuotes" type="Quote[]" singular="splittedQuote" associative="true"/>
+    </transfer>
 </transfers>
