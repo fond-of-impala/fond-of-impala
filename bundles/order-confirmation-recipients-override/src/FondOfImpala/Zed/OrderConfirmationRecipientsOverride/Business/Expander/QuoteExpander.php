@@ -19,8 +19,8 @@ class QuoteExpander implements QuoteExpanderInterface
     ): QuoteTransfer {
         $preventOrderMail = $restSplittableCheckoutRequestTransfer->getPreventCustomerOrderConfirmationMail();
 
-        if ($preventOrderMail !== true) {
-            $preventOrderMail = false;
+        if ($preventOrderMail === null || is_bool($preventOrderMail) === false) {
+            return $quoteTransfer;
         }
 
         return $quoteTransfer->setPreventCustomerOrderConfirmationMail($preventOrderMail);

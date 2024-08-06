@@ -19,8 +19,8 @@ class OrderPreventCustomerEmailsQuoteExpanderPlugin extends AbstractPlugin imple
         RestSplittableCheckoutRequestTransfer $restSplittableCheckoutRequestTransfer,
         QuoteTransfer $quoteTransfer
     ): QuoteTransfer {
-        $orderCustomReferences = $restSplittableCheckoutRequestTransfer->getPreventCustomerOrderConfirmationMails();
+        $preventCustomerMails = $restSplittableCheckoutRequestTransfer->getPreventCustomerOrderConfirmationMails();
 
-        return $quoteTransfer->setPreventCustomerOrderConfirmationMails($orderCustomReferences);
+        return $quoteTransfer->setPreventCustomerOrderConfirmationMails($preventCustomerMails);
     }
 }
