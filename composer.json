@@ -124,8 +124,7 @@
     "fond-of-impala/splittable-checkout-order-type-connector": "*",
     "fond-of-impala/web-ui-settings": "*",
     "fond-of-impala/web-ui-settings-customer-connector": "*",
-    "fond-of-impala/web-ui-settings-quote-connector": "*",
-    "fond-of-impala/web-ui-settings-rest-api": "*"
+    "fond-of-impala/web-ui-settings-quote-connector": "*"
   },
   "require": {
     "php": ">=8.0",
