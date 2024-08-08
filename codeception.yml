@@ -66,6 +66,8 @@ include:
   - bundles/navision-company-business-unit
   - bundles/navision-company-unit-address
   - bundles/navision-company-user
+  - bundles/order-budgets-bulk-rest-api
+  - bundles/order-confirmation-recipients-override
   - bundles/permission-cart-search-rest-api
   - bundles/price-list
   - bundles/price-list-api
