@@ -21,7 +21,7 @@ class OrderConfirmationOverrideOrderExpanderPreSavePlugin extends AbstractPlugin
     ): SpySalesOrderEntityTransfer {
         $mustPrevent = $quoteTransfer->getPreventCustomerOrderConfirmationMail();
 
-        if ($mustPrevent === null || is_bool($mustPrevent) === false) {
+        if ($mustPrevent === null || is_bool($mustPrevent) === false) { // @phpstan-ignore-line
             $mustPrevent = false;
         }
 

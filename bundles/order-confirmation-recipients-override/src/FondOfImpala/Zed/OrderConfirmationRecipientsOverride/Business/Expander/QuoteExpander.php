@@ -19,7 +19,7 @@ class QuoteExpander implements QuoteExpanderInterface
     ): QuoteTransfer {
         $preventOrderMail = $restSplittableCheckoutRequestTransfer->getPreventCustomerOrderConfirmationMail();
 
-        if ($preventOrderMail === null || is_bool($preventOrderMail) === false) {
+        if ($preventOrderMail === null || is_bool($preventOrderMail) === false) { // @phpstan-ignore-line
             return $quoteTransfer;
         }
 
