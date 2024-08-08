@@ -7,6 +7,9 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\RestSplittableCheckoutRequestTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
+/**
+ * @method \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\SplittableCheckoutOrderTypeConnectorFacadeInterface getFacade()
+ */
 class OrderTypesQuoteExpanderPlugin extends AbstractPlugin implements QuoteExpanderPluginInterface
 {
     /**
@@ -19,8 +22,6 @@ class OrderTypesQuoteExpanderPlugin extends AbstractPlugin implements QuoteExpan
         RestSplittableCheckoutRequestTransfer $restSplittableCheckoutRequestTransfer,
         QuoteTransfer $quoteTransfer
     ): QuoteTransfer {
-        $orderCustomReferences = $restSplittableCheckoutRequestTransfer->getOrderTypes();
-
-        return $quoteTransfer->setOrderTypes($orderCustomReferences);
+        return $this->getFacade()->expandTypesQuote($restSplittableCheckoutRequestTransfer, $quoteTransfer);
     }
 }

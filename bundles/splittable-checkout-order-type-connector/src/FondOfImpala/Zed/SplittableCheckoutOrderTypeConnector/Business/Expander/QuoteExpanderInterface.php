@@ -17,4 +17,15 @@ interface QuoteExpanderInterface
         RestSplittableCheckoutRequestTransfer $restSplittableCheckoutRequestTransfer,
         QuoteTransfer $quoteTransfer
     ): QuoteTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\RestSplittableCheckoutRequestTransfer $restSplittableCheckoutRequestTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    public function expandTypes(
+        RestSplittableCheckoutRequestTransfer $restSplittableCheckoutRequestTransfer,
+        QuoteTransfer $quoteTransfer
+    ): QuoteTransfer;
 }
