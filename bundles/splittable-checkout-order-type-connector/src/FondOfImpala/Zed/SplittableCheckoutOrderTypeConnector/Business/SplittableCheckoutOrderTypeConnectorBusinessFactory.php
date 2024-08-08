@@ -45,7 +45,7 @@ class SplittableCheckoutOrderTypeConnectorBusinessFactory extends AbstractBusine
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getAvailableOrderTypes(): array
     {

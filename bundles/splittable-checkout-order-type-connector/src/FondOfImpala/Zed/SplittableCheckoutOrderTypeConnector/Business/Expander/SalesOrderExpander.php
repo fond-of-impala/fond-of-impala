@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\SpySalesOrderEntityTransfer;
 class SalesOrderExpander implements SalesOrderExpanderInterface
 {
     /**
-     * @var array|string[]
+     * @var array<string>
      */
     protected array $orderTypes;
 
@@ -19,7 +19,9 @@ class SalesOrderExpander implements SalesOrderExpanderInterface
 
     protected SplittableCheckoutOrderTypeConnectorConfig $config;
 
-    /**\
+    /**
+     * \
+     *
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidator $orderTypeValidator
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\SplittableCheckoutOrderTypeConnectorConfig $config
      * @param array<string> $orderTypes
@@ -35,13 +37,14 @@ class SalesOrderExpander implements SalesOrderExpanderInterface
      * @param \Generated\Shared\Transfer\SpySalesOrderEntityTransfer $spySalesOrderEntityTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\SpySalesOrderEntityTransfer
      */
     public function expand(
         SpySalesOrderEntityTransfer $spySalesOrderEntityTransfer,
-        QuoteTransfer               $quoteTransfer
-    ): SpySalesOrderEntityTransfer
-    {
+        QuoteTransfer $quoteTransfer
+    ): SpySalesOrderEntityTransfer {
         $orderType = $quoteTransfer->getOrderType();
 
         if ($orderType === null && $this->config->getAllowEmptyOrderType()) {

@@ -5,12 +5,12 @@ namespace FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validat
 class OrderTypeValidator implements OrderTypeValidatorInterface
 {
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected array $orderTypes;
 
     /**
-     * @param string[] $orderTypes
+     * @param array<string> $orderTypes
      */
     public function __construct(array $orderTypes)
     {

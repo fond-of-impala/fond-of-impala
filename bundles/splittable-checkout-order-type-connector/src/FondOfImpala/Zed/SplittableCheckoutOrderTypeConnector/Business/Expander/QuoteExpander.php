@@ -47,6 +47,8 @@ class QuoteExpander implements QuoteExpanderInterface
      * @param \Generated\Shared\Transfer\RestSplittableCheckoutRequestTransfer $restSplittableCheckoutRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function expandTypes(
@@ -58,6 +60,7 @@ class QuoteExpander implements QuoteExpanderInterface
         foreach ($orderTypes as &$orderType) {
             if (($orderType === null || $orderType === '') && $this->config->getAllowEmptyOrderType()) {
                 $orderType = null;
+
                 continue;
             }
 
