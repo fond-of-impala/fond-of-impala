@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Expander;
 
 use Exception;
-use FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidator;
+use FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidatorInterface;
 use FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\SplittableCheckoutOrderTypeConnectorConfig;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\SpySalesOrderEntityTransfer;
@@ -15,18 +15,18 @@ class SalesOrderExpander implements SalesOrderExpanderInterface
      */
     protected array $orderTypes;
 
-    protected OrderTypeValidator $orderTypeValidator;
+    protected OrderTypeValidatorInterface $orderTypeValidator;
 
     protected SplittableCheckoutOrderTypeConnectorConfig $config;
 
     /**
      * \
      *
-     * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidator $orderTypeValidator
+     * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidatorInterface $orderTypeValidator
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\SplittableCheckoutOrderTypeConnectorConfig $config
      * @param array<string> $orderTypes
      */
-    public function __construct(OrderTypeValidator $orderTypeValidator, SplittableCheckoutOrderTypeConnectorConfig $config, array $orderTypes)
+    public function __construct(OrderTypeValidatorInterface $orderTypeValidator, SplittableCheckoutOrderTypeConnectorConfig $config, array $orderTypes)
     {
         $this->orderTypes = $orderTypes;
         $this->orderTypeValidator = $orderTypeValidator;
