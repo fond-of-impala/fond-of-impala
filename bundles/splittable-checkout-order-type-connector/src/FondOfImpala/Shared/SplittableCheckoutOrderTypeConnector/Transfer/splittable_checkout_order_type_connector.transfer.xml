@@ -29,4 +29,8 @@
     <transfer name="SplittableCheckout">
         <property name="splittedQuotes" type="Quote[]" singular="splittedQuote" associative="true"/>
     </transfer>
+
+    <transfer name="JellyfishOrder">
+        <property name="orderType" type="string"/>
+    </transfer>
 </transfers>
