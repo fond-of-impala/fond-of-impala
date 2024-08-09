@@ -15,8 +15,6 @@ class SalesOrderExpander implements SalesOrderExpanderInterface
     protected SplittableCheckoutOrderTypeConnectorConfig $config;
 
     /**
-     * \
-     *
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidatorInterface $orderTypeValidator
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\SplittableCheckoutOrderTypeConnectorConfig $config
      */
