@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+    <transfer name="Order">
+        <property name="orderType" type="string"/>
+    </transfer>
+
+    <transfer name="Quote">
+        <property name="orderType" type="string"/>
+        <property name="orderTypes" type="array" associative="true"/>
+        <property name="splitKey" type="string" />
+    </transfer>
+
+    <transfer name="RestSplittableCheckoutRequestAttributes">
+        <property name="orderType" type="string"/>
+        <property name="orderTypes" type="array" associative="true"/>
+    </transfer>
+
+    <transfer name="RestSplittableCheckoutRequest">
+        <property name="orderType" type="string"/>
+        <property name="orderTypes" type="array" associative="true"/>
+    </transfer>
+
+    <transfer name="RestSplittableCheckout">
+        <property name="orderTypes" type="array" associative="true"/>
+    </transfer>
+
+    <transfer name="SplittableCheckout">
+        <property name="splittedQuotes" type="Quote[]" singular="splittedQuote" associative="true"/>
+    </transfer>
+
+    <transfer name="JellyfishOrder">
+        <property name="orderType" type="string"/>
+    </transfer>
+</transfers>

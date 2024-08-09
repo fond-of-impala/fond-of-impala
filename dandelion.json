@@ -371,6 +371,10 @@
       "path": "bundles/product-product-list-connector",
       "version": "1.0.0"
     },
+    "splittable-checkout-order-type-connector": {
+      "path": "bundles/splittable-checkout-order-type-connector",
+      "version": "1.0.0"
+    },
     "web-ui-settings": {
       "path": "bundles/web-ui-settings",
       "version": "1.0.0"

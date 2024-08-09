@@ -1,0 +1,47 @@
+{
+  "name": "fond-of-impala/splittable-checkout-order-type-connector",
+  "description": "Splittable checkout order type connector bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
+    }
+  ],
+  "scripts": {
+    "ci": "make ci",
+    "codeception": "make codeception",
+    "phpcs": "make phpcs",
+    "phpstan": "make phpstan"
+  },
+  "require": {
+    "php": ">=8.1",
+    "fond-of-oryx/splittable-checkout-rest-api-extension": "^1.0.0 || ^2.0.0",
+    "fond-of-oryx/splittable-quote-extension": "^1.0.0 || ^2.0.0",
+    "spryker/sales": "^11.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
