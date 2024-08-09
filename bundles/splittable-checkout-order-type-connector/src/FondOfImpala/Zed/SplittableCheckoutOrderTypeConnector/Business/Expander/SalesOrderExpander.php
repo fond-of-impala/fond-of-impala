@@ -10,11 +10,6 @@ use Generated\Shared\Transfer\SpySalesOrderEntityTransfer;
 
 class SalesOrderExpander implements SalesOrderExpanderInterface
 {
-    /**
-     * @var array<string>
-     */
-    protected array $orderTypes;
-
     protected OrderTypeValidatorInterface $orderTypeValidator;
 
     protected SplittableCheckoutOrderTypeConnectorConfig $config;
@@ -24,11 +19,9 @@ class SalesOrderExpander implements SalesOrderExpanderInterface
      *
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\Business\Validator\OrderTypeValidatorInterface $orderTypeValidator
      * @param \FondOfImpala\Zed\SplittableCheckoutOrderTypeConnector\SplittableCheckoutOrderTypeConnectorConfig $config
-     * @param array<string> $orderTypes
      */
-    public function __construct(OrderTypeValidatorInterface $orderTypeValidator, SplittableCheckoutOrderTypeConnectorConfig $config, array $orderTypes)
+    public function __construct(OrderTypeValidatorInterface $orderTypeValidator, SplittableCheckoutOrderTypeConnectorConfig $config)
     {
-        $this->orderTypes = $orderTypes;
         $this->orderTypeValidator = $orderTypeValidator;
         $this->config = $config;
     }
@@ -51,7 +44,7 @@ class SalesOrderExpander implements SalesOrderExpanderInterface
             return $spySalesOrderEntityTransfer->setOrderType($orderType);
         }
 
-        if ($this->orderTypeValidator->validateOrderType($orderType) === true) {
+        if ($orderType !== null && $this->orderTypeValidator->validateOrderType($orderType) === true) {
             return $spySalesOrderEntityTransfer->setOrderType($orderType);
         }
 

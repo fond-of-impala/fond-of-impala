@@ -32,7 +32,6 @@ class SplittableCheckoutOrderTypeConnectorBusinessFactory extends AbstractBusine
         return new SalesOrderExpander(
             $this->createOrderTypeValidator(),
             $this->getConfig(),
-            $this->getAvailableOrderTypes(),
         );
     }
 
