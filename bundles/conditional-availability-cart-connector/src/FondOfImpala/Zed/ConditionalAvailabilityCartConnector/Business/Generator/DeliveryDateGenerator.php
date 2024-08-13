@@ -75,6 +75,7 @@ class DeliveryDateGenerator implements DeliveryDateGeneratorInterface
 
     /**
      * @param string|null $deliveryDate
+     *
      * @return string|null
      */
     public function addWorkingDayThreshold(?string $deliveryDate): ?string

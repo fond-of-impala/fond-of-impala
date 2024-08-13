@@ -6,6 +6,7 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use DateInterval;
 use DateTime;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\DeliveryDateGeneratorInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -18,6 +19,8 @@ class QuoteExpanderTest extends Unit
     protected MockObject|ItemExpanderInterface $itemExpanderMock;
 
     protected QuoteTransfer|MockObject $quoteTransferMock;
+
+    protected DeliveryDateGeneratorInterface|MockObject $deliveryDateGeneratorMock;
 
     /**
      * @var array<\Generated\Shared\Transfer\ItemTransfer|\PHPUnit\Framework\MockObject\MockObject>
@@ -41,6 +44,10 @@ class QuoteExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->deliveryDateGeneratorMock = $this->getMockBuilder(DeliveryDateGeneratorInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->quoteTransferMock = $this->getMockBuilder(QuoteTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -57,6 +64,7 @@ class QuoteExpanderTest extends Unit
         $this->expander = new QuoteExpander(
             $this->conditionalAvailabilityReaderMock,
             $this->itemExpanderMock,
+            $this->deliveryDateGeneratorMock,
         );
     }
 
@@ -119,6 +127,15 @@ class QuoteExpanderTest extends Unit
             ->method('setConcreteDeliveryDates')
             ->with([$concreteDeliveryDates[1]])
             ->willReturn($this->quoteTransferMock);
+
+        $this->deliveryDateGeneratorMock->expects(static::atLeastOnce())
+            ->method('addWorkingDayThreshold')
+            ->withConsecutive([$deliveryDates[0]], [$deliveryDates[1]], [$concreteDeliveryDates[1]])
+            ->willReturnOnConsecutiveCalls(
+                $deliveryDates[0],
+                $deliveryDates[1],
+                $concreteDeliveryDates[1],
+            );
 
         static::assertEquals(
             $this->quoteTransferMock,

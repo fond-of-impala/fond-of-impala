@@ -42,7 +42,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Persistence\ConditionalAvailabilityCartConnectorRepositoryInterface getRepository()
- * @@method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig getConfig()
+ * @method \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig getConfig()
  */
 class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusinessFactory
 {
@@ -54,7 +54,7 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
         return new QuoteExpander(
             $this->createConditionalAvailabilityReader(),
             $this->createItemExpander(),
-            $this->createDeliveryDateGenerator()
+            $this->createDeliveryDateGenerator(),
         );
     }
 
@@ -138,7 +138,7 @@ class ConditionalAvailabilityCartConnectorBusinessFactory extends AbstractBusine
             new DateTime(),
             $this->getConditionalAvailabilityService()->generateEarliestDeliveryDate(),
             $this->getConditionalAvailabilityService(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
