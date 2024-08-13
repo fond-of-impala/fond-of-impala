@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generat
 use Codeception\Test\Unit;
 use DateTime;
 use DateTimeInterface;
+use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Dependency\Service\ConditionalAvailabilityCartConnectorToConditionalAvailabilityServiceInterface;
 use Generated\Shared\Transfer\ConditionalAvailabilityPeriodTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
@@ -26,6 +27,11 @@ class DeliveryDateGeneratorTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ItemTransfer
      */
     protected ItemTransfer|MockObject $itemTransferMock;
+
+    /**
+     * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorConfig|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected ConditionalAvailabilityCartConnectorConfig|MockObject $configMock;
 
     /**
      * @var \FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Generator\DeliveryDateGeneratorInterface
@@ -55,6 +61,10 @@ class DeliveryDateGeneratorTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->configMock = $this->getMockBuilder(ConditionalAvailabilityCartConnectorConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->conditionalAvailabilityPeriodTransferMock = $this->getMockBuilder(ConditionalAvailabilityPeriodTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -66,6 +76,7 @@ class DeliveryDateGeneratorTest extends Unit
             $this->today,
             $this->earliestDeliveryDate,
             $this->conditionalAvailabilityServiceMock,
+            $this->configMock,
         );
     }
 
@@ -122,5 +133,31 @@ class DeliveryDateGeneratorTest extends Unit
             ->generateEarliestByConditionalAvailabilityPeriod($this->conditionalAvailabilityPeriodTransferMock);
 
         static::assertEquals($date->format('Y-m-d'), $earliestDate);
+    }
+
+    /**
+     * @return void
+     */
+    public function testAddWorkingDayThreshold(): void
+    {
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getDeliveryTimeThreshold')
+            ->willReturn('+2 Weekday');
+
+        static::assertEquals('2024-12-03', $this->deliveryDateGenerator->addWorkingDayThreshold('2024-12-01'));
+        static::assertEquals('2024-12-03', $this->deliveryDateGenerator->addWorkingDayThreshold('2024-11-29'));
+        static::assertEquals('test', $this->deliveryDateGenerator->addWorkingDayThreshold('test'));
+    }
+
+    /**
+     * @return void
+     */
+    public function testAddWorkingDayThresholdNoThresholdConfigured(): void
+    {
+        $this->configMock->expects(static::atLeastOnce())
+            ->method('getDeliveryTimeThreshold')
+            ->willReturn(null);
+
+        static::assertEquals('2024-12-04', $this->deliveryDateGenerator->addWorkingDayThreshold('2024-12-04'));
     }
 }

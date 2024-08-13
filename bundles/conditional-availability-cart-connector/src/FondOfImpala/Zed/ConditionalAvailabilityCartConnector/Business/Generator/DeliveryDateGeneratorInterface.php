@@ -22,4 +22,11 @@ interface DeliveryDateGeneratorInterface
     public function generateEarliestByConditionalAvailabilityPeriod(
         ConditionalAvailabilityPeriodTransfer $conditionalAvailabilityPeriodTransfer
     ): string;
+
+    /**
+     * @param string|null $deliveryDate
+     *
+     * @return string|null
+     */
+    public function addWorkingDayThreshold(?string $deliveryDate): ?string;
 }
