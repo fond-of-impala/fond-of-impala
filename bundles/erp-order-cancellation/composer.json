@@ -21,9 +21,11 @@
   ],
   "require": {
     "php": ">=8.1",
-    "fond-of-impala/erp-order-cancellation-extension": "dev-main",
-    "spryker/log": "^1.0.0 || ^2.0.0 || ^3.0.0",
-    "spryker/event-behavior": "^1.0.0"
+    "fond-of-impala/erp-order-cancellation-extension": "dev-main as 1.0.0",
+    "spryker/customer": "^6.3.0 || ^7.0.0",
+    "spryker/event": "^1.0.0 || ^2.0.0",
+    "spryker/event-behavior": "^1.0.0",
+    "spryker/log": "^1.0.0 || ^2.0.0 || ^3.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",

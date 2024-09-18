@@ -65,11 +65,10 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
      * @param \FondOfImpala\Zed\ErpOrderCancellationApi\Persistence\ErpOrderCancellationApiRepositoryInterface $repository
      */
     public function __construct(
-        ErpOrderCancellationApiToApiFacadeInterface                  $apiFacade,
+        ErpOrderCancellationApiToApiFacadeInterface $apiFacade,
         ErpOrderCancellationApiToErpOrderCancellationFacadeInterface $erpOrderCancellationFacade,
-        ErpOrderCancellationApiRepositoryInterface                   $repository
-    )
-    {
+        ErpOrderCancellationApiRepositoryInterface $repository
+    ) {
         $this->apiFacade = $apiFacade;
         $this->erpOrderCancellationFacade = $erpOrderCancellationFacade;
         $this->repository = $repository;
@@ -78,9 +77,9 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
     /**
      * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
      *
-     * @return \Generated\Shared\Transfer\ApiItemTransfer
      * @throws \Spryker\Zed\Api\Business\Exception\EntityNotSavedException
      *
+     * @return \Generated\Shared\Transfer\ApiItemTransfer
      */
     public function create(ApiDataTransfer $apiDataTransfer): ApiItemTransfer
     {
@@ -105,9 +104,9 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
      * @param int $idErpOrderCancellation
      * @param \Generated\Shared\Transfer\ApiDataTransfer $apiDataTransfer
      *
-     * @return \Generated\Shared\Transfer\ApiItemTransfer
      * @throws \Spryker\Zed\Api\Business\Exception\EntityNotSavedException
      *
+     * @return \Generated\Shared\Transfer\ApiItemTransfer
      */
     public function update(int $idErpOrderCancellation, ApiDataTransfer $apiDataTransfer): ApiItemTransfer
     {
@@ -183,9 +182,9 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
     /**
      * @param int $idErpOrderCancellation
      *
-     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      * @throws \Spryker\Zed\Api\Business\Exception\EntityNotFoundException
      *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     protected function getByIdErpOrderCancellation(int $idErpOrderCancellation): ErpOrderCancellationTransfer
     {
@@ -203,6 +202,7 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
 
     /**
      * @param \Generated\Shared\Transfer\ApiRequestTransfer $apiRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ApiRequestTransfer
      */
     protected function resolveStateFilter(ApiRequestTransfer $apiRequestTransfer): ApiRequestTransfer
@@ -231,11 +231,15 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
         unset($rule);
 
         $filter->setCriteriaJson(json_encode($jsonData));
+
         return $apiRequestTransfer->setFilter($filter);
     }
 
     /**
      * @param string $state
+     *
+     * @throws \PHPUnit\Util\Exception
+     *
      * @return int
      */
     protected function resolveStateValue(string $state): int
