@@ -35,6 +35,7 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
 
     /**
      * @param int $idErpOrderCancellation
+     *
      * @return \ArrayObject
      */
     public function findErpOrderCancellationItemsByIdErpOrderCancellation(int $idErpOrderCancellation): ArrayObject
@@ -57,8 +58,8 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
     /**
      * @param int $fkErpOrderCancellation
      * @param string $sku
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer|null
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findErpOrderCancellationItemByIdErpOrderCancellationAndSku(int $fkErpOrderCancellation, string $sku): ?ErpOrderCancellationItemTransfer
     {

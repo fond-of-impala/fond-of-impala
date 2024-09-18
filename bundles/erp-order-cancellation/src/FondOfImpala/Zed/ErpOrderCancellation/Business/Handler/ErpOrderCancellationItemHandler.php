@@ -108,6 +108,7 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
     /**
      * @param int $fkErpOrderCancellation
      * @param string $sku
+     *
      * @return void
      */
     protected function delete(int $fkErpOrderCancellation, string $sku): void
@@ -190,8 +191,10 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
      *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer
      */
-    protected function updateItemData(ErpOrderCancellationItemTransfer $updateItem, ErpOrderCancellationItemTransfer $erpOrderCancellationItemTransfer): ErpOrderCancellationItemTransfer
-    {
+    protected function updateItemData(
+        ErpOrderCancellationItemTransfer $updateItem,
+        ErpOrderCancellationItemTransfer $erpOrderCancellationItemTransfer
+    ): ErpOrderCancellationItemTransfer {
         $fkErpOrderCancellation = $updateItem->getFkErpOrderCancellation();
         $updateItem->fromArray($erpOrderCancellationItemTransfer->toArray(), true);
         $updateItem->setFkErpOrderCancellation($fkErpOrderCancellation);

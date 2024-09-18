@@ -23,6 +23,7 @@ interface ErpOrderCancellationItemWriterInterface
     /**
      * @param int $fkErpOrderCancellation
      * @param string $sku
+     *
      * @return void
      */
     public function delete(int $fkErpOrderCancellation, string $sku): void;

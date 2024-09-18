@@ -17,6 +17,7 @@ interface ErpOrderCancellationRepositoryInterface
 
     /**
      * @param int $idErpOrderCancellation
+     *
      * @return \ArrayObject
      */
     public function findErpOrderCancellationItemsByIdErpOrderCancellation(int $idErpOrderCancellation): ArrayObject;
@@ -24,8 +25,10 @@ interface ErpOrderCancellationRepositoryInterface
     /**
      * @param int $fkErpOrderCancellation
      * @param string $sku
-     * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer|null
+     *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer|null
      */
     public function findErpOrderCancellationItemByIdErpOrderCancellationAndSku(int $fkErpOrderCancellation, string $sku): ?ErpOrderCancellationItemTransfer;
 }

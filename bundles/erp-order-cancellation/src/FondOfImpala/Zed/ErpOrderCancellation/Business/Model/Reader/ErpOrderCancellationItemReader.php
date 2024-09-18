@@ -23,6 +23,7 @@ class ErpOrderCancellationItemReader implements ErpOrderCancellationItemReaderIn
 
     /**
      * @param int $idErpOrderCancellation
+     *
      * @return \ArrayObject
      */
     public function findErpOrderCancellationItemsByIdErpOrderCancellation(int $idErpOrderCancellation): ArrayObject
@@ -33,8 +34,8 @@ class ErpOrderCancellationItemReader implements ErpOrderCancellationItemReaderIn
     /**
      * @param int $fkErpOrderCancellation
      * @param string $sku
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer|null
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findErpOrderCancellationItemByIdErpOrderCancellationAndSku(int $fkErpOrderCancellation, string $sku): ?ErpOrderCancellationItemTransfer
     {

@@ -45,6 +45,7 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
         $container = $this->addErpOrderCancellationPreSavePlugin($container);
         $container = $this->addErpOrderCancellationPostSavePlugin($container);
         $container = $this->addErpOrderCancellationItemPreSavePlugin($container);
+
         return $this->addErpOrderCancellationItemPostSavePlugin($container);
     }
 

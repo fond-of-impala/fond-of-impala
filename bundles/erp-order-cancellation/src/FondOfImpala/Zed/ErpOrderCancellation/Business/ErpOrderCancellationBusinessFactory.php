@@ -99,6 +99,7 @@ class ErpOrderCancellationBusinessFactory extends AbstractBusinessFactory
             $this->getErpOrderCancellationItemPostSavePlugin(),
         );
     }
+
     /**
      * @return array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPreSavePluginInterface>
      */

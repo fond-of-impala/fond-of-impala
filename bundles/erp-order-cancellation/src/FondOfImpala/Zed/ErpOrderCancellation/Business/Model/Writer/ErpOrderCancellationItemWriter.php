@@ -63,6 +63,7 @@ class ErpOrderCancellationItemWriter implements ErpOrderCancellationItemWriterIn
     /**
      * @param int $fkErpOrderCancellation
      * @param string $sku
+     *
      * @return void
      */
     public function delete(int $fkErpOrderCancellation, string $sku): void
