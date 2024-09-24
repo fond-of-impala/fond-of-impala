@@ -17,17 +17,13 @@
 
         <id-method-parameter value="foi_erp_order_cancellation_pk_seq"/>
 
-        <foreign-key name="foi_erp_order_cancellation-internal-spy_customer" foreignTable="spy_customer" phpName="ErpOrderCancellationCustomerApproved">
+        <foreign-key name="foi_erp_order_cancellation-internal-spy_customer" foreignTable="spy_customer">
             <reference local="fk_customer_internal" foreign="id_customer"/>
         </foreign-key>
 
-        <foreign-key name="foi_erp_order_cancellation-requested-spy_customer" foreignTable="spy_customer" phpName="ErpOrderCancellationCustomerRequested">
+        <foreign-key name="foi_erp_order_cancellation-requested-spy_customer" foreignTable="spy_customer">
             <reference local="fk_customer_requested" foreign="id_customer"/>
         </foreign-key>
-
-        <behavior name="event">
-            <parameter name="foi_erp_order_cancellation_all" column="*"/>
-        </behavior>
 
         <index name="foi_erp_order_cancellation-debitor_number">
             <index-column name="debitor_number"/>
@@ -49,10 +45,6 @@
         <foreign-key name="foi_erp_order_cancellation_item-fk_erp_order_cancellation" foreignTable="foi_erp_order_cancellation">
             <reference local="fk_erp_order_cancellation" foreign="id_erp_order_cancellation"/>
         </foreign-key>
-
-        <index name="foi_erp_order_cancellation_item-fk_erp_order_cancellation">
-            <index-column name="fk_erp_order_cancellation"/>
-        </index>
 
         <index name="foi_erp_order_cancellation_item-fk_erp_order_cancellation">
             <index-column name="fk_erp_order_cancellation"/>
