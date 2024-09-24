@@ -60,6 +60,8 @@ include:
   - bundles/document-type-erp-order
   - bundles/enhanced-catalog
   - bundles/enhanced-catalog-extension
+  - bundles/erp-order-cancellation
+  - bundles/erp-order-cancellation-api
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/jellyfish-sales-order-purchaser
   - bundles/navision-company

@@ -8,7 +8,6 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \FondOfImpala\Zed\CompanyTypeConverter\Business\CompanyTypeConverterBusinessFactory getFactory()
- * @method \FondOfImpala\Zed\CompanyTypeConverter\Persistence\CompanyTypeConverterRepositoryInterface getRepository()
  */
 class CompanyTypeConverterFacade extends AbstractFacade implements CompanyTypeConverterFacadeInterface
 {
