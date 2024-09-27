@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="RestErpOrderCancellationAttributes">
+        <property name="uuid" type="string"/>
+        <property name="debitorNumber" restRequestParameter="required" type="string" />
+        <property name="erpOrderReference" restRequestParameter="required" type="string" />
+        <property name="erpOrderExternalReference" restRequestParameter="required" type="string" />
+        <property name="cancellationNumber" type="string" />
+        <property name="externalCancellationNumber" type="string" />
+        <property name="reasonForCancellation" type="string" />
+        <property name="state" type="string" />
+        <property name="createdAt" type="string" />
+        <property name="updatedAt" type="string" />
+        <property name="customer" type="Customer" />
+        <property name="internalCustomer" type="Customer" />
+        <property name="originatorReference" type="string" />
+        <property name="cancellationItems" singular="cancellationItem" type="RestCancellationItem[]" />
+    </transfer>
+
+    <transfer name="RestErpOrderCancellation">
+        <property name="uuid" type="string"/>
+        <property name="debitorNumber" type="string" />
+        <property name="erpOrderReference" type="string" />
+        <property name="erpOrderExternalReference" type="string" />
+        <property name="cancellationNumber" type="string" />
+        <property name="externalCancellationNumber" type="string" />
+        <property name="reasonForCancellation" type="string" />
+        <property name="state" type="string" />
+        <property name="createdAt" type="string" />
+        <property name="updatedAt" type="string" />
+        <property name="customer" type="Customer" />
+        <property name="internalCustomer" type="Customer" />
+        <property name="originatorReference" type="string" />
+        <property name="cancellationItems" singular="cancellationItem" type="RestCancellationItem[]" />
+    </transfer>
+
+    <transfer name="ErpOrderCancellationCollection">
+        <property name="cancellations" singular="cancellation" type="ErpOrderCancellation[]"/>
+    </transfer>
+
+    <transfer name="RestCancellationItem">
+        <property name="sku" type="string"/>
+        <property name="valueBeforeCancellation" type="int" />
+        <property name="quantityBeforeCancellation" type="int" />
+        <property name="cancellationValue" type="int" />
+        <property name="cancellationQuantity" type="int" />
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationFilter">
+        <property name="debitorNumber" type="string"/>
+        <property name="reference" type="string"/>
+        <property name="externalReference" type="string"/>
+        <property name="state" type="string"/>
+        <property name="customerReference" type="string"/>
+        <property name="internalCustomerReference" type="string"/>
+        <property name="page" type="RestErpOrderCancellationFilterPage" />
+        <property name="sort" type="RestErpOrderCancellationFilterSort[]" />
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationFilterSort">
+        <property name="field" type="string"/>
+        <property name="direction" type="string"/>
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationFilterPage">
+        <property name="offset" type="int"/>
+        <property name="limit" type="int"/>
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationRequest">
+        <property name="attributes" type="RestErpOrderCancellationAttributes"/>
+        <property name="filter" type="RestErpOrderCancellationFilter"/>
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationResponse">
+        <property name="erpOrderCancellation" type="RestErpOrderCancellation"/>
+        <property name="erpOrderCancellations" singular="erpOrderCancellation" type="RestErpOrderCancellation[]"/>
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationCollectionResponse">
+        <property name="erpOrderCancellations" singular="erpOrderCancellation" type="RestErpOrderCancellation[]"/>
+        <property name="pagination" type="RestErpOrderCancellationPagination"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellationPagination">
+        <property name="numFound" type="int" />
+        <property name="currentPage" type="int" />
+        <property name="maxPage" type="int" />
+        <property name="currentItemsPerPage" type="int" />
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationPagination">
+        <property name="numFound" type="int" />
+        <property name="currentPage" type="int" />
+        <property name="maxPage" type="int" />
+        <property name="currentItemsPerPage" type="int" />
+    </transfer>
+
+    <transfer name="ErpOrderCancellationFilter">
+        <property name="ids" singular="id" type="array" />
+        <property name="states" singular="state" type="array" />
+        <property name="offset" type="int" />
+        <property name="limit" type="int" />
+        <property name="originatorReference" type="string" />
+        <property name="sorting" singular="sort" type="ErpOrderCancellationFilterSort[]" />
+        <property name="customerReferences" singular="customerReference" type="array" />
+        <property name="internalCustomerReferences" singular="internalCustomerReference" type="array" />
+        <property name="debitorNumbers" singular="debitorNumber" type="array" />
+        <property name="references" singular="reference" type="array" />
+        <property name="externalReferences" singular="externalReference" type="array" />
+    </transfer>
+
+    <transfer name="ErpOrderCancellationFilterSort">
+        <property name="field" type="string"/>
+        <property name="direction" type="string"/>
+    </transfer>
+</transfers>

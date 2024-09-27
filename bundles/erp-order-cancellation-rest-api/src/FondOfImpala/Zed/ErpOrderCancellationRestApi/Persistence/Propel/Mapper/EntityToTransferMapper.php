@@ -1,0 +1,56 @@
+<?php
+
+namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Mapper;
+
+use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
+use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation;
+use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItem;
+use Propel\Runtime\Collection\ObjectCollection;
+
+class EntityToTransferMapper implements EntityToTransferMapperInterface
+{
+    /**
+     * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation $foiErpOrderCancellation
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
+     */
+    public function mapEntityToTransfer(FoiErpOrderCancellation $foiErpOrderCancellation
+    ): ErpOrderCancellationTransfer {
+        $erpOrderCancellationTransfer = new ErpOrderCancellationTransfer();
+        $erpOrderCancellationTransfer->fromArray($foiErpOrderCancellation->toArray(), true);
+
+        foreach ($foiErpOrderCancellation->getFoiErpOrderCancellationItems() as $item){
+            $erpOrderCancellationTransfer->addCancellationItem($this->mapItemEntityToTransfer($item));
+        }
+
+        return $erpOrderCancellationTransfer;
+    }
+
+    /**
+     * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItem $foiErpOrderCancellationItem
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer
+     */
+    public function mapItemEntityToTransfer(FoiErpOrderCancellationItem $foiErpOrderCancellationItem
+    ): ErpOrderCancellationItemTransfer {
+        $erpOrderCancellationTransfer = new ErpOrderCancellationItemTransfer();
+        $erpOrderCancellationTransfer->fromArray($foiErpOrderCancellationItem->toArray(), true);
+
+        return $erpOrderCancellationTransfer;
+    }
+
+    /**
+     * @param \Propel\Runtime\Collection\ObjectCollection $collection
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
+     */
+    public function mapEntityCollectionToTransferCollection(ObjectCollection $collection
+    ): ErpOrderCancellationCollectionTransfer {
+        $resultCollection = new ErpOrderCancellationCollectionTransfer();
+        /** @var \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation $item */
+        foreach ($collection->getData() as $item){
+            $resultCollection->addCancellation($this->mapEntityToTransfer($item));
+        }
+
+        return $resultCollection;
+    }
+}
