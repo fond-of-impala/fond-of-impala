@@ -2,11 +2,14 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model;
 
+use ArrayObject;
+use Exception;
 use FondOfImpala\Shared\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiConstants;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\ErpOrderCancellationRestApiRepositoryInterface;
+use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationAttributesTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
@@ -98,12 +101,44 @@ class CancellationManager implements CancellationManagerInterface
         RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer {
         try {
-            return (new RestErpOrderCancellationResponseTransfer());
+            $restErpOrderCancellationAttributesTransfer = $restErpOrderCancellationRequestTransfer->getAttributes();
+            $restErpOrderCancellationAttributesTransfer->requireUuid();
+            $erpOrderCancellation = $this->repository->findErpOrderCancellationByUuid($restErpOrderCancellationAttributesTransfer->getUuid());
+
+            if ($erpOrderCancellation === null) {
+                return $this->createErrorTransfer(ErpOrderCancellationRestApiConstants::ERROR_MESSAGE_NOT_FOUND, ErpOrderCancellationRestApiConstants::ERROR_CODE_NOT_FOUND);
+            }
+
+            $erpOrderCancellationUpdateTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
+
+            $updatedItemsCollection = [];
+
+            foreach ($erpOrderCancellationUpdateTransfer->getCancellationItems() as $item) {
+                $updatedItemsCollection[$this->getItemIdentifier($item)] = $item;
+            }
+
+            foreach ($erpOrderCancellation->getCancellationItems() as $item) {
+                if (!isset($updatedItemsCollection[$this->getItemIdentifier($item)])) {
+                    $updatedItemsCollection[$this->getItemIdentifier($item)] = $item;
+                }
+            }
+
+            $erpOrderCancellation->fromArray($erpOrderCancellationUpdateTransfer->modifiedToArray(), true)->setCancellationItems(new ArrayObject($updatedItemsCollection));
+
+            $response = $this->erpOrderCancellationFacade->updateErpOrderCancellation($erpOrderCancellation);
+
+            return (new RestErpOrderCancellationResponseTransfer())
+                ->setErpOrderCancellation($this->restDataMapper->mapResponse($response));
         } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage(), $throwable->getTrace());
 
             return $this->createErrorTransfer(ErpOrderCancellationRestApiConstants::ERROR_MESSAGE_UPDATE, ErpOrderCancellationRestApiConstants::ERROR_CODE_UPDATE);
         }
+    }
+
+    protected function getItemIdentifier(ErpOrderCancellationItemTransfer $item): string
+    {
+        return sprintf('%s|%s', $item->getSku(), $item->getLineId());
     }
 
     /**
@@ -115,6 +150,19 @@ class CancellationManager implements CancellationManagerInterface
         RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer {
         try {
+            $attributes = $restErpOrderCancellationRequestTransfer->getAttributes();
+            $attributes->requireUuid();
+
+            $erpOrderCancellation = $this->repository->findErpOrderCancellationByUuid($attributes->getUuid());
+
+            if ($erpOrderCancellation === null) {
+                throw new Exception(sprintf('ErpOrderCancellation with UUID "%s" not found', $attributes->getUuid()));
+            }
+
+            //ToDo Check permission
+
+            $this->erpOrderCancellationFacade->deleteErpOrderCancellationByIdErpOrderCancellation($erpOrderCancellation->getIdErpOrderCancellation());
+
             return (new RestErpOrderCancellationResponseTransfer());
         } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage(), $throwable->getTrace());

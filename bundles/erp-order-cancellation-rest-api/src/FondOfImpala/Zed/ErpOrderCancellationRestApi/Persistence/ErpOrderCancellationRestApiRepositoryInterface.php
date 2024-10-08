@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence;
 use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 
 interface ErpOrderCancellationRestApiRepositoryInterface
 {
@@ -31,6 +32,13 @@ interface ErpOrderCancellationRestApiRepositoryInterface
      * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
      */
     public function findErpOrderCancellation(ErpOrderCancellationFilterTransfer $filterTransfer): ErpOrderCancellationCollectionTransfer;
+
+    /**
+     * @param string $uuid
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer|null
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function findErpOrderCancellationByUuid(string $uuid): ?ErpOrderCancellationTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer

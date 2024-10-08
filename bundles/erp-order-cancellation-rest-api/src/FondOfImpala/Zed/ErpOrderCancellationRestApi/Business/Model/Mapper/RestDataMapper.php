@@ -4,9 +4,11 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper;
 
 use ArrayObject;
 use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use Generated\Shared\Transfer\RestCancellationItemTransfer;
 use Generated\Shared\Transfer\RestCustomerTransfer;
+use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationTransfer;
 
 class RestDataMapper implements RestDataMapperInterface
@@ -25,19 +27,44 @@ class RestDataMapper implements RestDataMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer $erpOrderCancellationCollectionTransfer
-     *
-     * @return \ArrayObject<\Generated\Shared\Transfer\RestErpOrderCancellationTransfer>
+     * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
-    public function mapResponseCollection(ErpOrderCancellationCollectionTransfer $erpOrderCancellationCollectionTransfer): ArrayObject
+    public function mapFromRequest(RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer): ErpOrderCancellationTransfer
     {
-        $restResponseCollection = new ArrayObject();
+        $attributes = $restErpOrderCancellationRequestTransfer->getAttributes();
 
-        foreach ($erpOrderCancellationCollectionTransfer->getErpOrderCancellations() as $erpOrderCancellation) {
-            $restResponseCollection->append($this->mapResponse($erpOrderCancellation));
+        $erpOrderCancellationTransfer = (new ErpOrderCancellationTransfer())
+            ->fromArray($attributes->modifiedToArray(), true);
+
+        return $erpOrderCancellationTransfer->setCancellationItems(
+            $this->mapItemsFromRequest($attributes->getCancellationItems())
+        );
+    }
+
+    /**
+     * @param \ArrayObject<\Generated\Shared\Transfer\RestCancellationItemTransfer> $restItemCollection
+     * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationItemTransfer>
+     */
+    public function mapItemsFromRequest(ArrayObject $restItemCollection): ArrayObject
+    {
+        $collection = new ArrayObject();
+
+        foreach ($restItemCollection as $restCancellationItemTransfer) {
+            $collection->append($this->mapItemFromItemRequest($restCancellationItemTransfer));
         }
 
-        return $restResponseCollection;
+        return $collection;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\RestCancellationItemTransfer $restCancellationItemTransfer
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer
+     */
+    public function mapItemFromItemRequest(RestCancellationItemTransfer $restCancellationItemTransfer): ErpOrderCancellationItemTransfer
+    {
+        return (new ErpOrderCancellationItemTransfer())
+            ->fromArray($restCancellationItemTransfer->modifiedToArray(), true);
     }
 
     /**

@@ -62,6 +62,16 @@ interface ErpOrderCancellationRestApiConstants
     /**
      * @var string
      */
+    public const ERROR_MESSAGE_NOT_FOUND = 'Could not find erp order cancellation!';
+
+    /**
+     * @var string
+     */
+    public const ERROR_CODE_NOT_FOUND = '2404';
+
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE_DELETE = 'Could not delete erp order cancellation!';
 
     /**

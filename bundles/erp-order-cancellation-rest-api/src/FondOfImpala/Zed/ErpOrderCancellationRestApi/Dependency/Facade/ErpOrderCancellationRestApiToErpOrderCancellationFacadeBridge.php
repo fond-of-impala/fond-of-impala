@@ -39,4 +39,14 @@ class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge implements E
     {
         return $this->facade->updateErpOrderCancellation($erpOrderCancellationTransfer);
     }
+
+    /**
+     * @param int $idErpOrderCancellation
+     *
+     * @return void
+     */
+    public function deleteErpOrderCancellationByIdErpOrderCancellation(int $idErpOrderCancellation): void
+    {
+        $this->facade->deleteErpOrderCancellationByIdErpOrderCancellation($idErpOrderCancellation);
+    }
 }

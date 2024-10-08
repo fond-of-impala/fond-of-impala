@@ -20,4 +20,11 @@ interface ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface
      * @return \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer
      */
     public function updateErpOrderCancellation(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationResponseTransfer;
+
+    /**
+     * @param int $idErpOrderCancellation
+     *
+     * @return void
+     */
+    public function deleteErpOrderCancellationByIdErpOrderCancellation(int $idErpOrderCancellation): void;
 }

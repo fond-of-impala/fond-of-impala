@@ -7,6 +7,7 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Expander\Que
 use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Spryker\Zed\Api\ApiConfig;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
@@ -82,6 +83,25 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
         $result = $query->find();
 
         return $this->getFactory()->createEntityToTransferMapper()->mapEntityCollectionToTransferCollection($result);
+    }
+
+    /**
+     * @param string $uuid
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer|null
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function findErpOrderCancellationByUuid(string $uuid): ?ErpOrderCancellationTransfer
+    {
+        $query = $this->getErpOrderCancellationQuery();
+        $query->filterByUuid($uuid);
+
+        $result = $query->findOne();
+
+        if ($result === null){
+            return null;
+        }
+
+        return $this->getFactory()->createEntityToTransferMapper()->mapEntityToTransfer($result);
     }
 
     /**
