@@ -2,10 +2,10 @@
 
 namespace FondOfImpala\Client\ErpOrderCancellationRestApi\Zed;
 
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
 
 interface ErpOrderCancellationRestApiStubInterface
 {

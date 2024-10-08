@@ -31,10 +31,16 @@
         <property name="state" type="string" />
         <property name="createdAt" type="string" />
         <property name="updatedAt" type="string" />
-        <property name="customer" type="Customer" />
-        <property name="internalCustomer" type="Customer" />
+        <property name="customer" type="RestCustomer" />
+        <property name="internalCustomer" type="RestCustomer" />
         <property name="originatorReference" type="string" />
         <property name="cancellationItems" singular="cancellationItem" type="RestCancellationItem[]" />
+    </transfer>
+
+    <transfer name="RestCustomer">
+        <property name="idCustomer" type="int"/>
+        <property name="reference" type="string" />
+        <property name="customerReference" type="string"/>
     </transfer>
 
     <transfer name="ErpOrderCancellationCollection">

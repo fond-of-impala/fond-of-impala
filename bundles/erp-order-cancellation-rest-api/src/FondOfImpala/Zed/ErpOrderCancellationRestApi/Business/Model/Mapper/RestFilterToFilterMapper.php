@@ -14,7 +14,7 @@ class RestFilterToFilterMapper implements RestFilterToFilterMapperInterface
     protected array $expanderPlugins;
 
     /**
-     * @param \FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface[] $expanderPlugins
+     * @param array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface> $expanderPlugins
      */
     public function __construct(array $expanderPlugins)
     {
@@ -24,10 +24,13 @@ class RestFilterToFilterMapper implements RestFilterToFilterMapperInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer|null $erpOrderCancellationFilterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer
      */
-    public function fromRestRequest(RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer, ?ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer = null): ErpOrderCancellationFilterTransfer
-    {
+    public function fromRestRequest(
+        RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer,
+        ?ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer = null
+    ): ErpOrderCancellationFilterTransfer {
         if ($erpOrderCancellationFilterTransfer === null) {
             $erpOrderCancellationFilterTransfer = new ErpOrderCancellationFilterTransfer();
         }
@@ -54,10 +57,13 @@ class RestFilterToFilterMapper implements RestFilterToFilterMapperInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationAttributesTransfer $attributes
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer
      */
-    protected function handleAttributes(RestErpOrderCancellationAttributesTransfer $attributes, ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer): ErpOrderCancellationFilterTransfer
-    {
+    protected function handleAttributes(
+        RestErpOrderCancellationAttributesTransfer $attributes,
+        ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
+    ): ErpOrderCancellationFilterTransfer {
         if ($attributes->getUuid() !== null) {
             $erpOrderCancellationFilterTransfer->addId($attributes->getUuid());
         }
@@ -68,10 +74,13 @@ class RestFilterToFilterMapper implements RestFilterToFilterMapperInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer
      */
-    protected function handlePagination(RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer, ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer): ErpOrderCancellationFilterTransfer
-    {
+    protected function handlePagination(
+        RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer,
+        ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
+    ): ErpOrderCancellationFilterTransfer {
         $page = $restErpOrderCancellationFilterTransfer->getPage();
         if ($page !== null) {
             $erpOrderCancellationFilterTransfer
@@ -85,10 +94,13 @@ class RestFilterToFilterMapper implements RestFilterToFilterMapperInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer
      */
-    protected function handleSorting(RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer, ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer): ErpOrderCancellationFilterTransfer
-    {
+    protected function handleSorting(
+        RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer,
+        ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
+    ): ErpOrderCancellationFilterTransfer {
         $sorting = $restErpOrderCancellationFilterTransfer->getSort();
         if ($sorting->count() > 0) {
             foreach ($sorting as $sort) {

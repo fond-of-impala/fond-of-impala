@@ -23,6 +23,7 @@ class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge implements E
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer
      */
     public function createErpOrderCancellation(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationResponseTransfer

@@ -29,19 +29,23 @@ interface ErpOrderCancellationRestApiRepositoryInterface
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
      */
     public function findErpOrderCancellation(ErpOrderCancellationFilterTransfer $filterTransfer): ErpOrderCancellationCollectionTransfer;
 
     /**
      * @param string $uuid
-     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer|null
+     *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer|null
      */
     public function findErpOrderCancellationByUuid(string $uuid): ?ErpOrderCancellationTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer
      */
     public function getErpOrderCancellationPagination(

@@ -2,10 +2,10 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business;
 
-use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapper;
-use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\CancellationManager;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\CancellationManagerInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapper;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapper;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface;
@@ -59,7 +59,7 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface
+     * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface>
      */
     protected function getRestFilterToFilterMapperExpanderPlugins(): array
     {

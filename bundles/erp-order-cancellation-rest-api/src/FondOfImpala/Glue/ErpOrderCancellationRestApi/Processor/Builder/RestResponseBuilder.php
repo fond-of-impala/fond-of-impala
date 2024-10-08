@@ -3,9 +3,9 @@
 namespace FondOfImpala\Glue\ErpOrderCancellationRestApi\Processor\Builder;
 
 use FondOfImpala\Glue\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiConfig;
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Symfony\Component\HttpFoundation\Response;

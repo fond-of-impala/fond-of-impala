@@ -9,7 +9,6 @@ use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
-use Spryker\Zed\Api\ApiConfig;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -21,9 +20,9 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
     /**
      * @param string $customerReference
      *
-     * @return int
      * @throws \Exception
      *
+     * @return int
      */
     public function getIdCustomerByReference(string $customerReference): int
     {
@@ -38,9 +37,9 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
     /**
      * @param string $mail
      *
-     * @return string
      * @throws \Exception
      *
+     * @return string
      */
     public function getCustomerReferenceByMail(string $mail): string
     {
@@ -54,28 +53,29 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
      */
     public function findErpOrderCancellation(ErpOrderCancellationFilterTransfer $filterTransfer): ErpOrderCancellationCollectionTransfer
     {
         $query = $this->getErpOrderCancellationQuery();
 
-        if (count($filterTransfer->getIds()) > 0){
+        if (count($filterTransfer->getIds()) > 0) {
             $query->filterByUuid_In($filterTransfer->getIds());
         }
 
         $query = $this->getQueryExpander()->expandErpOrderCancellationQuery($query, $filterTransfer);
 
-        if ($filterTransfer->getLimit()){
+        if ($filterTransfer->getLimit()) {
             $query->limit($filterTransfer->getLimit());
         }
 
-        if ($filterTransfer->getOffset()){
+        if ($filterTransfer->getOffset()) {
             $query->offset($filterTransfer->getOffset());
         }
 
-        if ($filterTransfer->getSorting() !== null){
-            foreach ($filterTransfer->getSorting() as $sort){
+        if ($filterTransfer->getSorting() !== null) {
+            foreach ($filterTransfer->getSorting() as $sort) {
                 $query->orderBy($sort->getField(), $sort->getDirection());
             }
         }
@@ -87,8 +87,8 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
 
     /**
      * @param string $uuid
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer|null
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function findErpOrderCancellationByUuid(string $uuid): ?ErpOrderCancellationTransfer
     {
@@ -97,7 +97,7 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
 
         $result = $query->findOne();
 
-        if ($result === null){
+        if ($result === null) {
             return null;
         }
 
@@ -106,6 +106,9 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer
      */
     public function getErpOrderCancellationPagination(
@@ -113,7 +116,7 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
     ): ErpOrderCancellationPaginationTransfer {
         $query = $this->getErpOrderCancellationQuery();
 
-        if (count($filterTransfer->getIds()) > 0){
+        if (count($filterTransfer->getIds()) > 0) {
             $query->filterByUuid_In($filterTransfer->getIds());
         }
 
@@ -126,8 +129,9 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
         $page = $filterTransfer->getLimit() ? ($filterTransfer->getOffset() / $filterTransfer->getLimit() + 1) : 1;
         $pageTotal = ($total && $filterTransfer->getLimit()) ? (int)ceil($total / $filterTransfer->getLimit()) : 1;
         if ($page > $pageTotal) {
-            throw new NotFoundHttpException('Out of bounds.', null, ApiConfig::HTTP_CODE_NOT_FOUND);
+            throw new NotFoundHttpException('Out of bounds.', null, 404);
         }
+
         return (new ErpOrderCancellationPaginationTransfer())
             ->setCurrentItemsPerPage($filterTransfer->getLimit())
             ->setCurrentPage($page)
@@ -151,7 +155,3 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
         return $this->getFactory()->createQueryExpander();
     }
 }
-
-
-
-

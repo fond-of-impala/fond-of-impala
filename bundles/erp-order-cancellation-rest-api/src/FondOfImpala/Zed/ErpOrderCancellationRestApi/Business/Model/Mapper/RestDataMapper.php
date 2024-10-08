@@ -28,6 +28,7 @@ class RestDataMapper implements RestDataMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function mapFromRequest(RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer): ErpOrderCancellationTransfer
@@ -38,12 +39,13 @@ class RestDataMapper implements RestDataMapperInterface
             ->fromArray($attributes->modifiedToArray(), true);
 
         return $erpOrderCancellationTransfer->setCancellationItems(
-            $this->mapItemsFromRequest($attributes->getCancellationItems())
+            $this->mapItemsFromRequest($attributes->getCancellationItems()),
         );
     }
 
     /**
      * @param \ArrayObject<\Generated\Shared\Transfer\RestCancellationItemTransfer> $restItemCollection
+     *
      * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationItemTransfer>
      */
     public function mapItemsFromRequest(ArrayObject $restItemCollection): ArrayObject
@@ -59,6 +61,7 @@ class RestDataMapper implements RestDataMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\RestCancellationItemTransfer $restCancellationItemTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer
      */
     public function mapItemFromItemRequest(RestCancellationItemTransfer $restCancellationItemTransfer): ErpOrderCancellationItemTransfer

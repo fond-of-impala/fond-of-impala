@@ -8,7 +8,7 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 class QueryExpander implements QueryExpanderInterface
 {
     /**
-     * @var array|\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationQueryExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationQueryExpanderPluginInterface>
      */
     protected array $erpOrderCancellationQueryExpanderPlugins;
 
@@ -23,10 +23,13 @@ class QueryExpander implements QueryExpanderInterface
     /**
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery $query
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
-    public function expandErpOrderCancellationQuery(FoiErpOrderCancellationQuery $query, ErpOrderCancellationFilterTransfer $filterTransfer): FoiErpOrderCancellationQuery
-    {
+    public function expandErpOrderCancellationQuery(
+        FoiErpOrderCancellationQuery $query,
+        ErpOrderCancellationFilterTransfer $filterTransfer
+    ): FoiErpOrderCancellationQuery {
         foreach ($this->erpOrderCancellationQueryExpanderPlugins as $plugin) {
             $query = $plugin->expandErpOrderCancellationQuery($query, $filterTransfer);
         }

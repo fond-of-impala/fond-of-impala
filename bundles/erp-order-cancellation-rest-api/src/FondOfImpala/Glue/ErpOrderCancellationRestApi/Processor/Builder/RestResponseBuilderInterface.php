@@ -2,9 +2,9 @@
 
 namespace FondOfImpala\Glue\ErpOrderCancellationRestApi\Processor\Builder;
 
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 
 interface RestResponseBuilderInterface

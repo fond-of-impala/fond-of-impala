@@ -20,18 +20,21 @@ interface RestDataMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function mapFromRequest(RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer): ErpOrderCancellationTransfer;
 
     /**
      * @param \ArrayObject<\Generated\Shared\Transfer\RestCancellationItemTransfer> $restItemCollection
+     *
      * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationItemTransfer>
      */
     public function mapItemsFromRequest(ArrayObject $restItemCollection): ArrayObject;
 
     /**
      * @param \Generated\Shared\Transfer\RestCancellationItemTransfer $restCancellationItemTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer
      */
     public function mapItemFromItemRequest(RestCancellationItemTransfer $restCancellationItemTransfer): ErpOrderCancellationItemTransfer;

@@ -19,7 +19,7 @@ class ErpOrderCancellationRestApiPersistenceFactory extends AbstractPersistenceF
     public function createQueryExpander(): QueryExpanderInterface
     {
         return new QueryExpander(
-            $this->getErpOrderCancellationQueryExpanderPlugins()
+            $this->getErpOrderCancellationQueryExpanderPlugins(),
         );
     }
 
@@ -41,7 +41,6 @@ class ErpOrderCancellationRestApiPersistenceFactory extends AbstractPersistenceF
 
     /**
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getErpOrderCancellationQuery(): FoiErpOrderCancellationQuery
     {

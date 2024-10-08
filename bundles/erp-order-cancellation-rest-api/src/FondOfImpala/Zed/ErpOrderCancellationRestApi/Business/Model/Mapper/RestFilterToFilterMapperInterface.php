@@ -10,7 +10,11 @@ interface RestFilterToFilterMapperInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer|null $erpOrderCancellationFilterTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer
      */
-    public function fromRestRequest(RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer, ?ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer = null): ErpOrderCancellationFilterTransfer;
+    public function fromRestRequest(
+        RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer,
+        ?ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer = null
+    ): ErpOrderCancellationFilterTransfer;
 }

@@ -142,8 +142,6 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
         return $container;
     }
 
-
-
     /**
      * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface>
      */

@@ -23,8 +23,14 @@ use Throwable;
 
 class CancellationManager implements CancellationManagerInterface
 {
+    /**
+     * @var string
+     */
     protected const PERMISSION_KEY_MANAGE = 'CanManageCancellationRequest';
 
+    /**
+     * @var string
+     */
     protected const PERMISSION_KEY_REQUEST = 'CanCreateCancellationRequest';
 
     /**
@@ -56,6 +62,7 @@ class CancellationManager implements CancellationManagerInterface
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface $erpOrderCancellationFacade
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\ErpOrderCancellationRestApiRepositoryInterface $repository
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface $restDataMapper
+     * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface $restFilterToFilterMapper
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
@@ -63,7 +70,7 @@ class CancellationManager implements CancellationManagerInterface
         ErpOrderCancellationRestApiRepositoryInterface $repository,
         RestDataMapperInterface $restDataMapper,
         RestFilterToFilterMapperInterface $restFilterToFilterMapper,
-        LoggerInterface $logger,
+        LoggerInterface $logger
     ) {
         $this->erpOrderCancellationFacade = $erpOrderCancellationFacade;
         $this->repository = $repository;
@@ -128,7 +135,7 @@ class CancellationManager implements CancellationManagerInterface
             $response = $this->erpOrderCancellationFacade->updateErpOrderCancellation($erpOrderCancellation);
 
             return (new RestErpOrderCancellationResponseTransfer())
-                ->setErpOrderCancellation($this->restDataMapper->mapResponse($response));
+                ->setErpOrderCancellation($this->restDataMapper->mapResponse($response->getErpOrderCancellation()));
         } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage(), $throwable->getTrace());
 
@@ -136,6 +143,11 @@ class CancellationManager implements CancellationManagerInterface
         }
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer $item
+     *
+     * @return string
+     */
     protected function getItemIdentifier(ErpOrderCancellationItemTransfer $item): string
     {
         return sprintf('%s|%s', $item->getSku(), $item->getLineId());
@@ -143,6 +155,8 @@ class CancellationManager implements CancellationManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     *
+     * @throws \Exception
      *
      * @return \Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer|\Generated\Shared\Transfer\RestErrorMessageTransfer
      */
@@ -185,7 +199,7 @@ class CancellationManager implements CancellationManagerInterface
             $collection = $this->repository->findErpOrderCancellation($filter);
             $responseCollection = (new RestErpOrderCancellationCollectionResponseTransfer());
 
-            foreach ($collection->getCancellations() as $cancellation){
+            foreach ($collection->getCancellations() as $cancellation) {
                 $responseCollection->addErpOrderCancellation((new RestErpOrderCancellationTransfer())->fromArray($cancellation->toArray(), true));
             }
 
@@ -226,7 +240,6 @@ class CancellationManager implements CancellationManagerInterface
             ->requireErpOrderReference()
             ->requireErpOrderExternalReference()
             ->requireDebitorNumber();
-
 
         $originatorId = $this->repository->getIdCustomerByReference($restErpOrderCancellationAttributesTransfer->getOriginatorReference());
 

@@ -5,8 +5,8 @@ namespace FondOfImpala\Glue\ErpOrderCancellationRestApi\Processor\Manager;
 use FondOfImpala\Client\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiClientInterface;
 use FondOfImpala\Glue\ErpOrderCancellationRestApi\Processor\Builder\RestResponseBuilderInterface;
 use FondOfImpala\Glue\ErpOrderCancellationRestApi\Processor\Mapper\ErpOrderCancellationMapperInterface;
-use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
+use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
@@ -35,7 +35,7 @@ class CancellationManager implements CancellationManagerInterface
     public function __construct(
         ErpOrderCancellationRestApiClientInterface $client,
         ErpOrderCancellationMapperInterface $erpOrderCancellationMapper,
-        RestResponseBuilderInterface $responseBuilder,
+        RestResponseBuilderInterface $responseBuilder
     ) {
         $this->client = $client;
         $this->erpOrderCancellationMapper = $erpOrderCancellationMapper;
