@@ -139,7 +139,7 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
      */
     protected function getItemIndex(ErpOrderCancellationItemTransfer $itemTransfer): string
     {
-        return sprintf('%s.%s', $itemTransfer->getSku(), $itemTransfer->getFkErpOrderCancellation());
+        return sprintf('%s|%s', $itemTransfer->getSku(), $itemTransfer->getLineId());
     }
 
     /**
@@ -196,7 +196,7 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
         ErpOrderCancellationItemTransfer $erpOrderCancellationItemTransfer
     ): ErpOrderCancellationItemTransfer {
         $fkErpOrderCancellation = $updateItem->getFkErpOrderCancellation();
-        $updateItem->fromArray($erpOrderCancellationItemTransfer->toArray(), true);
+        $updateItem->fromArray($erpOrderCancellationItemTransfer->modifiedToArray(), true);
         $updateItem->setFkErpOrderCancellation($fkErpOrderCancellation);
 
         return $updateItem;
