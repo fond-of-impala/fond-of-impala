@@ -267,6 +267,14 @@
       "path": "bundles/erp-order-cancellation-extension",
       "version": "1.0.0-beta"
     },
+    "erp-order-cancellation-rest-api": {
+      "path": "bundles/erp-order-cancellation-rest-api",
+      "version": "1.0.0-beta"
+    },
+    "erp-order-cancellation-rest-api-extension": {
+      "path": "bundles/erp-order-cancellation-rest-api-extension",
+      "version": "1.0.0-beta"
+    },
     "jellyfish-sales-order-conditional-availability": {
       "path": "bundles/jellyfish-sales-order-conditional-availability",
       "version": "1.0.0"
