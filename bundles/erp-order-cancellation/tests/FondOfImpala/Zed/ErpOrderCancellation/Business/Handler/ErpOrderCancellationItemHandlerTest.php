@@ -207,14 +207,6 @@ class ErpOrderCancellationItemHandlerTest extends Unit
             ->willReturn($fkErpOrderCancellation);
 
         $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
-            ->method('toArray')
-            ->willReturn([]);
-
-        $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
-            ->method('fromArray')
-            ->willReturnSelf();
-
-        $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
             ->method('setFkErpOrderCancellation')
             ->willReturnSelf();
 
@@ -285,10 +277,6 @@ class ErpOrderCancellationItemHandlerTest extends Unit
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
             ->method('getCancellationItems')
             ->willReturn($cancellationItems);
-
-        $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
-            ->method('getFkErpOrderCancellation')
-            ->willReturn($fkErpOrderCancellation);
 
         $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
             ->method('setFkErpOrderCancellation')
