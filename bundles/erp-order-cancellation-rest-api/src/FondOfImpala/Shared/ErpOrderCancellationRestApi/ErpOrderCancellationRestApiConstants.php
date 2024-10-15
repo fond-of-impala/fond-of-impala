@@ -47,11 +47,6 @@ interface ErpOrderCancellationRestApiConstants
     /**
      * @var string
      */
-    public const ERROR_CODE_ADD_BULK_EMPTY = '1001';
-
-    /**
-     * @var string
-     */
     public const ERROR_MESSAGE_UPDATE = 'Could not update erp order cancellation!';
 
     /**
@@ -88,4 +83,24 @@ interface ErpOrderCancellationRestApiConstants
      * @var string
      */
     public const ERROR_CODE_GET = '4000';
+
+    /**
+     * @var string
+     */
+    public const PERMISSION_TYPE_CREATE = 'crate';
+
+    /**
+     * @var string
+     */
+    public const PERMISSION_TYPE_UPDATE = 'update';
+
+    /**
+     * @var string
+     */
+    public const PERMISSION_TYPE_DELETE = 'delete';
+
+    /**
+     * @var string
+     */
+    public const PERMISSION_TYPE_READ = 'read';
 }

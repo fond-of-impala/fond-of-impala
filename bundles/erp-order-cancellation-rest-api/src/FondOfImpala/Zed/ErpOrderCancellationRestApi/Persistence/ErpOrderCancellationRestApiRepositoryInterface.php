@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence;
 
+use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer;
@@ -51,4 +52,13 @@ interface ErpOrderCancellationRestApiRepositoryInterface
     public function getErpOrderCancellationPagination(
         ErpOrderCancellationFilterTransfer $filterTransfer
     ): ErpOrderCancellationPaginationTransfer;
+
+    /**
+     * @param int $idCustomer
+     * @param string $debtorNumber
+     * @return \Generated\Shared\Transfer\CompanyUserTransfer
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function getCompanyUserByIdCustomerAndDebtorNumber(int $idCustomer, string $debtorNumber): CompanyUserTransfer;
 }

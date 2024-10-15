@@ -9,6 +9,15 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 class ExternalReferenceQueryExpanderPlugin implements ErpOrderCancellationQueryExpanderPluginInterface
 {
     /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     * @return bool
+     */
+    public function isApplicable(ErpOrderCancellationFilterTransfer $filterTransfer): bool
+    {
+        return count($filterTransfer->getExternalReferences()) !== 0;
+    }
+
+    /**
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery $query
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
      *
@@ -18,10 +27,6 @@ class ExternalReferenceQueryExpanderPlugin implements ErpOrderCancellationQueryE
         FoiErpOrderCancellationQuery $query,
         ErpOrderCancellationFilterTransfer $filterTransfer
     ): FoiErpOrderCancellationQuery {
-        if (count($filterTransfer->getExternalReferences()) === 0) {
-            return $query;
-        }
-
         return $query->filterByErpOrderExternalReference_In($filterTransfer->getExternalReferences());
     }
 }

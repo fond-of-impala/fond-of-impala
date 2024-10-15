@@ -7,36 +7,32 @@ use Exception;
 use FondOfImpala\Shared\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiConstants;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionCheckerInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\ErpOrderCancellationRestApiRepositoryInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
-use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
-use Generated\Shared\Transfer\RestErpOrderCancellationAttributesTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationPaginationTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
+use Orm\Zed\ErpOrderCancellation\Persistence\Map\FoiErpOrderCancellationTableMap;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 class CancellationManager implements CancellationManagerInterface
 {
     /**
-     * @var string
-     */
-    protected const PERMISSION_KEY_MANAGE = 'CanManageCancellationRequest';
-
-    /**
-     * @var string
-     */
-    protected const PERMISSION_KEY_REQUEST = 'CanCreateCancellationRequest';
-
-    /**
      * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface
      */
     protected ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface $erpOrderCancellationFacade;
+
+    /**
+     * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface
+     */
+    protected ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade;
 
     /**
      * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\ErpOrderCancellationRestApiRepositoryInterface
@@ -54,27 +50,38 @@ class CancellationManager implements CancellationManagerInterface
     protected RestDataMapperInterface $restDataMapper;
 
     /**
+     * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionCheckerInterface
+     */
+    protected PermissionCheckerInterface $permissionChecker;
+
+    /**
      * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface
      */
     protected RestFilterToFilterMapperInterface $restFilterToFilterMapper;
 
     /**
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface $erpOrderCancellationFacade
+     * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\ErpOrderCancellationRestApiRepositoryInterface $repository
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface $restDataMapper
+     * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionCheckerInterface $permissionChecker
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface $restFilterToFilterMapper
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface $erpOrderCancellationFacade,
+        ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade,
         ErpOrderCancellationRestApiRepositoryInterface $repository,
         RestDataMapperInterface $restDataMapper,
+        PermissionCheckerInterface $permissionChecker,
         RestFilterToFilterMapperInterface $restFilterToFilterMapper,
         LoggerInterface $logger
     ) {
         $this->erpOrderCancellationFacade = $erpOrderCancellationFacade;
+        $this->erpOrderFacade = $erpOrderFacade;
         $this->repository = $repository;
         $this->restDataMapper = $restDataMapper;
+        $this->permissionChecker = $permissionChecker;
         $this->restFilterToFilterMapper = $restFilterToFilterMapper;
         $this->logger = $logger;
     }
@@ -88,10 +95,39 @@ class CancellationManager implements CancellationManagerInterface
         RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer {
         try {
-            $response = $this->createErpOrderCancellation($restErpOrderCancellationRequestTransfer->getAttributes());
+            $attributes = $restErpOrderCancellationRequestTransfer->getAttributes();
+            $erpOrderCancellationTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
+
+            $erpOrderCancellationTransfer->requireErpOrderReference()
+                ->requireErpOrderExternalReference()
+                ->requireDebitorNumber();
+
+            $companyUser = $this->repository->getCompanyUserByIdCustomerAndDebtorNumber($attributes->getOriginator()->getIdCustomer(), $erpOrderCancellationTransfer->getDebitorNumber());
+
+            if ($this->permissionChecker->checkPermission($erpOrderCancellationTransfer, $companyUser, ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_CREATE) === false) {
+                throw new Exception('Permission denied');
+            }
+
+            $erpOrder = $this->erpOrderFacade->findErpOrderByExternalReference($erpOrderCancellationTransfer->getErpOrderExternalReference());
+
+            if ($erpOrder === null) {
+                throw new Exception(sprintf('ErpOrder with external reference "%s" not found', $erpOrderCancellationTransfer->getErpOrderExternalReference()));
+            }
+
+            if ($erpOrder->getFkCompanyBusinessUnit() !== $companyUser->getFkCompanyBusinessUnit()) {
+                throw new Exception(sprintf('ErpOrder does not belong to this debtor %s!', $erpOrderCancellationTransfer->getDebitorNumber()));
+            }
+
+            $erpOrderCancellationTransfer->setFkCustomerRequested($companyUser->getCustomer()->getIdCustomer())
+                ->setState(FoiErpOrderCancellationTableMap::COL_STATE_NEW);
+
+            $response =  $this->erpOrderCancellationFacade->createErpOrderCancellation($erpOrderCancellationTransfer)->getErpOrderCancellation();
+
+            $restErpOrderCancellationTransfer = $this->restDataMapper->mapResponse($response);
+            $restErpOrderCancellationTransfer->setErpOrder($erpOrder);
 
             return (new RestErpOrderCancellationResponseTransfer())
-                ->setErpOrderCancellation($this->restDataMapper->mapResponse($response));
+                ->setErpOrderCancellation($restErpOrderCancellationTransfer);
         } catch (Throwable $throwable) {
             $this->logger->error($throwable->getMessage(), $throwable->getTrace());
 
@@ -108,15 +144,20 @@ class CancellationManager implements CancellationManagerInterface
         RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer {
         try {
-            $restErpOrderCancellationAttributesTransfer = $restErpOrderCancellationRequestTransfer->getAttributes();
-            $restErpOrderCancellationAttributesTransfer->requireUuid();
-            $erpOrderCancellation = $this->repository->findErpOrderCancellationByUuid($restErpOrderCancellationAttributesTransfer->getUuid());
+            $attributes = $restErpOrderCancellationRequestTransfer->getAttributes();
+            $erpOrderCancellationUpdateTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
+            $companyUser = $this->repository->getCompanyUserByIdCustomerAndDebtorNumber($attributes->getOriginator()->getIdCustomer(), $erpOrderCancellationUpdateTransfer->getDebitorNumber());
+
+            if ($this->permissionChecker->checkPermission($erpOrderCancellationUpdateTransfer, $companyUser, ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_UPDATE) === false) {
+                throw new Exception('Permission denied');
+            }
+
+            $erpOrderCancellationUpdateTransfer->requireUuid();
+            $erpOrderCancellation = $this->repository->findErpOrderCancellationByUuid($erpOrderCancellationUpdateTransfer->getUuid());
 
             if ($erpOrderCancellation === null) {
                 return $this->createErrorTransfer(ErpOrderCancellationRestApiConstants::ERROR_MESSAGE_NOT_FOUND, ErpOrderCancellationRestApiConstants::ERROR_CODE_NOT_FOUND);
             }
-
-            $erpOrderCancellationUpdateTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
 
             $updatedItemsCollection = [];
 
@@ -144,16 +185,6 @@ class CancellationManager implements CancellationManagerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer $item
-     *
-     * @return string
-     */
-    protected function getItemIdentifier(ErpOrderCancellationItemTransfer $item): string
-    {
-        return sprintf('%s|%s', $item->getSku(), $item->getLineId());
-    }
-
-    /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
      *
      * @throws \Exception
@@ -165,15 +196,20 @@ class CancellationManager implements CancellationManagerInterface
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer {
         try {
             $attributes = $restErpOrderCancellationRequestTransfer->getAttributes();
-            $attributes->requireUuid();
+            $erpOrderCancellationTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
+            $companyUser = $this->repository->getCompanyUserByIdCustomerAndDebtorNumber($attributes->getOriginator()->getIdCustomer(), $erpOrderCancellationTransfer->getDebitorNumber());
 
-            $erpOrderCancellation = $this->repository->findErpOrderCancellationByUuid($attributes->getUuid());
-
-            if ($erpOrderCancellation === null) {
-                throw new Exception(sprintf('ErpOrderCancellation with UUID "%s" not found', $attributes->getUuid()));
+            if ($this->permissionChecker->checkPermission($erpOrderCancellationTransfer, $companyUser, ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_DELETE) === false) {
+                throw new Exception('Permission denied');
             }
 
-            //ToDo Check permission
+            $erpOrderCancellationTransfer->requireUuid();
+
+            $erpOrderCancellation = $this->repository->findErpOrderCancellationByUuid($erpOrderCancellationTransfer->getUuid());
+
+            if ($erpOrderCancellation === null) {
+                throw new Exception(sprintf('ErpOrderCancellation with UUID "%s" not found', $erpOrderCancellationTransfer->getUuid()));
+            }
 
             $this->erpOrderCancellationFacade->deleteErpOrderCancellationByIdErpOrderCancellation($erpOrderCancellation->getIdErpOrderCancellation());
 
@@ -214,6 +250,16 @@ class CancellationManager implements CancellationManagerInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer $item
+     *
+     * @return string
+     */
+    protected function getItemIdentifier(ErpOrderCancellationItemTransfer $item): string
+    {
+        return sprintf('%s|%s', $item->getSku(), $item->getLineId());
+    }
+
+    /**
      * @param string $message
      * @param string $code
      * @param int $status
@@ -226,29 +272,5 @@ class CancellationManager implements CancellationManagerInterface
             ->setDetail($message)
             ->setCode($code)
             ->setStatus($status);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\RestErpOrderCancellationAttributesTransfer $restErpOrderCancellationAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
-     */
-    protected function createErpOrderCancellation(
-        RestErpOrderCancellationAttributesTransfer $restErpOrderCancellationAttributesTransfer
-    ): ErpOrderCancellationTransfer {
-        $restErpOrderCancellationAttributesTransfer
-            ->requireErpOrderReference()
-            ->requireErpOrderExternalReference()
-            ->requireDebitorNumber();
-
-        $originatorId = $this->repository->getIdCustomerByReference($restErpOrderCancellationAttributesTransfer->getOriginatorReference());
-
-        $erpOrderCancellationTransfer = (new ErpOrderCancellationTransfer())
-            ->setFkCustomerRequested($originatorId)
-            ->setDebitorNumber($restErpOrderCancellationAttributesTransfer->getDebitorNumber())
-            ->setErpOrderReference($restErpOrderCancellationAttributesTransfer->getErpOrderReference())
-            ->setErpOrderExternalReference($restErpOrderCancellationAttributesTransfer->getErpOrderExternalReference());
-
-        return $this->erpOrderCancellationFacade->createErpOrderCancellation($erpOrderCancellationTransfer)->getErpOrderCancellation();
     }
 }

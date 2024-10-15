@@ -1,6 +1,6 @@
 {
-  "name": "fond-of-impala/erp-order-cancellation-rest-api",
-  "description": "ERP Order Cancellation Rest Api",
+  "name": "fond-of-impala/permission-erp-order-cancellation-rest-api",
+  "description": "Permission erp order cancellation rest api bundle",
   "license": "MIT",
   "authors": [
     {
@@ -10,13 +10,11 @@
   ],
   "require": {
     "php": ">=8.1",
-    "fond-of-impala/erp-order-cancellation": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-rest-api-extension": "^1.0.0",
-    "fond-of-impala/erp-order-cancellation-extension": "^1.0.0",
-    "fond-of-ofyx/erp-order": "^1.0.0",
+    "spryker/company-role": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",
-    "spryker/glue-application": "*",
-    "spryker/uuid-behavior": "^1.0.0"
+    "spryker/permission": "^1.0.0",
+    "spryker/permission-extension": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
@@ -34,11 +32,10 @@
     "psr-4": {
       "FondOfImpala\\": "tests/FondOfImpala/",
       "Generated\\": "src/Generated/",
-      "Orm\\Zed\\": "src/Orm/Zed/"
+      "Orm\\": "src/Orm/"
     }
   },
   "config": {
-    "sort-packages": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }

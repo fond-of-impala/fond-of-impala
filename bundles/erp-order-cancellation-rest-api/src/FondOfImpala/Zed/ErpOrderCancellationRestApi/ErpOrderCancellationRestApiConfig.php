@@ -8,13 +8,14 @@ use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\ErpOrder\Persistence\FooErpOrderQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
+use Spryker\Zed\Kernel\AbstractBundleConfig;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
 /**
  * @codeCoverageIgnore
  */
-class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDependencyProvider
+class ErpOrderCancellationRestApiConfig extends AbstractBundleConfig
 {
     /**
      * @var string
@@ -57,11 +58,6 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
     public const PLUGINS_ERP_ORDER_CANCELLATION_QUERY_EXPANDER = 'PLUGINS_ERP_ORDER_CANCELLATION_QUERY_EXPANDER';
 
     /**
-     * @var string
-     */
-    public const PLUGINS_ERP_ORDER_CANCELLATION_PERMISSION = 'PLUGINS_ERP_ORDER_CANCELLATION_PERMISSION';
-
-    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -88,7 +84,6 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
         $container = parent::provideBusinessLayerDependencies($container);
         $container = $this->addRestFilterToFilterMapperExpanderPlugin($container);
         $container = $this->addErpOrderFacade($container);
-        $container = $this->addErpOrderCancellationPermissionPlugin($container);
 
         return $this->addErpOrderCancellationFacade($container);
     }
@@ -229,28 +224,6 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
      * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationQueryExpanderPluginInterface>
      */
     protected function getErpOrderCancellationQueryExpanderPlugin(): array
-    {
-        return [];
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    public function addErpOrderCancellationPermissionPlugin(Container $container): Container
-    {
-        $container[static::PLUGINS_ERP_ORDER_CANCELLATION_PERMISSION] = function () {
-            return $this->getErpOrderCancellationPermissionPlugin();
-        };
-
-        return $container;
-    }
-
-    /**
-     * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationPermissionPluginInterface>
-     */
-    protected function getErpOrderCancellationPermissionPlugin(): array
     {
         return [];
     }

@@ -27,10 +27,14 @@ class QueryExpander implements QueryExpanderInterface
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
     public function expandErpOrderCancellationQuery(
-        FoiErpOrderCancellationQuery $query,
+        FoiErpOrderCancellationQuery       $query,
         ErpOrderCancellationFilterTransfer $filterTransfer
-    ): FoiErpOrderCancellationQuery {
+    ): FoiErpOrderCancellationQuery
+    {
         foreach ($this->erpOrderCancellationQueryExpanderPlugins as $plugin) {
+            if ($plugin->isApplicable($filterTransfer) === false) {
+                continue;
+            }
             $query = $plugin->expandErpOrderCancellationQuery($query, $filterTransfer);
         }
 

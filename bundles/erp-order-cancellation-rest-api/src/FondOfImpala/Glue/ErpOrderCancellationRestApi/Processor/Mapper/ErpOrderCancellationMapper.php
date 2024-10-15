@@ -3,6 +3,7 @@
 namespace FondOfImpala\Glue\ErpOrderCancellationRestApi\Processor\Mapper;
 
 use ArrayObject;
+use Generated\Shared\Transfer\RestCustomerTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationAttributesTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationFilterPageTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationFilterSortTransfer;
@@ -57,6 +58,7 @@ class ErpOrderCancellationMapper implements ErpOrderCancellationMapperInterface
         return (new RestErpOrderCancellationAttributesTransfer())
             ->fromArray($data, true)
             ->setUuid($this->getUuid($restRequest))
+            ->setOriginator($this->getOriginator($restRequest))
             ->setOriginatorReference($this->getOriginatorCustomerUserReference($restRequest));
     }
 
@@ -88,6 +90,16 @@ class ErpOrderCancellationMapper implements ErpOrderCancellationMapperInterface
     protected function getOriginatorCustomerUserReference(RestRequestInterface $restRequest): ?string
     {
         return $restRequest->getRestUser()->getNaturalIdentifier();
+    }
+
+    /**
+     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
+     * @return \Generated\Shared\Transfer\RestCustomerTransfer
+     */
+    protected function getOriginator(RestRequestInterface $restRequest): RestCustomerTransfer
+    {
+        $restUser = $restRequest->getRestUser();
+        return (new RestCustomerTransfer())->setIdCustomer($restUser->getSurrogateIdentifier())->setCustomerReference($restUser->getNaturalIdentifier());
     }
 
     /**

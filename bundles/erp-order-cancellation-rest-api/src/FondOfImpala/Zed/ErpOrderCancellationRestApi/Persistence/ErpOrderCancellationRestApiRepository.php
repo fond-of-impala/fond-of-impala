@@ -4,10 +4,15 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence;
 
 use Exception;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Expander\QueryExpanderInterface;
+use Generated\Shared\Transfer\CompanyBusinessUnitTransfer;
+use Generated\Shared\Transfer\CompanyTransfer;
+use Generated\Shared\Transfer\CompanyUserTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -137,6 +142,46 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
             ->setCurrentPage($page)
             ->setNumFound($total)
             ->setMaxPage($pageTotal);
+    }
+
+    /**
+     * @param int $idCustomer
+     * @param string $debtorNumber
+     * @return \Generated\Shared\Transfer\CompanyUserTransfer
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function getCompanyUserByIdCustomerAndDebtorNumber(int $idCustomer, string $debtorNumber): CompanyUserTransfer
+    {
+        /** @var \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $query */
+        $query = $this->getFactory()
+            ->getCompanyUserQuery()
+            ->clear()
+            ->filterByFkCustomer($idCustomer)
+            ->useCompanyQuery()
+            ->filterByDebtorNumber($debtorNumber)
+            ->endUse();
+
+        $companyUserEntity = $query
+            ->findOne();
+
+        if ($companyUserEntity === null) {
+            throw new Exception(sprintf('Could not find company user by idCustomer %s and debtorNumber %s', $idCustomer, $debtorNumber));
+        }
+
+        $companyUserTransfer = (new CompanyUserTransfer())->fromArray($companyUserEntity->toArray(), true);
+        $customerTransfer = (new CustomerTransfer())->fromArray($companyUserEntity->getCustomer()->toArray(), true);
+        $companyTransfer = (new CompanyTransfer())->fromArray($companyUserEntity->getCompany()->toArray(), true);
+        $companyBusinessUnitTransfer = (new CompanyBusinessUnitTransfer())->fromArray($companyUserEntity->getCompanyBusinessUnit()->toArray(), true);
+
+
+        return $companyUserTransfer
+            ->setFkCustomer($customerTransfer->getIdCustomer())
+            ->setCustomer($customerTransfer)
+            ->setFkCompany($companyTransfer->getIdCompany())
+            ->setCompany($companyTransfer)
+            ->setFkCompanyBusinessUnit($companyBusinessUnitTransfer->getIdCompanyBusinessUnit())
+            ->setCompanyBusinessUnit($companyBusinessUnitTransfer);
     }
 
     /**
