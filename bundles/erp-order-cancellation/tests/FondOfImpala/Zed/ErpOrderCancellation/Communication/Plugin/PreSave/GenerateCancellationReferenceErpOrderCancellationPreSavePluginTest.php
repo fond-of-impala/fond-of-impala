@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PostSave;
 
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacade;
 use FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PreSave\GenerateCancellationReferenceErpOrderCancellationPreSavePlugin;
 use FondOfImpala\Zed\ErpOrderCancellation\ErpOrderCancellationConfig;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
@@ -65,12 +64,12 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePluginTest extends
 
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
             ->method('setCancellationNumber')
-            ->with( 'prefixreference')
+            ->with('prefixreference')
             ->willReturn($this->erpOrderCancellationTransferMock);
 
         static::assertInstanceOf(
             ErpOrderCancellationTransfer::class,
-            $this->plugin->preSave($this->erpOrderCancellationTransferMock)
+            $this->plugin->preSave($this->erpOrderCancellationTransferMock),
         );
     }
 
@@ -87,7 +86,7 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePluginTest extends
 
         static::assertInstanceOf(
             ErpOrderCancellationTransfer::class,
-            $this->plugin->preSave($this->erpOrderCancellationTransferMock)
+            $this->plugin->preSave($this->erpOrderCancellationTransferMock),
         );
     }
 }

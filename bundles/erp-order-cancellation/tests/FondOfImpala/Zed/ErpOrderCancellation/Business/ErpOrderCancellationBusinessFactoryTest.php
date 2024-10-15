@@ -4,7 +4,6 @@ namespace FondOfImpala\Zed\ErpOrderCancellation\Business;
 
 use ArrayObject;
 use Codeception\Test\Unit;
-use FondOfImpala\Zed\ConditionalAvailability\Business\ConditionalAvailabilityBusinessFactory;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Handler\ErpOrderCancellationItemHandlerInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ErpOrderCancellationItemReaderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ReaderInterface;
@@ -17,7 +16,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Spryker\Shared\Log\Config\LoggerConfigInterface;
 use Spryker\Zed\Kernel\Container;
-
 
 class ErpOrderCancellationBusinessFactoryTest extends Unit
 {
@@ -115,7 +113,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
 
         static::assertInstanceOf(
             ErpOrderCancellationWriterInterface::class,
-            $this->businessFactory->createErpOrderCancellationWriter()
+            $this->businessFactory->createErpOrderCancellationWriter(),
         );
     }
 
@@ -137,7 +135,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
 
         static::assertInstanceOf(
             ErpOrderCancellationItemWriterInterface::class,
-            $this->businessFactory->createErpOrderCancellationItemWriter()
+            $this->businessFactory->createErpOrderCancellationItemWriter(),
         );
     }
 
@@ -159,7 +157,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
 
         static::assertInstanceOf(
             ErpOrderCancellationItemHandlerInterface::class,
-            $this->businessFactory->createErpOrderCancellationItemHandler()
+            $this->businessFactory->createErpOrderCancellationItemHandler(),
         );
     }
 
@@ -170,7 +168,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             ReaderInterface::class,
-            $this->businessFactory->createErpOrderCancellationReader()
+            $this->businessFactory->createErpOrderCancellationReader(),
         );
     }
 
@@ -181,7 +179,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
     {
         static::assertInstanceOf(
             ErpOrderCancellationItemReaderInterface::class,
-            $this->businessFactory->createErpOrderCancellationItemReader()
+            $this->businessFactory->createErpOrderCancellationItemReader(),
         );
     }
 
@@ -200,7 +198,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->willReturn(new ArrayObject());
 
         static::assertIsArray(
-            $this->businessFactory->getErpOrderCancellationPreSavePlugin()
+            $this->businessFactory->getErpOrderCancellationPreSavePlugin(),
         );
     }
 
@@ -219,7 +217,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->willReturn(new ArrayObject());
 
         static::assertIsArray(
-            $this->businessFactory->getErpOrderCancellationPostSavePlugin()
+            $this->businessFactory->getErpOrderCancellationPostSavePlugin(),
         );
     }
 
@@ -238,7 +236,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->willReturn(new ArrayObject());
 
         static::assertIsArray(
-            $this->businessFactory->getErpOrderCancellationItemPreSavePlugin()
+            $this->businessFactory->getErpOrderCancellationItemPreSavePlugin(),
         );
     }
 
@@ -257,7 +255,7 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->willReturn(new ArrayObject());
 
         static::assertIsArray(
-            $this->businessFactory->getErpOrderCancellationItemPostSavePlugin()
+            $this->businessFactory->getErpOrderCancellationItemPostSavePlugin(),
         );
     }
 }

@@ -8,6 +8,7 @@ use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ReaderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Writer\ErpOrderCancellationWriterInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+
 class ErpOrderCancellationFacadeTest extends Unit
 {
     /**
@@ -94,7 +95,7 @@ class ErpOrderCancellationFacadeTest extends Unit
 
         static::assertInstanceOf(
             ErpOrderCancellationResponseTransfer::class,
-            $this->facade->createErpOrderCancellation($this->erpOrderCancellationTransferMock)
+            $this->facade->createErpOrderCancellation($this->erpOrderCancellationTransferMock),
         );
     }
 
@@ -114,7 +115,7 @@ class ErpOrderCancellationFacadeTest extends Unit
 
         static::assertInstanceOf(
             ErpOrderCancellationResponseTransfer::class,
-            $this->facade->updateErpOrderCancellation($this->erpOrderCancellationTransferMock)
+            $this->facade->updateErpOrderCancellation($this->erpOrderCancellationTransferMock),
         );
     }
 
@@ -169,7 +170,7 @@ class ErpOrderCancellationFacadeTest extends Unit
 
         static::assertInstanceOf(
             ErpOrderCancellationTransfer::class,
-            $this->facade->persistErpOrderCancellationItem($this->erpOrderCancellationTransferMock)
+            $this->facade->persistErpOrderCancellationItem($this->erpOrderCancellationTransferMock),
         );
     }
 }

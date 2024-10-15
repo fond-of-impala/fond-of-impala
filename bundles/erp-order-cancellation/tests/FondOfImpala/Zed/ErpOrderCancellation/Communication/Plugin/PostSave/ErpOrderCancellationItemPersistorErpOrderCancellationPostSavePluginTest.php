@@ -52,7 +52,7 @@ class ErpOrderCancellationItemPersistorErpOrderCancellationPostSavePluginTest ex
 
         static::assertInstanceOf(
             ErpOrderCancellationTransfer::class,
-            $this->plugin->postSave($this->erpOrderCancellationTransferMock)
+            $this->plugin->postSave($this->erpOrderCancellationTransferMock),
         );
     }
 }
