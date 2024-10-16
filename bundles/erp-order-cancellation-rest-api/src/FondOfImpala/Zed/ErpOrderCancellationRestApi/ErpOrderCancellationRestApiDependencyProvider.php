@@ -6,7 +6,7 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCance
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeBridge;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
-use Orm\Zed\ErpOrder\Persistence\FooErpOrderQuery;
+use Orm\Zed\ErpOrder\Persistence\ErpOrderQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
@@ -72,7 +72,7 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
         $container = $this->addSpyCompanyUserQuery($container);
         $container = $this->addSpyCustomerQuery($container);
         $container = $this->addErpOrderCancellationQueryExpanderPlugin($container);
-        $container = $this->addFooErpOrderQuery($container);
+        $container = $this->addErpOrderQuery($container);
         $container = $this->addErpOrderFacade($container);
 
         return $this->addFoiErpOrderCancellationQuery($container);
@@ -166,10 +166,10 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function addFooErpOrderQuery(Container $container): Container
+    public function addErpOrderQuery(Container $container): Container
     {
         $container[static::QUERY_FOO_ERP_ORDER] = static function (Container $container) {
-            return FooErpOrderQuery::create();
+            return ErpOrderQuery::create();
         };
 
         return $container;

@@ -56,9 +56,11 @@ interface ErpOrderCancellationRestApiRepositoryInterface
     /**
      * @param int $idCustomer
      * @param string $debtorNumber
-     * @return \Generated\Shared\Transfer\CompanyUserTransfer
+     *
      * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
     public function getCompanyUserByIdCustomerAndDebtorNumber(int $idCustomer, string $debtorNumber): CompanyUserTransfer;
 }

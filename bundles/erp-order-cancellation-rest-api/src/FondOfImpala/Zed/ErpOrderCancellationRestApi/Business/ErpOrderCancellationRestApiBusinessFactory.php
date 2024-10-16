@@ -10,8 +10,8 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilte
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionChecker;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface;
-use FondOfImpala\Zed\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiDependencyProvider;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiDependencyProvider;
 use Spryker\Shared\Log\LoggerTrait;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
@@ -72,7 +72,6 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
 
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function getErpOrderFacade(): ErpOrderCancellationRestApiToErpOrderFacadeInterface
     {

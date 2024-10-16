@@ -83,24 +83,4 @@ interface ErpOrderCancellationRestApiConstants
      * @var string
      */
     public const ERROR_CODE_GET = '4000';
-
-    /**
-     * @var string
-     */
-    public const PERMISSION_TYPE_CREATE = 'crate';
-
-    /**
-     * @var string
-     */
-    public const PERMISSION_TYPE_UPDATE = 'update';
-
-    /**
-     * @var string
-     */
-    public const PERMISSION_TYPE_DELETE = 'delete';
-
-    /**
-     * @var string
-     */
-    public const PERMISSION_TYPE_READ = 'read';
 }

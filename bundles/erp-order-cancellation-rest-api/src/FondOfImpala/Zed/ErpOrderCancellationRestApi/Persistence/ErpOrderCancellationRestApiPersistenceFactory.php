@@ -10,7 +10,7 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Mapper\Entit
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Mapper\EntityToTransferMapperInterface;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
-use Orm\Zed\ErpOrder\Persistence\FooErpOrderQuery;
+use Orm\Zed\ErpOrder\Persistence\ErpOrderQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
@@ -44,7 +44,6 @@ class ErpOrderCancellationRestApiPersistenceFactory extends AbstractPersistenceF
 
     /**
      * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyUserQuery(): SpyCompanyUserQuery
     {
@@ -61,7 +60,6 @@ class ErpOrderCancellationRestApiPersistenceFactory extends AbstractPersistenceF
 
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getErpOrderFacade(): ErpOrderCancellationRestApiToErpOrderFacadeInterface
     {
@@ -69,10 +67,9 @@ class ErpOrderCancellationRestApiPersistenceFactory extends AbstractPersistenceF
     }
 
     /**
-     * @return \Orm\Zed\ErpOrder\Persistence\FooErpOrderQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \Orm\Zed\ErpOrder\Persistence\ErpOrderQuery
      */
-    public function getErpOrderQuery(): FooErpOrderQuery
+    public function getErpOrderQuery(): ErpOrderQuery
     {
         return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::QUERY_FOO_ERP_ORDER);
     }

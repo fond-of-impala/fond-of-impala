@@ -26,7 +26,6 @@ class PermissionErpOrderCancellationRestApiPersistenceFactory extends AbstractPe
 
     /**
      * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyQuery(): SpyCompanyQuery
     {
@@ -37,7 +36,6 @@ class PermissionErpOrderCancellationRestApiPersistenceFactory extends AbstractPe
 
     /**
      * @return \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyUserQuery(): SpyCompanyUserQuery
     {
@@ -48,7 +46,6 @@ class PermissionErpOrderCancellationRestApiPersistenceFactory extends AbstractPe
 
     /**
      * @return \Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyRoleQuery(): SpyCompanyRoleQuery
     {

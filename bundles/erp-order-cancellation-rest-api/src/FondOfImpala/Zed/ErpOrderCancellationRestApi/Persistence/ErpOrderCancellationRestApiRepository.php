@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationPaginationTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
-use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -147,9 +146,10 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
     /**
      * @param int $idCustomer
      * @param string $debtorNumber
+     *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\CompanyUserTransfer
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getCompanyUserByIdCustomerAndDebtorNumber(int $idCustomer, string $debtorNumber): CompanyUserTransfer
     {
@@ -173,7 +173,6 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
         $customerTransfer = (new CustomerTransfer())->fromArray($companyUserEntity->getCustomer()->toArray(), true);
         $companyTransfer = (new CompanyTransfer())->fromArray($companyUserEntity->getCompany()->toArray(), true);
         $companyBusinessUnitTransfer = (new CompanyBusinessUnitTransfer())->fromArray($companyUserEntity->getCompanyBusinessUnit()->toArray(), true);
-
 
         return $companyUserTransfer
             ->setFkCustomer($customerTransfer->getIdCustomer())

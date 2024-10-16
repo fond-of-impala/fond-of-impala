@@ -9,6 +9,7 @@ interface ErpOrderCancellationQueryExpanderPluginInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return bool
      */
     public function isApplicable(ErpOrderCancellationFilterTransfer $filterTransfer): bool;

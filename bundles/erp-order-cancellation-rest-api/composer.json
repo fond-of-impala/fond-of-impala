@@ -13,9 +13,11 @@
     "fond-of-impala/erp-order-cancellation": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-rest-api-extension": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-extension": "^1.0.0",
-    "fond-of-ofyx/erp-order": "^1.0.0",
+    "fond-of-oryx/erp-order": "^4.7.0",
+    "spryker/company": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",
     "spryker/glue-application": "*",
+    "spryker/event-behavior": "<1.29",
     "spryker/uuid-behavior": "^1.0.0"
   },
   "require-dev": {

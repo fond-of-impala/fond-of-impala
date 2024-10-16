@@ -10,6 +10,7 @@ class ReferenceQueryExpanderPlugin implements ErpOrderCancellationQueryExpanderP
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return bool
      */
     public function isApplicable(ErpOrderCancellationFilterTransfer $filterTransfer): bool
@@ -24,10 +25,9 @@ class ReferenceQueryExpanderPlugin implements ErpOrderCancellationQueryExpanderP
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
     public function expandErpOrderCancellationQuery(
-        FoiErpOrderCancellationQuery       $query,
+        FoiErpOrderCancellationQuery $query,
         ErpOrderCancellationFilterTransfer $filterTransfer
-    ): FoiErpOrderCancellationQuery
-    {
+    ): FoiErpOrderCancellationQuery {
         return $query->filterByErpOrderReference_In($filterTransfer->getReferences());
     }
 }

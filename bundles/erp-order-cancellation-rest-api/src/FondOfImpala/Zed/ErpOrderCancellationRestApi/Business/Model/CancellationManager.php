@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model;
 use ArrayObject;
 use Exception;
 use FondOfImpala\Shared\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiConstants;
+use FondOfImpala\Shared\ErpOrderCancellationRestApiExtension\ErpOrderCancellationRestApiExtensionConstants;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionCheckerInterface;
@@ -89,6 +90,8 @@ class CancellationManager implements CancellationManagerInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
      *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer|\Generated\Shared\Transfer\RestErrorMessageTransfer
      */
     public function addErpOrderCancellation(
@@ -104,7 +107,7 @@ class CancellationManager implements CancellationManagerInterface
 
             $companyUser = $this->repository->getCompanyUserByIdCustomerAndDebtorNumber($attributes->getOriginator()->getIdCustomer(), $erpOrderCancellationTransfer->getDebitorNumber());
 
-            if ($this->permissionChecker->checkPermission($erpOrderCancellationTransfer, $companyUser, ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_CREATE) === false) {
+            if ($this->permissionChecker->checkPermission($erpOrderCancellationTransfer, $companyUser, ErpOrderCancellationRestApiExtensionConstants::PERMISSION_TYPE_CREATE) === false) {
                 throw new Exception('Permission denied');
             }
 
@@ -121,7 +124,7 @@ class CancellationManager implements CancellationManagerInterface
             $erpOrderCancellationTransfer->setFkCustomerRequested($companyUser->getCustomer()->getIdCustomer())
                 ->setState(FoiErpOrderCancellationTableMap::COL_STATE_NEW);
 
-            $response =  $this->erpOrderCancellationFacade->createErpOrderCancellation($erpOrderCancellationTransfer)->getErpOrderCancellation();
+            $response = $this->erpOrderCancellationFacade->createErpOrderCancellation($erpOrderCancellationTransfer)->getErpOrderCancellation();
 
             $restErpOrderCancellationTransfer = $this->restDataMapper->mapResponse($response);
             $restErpOrderCancellationTransfer->setErpOrder($erpOrder);
@@ -138,6 +141,8 @@ class CancellationManager implements CancellationManagerInterface
     /**
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
      *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer|\Generated\Shared\Transfer\RestErrorMessageTransfer
      */
     public function updateErpOrderCancellation(
@@ -148,7 +153,7 @@ class CancellationManager implements CancellationManagerInterface
             $erpOrderCancellationUpdateTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
             $companyUser = $this->repository->getCompanyUserByIdCustomerAndDebtorNumber($attributes->getOriginator()->getIdCustomer(), $erpOrderCancellationUpdateTransfer->getDebitorNumber());
 
-            if ($this->permissionChecker->checkPermission($erpOrderCancellationUpdateTransfer, $companyUser, ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_UPDATE) === false) {
+            if ($this->permissionChecker->checkPermission($erpOrderCancellationUpdateTransfer, $companyUser, ErpOrderCancellationRestApiExtensionConstants::PERMISSION_TYPE_UPDATE) === false) {
                 throw new Exception('Permission denied');
             }
 
@@ -199,7 +204,7 @@ class CancellationManager implements CancellationManagerInterface
             $erpOrderCancellationTransfer = $this->restDataMapper->mapFromRequest($restErpOrderCancellationRequestTransfer);
             $companyUser = $this->repository->getCompanyUserByIdCustomerAndDebtorNumber($attributes->getOriginator()->getIdCustomer(), $erpOrderCancellationTransfer->getDebitorNumber());
 
-            if ($this->permissionChecker->checkPermission($erpOrderCancellationTransfer, $companyUser, ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_DELETE) === false) {
+            if ($this->permissionChecker->checkPermission($erpOrderCancellationTransfer, $companyUser, ErpOrderCancellationRestApiExtensionConstants::PERMISSION_TYPE_DELETE) === false) {
                 throw new Exception('Permission denied');
             }
 

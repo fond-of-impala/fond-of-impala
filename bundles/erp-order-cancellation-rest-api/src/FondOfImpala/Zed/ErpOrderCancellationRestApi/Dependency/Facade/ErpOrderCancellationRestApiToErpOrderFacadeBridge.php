@@ -22,6 +22,7 @@ class ErpOrderCancellationRestApiToErpOrderFacadeBridge implements ErpOrderCance
 
     /**
      * @param string $reference
+     *
      * @return \Generated\Shared\Transfer\ErpOrderTransfer|null
      */
     public function findErpOrderByReference(string $reference): ?ErpOrderTransfer
@@ -31,6 +32,7 @@ class ErpOrderCancellationRestApiToErpOrderFacadeBridge implements ErpOrderCance
 
     /**
      * @param string $externalReference
+     *
      * @return \Generated\Shared\Transfer\ErpOrderTransfer|null
      */
     public function findErpOrderByExternalReference(string $externalReference): ?ErpOrderTransfer

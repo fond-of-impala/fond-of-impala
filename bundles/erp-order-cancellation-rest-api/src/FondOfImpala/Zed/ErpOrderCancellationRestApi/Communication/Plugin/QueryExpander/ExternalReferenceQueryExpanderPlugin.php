@@ -10,6 +10,7 @@ class ExternalReferenceQueryExpanderPlugin implements ErpOrderCancellationQueryE
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return bool
      */
     public function isApplicable(ErpOrderCancellationFilterTransfer $filterTransfer): bool

@@ -94,11 +94,13 @@ class ErpOrderCancellationMapper implements ErpOrderCancellationMapperInterface
 
     /**
      * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
+     *
      * @return \Generated\Shared\Transfer\RestCustomerTransfer
      */
     protected function getOriginator(RestRequestInterface $restRequest): RestCustomerTransfer
     {
         $restUser = $restRequest->getRestUser();
+
         return (new RestCustomerTransfer())->setIdCustomer($restUser->getSurrogateIdentifier())->setCustomerReference($restUser->getNaturalIdentifier());
     }
 

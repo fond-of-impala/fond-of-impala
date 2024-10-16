@@ -14,6 +14,7 @@ class PermissionReadErpOrderCancellationQueryExpanderPlugin extends AbstractPlug
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
      * @return bool
      */
     public function isApplicable(ErpOrderCancellationFilterTransfer $filterTransfer): bool
@@ -27,8 +28,10 @@ class PermissionReadErpOrderCancellationQueryExpanderPlugin extends AbstractPlug
      *
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
-    public function expandErpOrderCancellationQuery(FoiErpOrderCancellationQuery $query, ErpOrderCancellationFilterTransfer $filterTransfer): FoiErpOrderCancellationQuery
-    {
+    public function expandErpOrderCancellationQuery(
+        FoiErpOrderCancellationQuery $query,
+        ErpOrderCancellationFilterTransfer $filterTransfer
+    ): FoiErpOrderCancellationQuery {
         $debtorNumbers = $filterTransfer->getDebitorNumbers();
 
         $debtorNumbersAvailable = $this->getRepository()->getDebtorNumbersByFkCustomer($filterTransfer->getFkOriginator());
@@ -46,5 +49,4 @@ class PermissionReadErpOrderCancellationQueryExpanderPlugin extends AbstractPlug
 
         return $query->filterByDebitorNumber_In($allowedDebtorNumbers);
     }
-
 }

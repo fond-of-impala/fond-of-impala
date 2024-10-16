@@ -2,7 +2,7 @@
 
 namespace FondOfImpala\Zed\PermissionErpOrderCancellationRestApi\Communication\Plugin\ErpOrderCancellationRestApiExtension;
 
-use FondOfImpala\Shared\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiConstants;
+use FondOfImpala\Shared\ErpOrderCancellationRestApiExtension\ErpOrderCancellationRestApiExtensionConstants;
 use FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationPermissionPluginInterface;
 use FondOfImpala\Zed\PermissionErpOrderCancellationRestApi\Communication\Plugin\PermissionExtension\ErpOrderCancellationCreatePermissionPlugin as PermissionErpOrderCancellationCreatePermissionPlugin;
 use FondOfImpala\Zed\PermissionErpOrderCancellationRestApi\Communication\Plugin\PermissionExtension\ErpOrderCancellationManagePermissionPlugin;
@@ -19,25 +19,29 @@ class ErpOrderCancellationCreatePermissionPlugin extends AbstractPlugin implemen
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
      * @param string|null $type
+     *
      * @return bool
      */
-    public function isApplicable(ErpOrderCancellationTransfer $erpOrderCancellationTransfer, CompanyUserTransfer $companyUserTransfer, ?string $type = null): bool
-    {
-        return $type === ErpOrderCancellationRestApiConstants::PERMISSION_TYPE_CREATE;
+    public function isApplicable(
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer,
+        CompanyUserTransfer $companyUserTransfer,
+        ?string $type = null
+    ): bool {
+        return $type === ErpOrderCancellationRestApiExtensionConstants::PERMISSION_TYPE_CREATE;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      * @param \Generated\Shared\Transfer\CompanyUserTransfer $companyUserTransfer
+     *
      * @return bool
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function can(ErpOrderCancellationTransfer $erpOrderCancellationTransfer, CompanyUserTransfer $companyUserTransfer): bool
     {
-        return $this->getRepository()->hasPermission($companyUserTransfer->getIdCompanyUser(), PermissionErpOrderCancellationCreatePermissionPlugin::KEY) !== null
-            || $this->getRepository()->hasPermission($companyUserTransfer->getIdCompanyUser(), ErpOrderCancellationManagePermissionPlugin::KEY) !== null;
-    }
+        if ($this->getRepository()->hasPermission($companyUserTransfer->getIdCompanyUser(), PermissionErpOrderCancellationCreatePermissionPlugin::KEY) === true) {
+            return true;
+        }
 
+        return $this->getRepository()->hasPermission($companyUserTransfer->getIdCompanyUser(), ErpOrderCancellationManagePermissionPlugin::KEY);
+    }
 }

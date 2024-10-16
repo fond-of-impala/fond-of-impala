@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed" xsi:noNamespaceSchemaLocation="https://static.spryker.com/schema-01.xsd" namespace="Orm\Zed\Company\Persistence" package="src.Orm.Zed.Company.Persistence">
+    <table name="spy_company" phpName="SpyCompany">
+        <column name="debtor_number" type="VARCHAR" size="255" required="false"/>
+    </table>
+</database>
