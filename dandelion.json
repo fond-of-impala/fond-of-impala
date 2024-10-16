@@ -319,6 +319,10 @@
       "path": "bundles/permission-cart-search-rest-api",
       "version": "1.0.0"
     },
+    "permission-erp-order-cancellation-rest-api": {
+      "path": "bundles/permission-erp-order-cancellation-rest-api",
+      "version": "1.0.0-beta"
+    },
     "price-list": {
       "path": "bundles/price-list",
       "version": "1.0.0"

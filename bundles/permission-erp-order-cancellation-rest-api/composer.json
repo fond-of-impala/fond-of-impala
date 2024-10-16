@@ -1,0 +1,44 @@
+{
+  "name": "fond-of-impala/permission-erp-order-cancellation-rest-api",
+  "description": "Permission erp order cancellation rest api bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "fond-of-impala/erp-order-cancellation-rest-api-extension": "^1.0.0",
+    "spryker/company": "^1.0.0",
+    "spryker/company-role": "^1.0.0",
+    "spryker/company-user": "^1.0.0 || ^2.0.0",
+    "spryker/permission": "^1.0.0",
+    "spryker/permission-extension": "^1.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

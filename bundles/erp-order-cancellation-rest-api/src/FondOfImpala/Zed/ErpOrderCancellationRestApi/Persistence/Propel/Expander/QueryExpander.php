@@ -31,6 +31,9 @@ class QueryExpander implements QueryExpanderInterface
         ErpOrderCancellationFilterTransfer $filterTransfer
     ): FoiErpOrderCancellationQuery {
         foreach ($this->erpOrderCancellationQueryExpanderPlugins as $plugin) {
+            if ($plugin->isApplicable($filterTransfer) === false) {
+                continue;
+            }
             $query = $plugin->expandErpOrderCancellationQuery($query, $filterTransfer);
         }
 
