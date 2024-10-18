@@ -36,8 +36,7 @@ class ErpOrderCancellationApiValidatorTest extends Unit
     public function testValidate(): void
     {
         static::assertIsArray(
-            $this->validator->validate($this->apiRequestTransferMock)
+            $this->validator->validate($this->apiRequestTransferMock),
         );
     }
-
 }

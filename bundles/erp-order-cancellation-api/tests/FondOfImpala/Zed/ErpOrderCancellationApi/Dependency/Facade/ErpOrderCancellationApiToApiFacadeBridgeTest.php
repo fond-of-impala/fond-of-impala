@@ -56,7 +56,7 @@ class ErpOrderCancellationApiToApiFacadeBridgeTest extends Unit
             ->getMock();
 
         $this->bridge = new ErpOrderCancellationApiToApiFacadeBridge(
-            $this->apiFacadeMock
+            $this->apiFacadeMock,
         );
     }
 
@@ -95,5 +95,4 @@ class ErpOrderCancellationApiToApiFacadeBridgeTest extends Unit
 
         static::assertEquals($this->apiCollectionFacadeMock, $apiCollectionTransfer);
     }
-
 }

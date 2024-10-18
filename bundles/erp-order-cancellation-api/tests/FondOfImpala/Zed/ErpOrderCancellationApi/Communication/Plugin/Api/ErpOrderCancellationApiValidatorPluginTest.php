@@ -63,5 +63,4 @@ class ErpOrderCancellationApiValidatorPluginTest extends Unit
 
         static::assertIsArray($this->plugin->validate($this->apiRequestTransferMock));
     }
-
 }

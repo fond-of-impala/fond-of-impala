@@ -137,7 +137,6 @@ class ErpOrderCancellationApiDependencyProviderTest extends Unit
             ->with('queryContainer')
             ->willReturnOnConsecutiveCalls($this->apiQueryBuilderQueryContainerMock);
 
-
         $container = $this->dependencyProvider
             ->providePersistenceLayerDependencies($this->containerMock);
 
@@ -152,7 +151,5 @@ class ErpOrderCancellationApiDependencyProviderTest extends Unit
             ErpOrderCancellationApiToApiQueryBuilderQueryContainerBridge::class,
             $container[ErpOrderCancellationApiDependencyProvider::QUERY_CONTAINER_API_QUERY_BUILDER],
         );
-
     }
-
 }

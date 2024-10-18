@@ -60,7 +60,6 @@ class ErpOrderCancellationApiBusinessFactoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-
         $this->businessFactory = new ErpOrderCancellationApiBusinessFactory();
         $this->businessFactory->setRepository($this->repositoryMock);
         $this->businessFactory->setContainer($this->containerMock);
@@ -101,5 +100,4 @@ class ErpOrderCancellationApiBusinessFactoryTest extends Unit
             $this->businessFactory->createErpOrderCancellationApiValidator(),
         );
     }
-
 }

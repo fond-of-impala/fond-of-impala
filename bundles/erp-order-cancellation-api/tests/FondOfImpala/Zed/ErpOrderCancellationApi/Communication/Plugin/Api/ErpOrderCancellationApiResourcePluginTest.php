@@ -164,5 +164,4 @@ class ErpOrderCancellationApiResourcePluginTest extends Unit
 
         static::assertEquals($this->apiCollectionTransferMock, $responseTransfer);
     }
-
 }

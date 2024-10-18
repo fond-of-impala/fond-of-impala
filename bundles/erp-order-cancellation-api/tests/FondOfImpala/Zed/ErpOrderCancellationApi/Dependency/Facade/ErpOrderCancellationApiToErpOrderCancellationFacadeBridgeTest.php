@@ -7,7 +7,6 @@ use FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacadeInt
 use Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 
-
 class ErpOrderCancellationApiToErpOrderCancellationFacadeBridgeTest extends Unit
 {
     /**
@@ -23,7 +22,7 @@ class ErpOrderCancellationApiToErpOrderCancellationFacadeBridgeTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
-    protected  MockObject|ErpOrderCancellationTransfer $erpOrderCancellationTransferMock;
+    protected MockObject|ErpOrderCancellationTransfer $erpOrderCancellationTransferMock;
 
     /**
      * @var \FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade/ErpOrderCancellationApiToErpOrderCancellationFacadeBridge
@@ -51,7 +50,7 @@ class ErpOrderCancellationApiToErpOrderCancellationFacadeBridgeTest extends Unit
             ->getMock();
 
         $this->bridge = new ErpOrderCancellationApiToErpOrderCancellationFacadeBridge(
-            $this->erpOrderCancellationFacadeMock
+            $this->erpOrderCancellationFacadeMock,
         );
     }
 
@@ -64,7 +63,6 @@ class ErpOrderCancellationApiToErpOrderCancellationFacadeBridgeTest extends Unit
             ->method('createErpOrderCancellation')
             ->with($this->erpOrderCancellationTransferMock)
             ->willReturn($this->erpOrderCancellationResponseTransferMock);
-
 
         $responseTransfer = $this->bridge->createErpOrderCancellation($this->erpOrderCancellationTransferMock);
 
@@ -80,7 +78,6 @@ class ErpOrderCancellationApiToErpOrderCancellationFacadeBridgeTest extends Unit
             ->method('updateErpOrderCancellation')
             ->with($this->erpOrderCancellationTransferMock)
             ->willReturn($this->erpOrderCancellationResponseTransferMock);
-
 
         $responseTransfer = $this->bridge->updateErpOrderCancellation($this->erpOrderCancellationTransferMock);
 
@@ -112,11 +109,9 @@ class ErpOrderCancellationApiToErpOrderCancellationFacadeBridgeTest extends Unit
             ->with($idErpOrderCancellation)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-
         $responseTransfer = $this->bridge
             ->findErpOrderCancellationByIdErpOrderCancellation($idErpOrderCancellation);
 
         static::assertEquals($this->erpOrderCancellationTransferMock, $responseTransfer);
     }
-
 }

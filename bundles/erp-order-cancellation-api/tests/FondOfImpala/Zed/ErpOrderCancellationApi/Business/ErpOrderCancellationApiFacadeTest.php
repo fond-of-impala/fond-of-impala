@@ -36,7 +36,7 @@ class ErpOrderCancellationApiFacadeTest extends Unit
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationApi\Business\Validator\ErpOrderCancellationApiValidatorInterface
      */
-    protected  MockObject|ErpOrderCancellationApiValidatorInterface $erpOrderCancellationApiValidatorMock;
+    protected MockObject|ErpOrderCancellationApiValidatorInterface $erpOrderCancellationApiValidatorMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationApi\Business\Model\ErpOrderCancellationApi
@@ -210,7 +210,7 @@ class ErpOrderCancellationApiFacadeTest extends Unit
 
         static::assertIsArray(
             $this->facade
-                ->validateErpOrderCancellation($this->apiRequestTransferMock)
+                ->validateErpOrderCancellation($this->apiRequestTransferMock),
         );
     }
 }

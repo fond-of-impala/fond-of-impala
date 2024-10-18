@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationApi\Business\Model;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToApiFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Persistence\ErpOrderCancellationApiRepositoryInterface;
@@ -80,30 +81,29 @@ class ErpOrderCancellationApiTest extends Unit
     protected function _before(): void
     {
         $this->apiCollectionTransferMock = $this
-            ->getMockBuilder(   ApiCollectionTransfer::class)
+            ->getMockBuilder(ApiCollectionTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->apiDataTransferMock = $this
-            ->getMockBuilder(   ApiDataTransfer::class)
+            ->getMockBuilder(ApiDataTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->apiFilterTransferMock = $this
-            ->getMockBuilder(   ApiFilterTransfer::class)
+            ->getMockBuilder(ApiFilterTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->apiItemTransferMock = $this
-            ->getMockBuilder(   ApiItemTransfer::class)
+            ->getMockBuilder(ApiItemTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->apiRequestTransferMock = $this
-            ->getMockBuilder(   ApiRequestTransfer::class)
+            ->getMockBuilder(ApiRequestTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
-
 
         $this->erpOrderCancellationTransferMock = $this
             ->getMockBuilder(ErpOrderCancellationTransfer::class)
@@ -133,7 +133,7 @@ class ErpOrderCancellationApiTest extends Unit
         $this->model = new ErpOrderCancellationApi(
             $this->erpOrderCancellationApiToApiFacadeMock,
             $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock,
-            $this->erpOrderCancellationApiRepositoryMock
+            $this->erpOrderCancellationApiRepositoryMock,
         );
     }
 
@@ -330,8 +330,8 @@ class ErpOrderCancellationApiTest extends Unit
 
         $apiCollectionData = [
             '0' => [
-                'id_erp_order_cancellation' => 1
-            ]
+                'id_erp_order_cancellation' => 1,
+            ],
         ];
 
         $this->apiRequestTransferMock->expects(static::atLeastOnce())
@@ -390,7 +390,6 @@ class ErpOrderCancellationApiTest extends Unit
             }
         ]}';
 
-
         $this->apiRequestTransferMock->expects(static::atLeastOnce())
             ->method('getFilter')
             ->willReturn($this->apiFilterTransferMock);
@@ -399,7 +398,7 @@ class ErpOrderCancellationApiTest extends Unit
             ->method('getCriteriaJson')
             ->willReturn($criteriaJson);
 
-        static::expectException(\Exception::class);
+        static::expectException(Exception::class);
 
         $this->model->find($this->apiRequestTransferMock);
     }
@@ -483,8 +482,8 @@ class ErpOrderCancellationApiTest extends Unit
 
         $apiCollectionData = [
             '0' => [
-                'id_erp_order_' => 1
-            ]
+                'id_erp_order_' => 1,
+            ],
         ];
 
         $this->erpOrderCancellationApiRepositoryMock->expects(static::atLeastOnce())

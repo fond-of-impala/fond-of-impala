@@ -61,7 +61,7 @@ class ErpOrderCancellationApiToApiQueryBuilderQueryContainerBridgeTest extends U
             ->getMock();
 
         $this->bridge = new ErpOrderCancellationApiToApiQueryBuilderQueryContainerBridge(
-            $this->apiQueryBuilderQueryContainerMock
+            $this->apiQueryBuilderQueryContainerMock,
         );
     }
 
@@ -70,7 +70,6 @@ class ErpOrderCancellationApiToApiQueryBuilderQueryContainerBridgeTest extends U
      */
     public function testToPropelQueryBuilderCriteria(): void
     {
-
         $this->apiQueryBuilderQueryContainerMock->expects(static::atLeastOnce())
             ->method('toPropelQueryBuilderCriteria')
             ->with($this->apiQueryBuilderQueryTransferMock)
@@ -96,5 +95,4 @@ class ErpOrderCancellationApiToApiQueryBuilderQueryContainerBridgeTest extends U
 
         static::assertEquals($this->modelCriteriaMock, $modelCriteria);
     }
-
 }
