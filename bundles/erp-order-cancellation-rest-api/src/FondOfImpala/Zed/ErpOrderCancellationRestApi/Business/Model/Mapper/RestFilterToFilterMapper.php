@@ -68,7 +68,9 @@ class RestFilterToFilterMapper implements RestFilterToFilterMapperInterface
             $erpOrderCancellationFilterTransfer->addId($attributes->getUuid());
         }
 
-        return $erpOrderCancellationFilterTransfer->setOriginatorReference($attributes->getOriginatorReference());
+        return $erpOrderCancellationFilterTransfer
+            ->setOriginatorReference($attributes->getOriginatorReference())
+            ->setFkOriginator($attributes->getOriginator()->getIdCustomer());
     }
 
     /**
