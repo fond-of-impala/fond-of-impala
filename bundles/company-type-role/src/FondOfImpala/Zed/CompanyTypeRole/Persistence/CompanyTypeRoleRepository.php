@@ -72,12 +72,12 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
         // @phpstan-ignore-next-line
         return SpyCompanyRoleQuery::create()
             ->useSpyCompanyRoleToPermissionQuery()
-            ->innerJoinPermission()
+                ->innerJoinPermission()
             ->endUse()
             ->useCompanyQuery()
-            ->useFoiCompanyTypeQuery()
-            ->filterByName($companyTypeName)
-            ->endUse()
+                ->useFoiCompanyTypeQuery()
+                    ->filterByName($companyTypeName)
+                ->endUse()
             ->endUse()
             ->filterByName($companyRoleName)
             ->orderBy(SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE)
@@ -134,7 +134,7 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
     ): CompanyUserCollectionTransfer {
         $spyCompanyUsers = SpyCompanyUserQuery::create()
             ->useSpyCompanyRoleToCompanyUserQuery()
-            ->filterByFkCompanyRole($companyRoleId)
+                ->filterByFkCompanyRole($companyRoleId)
             ->endUse()
             ->find();
 
