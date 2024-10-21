@@ -109,7 +109,7 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
             $configCompanyRoles,
         );
 
-        print "remove roles from:" . $companyTransfer->getName() . "\n";
+        print 'remove roles from:' . $companyTransfer->getName() . "\n";
 
         $companyRoleCollectionTransfer = $this->addCompanyRoles(
             $companyTransfer,

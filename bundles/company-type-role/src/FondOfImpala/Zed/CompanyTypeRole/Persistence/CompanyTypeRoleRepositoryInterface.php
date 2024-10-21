@@ -58,9 +58,9 @@ interface CompanyTypeRoleRepositoryInterface
     public function getCompanyCount(): int;
 
     /**
-     * @param CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+     * @param \Generated\Shared\Transfer\CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
      *
-     * @return CompanyCollectionTransfer
+     * @return \Generated\Shared\Transfer\CompanyCollectionTransfer
      */
     public function getCompanyCollection(
         CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer

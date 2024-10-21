@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade;
 
 use Generated\Shared\Transfer\CompanyCollectionTransfer;
-use Generated\Shared\Transfer\CompanyCriteriaFilterTransfer;
 use Spryker\Zed\Company\Business\CompanyFacadeInterface;
 
 class CompanyTypeRoleToCompanyFacadeBridge implements CompanyTypeRoleToCompanyFacadeInterface
