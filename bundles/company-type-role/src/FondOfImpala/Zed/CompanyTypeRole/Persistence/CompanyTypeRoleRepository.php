@@ -2,10 +2,13 @@
 
 namespace FondOfImpala\Zed\CompanyTypeRole\Persistence;
 
+use Generated\Shared\Transfer\CompanyCollectionTransfer;
+use Generated\Shared\Transfer\CompanyCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
+use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyRole\Persistence\Base\SpyCompanyRoleQuery;
 use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
 use Orm\Zed\CompanyUser\Persistence\Map\SpyCompanyUserTableMap;
@@ -131,7 +134,7 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
     ): CompanyUserCollectionTransfer {
         $spyCompanyUsers = SpyCompanyUserQuery::create()
             ->useSpyCompanyRoleToCompanyUserQuery()
-                ->filterByFkCompanyRole($companyRoleId)
+            ->filterByFkCompanyRole($companyRoleId)
             ->endUse()
             ->find();
 
@@ -150,5 +153,62 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
     public function getCompanyCount(): int
     {
         return $this->getFactory()->getCompanyQuery()->select(SpyCompanyTableMap::COL_ID_COMPANY)->count();
+    }
+
+    /**
+     * @param CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+     *
+     * @return CompanyCollectionTransfer
+     */
+    public function getCompanyCollection(
+        CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+    ): CompanyCollectionTransfer {
+        $companyQuery = $this->getFactory()
+            ->getCompanyQuery();
+
+        $companyQuery = $this->setCompanyFilters(
+            $companyQuery,
+            $companyCriteriaFilterTransfer,
+        );
+
+        return $this->getFactory()
+            ->createCompanyMapper()
+            ->mapCompanyEntityCollectionToCompanyCollectionTransfer($companyQuery->find());
+    }
+
+    /**
+     * @param \Orm\Zed\Company\Persistence\SpyCompanyQuery $companyQuery
+     * @param \Generated\Shared\Transfer\CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+     *
+     * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
+     */
+    protected function setCompanyFilters(
+        SpyCompanyQuery $companyQuery,
+        CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+    ): SpyCompanyQuery {
+        if ($companyCriteriaFilterTransfer->getIdCompany()) {
+            $companyQuery->filterByIdCompany($companyCriteriaFilterTransfer->getIdCompany());
+        }
+
+        if ($companyCriteriaFilterTransfer->getName()) {
+            $companyQuery->filterByName(sprintf('%%%s%%', $companyCriteriaFilterTransfer->getName()), Criteria::LIKE);
+            $companyQuery->setIgnoreCase(true);
+        }
+
+        if (
+            $companyCriteriaFilterTransfer->getFilter()
+            && $companyCriteriaFilterTransfer->getFilter()->getLimit()
+        ) {
+            $companyQuery->limit($companyCriteriaFilterTransfer->getFilter()->getLimit());
+        }
+
+        if (
+            $companyCriteriaFilterTransfer->getFilter()
+            && $companyCriteriaFilterTransfer->getFilter()->getOffset()
+        ) {
+            $companyQuery->offset($companyCriteriaFilterTransfer->getFilter()->getOffset());
+        }
+
+        return $companyQuery;
     }
 }

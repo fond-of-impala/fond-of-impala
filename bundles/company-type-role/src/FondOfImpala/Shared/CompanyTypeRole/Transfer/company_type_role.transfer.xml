@@ -8,6 +8,10 @@
         <property name="foreignKeys" type="array" singular="foreignKeys"/>
     </transfer>
 
+    <transfer name="CompanyCriteriaFilter">
+        <property name="offset" type="int" />
+    </transfer>
+
     <transfer name="CompanyType">
         <property name="name" type="string" />
     </transfer>

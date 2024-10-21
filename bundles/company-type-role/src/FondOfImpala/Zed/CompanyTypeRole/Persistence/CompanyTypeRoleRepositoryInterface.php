@@ -2,6 +2,8 @@
 
 namespace FondOfImpala\Zed\CompanyTypeRole\Persistence;
 
+use Generated\Shared\Transfer\CompanyCollectionTransfer;
+use Generated\Shared\Transfer\CompanyCriteriaFilterTransfer;
 use Generated\Shared\Transfer\CompanyRoleCollectionTransfer;
 use Generated\Shared\Transfer\CompanyUserCollectionTransfer;
 
@@ -54,4 +56,13 @@ interface CompanyTypeRoleRepositoryInterface
      * @return int
      */
     public function getCompanyCount(): int;
+
+    /**
+     * @param CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+     *
+     * @return CompanyCollectionTransfer
+     */
+    public function getCompanyCollection(
+        CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
+    ): CompanyCollectionTransfer;
 }

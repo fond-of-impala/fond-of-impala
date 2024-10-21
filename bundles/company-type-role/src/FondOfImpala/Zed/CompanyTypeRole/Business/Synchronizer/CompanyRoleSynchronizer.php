@@ -65,13 +65,14 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
         while ($companyCount > $offset) {
             $filter = (new FilterTransfer())->setLimit($limit)->setOffset($offset);
             $companyCriteriaFilterTransfer = (new CompanyCriteriaFilterTransfer())->setFilter($filter);
-            $companyCollectionTransfer = $this->companyFacade->getCompanyCollection($companyCriteriaFilterTransfer);
+            $companyCollectionTransfer = $this->repository->getCompanyCollection($companyCriteriaFilterTransfer);
 
             foreach ($companyCollectionTransfer->getCompanies() as $companyTransfer) {
                 $companyRoleCollectionTransfer = $this->getCompanyRoleCollection($companyTransfer);
 
                 $this->setCompanyRoles($companyTransfer, $companyRoleCollectionTransfer);
             }
+
             unset($companyCollectionTransfer);
             $offset += $limit;
         }
@@ -100,12 +101,15 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
         CompanyRoleCollectionTransfer $currentCompanyRoleCollectionTransfer
     ): CompanyRoleCollectionTransfer {
         $companyType = $this->companyTypeFacade->findCompanyTypeByIdCompany($companyTransfer);
+
         $configCompanyRoles = $this->getConfigCompanyRoles($companyType->getName());
 
         $companyRoleCollectionTransfer = $this->removeCompanyRoles(
             $currentCompanyRoleCollectionTransfer,
             $configCompanyRoles,
         );
+
+        print "remove roles from:" . $companyTransfer->getName() . "\n";
 
         $companyRoleCollectionTransfer = $this->addCompanyRoles(
             $companyTransfer,
