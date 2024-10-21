@@ -25,19 +25,4 @@ class CompanyTypeRoleToCompanyFacadeBridge implements CompanyTypeRoleToCompanyFa
     {
         return $this->companyFacade->getCompanies();
     }
-
-    /**
-     * Specification:
-     * - Finds companies according to criteria from CompanyCriteriaFilterTransfer.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyCollectionTransfer
-     */
-    public function getCompanyCollection(CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer): CompanyCollectionTransfer
-    {
-        return $this->companyFacade->getCompanyCollection($companyCriteriaFilterTransfer);
-    }
 }

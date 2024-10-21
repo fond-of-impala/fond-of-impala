@@ -11,16 +11,4 @@ interface CompanyTypeRoleToCompanyFacadeInterface
      * @return \Generated\Shared\Transfer\CompanyCollectionTransfer
      */
     public function getCompanies(): CompanyCollectionTransfer;
-
-    /**
-     * Specification:
-     * - Finds companies according to criteria from CompanyCriteriaFilterTransfer.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyCollectionTransfer
-     */
-    public function getCompanyCollection(CompanyCriteriaFilterTransfer $companyCriteriaFilterTransfer): CompanyCollectionTransfer;
 }
