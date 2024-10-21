@@ -101,15 +101,12 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
         CompanyRoleCollectionTransfer $currentCompanyRoleCollectionTransfer
     ): CompanyRoleCollectionTransfer {
         $companyType = $this->companyTypeFacade->findCompanyTypeByIdCompany($companyTransfer);
-
         $configCompanyRoles = $this->getConfigCompanyRoles($companyType->getName());
 
         $companyRoleCollectionTransfer = $this->removeCompanyRoles(
             $currentCompanyRoleCollectionTransfer,
             $configCompanyRoles,
         );
-
-        print 'remove roles from:' . $companyTransfer->getName() . "\n";
 
         $companyRoleCollectionTransfer = $this->addCompanyRoles(
             $companyTransfer,
