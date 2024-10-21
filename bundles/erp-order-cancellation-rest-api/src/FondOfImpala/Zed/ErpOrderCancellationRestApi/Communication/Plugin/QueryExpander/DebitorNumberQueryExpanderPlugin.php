@@ -9,6 +9,16 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 class DebitorNumberQueryExpanderPlugin implements ErpOrderCancellationQueryExpanderPluginInterface
 {
     /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
+     *
+     * @return bool
+     */
+    public function isApplicable(ErpOrderCancellationFilterTransfer $filterTransfer): bool
+    {
+        return count($filterTransfer->getDebitorNumbers()) !== 0;
+    }
+
+    /**
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery $query
      * @param \Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer $filterTransfer
      *
@@ -18,10 +28,6 @@ class DebitorNumberQueryExpanderPlugin implements ErpOrderCancellationQueryExpan
         FoiErpOrderCancellationQuery $query,
         ErpOrderCancellationFilterTransfer $filterTransfer
     ): FoiErpOrderCancellationQuery {
-        if (count($filterTransfer->getDebitorNumbers()) === 0) {
-            return $query;
-        }
-
         return $query->filterByDebitorNumber_In($filterTransfer->getDebitorNumbers());
     }
 }

@@ -8,7 +8,9 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataM
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapper;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionChecker;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiDependencyProvider;
 use Spryker\Shared\Log\LoggerTrait;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
@@ -27,8 +29,10 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new CancellationManager(
             $this->getErpOrderCancellationFacade(),
+            $this->getErpOrderFacade(),
             $this->getRepository(),
             $this->createRestDataMapper(),
+            $this->createPermissionChecker(),
             $this->createRestFilterToFilterMapper(),
             $this->getLogger(),
         );
@@ -40,6 +44,14 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     public function createRestDataMapper(): RestDataMapperInterface
     {
         return new RestDataMapper();
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionChecker
+     */
+    public function createPermissionChecker(): PermissionChecker
+    {
+        return new PermissionChecker($this->getErpOrderCancellationPermissionPlugins());
     }
 
     /**
@@ -59,10 +71,26 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface
+     */
+    protected function getErpOrderFacade(): ErpOrderCancellationRestApiToErpOrderFacadeInterface
+    {
+        return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::FACADE_ERP_ORDER);
+    }
+
+    /**
      * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface>
      */
     protected function getRestFilterToFilterMapperExpanderPlugins(): array
     {
         return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::PLUGINS_ERP_ORDER_CANCELLATION_REST_FILTER_TO_FILTER_MAPPER_EXPANDER);
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationPermissionPluginInterface>
+     */
+    protected function getErpOrderCancellationPermissionPlugins(): array
+    {
+        return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::PLUGINS_ERP_ORDER_CANCELLATION_PERMISSION);
     }
 }

@@ -17,6 +17,7 @@
         <property name="customer" type="Customer" />
         <property name="internalCustomer" type="Customer" />
         <property name="originatorReference" type="string" />
+        <property name="originator" type="RestCustomer" />
         <property name="cancellationItems" singular="cancellationItem" type="RestCancellationItem[]" />
     </transfer>
 
@@ -32,9 +33,15 @@
         <property name="createdAt" type="string" />
         <property name="updatedAt" type="string" />
         <property name="customer" type="RestCustomer" />
+        <property name="erpOrder" type="ErpOrder" />
         <property name="internalCustomer" type="RestCustomer" />
         <property name="originatorReference" type="string" />
+        <property name="originator" type="RestCustomer" />
         <property name="cancellationItems" singular="cancellationItem" type="RestCancellationItem[]" />
+    </transfer>
+
+    <transfer name="ErpOrderCancellation">
+        <property name="uuid" type="string"/>
     </transfer>
 
     <transfer name="RestCustomer">
@@ -112,6 +119,7 @@
         <property name="offset" type="int" />
         <property name="limit" type="int" />
         <property name="originatorReference" type="string" />
+        <property name="fkOriginator" type="int" />
         <property name="sorting" singular="sort" type="ErpOrderCancellationFilterSort[]" />
         <property name="customerReferences" singular="customerReference" type="array" />
         <property name="internalCustomerReferences" singular="internalCustomerReference" type="array" />
