@@ -17,6 +17,7 @@
         <property name="error" type="string"/>
         <property name="erpOrderReference" type="string"/>
         <property name="erpOrderExternalReference" type="string"/>
+        <property name="amount" type="int"/>
         <property name="createdAt" type="int"/>
         <property name="updatedAt" type="int"/>
     </transfer>

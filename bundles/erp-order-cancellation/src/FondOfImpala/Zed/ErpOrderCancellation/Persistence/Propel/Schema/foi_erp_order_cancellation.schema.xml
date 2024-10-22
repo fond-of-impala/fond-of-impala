@@ -10,6 +10,7 @@
         <column name="debitor_number" required="true" size="35" type="VARCHAR"/>
         <column name="cancellation_number" required="true" size="35" type="VARCHAR"/>
         <column name="external_cancellation_number" required="false" size="35" type="VARCHAR"/>
+        <column name="amount" required="false" type="INTEGER"/>
         <column name="reason_for_cancellation" required="false" size="255" type="VARCHAR"/>
         <column name="error" required="false" size="255" type="VARCHAR"/>
         <column name="state" type="ENUM" valueSet="new, ready, approved, rejected, processed, error" default="new" required="false"/>
