@@ -65,13 +65,14 @@ class CompanyRoleSynchronizer implements CompanyRoleSynchronizerInterface
         while ($companyCount > $offset) {
             $filter = (new FilterTransfer())->setLimit($limit)->setOffset($offset);
             $companyCriteriaFilterTransfer = (new CompanyCriteriaFilterTransfer())->setFilter($filter);
-            $companyCollectionTransfer = $this->companyFacade->getCompanyCollection($companyCriteriaFilterTransfer);
+            $companyCollectionTransfer = $this->repository->getCompanyCollection($companyCriteriaFilterTransfer);
 
             foreach ($companyCollectionTransfer->getCompanies() as $companyTransfer) {
                 $companyRoleCollectionTransfer = $this->getCompanyRoleCollection($companyTransfer);
 
                 $this->setCompanyRoles($companyTransfer, $companyRoleCollectionTransfer);
             }
+
             unset($companyCollectionTransfer);
             $offset += $limit;
         }
