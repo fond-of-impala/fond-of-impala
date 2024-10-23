@@ -18,7 +18,7 @@ abstract class AbstractErpOrderCancellationMailTypePlugin extends AbstractPlugin
     /**
      * @var string
      */
-    public const MAIL_TYPE = 'notify-approved-erp-order-cancellation';
+    public const MAIL_TYPE = 'mail.erp.order.cancellation';
 
     /**
      * @return string
@@ -48,21 +48,37 @@ abstract class AbstractErpOrderCancellationMailTypePlugin extends AbstractPlugin
      *
      * @return $this
      */
-    abstract protected function setSubject(MailBuilderInterface $mailBuilder);
+    protected function setSubject(MailBuilderInterface $mailBuilder)
+    {
+        $mailBuilder->setSubject(sprintf('%s.subject', $this->getName()));
+
+        return $this;
+    }
+
 
     /**
      * @param \Spryker\Zed\Mail\Business\Model\Mail\Builder\MailBuilderInterface $mailBuilder
      *
      * @return $this
      */
-    abstract protected function setHtmlTemplate(MailBuilderInterface $mailBuilder);
+    protected function setHtmlTemplate(MailBuilderInterface $mailBuilder)
+    {
+        $mailBuilder->setHtmlTemplate('ErpOrderCancellationMailConnector/Mail/notify_erp_order_cancellation.html.twig');
+
+        return $this;
+    }
 
     /**
      * @param \Spryker\Zed\Mail\Business\Model\Mail\Builder\MailBuilderInterface $mailBuilder
      *
      * @return $this
      */
-    abstract protected function setTextTemplate(MailBuilderInterface $mailBuilder);
+    protected function setTextTemplate(MailBuilderInterface $mailBuilder)
+    {
+        $mailBuilder->setTextTemplate('ErpOrderCancellationMailConnector/Mail/notify_erp_order_cancellation.text.twig');
+
+        return $this;
+    }
 
     /**
      * @param \Spryker\Zed\Mail\Business\Model\Mail\Builder\MailBuilderInterface $mailBuilder
