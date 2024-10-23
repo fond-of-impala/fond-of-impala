@@ -2,13 +2,11 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence;
 
-use ArrayObject;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\ErpOrderCancellationMailConnectorConfig;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
 use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery;
-use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleToCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
@@ -23,10 +21,8 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
     /**
      * @param string $debtorNumber
      * @param array $roleNames
+     *
      * @return array
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getMailAddressesByDebtorNumberAndRoleNames(string $debtorNumber, array $roleNames): array
     {
@@ -42,7 +38,6 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
             ->endUse()
             ->select(SpyCustomerTableMap::COL_EMAIL);
 
-
         $data = $customerQuery->find();
 
         if ($data->count() === 0) {
@@ -55,9 +50,8 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
     /**
      * @param array $roleNames
      * @param string $debtorNumber
+     *
      * @return array
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getCompanyRoleIdsByNameAndDebtorNumber(array $roleNames, string $debtorNumber): array
     {
@@ -67,7 +61,6 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
                     ->endUse()
                     ->filterByName_In($roleNames)
                     ->select(SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE);
-
 
         $data = $companyRoleQuery->find();
 
@@ -80,9 +73,8 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
 
     /**
      * @param int $idCustomer
+     *
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getCustomerByIdCustomer(int $idCustomer): ?CustomerTransfer
     {
@@ -97,7 +89,6 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
 
     /**
      * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function getCompanyQuery(): SpyCompanyQuery
     {
@@ -114,7 +105,6 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
 
     /**
      * @return \Orm\Zed\Customer\Persistence\SpyCustomerQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     protected function getCustomerQuery(): SpyCustomerQuery
     {
@@ -128,6 +118,7 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
     {
         /** @var \FondOfImpala\Zed\ErpOrderCancellationMailConnector\ErpOrderCancellationMailConnectorConfig $config */
         $config = $this->getFactory()->getConfig();
+
         return $config;
     }
 }

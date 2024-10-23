@@ -9,6 +9,7 @@ interface ErpOrderCancellationMailConnectorFacadeInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationMailConfigResponseTransfer
      */
     public function handleMails(ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer): ErpOrderCancellationMailConfigResponseTransfer;

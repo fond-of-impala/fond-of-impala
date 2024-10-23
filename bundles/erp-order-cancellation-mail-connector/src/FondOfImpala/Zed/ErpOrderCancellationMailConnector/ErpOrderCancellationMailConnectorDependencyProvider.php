@@ -2,14 +2,8 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector;
 
-use ArrayObject;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToLocaleFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToMailFacadeBridge;
-use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Exception\WrongInterfaceException;
-use FondOfImpala\Zed\ErpOrderCancellationMailConnectorExtension\Dependency\Plugin\ErpOrderCancellationMailConnectorItemPostSavePluginInterface;
-use FondOfImpala\Zed\ErpOrderCancellationMailConnectorExtension\Dependency\Plugin\ErpOrderCancellationMailConnectorItemPreSavePluginInterface;
-use FondOfImpala\Zed\ErpOrderCancellationMailConnectorExtension\Dependency\Plugin\ErpOrderCancellationMailConnectorPostSavePluginInterface;
-use FondOfImpala\Zed\ErpOrderCancellationMailConnectorExtension\Dependency\Plugin\ErpOrderCancellationMailConnectorPreSavePluginInterface;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
@@ -145,5 +139,4 @@ class ErpOrderCancellationMailConnectorDependencyProvider extends AbstractBundle
 
         return $container;
     }
-
 }

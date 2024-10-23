@@ -23,7 +23,10 @@ interface ErpOrderCancellationPluginExecutorInterface
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer
      */
-    public function executePostTransactionPlugins(ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer): ErpOrderCancellationResponseTransfer;
+    public function executePostTransactionPlugins(
+        ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer
+    ): ErpOrderCancellationResponseTransfer;
 }

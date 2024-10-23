@@ -9,6 +9,7 @@ interface MailHandlerInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationMailConfigResponseTransfer
      */
     public function sendMail(ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer): ErpOrderCancellationMailConfigResponseTransfer;

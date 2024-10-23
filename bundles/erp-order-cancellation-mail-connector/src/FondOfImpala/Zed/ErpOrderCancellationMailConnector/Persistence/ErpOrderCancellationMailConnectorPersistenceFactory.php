@@ -18,7 +18,6 @@ class ErpOrderCancellationMailConnectorPersistenceFactory extends AbstractPersis
 {
     /**
      * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyQuery(): SpyCompanyQuery
     {
@@ -27,7 +26,6 @@ class ErpOrderCancellationMailConnectorPersistenceFactory extends AbstractPersis
 
     /**
      * @return \Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCompanyRoleQuery(): SpyCompanyRoleQuery
     {
@@ -36,7 +34,6 @@ class ErpOrderCancellationMailConnectorPersistenceFactory extends AbstractPersis
 
     /**
      * @return \Orm\Zed\Customer\Persistence\SpyCustomerQuery
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getCustomerQuery(): SpyCustomerQuery
     {

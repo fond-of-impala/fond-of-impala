@@ -55,7 +55,6 @@ abstract class AbstractErpOrderCancellationMailTypePlugin extends AbstractPlugin
         return $this;
     }
 
-
     /**
      * @param \Spryker\Zed\Mail\Business\Model\Mail\Builder\MailBuilderInterface $mailBuilder
      *
@@ -100,12 +99,11 @@ abstract class AbstractErpOrderCancellationMailTypePlugin extends AbstractPlugin
                 ->setEmail($defaultMailAddress)
                 ->setName($customerTransfer->getFirstName() . ' ' . $customerTransfer->getLastName());
             $mailTransfer->addRecipient($recipient);
-
         }
 
         $rolesToNotify = $config->getRoleNames();
 
-        if ($rolesToNotify === null || count($rolesToNotify) === 0) {
+        if (count($rolesToNotify) === 0) {
             $rolesToNotify = $this->getConfig()->getRolesToNotify();
         }
 

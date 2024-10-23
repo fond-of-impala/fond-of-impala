@@ -27,8 +27,11 @@ class ErpOrderCancellationPluginExecutor implements ErpOrderCancellationPluginEx
      * @param array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostSavePluginInterface> $erpOrderCancellationPostSavePlugins
      * @param array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostTransactionPluginInterface> $erpOrderCancellationPostTransactionPlugins
      */
-    public function __construct(array $erpOrderCancellationPreSavePlugins, array $erpOrderCancellationPostSavePlugins, array $erpOrderCancellationPostTransactionPlugins)
-    {
+    public function __construct(
+        array $erpOrderCancellationPreSavePlugins,
+        array $erpOrderCancellationPostSavePlugins,
+        array $erpOrderCancellationPostTransactionPlugins
+    ) {
         $this->erpOrderCancellationPreSavePlugins = $erpOrderCancellationPreSavePlugins;
         $this->erpOrderCancellationPostSavePlugins = $erpOrderCancellationPostSavePlugins;
         $this->erpOrderCancellationPostTransactionPlugins = $erpOrderCancellationPostTransactionPlugins;
@@ -64,10 +67,12 @@ class ErpOrderCancellationPluginExecutor implements ErpOrderCancellationPluginEx
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer
      */
-    public function executePostTransactionPlugins(ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer): ErpOrderCancellationResponseTransfer
-    {
+    public function executePostTransactionPlugins(
+        ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer
+    ): ErpOrderCancellationResponseTransfer {
         foreach ($this->erpOrderCancellationPostTransactionPlugins as $plugin) {
             $erpOrderCancellationResponseTransfer = $plugin->postTransaction($erpOrderCancellationResponseTransfer);
         }

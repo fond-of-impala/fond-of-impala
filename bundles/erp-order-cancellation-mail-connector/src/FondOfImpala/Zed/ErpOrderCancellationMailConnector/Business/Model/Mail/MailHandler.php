@@ -44,32 +44,34 @@ class MailHandler implements MailHandlerInterface
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationMailConfigResponseTransfer
      */
     public function sendMail(ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer): ErpOrderCancellationMailConfigResponseTransfer
     {
-       try {
-           $response = (new ErpOrderCancellationMailConfigResponseTransfer())
-               ->setIsSuccessful(false)
-               ->setConfig($erpOrderCancellationMailConfigTransfer);
+        $response = (new ErpOrderCancellationMailConfigResponseTransfer())
+            ->setIsSuccessful(false)
+            ->setConfig($erpOrderCancellationMailConfigTransfer);
 
-           $mailTransfer = new MailTransfer();
-           $mailTransfer->setType($erpOrderCancellationMailConfigTransfer->getTypeOrFail());
+        try {
+            $mailTransfer = new MailTransfer();
+            $mailTransfer->setType($erpOrderCancellationMailConfigTransfer->getTypeOrFail());
 
-           $customerTransfer = $erpOrderCancellationMailConfigTransfer->getRecipient();
-           if ($customerTransfer === null) {
-               $customerTransfer = $this->repository->getCustomerByIdCustomer($erpOrderCancellationMailConfigTransfer->getCancellation()->getFkCustomerRequested());
-               $mailTransfer->setCustomer($customerTransfer);
-           }
+            $customerTransfer = $erpOrderCancellationMailConfigTransfer->getRecipient();
+            if ($customerTransfer === null) {
+                $customerTransfer = $this->repository->getCustomerByIdCustomer($erpOrderCancellationMailConfigTransfer->getCancellation()->getFkCustomerRequested());
+                $mailTransfer->setCustomer($customerTransfer);
+            }
 
-           $mailTransfer->setLocale($this->localeFacade->getLocaleById($customerTransfer->getFkLocale()))
+            $mailTransfer->setLocale($this->localeFacade->getLocaleById($customerTransfer->getFkLocale()))
                ->setErpOrderCancellationMailConfig($erpOrderCancellationMailConfigTransfer);
 
             $this->mailFacade->handleMail($mailTransfer);
-        }catch (Throwable $exception) {
+            $response->setMail($mailTransfer);
+        } catch (Throwable $exception) {
             $response->setIsSuccessful(false);
         }
 
-        return $response->setMail($mailTransfer);
+        return $response;
     }
 }

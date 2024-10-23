@@ -11,7 +11,6 @@ use Spryker\Shared\Log\LoggerTrait;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
- * @method \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManagerInterface getEntityManager()
  * @method \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface getRepository()()
  */
 class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessFactory
@@ -19,7 +18,7 @@ class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessF
     use LoggerTrait;
 
     /**
-     * @return \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Writer\ErpOrderCancellationMailConnectorWriterInterface
+     * @return \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Mail\MailHandlerInterface
      */
     public function createMailHandler(): MailHandlerInterface
     {
@@ -32,7 +31,6 @@ class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessF
 
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToMailFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getMailFacade(): ErpOrderCancellationMailConnectorToMailFacadeInterface
     {
@@ -41,7 +39,6 @@ class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessF
 
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToLocaleFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getLocaleFacade(): ErpOrderCancellationMailConnectorToLocaleFacadeInterface
     {

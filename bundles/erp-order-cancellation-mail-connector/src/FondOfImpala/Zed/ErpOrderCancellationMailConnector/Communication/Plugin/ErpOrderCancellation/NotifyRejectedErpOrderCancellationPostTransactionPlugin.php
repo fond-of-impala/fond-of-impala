@@ -15,13 +15,20 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class NotifyRejectedErpOrderCancellationPostTransactionPlugin extends AbstractPlugin implements ErpOrderCancellationPostTransactionPluginInterface
 {
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer
+     */
     public function postTransaction(ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer): ErpOrderCancellationResponseTransfer
     {
         $erpOrderCancellationTransfer = $erpOrderCancellationResponseTransfer->getErpOrderCancellation();
 
-        if ($erpOrderCancellationTransfer === null
+        if (
+            $erpOrderCancellationTransfer === null
             || !$erpOrderCancellationResponseTransfer->getIsSuccessful()
-            || $erpOrderCancellationTransfer->getState() !== 'rejected') {
+            || $erpOrderCancellationTransfer->getState() !== 'rejected'
+        ) {
             return $erpOrderCancellationResponseTransfer;
         }
 
@@ -33,5 +40,4 @@ class NotifyRejectedErpOrderCancellationPostTransactionPlugin extends AbstractPl
 
         return $erpOrderCancellationResponseTransfer;
     }
-
 }

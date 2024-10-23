@@ -32,4 +32,13 @@
         <property name="erpOrderCancellationMailConfig" type="ErpOrderCancellationMailConfig"/>
     </transfer>
 
+    <transfer name="ErpOrderCancellation">
+        <property name="fkCustomerRequested" type="int"/>
+        <property name="debitorNumber" type="string"/>
+    </transfer>
+
+    <transfer name="Customer">
+        <property name="fkLocale" type="int"/>
+    </transfer>
+
 </transfers>
