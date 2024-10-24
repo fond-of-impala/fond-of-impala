@@ -150,6 +150,12 @@ class ErpOrderCancellationWriterTest extends Unit
             ->with($this->erpOrderCancellationTransferMock)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
+        $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePostTransactionPlugins')
+            ->willReturnCallback(static function (ErpOrderCancellationResponseTransfer $responseTransfer) {
+                return $responseTransfer;
+            });
+
         $responseTransfer = $this->writer->create($this->erpOrderCancellationTransferMock);
 
         static::assertTrue($responseTransfer->getIsSuccessful());
@@ -192,6 +198,12 @@ class ErpOrderCancellationWriterTest extends Unit
                 'data' => $serializedData,
             ]);
 
+        $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePostTransactionPlugins')
+            ->willReturnCallback(static function (ErpOrderCancellationResponseTransfer $responseTransfer) {
+                return $responseTransfer;
+            });
+
         $responseTransfer = $this->writer->create($this->erpOrderCancellationTransferMock);
 
         static::assertFalse($responseTransfer->getIsSuccessful());
@@ -226,6 +238,12 @@ class ErpOrderCancellationWriterTest extends Unit
             ->with($this->erpOrderCancellationTransferMock)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
+        $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePostTransactionPlugins')
+            ->willReturnCallback(static function (ErpOrderCancellationResponseTransfer $responseTransfer) {
+                return $responseTransfer;
+            });
+
         $responseTransfer = $this->writer->update($this->erpOrderCancellationTransferMock);
 
         static::assertTrue($responseTransfer->getIsSuccessful());
@@ -255,6 +273,12 @@ class ErpOrderCancellationWriterTest extends Unit
             ->method('executePreSavePlugins')
             ->with($this->erpOrderCancellationTransferMock)
             ->willThrowException($exception);
+
+        $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
+            ->method('executePostTransactionPlugins')
+            ->willReturnCallback(static function (ErpOrderCancellationResponseTransfer $responseTransfer) {
+                return $responseTransfer;
+            });
 
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
             ->method('serialize')

@@ -73,7 +73,7 @@ class ErpOrderCancellationWriter implements ErpOrderCancellationWriterInterface
                 ->setIsSuccessful(false);
         }
 
-        return $responseTransfer;
+        return $this->erpOrderCancellationPluginExecutor->executePostTransactionPlugins($responseTransfer);
     }
 
     /**
@@ -104,7 +104,7 @@ class ErpOrderCancellationWriter implements ErpOrderCancellationWriterInterface
                 ->setIsSuccessful(false);
         }
 
-        return $responseTransfer;
+        return $this->erpOrderCancellationPluginExecutor->executePostTransactionPlugins($responseTransfer);
     }
 
     /**

@@ -52,10 +52,12 @@ class ErpOrderCancellationPluginExecutorTest extends Unit
 
         $erpOrderCancellationPreSavePlugins = [$this->erpOrderCancellationPreSavePluginMock];
         $erpOrderCancellationPostSavePlugins = [$this->erpOrderCancellationPostSavePluginMock];
+        $erpOrderCancellationPostTransactionPlugins = [];
 
         $this->pluginExecutor = new ErpOrderCancellationPluginExecutor(
             $erpOrderCancellationPreSavePlugins,
             $erpOrderCancellationPostSavePlugins,
+            $erpOrderCancellationPostTransactionPlugins,
         );
     }
 

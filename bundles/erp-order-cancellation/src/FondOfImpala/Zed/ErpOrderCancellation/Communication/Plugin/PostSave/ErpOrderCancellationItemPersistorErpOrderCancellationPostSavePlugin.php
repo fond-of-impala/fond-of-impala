@@ -7,10 +7,6 @@ use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * Class ErpOrderCancellationAddressPreSavePlugin
- *
- * @package FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PreSave
- *
  * @method \FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacadeInterface getFacade()
  */
 class ErpOrderCancellationItemPersistorErpOrderCancellationPostSavePlugin extends AbstractPlugin implements ErpOrderCancellationPostSavePluginInterface
