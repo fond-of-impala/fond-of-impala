@@ -16,13 +16,16 @@ class ErpOrderCancellationExternalCustomerExpanderPlugin extends AbstractPlugin 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
-    public function expand(ErpOrderCancellationTransfer $erpOrderCancellationTransfer, RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer): ErpOrderCancellationTransfer
-    {
+    public function expand(
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer,
+        RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+    ): ErpOrderCancellationTransfer {
         $fkCustomerRequested = $erpOrderCancellationTransfer->getFkCustomerRequested();
 
-        if ($fkCustomerRequested !== null){
+        if ($fkCustomerRequested !== null) {
             return $erpOrderCancellationTransfer;
         }
 
@@ -31,5 +34,4 @@ class ErpOrderCancellationExternalCustomerExpanderPlugin extends AbstractPlugin 
 
         return $erpOrderCancellationTransfer->setFkCustomerRequested($originator->getIdCustomer());
     }
-
 }

@@ -8,7 +8,7 @@ use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 class ErpOrderCancellationExpander implements ErpOrderCancellationExpanderInterface
 {
     /**
-     * @var array|\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationExpanderPluginInterface[]
+     * @var array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationExpanderPluginInterface>
      */
     protected array $erpOrderCancellationExpanderPlugins;
 
@@ -23,10 +23,13 @@ class ErpOrderCancellationExpander implements ErpOrderCancellationExpanderInterf
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
-    public function expand(ErpOrderCancellationTransfer $erpOrderCancellationTransfer, RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer): ErpOrderCancellationTransfer
-    {
+    public function expand(
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer,
+        RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+    ): ErpOrderCancellationTransfer {
         foreach ($this->erpOrderCancellationExpanderPlugins as $erpOrderCancellationExpanderPlugin) {
             $erpOrderCancellationTransfer = $erpOrderCancellationExpanderPlugin->expand($erpOrderCancellationTransfer, $restErpOrderCancellationRequestTransfer);
         }

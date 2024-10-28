@@ -67,8 +67,10 @@ interface ErpOrderCancellationRestApiRepositoryInterface
     /**
      * @param int $idCustomer
      * @param array<int> $internalCompanyIds
-     * @return bool
+     *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return bool
      */
     public function isInternalCustomer(int $idCustomer, array $internalCompanyIds): bool;
 }
