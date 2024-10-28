@@ -48,11 +48,11 @@ class ErpOrderCancellationInternalCustomerExpanderPlugin extends AbstractPlugin 
 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
      * @return bool
      */
     protected function isInternalState(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): bool
     {
         return in_array($erpOrderCancellationTransfer->getState(), $this->getConfig()->getInternalStates(), true);
     }
-
 }
