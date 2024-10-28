@@ -10,6 +10,7 @@
   ],
   "require": {
     "php": ">=8.1",
+    "fond-of-impala/company-type": "^1.0.0",
     "fond-of-impala/erp-order-cancellation": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-rest-api-extension": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-extension": "^1.0.0",

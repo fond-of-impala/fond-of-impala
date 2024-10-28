@@ -16,21 +16,23 @@ class ErpOrderCancellationInternalCustomerExpanderPlugin extends AbstractPlugin 
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
-    public function expand(ErpOrderCancellationTransfer $erpOrderCancellationTransfer, RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer): ErpOrderCancellationTransfer
-    {
+    public function expand(
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer,
+        RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
+    ): ErpOrderCancellationTransfer {
         if (!$this->isInternalState($erpOrderCancellationTransfer)) {
             return $erpOrderCancellationTransfer->setFkCustomerInternal(null);
         }
-
         $fkCustomerInternal = $erpOrderCancellationTransfer->getFkCustomerInternal();
 
-        if ($fkCustomerInternal !== null && $this->getRepository()->isInternalCustomer($fkCustomerInternal, $this->getConfig()->getInternalCompanyTypeIds())){
+        if ($fkCustomerInternal !== null && $this->getRepository()->isInternalCustomer($fkCustomerInternal, $this->getConfig()->getInternalCompanyTypeIds())) {
             return $erpOrderCancellationTransfer->setFkCustomerInternal(null);
         }
 
-        if ($fkCustomerInternal !== null){
+        if ($fkCustomerInternal !== null) {
             return $erpOrderCancellationTransfer;
         }
 
