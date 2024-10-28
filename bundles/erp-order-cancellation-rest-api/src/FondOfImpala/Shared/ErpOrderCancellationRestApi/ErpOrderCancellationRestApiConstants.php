@@ -88,4 +88,9 @@ interface ErpOrderCancellationRestApiConstants
      * @var string
      */
     public const INTERNAL_COMPANY_TYPE_IDS = 'FOI:ERP_ORDER_CANCELLATION:INTERNAL_COMPANY_TYPE_IDS';
+
+    /**
+     * @var string
+     */
+    public const INTERNAL_STATES = 'FOI:ERP_ORDER_CANCELLATION:INTERNAL_STATES';
 }

@@ -17,4 +17,12 @@ class ErpOrderCancellationRestApiConfig extends AbstractBundleConfig
     {
         return $this->get(ErpOrderCancellationRestApiConstants::INTERNAL_COMPANY_TYPE_IDS, []);
     }
+
+    /**
+     * @return array<string>
+     */
+    public function getInternalStates(): array
+    {
+        return $this->get(ErpOrderCancellationRestApiConstants::INTERNAL_STATES, []);
+    }
 }
