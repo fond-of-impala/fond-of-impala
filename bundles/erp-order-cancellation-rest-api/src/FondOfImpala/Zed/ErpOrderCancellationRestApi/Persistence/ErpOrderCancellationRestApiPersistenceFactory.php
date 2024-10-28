@@ -8,6 +8,7 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Expander\Que
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Expander\QueryExpanderInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Mapper\EntityToTransferMapper;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\Propel\Mapper\EntityToTransferMapperInterface;
+use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\ErpOrder\Persistence\ErpOrderQuery;
@@ -48,6 +49,15 @@ class ErpOrderCancellationRestApiPersistenceFactory extends AbstractPersistenceF
     public function getCompanyUserQuery(): SpyCompanyUserQuery
     {
         return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::QUERY_SPY_COMPANY_USER);
+    }
+
+    /**
+     * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function getCompanyQuery(): SpyCompanyQuery
+    {
+        return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::QUERY_SPY_COMPANY);
     }
 
     /**

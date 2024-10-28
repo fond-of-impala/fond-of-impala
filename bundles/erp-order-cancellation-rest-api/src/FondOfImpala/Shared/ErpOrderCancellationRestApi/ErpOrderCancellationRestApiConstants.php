@@ -83,4 +83,9 @@ interface ErpOrderCancellationRestApiConstants
      * @var string
      */
     public const ERROR_CODE_GET = '4000';
+
+    /**
+     * @var string
+     */
+    public const INTERNAL_COMPANY_TYPE_IDS = 'FOI:ERP_ORDER_CANCELLATION:INTERNAL_COMPANY_TYPE_IDS';
 }

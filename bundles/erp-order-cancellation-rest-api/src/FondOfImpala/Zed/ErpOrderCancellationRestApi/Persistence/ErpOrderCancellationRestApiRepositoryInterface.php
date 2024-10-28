@@ -63,4 +63,12 @@ interface ErpOrderCancellationRestApiRepositoryInterface
      * @return \Generated\Shared\Transfer\CompanyUserTransfer
      */
     public function getCompanyUserByIdCustomerAndDebtorNumber(int $idCustomer, string $debtorNumber): CompanyUserTransfer;
+
+    /**
+     * @param int $idCustomer
+     * @param array<int> $internalCompanyIds
+     * @return bool
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
+    public function isInternalCustomer(int $idCustomer, array $internalCompanyIds): bool;
 }

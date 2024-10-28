@@ -4,6 +4,8 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business;
 
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\CancellationManager;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\CancellationManagerInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpander;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapper;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapper;
@@ -43,7 +45,19 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
      */
     public function createRestDataMapper(): RestDataMapperInterface
     {
-        return new RestDataMapper();
+        return new RestDataMapper(
+            $this->createErpOrderCancellationExpander()
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface
+     */
+    public function createErpOrderCancellationExpander(): ErpOrderCancellationExpanderInterface
+    {
+        return new ErpOrderCancellationExpander(
+            $this->getErpOrderCancellationExpanderPlugins()
+        );
     }
 
     /**
@@ -92,5 +106,13 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     protected function getErpOrderCancellationPermissionPlugins(): array
     {
         return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::PLUGINS_ERP_ORDER_CANCELLATION_PERMISSION);
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationExpanderPluginInterface>
+     */
+    protected function getErpOrderCancellationExpanderPlugins(): array
+    {
+        return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::PLUGINS_ERP_ORDER_CANCELLATION_EXPANDER);
     }
 }
