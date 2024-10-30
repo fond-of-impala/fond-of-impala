@@ -39,13 +39,13 @@ class HandleReasonForCancellationErpOrderCancellationPreSavePlugin extends Abstr
 
     /**
      * @param string $reference
-     * @param int|null $reason
+     * @param string|null $reason
      *
      * @throws \Exception
      *
      * @return void
      */
-    public function validateReasonForCancellation(string $reference, ?int $reason): void
+    public function validateReasonForCancellation(string $reference, ?string $reason): void
     {
         if ($reason === null) {
             throw new Exception(sprintf('Reason for cancellation is required "%s"', $reference));

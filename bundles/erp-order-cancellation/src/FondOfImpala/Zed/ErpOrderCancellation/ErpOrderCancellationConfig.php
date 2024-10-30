@@ -24,7 +24,7 @@ class ErpOrderCancellationConfig extends AbstractBundleConfig
     }
 
     /**
-     * @return array<int>
+     * @return array<string>
      */
     public function getReasonForCancellation(): array
     {

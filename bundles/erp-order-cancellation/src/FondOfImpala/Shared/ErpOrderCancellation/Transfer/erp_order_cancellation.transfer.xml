@@ -12,7 +12,7 @@
         <property name="debitorNumber" type="string"/>
         <property name="cancellationNumber" type="string"/>
         <property name="externalCancellationNumber" type="string"/>
-        <property name="reasonForCancellation" type="int"/>
+        <property name="reasonForCancellation" type="string"/>
         <property name="state" type="string"/>
         <property name="error" type="string"/>
         <property name="erpOrderReference" type="string"/>
@@ -29,7 +29,7 @@
         <property name="lineId" type="int"/>
         <property name="valueBeforeCancellation" type="int"/>
         <property name="quantityBeforeCancellation" type="int"/>
-        <property name="reasonForCancellation" type="int"/>
+        <property name="reasonForCancellation" type="string"/>
         <property name="cancellationValue" type="int"/>
         <property name="cancellationQuantity" type="int"/>
         <property name="createdAt" type="int"/>
