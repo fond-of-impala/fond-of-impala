@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business;
 
+use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
@@ -10,6 +11,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\ErpOrderCancellationRestApiBusinessFactory getFactory()
+ * @method \FondOfImpala\Zed\ErpOrderCancellationRestApi\Persistence\ErpOrderCancellationRestApiEntityManagerInterface getEntityManager()()
  */
 class ErpOrderCancellationRestApiFacade extends AbstractFacade implements ErpOrderCancellationRestApiFacadeInterface
 {
@@ -63,5 +65,17 @@ class ErpOrderCancellationRestApiFacade extends AbstractFacade implements ErpOrd
         return $this->getFactory()
             ->createCancellationManager()
             ->deleteErpOrderCancellation($restErpOrderCancellationRequestTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
+     */
+    public function updateErpOrderCancellationAmount(
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+    ): ErpOrderCancellationTransfer {
+        return $this->getEntityManager()
+            ->updateErpOrderCancellationAmount($erpOrderCancellationTransfer);
     }
 }
