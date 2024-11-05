@@ -216,6 +216,7 @@
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
+    "phpunit/phpunit": "9.6.21",
     "rector/rector": "*",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
