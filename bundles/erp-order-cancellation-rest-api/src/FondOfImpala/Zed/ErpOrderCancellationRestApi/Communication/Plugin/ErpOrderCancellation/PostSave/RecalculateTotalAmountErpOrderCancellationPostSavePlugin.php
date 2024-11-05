@@ -2,10 +2,8 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\Plugin\ErpOrderCancellation\PostSave;
 
-
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostSavePluginInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
-use Spryker\Zed\Kernel\Business\AbstractFacade;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
@@ -27,6 +25,7 @@ class RecalculateTotalAmountErpOrderCancellationPostSavePlugin extends AbstractP
         }
 
         $erpOrderCancellationTransfer->setAmount($amount);
+
         return $this->getFacade()->updateErpOrderCancellationAmount($erpOrderCancellationTransfer);
     }
 }

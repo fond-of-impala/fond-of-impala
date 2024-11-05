@@ -47,9 +47,9 @@ interface ErpOrderCancellationRestApiFacadeInterface
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer;
 
     /**
-     * @param int $id
-     * @param int $amount
-     * @return void
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function updateErpOrderCancellationAmount(
         ErpOrderCancellationTransfer $erpOrderCancellationTransfer

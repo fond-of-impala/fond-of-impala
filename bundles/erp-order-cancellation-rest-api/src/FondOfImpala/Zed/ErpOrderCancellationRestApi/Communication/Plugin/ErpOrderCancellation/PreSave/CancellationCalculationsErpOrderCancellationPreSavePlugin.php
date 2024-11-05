@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\Plugin\ErpOrderCancellation\PreSave;
 
-
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPreSavePluginInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -33,7 +32,6 @@ class CancellationCalculationsErpOrderCancellationPreSavePlugin extends Abstract
                         ->setValueBeforeCancellation($item->getAmount()->getValue())
                         ->setQuantityBeforeCancellation($item->getOrderedQuantity());
                 }
-
             }
         }
 

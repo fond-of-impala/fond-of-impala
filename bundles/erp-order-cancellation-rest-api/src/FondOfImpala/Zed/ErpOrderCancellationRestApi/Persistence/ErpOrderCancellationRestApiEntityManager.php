@@ -14,8 +14,10 @@ class ErpOrderCancellationRestApiEntityManager extends AbstractRepository implem
 {
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     public function updateErpOrderCancellationAmount(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationTransfer
     {
@@ -41,5 +43,4 @@ class ErpOrderCancellationRestApiEntityManager extends AbstractRepository implem
     {
         return $this->getFactory()->getErpOrderCancellationQuery()->clear();
     }
-
 }
