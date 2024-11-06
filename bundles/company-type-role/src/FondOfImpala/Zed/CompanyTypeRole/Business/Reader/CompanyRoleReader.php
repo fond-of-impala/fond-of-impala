@@ -53,6 +53,27 @@ class CompanyRoleReader implements CompanyRoleReaderInterface
     }
 
     /**
+     * @return array<\Generated\Shared\Transfer\SyncableCompanyRoleTransfer>
+     */
+    public function findEmptyPermissionSetSyncableCompanyRoles(): array
+    {
+        $syncableCompanyRoles = [];
+        $permissionSets = $this->permissionReader->getPermissionSets();
+
+        foreach ($permissionSets as $permissionSet) {
+            $syncableCompanyRole = $this->findMissingSyncableCompanyRoleByPermissionSet($permissionSet);
+
+            if ($syncableCompanyRole === null) {
+                continue;
+            }
+
+            $syncableCompanyRoles[] = $syncableCompanyRole;
+        }
+
+        return $syncableCompanyRoles;
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\PermissionSetTransfer $permissionSetTransfer
      *
      * @return \Generated\Shared\Transfer\SyncableCompanyRoleTransfer|null
@@ -78,6 +99,38 @@ class CompanyRoleReader implements CompanyRoleReaderInterface
             $companyType,
             $companyRoleName,
             $permissionKeys,
+        );
+
+        return (new SyncableCompanyRoleTransfer())->setIds($companyRolesIds)
+            ->setName($companyRoleName)
+            ->setCompanyType($companyType)
+            ->setPermissions($permissionCollectionTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\PermissionSetTransfer $permissionSetTransfer
+     *
+     * @return \Generated\Shared\Transfer\SyncableCompanyRoleTransfer|null
+     */
+    public function findMissingSyncableCompanyRoleByPermissionSet(
+        PermissionSetTransfer $permissionSetTransfer
+    ): ?SyncableCompanyRoleTransfer {
+        $companyType = $permissionSetTransfer->getCompanyType();
+        $companyRoleName = $permissionSetTransfer->getCompanyRoleName();
+        $permissionCollectionTransfer = $permissionSetTransfer->getEntries();
+
+        if (
+            $companyType === null ||
+            $companyRoleName === null ||
+            $permissionCollectionTransfer === null ||
+            $permissionCollectionTransfer->getPermissions()->count() < 1
+        ) {
+            return null;
+        }
+
+        $companyRolesIds = $this->repository->findSyncableCompanyRoleIdsWithEmptyPermissionSet(
+            $companyType,
+            $companyRoleName,
         );
 
         return (new SyncableCompanyRoleTransfer())->setIds($companyRolesIds)

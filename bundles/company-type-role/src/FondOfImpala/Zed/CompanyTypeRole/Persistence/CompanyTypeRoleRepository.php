@@ -90,6 +90,36 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
     }
 
     /**
+     * @param string $companyTypeName
+     * @param string $companyRoleName
+     *
+     * @return array<int>
+     */
+    public function findSyncableCompanyRoleIdsWithEmptyPermissionSet(
+        string $companyTypeName,
+        string $companyRoleName
+    ): array {
+
+        $query = SpyCompanyRoleQuery::create()
+            ->useSpyCompanyRoleToPermissionQuery(null, 'LEFT OUTER JOIN')->filterByIdCompanyRoleToPermission(null, Criteria::ISNULL)
+                ->joinPermission(null, 'LEFT OUTER JOIN')
+            ->endUse()
+            ->useCompanyQuery()
+                ->useFoiCompanyTypeQuery()
+                    ->filterByName($companyTypeName)
+                ->endUse()
+            ->endUse()
+            ->filterByName($companyRoleName)
+            ->orderBy(SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE)
+            ->select([SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE])
+            ->groupByIdCompanyRole();
+
+        return $query
+            ->find()
+            ->toArray();
+    }
+
+    /**
      * @param array<int> $companyRoleIds
      *
      * @return \Generated\Shared\Transfer\CompanyRoleCollectionTransfer

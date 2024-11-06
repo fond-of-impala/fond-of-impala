@@ -14,11 +14,25 @@ interface CompanyRoleReaderInterface
     public function findSyncableCompanyRoles(): array;
 
     /**
+     * @return array<\Generated\Shared\Transfer\SyncableCompanyRoleTransfer>
+     */
+    public function findEmptyPermissionSetSyncableCompanyRoles(): array;
+
+    /**
      * @param \Generated\Shared\Transfer\PermissionSetTransfer $permissionSetTransfer
      *
      * @return \Generated\Shared\Transfer\SyncableCompanyRoleTransfer|null
      */
     public function findSyncableCompanyRoleByPermissionSet(
+        PermissionSetTransfer $permissionSetTransfer
+    ): ?SyncableCompanyRoleTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\PermissionSetTransfer $permissionSetTransfer
+     *
+     * @return \Generated\Shared\Transfer\SyncableCompanyRoleTransfer|null
+     */
+    public function findMissingSyncableCompanyRoleByPermissionSet(
         PermissionSetTransfer $permissionSetTransfer
     ): ?SyncableCompanyRoleTransfer;
 
