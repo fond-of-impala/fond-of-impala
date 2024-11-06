@@ -30,6 +30,17 @@ interface CompanyTypeRoleRepositoryInterface
     ): array;
 
     /**
+     * @param string $companyTypeName
+     * @param string $companyRoleName
+     *
+     * @return array<int>
+     */
+    public function findSyncableCompanyRoleIdsWithEmptyPermissionSet(
+        string $companyTypeName,
+        string $companyRoleName
+    ): array;
+
+    /**
      * @param array<int> $companyRoleIds
      *
      * @return \Generated\Shared\Transfer\CompanyRoleCollectionTransfer
