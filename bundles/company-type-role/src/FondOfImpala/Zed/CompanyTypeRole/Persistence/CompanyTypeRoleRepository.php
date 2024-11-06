@@ -73,12 +73,12 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
         // @phpstan-ignore-next-line
         return SpyCompanyRoleQuery::create()
             ->useSpyCompanyRoleToPermissionQuery()
-                ->innerJoinPermission()
+            ->innerJoinPermission()
             ->endUse()
             ->useCompanyQuery()
-                ->useFoiCompanyTypeQuery()
-                    ->filterByName($companyTypeName)
-                ->endUse()
+            ->useFoiCompanyTypeQuery()
+            ->filterByName($companyTypeName)
+            ->endUse()
             ->endUse()
             ->filterByName($companyRoleName)
             ->orderBy(SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE)
@@ -99,21 +99,21 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
         string $companyTypeName,
         string $companyRoleName
     ): array {
-
         $query = SpyCompanyRoleQuery::create()
             ->useSpyCompanyRoleToPermissionQuery(null, 'LEFT OUTER JOIN')->filterByIdCompanyRoleToPermission(null, Criteria::ISNULL)
-                ->joinPermission(null, 'LEFT OUTER JOIN')
+            ->joinPermission(null, 'LEFT OUTER JOIN')
             ->endUse()
             ->useCompanyQuery()
-                ->useFoiCompanyTypeQuery()
-                    ->filterByName($companyTypeName)
-                ->endUse()
+            ->useFoiCompanyTypeQuery()
+            ->filterByName($companyTypeName)
+            ->endUse()
             ->endUse()
             ->filterByName($companyRoleName)
             ->orderBy(SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE)
             ->select([SpyCompanyRoleTableMap::COL_ID_COMPANY_ROLE])
             ->groupByIdCompanyRole();
 
+        // @phpstan-ignore-next-line
         return $query
             ->find()
             ->toArray();
@@ -165,7 +165,7 @@ class CompanyTypeRoleRepository extends AbstractRepository implements CompanyTyp
     ): CompanyUserCollectionTransfer {
         $spyCompanyUsers = SpyCompanyUserQuery::create()
             ->useSpyCompanyRoleToCompanyUserQuery()
-                ->filterByFkCompanyRole($companyRoleId)
+            ->filterByFkCompanyRole($companyRoleId)
             ->endUse()
             ->find();
 

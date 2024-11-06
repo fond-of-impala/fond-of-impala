@@ -34,6 +34,7 @@ class PermissionSynchronizer implements PermissionSynchronizerInterface
 
     /**
      * @param array<\Generated\Shared\Transfer\SyncableCompanyRoleTransfer> $syncableCompanyRoles
+     *
      * @return void
      */
     protected function handleSyncableCompanyRoles(array $syncableCompanyRoles): void
