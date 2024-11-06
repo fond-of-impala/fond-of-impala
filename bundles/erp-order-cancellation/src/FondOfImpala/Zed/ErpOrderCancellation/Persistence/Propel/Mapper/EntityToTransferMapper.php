@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Mapper;
 
 use DateTime;
 use Exception;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation;
@@ -57,6 +58,16 @@ class EntityToTransferMapper implements EntityToTransferMapperInterface
             foreach ($erpOrderCancellation->getFoiErpOrderCancellationItems() as $erpOrderCancellationItem) {
                 $erpOrderCancellationTransfer->addCancellationItem($this->fromEprOrderCancellationItemToTransfer($erpOrderCancellationItem));
             }
+        }
+
+        $customer = $erpOrderCancellation->getSpyCustomerRelatedByFkCustomerRequested();
+        if ($customer !== null) {
+            $erpOrderCancellationTransfer->setCustomer((new CustomerTransfer())->fromArray($customer->toArray(), true));
+        }
+
+        $internalCustomer = $erpOrderCancellation->getSpyCustomerRelatedByFkCustomerInternal();
+        if ($internalCustomer !== null) {
+            $erpOrderCancellationTransfer->setCustomerInternal((new CustomerTransfer())->fromArray($internalCustomer->toArray(), true));
         }
 
         return $erpOrderCancellationTransfer
