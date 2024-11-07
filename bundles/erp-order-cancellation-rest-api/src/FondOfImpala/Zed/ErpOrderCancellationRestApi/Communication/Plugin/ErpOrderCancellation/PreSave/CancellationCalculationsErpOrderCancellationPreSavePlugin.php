@@ -18,7 +18,12 @@ class CancellationCalculationsErpOrderCancellationPreSavePlugin extends Abstract
      */
     public function preSave(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationTransfer
     {
-        $erpOrder = $this->getFactory()->getErpOrderFacade()->findErpOrderByReference($erpOrderCancellationTransfer->getErpOrderReference());
+        $erpOrderReference = $erpOrderCancellationTransfer->getErpOrderReference();
+        $erpOrder = null;
+
+        if ($erpOrderReference !== null) {
+            $erpOrder = $this->getFactory()->getErpOrderFacade()->findErpOrderByReference($erpOrderReference);
+        }
 
         if ($erpOrder === null) {
             return $erpOrderCancellationTransfer;

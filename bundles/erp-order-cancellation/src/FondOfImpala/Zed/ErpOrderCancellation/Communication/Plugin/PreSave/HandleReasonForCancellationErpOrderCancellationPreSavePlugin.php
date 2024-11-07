@@ -22,7 +22,9 @@ class HandleReasonForCancellationErpOrderCancellationPreSavePlugin extends Abstr
     {
         $reasonForCancellation = $erpOrderCancellationTransfer->getReasonForCancellation();
 
-        $this->validateReasonForCancellation($erpOrderCancellationTransfer->getErpOrderReference(), $reasonForCancellation);
+        if ($erpOrderCancellationTransfer->getIdErpOrderCancellation() === null) {
+            $this->validateReasonForCancellation($erpOrderCancellationTransfer->getErpOrderReference(), $reasonForCancellation);
+        }
 
         foreach ($erpOrderCancellationTransfer->getCancellationItems() as $cancellationItem) {
             if ($cancellationItem->getReasonForCancellation() === null) {
