@@ -114,12 +114,19 @@ class CancellationManager implements CancellationManagerInterface
             $erpOrder = $this->erpOrderFacade->findErpOrderByExternalReference($erpOrderCancellationTransfer->getErpOrderExternalReference());
 
             if ($erpOrder === null) {
-                throw new Exception(sprintf('ErpOrder with external reference "%s" not found', $erpOrderCancellationTransfer->getErpOrderExternalReference()));
+                $erpOrder = $this->erpOrderFacade->findErpOrderByReference($erpOrderCancellationTransfer->getErpOrderReference());
+            }
+
+            if ($erpOrder === null) {
+                throw new Exception(sprintf('ErpOrder with external reference "%s" or reference "%s" not found', $erpOrderCancellationTransfer->getErpOrderExternalReference(), $erpOrderCancellationTransfer->getErpOrderReference()));
             }
 
             if ($erpOrder->getFkCompanyBusinessUnit() !== $companyUser->getFkCompanyBusinessUnit()) {
                 throw new Exception(sprintf('ErpOrder does not belong to this debtor %s!', $erpOrderCancellationTransfer->getDebitorNumber()));
             }
+
+            $erpOrderCancellationTransfer->setErpOrderReference($erpOrder->getReference());
+            $erpOrderCancellationTransfer->setErpOrderExternalReference($erpOrder->getExternalReference());
 
             $erpOrderCancellationTransfer->setFkCustomerRequested($companyUser->getCustomer()->getIdCustomer())
                 ->setState(FoiErpOrderCancellationTableMap::COL_STATE_NEW);
@@ -174,6 +181,13 @@ class CancellationManager implements CancellationManagerInterface
                 if (!isset($updatedItemsCollection[$this->getItemIdentifier($item)])) {
                     $updatedItemsCollection[$this->getItemIdentifier($item)] = $item;
                 }
+            }
+
+            if (
+                ($erpOrderCancellationUpdateTransfer->getErpOrderReference() !== null && $erpOrderCancellation->getErpOrderReference() !== $erpOrderCancellationUpdateTransfer->getErpOrderReference())
+                || ($erpOrderCancellationUpdateTransfer->getErpOrderExternalReference() !== null && $erpOrderCancellation->getErpOrderExternalReference() !== $erpOrderCancellationUpdateTransfer->getErpOrderExternalReference())
+            ) {
+                throw new Exception('ErpOrderReference and/or ErpOrderExternalReference cannot be changed');
             }
 
             $erpOrderCancellation->fromArray($erpOrderCancellationUpdateTransfer->modifiedToArray(), true)->setCancellationItems(new ArrayObject($updatedItemsCollection));

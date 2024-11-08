@@ -26,6 +26,7 @@ class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessF
             $this->getRepository(),
             $this->getMailFacade(),
             $this->getLocaleFacade(),
+            $this->getLogger(),
         );
     }
 

@@ -8,6 +8,7 @@ use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCance
 use Generated\Shared\Transfer\ErpOrderCancellationMailConfigResponseTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationMailConfigTransfer;
 use Generated\Shared\Transfer\MailTransfer;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class MailHandler implements MailHandlerInterface
@@ -28,18 +29,26 @@ class MailHandler implements MailHandlerInterface
     protected ErpOrderCancellationMailConnectorRepositoryInterface $repository;
 
     /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected LoggerInterface $logger;
+
+    /**
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface $repository
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToMailFacadeInterface $mailFacade
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToLocaleFacadeInterface $localeFacade
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         ErpOrderCancellationMailConnectorRepositoryInterface $repository,
         ErpOrderCancellationMailConnectorToMailFacadeInterface $mailFacade,
-        ErpOrderCancellationMailConnectorToLocaleFacadeInterface $localeFacade
+        ErpOrderCancellationMailConnectorToLocaleFacadeInterface $localeFacade,
+        LoggerInterface $logger
     ) {
         $this->repository = $repository;
         $this->mailFacade = $mailFacade;
         $this->localeFacade = $localeFacade;
+        $this->logger = $logger;
     }
 
     /**
@@ -69,6 +78,7 @@ class MailHandler implements MailHandlerInterface
             $this->mailFacade->handleMail($mailTransfer);
             $response->setMail($mailTransfer);
         } catch (Throwable $exception) {
+            $this->logger->error(sprintf('Error while sending cancellation %s mail: %s', $erpOrderCancellationMailConfigTransfer->getCancellation()->getCancellationNumber(), $exception->getMessage()), ['exception' => $exception]);
             $response->setIsSuccessful(false);
         }
 

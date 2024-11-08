@@ -20,11 +20,10 @@ class HandleReasonForCancellationErpOrderCancellationPreSavePlugin extends Abstr
      */
     public function preSave(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationTransfer
     {
-        $reasonForCancellation = $erpOrderCancellationTransfer->getReasonForCancellation();
-
-        if ($erpOrderCancellationTransfer->getIdErpOrderCancellation() === null) {
-            $this->validateReasonForCancellation($erpOrderCancellationTransfer->getErpOrderReference(), $reasonForCancellation);
-        }
+        $this->validateReasonForCancellation(
+            $erpOrderCancellationTransfer->getErpOrderReference(),
+            $erpOrderCancellationTransfer->getReasonForCancellation(),
+        );
 
         foreach ($erpOrderCancellationTransfer->getCancellationItems() as $cancellationItem) {
             if ($cancellationItem->getReasonForCancellation() === null) {
