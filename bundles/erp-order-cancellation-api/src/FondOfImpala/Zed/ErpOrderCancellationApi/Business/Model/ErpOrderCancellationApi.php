@@ -110,11 +110,14 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
      */
     public function update(int $idErpOrderCancellation, ApiDataTransfer $apiDataTransfer): ApiItemTransfer
     {
-        $this->getByIdErpOrderCancellation($idErpOrderCancellation);
+        $erpOrderCancellationTransfer = $this->getByIdErpOrderCancellation($idErpOrderCancellation);
 
-        $erpOrderCancellationTransfer = (new ErpOrderCancellationTransfer())
+        $erpOrderCancellationUpdateTransfer = (new ErpOrderCancellationTransfer())
             ->fromArray($apiDataTransfer->getData(), true)
             ->setIdErpOrderCancellation($idErpOrderCancellation);
+
+        $erpOrderCancellationTransfer->fromArray($erpOrderCancellationUpdateTransfer->modifiedToArray(), true);
+        $erpOrderCancellationTransfer->setCancellationItems($erpOrderCancellationUpdateTransfer->getCancellationItems());
 
         $erpOrderCancellationResponseTransfer = $this->erpOrderCancellationFacade->updateErpOrderCancellation($erpOrderCancellationTransfer);
         $erpOrderCancellationTransfer = $erpOrderCancellationResponseTransfer->getErpOrderCancellation();

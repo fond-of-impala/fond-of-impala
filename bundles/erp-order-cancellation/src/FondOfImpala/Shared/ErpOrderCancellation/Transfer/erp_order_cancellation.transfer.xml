@@ -26,12 +26,14 @@
     <transfer name="ErpOrderCancellationItem">
         <property name="fkErpOrderCancellation" type="int" />
         <property name="sku" type="string"/>
+        <property name="name" type="string"/>
         <property name="lineId" type="int"/>
         <property name="valueBeforeCancellation" type="int"/>
         <property name="quantityBeforeCancellation" type="int"/>
         <property name="reasonForCancellation" type="string"/>
         <property name="cancellationValue" type="int"/>
         <property name="cancellationQuantity" type="int"/>
+        <property name="unitPrice" type="int"/>
         <property name="createdAt" type="int"/>
         <property name="updatedAt" type="int"/>
     </transfer>

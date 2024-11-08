@@ -26,6 +26,11 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
     protected const DELETE = 'delete';
 
     /**
+     * @var string
+     */
+    protected const UNTOUCHED = 'untouched';
+
+    /**
      * @var \FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Writer\ErpOrderCancellationItemWriterInterface
      */
     protected $erpOrderCancellationItemWriter;
@@ -72,6 +77,12 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
             $erpOrderCancellationItemTransfer->setFkErpOrderCancellation($orderId);
             $erpOrderCancellationItemTransfer = $this->create($erpOrderCancellationItemTransfer);
             $collection->append($erpOrderCancellationItemTransfer);
+        }
+
+        foreach ($preparedItems[static::UNTOUCHED] as $erpOrderCancellationItemTransfers) {
+            foreach ($erpOrderCancellationItemTransfers as $item) {
+                $collection->append($item);
+            }
         }
 
         return $erpOrderCancellationTransfer->setCancellationItems($collection);
@@ -182,6 +193,7 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
             static::NEW => $new,
             static::UPDATE => $update,
             static::DELETE => $delete,
+            static::UNTOUCHED => $existingItems,
         ];
     }
 

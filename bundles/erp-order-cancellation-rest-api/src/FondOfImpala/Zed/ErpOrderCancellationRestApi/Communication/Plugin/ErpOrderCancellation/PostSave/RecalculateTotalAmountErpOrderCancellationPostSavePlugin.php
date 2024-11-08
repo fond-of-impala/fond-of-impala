@@ -24,6 +24,10 @@ class RecalculateTotalAmountErpOrderCancellationPostSavePlugin extends AbstractP
             $amount += $cancellationItem->getCancellationValue();
         }
 
+        if ($erpOrderCancellationTransfer->getAmount() === $amount) {
+            return $erpOrderCancellationTransfer;
+        }
+
         $erpOrderCancellationTransfer->setAmount($amount);
 
         return $this->getFacade()->updateErpOrderCancellationAmount($erpOrderCancellationTransfer);
