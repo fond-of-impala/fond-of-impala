@@ -79,10 +79,15 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
             $collection->append($erpOrderCancellationItemTransfer);
         }
 
-        foreach ($preparedItems[static::UNTOUCHED] as $erpOrderCancellationItemTransfers) {
-            foreach ($erpOrderCancellationItemTransfers as $item) {
-                $collection->append($item);
+        foreach ($preparedItems[static::UNTOUCHED] as $data) {
+            if (is_array($data)) {
+                foreach ($data as $item) {
+                    $collection->append($item);
+                }
+
+                continue;
             }
+            $collection->append($data);
         }
 
         return $erpOrderCancellationTransfer->setCancellationItems($collection);
