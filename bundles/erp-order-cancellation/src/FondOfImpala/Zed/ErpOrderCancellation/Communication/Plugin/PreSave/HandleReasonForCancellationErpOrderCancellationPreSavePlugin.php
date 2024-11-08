@@ -22,7 +22,7 @@ class HandleReasonForCancellationErpOrderCancellationPreSavePlugin extends Abstr
     {
         $this->validateReasonForCancellation(
             $erpOrderCancellationTransfer->getErpOrderReference(),
-            $erpOrderCancellationTransfer->getReasonForCancellation()
+            $erpOrderCancellationTransfer->getReasonForCancellation(),
         );
 
         foreach ($erpOrderCancellationTransfer->getCancellationItems() as $cancellationItem) {
@@ -42,9 +42,9 @@ class HandleReasonForCancellationErpOrderCancellationPreSavePlugin extends Abstr
      * @param string $reference
      * @param string|null $reason
      *
-     * @return void
      * @throws \Exception
      *
+     * @return void
      */
     public function validateReasonForCancellation(string $reference, ?string $reason): void
     {

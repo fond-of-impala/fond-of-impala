@@ -17,6 +17,7 @@
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
+    "phpunit/phpunit": "<10",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
   },

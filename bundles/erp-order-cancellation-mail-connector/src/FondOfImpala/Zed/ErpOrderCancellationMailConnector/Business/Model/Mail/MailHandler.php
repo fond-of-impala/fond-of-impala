@@ -37,6 +37,7 @@ class MailHandler implements MailHandlerInterface
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface $repository
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToMailFacadeInterface $mailFacade
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToLocaleFacadeInterface $localeFacade
+     * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
         ErpOrderCancellationMailConnectorRepositoryInterface $repository,

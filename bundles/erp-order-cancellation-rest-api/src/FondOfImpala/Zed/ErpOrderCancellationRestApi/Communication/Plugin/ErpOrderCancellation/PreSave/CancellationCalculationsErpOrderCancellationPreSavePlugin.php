@@ -16,6 +16,8 @@ class CancellationCalculationsErpOrderCancellationPreSavePlugin extends Abstract
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      *
+     * @throws \Exception
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function preSave(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationTransfer

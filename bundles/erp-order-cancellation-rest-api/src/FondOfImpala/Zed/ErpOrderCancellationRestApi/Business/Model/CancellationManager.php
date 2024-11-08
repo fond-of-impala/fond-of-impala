@@ -183,8 +183,10 @@ class CancellationManager implements CancellationManagerInterface
                 }
             }
 
-            if (($erpOrderCancellationUpdateTransfer->getErpOrderReference() !== null && $erpOrderCancellation->getErpOrderReference() !== $erpOrderCancellationUpdateTransfer->getErpOrderReference())
-            || ($erpOrderCancellationUpdateTransfer->getErpOrderExternalReference() !== null && $erpOrderCancellation->getErpOrderExternalReference() !== $erpOrderCancellationUpdateTransfer->getErpOrderExternalReference())){
+            if (
+                ($erpOrderCancellationUpdateTransfer->getErpOrderReference() !== null && $erpOrderCancellation->getErpOrderReference() !== $erpOrderCancellationUpdateTransfer->getErpOrderReference())
+                || ($erpOrderCancellationUpdateTransfer->getErpOrderExternalReference() !== null && $erpOrderCancellation->getErpOrderExternalReference() !== $erpOrderCancellationUpdateTransfer->getErpOrderExternalReference())
+            ) {
                 throw new Exception('ErpOrderReference and/or ErpOrderExternalReference cannot be changed');
             }
 
