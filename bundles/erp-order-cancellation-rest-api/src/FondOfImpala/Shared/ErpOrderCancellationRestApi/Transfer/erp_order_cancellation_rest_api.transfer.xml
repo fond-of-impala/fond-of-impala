@@ -58,7 +58,7 @@
 
     <transfer name="RestCancellationItem">
         <property name="sku" type="string"/>
-        <property name="lineId" type="int" />
+        <property name="lineId" type="string" />
         <property name="valueBeforeCancellation" type="int" />
         <property name="quantityBeforeCancellation" type="int" />
         <property name="cancellationValue" type="int" />
