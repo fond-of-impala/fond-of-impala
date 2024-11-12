@@ -22,7 +22,6 @@
     "spryker/company": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",
     "spryker/glue-application": "*",
-    "spryker/event-behavior": "<1.29",
     "spryker/uuid-behavior": "^1.0.0"
   },
   "require-dev": {
