@@ -105,7 +105,7 @@
     },
     "company-type-role": {
       "path": "bundles/company-type-role",
-      "version": "1.3.1"
+      "version": "1.3.2"
     },
     "company-user-carts-rest-api": {
       "path": "bundles/company-user-carts-rest-api",
@@ -257,7 +257,7 @@
     },
     "erp-order-cancellation": {
       "path": "bundles/erp-order-cancellation",
-      "version": "1.0.0-beta"
+      "version": "1.0.0-beta.1"
     },
     "erp-order-cancellation-api": {
       "path": "bundles/erp-order-cancellation-api",
@@ -267,9 +267,13 @@
       "path": "bundles/erp-order-cancellation-extension",
       "version": "1.0.0-beta"
     },
+    "erp-order-cancellation-mail-connector": {
+      "path": "bundles/erp-order-cancellation-mail-connector",
+      "version": "1.0.0-beta"
+    },
     "erp-order-cancellation-rest-api": {
       "path": "bundles/erp-order-cancellation-rest-api",
-      "version": "1.0.0-beta"
+      "version": "1.0.0-beta.1"
     },
     "erp-order-cancellation-rest-api-extension": {
       "path": "bundles/erp-order-cancellation-rest-api-extension",

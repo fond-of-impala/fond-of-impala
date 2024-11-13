@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 https://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="ErpOrderCancellationMailConfig">
+        <property name="cancellation" type="ErpOrderCancellation"/>
+        <property name="type" type="string"/>
+        <property name="roleNames" type="array"/>
+        <property name="roles" singular="role" type="Role[]"/>
+        <property name="recipient" type="Customer"/>
+        <property name="recipientsBcc" type="array"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellationMailConfigResponse">
+        <property name="config" type="ErpOrderCancellationMailConfig"/>
+        <property name="mail" type="Mail"/>
+        <property name="isSuccessful" type="bool"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellation">
+        <property name="readyMailSentData" type="string"/>
+        <property name="manageMailSentData" type="string"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellationMailConfig">
+        <property name="cancellation" type="ErpOrderCancellation"/>
+        <property name="mail" type="Mail"/>
+    </transfer>
+
+    <transfer name="Mail">
+        <property name="erpOrderCancellationMailConfig" type="ErpOrderCancellationMailConfig"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellation">
+        <property name="fkCustomerRequested" type="int"/>
+        <property name="debitorNumber" type="string"/>
+    </transfer>
+
+    <transfer name="Customer">
+        <property name="fkLocale" type="int"/>
+    </transfer>
+
+</transfers>

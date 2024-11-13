@@ -10,8 +10,10 @@
         <column name="debitor_number" required="true" size="35" type="VARCHAR"/>
         <column name="cancellation_number" required="true" size="35" type="VARCHAR"/>
         <column name="external_cancellation_number" required="false" size="35" type="VARCHAR"/>
-        <column name="reason_for_cancellation" required="false" size="255" type="VARCHAR"/>
-        <column name="error" required="false" size="255" type="VARCHAR"/>
+        <column name="amount" required="false" type="INTEGER"/>
+        <column name="currency_iso_code" required="false" type="VARCHAR"/>
+        <column name="reason_for_cancellation" required="true" size="10" type="VARCHAR"/>
+        <column name="error" required="false" type="LONGVARCHAR"/>
         <column name="state" type="ENUM" valueSet="new, ready, approved, rejected, processed, error" default="new" required="false"/>
         <column name="erp_order_reference" required="true" size="35" type="VARCHAR"/>
         <column name="erp_order_external_reference" required="tr1ue" size="35" type="VARCHAR"/>
@@ -30,14 +32,21 @@
             <index-column name="debitor_number"/>
         </index>
 
+        <unique name="foi_erp_order_cancellation-unique-cancellation_number">
+            <unique-column name="cancellation_number"/>
+        </unique>
+
         <behavior name="timestampable"/>
     </table>
 
     <table name="foi_erp_order_cancellation_item">
         <column name="fk_erp_order_cancellation" required="true" type="INTEGER" primaryKey="true"/>
         <column name="sku" required="true" size="255" type="VARCHAR" primaryKey="true"/>
-        <column name="line_id" required="true" type="INTEGER" primaryKey="true"/>
+        <column name="line_id" required="true" size="255" type="VARCHAR" primaryKey="true"/>
+        <column name="name" size="255" type="VARCHAR"/>
+        <column name="reason_for_cancellation" required="true" size="10" type="VARCHAR"/>
         <column name="value_before_cancellation" required="false" type="INTEGER"/>
+        <column name="unit_price" required="false" type="INTEGER"/>
         <column name="quantity_before_cancellation" required="false" type="INTEGER"/>
         <column name="cancellation_value" required="false" type="INTEGER"/>
         <column name="cancellation_quantity" required="false" type="INTEGER"/>

@@ -6,22 +6,27 @@
     {
       "name": "Julian Hyatt",
       "email": "dev@jzit.de"
+    },
+    {
+      "name": "Jozsef Geng",
+      "email": "dev@jozsefgeng.com"
     }
   ],
   "require": {
     "php": ">=8.1",
+    "fond-of-impala/company-type": "^1.0.0",
     "fond-of-impala/erp-order-cancellation": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-rest-api-extension": "^1.0.0",
     "fond-of-impala/erp-order-cancellation-extension": "^1.0.0",
-    "fond-of-oryx/erp-order": "^4.7.0",
+    "fond-of-oryx/erp-order": "^4.8.0",
     "spryker/company": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",
     "spryker/glue-application": "*",
-    "spryker/event-behavior": "<1.29",
     "spryker/uuid-behavior": "^1.0.0"
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
+    "phpunit/phpunit": "<10",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
   },

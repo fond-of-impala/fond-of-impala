@@ -86,6 +86,7 @@ class ErpOrderCancellationBusinessFactory extends AbstractBusinessFactory
         return new ErpOrderCancellationPluginExecutor(
             $this->getErpOrderCancellationPreSavePlugin(),
             $this->getErpOrderCancellationPostSavePlugin(),
+            $this->getErpOrderCancellationPostTransactionPlugin(),
         );
     }
 
@@ -114,6 +115,14 @@ class ErpOrderCancellationBusinessFactory extends AbstractBusinessFactory
     public function getErpOrderCancellationPostSavePlugin(): array
     {
         return $this->getProvidedDependency(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE)->getArrayCopy();
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostTransactionPluginInterface>
+     */
+    public function getErpOrderCancellationPostTransactionPlugin(): array
+    {
+        return $this->getProvidedDependency(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION)->getArrayCopy();
     }
 
     /**

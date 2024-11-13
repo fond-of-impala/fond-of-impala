@@ -22,4 +22,12 @@ class ErpOrderCancellationConfig extends AbstractBundleConfig
     {
         return $this->get(ErpOrderCancellationConstants::PREFIX, ErpOrderCancellationConstants::DEFAULT_PREFIX);
     }
+
+    /**
+     * @return array<string>
+     */
+    public function getReasonForCancellation(): array
+    {
+        return $this->get(ErpOrderCancellationConstants::REASON_FOR_CANCELLATION_MAPPING, []);
+    }
 }

@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper;
 
 use ArrayObject;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
@@ -13,6 +14,19 @@ use Generated\Shared\Transfer\RestErpOrderCancellationTransfer;
 
 class RestDataMapper implements RestDataMapperInterface
 {
+    /**
+     * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface
+     */
+    protected ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander;
+
+    /**
+     * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander
+     */
+    public function __construct(ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander)
+    {
+        $this->erpOrderCancellationExpander = $erpOrderCancellationExpander;
+    }
+
     /**
      * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      *
@@ -38,9 +52,11 @@ class RestDataMapper implements RestDataMapperInterface
         $erpOrderCancellationTransfer = (new ErpOrderCancellationTransfer())
             ->fromArray($attributes->modifiedToArray(), true);
 
-        return $erpOrderCancellationTransfer->setCancellationItems(
+        $erpOrderCancellationTransfer->setCancellationItems(
             $this->mapItemsFromRequest($attributes->getCancellationItems()),
         );
+
+        return $this->erpOrderCancellationExpander->expand($erpOrderCancellationTransfer, $restErpOrderCancellationRequestTransfer);
     }
 
     /**

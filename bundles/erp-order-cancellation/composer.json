@@ -6,6 +6,10 @@
     {
       "name": "Julian Hyatt",
       "email": "dev@jzit.de"
+    },
+    {
+      "name": "Jozsef Geng",
+      "email": "dev@jozsefgeng.com"
     }
   ],
   "require": {
@@ -18,6 +22,7 @@
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
+    "phpunit/phpunit": "<10",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
   },

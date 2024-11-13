@@ -109,7 +109,8 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->withConsecutive(
                 [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_PRE_SAVE],
                 [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE],
-            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject());
+                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION],
+            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject(), new ArrayObject());
 
         static::assertInstanceOf(
             ErpOrderCancellationWriterInterface::class,
@@ -131,7 +132,8 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->withConsecutive(
                 [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE],
                 [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_POST_SAVE],
-            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject());
+                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION],
+            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject(), new ArrayObject());
 
         static::assertInstanceOf(
             ErpOrderCancellationItemWriterInterface::class,
@@ -153,7 +155,8 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
             ->withConsecutive(
                 [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE],
                 [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_POST_SAVE],
-            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject());
+                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION],
+            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject(), new ArrayObject());
 
         static::assertInstanceOf(
             ErpOrderCancellationItemHandlerInterface::class,

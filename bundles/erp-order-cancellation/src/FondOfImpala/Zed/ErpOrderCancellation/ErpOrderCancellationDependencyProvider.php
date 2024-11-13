@@ -7,6 +7,7 @@ use FondOfImpala\Zed\ErpOrderCancellation\Exception\WrongInterfaceException;
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPostSavePluginInterface;
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPreSavePluginInterface;
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostSavePluginInterface;
+use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostTransactionPluginInterface;
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPreSavePluginInterface;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
@@ -22,6 +23,11 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
      * @var string
      */
     public const PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE = 'PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE';
+
+    /**
+     * @var string
+     */
+    public const PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION = 'PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION';
 
     /**
      * @var string
@@ -44,6 +50,7 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
 
         $container = $this->addErpOrderCancellationPreSavePlugin($container);
         $container = $this->addErpOrderCancellationPostSavePlugin($container);
+        $container = $this->addErpOrderCancellationPostTransactionPlugin($container);
         $container = $this->addErpOrderCancellationItemPreSavePlugin($container);
 
         return $this->addErpOrderCancellationItemPostSavePlugin($container);
@@ -59,6 +66,23 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
         $container[static::PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE] = function () {
             $plugins = $this->getErpOrderCancellationPostSavePlugin();
             $this->validatePlugin($plugins, ErpOrderCancellationPostSavePluginInterface::class);
+
+            return new ArrayObject($plugins);
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addErpOrderCancellationPostTransactionPlugin(Container $container): Container
+    {
+        $container[static::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION] = function () {
+            $plugins = $this->getErpOrderCancellationPostTransactionPlugin();
+            $this->validatePlugin($plugins, ErpOrderCancellationPostTransactionPluginInterface::class);
 
             return new ArrayObject($plugins);
         };
@@ -142,6 +166,14 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
      * @return array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostSavePluginInterface>
      */
     protected function getErpOrderCancellationPostSavePlugin(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostTransactionPluginInterface>
+     */
+    protected function getErpOrderCancellationPostTransactionPlugin(): array
     {
         return [];
     }

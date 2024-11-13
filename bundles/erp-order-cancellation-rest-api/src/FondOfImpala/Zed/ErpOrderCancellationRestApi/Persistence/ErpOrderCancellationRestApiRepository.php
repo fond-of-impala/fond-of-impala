@@ -184,6 +184,29 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
     }
 
     /**
+     * @param int $idCustomer
+     * @param array<int> $internalCompanyIds
+     *
+     * @return bool
+     */
+    public function isInternalCustomer(int $idCustomer, array $internalCompanyIds): bool
+    {
+        /** @var \Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery $query */
+        $query = $this->getFactory()
+            ->getCompanyUserQuery()
+            ->clear()
+            ->filterByfkCustomer($idCustomer)
+            ->useCompanyQuery()
+                ->filterByFkCompanyType_In($internalCompanyIds)
+            ->endUse();
+
+        $companyUserEntity = $query
+            ->findOne();
+
+        return $companyUserEntity !== null;
+    }
+
+    /**
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
     protected function getErpOrderCancellationQuery(): FoiErpOrderCancellationQuery

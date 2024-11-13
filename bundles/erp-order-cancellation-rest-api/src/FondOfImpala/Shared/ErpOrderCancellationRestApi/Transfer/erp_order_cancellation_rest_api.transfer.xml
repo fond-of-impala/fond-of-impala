@@ -34,6 +34,8 @@
         <property name="updatedAt" type="string" />
         <property name="customer" type="RestCustomer" />
         <property name="erpOrder" type="ErpOrder" />
+        <property name="amount" type="int" />
+        <property name="currencyIsoCode" type="string" />
         <property name="internalCustomer" type="RestCustomer" />
         <property name="originatorReference" type="string" />
         <property name="originator" type="RestCustomer" />
@@ -56,7 +58,7 @@
 
     <transfer name="RestCancellationItem">
         <property name="sku" type="string"/>
-        <property name="lineId" type="int" />
+        <property name="lineId" type="string" />
         <property name="valueBeforeCancellation" type="int" />
         <property name="quantityBeforeCancellation" type="int" />
         <property name="cancellationValue" type="int" />

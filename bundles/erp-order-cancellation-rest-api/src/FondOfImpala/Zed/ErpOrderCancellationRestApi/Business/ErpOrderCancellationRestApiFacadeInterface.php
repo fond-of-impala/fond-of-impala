@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business;
 
+use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
@@ -44,4 +45,13 @@ interface ErpOrderCancellationRestApiFacadeInterface
     public function deleteErpOrderCancellation(
         RestErpOrderCancellationRequestTransfer $restErpOrderCancellationRequestTransfer
     ): RestErpOrderCancellationResponseTransfer|RestErrorMessageTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
+     */
+    public function updateErpOrderCancellationAmount(
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+    ): ErpOrderCancellationTransfer;
 }

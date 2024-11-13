@@ -28,8 +28,17 @@ class PermissionSynchronizer implements PermissionSynchronizerInterface
      */
     public function sync(): void
     {
-        $syncableCompanyRoles = $this->companyRoleReader->findSyncableCompanyRoles();
+        $this->handleSyncableCompanyRoles($this->companyRoleReader->findEmptyPermissionSetSyncableCompanyRoles());
+        $this->handleSyncableCompanyRoles($this->companyRoleReader->findSyncableCompanyRoles());
+    }
 
+    /**
+     * @param array<\Generated\Shared\Transfer\SyncableCompanyRoleTransfer> $syncableCompanyRoles
+     *
+     * @return void
+     */
+    protected function handleSyncableCompanyRoles(array $syncableCompanyRoles): void
+    {
         foreach ($syncableCompanyRoles as $syncableCompanyRole) {
             $syncableCompanyRoleIds = $syncableCompanyRole->getIds();
 

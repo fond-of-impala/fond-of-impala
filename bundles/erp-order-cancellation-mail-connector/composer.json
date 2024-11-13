@@ -1,0 +1,44 @@
+{
+  "name": "fond-of-impala/erp-order-cancellation-mail-connector",
+  "description": "ERP Order Cancellation Mail Connector module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian Hyatt",
+      "email": "dev@jzit.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "fond-of-impala/erp-order-cancellation-extension": "^1.0.0",
+    "spryker/company-role": "^1.0.0",
+    "spryker/customer": "^6.3.0 || ^7.0.0",
+    "spryker/log": "^1.0.0 || ^2.0.0 || ^3.0.0",
+    "spryker/mail": "^4.0.0"
+  },
+  "require-dev": {
+    "fond-of-codeception/spryker": "*",
+    "phpunit/phpunit": "<10",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "FondOfImpala\\": "src/FondOfImpala/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FondOfImpala\\": "tests/FondOfImpala/",
+      "Generated\\": "src/Generated/",
+      "Orm\\": "src/Orm/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
