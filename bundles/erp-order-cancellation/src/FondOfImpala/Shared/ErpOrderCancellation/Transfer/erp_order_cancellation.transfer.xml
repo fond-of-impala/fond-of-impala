@@ -28,6 +28,7 @@
         <property name="sku" type="string"/>
         <property name="name" type="string"/>
         <property name="lineId" type="string"/>
+        <property name="position" type="int"/>
         <property name="valueBeforeCancellation" type="int"/>
         <property name="quantityBeforeCancellation" type="int"/>
         <property name="reasonForCancellation" type="string"/>

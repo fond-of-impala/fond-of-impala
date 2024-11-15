@@ -43,6 +43,7 @@
         <column name="fk_erp_order_cancellation" required="true" type="INTEGER" primaryKey="true"/>
         <column name="sku" required="true" size="255" type="VARCHAR" primaryKey="true"/>
         <column name="line_id" required="true" size="255" type="VARCHAR" primaryKey="true"/>
+        <column name="position" required="false" type="INTEGER"/>
         <column name="name" size="255" type="VARCHAR"/>
         <column name="reason_for_cancellation" required="true" size="10" type="VARCHAR"/>
         <column name="value_before_cancellation" required="false" type="INTEGER"/>
