@@ -42,7 +42,8 @@ class CancellationCalculationsErpOrderCancellationPreSavePlugin extends Abstract
                         ->setValueBeforeCancellation($item->getAmount()->getValue())
                         ->setQuantityBeforeCancellation($item->getOrderedQuantity())
                         ->setUnitPrice($item->getUnitPrice()->getValue())
-                        ->setName($item->getName());
+                        ->setName($item->getName())
+                        ->setPosition($item->getPosition());
                     $items->append($cancellationItem);
                 }
             }
