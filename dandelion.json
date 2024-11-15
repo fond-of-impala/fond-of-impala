@@ -257,7 +257,7 @@
     },
     "erp-order-cancellation": {
       "path": "bundles/erp-order-cancellation",
-      "version": "1.0.0-beta.2"
+      "version": "1.0.0-beta.3"
     },
     "erp-order-cancellation-api": {
       "path": "bundles/erp-order-cancellation-api",
@@ -273,7 +273,7 @@
     },
     "erp-order-cancellation-rest-api": {
       "path": "bundles/erp-order-cancellation-rest-api",
-      "version": "1.0.0-beta.2"
+      "version": "1.0.0-beta.3"
     },
     "erp-order-cancellation-rest-api-extension": {
       "path": "bundles/erp-order-cancellation-rest-api-extension",
