@@ -64,7 +64,7 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
     {
         $query = $this->getErpOrderCancellationQuery();
 
-        if (count($filterTransfer->getIds()) > 0) {
+      /*  if (count($filterTransfer->getIds()) > 0) {
             $query->filterByUuid_In($filterTransfer->getIds());
         }
 
@@ -82,7 +82,7 @@ class ErpOrderCancellationRestApiRepository extends AbstractRepository implement
             foreach ($filterTransfer->getSorting() as $sort) {
                 $query->orderBy($sort->getField(), $sort->getDirection());
             }
-        }
+        }*/
 
         $result = $query->find();
 

@@ -89,7 +89,7 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
             }
             $collection->append($data);
         }
-
+        
         return $erpOrderCancellationTransfer->setCancellationItems($collection);
     }
 
