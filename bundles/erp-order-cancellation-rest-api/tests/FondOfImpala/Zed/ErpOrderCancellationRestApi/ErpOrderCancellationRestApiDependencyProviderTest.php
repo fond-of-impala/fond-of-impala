@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeBridge;
@@ -81,14 +82,23 @@ class ErpOrderCancellationRestApiDependencyProviderTest extends Unit
      */
     public function testProvideBusinessLayerDependencies(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('getLocator')
             ->willReturn($this->locatorMock);
 
         $this->locatorMock->expects(static::atLeastOnce())
             ->method('__call')
-            ->withConsecutive(['erpOrder'], ['erpOrderCancellation'])
-            ->willReturn($this->bundleProxyMock);
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case 'erpOrder':
+                        return $self->bundleProxyMock;
+                    case 'erpOrderCancellation':
+                        return $self->bundleProxyMock;
+                }
+
+                throw new Exception('Invalid key');
+            });
 
         $this->bundleProxyMock->expects(static::atLeastOnce())
             ->method('__call')
@@ -149,7 +159,6 @@ class ErpOrderCancellationRestApiDependencyProviderTest extends Unit
         );
 
         self::assertIsArray($container[ErpOrderCancellationRestApiDependencyProvider::PLUGINS_ERP_ORDER_CANCELLATION_QUERY_EXPANDER]);
-
     }
 
     /**
@@ -181,6 +190,4 @@ class ErpOrderCancellationRestApiDependencyProviderTest extends Unit
             $container[ErpOrderCancellationRestApiDependencyProvider::FACADE_ERP_ORDER],
         );
     }
-
-
 }

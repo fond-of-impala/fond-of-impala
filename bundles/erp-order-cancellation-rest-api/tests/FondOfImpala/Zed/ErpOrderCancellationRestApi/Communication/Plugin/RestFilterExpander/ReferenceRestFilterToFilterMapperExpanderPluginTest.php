@@ -37,7 +37,7 @@ class ReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
             ->getMock();
 
         $this->restErpOrderCancellationFilterTransferMock = $this
-            ->getMockBuilder( RestErpOrderCancellationFilterTransfer::class)
+            ->getMockBuilder(RestErpOrderCancellationFilterTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -64,7 +64,7 @@ class ReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
             $this->erpOrderCancellationFilterTransferMock,
             $this->plugin->expand(
                 $this->restErpOrderCancellationFilterTransferMock,
-                $this->erpOrderCancellationFilterTransferMock
+                $this->erpOrderCancellationFilterTransferMock,
             ),
         );
     }
@@ -84,7 +84,7 @@ class ReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
             $this->erpOrderCancellationFilterTransferMock,
             $this->plugin->expand(
                 $this->restErpOrderCancellationFilterTransferMock,
-                $this->erpOrderCancellationFilterTransferMock
+                $this->erpOrderCancellationFilterTransferMock,
             ),
         );
     }

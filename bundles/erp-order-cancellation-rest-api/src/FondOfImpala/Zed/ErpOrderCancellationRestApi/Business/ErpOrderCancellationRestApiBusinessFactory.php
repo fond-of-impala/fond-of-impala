@@ -11,6 +11,7 @@ use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestDataM
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapper;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper\RestFilterToFilterMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionChecker;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionCheckerInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiDependencyProvider;
@@ -63,7 +64,7 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Permission\PermissionChecker
      */
-    public function createPermissionChecker(): PermissionChecker
+    public function createPermissionChecker(): PermissionCheckerInterface
     {
         return new PermissionChecker($this->getErpOrderCancellationPermissionPlugins());
     }

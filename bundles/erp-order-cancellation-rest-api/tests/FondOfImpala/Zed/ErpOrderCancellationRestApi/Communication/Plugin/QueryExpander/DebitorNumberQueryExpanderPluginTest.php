@@ -37,7 +37,7 @@ class DebitorNumberQueryExpanderPluginTest extends Unit
             ->getMock();
 
         $this->foiErpOrderCancellationQueryMock = $this
-            ->getMockBuilder( FoiErpOrderCancellationQuery::class)
+            ->getMockBuilder(FoiErpOrderCancellationQuery::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -55,7 +55,7 @@ class DebitorNumberQueryExpanderPluginTest extends Unit
             ->method('getDebitorNumbers')
             ->willReturn($debtorNumber);
 
-        $isApplicable =$this->plugin->isApplicable($this->erpOrderCancellationFilterTransferMock);
+        $isApplicable = $this->plugin->isApplicable($this->erpOrderCancellationFilterTransferMock);
 
         static::assertIsBool($isApplicable);
 
@@ -82,7 +82,7 @@ class DebitorNumberQueryExpanderPluginTest extends Unit
             $this->foiErpOrderCancellationQueryMock,
             $this->plugin->expandErpOrderCancellationQuery(
                 $this->foiErpOrderCancellationQueryMock,
-                $this->erpOrderCancellationFilterTransferMock
+                $this->erpOrderCancellationFilterTransferMock,
             ),
         );
     }

@@ -50,7 +50,7 @@ class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridgeTest extends 
             ->getMock();
 
         $this->bridge = new ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge(
-            $this->erpOrderCancellationFacadeMock
+            $this->erpOrderCancellationFacadeMock,
         );
     }
 
@@ -69,7 +69,7 @@ class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridgeTest extends 
 
         static::assertEquals(
             $this->erpOrderCancellationResponseTransferMock,
-            $erpOrderCancellationresponseResponseTransfer
+            $erpOrderCancellationresponseResponseTransfer,
         );
     }
 
@@ -88,7 +88,7 @@ class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridgeTest extends 
 
         static::assertEquals(
             $this->erpOrderCancellationResponseTransferMock,
-            $erpOrderCancellationresponseResponseTransfer
+            $erpOrderCancellationresponseResponseTransfer,
         );
     }
 
@@ -105,7 +105,5 @@ class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridgeTest extends 
 
         $this->bridge
             ->deleteErpOrderCancellationByIdErpOrderCancellation($idErpOrderCancellation);
-
     }
-
 }

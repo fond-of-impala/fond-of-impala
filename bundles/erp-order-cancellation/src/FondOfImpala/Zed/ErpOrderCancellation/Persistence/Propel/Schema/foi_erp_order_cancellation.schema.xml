@@ -16,7 +16,7 @@
         <column name="error" required="false" type="LONGVARCHAR"/>
         <column name="state" type="ENUM" valueSet="new, ready, approved, rejected, processed, error" default="new" required="false"/>
         <column name="erp_order_reference" required="true" size="35" type="VARCHAR"/>
-        <column name="erp_order_external_reference" required="tr1ue" size="35" type="VARCHAR"/>
+        <column name="erp_order_external_reference" required="true" size="35" type="VARCHAR"/>
 
         <id-method-parameter value="foi_erp_order_cancellation_pk_seq"/>
 

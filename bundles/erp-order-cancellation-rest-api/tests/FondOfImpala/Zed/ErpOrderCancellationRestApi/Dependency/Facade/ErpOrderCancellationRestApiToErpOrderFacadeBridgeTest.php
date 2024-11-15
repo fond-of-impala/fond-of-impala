@@ -6,7 +6,7 @@ use Codeception\Test\Unit;
 use FondOfOryx\Zed\ErpOrder\Business\ErpOrderFacadeInterface;
 use Generated\Shared\Transfer\ErpOrderTransfer;
 
-class ErpOrderCancellationApiToApiFacadeBridgeTest extends Unit
+class ErpOrderCancellationRestApiToErpOrderFacadeBridgeTest extends Unit
 {
     /**
      * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeBridge
@@ -76,5 +76,4 @@ class ErpOrderCancellationApiToApiFacadeBridgeTest extends Unit
 
         static::assertEquals($this->erpOrderTransferMock, $erpOrderTransfer);
     }
-
 }
