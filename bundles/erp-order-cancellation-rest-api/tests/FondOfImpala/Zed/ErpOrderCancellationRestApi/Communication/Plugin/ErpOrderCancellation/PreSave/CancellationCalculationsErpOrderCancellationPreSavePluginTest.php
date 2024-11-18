@@ -167,7 +167,7 @@ class CancellationCalculationsErpOrderCancellationPreSavePluginTest extends Unit
 
         $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
             ->method('setUnitPrice')
-            ->with(20)
+            ->with(10)
             ->willReturnSelf();
 
         $this->erpOrderCancellationItemTransferMock->expects(static::atLeastOnce())
@@ -180,13 +180,9 @@ class CancellationCalculationsErpOrderCancellationPreSavePluginTest extends Unit
             ->with(99)
             ->willReturnSelf();
 
-        $this->erpOrderItemTransferMock->expects(static::atLeastOnce())
-            ->method('getAmount')
-            ->willReturn($this->erpOrderAmountTransferMock);
-
         $this->erpOrderAmountTransferMock->expects(static::atLeastOnce())
             ->method('getValue')
-            ->willReturn(20);
+            ->willReturn(10);
 
         $this->erpOrderItemTransferMock->expects(static::atLeastOnce())
             ->method('getOrderedQuantity')

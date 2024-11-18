@@ -37,11 +37,12 @@ class CancellationCalculationsErpOrderCancellationPreSavePlugin extends Abstract
         foreach ($erpOrderCancellationTransfer->getCancellationItems() as $cancellationItem) {
             foreach ($erpOrder->getOrderItems() as $item) {
                 if ($cancellationItem->getSku() === $item->getSku() && $cancellationItem->getLineId() === $item->getLineId()) {
+                    $unitPrice = $item->getUnitPrice()->getValue();
                     $cancellationItem
-                        ->setCancellationValue($item->getAmount()->getValue() / $item->getOrderedQuantity() * $cancellationItem->getCancellationQuantity())
-                        ->setValueBeforeCancellation($item->getAmount()->getValue())
+                        ->setCancellationValue($unitPrice * $cancellationItem->getCancellationQuantity())
+                        ->setValueBeforeCancellation($unitPrice * $item->getOrderedQuantity())
                         ->setQuantityBeforeCancellation($item->getOrderedQuantity())
-                        ->setUnitPrice($item->getUnitPrice()->getValue())
+                        ->setUnitPrice($unitPrice)
                         ->setName($item->getName())
                         ->setPosition($item->getPosition());
                     $items->append($cancellationItem);
