@@ -12,9 +12,6 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
-/**
- * @codeCoverageIgnore
- */
 class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
