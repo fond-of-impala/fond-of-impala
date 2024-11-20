@@ -59,7 +59,7 @@ class MailHandler implements MailHandlerInterface
     public function sendMail(ErpOrderCancellationMailConfigTransfer $erpOrderCancellationMailConfigTransfer): ErpOrderCancellationMailConfigResponseTransfer
     {
         $response = (new ErpOrderCancellationMailConfigResponseTransfer())
-            ->setIsSuccessful(false)
+            ->setIsSuccessful(true)
             ->setConfig($erpOrderCancellationMailConfigTransfer);
 
         try {
