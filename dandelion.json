@@ -257,27 +257,27 @@
     },
     "erp-order-cancellation": {
       "path": "bundles/erp-order-cancellation",
-      "version": "1.0.0-beta.3"
+      "version": "1.0.0"
     },
     "erp-order-cancellation-api": {
       "path": "bundles/erp-order-cancellation-api",
-      "version": "1.0.0-beta.1"
+      "version": "1.0.0"
     },
     "erp-order-cancellation-extension": {
       "path": "bundles/erp-order-cancellation-extension",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "erp-order-cancellation-mail-connector": {
       "path": "bundles/erp-order-cancellation-mail-connector",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "erp-order-cancellation-rest-api": {
       "path": "bundles/erp-order-cancellation-rest-api",
-      "version": "1.0.0-beta.3"
+      "version": "1.0.0"
     },
     "erp-order-cancellation-rest-api-extension": {
       "path": "bundles/erp-order-cancellation-rest-api-extension",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "jellyfish-sales-order-conditional-availability": {
       "path": "bundles/jellyfish-sales-order-conditional-availability",
@@ -325,7 +325,7 @@
     },
     "permission-erp-order-cancellation-rest-api": {
       "path": "bundles/permission-erp-order-cancellation-rest-api",
-      "version": "1.0.0-beta"
+      "version": "1.0.0"
     },
     "price-list": {
       "path": "bundles/price-list",

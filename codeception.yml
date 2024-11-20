@@ -62,6 +62,8 @@ include:
   - bundles/enhanced-catalog-extension
   - bundles/erp-order-cancellation
   - bundles/erp-order-cancellation-api
+  - bundles/erp-order-cancellation-mail-connector
+  - bundles/erp-order-cancellation-rest-api
   - bundles/jellyfish-sales-order-conditional-availability
   - bundles/jellyfish-sales-order-purchaser
   - bundles/navision-company
@@ -71,6 +73,7 @@ include:
   - bundles/order-budgets-bulk-rest-api
   - bundles/order-confirmation-recipients-override
   - bundles/permission-cart-search-rest-api
+  - bundles/permission-erp-order-cancellation-rest-api
   - bundles/price-list
   - bundles/price-list-api
   - bundles/price-list-gui
