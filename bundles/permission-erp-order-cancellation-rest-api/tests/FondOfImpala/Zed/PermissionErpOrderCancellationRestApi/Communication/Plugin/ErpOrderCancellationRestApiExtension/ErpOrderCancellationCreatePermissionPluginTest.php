@@ -88,9 +88,12 @@ class ErpOrderCancellationCreatePermissionPluginTest extends Unit
         $this->repositoryMock->expects($callCount)
             ->method('hasPermission')
             ->willReturnCallback(static function (int $id, string $permissionKey) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
                 if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
                     $count = $callCount->getInvocationCount();
                 } else {
+                    /** @phpstan-ignore-next-line */
                     $count = $callCount->numberOfInvocations();
                 }
 
@@ -126,9 +129,12 @@ class ErpOrderCancellationCreatePermissionPluginTest extends Unit
         $this->repositoryMock->expects($callCount)
             ->method('hasPermission')
             ->willReturnCallback(static function (int $id, string $permissionKey) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
                 if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
                     $count = $callCount->getInvocationCount();
                 } else {
+                    /** @phpstan-ignore-next-line */
                     $count = $callCount->numberOfInvocations();
                 }
 

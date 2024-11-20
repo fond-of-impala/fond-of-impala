@@ -6,6 +6,7 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PreSave\GenerateCancellationReferenceErpOrderCancellationPreSavePlugin;
 use FondOfImpala\Zed\ErpOrderCancellation\ErpOrderCancellationConfig;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class GenerateCancellationReferenceErpOrderCancellationPreSavePluginTest extends Unit
 {
@@ -17,7 +18,7 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePluginTest extends
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\ErpOrderCancellationConfig
      */
-    protected MockObject|ErpOrderCancellationConfig $configMock;
+    protected MockObject|ErpOrderCancellationConfig $erpOrderCancellationConfigMock;
 
     /**
      * @var \FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PreSave\GenerateCancellationReferenceErpOrderCancellationPreSavePlugin

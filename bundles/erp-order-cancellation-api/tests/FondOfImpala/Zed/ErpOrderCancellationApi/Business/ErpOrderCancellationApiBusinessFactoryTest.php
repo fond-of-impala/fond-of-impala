@@ -70,18 +70,36 @@ class ErpOrderCancellationApiBusinessFactoryTest extends Unit
      */
     public function testCreateErpOrderCancellationApi(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $callCount = static::atLeastOnce();
+        $this->containerMock->expects($callCount)
             ->method('get')
-            ->withConsecutive(
-                [ErpOrderCancellationApiDependencyProvider::FACADE_API],
-                [ErpOrderCancellationApiDependencyProvider::FACADE_ERP_ORDER_CANCELLATION],
-            )->willReturnOnConsecutiveCalls(
-                $this->erpOrderCancellationApiToApiFacadeMock,
-                $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock,
+            ->willReturnCallback(
+                static function (string $key) use ($self, $callCount) {
+                    /** @phpstan-ignore-next-line */
+                    if (method_exists($callCount, 'getInvocationCount')) {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->getInvocationCount();
+                    } else {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->numberOfInvocations();
+                    }
+
+                    switch ($count) {
+                        case 1:
+                            $self->assertEquals(ErpOrderCancellationApiDependencyProvider::FACADE_API, $key);
+
+                            return $self->erpOrderCancellationApiToApiFacadeMock;
+                        case 2:
+                            $self->assertEquals(ErpOrderCancellationApiDependencyProvider::FACADE_ERP_ORDER_CANCELLATION, $key);
+
+                            return $self->erpOrderCancellationApiToErpOrderCancellationFacadeMock;
+                    }
+                },
             );
 
         static::assertInstanceOf(

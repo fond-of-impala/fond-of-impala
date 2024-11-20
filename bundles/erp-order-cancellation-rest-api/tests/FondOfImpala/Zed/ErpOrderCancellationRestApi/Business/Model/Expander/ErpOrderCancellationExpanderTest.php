@@ -31,11 +31,6 @@ class ErpOrderCancellationExpanderTest extends Unit
     protected MockObject|ErpOrderCancellationExpanderPluginInterface $erpOrderCancellationExpanderPlugin2Mock;
 
     /**
-     * @var array<\FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationExpanderPluginInterface>
-     */
-    protected array $erpOrderCancellationExpanderPluginMocks = [];
-
-    /**
      * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpander
      */
     protected ErpOrderCancellationExpander $expander;
@@ -61,12 +56,11 @@ class ErpOrderCancellationExpanderTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $plugins = [
+        /** @phpstan-ignore-next-line */
+        $this->expander = new ErpOrderCancellationExpander([
             $this->erpOrderCancellationExpanderPluginMock,
             $this->erpOrderCancellationExpanderPlugin2Mock,
-        ];
-
-        $this->expander = new ErpOrderCancellationExpander($plugins);
+        ]);
     }
 
     /**

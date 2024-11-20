@@ -6,27 +6,16 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacadeInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge
-     */
     protected ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacadeInterface
-     */
     protected MockObject|ErpOrderCancellationFacadeInterface $erpOrderCancellationFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ErpOrderCancellationTransfer
-     */
     protected MockObject|ErpOrderCancellationTransfer $erpOrderCancellationTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer
-     */
     protected MockObject|ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransferMock;
 
     /**

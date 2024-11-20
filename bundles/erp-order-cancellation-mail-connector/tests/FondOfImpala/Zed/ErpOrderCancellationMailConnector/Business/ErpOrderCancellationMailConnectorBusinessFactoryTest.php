@@ -96,9 +96,12 @@ class ErpOrderCancellationMailConnectorBusinessFactoryTest extends Unit
             ->method('get')
             ->willReturnCallback(
                 static function (string $key) use ($self, $callCount) {
+                    /** @phpstan-ignore-next-line */
                     if (method_exists($callCount, 'getInvocationCount')) {
+                        /** @phpstan-ignore-next-line */
                         $count = $callCount->getInvocationCount();
                     } else {
+                        /** @phpstan-ignore-next-line */
                         $count = $callCount->numberOfInvocations();
                     }
 

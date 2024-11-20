@@ -94,7 +94,6 @@ class NotifyApprovedErpOrderCancellationPostTransactionPluginTest extends Unit
      */
     public function testPostTransactionDoNothing(): void
     {
-        $self = $this;
         $this->erpOrderCancellationResponseTransferMock->expects(static::once())
             ->method('getErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationTransferMock);

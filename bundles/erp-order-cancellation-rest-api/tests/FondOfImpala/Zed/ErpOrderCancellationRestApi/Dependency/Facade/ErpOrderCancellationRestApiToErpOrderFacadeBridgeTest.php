@@ -5,22 +5,14 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade;
 use Codeception\Test\Unit;
 use FondOfOryx\Zed\ErpOrder\Business\ErpOrderFacadeInterface;
 use Generated\Shared\Transfer\ErpOrderTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ErpOrderCancellationRestApiToErpOrderFacadeBridgeTest extends Unit
 {
-    /**
-     * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeBridge
-     */
     protected ErpOrderCancellationRestApiToErpOrderFacadeBridge $bridge;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfOryx\Zed\ErpOrder\Business\ErpOrderFacadeInterface
-     */
     protected MockObject|ErpOrderFacadeInterface $erpOrderFacadeMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ErpOrderTransfer
-     */
     protected MockObject|ErpOrderTransfer $erpOrderTransferMock;
 
     /**

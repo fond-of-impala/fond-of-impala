@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ErpOrderCancellation;
 
 use Codeception\Test\Unit;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Kernel\Container;
 
 class ErpOrderCancellationDependencyProviderTest extends Unit

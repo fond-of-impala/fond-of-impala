@@ -29,9 +29,12 @@ class PermissionErpOrderCancellationRestApiDependencyProviderTest extends Unit
     {
         $containerMock = $this->getMockBuilder(Container::class);
 
+        /** @phpstan-ignore-next-line */
         if (method_exists($containerMock, 'setMethodsExcept')) {
+            /** @phpstan-ignore-next-line */
             $containerMock->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet']);
         } else {
+            /** @phpstan-ignore-next-line */
             $containerMock->onlyMethods(['getLocator'])->enableOriginalClone();
         }
 

@@ -9,19 +9,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class DebitorNumberQueryExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
-     */
-    protected MockObject|FoiErpOrderCancellationQuery $foiErpOrderCancellationQuery;
+    protected MockObject|FoiErpOrderCancellationQuery $foiErpOrderCancellationQueryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer
-     */
-    protected MockObject|RestErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransferMock;
+    protected MockObject|ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\Plugin\QueryExpander\DebitorNumberQueryExpanderPlugin
-     */
     protected DebitorNumberQueryExpanderPlugin $plugin;
 
     /**

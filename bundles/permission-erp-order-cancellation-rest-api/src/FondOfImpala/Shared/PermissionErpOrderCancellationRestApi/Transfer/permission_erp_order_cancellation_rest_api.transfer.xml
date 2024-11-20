@@ -23,4 +23,9 @@
         <property name="value" type="string"/>
         <property name="comparison" type="string"/>
     </transfer>
+
+    <transfer name="ErpOrderCancellationFilter">
+        <property name="fkOriginator" type="int" />
+        <property name="debitorNumbers" singular="debitorNumber" type="array" />
+    </transfer>
 </transfers>

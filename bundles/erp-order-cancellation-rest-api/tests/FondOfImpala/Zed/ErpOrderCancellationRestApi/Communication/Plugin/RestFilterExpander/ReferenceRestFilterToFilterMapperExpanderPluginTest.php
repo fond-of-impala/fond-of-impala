@@ -9,19 +9,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer
-     */
     protected MockObject|RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer
-     */
-    protected MockObject|RestErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransferMock;
+    protected MockObject|ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransferMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\Plugin\RestFilterExpander\ReferenceRestFilterToFilterMapperExpanderPlugin
-     */
     protected ReferenceRestFilterToFilterMapperExpanderPlugin $plugin;
 
     /**

@@ -3,11 +3,13 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationApi;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToApiFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToErpOrderCancellationFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\QueryContainer\ErpOrderCancellationApiToApiQueryBuilderQueryContainerBridge;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\Api\Business\ApiFacadeInterface;
 use Spryker\Zed\ApiQueryBuilder\Persistence\ApiQueryBuilderQueryContainerInterface;
@@ -32,6 +34,11 @@ class ErpOrderCancellationApiDependencyProviderTest extends Unit
     protected MockObject|Container $containerMock;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\BundleProxy
+     */
+    protected MockObject|BundleProxy $bundleProxyMock;
+
+    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Api\Business\ApiFacadeInterface
      */
     protected MockObject|ApiFacadeInterface $apiFacadeMock;
@@ -51,9 +58,18 @@ class ErpOrderCancellationApiDependencyProviderTest extends Unit
      */
     protected function _before(): void
     {
-        $this->containerMock = $this->getMockBuilder(Container::class)
-            ->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet'])
-            ->getMock();
+        $containerMock = $this->getMockBuilder(Container::class);
+
+        /** @phpstan-ignore-next-line */
+        if (method_exists($containerMock, 'setMethodsExcept')) {
+            /** @phpstan-ignore-next-line */
+            $containerMock->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet']);
+        } else {
+            /** @phpstan-ignore-next-line */
+            $containerMock->onlyMethods(['getLocator'])->enableOriginalClone();
+        }
+
+        $this->containerMock = $containerMock->getMock();
 
         $this->locatorMock = $this->getMockBuilder(Locator::class)
             ->disableOriginalConstructor()
@@ -85,14 +101,23 @@ class ErpOrderCancellationApiDependencyProviderTest extends Unit
      */
     public function testProvideBusinessLayerDependencies(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('getLocator')
             ->willReturn($this->locatorMock);
 
         $this->locatorMock->expects(static::atLeastOnce())
             ->method('__call')
-            ->withConsecutive(['erpOrderCancellation'], ['api'])
-            ->willReturn($this->bundleProxyMock);
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case 'erpOrderCancellation':
+                        return $self->bundleProxyMock;
+                    case 'api':
+                        return $self->bundleProxyMock;
+                }
+
+                throw new Exception('Invalid key');
+            });
 
         $this->bundleProxyMock->expects(static::atLeastOnce())
             ->method('__call')
