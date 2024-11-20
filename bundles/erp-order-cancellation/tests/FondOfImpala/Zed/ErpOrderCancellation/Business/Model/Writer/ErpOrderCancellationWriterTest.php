@@ -20,7 +20,7 @@ class ErpOrderCancellationWriterTest extends Unit
     protected MockObject|LoggerInterface $loggerMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\Business\PluginExecutor\ErpOrderCancellationPluginExecutorInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Psr\Log\LoggerInterface
      */
     protected MockObject|LoggerInterface $erpOrderCancellationPluginExecutorMock;
 

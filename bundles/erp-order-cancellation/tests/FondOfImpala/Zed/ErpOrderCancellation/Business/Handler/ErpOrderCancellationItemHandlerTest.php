@@ -6,6 +6,8 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ErpOrderCancellationItemReaderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Writer\ErpOrderCancellationItemWriterInterface;
+use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPostSavePluginInterface;
+use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPreSavePluginInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -13,12 +15,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 class ErpOrderCancellationItemHandlerTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ErpOrderCancellationItemReaderInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPostSavePluginInterface
      */
     protected MockObject|ErpOrderCancellationItemPostSavePluginInterface $erpOrderCancellationItemReaderMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Writer\ErpOrderCancellationItemWriterInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPreSavePluginInterface
      */
     protected MockObject|ErpOrderCancellationItemPreSavePluginInterface $erpOrderCancellationItemWriterMock;
 

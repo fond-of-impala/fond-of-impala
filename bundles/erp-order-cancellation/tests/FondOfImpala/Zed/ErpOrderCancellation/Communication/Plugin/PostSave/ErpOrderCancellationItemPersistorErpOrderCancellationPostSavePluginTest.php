@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PostSave;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\ErpOrderCancellationFacade;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ErpOrderCancellationItemPersistorErpOrderCancellationPostSavePluginTest extends Unit
 {

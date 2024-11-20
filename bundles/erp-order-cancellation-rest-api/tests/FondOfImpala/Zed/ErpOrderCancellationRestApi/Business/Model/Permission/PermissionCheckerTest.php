@@ -6,7 +6,6 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationPermissionPluginInterface;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
-use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class PermissionCheckerTest extends Unit
@@ -46,10 +45,6 @@ class PermissionCheckerTest extends Unit
      */
     protected function _before(): void
     {
-        $this->restErpOrderCancellationRequestTransferMock = $this->getMockBuilder(RestErpOrderCancellationRequestTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->erpOrderCancellationTransferMock = $this->getMockBuilder(ErpOrderCancellationTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();

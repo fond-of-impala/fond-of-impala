@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\QueryContainer;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiQueryBuilderQueryTransfer;
 use Generated\Shared\Transfer\PropelQueryBuilderCriteriaTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Spryker\Zed\ApiQueryBuilder\Persistence\ApiQueryBuilderQueryContainerInterface;
 

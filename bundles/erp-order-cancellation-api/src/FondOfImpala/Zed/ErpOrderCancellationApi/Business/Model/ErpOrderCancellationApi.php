@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationApi\Business\Model;
 
+use Exception;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToApiFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Persistence\ErpOrderCancellationApiRepositoryInterface;
@@ -11,7 +12,6 @@ use Generated\Shared\Transfer\ApiItemTransfer;
 use Generated\Shared\Transfer\ApiRequestTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Orm\Zed\ErpOrderCancellation\Persistence\Map\FoiErpOrderCancellationTableMap;
-use PHPUnit\Util\Exception;
 use Spryker\Zed\Api\ApiConfig;
 use Spryker\Zed\Api\Business\Exception\EntityNotFoundException;
 use Spryker\Zed\Api\Business\Exception\EntityNotSavedException;
@@ -241,7 +241,7 @@ class ErpOrderCancellationApi implements ErpOrderCancellationApiInterface
     /**
      * @param string $state
      *
-     * @throws \PHPUnit\Util\Exception
+     * @throws \Exception
      *
      * @return int
      */

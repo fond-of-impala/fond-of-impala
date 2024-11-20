@@ -80,6 +80,7 @@ class ErpOrderCancellationItemHandler implements ErpOrderCancellationItemHandler
         }
 
         foreach ($preparedItems[static::UNTOUCHED] as $data) {
+            /** @phpstan-ignore-next-line */
             if (is_array($data)) {
                 foreach ($data as $item) {
                     $collection->append($item);

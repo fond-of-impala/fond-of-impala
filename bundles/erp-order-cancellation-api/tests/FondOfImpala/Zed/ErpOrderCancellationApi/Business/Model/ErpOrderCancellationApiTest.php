@@ -3,7 +3,6 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationApi\Business\Model;
 
 use Codeception\Test\Unit;
-use Exception;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToApiFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade\ErpOrderCancellationApiToErpOrderCancellationFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationApi\Persistence\ErpOrderCancellationApiRepositoryInterface;
@@ -17,6 +16,7 @@ use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Api\Business\Exception\EntityNotFoundException;
 use Spryker\Zed\Api\Business\Exception\EntityNotSavedException;
+use Throwable;
 
 class ErpOrderCancellationApiTest extends Unit
 {
@@ -144,34 +144,34 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $idErpOrderCancellation = 1;
 
-        $this->apiDataTransferMock->expects(static::atLeastOnce())
+        $this->apiDataTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn([]);
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('createErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationResponseTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getIsSuccessful')
             ->willReturn(true);
 
-        $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationTransferMock->expects($this->atLeastOnce())
             ->method('getIdErpOrderCancellation')
             ->willReturn($idErpOrderCancellation);
 
-        $this->erpOrderCancellationApiToApiFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToApiFacadeMock->expects($this->atLeastOnce())
             ->method('createApiItem')
             ->with($this->erpOrderCancellationTransferMock, (string)$idErpOrderCancellation)
             ->willReturn($this->apiItemTransferMock);
 
         $responseTransfer = $this->model->create($this->apiDataTransferMock);
 
-        static::assertEquals($this->apiItemTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiItemTransferMock, $responseTransfer);
     }
 
     /**
@@ -179,23 +179,23 @@ class ErpOrderCancellationApiTest extends Unit
      */
     public function testCreateWithException(): void
     {
-        $this->apiDataTransferMock->expects(static::atLeastOnce())
+        $this->apiDataTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn([]);
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('createErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationResponseTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getIsSuccessful')
             ->willReturn(false);
 
-        static::expectException(EntityNotSavedException::class);
+        $this->expectException(EntityNotSavedException::class);
 
         $this->model->create($this->apiDataTransferMock);
     }
@@ -207,39 +207,39 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $idErpOrderCancellation = 1;
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('findErpOrderCancellationByIdErpOrderCancellation')
             ->with($idErpOrderCancellation)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->apiDataTransferMock->expects(static::atLeastOnce())
+        $this->apiDataTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn([]);
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('updateErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationResponseTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getIsSuccessful')
             ->willReturn(true);
 
-        $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationTransferMock->expects($this->atLeastOnce())
             ->method('getIdErpOrderCancellation')
             ->willReturn($idErpOrderCancellation);
 
-        $this->erpOrderCancellationApiToApiFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToApiFacadeMock->expects($this->atLeastOnce())
             ->method('createApiItem')
             ->with($this->erpOrderCancellationTransferMock, (string)$idErpOrderCancellation)
             ->willReturn($this->apiItemTransferMock);
 
         $responseTransfer = $this->model->update($idErpOrderCancellation, $this->apiDataTransferMock);
 
-        static::assertEquals($this->apiItemTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiItemTransferMock, $responseTransfer);
     }
 
     /**
@@ -249,28 +249,28 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $idErpOrderCancellation = 1;
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('findErpOrderCancellationByIdErpOrderCancellation')
             ->with($idErpOrderCancellation)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->apiDataTransferMock->expects(static::atLeastOnce())
+        $this->apiDataTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn([]);
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('updateErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationResponseTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getErpOrderCancellation')
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->erpOrderCancellationResponseTransferMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationResponseTransferMock->expects($this->atLeastOnce())
             ->method('getIsSuccessful')
             ->willReturn(false);
 
-        static::expectException(EntityNotSavedException::class);
+        $this->expectException(EntityNotSavedException::class);
 
         $this->model->update($idErpOrderCancellation, $this->apiDataTransferMock);
     }
@@ -282,19 +282,19 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $idErpOrderCancellation = 1;
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('findErpOrderCancellationByIdErpOrderCancellation')
             ->with($idErpOrderCancellation)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->erpOrderCancellationApiToApiFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToApiFacadeMock->expects($this->atLeastOnce())
             ->method('createApiItem')
             ->with($this->erpOrderCancellationTransferMock, (string)$idErpOrderCancellation)
             ->willReturn($this->apiItemTransferMock);
 
         $responseTransfer = $this->model->get($idErpOrderCancellation);
 
-        static::assertEquals($this->apiItemTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiItemTransferMock, $responseTransfer);
     }
 
     /**
@@ -304,12 +304,12 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $idErpOrderCancellation = 1;
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('findErpOrderCancellationByIdErpOrderCancellation')
             ->with($idErpOrderCancellation)
             ->willReturn(null);
 
-        static::expectException(EntityNotFoundException::class);
+        $this->expectException(EntityNotFoundException::class);
 
         $this->model->get($idErpOrderCancellation);
     }
@@ -334,47 +334,47 @@ class ErpOrderCancellationApiTest extends Unit
             ],
         ];
 
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('getFilter')
             ->willReturn($this->apiFilterTransferMock);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('getCriteriaJson')
             ->willReturn($criteriaJson);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('setCriteriaJson');
 
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('setFilter')
             ->with($this->apiFilterTransferMock)
             ->willReturn($this->apiRequestTransferMock);
 
-        $this->erpOrderCancellationApiRepositoryMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiRepositoryMock->expects($this->atLeastOnce())
             ->method('find')
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn($apiCollectionData);
 
-         $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+         $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
              ->method('findErpOrderCancellationByIdErpOrderCancellation')
              ->with($idErpOrderCancellation)
              ->willReturn($this->erpOrderCancellationTransferMock);
 
-         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
+         $this->erpOrderCancellationTransferMock->expects($this->atLeastOnce())
              ->method('toArray')
              ->willReturn([]);
 
-         $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+         $this->apiCollectionTransferMock->expects($this->atLeastOnce())
              ->method('setData')
              ->willReturn($this->apiCollectionTransferMock);
 
         $responseTransfer = $this->model->find($this->apiRequestTransferMock);
 
-        static::assertEquals($this->apiCollectionTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiCollectionTransferMock, $responseTransfer);
     }
 
     /**
@@ -390,15 +390,15 @@ class ErpOrderCancellationApiTest extends Unit
             }
         ]}';
 
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('getFilter')
             ->willReturn($this->apiFilterTransferMock);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('getCriteriaJson')
             ->willReturn($criteriaJson);
 
-        static::expectException(Exception::class);
+        $this->expectException(Throwable::class);
 
         $this->model->find($this->apiRequestTransferMock);
     }
@@ -408,30 +408,30 @@ class ErpOrderCancellationApiTest extends Unit
      */
     public function testFindWithNoCriteriaJson(): void
     {
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('getFilter')
             ->willReturn($this->apiFilterTransferMock);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('getCriteriaJson')
             ->willReturn(null);
 
-        $this->erpOrderCancellationApiRepositoryMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiRepositoryMock->expects($this->atLeastOnce())
             ->method('find')
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn([]);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('setData')
             ->willReturn($this->apiCollectionTransferMock);
 
         $responseTransfer = $this->model->find($this->apiRequestTransferMock);
 
-        static::assertEquals($this->apiCollectionTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiCollectionTransferMock, $responseTransfer);
     }
 
     /**
@@ -441,30 +441,30 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $criteriaJson = '{}';
 
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('getFilter')
             ->willReturn($this->apiFilterTransferMock);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('getCriteriaJson')
             ->willReturn($criteriaJson);
 
-        $this->erpOrderCancellationApiRepositoryMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiRepositoryMock->expects($this->atLeastOnce())
             ->method('find')
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn([]);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('setData')
             ->willReturn($this->apiCollectionTransferMock);
 
         $responseTransfer = $this->model->find($this->apiRequestTransferMock);
 
-        static::assertEquals($this->apiCollectionTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiCollectionTransferMock, $responseTransfer);
     }
 
     /**
@@ -486,43 +486,43 @@ class ErpOrderCancellationApiTest extends Unit
             ],
         ];
 
-        $this->erpOrderCancellationApiRepositoryMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiRepositoryMock->expects($this->atLeastOnce())
             ->method('find')
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('getFilter')
             ->willReturn($this->apiFilterTransferMock);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('getCriteriaJson')
             ->willReturn($criteriaJson);
 
-        $this->apiFilterTransferMock->expects(static::atLeastOnce())
+        $this->apiFilterTransferMock->expects($this->atLeastOnce())
             ->method('setCriteriaJson');
 
-        $this->apiRequestTransferMock->expects(static::atLeastOnce())
+        $this->apiRequestTransferMock->expects($this->atLeastOnce())
             ->method('setFilter')
             ->with($this->apiFilterTransferMock)
             ->willReturn($this->apiRequestTransferMock);
 
-        $this->erpOrderCancellationApiRepositoryMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiRepositoryMock->expects($this->atLeastOnce())
             ->method('find')
             ->with($this->apiRequestTransferMock)
             ->willReturn($this->apiCollectionTransferMock);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn($apiCollectionData);
 
-        $this->apiCollectionTransferMock->expects(static::atLeastOnce())
+        $this->apiCollectionTransferMock->expects($this->atLeastOnce())
             ->method('setData')
             ->willReturn($this->apiCollectionTransferMock);
 
         $responseTransfer = $this->model->find($this->apiRequestTransferMock);
 
-        static::assertEquals($this->apiCollectionTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiCollectionTransferMock, $responseTransfer);
     }
 
     /**
@@ -532,22 +532,22 @@ class ErpOrderCancellationApiTest extends Unit
     {
         $idErpOrderCancellation = 1;
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('findErpOrderCancellationByIdErpOrderCancellation')
             ->with($idErpOrderCancellation)
             ->willReturn($this->erpOrderCancellationTransferMock);
 
-        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToErpOrderCancellationFacadeMock->expects($this->atLeastOnce())
             ->method('deleteErpOrderCancellationByIdErpOrderCancellation')
             ->with($idErpOrderCancellation);
 
-        $this->erpOrderCancellationApiToApiFacadeMock->expects(static::atLeastOnce())
+        $this->erpOrderCancellationApiToApiFacadeMock->expects($this->atLeastOnce())
             ->method('createApiItem')
             ->with(null, (string)$idErpOrderCancellation)
             ->willReturn($this->apiItemTransferMock);
 
         $responseTransfer = $this->model->delete($idErpOrderCancellation);
 
-        static::assertEquals($this->apiItemTransferMock, $responseTransfer);
+        $this->assertEquals($this->apiItemTransferMock, $responseTransfer);
     }
 }

@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellation\Business;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Handler\ErpOrderCancellationItemHandlerInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ErpOrderCancellationItemReaderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ReaderInterface;
@@ -100,17 +101,43 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
      */
     public function testCreateErpOrderCancellationWriter(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $callCount = static::atLeastOnce();
+        $this->containerMock->expects($callCount)
             ->method('get')
-            ->withConsecutive(
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_PRE_SAVE],
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE],
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION],
-            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject(), new ArrayObject());
+            ->willReturnCallback(
+                static function (string $key) use ($self, $callCount) {
+                    /** @phpstan-ignore-next-line */
+                    if (method_exists($callCount, 'getInvocationCount')) {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->getInvocationCount();
+                    } else {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->numberOfInvocations();
+                    }
+
+                    switch ($count) {
+                        case 1:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_PRE_SAVE, $key);
+
+                            return new ArrayObject();
+                        case 2:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_SAVE, $key);
+
+                            return new ArrayObject();
+                        case 3:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION, $key);
+
+                            return new ArrayObject();
+                    }
+
+                    throw new Exception('Invalid key');
+                },
+            );
 
         static::assertInstanceOf(
             ErpOrderCancellationWriterInterface::class,
@@ -123,17 +150,43 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
      */
     public function testCreateErpOrderCancellationItemWriter(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $callCount = static::atLeastOnce();
+        $this->containerMock->expects($callCount)
             ->method('get')
-            ->withConsecutive(
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE],
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_POST_SAVE],
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION],
-            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject(), new ArrayObject());
+            ->willReturnCallback(
+                static function (string $key) use ($self, $callCount) {
+                    /** @phpstan-ignore-next-line */
+                    if (method_exists($callCount, 'getInvocationCount')) {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->getInvocationCount();
+                    } else {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->numberOfInvocations();
+                    }
+
+                    switch ($count) {
+                        case 1:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE, $key);
+
+                            return new ArrayObject();
+                        case 2:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_POST_SAVE, $key);
+
+                            return new ArrayObject();
+                        case 3:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION, $key);
+
+                            return new ArrayObject();
+                    }
+
+                    throw new Exception('Invalid key');
+                },
+            );
 
         static::assertInstanceOf(
             ErpOrderCancellationItemWriterInterface::class,
@@ -146,17 +199,43 @@ class ErpOrderCancellationBusinessFactoryTest extends Unit
      */
     public function testCreateErpOrderCancellationItemHandler(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $callCount = static::atLeastOnce();
+        $this->containerMock->expects($callCount)
             ->method('get')
-            ->withConsecutive(
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE],
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_POST_SAVE],
-                [ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION],
-            )->willReturnOnConsecutiveCalls(new ArrayObject(), new ArrayObject(), new ArrayObject());
+            ->willReturnCallback(
+                static function (string $key) use ($self, $callCount) {
+                    /** @phpstan-ignore-next-line */
+                    if (method_exists($callCount, 'getInvocationCount')) {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->getInvocationCount();
+                    } else {
+                        /** @phpstan-ignore-next-line */
+                        $count = $callCount->numberOfInvocations();
+                    }
+
+                    switch ($count) {
+                        case 1:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE, $key);
+
+                            return new ArrayObject();
+                        case 2:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ITEM_POST_SAVE, $key);
+
+                            return new ArrayObject();
+                        case 3:
+                            $self->assertEquals(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_POST_TRANSACTION, $key);
+
+                            return new ArrayObject();
+                    }
+
+                    throw new Exception('Invalid key');
+                },
+            );
 
         static::assertInstanceOf(
             ErpOrderCancellationItemHandlerInterface::class,

@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellationApi\Dependency\Facade;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ApiCollectionTransfer;
 use Generated\Shared\Transfer\ApiItemTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Spryker\Zed\Api\Business\ApiFacadeInterface;
 
@@ -19,6 +20,11 @@ class ErpOrderCancellationApiToApiFacadeBridgeTest extends Unit
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ApiItemTransfer
      */
     protected MockObject|ApiItemTransfer $apiItemTransferMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     */
+    protected MockObject|AbstractTransfer $abstractTransferMock;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Api\Business\ApiFacadeInterface

@@ -8,6 +8,7 @@ use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ReaderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Writer\ErpOrderCancellationWriterInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationResponseTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ErpOrderCancellationFacadeTest extends Unit
 {

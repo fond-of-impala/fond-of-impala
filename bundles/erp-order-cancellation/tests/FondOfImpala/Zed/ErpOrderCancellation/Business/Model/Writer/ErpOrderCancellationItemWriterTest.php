@@ -11,7 +11,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 class ErpOrderCancellationItemWriterTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\Business\PluginExecutor\ErpOrderCancellationPluginExecutorInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellation\Business\PluginExecutor\ErpOrderCancellationItemPluginExecutorInterface
      */
     protected MockObject|ErpOrderCancellationItemPluginExecutorInterface $erpOrderCancellationItemPluginExecutorMock;
 
