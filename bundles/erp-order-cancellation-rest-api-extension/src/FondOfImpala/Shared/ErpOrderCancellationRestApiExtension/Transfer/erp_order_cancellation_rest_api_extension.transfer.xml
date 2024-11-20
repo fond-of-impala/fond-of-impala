@@ -5,4 +5,5 @@
     <transfer name="RestErpOrderCancellationFilter" />
     <transfer name="ErpOrderCancellationFilter" />
     <transfer name="CompanyUser" />
+    <transfer name="RestErpOrderCancellationRequest" />
 </transfers>
