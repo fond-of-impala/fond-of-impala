@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-spryker/jellyfish-b2b-extension": "dev-master",
     "spryker/company-extension": "^1.0",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0"

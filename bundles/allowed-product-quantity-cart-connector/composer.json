@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "spryker/cart-extension": "^4.0.0",
     "fond-of-impala/allowed-product-quantity": "^1.0.0"
   },

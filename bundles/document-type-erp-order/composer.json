@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "fond-of-oryx/documents-rest-api": "^1.0.0-beta",
     "fond-of-oryx/erp-order": "^4.4.0",
     "fond-of-oryx/erp-order-permission": "^2.0.0",

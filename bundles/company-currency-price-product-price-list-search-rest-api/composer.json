@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/price-product-price-list-search-rest-api": "^1.1.0",
     "fond-of-impala/price-product-price-list-search-rest-api-extension": "^1.0.0",
     "spryker/company-user": "^1.0.0 || ^2.0.0",

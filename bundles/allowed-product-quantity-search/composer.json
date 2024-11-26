@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "spryker/event": "^1.0.0 || ^2.0.0",
     "spryker/product-page-search": "^1.0.0 || ^2.0.0 || ^3.0.0",
     "spryker/product-page-search-extension": "^1.2.0",

@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "fond-of-impala/erp-order-cancellation-rest-api-extension": "^1.0.0",
     "spryker/company": "^1.0.0",
     "spryker/company-role": "^1.0.0",

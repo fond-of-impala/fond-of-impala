@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-user-reference": "^1.0.0",
     "spryker/quote": "^2.0.0",
     "spryker/uuid-behavior": "^1.0.0"

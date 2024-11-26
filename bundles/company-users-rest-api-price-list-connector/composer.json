@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-price-list": "^1.0.0",
     "fond-of-oryx/company-users-rest-api-extension": "^2.2.0",
     "spryker/company": "^1.4.0",

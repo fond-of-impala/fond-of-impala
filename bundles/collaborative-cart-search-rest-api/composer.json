@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-oryx/cart-search-rest-api-extension": "^1.0.0 || ^2.0.0",
     "fond-of-impala/collaborative-cart": "^1.0.0"
   },

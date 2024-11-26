@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-users-bulk-rest-api-extension": "^1.0.0",
     "fond-of-impala/navision-company": "1.0.0",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0",

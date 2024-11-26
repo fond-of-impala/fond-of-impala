@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/conditional-availability-cart-connector": "^2.0.0",
     "spryker/checkout-extension": "^1.2.0"
   },

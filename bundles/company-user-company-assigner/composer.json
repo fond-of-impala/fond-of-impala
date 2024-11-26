@@ -19,7 +19,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-type": "^1.0.0",
     "fond-of-spryker/company": "dev-master",
     "spryker/company-business-unit": "^1.0.0 || ^2.0.0",

@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/product-lists-bulk-rest-api-extension": "^1.0.0",
     "fond-of-impala/company-type": "^1.0.0",
     "spryker/company-role": "^1.0.0",

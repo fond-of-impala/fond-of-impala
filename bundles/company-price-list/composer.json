@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/price-list": "^1.0.0",
     "fond-of-oryx/company-user-search-rest-api": "^2.0.0",
     "fond-of-spryker/company-extension": "dev-master",
