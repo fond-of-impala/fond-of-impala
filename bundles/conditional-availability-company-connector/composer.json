@@ -15,6 +15,7 @@
   "require": {
     "php": ">=8.2",
     "spryker/company": "^1.0.0",
+    "spryker/company-user": "^1.0.0 || ^2.0.0",
     "spryker/customer": "^6.3.0 || ^7.0.0"
   },
   "require-dev": {

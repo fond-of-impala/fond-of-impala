@@ -6,7 +6,7 @@ parameters:
     level: 5
     reportUnmatchedIgnoredErrors: false
     ignoreErrors:
-    		- identifier: missingType.iterableValue
+        - identifier: missingType.iterableValue
     tmpDir: phpstanCache
     scanDirectories:
         - src/Orm/Zed
