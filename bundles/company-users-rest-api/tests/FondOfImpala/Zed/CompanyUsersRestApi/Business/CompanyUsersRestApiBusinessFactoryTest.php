@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUsersRestApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\CompanyUser\CompanyUserWriter;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\PluginExecutor\CompanyUserPluginExecutor;
 use FondOfImpala\Zed\CompanyUsersRestApi\Business\Reader\CompanyUserReader;
@@ -157,9 +158,9 @@ class CompanyUsersRestApiBusinessFactoryTest extends Unit
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-            )->willReturnOnConsecutiveCalls(
+            ->with(
+                CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE,
+            )->willReturn(
                 $this->companyUserReferenceFacadeMock,
             );
 
@@ -174,41 +175,42 @@ class CompanyUsersRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyUserWriter(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUsersRestApiDependencyProvider::FACADE_CUSTOMER],
-                [CompanyUsersRestApiDependencyProvider::SERVICE_UTIL_TEXT],
-                [CompanyUsersRestApiDependencyProvider::SERVICE_UTIL_TEXT],
-                [CompanyUsersRestApiDependencyProvider::FACADE_CUSTOMER],
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY],
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT],
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER],
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUsersRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_CREATE],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION],
-            )->willReturnOnConsecutiveCalls(
-                $this->customerFacadeMock,
-                $this->utilTextServiceMock,
-                $this->utilTextServiceMock,
-                $this->customerFacadeMock,
-                $this->companyFacadeMock,
-                $this->companyBusinessUnitFacadeMock,
-                $this->companyUserFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-                [],
-                [],
-                [],
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUsersRestApiDependencyProvider::FACADE_CUSTOMER:
+                        return $self->customerFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::SERVICE_UTIL_TEXT:
+                        return $self->utilTextServiceMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY:
+                        return $self->companyFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT:
+                        return $self->companyBusinessUnitFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyUserFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_CREATE:
+                        return [];
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE:
+                        return [];
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION:
+                        return [];
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CompanyUserWriter::class,
@@ -221,31 +223,36 @@ class CompanyUsersRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyUserUpdater(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_ROLE],
-                [CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER],
-                [CompanyUsersRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_CREATE],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION],
-                [CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyUserReferenceFacadeMock,
-                $this->companyRoleFacadeMock,
-                $this->companyUserFacadeMock,
-                $this->permissionFacadeMock,
-                [],
-                [],
-                [],
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_ROLE:
+                        return $self->companyRoleFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyUserFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_CREATE:
+                        return [];
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_POST_CREATE:
+                        return [];
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_DELETE_VALIDATION:
+                        return [];
+                    case CompanyUsersRestApiDependencyProvider::PLUGINS_COMPANY_USER_PRE_UPDATE_VALIDATION:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CompanyUserUpdater::class,

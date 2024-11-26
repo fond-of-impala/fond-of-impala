@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Model\ConditionalAvailabilityBulkApi;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\ConditionalAvailabilityBulkApiDependencyProvider;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToApiFacadeInterface;
@@ -70,26 +71,26 @@ class ConditionalAvailabilityBulkApiBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilitiesBulkApi(): void
     {
-        $this->containerMock->expects(static::atLeastOnce())
-            ->method('has')
-            ->withConsecutive(
-                [ConditionalAvailabilityBulkApiDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityBulkApiDependencyProvider::FACADE_PRODUCT],
-                [ConditionalAvailabilityBulkApiDependencyProvider::FACADE_API],
-            )->willReturn(true);
+        $self = $this;
 
         $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [ConditionalAvailabilityBulkApiDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityBulkApiDependencyProvider::FACADE_PRODUCT],
-                [ConditionalAvailabilityBulkApiDependencyProvider::FACADE_API],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->conditionalAvailabilityFacadeMock,
-                $this->productFacadeMock,
-                $this->apiFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case ConditionalAvailabilityBulkApiDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY:
+                        return $self->conditionalAvailabilityFacadeMock;
+                    case ConditionalAvailabilityBulkApiDependencyProvider::FACADE_PRODUCT:
+                        return $self->productFacadeMock;
+                    case ConditionalAvailabilityBulkApiDependencyProvider::FACADE_API:
+                        return $self->apiFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             ConditionalAvailabilityBulkApi::class,

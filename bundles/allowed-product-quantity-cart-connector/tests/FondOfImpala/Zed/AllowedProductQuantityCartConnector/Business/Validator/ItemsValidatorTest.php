@@ -92,6 +92,8 @@ class ItemsValidatorTest extends Unit
      */
     public function testValidate(): void
     {
+        $self = $this;
+
         $abstractSkus = ['FOO-001-001', 'FOO-001-002', 'FOO-001-003'];
         $groupKeys = ['GROUP.FOO-001-001', 'GROUP.FOO-001-002', 'GROUP.FOO-001-003'];
         $allowedProductQuantityTransferMock = [
@@ -99,42 +101,46 @@ class ItemsValidatorTest extends Unit
             $abstractSkus[2] => $this->allowedProductQuantityTransferMocks[1],
         ];
 
-        $this->allowedProductQuantityReaderMock->expects(static::atLeastOnce())
+        $this->allowedProductQuantityReaderMock->expects($this->atLeastOnce())
             ->method('getGroupedByItems')
             ->with($this->itemTransferMocks)
             ->willReturn($allowedProductQuantityTransferMock);
 
-        $this->itemTransferMocks->offsetGet(0)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(0)->expects($this->atLeastOnce())
             ->method('getGroupKey')
             ->willReturn($groupKeys[0]);
 
-        $this->itemTransferMocks->offsetGet(0)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(0)->expects($this->atLeastOnce())
             ->method('getAbstractSku')
             ->willReturn($abstractSkus[0]);
 
-        $this->itemValidatorMock->expects(static::atLeastOnce())
+        $this->itemValidatorMock->expects($this->atLeastOnce())
             ->method('validate')
-            ->withConsecutive(
-                [$this->itemTransferMocks->offsetGet(0), $this->allowedProductQuantityTransferMocks[0]],
-                [$this->itemTransferMocks->offsetGet(2), $this->allowedProductQuantityTransferMocks[1]],
-            )->willReturnOnConsecutiveCalls(
-                new ArrayObject(),
-                new ArrayObject([$this->messageTransferMock]),
-            );
+            ->willReturnCallback(static function (ItemTransfer $itemTransfer, ?AllowedProductQuantityTransfer $allowedProductQuantityTransfer = null) use ($self) {
+                if ($itemTransfer === $self->itemTransferMocks->offsetGet(0) && $allowedProductQuantityTransfer === $self->allowedProductQuantityTransferMocks[0]) {
+                    return new ArrayObject();
+                }
 
-        $this->itemTransferMocks->offsetGet(1)->expects(static::atLeastOnce())
+                if ($itemTransfer === $self->itemTransferMocks->offsetGet(2) && $allowedProductQuantityTransfer === $self->allowedProductQuantityTransferMocks[1]) {
+                    return new ArrayObject([$self->messageTransferMock]);
+                }
+
+                throw new Exception('Unexpected call');
+            });
+
+        $this->itemTransferMocks->offsetGet(1)->expects($this->atLeastOnce())
             ->method('getGroupKey')
             ->willReturn($groupKeys[1]);
 
-        $this->itemTransferMocks->offsetGet(1)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(1)->expects($this->atLeastOnce())
             ->method('getAbstractSku')
             ->willReturn($abstractSkus[1]);
 
-        $this->itemTransferMocks->offsetGet(2)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(2)->expects($this->atLeastOnce())
             ->method('getGroupKey')
             ->willReturn($groupKeys[2]);
 
-        $this->itemTransferMocks->offsetGet(2)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(2)->expects($this->atLeastOnce())
             ->method('getAbstractSku')
             ->willReturn($abstractSkus[2]);
 
@@ -149,6 +155,8 @@ class ItemsValidatorTest extends Unit
      */
     public function testValidateAndAppendResult(): void
     {
+        $self = $this;
+
         $abstractSkus = ['FOO-001-001', 'FOO-001-002', 'FOO-001-003'];
         $groupKeys = ['GROUP.FOO-001-001', 'GROUP.FOO-001-002', 'GROUP.FOO-001-003'];
         $allowedProductQuantityTransferMock = [
@@ -156,46 +164,50 @@ class ItemsValidatorTest extends Unit
             $abstractSkus[2] => $this->allowedProductQuantityTransferMocks[1],
         ];
 
-        $this->allowedProductQuantityReaderMock->expects(static::atLeastOnce())
+        $this->allowedProductQuantityReaderMock->expects($this->atLeastOnce())
             ->method('getGroupedByItems')
             ->with($this->itemTransferMocks)
             ->willReturn($allowedProductQuantityTransferMock);
 
-        $this->itemTransferMocks->offsetGet(0)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(0)->expects($this->atLeastOnce())
             ->method('getGroupKey')
             ->willReturn($groupKeys[0]);
 
-        $this->itemTransferMocks->offsetGet(0)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(0)->expects($this->atLeastOnce())
             ->method('getAbstractSku')
             ->willReturn($abstractSkus[0]);
 
-        $this->itemValidatorMock->expects(static::atLeastOnce())
+        $this->itemValidatorMock->expects($this->atLeastOnce())
             ->method('validate')
-            ->withConsecutive(
-                [$this->itemTransferMocks->offsetGet(0), $this->allowedProductQuantityTransferMocks[0]],
-                [$this->itemTransferMocks->offsetGet(2), $this->allowedProductQuantityTransferMocks[1]],
-            )->willReturnOnConsecutiveCalls(
-                new ArrayObject(),
-                new ArrayObject([$this->messageTransferMock]),
-            );
+            ->willReturnCallback(static function (ItemTransfer $itemTransfer, ?AllowedProductQuantityTransfer $allowedProductQuantityTransfer = null) use ($self) {
+                if ($itemTransfer === $self->itemTransferMocks->offsetGet(0) && $allowedProductQuantityTransfer === $self->allowedProductQuantityTransferMocks[0]) {
+                    return new ArrayObject();
+                }
 
-        $this->itemTransferMocks->offsetGet(1)->expects(static::atLeastOnce())
+                if ($itemTransfer === $self->itemTransferMocks->offsetGet(2) && $allowedProductQuantityTransfer === $self->allowedProductQuantityTransferMocks[1]) {
+                    return new ArrayObject([$self->messageTransferMock]);
+                }
+
+                throw new Exception('Unexpected call');
+            });
+
+        $this->itemTransferMocks->offsetGet(1)->expects($this->atLeastOnce())
             ->method('getGroupKey')
             ->willReturn($groupKeys[1]);
 
-        $this->itemTransferMocks->offsetGet(1)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(1)->expects($this->atLeastOnce())
             ->method('getAbstractSku')
             ->willReturn($abstractSkus[1]);
 
-        $this->itemTransferMocks->offsetGet(2)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(2)->expects($this->atLeastOnce())
             ->method('getGroupKey')
             ->willReturn($groupKeys[2]);
 
-        $this->itemTransferMocks->offsetGet(2)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(2)->expects($this->atLeastOnce())
             ->method('getAbstractSku')
             ->willReturn($abstractSkus[2]);
 
-        $this->itemTransferMocks->offsetGet(2)->expects(static::atLeastOnce())
+        $this->itemTransferMocks->offsetGet(2)->expects($this->atLeastOnce())
             ->method('addValidationMessage')
             ->with($this->messageTransferMock)
             ->willReturn($this->itemTransferMocks);

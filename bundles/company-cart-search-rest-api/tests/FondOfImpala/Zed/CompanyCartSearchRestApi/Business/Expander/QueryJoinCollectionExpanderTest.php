@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Business\Expander;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Business\Reader\CompanyReaderInterface;
 use Generated\Shared\Transfer\FilterFieldTransfer;
 use Generated\Shared\Transfer\QueryJoinCollectionTransfer;
@@ -66,6 +67,7 @@ class QueryJoinCollectionExpanderTest extends Unit
      */
     public function testExpand(): void
     {
+        $self = $this;
         $idCompany = 1;
 
         $this->companyReaderMock->expects(static::atLeastOnce())
@@ -73,26 +75,29 @@ class QueryJoinCollectionExpanderTest extends Unit
             ->with($this->filterFieldTransferMocks)
             ->willReturn($idCompany);
 
-        $this->queryJoinCollectionTransferMock->expects(static::atLeastOnce())
+        $this->queryJoinCollectionTransferMock->expects($this->atLeastOnce())
             ->method('addQueryJoin')
-            ->withConsecutive(
-                [
-                    static::callback(
-                        static fn (QueryJoinTransfer $queryJoinTransfer): bool => $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE]
-                            && $queryJoinTransfer->getRight() == [SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]
-                            && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                            && $queryJoinTransfer->getWhereConditions()->count() === 1,
-                    ),
-                ],
-                [
-                    static::callback(
-                        static fn (QueryJoinTransfer $queryJoinTransfer): bool => $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_FK_CUSTOMER]
-                            && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_ID_CUSTOMER]
-                            && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                            && $queryJoinTransfer->getWhereConditions()->count() === 1,
-                    ),
-                ],
-            )->willReturn($this->queryJoinCollectionTransferMock);
+            ->willReturnCallback(static function (QueryJoinTransfer $queryJoinTransfer) use ($self) {
+                if (
+                    $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE]
+                    && $queryJoinTransfer->getRight() == [SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]
+                    && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
+                    && $queryJoinTransfer->getWhereConditions()->count() === 1
+                ) {
+                    return $self->queryJoinCollectionTransferMock;
+                }
+
+                if (
+                    $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_FK_CUSTOMER]
+                    && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_ID_CUSTOMER]
+                    && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
+                    && $queryJoinTransfer->getWhereConditions()->count() === 1
+                ) {
+                    return $self->queryJoinCollectionTransferMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertEquals(
             $this->queryJoinCollectionTransferMock,
@@ -108,31 +113,36 @@ class QueryJoinCollectionExpanderTest extends Unit
      */
     public function testExpandWithNullableIdCompany(): void
     {
+        $self = $this;
+
         $this->companyReaderMock->expects(static::atLeastOnce())
             ->method('getIdByFilterFields')
             ->with($this->filterFieldTransferMocks)
             ->willReturn(null);
 
-        $this->queryJoinCollectionTransferMock->expects(static::atLeastOnce())
+        $this->queryJoinCollectionTransferMock->expects($this->atLeastOnce())
             ->method('addQueryJoin')
-            ->withConsecutive(
-                [
-                    static::callback(
-                        static fn (QueryJoinTransfer $queryJoinTransfer): bool => $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE]
-                            && $queryJoinTransfer->getRight() == [SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]
-                            && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                            && $queryJoinTransfer->getWhereConditions()->count() === 1,
-                    ),
-                ],
-                [
-                    static::callback(
-                        static fn (QueryJoinTransfer $queryJoinTransfer): bool => $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_FK_CUSTOMER]
-                            && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_ID_CUSTOMER]
-                            && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                            && $queryJoinTransfer->getWhereConditions()->count() === 1,
-                    ),
-                ],
-            )->willReturn($this->queryJoinCollectionTransferMock);
+            ->willReturnCallback(static function (QueryJoinTransfer $queryJoinTransfer) use ($self) {
+                if (
+                    $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE]
+                    && $queryJoinTransfer->getRight() == [SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]
+                    && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
+                    && $queryJoinTransfer->getWhereConditions()->count() === 1
+                ) {
+                    return $self->queryJoinCollectionTransferMock;
+                }
+
+                if (
+                    $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_FK_CUSTOMER]
+                    && $queryJoinTransfer->getRight() == [SpyCustomerTableMap::COL_ID_CUSTOMER]
+                    && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
+                    && $queryJoinTransfer->getWhereConditions()->count() === 1
+                ) {
+                    return $self->queryJoinCollectionTransferMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertEquals(
             $this->queryJoinCollectionTransferMock,

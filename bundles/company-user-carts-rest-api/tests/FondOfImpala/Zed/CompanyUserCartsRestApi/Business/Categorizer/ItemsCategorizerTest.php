@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Categorizer;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Finder\ItemFinderInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Grouper\ItemsGrouperInterface;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Mapper\ItemMapperInterface;
@@ -131,6 +132,8 @@ class ItemsCategorizerTest extends Unit
      */
     public function testCategorize(): void
     {
+        $self = $this;
+
         $newQuantities = [2, 0, 2];
         $currentQuantities = [1, 1];
 
@@ -143,29 +146,70 @@ class ItemsCategorizerTest extends Unit
             ->method('getItems')
             ->willReturn(new ArrayObject($this->restCartItemTransferMocks));
 
-        $this->itemFinderMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->itemFinderMock->expects($callCount)
             ->method('findInGroupedItemsByRestCartItem')
-            ->withConsecutive(
-                [$this->itemTransferMocks, $this->restCartItemTransferMocks[0]],
-                [$this->itemTransferMocks, $this->restCartItemTransferMocks[1]],
-                [$this->itemTransferMocks, $this->restCartItemTransferMocks[2]],
-            )->willReturnOnConsecutiveCalls(
-                null,
-                $this->itemTransferMocks['foo.bar-1'],
-                $this->itemTransferMocks['foo.bar-2'],
-            );
+            ->willReturnCallback(static function (array $groupedItemTransfers, RestCartItemTransfer $restCartItemTransfer) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
 
-        $this->itemMapperMock->expects(static::atLeastOnce())
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->itemTransferMocks, $groupedItemTransfers);
+                        $self->assertSame($self->restCartItemTransferMocks[0], $restCartItemTransfer);
+
+                        return null;
+                    case 2:
+                        $self->assertSame($self->itemTransferMocks, $groupedItemTransfers);
+                        $self->assertSame($self->restCartItemTransferMocks[1], $restCartItemTransfer);
+
+                        return $self->itemTransferMocks['foo.bar-1'];
+                    case 3:
+                        $self->assertSame($self->itemTransferMocks, $groupedItemTransfers);
+                        $self->assertSame($self->restCartItemTransferMocks[2], $restCartItemTransfer);
+
+                        return $self->itemTransferMocks['foo.bar-2'];
+                }
+
+                throw new Exception('Unexpected call count');
+            });
+
+        $callCount2 = $this->atLeastOnce();
+        $this->itemMapperMock->expects($callCount2)
             ->method('fromRestCartItem')
-            ->withConsecutive(
-                [$this->restCartItemTransferMocks[0]],
-                [$this->restCartItemTransferMocks[1]],
-                [$this->restCartItemTransferMocks[2]],
-            )->willReturnOnConsecutiveCalls(
-                $this->newItemTransferMocks[0],
-                $this->newItemTransferMocks[1],
-                $this->newItemTransferMocks[2],
-            );
+            ->willReturnCallback(static function (RestCartItemTransfer $restCartItemTransfer) use ($self, $callCount2) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount2, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount2->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount2->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->restCartItemTransferMocks[0], $restCartItemTransfer);
+
+                        return $self->newItemTransferMocks[0];
+                    case 2:
+                        $self->assertSame($self->restCartItemTransferMocks[1], $restCartItemTransfer);
+
+                        return $self->newItemTransferMocks[1];
+                    case 3:
+                        $self->assertSame($self->restCartItemTransferMocks[2], $restCartItemTransfer);
+
+                        return $self->newItemTransferMocks[2];
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->restCartItemTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getQuantity')
@@ -226,6 +270,8 @@ class ItemsCategorizerTest extends Unit
      */
     public function testCategorizeWithString(): void
     {
+        $self = $this;
+
         $newQuantities = [2, 0, ''];
         $currentQuantities = [1, 1];
 
@@ -238,29 +284,70 @@ class ItemsCategorizerTest extends Unit
             ->method('getItems')
             ->willReturn(new ArrayObject($this->restCartItemTransferMocks));
 
-        $this->itemFinderMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->itemFinderMock->expects($callCount)
             ->method('findInGroupedItemsByRestCartItem')
-            ->withConsecutive(
-                [$this->itemTransferMocks, $this->restCartItemTransferMocks[0]],
-                [$this->itemTransferMocks, $this->restCartItemTransferMocks[1]],
-                [$this->itemTransferMocks, $this->restCartItemTransferMocks[2]],
-            )->willReturnOnConsecutiveCalls(
-                null,
-                $this->itemTransferMocks['foo.bar-1'],
-                $this->itemTransferMocks['foo.bar-2'],
-            );
+            ->willReturnCallback(static function (array $groupedItemTransfers, RestCartItemTransfer $restCartItemTransfer) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
 
-        $this->itemMapperMock->expects(static::atLeastOnce())
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->itemTransferMocks, $groupedItemTransfers);
+                        $self->assertSame($self->restCartItemTransferMocks[0], $restCartItemTransfer);
+
+                        return null;
+                    case 2:
+                        $self->assertSame($self->itemTransferMocks, $groupedItemTransfers);
+                        $self->assertSame($self->restCartItemTransferMocks[1], $restCartItemTransfer);
+
+                        return $self->itemTransferMocks['foo.bar-1'];
+                    case 3:
+                        $self->assertSame($self->itemTransferMocks, $groupedItemTransfers);
+                        $self->assertSame($self->restCartItemTransferMocks[2], $restCartItemTransfer);
+
+                        return $self->itemTransferMocks['foo.bar-2'];
+                }
+
+                throw new Exception('Unexpected call count');
+            });
+
+        $callCount2 = $this->atLeastOnce();
+        $this->itemMapperMock->expects($callCount2)
             ->method('fromRestCartItem')
-            ->withConsecutive(
-                [$this->restCartItemTransferMocks[0]],
-                [$this->restCartItemTransferMocks[1]],
-                [$this->restCartItemTransferMocks[2]],
-            )->willReturnOnConsecutiveCalls(
-                $this->newItemTransferMocks[0],
-                $this->newItemTransferMocks[1],
-                $this->newItemTransferMocks[2],
-            );
+            ->willReturnCallback(static function (RestCartItemTransfer $restCartItemTransfer) use ($self, $callCount2) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount2, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount2->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount2->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->restCartItemTransferMocks[0], $restCartItemTransfer);
+
+                        return $self->newItemTransferMocks[0];
+                    case 2:
+                        $self->assertSame($self->restCartItemTransferMocks[1], $restCartItemTransfer);
+
+                        return $self->newItemTransferMocks[1];
+                    case 3:
+                        $self->assertSame($self->restCartItemTransferMocks[2], $restCartItemTransfer);
+
+                        return $self->newItemTransferMocks[2];
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->restCartItemTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getQuantity')

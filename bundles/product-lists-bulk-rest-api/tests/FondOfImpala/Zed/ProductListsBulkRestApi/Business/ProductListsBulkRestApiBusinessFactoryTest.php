@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ProductListsBulkRestApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Expander\RestProductListsBulkRequestExpander;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Business\Processor\BulkProcessor;
 use FondOfImpala\Zed\ProductListsBulkRestApi\Dependency\Facade\ProductListsBulkRestApiToEventFacadeInterface;
@@ -51,20 +52,26 @@ class ProductListsBulkRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateBulkProcessor(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK],
-                [ProductListsBulkRestApiDependencyProvider::FACADE_EVENT],
-            )->willReturnOnConsecutiveCalls(
-                [],
-                $this->productListsBulkRestApiToEventFacadeMock,
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_ASSIGNMENT_PRE_CHECK:
+                        return [];
+                    case ProductListsBulkRestApiDependencyProvider::FACADE_EVENT:
+                        return $self->productListsBulkRestApiToEventFacadeMock;
+                    case ProductListsBulkRestApiDependencyProvider::PLUGINS_REST_PRODUCT_LISTS_BULK_REQUEST_EXPANDER:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             BulkProcessor::class,

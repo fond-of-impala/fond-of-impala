@@ -3,6 +3,7 @@
 namespace FondOfImpala\Glue\PriceProductPriceListSearchRestApi;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Dependency\Client\PriceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterface;
 use FondOfImpala\Glue\PriceProductPriceListSearchRestApi\Processor\PriceProductPriceListSearch\PriceProductPriceListSearchReaderInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -77,20 +78,24 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
      */
     public function testCreatePriceProductConcretePriceListSearchReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH],
-                [PriceProductPriceListSearchRestApiDependencyProvider::PLUGINS_REDUCER],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock,
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH:
+                        return $self->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock;
+                    case PriceProductPriceListSearchRestApiDependencyProvider::PLUGINS_REDUCER:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             PriceProductPriceListSearchReaderInterface::class,
@@ -103,20 +108,24 @@ class PriceProductPriceListSearchRestApiFactoryTest extends Unit
      */
     public function testCreatePriceProductAbstractPriceListSearchReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH],
-                [PriceProductPriceListSearchRestApiDependencyProvider::PLUGINS_REDUCER],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock,
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case PriceProductPriceListSearchRestApiDependencyProvider::CLIENT_PRICE_PRODUCT_PRICE_LIST_PAGE_SEARCH:
+                        return $self->priceProductPriceListSearchRestApiToPriceProductPriceListPageSearchClientInterfaceMock;
+                    case PriceProductPriceListSearchRestApiDependencyProvider::PLUGINS_REDUCER:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             PriceProductPriceListSearchReaderInterface::class,

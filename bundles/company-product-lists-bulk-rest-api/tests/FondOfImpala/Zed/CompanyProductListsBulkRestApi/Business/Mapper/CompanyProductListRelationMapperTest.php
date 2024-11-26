@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Mapper;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Filter\ProductListIdsFilterInterface;
 use FondOfImpala\Zed\CompanyProductListsBulkRestApi\Business\Reader\ProductListReaderInterface;
 use Generated\Shared\Transfer\CompanyProductListRelationTransfer;
@@ -107,15 +108,19 @@ class CompanyProductListRelationMapperTest extends Unit
             ->method('getProductListsToUnassign')
             ->willReturn($productListsToUnassignMocks);
 
-        $this->productListIdsFilterMock->expects(static::atLeastOnce())
+        $this->productListIdsFilterMock->expects($this->atLeastOnce())
             ->method('filterFromRestProductListsBulkRequestAssignmentProductLists')
-            ->withConsecutive(
-                [$productListsToAssignMocks],
-                [$productListsToUnassignMocks],
-            )->willReturnOnConsecutiveCalls(
-                $productListIdsToAssign,
-                $productListIdsToUnassign,
-            );
+            ->willReturnCallback(static function (ArrayObject $productLists) use ($productListsToAssignMocks, $productListsToUnassignMocks, $productListIdsToAssign, $productListIdsToUnassign) {
+                if ($productLists === $productListsToAssignMocks) {
+                    return $productListIdsToAssign;
+                }
+
+                if ($productLists === $productListsToUnassignMocks) {
+                    return $productListIdsToUnassign;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->productListReaderMock->expects(static::atLeastOnce())
             ->method('getIdsByIdCompany')
@@ -199,15 +204,19 @@ class CompanyProductListRelationMapperTest extends Unit
             ->method('getProductListsToUnassign')
             ->willReturn($productListsToUnassignMocks);
 
-        $this->productListIdsFilterMock->expects(static::atLeastOnce())
+        $this->productListIdsFilterMock->expects($this->atLeastOnce())
             ->method('filterFromRestProductListsBulkRequestAssignmentProductLists')
-            ->withConsecutive(
-                [$productListsToAssignMocks],
-                [$productListsToUnassignMocks],
-            )->willReturnOnConsecutiveCalls(
-                $productListIdsToAssign,
-                $productListIdsToUnassign,
-            );
+            ->willReturnCallback(static function (ArrayObject $productLists) use ($productListsToAssignMocks, $productListsToUnassignMocks, $productListIdsToAssign, $productListIdsToUnassign) {
+                if ($productLists === $productListsToAssignMocks) {
+                    return $productListIdsToAssign;
+                }
+
+                if ($productLists === $productListsToUnassignMocks) {
+                    return $productListIdsToUnassign;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->productListReaderMock->expects(static::never())
             ->method('getIdsByIdCompany');

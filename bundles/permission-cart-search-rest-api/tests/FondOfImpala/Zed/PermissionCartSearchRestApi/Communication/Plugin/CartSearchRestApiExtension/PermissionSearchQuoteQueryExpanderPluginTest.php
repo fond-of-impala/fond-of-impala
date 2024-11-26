@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\PermissionCartSearchRestApi\Communication\Plugin\CartSearchRestApiExtension;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\PermissionCartSearchRestApi\Communication\Plugin\PermissionExtension\SearchCartPermissionPlugin;
 use FondOfImpala\Zed\PermissionCartSearchRestApi\Persistence\PermissionCartSearchRestApiRepository;
 use Generated\Shared\Transfer\FilterFieldTransfer;
@@ -78,6 +79,8 @@ class PermissionSearchQuoteQueryExpanderPluginTest extends Unit
      */
     public function testExpand(): void
     {
+        $self = $this;
+
         $idPermission = 1;
 
         $this->repositoryMock->expects(static::atLeastOnce())
@@ -85,40 +88,45 @@ class PermissionSearchQuoteQueryExpanderPluginTest extends Unit
             ->with(SearchCartPermissionPlugin::KEY)
             ->willReturn($idPermission);
 
-        $this->queryJoinCollectionTransferMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->queryJoinCollectionTransferMock->expects($callCount)
             ->method('addQueryJoin')
-            ->withConsecutive(
-                [
-                    static::callback(
-                        static function (QueryJoinTransfer $queryJoinTransfer) {
-                            return $queryJoinTransfer->getLeft() == [SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE]
-                                && $queryJoinTransfer->getRight() == [SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE]
-                                && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                                && $queryJoinTransfer->getWhereConditions()->count() === 0;
-                        },
-                    ),
-                ],
-                [
-                    static::callback(
-                        static function (QueryJoinTransfer $queryJoinTransfer) {
-                            return $queryJoinTransfer->getLeft() == [SpyCompanyUserTableMap::COL_ID_COMPANY_USER]
-                                && $queryJoinTransfer->getRight() == [SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER]
-                                && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                                && $queryJoinTransfer->getWhereConditions()->count() === 0;
-                        },
-                    ),
-                ],
-                [
-                    static::callback(
-                        static function (QueryJoinTransfer $queryJoinTransfer) {
-                            return $queryJoinTransfer->getLeft() == [SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_ROLE]
-                                && $queryJoinTransfer->getRight() == [SpyCompanyRoleToPermissionTableMap::COL_FK_COMPANY_ROLE]
-                                && $queryJoinTransfer->getJoinType() === Criteria::INNER_JOIN
-                                && $queryJoinTransfer->getWhereConditions()->count() === 1;
-                        },
-                    ),
-                ],
-            )->willReturn($this->queryJoinCollectionTransferMock);
+            ->willReturnCallback(static function (QueryJoinTransfer $queryJoinTransfer) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertEquals([SpyQuoteTableMap::COL_COMPANY_USER_REFERENCE], $queryJoinTransfer->getLeft());
+                        $self->assertEquals([SpyCompanyUserTableMap::COL_COMPANY_USER_REFERENCE], $queryJoinTransfer->getRight());
+                        $self->assertEquals(Criteria::INNER_JOIN, $queryJoinTransfer->getJoinType());
+                        $self->assertEquals(0, $queryJoinTransfer->getWhereConditions()->count());
+
+                        return $self->queryJoinCollectionTransferMock;
+                    case 2:
+                        $self->assertEquals([SpyCompanyUserTableMap::COL_ID_COMPANY_USER], $queryJoinTransfer->getLeft());
+                        $self->assertEquals([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_USER], $queryJoinTransfer->getRight());
+                        $self->assertEquals(Criteria::INNER_JOIN, $queryJoinTransfer->getJoinType());
+                        $self->assertEquals(0, $queryJoinTransfer->getWhereConditions()->count());
+
+                        return $self->queryJoinCollectionTransferMock;
+                    case 3:
+                        $self->assertEquals([SpyCompanyRoleToCompanyUserTableMap::COL_FK_COMPANY_ROLE], $queryJoinTransfer->getLeft());
+                        $self->assertEquals([SpyCompanyRoleToPermissionTableMap::COL_FK_COMPANY_ROLE], $queryJoinTransfer->getRight());
+                        $self->assertEquals(Criteria::INNER_JOIN, $queryJoinTransfer->getJoinType());
+                        $self->assertEquals(1, $queryJoinTransfer->getWhereConditions()->count());
+
+                        return $self->queryJoinCollectionTransferMock;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         static::assertEquals(
             $this->queryJoinCollectionTransferMock,

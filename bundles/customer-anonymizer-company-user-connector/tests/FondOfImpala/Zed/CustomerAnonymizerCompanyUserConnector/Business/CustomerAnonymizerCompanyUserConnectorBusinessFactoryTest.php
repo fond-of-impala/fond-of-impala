@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Business\Deleter\CompanyUserDeleter;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorDependencyProvider;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Dependency\Facade\CustomerAnonymizerCompanyUserConnectorToCompanyUserFacadeInterface;
@@ -69,19 +70,23 @@ class CustomerAnonymizerCompanyUserConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyUserDeleter(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_COMPANY_USER],
-                [CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_EVENT],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyUserFacadeMock,
-                $this->eventFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyUserFacadeMock;
+                    case CustomerAnonymizerCompanyUserConnectorDependencyProvider::FACADE_EVENT:
+                        return $self->eventFacadeMock;
+                }
+
+                throw new Exception('Invalid key');
+            });
 
         static::assertInstanceOf(
             CompanyUserDeleter::class,

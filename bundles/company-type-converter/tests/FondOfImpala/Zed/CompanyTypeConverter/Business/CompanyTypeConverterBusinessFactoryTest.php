@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyTypeConverter\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyReaderInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeConverter;
 use FondOfImpala\Zed\CompanyTypeConverter\Business\Model\CompanyTypeRoleWriterInterface;
@@ -121,33 +122,34 @@ class CompanyTypeConverterBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyTypeConverter(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_ROLE],
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_USER],
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_ROLE],
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE_ROLE],
-                [CompanyTypeConverterDependencyProvider::FACADE_PERMISSION],
-                [CompanyTypeConverterDependencyProvider::COMPANY_TYPE_CONVERTER_PRE_SAVE_PLUGINS],
-                [CompanyTypeConverterDependencyProvider::COMPANY_TYPE_CONVERTER_POST_SAVE_PLUGINS],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyTypeConverterToCompanyTypeFacadeMock,
-                $this->companyTypeConverterToCompanyRoleFacadeMock,
-                $this->companyTypeConverterToCompanyUserFacadeMock,
-                $this->companyTypeConverterToCompanyRoleFacadeMock,
-                $this->companyTypeConverterToCompanyTypeFacadeMock,
-                $this->companyTypeConverterToCompanyTypeRoleFacadeMock,
-                $this->companyTypeConverterToPermissionFacadeMock,
-                [],
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE:
+                        return $self->companyTypeConverterToCompanyTypeFacadeMock;
+                    case CompanyTypeConverterDependencyProvider::FACADE_COMPANY_ROLE:
+                        return $self->companyTypeConverterToCompanyRoleFacadeMock;
+                    case CompanyTypeConverterDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyTypeConverterToCompanyUserFacadeMock;
+                    case CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE_ROLE:
+                        return $self->companyTypeConverterToCompanyTypeRoleFacadeMock;
+                    case CompanyTypeConverterDependencyProvider::FACADE_PERMISSION:
+                        return $self->companyTypeConverterToPermissionFacadeMock;
+                    case CompanyTypeConverterDependencyProvider::COMPANY_TYPE_CONVERTER_PRE_SAVE_PLUGINS:
+                        return [];
+                    case CompanyTypeConverterDependencyProvider::COMPANY_TYPE_CONVERTER_POST_SAVE_PLUGINS:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->assertInstanceOf(
             CompanyTypeConverter::class,
@@ -160,19 +162,24 @@ class CompanyTypeConverterBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY],
-                [CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyTypeConverterToCompanyFacadeMock,
-                $this->companyTypeConverterToCompanyTypeFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyTypeConverterDependencyProvider::FACADE_COMPANY:
+                        return $self->companyTypeConverterToCompanyFacadeMock;
+                    case CompanyTypeConverterDependencyProvider::FACADE_COMPANY_TYPE:
+                        return $self->companyTypeConverterToCompanyTypeFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->assertInstanceOf(
             CompanyReaderInterface::class,

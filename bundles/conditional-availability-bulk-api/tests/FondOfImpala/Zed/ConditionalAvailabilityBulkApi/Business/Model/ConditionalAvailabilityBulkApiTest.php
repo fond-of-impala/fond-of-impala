@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Model;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper\ConditionalAvailabilityBulkApiMapperInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToApiFacadeInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Dependency\Facade\ConditionalAvailabilityBulkApiToConditionalAvailabilityFacadeInterface;
@@ -137,6 +138,8 @@ class ConditionalAvailabilityBulkApiTest extends Unit
      */
     public function testPersist(): void
     {
+        $self = $this;
+
         $ids = ['BAR-1' => 1, 'BAR-2' => 2, 'BAR-3' => null];
         $skus = array_keys($ids);
 
@@ -177,15 +180,32 @@ class ConditionalAvailabilityBulkApiTest extends Unit
             ->method('getFkProduct')
             ->willReturn($ids['BAR-3']);
 
-        $this->conditionalAvailabilityFacadeMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->conditionalAvailabilityFacadeMock->expects($callCount)
             ->method('persistConditionalAvailability')
-            ->withConsecutive(
-                [$this->groupedConditionalAvailabilityTransferMocks['FOO']['BAR-1']],
-                [$this->groupedConditionalAvailabilityTransferMocks['FOO']['BAR-2']],
-            )->willReturnOnConsecutiveCalls(
-                $this->conditionalAvailabilityResponseTransferMocks[0],
-                $this->conditionalAvailabilityResponseTransferMocks[1],
-            );
+            ->willReturnCallback(static function (ConditionalAvailabilityTransfer $conditionalAvailabilityTransfer) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->groupedConditionalAvailabilityTransferMocks['FOO']['BAR-1'], $conditionalAvailabilityTransfer);
+
+                        return $self->conditionalAvailabilityResponseTransferMocks[0];
+                    case 2:
+                        $self->assertSame($self->groupedConditionalAvailabilityTransferMocks['FOO']['BAR-2'], $conditionalAvailabilityTransfer);
+
+                        return $self->conditionalAvailabilityResponseTransferMocks[1];
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->conditionalAvailabilityResponseTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getConditionalAvailabilityTransfer')

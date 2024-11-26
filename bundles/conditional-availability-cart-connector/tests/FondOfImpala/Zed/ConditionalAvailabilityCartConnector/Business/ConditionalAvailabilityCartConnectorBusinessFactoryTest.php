@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business;
 
 use Codeception\Test\Unit;
 use DateTime;
+use Exception;
 use FondOfImpala\Service\ConditionalAvailabilityCartConnector\ConditionalAvailabilityCartConnectorServiceInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Expander\QuoteExpander;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Model\ConditionalAvailabilityDeliveryDateCleaner;
@@ -94,27 +95,26 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testQuoteExpander(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-            )->willReturnOnConsecutiveCalls(
-                $this->customerFacadeMock,
-                $this->conditionalAvailabilityFacadeMock,
-                $this->conditionalAvailabilityServiceMock,
-                $this->conditionalAvailabilityServiceMock,
-                $this->conditionalAvailabilityServiceMock,
-                $this->conditionalAvailabilityServiceMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER:
+                        return $self->customerFacadeMock;
+                    case ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY:
+                        return $self->conditionalAvailabilityFacadeMock;
+                    case ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY:
+                        return $self->conditionalAvailabilityServiceMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
             ->method('generateEarliestDeliveryDate')
@@ -173,27 +173,26 @@ class ConditionalAvailabilityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateUnavailableSkuReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-                [ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY],
-            )->willReturnOnConsecutiveCalls(
-                $this->customerFacadeMock,
-                $this->conditionalAvailabilityFacadeMock,
-                $this->conditionalAvailabilityServiceMock,
-                $this->conditionalAvailabilityServiceMock,
-                $this->conditionalAvailabilityServiceMock,
-                $this->conditionalAvailabilityServiceMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CUSTOMER:
+                        return $self->customerFacadeMock;
+                    case ConditionalAvailabilityCartConnectorDependencyProvider::FACADE_CONDITIONAL_AVAILABILITY:
+                        return $self->conditionalAvailabilityFacadeMock;
+                    case ConditionalAvailabilityCartConnectorDependencyProvider::SERVICE_CONDITIONAL_AVAILABILITY:
+                        return $self->conditionalAvailabilityServiceMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->conditionalAvailabilityServiceMock->expects(static::atLeastOnce())
             ->method('generateEarliestDeliveryDate')

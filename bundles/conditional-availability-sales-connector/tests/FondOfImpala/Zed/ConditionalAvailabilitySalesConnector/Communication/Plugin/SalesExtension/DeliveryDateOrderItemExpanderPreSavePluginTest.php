@@ -47,7 +47,7 @@ class DeliveryDateOrderItemExpanderPreSavePluginTest extends Unit
 
         $this->spySalesOrderItemEntityTransferMock = $this->getMockBuilder(SpySalesOrderItemEntityTransfer::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setDeliveryDate', 'setConcreteDeliveryDate'])
+            ->onlyMethods(['setDeliveryDate', 'setConcreteDeliveryDate'])
             ->getMock();
 
         $this->plugin = new DeliveryDateOrderItemExpanderPreSavePlugin();

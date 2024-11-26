@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchPublisher;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\Business\Model\ConditionalAvailabilityPeriodPageSearchUnpublisher;
 use FondOfImpala\Zed\ConditionalAvailabilityPageSearch\ConditionalAvailabilityPageSearchDependencyProvider;
@@ -56,21 +57,26 @@ class ConditionalAvailabilityPageSearchBusinessFactoryTest extends Unit
      */
     public function testCreateConditionalAvailabilityPeriodPageSearchPublisher(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER],
-                [ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER],
-                [ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING],
-            )->willReturnOnConsecutiveCalls(
-                [],
-                [],
-                $this->utilEncodingServiceMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_DATA_EXPANDER:
+                        return [];
+                    case ConditionalAvailabilityPageSearchDependencyProvider::PLUGINS_CONDITIONAL_AVAILABILITY_PERIOD_PAGE_SEARCH_DATA_EXPANDER:
+                        return [];
+                    case ConditionalAvailabilityPageSearchDependencyProvider::SERVICE_UTIL_ENCODING:
+                        return $self->utilEncodingServiceMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             ConditionalAvailabilityPeriodPageSearchPublisher::class,

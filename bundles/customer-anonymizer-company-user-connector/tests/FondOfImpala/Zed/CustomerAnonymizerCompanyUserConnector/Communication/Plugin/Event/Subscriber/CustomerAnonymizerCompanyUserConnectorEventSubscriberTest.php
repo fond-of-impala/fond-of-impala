@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Communication\Plugin\Event\Subscriber;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Shared\CustomerAnonymizerCompanyUserConnector\CustomerAnonymizerCompanyUserConnectorConstants;
 use FondOfImpala\Zed\CustomerAnonymizerCompanyUserConnector\Communication\Plugin\Event\Listener\CompanyUserDeleterListener;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
@@ -39,19 +40,34 @@ class CustomerAnonymizerCompanyUserConnectorEventSubscriberTest extends Unit
      */
     public function testGetSubscribedEvents(): void
     {
-        $this->eventCollectionMock->expects(static::atLeastOnce())
+        $self = $this;
+
+        $callCount = $this->atLeastOnce();
+        $this->eventCollectionMock->expects($callCount)
             ->method('addListenerQueued')
-            ->withConsecutive(
-                [
-                    CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER,
-                    static::callback(
-                        static fn (EventBaseHandlerInterface $eventHandler): bool => $eventHandler instanceof CompanyUserDeleterListener,
-                    ),
-                    0,
-                    null,
-                    null,
-                ],
-            );
+            ->willReturnCallback(static function ($eventName, EventBaseHandlerInterface $eventHandler, $priority = 0, $queuePoolName = null, $eventQueueName = null) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame(CustomerAnonymizerCompanyUserConnectorConstants::EVENT_DELETE_COMPANY_USER, $eventName);
+                        $self->assertInstanceOf(CompanyUserDeleterListener::class, $eventHandler);
+                        $self->assertSame(0, $priority);
+                        $self->assertNull($queuePoolName);
+                        $self->assertNull($eventQueueName);
+
+                        return $self->eventCollectionMock;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         static::assertEquals(
             $this->eventCollectionMock,

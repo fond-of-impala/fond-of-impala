@@ -50,9 +50,18 @@ class CompanyBusinessUnitQuoteConnectorDependencyProviderTest extends Unit
     {
         parent::_before();
 
-        $this->containerMock = $this->getMockBuilder(Container::class)
-            ->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet'])
-            ->getMock();
+        $containerMock = $this->getMockBuilder(Container::class);
+
+        /** @phpstan-ignore-next-line */
+        if (method_exists($containerMock, 'setMethodsExcept')) {
+            /** @phpstan-ignore-next-line */
+            $containerMock->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet']);
+        } else {
+            /** @phpstan-ignore-next-line */
+            $containerMock->onlyMethods(['getLocator'])->enableOriginalClone();
+        }
+
+        $this->containerMock = $containerMock->getMock();
 
         $this->locatorMock = $this->getMockBuilder(Locator::class)
             ->disableOriginalConstructor()
@@ -78,16 +87,25 @@ class CompanyBusinessUnitQuoteConnectorDependencyProviderTest extends Unit
      */
     public function testProvideBusinessLayerDependencies(): void
     {
-        $this->containerMock->expects(self::atLeastOnce())
+        $self = $this;
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('getLocator')
             ->willReturn($this->locatorMock);
 
-        $this->locatorMock->expects(self::atLeastOnce())
+        $this->locatorMock->expects($this->atLeastOnce())
             ->method('__call')
-            ->withConsecutive(['permission'], ['companyUserReferenceQuoteConnector'])
-            ->willReturn($this->bundleProxyMock);
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case 'permission':
+                        return $self->bundleProxyMock;
+                    case 'companyUserReferenceQuoteConnector':
+                        return $self->bundleProxyMock;
+                }
 
-        $this->bundleProxyMock->expects(self::atLeastOnce())
+                throw new Exception('Invalid key');
+            });
+
+        $this->bundleProxyMock->expects($this->atLeastOnce())
             ->method('__call')
             ->with('facade')
             ->willReturnOnConsecutiveCalls(

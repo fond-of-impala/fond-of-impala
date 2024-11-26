@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\PriceListApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\PriceListApi\Business\Hydrator\PriceProductsHydrator;
 use FondOfImpala\Zed\PriceListApi\Business\Model\PriceListApi;
 use FondOfImpala\Zed\PriceListApi\Business\Validator\PriceListApiValidator;
@@ -161,35 +162,32 @@ class PriceListApiBusinessFactoryTest extends Unit
      */
     public function testCreateProductListApi(): void
     {
-        $this->containerMock->expects(static::atLeastOnce())
-            ->method('has')
-            ->withConsecutive(
-                [PriceListApiDependencyProvider::PROPEL_CONNECTION],
-                [PriceListApiDependencyProvider::FACADE_PRICE_LIST],
-                [PriceListApiDependencyProvider::FACADE_PRICE_PRODUCT_PRICE_LIST],
-                [PriceListApiDependencyProvider::FACADE_API],
-                [PriceListApiDependencyProvider::QUERY_CONTAINER_API_QUERY_BUILDER],
-                [PriceListApiDependencyProvider::PLUGINS_PRICE_PRODUCTS_HYDRATION],
-            )->willReturn(true);
+        $self = $this;
 
         $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [PriceListApiDependencyProvider::PROPEL_CONNECTION],
-                [PriceListApiDependencyProvider::FACADE_PRICE_LIST],
-                [PriceListApiDependencyProvider::FACADE_PRICE_PRODUCT_PRICE_LIST],
-                [PriceListApiDependencyProvider::FACADE_API],
-                [PriceListApiDependencyProvider::QUERY_CONTAINER_API_QUERY_BUILDER],
-                [PriceListApiDependencyProvider::PLUGINS_PRICE_PRODUCTS_HYDRATION],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->connectionInterfaceMock,
-                $this->facadePriceListMock,
-                $this->facadePriceProductPriceListMock,
-                $this->queryContainerApiMock,
-                $this->queryContainerApiQueryBuilderMock,
-                $this->priceProductHydrationPlugins,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case PriceListApiDependencyProvider::PROPEL_CONNECTION:
+                        return $self->connectionInterfaceMock;
+                    case PriceListApiDependencyProvider::FACADE_PRICE_LIST:
+                        return $self->facadePriceListMock;
+                    case PriceListApiDependencyProvider::FACADE_PRICE_PRODUCT_PRICE_LIST:
+                        return $self->facadePriceProductPriceListMock;
+                    case PriceListApiDependencyProvider::FACADE_API:
+                        return $self->queryContainerApiMock;
+                    case PriceListApiDependencyProvider::QUERY_CONTAINER_API_QUERY_BUILDER:
+                        return $self->queryContainerApiQueryBuilderMock;
+                    case PriceListApiDependencyProvider::PLUGINS_PRICE_PRODUCTS_HYDRATION:
+                        return $self->priceProductHydrationPlugins;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             PriceListApi::class,

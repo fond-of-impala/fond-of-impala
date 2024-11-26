@@ -70,20 +70,25 @@ class CompanyBusinessUnitsCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyBusinessUnitsCartsRestApiDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT],
-                [CompanyBusinessUnitsCartsRestApiDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT_QUOTE_CONNECTOR],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->companyBusinessUnitFacadeMock,
-                $this->companyBusinessUnitQuoteConnectorFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                if ($key === CompanyBusinessUnitsCartsRestApiDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT) {
+                    return $self->companyBusinessUnitFacadeMock;
+                }
+
+                if ($key === CompanyBusinessUnitsCartsRestApiDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT_QUOTE_CONNECTOR) {
+                    return $self->companyBusinessUnitQuoteConnectorFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         self::assertInstanceOf(
             QuoteReader::class,

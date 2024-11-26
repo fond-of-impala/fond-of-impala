@@ -60,20 +60,38 @@ class AllowedProductQuantityCartConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteValidator(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects($this->atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->containerMock->expects($callCount)
             ->method('get')
-            ->withConsecutive(
-                [AllowedProductQuantityCartConnectorDependencyProvider::FACADE_ALLOWED_PRODUCT_QUANTITY],
-                [AllowedProductQuantityCartConnectorDependencyProvider::FACADE_ALLOWED_PRODUCT_QUANTITY],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->allowedProductQuantityFacadeMock,
-                $this->allowedProductQuantityFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame(AllowedProductQuantityCartConnectorDependencyProvider::FACADE_ALLOWED_PRODUCT_QUANTITY, $key);
+
+                        return $self->allowedProductQuantityFacadeMock;
+                    case 2:
+                        $self->assertSame(AllowedProductQuantityCartConnectorDependencyProvider::FACADE_ALLOWED_PRODUCT_QUANTITY, $key);
+
+                        return $self->allowedProductQuantityFacadeMock;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         static::assertInstanceOf(
             QuoteValidator::class,
