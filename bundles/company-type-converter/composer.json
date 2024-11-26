@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "spryker/company": "^1.0.0",
     "spryker/company-role": "^1.0",
     "spryker/permission": "^1.2",

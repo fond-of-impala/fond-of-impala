@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "fond-of-oryx/splittable-checkout-rest-api-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/splittable-quote-extension": "^1.0.0 || ^2.0.0",
     "spryker/sales": "^11.0.0"

@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Mapper;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ConditionalAvailabilityBulkApi\Business\Generator\GroupKeyGeneratorInterface;
 use Generated\Shared\Transfer\ApiDataTransfer;
 use Generated\Shared\Transfer\ConditionalAvailabilityTransfer;
@@ -52,6 +53,7 @@ class ConditionalAvailabilityBulkApiMapperTest extends Unit
      */
     public function testMapApiDataTransferToGroupedConditionalAvailabilityTransfers(): void
     {
+        $self = $this;
         $data = [
             ['sku' => 'FOO-1', 'warehouse_group' => 'FOO'],
             ['sku' => 'FOO-2'],
@@ -63,15 +65,32 @@ class ConditionalAvailabilityBulkApiMapperTest extends Unit
             ->method('getData')
             ->willReturn($data);
 
-        $this->groupKeyGeneratorMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->groupKeyGeneratorMock->expects($callCount)
             ->method('generateByApiData')
-            ->withConsecutive(
-                [$data[0]],
-                [$data[1]],
-            )->willReturnOnConsecutiveCalls(
-                $groupKey,
-                null,
-            );
+            ->willReturnCallback(static function (array $array) use ($self, $callCount, $data, $groupKey) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($array, $data[0]);
+
+                        return $groupKey;
+                    case 2:
+                        $self->assertSame($array, $data[1]);
+
+                        return null;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $groupedConditionalAvailabilityTransfers = $this->conditionalAvailabilityBulkApiMapper
             ->mapApiDataTransferToGroupedConditionalAvailabilityTransfers(

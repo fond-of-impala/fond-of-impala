@@ -70,19 +70,24 @@ class CompanyBusinessUnitQuoteConnectorBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteReader(): void
     {
-        $this->containerMock->expects(self::atLeastOnce())
+        $self = $this;
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(self::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyBusinessUnitQuoteConnectorDependencyProvider::FACADE_PERMISSION],
-                [CompanyBusinessUnitQuoteConnectorDependencyProvider::FACADE_COMPANY_USER_REFERENCE_QUOTE_CONNECTOR],
-            )->willReturnOnConsecutiveCalls(
-                $this->permissionFacadeMock,
-                $this->companyUserReferenceQuoteConnectorFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                if ($key === CompanyBusinessUnitQuoteConnectorDependencyProvider::FACADE_PERMISSION) {
+                    return $self->permissionFacadeMock;
+                }
+
+                if ($key === CompanyBusinessUnitQuoteConnectorDependencyProvider::FACADE_COMPANY_USER_REFERENCE_QUOTE_CONNECTOR) {
+                    return $self->companyUserReferenceQuoteConnectorFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         self::assertInstanceOf(
             QuoteReader::class,

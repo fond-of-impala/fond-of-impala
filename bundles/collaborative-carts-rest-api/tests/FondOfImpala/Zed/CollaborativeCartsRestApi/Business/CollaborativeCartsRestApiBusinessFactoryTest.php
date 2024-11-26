@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CollaborativeCartsRestApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Claimer\CartClaimer;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\Business\Releaser\CartReleaser;
 use FondOfImpala\Zed\CollaborativeCartsRestApi\CollaborativeCartsRestApiDependencyProvider;
@@ -60,19 +61,25 @@ class CollaborativeCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateCartClaimer(): void
     {
-        $this->containerMock->expects(static::atLeastOnce())
+        $self = $this;
+
+        $this->containerMock->expects($self->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CollaborativeCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CollaborativeCartsRestApiDependencyProvider::FACADE_COLLABORATIVE_CART],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->collaborativeCartFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                if ($key === CollaborativeCartsRestApiDependencyProvider::FACADE_QUOTE) {
+                    return $self->quoteFacadeMock;
+                }
+
+                if ($key === CollaborativeCartsRestApiDependencyProvider::FACADE_COLLABORATIVE_CART) {
+                    return $self->collaborativeCartFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CartClaimer::class,
@@ -85,19 +92,25 @@ class CollaborativeCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateCartReleaser(): void
     {
-        $this->containerMock->expects(static::atLeastOnce())
+        $self = $this;
+
+        $this->containerMock->expects($self->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CollaborativeCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CollaborativeCartsRestApiDependencyProvider::FACADE_COLLABORATIVE_CART],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->collaborativeCartFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                if ($key === CollaborativeCartsRestApiDependencyProvider::FACADE_QUOTE) {
+                    return $self->quoteFacadeMock;
+                }
+
+                if ($key === CollaborativeCartsRestApiDependencyProvider::FACADE_COLLABORATIVE_CART) {
+                    return $self->collaborativeCartFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CartReleaser::class,

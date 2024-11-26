@@ -3,6 +3,7 @@
 namespace FondOfImpala\Glue\PriceListsRestApi;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Glue\PriceListsRestApi\Dependency\Client\PriceListsRestApiToPriceListClientInterface;
 use FondOfImpala\Glue\PriceListsRestApi\Processor\PriceList\PriceListReader;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -76,16 +77,24 @@ class PriceListsRestApiFactoryTest extends Unit
      */
     public function testCreatePriceListReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [PriceListsRestApiDependencyProvider::CLIENT_PRICE_LIST],
-                [PriceListsRestApiDependencyProvider::PLUGINS_FILTER_FIELDS_EXPANDER],
-            )->willReturnOnConsecutiveCalls($this->priceClientMock, []);
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case PriceListsRestApiDependencyProvider::CLIENT_PRICE_LIST:
+                        return $self->priceClientMock;
+                    case PriceListsRestApiDependencyProvider::PLUGINS_FILTER_FIELDS_EXPANDER:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             PriceListReader::class,

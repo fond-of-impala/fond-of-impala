@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-product-lists-bulk-rest-api": "^1.0.0",
     "fond-of-impala/navision-company": "^1.0.0"
   },

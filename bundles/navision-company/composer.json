@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "spryker/checkout-extension": "^1.2.0",
     "spryker/company-extension": "^1.0.0",
     "spryker/quote-extension": "^1.2.0",

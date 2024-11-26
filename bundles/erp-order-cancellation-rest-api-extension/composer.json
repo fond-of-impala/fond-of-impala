@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "fond-of-impala/erp-order-cancellation": "^1.0.0"
   },
   "require-dev": {

@@ -40,28 +40,41 @@ class CompanyUserCompanyAssignerEventSubscriberTest extends Unit
      */
     public function testGetSubscribedEvents(): void
     {
-        $this->eventCollectionMock->expects(static::atLeastOnce())
+        $self = $this;
+        $callCount = $this->atLeastOnce();
+        $this->eventCollectionMock->expects($callCount)
             ->method('addListenerQueued')
-            ->withConsecutive(
-                [
-                    CompanyUserCompanyAssignerEvents::MANUFACTURER_USER_MARK_FOR_ASSIGMENT,
-                    static::callback(
-                        static fn (EventBaseHandlerInterface $eventBaseHandler): bool => $eventBaseHandler instanceof AssignManufacturerUserToNonManufacturerCompaniesListener,
-                    ),
-                    0,
-                    null,
-                    null,
-                ],
-                [
-                    CompanyUserCompanyAssignerEvents::MANUFACTURER_COMPANY_USER_COMPANY_ROLE_UPDATE,
-                    static::callback(
-                        static fn (EventBaseHandlerInterface $eventBaseHandler): bool => $eventBaseHandler instanceof UpdateNonManufacturerUsersCompanyRole,
-                    ),
-                    0,
-                    null,
-                    null,
-                ],
-            )->willReturn($this->eventCollectionMock);
+            ->willReturnCallback(static function ($eventName, EventBaseHandlerInterface $eventHandler, $priority = 0, $queuePoolName = null, $eventQueueName = null) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame(CompanyUserCompanyAssignerEvents::MANUFACTURER_USER_MARK_FOR_ASSIGMENT, $eventName);
+                        $self->assertInstanceOf(AssignManufacturerUserToNonManufacturerCompaniesListener::class, $eventHandler);
+                        $self->assertEquals(0, $priority);
+                        $self->assertNull($queuePoolName);
+                        $self->assertNull($eventQueueName);
+
+                        return $self->eventCollectionMock;
+                    case 2:
+                        $self->assertSame(CompanyUserCompanyAssignerEvents::MANUFACTURER_COMPANY_USER_COMPANY_ROLE_UPDATE, $eventName);
+                        $self->assertInstanceOf(UpdateNonManufacturerUsersCompanyRole::class, $eventHandler);
+                        $self->assertEquals(0, $priority);
+                        $self->assertNull($queuePoolName);
+                        $self->assertNull($eventQueueName);
+
+                        return $self->eventCollectionMock;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         static::assertEquals(
             $this->eventCollectionMock,

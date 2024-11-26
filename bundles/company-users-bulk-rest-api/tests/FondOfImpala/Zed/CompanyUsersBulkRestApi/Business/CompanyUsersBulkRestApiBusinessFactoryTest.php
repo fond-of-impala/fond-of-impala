@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUsersBulkRestApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CompanyBusinessUnitToCompanyTransferExpander;
 use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CompanyExpander;
 use FondOfImpala\Zed\CompanyUsersBulkRestApi\Business\Expander\CompanyRolesToCompanyTransferExpander;
@@ -112,28 +113,32 @@ class CompanyUsersBulkRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateBulkManager(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUsersBulkRestApiDependencyProvider::FACADE_EVENT],
-                [CompanyUsersBulkRestApiDependencyProvider::FACADE_COMPANY_USER],
-                [CompanyUsersBulkRestApiDependencyProvider::PLUGINS_DATA_EXPANDER],
-                [CompanyUsersBulkRestApiDependencyProvider::PLUGINS_DATA_POST_EXPANDER],
-                [CompanyUsersBulkRestApiDependencyProvider::PLUGINS_PRE_HANDLING],
-                [CompanyUsersBulkRestApiDependencyProvider::PLUGINS_POST_HANDLING],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->eventFacadeMock,
-                $this->companyUserFacadeMock,
-                [],
-                [],
-                [],
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUsersBulkRestApiDependencyProvider::FACADE_EVENT:
+                        return $self->eventFacadeMock;
+                    case CompanyUsersBulkRestApiDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyUserFacadeMock;
+                    case CompanyUsersBulkRestApiDependencyProvider::PLUGINS_DATA_EXPANDER:
+                        return [];
+                    case CompanyUsersBulkRestApiDependencyProvider::PLUGINS_DATA_POST_EXPANDER:
+                        return [];
+                    case CompanyUsersBulkRestApiDependencyProvider::PLUGINS_PRE_HANDLING:
+                        return [];
+                    case CompanyUsersBulkRestApiDependencyProvider::PLUGINS_POST_HANDLING:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             BulkManagerInterface::class,

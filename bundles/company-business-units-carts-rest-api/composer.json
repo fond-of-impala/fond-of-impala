@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "spryker/company-business-unit": "^2.10.0",
     "fond-of-impala/company-business-unit-quote-connector": "^1.0.0",
     "fond-of-impala/company-user-quote": "^1.0.0",

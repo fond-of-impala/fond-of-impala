@@ -3,6 +3,7 @@
 namespace FondOfImpala\Client\PriceProductPriceListPageSearch;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Client\PriceProductPriceListPageSearch\Dependency\Client\PriceProductPriceListPageSearchToSearchClientBridge;
 use FondOfImpala\Client\PriceProductPriceListPageSearch\Plugin\SearchExtension\PriceProductConcretePriceListSearchQueryPlugin;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -75,27 +76,24 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testCreatePriceProductAbstractPriceListSearchQuery(): void
     {
-        $this->containerMock->expects(static::atLeastOnce())
-            ->method('has')
-            ->withConsecutive(
-                [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY],
-                [PriceProductPriceListPageSearchDependencyProvider::CLIENT_SEARCH],
-            )
-            ->willReturnOnConsecutiveCalls(
-                true,
-                true,
-            );
+        $self = $this;
 
         $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY],
-                [PriceProductPriceListPageSearchDependencyProvider::CLIENT_SEARCH],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->priceProductConcretePriceListSearchQueryPluginMock,
-                $this->searchClientMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_ABSTRACT_PRICE_LIST_SEARCH_QUERY:
+                        return $self->priceProductConcretePriceListSearchQueryPluginMock;
+                    case PriceProductPriceListPageSearchDependencyProvider::CLIENT_SEARCH:
+                        return $self->searchClientMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             QueryInterface::class,
@@ -112,27 +110,24 @@ class PriceProductPriceListPageSearchFactoryTest extends Unit
      */
     public function testCreatePriceProductConcretePriceListSearchQuery(): void
     {
-        $this->containerMock->expects(static::atLeastOnce())
-            ->method('has')
-            ->withConsecutive(
-                [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY],
-                [PriceProductPriceListPageSearchDependencyProvider::CLIENT_SEARCH],
-            )
-            ->willReturnOnConsecutiveCalls(
-                true,
-                true,
-            );
+        $self = $this;
 
         $this->containerMock->expects(static::atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
+
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY],
-                [PriceProductPriceListPageSearchDependencyProvider::CLIENT_SEARCH],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->priceProductConcretePriceListSearchQueryPluginMock,
-                $this->searchClientMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case PriceProductPriceListPageSearchDependencyProvider::PLUGIN_PRICE_PRODUCT_CONCRETE_PRICE_LIST_SEARCH_QUERY:
+                        return $self->priceProductConcretePriceListSearchQueryPluginMock;
+                    case PriceProductPriceListPageSearchDependencyProvider::CLIENT_SEARCH:
+                        return $self->searchClientMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             QueryInterface::class,

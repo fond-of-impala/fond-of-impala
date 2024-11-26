@@ -17,6 +17,7 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestLinkInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
+use Spryker\Shared\Kernel\Transfer\AbstractTransfer;
 use Symfony\Component\HttpFoundation\Response;
 
 class RestResponseBuilderTest extends Unit
@@ -210,6 +211,8 @@ class RestResponseBuilderTest extends Unit
      */
     public function testBuildRestResponse(): void
     {
+        $self = $this;
+
         $uuid = 'e6b02939-18fc-4857-837e-f0e8063c306e';
         $groupKey = 'foo.bar-1';
         $companyUserReference = 'FOO--CU-1';
@@ -223,23 +226,36 @@ class RestResponseBuilderTest extends Unit
             ->with($this->quoteTransferMock)
             ->willReturn($this->restCartsAttributesTransferMock);
 
-        $this->restResourceBuilderMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->restResourceBuilderMock->expects($callCount)
             ->method('createRestResource')
-            ->withConsecutive(
-                [
-                    CompanyUserCartsRestApiConfig::RESOURCE_COMPANY_USER_CARTS,
-                    $uuid,
-                    $this->restCartsAttributesTransferMock,
-                ],
-                [
-                    CompanyUserCartsRestApiConfig::RESOURCE_CART_ITEMS,
-                    $groupKey,
-                    $this->restItemsAttributesTransferMock,
-                ],
-            )->willReturnOnConsecutiveCalls(
-                $this->restResourceMock,
-                $this->relatedRestResourceMock,
-            );
+            ->willReturnCallback(static function (string $type, ?string $id = null, ?AbstractTransfer $attributeTransfer = null) use ($self, $callCount, $uuid, $groupKey) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame(CompanyUserCartsRestApiConfig::RESOURCE_COMPANY_USER_CARTS, $type);
+                        $self->assertSame($uuid, $id);
+                        $self->assertSame($self->restCartsAttributesTransferMock, $attributeTransfer);
+
+                        return $self->restResourceMock;
+                    case 2:
+                        $self->assertSame(CompanyUserCartsRestApiConfig::RESOURCE_CART_ITEMS, $type);
+                        $self->assertSame($groupKey, $id);
+                        $self->assertSame($self->restItemsAttributesTransferMock, $attributeTransfer);
+
+                        return $self->relatedRestResourceMock;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->restResourceMock->expects(static::atLeastOnce())
             ->method('setPayload')

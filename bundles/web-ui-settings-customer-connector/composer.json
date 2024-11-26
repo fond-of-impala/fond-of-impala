@@ -27,7 +27,7 @@
     }
   ],
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "fond-of-impala/web-ui-settings": "^1.0.0",
     "spryker/customer": "dev-feature/add-update-and-add-customer-pre-post-expanding as 7.57.0",
     "spryker/customer-extension": "dev-feature/provides-more-expander-plugin-interfaces as 1.6.0"

@@ -4,6 +4,7 @@ namespace FondOfImpala\Glue\ProductListsBulkRestApi\Processor\Mapper;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Glue\ProductListsBulkRestApiExtension\Dependency\Plugin\RestProductListsBulkRequestAssignmentMapperPluginInterface;
 use Generated\Shared\Transfer\RestProductListsBulkAssignmentProductListTransfer;
 use Generated\Shared\Transfer\RestProductListsBulkAssignmentTransfer;
@@ -79,6 +80,8 @@ class RestProductListsBulkRequestAssignmentMapperTest extends Unit
      */
     public function testFromRestProductListsBulkAssignment(): void
     {
+        $self = $this;
+
         $restProductListsBulkAssignmentProductListToUnassignTransferMock = new ArrayObject();
         $restProductListsBulkAssignmentProductListToAssignTransferMock = new ArrayObject(
             $this->restProductListsBulkAssignmentProductListTransferMocks,
@@ -97,15 +100,32 @@ class RestProductListsBulkRequestAssignmentMapperTest extends Unit
             ->method('getProductListsToUnassign')
             ->willReturn($restProductListsBulkAssignmentProductListToUnassignTransferMock);
 
-        $this->restProductListsBulkRequestAssignmentProductListsMapperMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->restProductListsBulkRequestAssignmentProductListsMapperMock->expects($callCount)
             ->method('fromRestProductListsBulkAssignmentProductLists')
-            ->withConsecutive(
-                [$restProductListsBulkAssignmentProductListToAssignTransferMock],
-                [$restProductListsBulkAssignmentProductListToUnassignTransferMock],
-            )->willReturnOnConsecutiveCalls(
-                $restProductListsBulkRequestAssignmentProductListToAssignTransferMock,
-                $restProductListsBulkRequestAssignmentProductListToUnassignTransferMock,
-            );
+            ->willReturnCallback(static function (ArrayObject $arrayObject) use ($self, $callCount, $restProductListsBulkAssignmentProductListToAssignTransferMock, $restProductListsBulkAssignmentProductListToUnassignTransferMock, $restProductListsBulkRequestAssignmentProductListToAssignTransferMock, $restProductListsBulkRequestAssignmentProductListToUnassignTransferMock) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($arrayObject, $restProductListsBulkAssignmentProductListToAssignTransferMock);
+
+                        return $restProductListsBulkRequestAssignmentProductListToAssignTransferMock;
+                    case 2:
+                        $self->assertSame($arrayObject, $restProductListsBulkAssignmentProductListToUnassignTransferMock);
+
+                        return $restProductListsBulkRequestAssignmentProductListToUnassignTransferMock;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->restProductListsBulkRequestAssignmentMapperPluginMock->expects(static::atLeastOnce())
             ->method('mapRestProductListsBulkAssignmentToRestProductListsBulkRequestAssignment')

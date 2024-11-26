@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Mapper;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Filter\ProductListIdsFilterInterface;
 use FondOfImpala\Zed\CustomerProductListsBulkRestApi\Business\Reader\ProductListReaderInterface;
 use Generated\Shared\Transfer\CustomerProductListRelationTransfer;
@@ -78,6 +79,8 @@ class CustomerProductListRelationMapperTest extends Unit
      */
     public function testFromRestProductListsBulkRequestAssignmentTransfer(): void
     {
+        $self = $this;
+
         $idCustomer = 1;
         $productListIdsToAssign = [8];
         $productListIdsToUnassign = [1];
@@ -107,15 +110,32 @@ class CustomerProductListRelationMapperTest extends Unit
             ->method('getProductListsToUnassign')
             ->willReturn($productListsToUnassignMocks);
 
-        $this->productListIdsFilterMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->productListIdsFilterMock->expects($callCount)
             ->method('filterFromRestProductListsBulkRequestAssignmentProductLists')
-            ->withConsecutive(
-                [$productListsToAssignMocks],
-                [$productListsToUnassignMocks],
-            )->willReturnOnConsecutiveCalls(
-                $productListIdsToAssign,
-                $productListIdsToUnassign,
-            );
+            ->willReturnCallback(static function (ArrayObject $restProductListsBulkRequestAssignmentProductListTransfers) use ($self, $callCount, $productListsToAssignMocks, $productListsToUnassignMocks, $productListIdsToAssign, $productListIdsToUnassign) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($restProductListsBulkRequestAssignmentProductListTransfers, $productListsToAssignMocks);
+
+                        return $productListIdsToAssign;
+                    case 2:
+                        $self->assertSame($restProductListsBulkRequestAssignmentProductListTransfers, $productListsToUnassignMocks);
+
+                        return $productListIdsToUnassign;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->productListReaderMock->expects(static::atLeastOnce())
             ->method('getIdsByIdCustomer')
@@ -171,6 +191,8 @@ class CustomerProductListRelationMapperTest extends Unit
      */
     public function testFromRestProductListsBulkRequestAssignmentTransferWithoutCustomerId(): void
     {
+        $self = $this;
+
         $idCustomer = null;
         $productListIdsToAssign = [8];
         $productListIdsToUnassign = [1];
@@ -199,15 +221,32 @@ class CustomerProductListRelationMapperTest extends Unit
             ->method('getProductListsToUnassign')
             ->willReturn($productListsToUnassignMocks);
 
-        $this->productListIdsFilterMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->productListIdsFilterMock->expects($callCount)
             ->method('filterFromRestProductListsBulkRequestAssignmentProductLists')
-            ->withConsecutive(
-                [$productListsToAssignMocks],
-                [$productListsToUnassignMocks],
-            )->willReturnOnConsecutiveCalls(
-                $productListIdsToAssign,
-                $productListIdsToUnassign,
-            );
+            ->willReturnCallback(static function (ArrayObject $restProductListsBulkRequestAssignmentProductListTransfers) use ($self, $callCount, $productListsToAssignMocks, $productListsToUnassignMocks, $productListIdsToAssign, $productListIdsToUnassign) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($restProductListsBulkRequestAssignmentProductListTransfers, $productListsToAssignMocks);
+
+                        return $productListIdsToAssign;
+                    case 2:
+                        $self->assertSame($restProductListsBulkRequestAssignmentProductListTransfers, $productListsToUnassignMocks);
+
+                        return $productListIdsToUnassign;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->productListReaderMock->expects(static::never())
             ->method('getIdsByIdCustomer');

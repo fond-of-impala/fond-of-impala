@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-price-list": "^1.0.0",
     "spryker/company-gui-extension": "^1.0.0"
   },

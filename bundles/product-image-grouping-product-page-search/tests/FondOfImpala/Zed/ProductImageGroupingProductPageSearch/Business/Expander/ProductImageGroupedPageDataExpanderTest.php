@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Expander;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ProductImageGroupingProductPageSearch\Business\Validator\UrlValidatorInterface;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Generated\Shared\Transfer\ProductPayloadTransfer;
@@ -195,6 +196,8 @@ class ProductImageGroupedPageDataExpanderTest extends Unit
      */
     public function testExpandProductPageDataWithUrlValidation(): void
     {
+        $self = $this;
+
         $key = 'front';
         $idProductImageSet = 44;
 
@@ -229,13 +232,32 @@ class ProductImageGroupedPageDataExpanderTest extends Unit
             ->method('getName')
             ->willReturn($key);
 
-        $this->urlValidatorMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->urlValidatorMock->expects($callCount)
             ->method('isValid')
-            ->withConsecutive(['asdas'], ['https://www.fondof.de'])
-            ->willReturnOnConsecutiveCalls(
-                false,
-                true,
-            );
+            ->willReturnCallback(static function (string $key) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame('asdas', $key);
+
+                        return false;
+                    case 2:
+                        $self->assertSame('https://www.fondof.de', $key);
+
+                        return true;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->pageSearchTransferMock->expects(static::atLeastOnce())
             ->method('setGroupedProductImages')

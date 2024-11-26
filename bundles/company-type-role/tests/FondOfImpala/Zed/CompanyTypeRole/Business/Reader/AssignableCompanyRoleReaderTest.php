@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\CompanyTypeRole\Business\Reader;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyTypeRole\Business\Generator\AssignPermissionKeyGeneratorInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToCompanyRoleFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeRole\Dependency\Facade\CompanyTypeRoleToPermissionFacadeInterface;
@@ -132,6 +133,8 @@ class AssignableCompanyRoleReaderTest extends Unit
      */
     public function testGetByAssignableCompanyRoleCriteriaFilter(): void
     {
+        $self = $this;
+
         $idCompany = 1;
         $idCompanyUser = 1;
         $permissionKey = 'FooBar';
@@ -173,10 +176,19 @@ class AssignableCompanyRoleReaderTest extends Unit
             ->method('getRoles')
             ->willReturn(new ArrayObject($this->companyRoleTransferMocks));
 
-        $this->assignPermissionKeyGeneratorMock->expects(static::atLeastOnce())
+        $this->assignPermissionKeyGeneratorMock->expects($this->atLeastOnce())
             ->method('generateByCompanyRole')
-            ->withConsecutive([$this->companyRoleTransferMocks[0]], [$this->companyRoleTransferMocks[1]])
-            ->willReturnOnConsecutiveCalls($permissionKey, null);
+            ->willReturnCallback(static function (CompanyRoleTransfer $companyRoleTransfer) use ($self, $permissionKey) {
+                if ($companyRoleTransfer === $self->companyRoleTransferMocks[0]) {
+                    return $permissionKey;
+                }
+
+                if ($companyRoleTransfer === $self->companyRoleTransferMocks[1]) {
+                    return null;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->permissionFacadeMock->expects(static::atLeastOnce())
             ->method('can')

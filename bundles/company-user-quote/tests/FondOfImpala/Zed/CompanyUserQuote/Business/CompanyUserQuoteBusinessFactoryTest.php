@@ -77,20 +77,24 @@ class CompanyUserQuoteBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyUserQuoteReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeast(2))
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [QuoteDependencyProvider::PLUGINS_QUOTE_EXPANDER],
-                [QuoteDependencyProvider::FACADE_STORE],
-            )
-            ->willReturnOnConsecutiveCalls(
-                $this->quoteExpanderPluginInterfaceMocks,
-                $this->quoteToStoreFacadeInterfaceMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case QuoteDependencyProvider::PLUGINS_QUOTE_EXPANDER:
+                        return $self->quoteExpanderPluginInterfaceMocks;
+                    case QuoteDependencyProvider::FACADE_STORE:
+                        return $self->quoteToStoreFacadeInterfaceMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->assertInstanceOf(
             CompanyUserQuoteReaderInterface::class,

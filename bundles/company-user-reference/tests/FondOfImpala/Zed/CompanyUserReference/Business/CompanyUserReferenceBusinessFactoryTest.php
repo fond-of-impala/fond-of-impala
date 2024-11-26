@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUserReference\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyUserReference\Business\Generator\CompanyUserReferenceGenerator;
 use FondOfImpala\Zed\CompanyUserReference\Business\Reader\CompanyBusinessUnitReader;
 use FondOfImpala\Zed\CompanyUserReference\Business\Reader\CompanyReader;
@@ -102,19 +103,24 @@ class CompanyUserReferenceBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyUserReferenceGenerator(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserReferenceDependencyProvider::FACADE_SEQUENCE_NUMBER],
-                [CompanyUserReferenceDependencyProvider::FACADE_STORE],
-            )->willReturnOnConsecutiveCalls(
-                $this->sequenceNumberFacadeMock,
-                $this->storeFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserReferenceDependencyProvider::FACADE_SEQUENCE_NUMBER:
+                        return $self->sequenceNumberFacadeMock;
+                    case CompanyUserReferenceDependencyProvider::FACADE_STORE:
+                        return $self->storeFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CompanyUserReferenceGenerator::class,
@@ -144,17 +150,21 @@ class CompanyUserReferenceBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyReader(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserReferenceDependencyProvider::FACADE_COMPANY],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserReferenceDependencyProvider::FACADE_COMPANY:
+                        return $self->companyFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(CompanyReader::class, $this->factory->createCompanyReader());
     }
@@ -164,17 +174,22 @@ class CompanyUserReferenceBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyBusinessUnitReader(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserReferenceDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyBusinessUnitFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserReferenceDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT:
+                        return $self->companyBusinessUnitFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(CompanyBusinessUnitReader::class, $this->factory->createCompanyBusinessUnitReader());
     }

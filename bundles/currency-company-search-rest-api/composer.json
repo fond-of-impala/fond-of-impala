@@ -15,7 +15,7 @@
     "phpstan": "make phpstan"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-oryx/company-search-rest-api-extension": "^1.2.0",
     "spryker/currency": "^3.0.0 || ^4.0.0"
   },

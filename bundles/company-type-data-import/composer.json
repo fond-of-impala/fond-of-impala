@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/company-type": "^1.0.0",
     "spryker/data-import": "^1.3.0",
     "spryker/kernel": "^3.30.0",

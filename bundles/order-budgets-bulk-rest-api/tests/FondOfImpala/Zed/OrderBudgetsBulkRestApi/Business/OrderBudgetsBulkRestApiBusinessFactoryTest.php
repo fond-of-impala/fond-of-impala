@@ -91,21 +91,35 @@ class OrderBudgetsBulkRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateBulkProcessor(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::exactly(2))
             ->method('has')
             ->willReturn(true);
 
-        $matcher = static::exactly(2);
+        $callCount = static::exactly(2);
 
-        $this->containerMock->expects($matcher)
+        $this->containerMock->expects($callCount)
             ->method('get')
-            ->willReturnCallback(
-                fn (string $value): MockObject|OrderBudgetsBulkRestApiToEventFacadeInterface|array => match ($matcher->getInvocationCount()) {
-                    1 => $this->eventFacadeMock,
-                    2 => [],
-                    default => throw new LogicException(),
-                },
-            );
+            ->willReturnCallback(static function (string $key) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        return $self->eventFacadeMock;
+                    case 2:
+                        return [];
+                }
+
+                throw new LogicException();
+            });
 
         static::assertInstanceOf(
             BulkProcessor::class,

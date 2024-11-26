@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "spryker/store": "^1.1.0",
     "spryker/sequence-number": "^1.0.0 || ^2.0.0 || ^3.0.0",
     "spryker/company": "^1.2.0",

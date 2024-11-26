@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader;
 
 use ArrayObject;
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Filter\ConditionalAvailabilityPeriodsFilterInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Finder\IndexFinderInterface;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reducer\ConditionalAvailabilityPeriodsReducerInterface;
@@ -100,6 +101,8 @@ class UnavailableSkuReaderTest extends Unit
      */
     public function testGetByQuote(): void
     {
+        $self = $this;
+
         $skus = [
             'foo',
             'bar',
@@ -117,32 +120,68 @@ class UnavailableSkuReaderTest extends Unit
             ->method('getItems')
             ->willReturn(new ArrayObject($this->itemTransferMocks));
 
-        $this->conditionalAvailabilityPeriodsFilterMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->conditionalAvailabilityPeriodsFilterMock->expects($callCount)
             ->method('filterFromGroupedConditionalAvailabilitiesByItem')
-            ->withConsecutive([
-                $this->groupedConditionalAvailabilityTransferMocks,
-                $this->itemTransferMocks[0],
-            ], [
-                $this->groupedConditionalAvailabilityTransferMocks,
-                $this->itemTransferMocks[1],
-            ], [
-                $this->groupedConditionalAvailabilityTransferMocks,
-                $this->itemTransferMocks[2],
-            ])->willReturnOnConsecutiveCalls(
-                null,
-                $this->conditionalAvailabilityPeriodTransferMocks,
-                $this->conditionalAvailabilityPeriodTransferMocks,
-            );
+            ->willReturnCallback(static function (ArrayObject $conditionalAvailabilityTransfers, ItemTransfer $itemTransfer) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
 
-        $this->indexFinderMock->expects(static::atLeastOnce())
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->groupedConditionalAvailabilityTransferMocks, $conditionalAvailabilityTransfers);
+                        $self->assertSame($self->itemTransferMocks[0], $itemTransfer);
+
+                        return null;
+                    case 2:
+                        $self->assertSame($self->groupedConditionalAvailabilityTransferMocks, $conditionalAvailabilityTransfers);
+                        $self->assertSame($self->itemTransferMocks[1], $itemTransfer);
+
+                        return $self->conditionalAvailabilityPeriodTransferMocks;
+                    case 3:
+                        $self->assertSame($self->groupedConditionalAvailabilityTransferMocks, $conditionalAvailabilityTransfers);
+                        $self->assertSame($self->itemTransferMocks[2], $itemTransfer);
+
+                        return $self->conditionalAvailabilityPeriodTransferMocks;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
+
+        $callCount2 = $this->atLeastOnce();
+        $this->indexFinderMock->expects($callCount2)
             ->method('findConcreteFromConditionalAvailabilityPeriods')
-            ->withConsecutive([
-                $this->conditionalAvailabilityPeriodTransferMocks,
-                $this->itemTransferMocks[1],
-            ], [
-                $this->conditionalAvailabilityPeriodTransferMocks,
-                $this->itemTransferMocks[2],
-            ])->willReturnOnConsecutiveCalls(null, $index);
+            ->willReturnCallback(static function (ArrayObject $conditionalAvailabilityTransfers, ItemTransfer $itemTransfer) use ($self, $callCount2, $index) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount2, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount2->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount2->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertEquals($self->groupedConditionalAvailabilityTransferMocks, $conditionalAvailabilityTransfers);
+                        $self->assertEquals($self->itemTransferMocks[0], $itemTransfer);
+
+                        return null;
+                    case 2:
+                        $self->assertEquals($self->groupedConditionalAvailabilityTransferMocks, $conditionalAvailabilityTransfers);
+                        $self->assertEquals($self->itemTransferMocks[1], $itemTransfer);
+
+                        return $index;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->conditionalAvailabilityPeriodsReducerMock->expects(static::atLeastOnce())
             ->method('reduceByItemAndEffectedIndex')

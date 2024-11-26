@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyTypeConverter;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyType\Business\CompanyTypeFacadeInterface;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyRoleFacadeBridge;
 use FondOfImpala\Zed\CompanyTypeConverter\Dependency\Facade\CompanyTypeConverterToCompanyTypeFacadeBridge;
@@ -70,9 +71,18 @@ class CompanyTypeConverterDependencyProviderTest extends Unit
     {
         parent::_before();
 
-        $this->containerMock = $this->getMockBuilder(Container::class)
-            ->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet'])
-            ->getMock();
+        $containerMock = $this->getMockBuilder(Container::class);
+
+        /** @phpstan-ignore-next-line */
+        if (method_exists($containerMock, 'setMethodsExcept')) {
+            /** @phpstan-ignore-next-line */
+            $containerMock->setMethodsExcept(['factory', 'set', 'offsetSet', 'get', 'offsetGet']);
+        } else {
+            /** @phpstan-ignore-next-line */
+            $containerMock->onlyMethods(['getLocator'])->enableOriginalClone();
+        }
+
+        $this->containerMock = $containerMock->getMock();
 
         $this->locatorMock = $this->getMockBuilder(Locator::class)
             ->disableOriginalConstructor()
@@ -110,20 +120,29 @@ class CompanyTypeConverterDependencyProviderTest extends Unit
      */
     public function testProvideBusinessLayerDependencies(): void
     {
+        $self = $this;
         $this->containerMock->expects($this->atLeastOnce())
             ->method('getLocator')
             ->willReturn($this->locatorMock);
 
         $this->locatorMock->expects($this->atLeastOnce())
             ->method('__call')
-            ->withConsecutive(
-                ['permission'],
-                ['companyTypeRole'],
-                ['companyRole'],
-                ['companyType'],
-                ['companyUser'],
-            )
-            ->willReturn($this->bundleProxyMock);
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case 'permission':
+                        return $self->bundleProxyMock;
+                    case 'companyTypeRole':
+                        return $self->bundleProxyMock;
+                    case 'companyRole':
+                        return $self->bundleProxyMock;
+                    case 'companyType':
+                        return $self->bundleProxyMock;
+                    case 'companyUser':
+                        return $self->bundleProxyMock;
+                }
+
+                throw new Exception('Invalid key');
+            });
 
         $this->bundleProxyMock->expects($this->atLeastOnce())
             ->method('__call')

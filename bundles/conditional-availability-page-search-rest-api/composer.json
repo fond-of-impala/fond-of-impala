@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/conditional-availability": "^1.1.0 || ^2.0.0",
     "fond-of-impala/conditional-availability-page-search": "^1.1.0 || ^2.0.0",
     "fond-of-impala/conditional-availability-page-search-rest-api-extension": "^1.0.0",

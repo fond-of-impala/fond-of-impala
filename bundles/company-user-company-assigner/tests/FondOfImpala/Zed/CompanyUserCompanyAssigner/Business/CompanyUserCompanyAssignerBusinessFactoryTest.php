@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUserCompanyAssigner\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Assigner\ManufacturerUserAssigner;
 use FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Manager\CompanyRoleManager;
 use FondOfImpala\Zed\CompanyUserCompanyAssigner\Business\Model\CompanyUser;
@@ -112,25 +113,30 @@ class CompanyUserCompanyAssignerBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyUser(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_USER],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_ROLE],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyUserFacadeMock,
-                $this->companyFacadeMock,
-                $this->companyTypeFacadeMock,
-                $this->companyRoleFacadeMock,
-                $this->companyBusinessUnitFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyUserFacadeMock;
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY:
+                        return $self->companyFacadeMock;
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE:
+                        return $self->companyTypeFacadeMock;
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_ROLE:
+                        return $self->companyRoleFacadeMock;
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_BUSINESS_UNIT:
+                        return $self->companyBusinessUnitFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CompanyUser::class,
@@ -143,19 +149,23 @@ class CompanyUserCompanyAssignerBusinessFactoryTest extends Unit
      */
     public function testCreateManufacturerUserAssigner(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_USER],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyTypeFacadeMock,
-                $this->companyUserFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_USER:
+                        return $self->companyUserFacadeMock;
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE:
+                        return $self->companyTypeFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             ManufacturerUserAssigner::class,
@@ -168,21 +178,23 @@ class CompanyUserCompanyAssignerBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyRoleManager(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_ROLE],
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyTypeFacadeMock,
-                $this->companyRoleFacadeMock,
-                $this->companyTypeFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE:
+                        return $self->companyTypeFacadeMock;
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_ROLE:
+                        return $self->companyRoleFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(CompanyRoleManager::class, $this->factory->createCompanyRoleManager());
     }
@@ -192,17 +204,21 @@ class CompanyUserCompanyAssignerBusinessFactoryTest extends Unit
      */
     public function testCreateCompanyTypeReader(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyTypeFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCompanyAssignerDependencyProvider::FACADE_COMPANY_TYPE:
+                        return $self->companyTypeFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             CompanyTypeReader::class,

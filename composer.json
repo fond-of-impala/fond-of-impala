@@ -134,7 +134,7 @@
     "fond-of-impala/web-ui-settings-quote-connector": "*"
   },
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-oryx/cart-search-rest-api-extension": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/company-product-list-connector": "^1.0.0 || ^2.0.0",
     "fond-of-oryx/company-business-unit-order-budget": "^1.0.0 || ^2.0.0",
@@ -216,7 +216,7 @@
   },
   "require-dev": {
     "fond-of-codeception/spryker": "*",
-    "phpunit/phpunit": "9.6.21",
+    "phpunit/phpunit": "*",
     "rector/rector": "*",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"

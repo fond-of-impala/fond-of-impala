@@ -3,6 +3,7 @@
 namespace FondOfImpala\Glue\CartValidation;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToGlossaryStorageClientInterface;
 use FondOfImpala\Glue\CartValidation\Dependency\Client\CartValidationToLocaleClientInterface;
 use FondOfImpala\Glue\CartValidation\Processor\Translator\ValidationMessageTranslator;
@@ -58,19 +59,24 @@ class CartValidationFactoryTest extends Unit
      */
     public function testCreateValidationTranslator(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CartValidationDependencyProvider::CLIENT_GLOSSARY_STORAGE],
-                [CartValidationDependencyProvider::CLIENT_LOCALE],
-            )->willReturnOnConsecutiveCalls(
-                $this->glossaryStorageClientInterfaceMock,
-                $this->localeClientInterfaceMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                if ($key === CartValidationDependencyProvider::CLIENT_GLOSSARY_STORAGE) {
+                    return $self->glossaryStorageClientInterfaceMock;
+                }
+
+                if ($key === CartValidationDependencyProvider::CLIENT_LOCALE) {
+                    return $self->localeClientInterfaceMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             ValidationMessageTranslator::class,

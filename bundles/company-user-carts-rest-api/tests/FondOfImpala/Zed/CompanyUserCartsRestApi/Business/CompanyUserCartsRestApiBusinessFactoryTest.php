@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyUserCartsRestApi\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Creator\QuoteCreator;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Deleter\QuoteDeleter;
 use FondOfImpala\Zed\CompanyUserCartsRestApi\Business\Expander\QuoteCreateExpanderInterface;
@@ -138,35 +139,30 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteCreator(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_CART],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_CART],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CompanyUserCartsRestApiDependencyProvider::PLUGIN_QUOTE_CREATE_EXPANDER],
-            )->willReturnOnConsecutiveCalls(
-                $this->companyUserReferenceFacadeMock,
-                $this->cartFacadeMock,
-                $this->cartFacadeMock,
-                $this->quoteFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-                $this->quoteFacadeMock,
-                [],
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_CART:
+                        return $self->cartFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE:
+                        return $self->quoteFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::PLUGIN_QUOTE_CREATE_EXPANDER:
+                        return [];
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             QuoteCreator::class,
@@ -179,31 +175,28 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteUpdater(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_CART],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_CART],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-                $this->cartFacadeMock,
-                $this->cartFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-                $this->quoteFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_CART:
+                        return $self->cartFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE:
+                        return $self->quoteFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             QuoteUpdater::class,
@@ -216,23 +209,26 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteDeleter(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-                $this->quoteFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE:
+                        return $self->quoteFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             QuoteDeleter::class,
@@ -245,21 +241,26 @@ class CompanyUserCartsRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteFinder(): void
     {
+        $self = $this;
+
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
-        $this->containerMock->expects(static::atLeastOnce())
+        $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-                [CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-                $this->permissionFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_QUOTE:
+                        return $self->quoteFacadeMock;
+                    case CompanyUserCartsRestApiDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         static::assertInstanceOf(
             QuoteFinder::class,

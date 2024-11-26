@@ -6,6 +6,7 @@ use ArrayObject;
 use Codeception\Test\Unit;
 use DateInterval;
 use DateTime;
+use Exception;
 use FondOfImpala\Zed\ConditionalAvailabilityCartConnector\Business\Reader\ConditionalAvailabilityReaderInterface;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -65,6 +66,8 @@ class QuoteExpanderTest extends Unit
      */
     public function testExpand(): void
     {
+        $self = $this;
+
         $groupedConditionalAvailabilities = new ArrayObject();
 
         $deliveryDates = [
@@ -86,13 +89,32 @@ class QuoteExpanderTest extends Unit
             ->method('getItems')
             ->willReturn(new ArrayObject($this->itemTransferMocks));
 
-        $this->itemExpanderMock->expects(static::atLeastOnce())
+        $callCount = $this->atLeastOnce();
+        $this->itemExpanderMock->expects($callCount)
             ->method('expand')
-            ->withConsecutive([$this->itemTransferMocks[0]], [$this->itemTransferMocks[1]])
-            ->willReturnOnConsecutiveCalls(
-                $this->itemTransferMocks[0],
-                $this->itemTransferMocks[1],
-            );
+            ->willReturnCallback(static function (ItemTransfer $itemTransfer) use ($self, $callCount) {
+                /** @phpstan-ignore-next-line */
+                if (method_exists($callCount, 'getInvocationCount')) {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->getInvocationCount();
+                } else {
+                    /** @phpstan-ignore-next-line */
+                    $count = $callCount->numberOfInvocations();
+                }
+
+                switch ($count) {
+                    case 1:
+                        $self->assertSame($self->itemTransferMocks[0], $itemTransfer);
+
+                        return $itemTransfer;
+                    case 2:
+                        $self->assertSame($self->itemTransferMocks[1], $itemTransfer);
+
+                        return $itemTransfer;
+                }
+
+                throw new Exception('Unexpected call count');
+            });
 
         $this->itemTransferMocks[0]->expects(static::atLeastOnce())
             ->method('getDeliveryDate')

@@ -9,8 +9,9 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "fond-of-impala/conditional-availability": "^2.3.0",
+    "fond-of-impala/enhanced-catalog-extension": "^1.0.0",
     "spryker/product-page-search": "^3.24.0"
   },
   "require-dev": {

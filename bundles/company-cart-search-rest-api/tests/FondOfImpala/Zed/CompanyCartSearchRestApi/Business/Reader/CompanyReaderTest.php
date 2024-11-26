@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CompanyCartSearchRestApi\Business\Reader;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Business\Filter\CompanyUuidFilterInterface;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Business\Filter\IdCustomerFilterInterface;
 use FondOfImpala\Zed\CompanyCartSearchRestApi\Persistence\CompanyCartSearchRestApiRepositoryInterface;
@@ -76,23 +77,24 @@ class CompanyReaderTest extends Unit
      */
     public function testGetIdByFilterFields(): void
     {
+        $self = $this;
         $idCompany = 1;
         $idCustomer = 1;
         $companyUuid = 'd5ffcf7e-183f-4aa1-819e-74acf9f6a134';
 
-        $this->idCustomerFilterMock->expects(static::atLeastOnce())
+        $this->idCustomerFilterMock->expects($this->atLeastOnce())
             ->method('filterByFilterField')
-            ->withConsecutive(
-                [
-                    $this->filterFieldTransferMocks[0],
-                ],
-                [
-                    $this->filterFieldTransferMocks[1],
-                ],
-            )->willReturnOnConsecutiveCalls(
-                $idCustomer,
-                null,
-            );
+            ->willReturnCallback(static function (FilterFieldTransfer $filterFieldTransfer) use ($self, $idCustomer) {
+                if ($filterFieldTransfer === $self->filterFieldTransferMocks[0]) {
+                    return $idCustomer;
+                }
+
+                if ($filterFieldTransfer === $self->filterFieldTransferMocks[1]) {
+                    return null;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->companyUuidFilterMock->expects(static::atLeastOnce())
             ->method('filterByFilterField')
@@ -117,21 +119,22 @@ class CompanyReaderTest extends Unit
      */
     public function testGetIdByFilterFieldsWithInvalidFilterFields(): void
     {
+        $self = $this;
         $idCustomer = 1;
 
-        $this->idCustomerFilterMock->expects(static::atLeastOnce())
+        $this->idCustomerFilterMock->expects($this->atLeastOnce())
             ->method('filterByFilterField')
-            ->withConsecutive(
-                [
-                    $this->filterFieldTransferMocks[0],
-                ],
-                [
-                    $this->filterFieldTransferMocks[1],
-                ],
-            )->willReturnOnConsecutiveCalls(
-                $idCustomer,
-                null,
-            );
+            ->willReturnCallback(static function (FilterFieldTransfer $filterFieldTransfer) use ($self, $idCustomer) {
+                if ($filterFieldTransfer === $self->filterFieldTransferMocks[0]) {
+                    return $idCustomer;
+                }
+
+                if ($filterFieldTransfer === $self->filterFieldTransferMocks[1]) {
+                    return null;
+                }
+
+                throw new Exception('Unexpected call');
+            });
 
         $this->companyUuidFilterMock->expects(static::atLeastOnce())
             ->method('filterByFilterField')

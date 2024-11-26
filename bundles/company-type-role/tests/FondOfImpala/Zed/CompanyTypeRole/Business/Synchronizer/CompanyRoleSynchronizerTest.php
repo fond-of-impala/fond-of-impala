@@ -288,6 +288,7 @@ class CompanyRoleSynchronizerTest extends Unit
             ->willReturnOnConsecutiveCalls(
                 'company-role',
                 'company-role-delete',
+                'company-role',
             );
 
         $this->companyRoleFacadeMock->expects(static::atLeastOnce())
@@ -325,13 +326,12 @@ class CompanyRoleSynchronizerTest extends Unit
         $companyRoles = new ArrayObject();
         $companyRoles->append($this->companyRoleTransferMock);
         $companyTypeName = 'company-type';
-
         $responseErrorMessages = new ArrayObject();
         $responseErrorMessages->append($this->responseMessageTransferMock);
 
         $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getCompanyCount')
-            ->willReturn(10);
+            ->willReturn(2);
 
         $this->repositoryMock->expects(static::atLeastOnce())
             ->method('getCompanyCollection')
@@ -376,6 +376,8 @@ class CompanyRoleSynchronizerTest extends Unit
             ->willReturnOnConsecutiveCalls(
                 'company-role',
                 'company-role-delete',
+                'company-role-delete',
+                'company-role-delete',
                 'company-role-add',
             );
 
@@ -384,27 +386,20 @@ class CompanyRoleSynchronizerTest extends Unit
             ->willReturn($this->companyRoleResponseTransferMock);
 
         $this->companyRoleResponseTransferMock->expects(static::atLeastOnce())
-            ->method('getIsSuccessful')
-            ->willReturnOnConsecutiveCalls(
-                true,
-                false,
-            );
-
-        $this->companyRoleFacadeMock->expects(static::atLeastOnce())
-            ->method('create')
-            ->willReturn($this->companyRoleResponseTransferMock);
-
-        $this->companyRoleResponseTransferMock->expects(static::atLeastOnce())
             ->method('getCompanyRoleTransfer')
             ->willReturn($this->companyRoleTransferMock);
+
+        $this->companyRoleResponseTransferMock->expects(static::atLeastOnce())
+            ->method('getIsSuccessful')
+            ->willReturnOnConsecutiveCalls(true, false);
 
         $this->companyRoleResponseTransferMock->expects(static::atLeastOnce())
             ->method('getMessages')
             ->willReturn($responseErrorMessages);
 
-        $this->responseMessageTransferMock->expects(static::atLeastOnce())
-            ->method('getText')
-            ->willReturn('error');
+        $this->companyRoleFacadeMock->expects(static::atLeastOnce())
+            ->method('create')
+            ->willReturn($this->companyRoleResponseTransferMock);
 
         $this->expectException(Exception::class);
 
@@ -528,6 +523,7 @@ class CompanyRoleSynchronizerTest extends Unit
             ->willReturnOnConsecutiveCalls(
                 'company-role',
                 'company-role2',
+                'company-role',
                 'company-role',
             );
 

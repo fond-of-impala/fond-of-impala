@@ -3,6 +3,7 @@
 namespace FondOfImpala\Zed\CollaborativeCart\Business;
 
 use Codeception\Test\Unit;
+use Exception;
 use FondOfImpala\Zed\CollaborativeCart\Business\Model\CartClaimer;
 use FondOfImpala\Zed\CollaborativeCart\Business\Model\QuoteExpander;
 use FondOfImpala\Zed\CollaborativeCart\Business\Releaser\CartReleaser;
@@ -92,21 +93,24 @@ class CollaborativeCartBusinessFactoryTest extends Unit
      */
     public function testCreateCartClaimer(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CollaborativeCartDependencyProvider::FACADE_QUOTE],
-                [CollaborativeCartDependencyProvider::FACADE_QUOTE],
-                [CollaborativeCartDependencyProvider::FACADE_PERMISSION],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->quoteFacadeMock,
-                $this->permissionFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CollaborativeCartDependencyProvider::FACADE_QUOTE:
+                        return $self->quoteFacadeMock;
+                    case CollaborativeCartDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                    default:
+                        throw new Exception('Unexpected call');
+                }
+            });
 
         self::assertInstanceOf(
             CartClaimer::class,
@@ -119,20 +123,24 @@ class CollaborativeCartBusinessFactoryTest extends Unit
      */
     public function testCreateCartReleaser(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CollaborativeCartDependencyProvider::FACADE_QUOTE],
-                [CollaborativeCartDependencyProvider::FACADE_QUOTE],
-            )->willReturnOnConsecutiveCalls(
-                $this->quoteFacadeMock,
-                $this->quoteFacadeMock,
-                $this->permissionFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CollaborativeCartDependencyProvider::FACADE_QUOTE:
+                        return $self->quoteFacadeMock;
+                    case CollaborativeCartDependencyProvider::FACADE_PERMISSION:
+                        return $self->permissionFacadeMock;
+                    default:
+                        throw new Exception('Unexpected call');
+                }
+            });
 
         self::assertInstanceOf(
             CartReleaser::class,
@@ -145,19 +153,24 @@ class CollaborativeCartBusinessFactoryTest extends Unit
      */
     public function testCreateQuoteExpander(): void
     {
+        $self = $this;
+
         $this->containerMock->expects($this->atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects($this->atLeastOnce())
             ->method('get')
-            ->withConsecutive(
-                [CollaborativeCartDependencyProvider::FACADE_CUSTOMER],
-                [CollaborativeCartDependencyProvider::FACADE_COMPANY_USER_REFERENCE],
-            )->willReturnOnConsecutiveCalls(
-                $this->customerFacadeMock,
-                $this->companyUserReferenceFacadeMock,
-            );
+            ->willReturnCallback(static function (string $key) use ($self) {
+                switch ($key) {
+                    case CollaborativeCartDependencyProvider::FACADE_CUSTOMER:
+                        return $self->customerFacadeMock;
+                    case CollaborativeCartDependencyProvider::FACADE_COMPANY_USER_REFERENCE:
+                        return $self->companyUserReferenceFacadeMock;
+                    default:
+                        throw new Exception('Unexpected call');
+                }
+            });
 
         self::assertInstanceOf(
             QuoteExpander::class,
