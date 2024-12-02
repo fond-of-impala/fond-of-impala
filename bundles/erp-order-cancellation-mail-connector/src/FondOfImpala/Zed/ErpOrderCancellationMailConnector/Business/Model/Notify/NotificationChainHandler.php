@@ -13,18 +13,25 @@ class NotificationChainHandler implements NotificationChainHandlerInterface
 
     protected ErpOrderCancellationMailConnectorEntityManager $entityManager;
 
+    /**
+     * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface $repository
+     * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManager $entityManager
+     */
     public function __construct(
         ErpOrderCancellationMailConnectorRepositoryInterface $repository,
-        ErpOrderCancellationMailConnectorEntityManager       $entityManager
-    )
-    {
+        ErpOrderCancellationMailConnectorEntityManager $entityManager
+    ) {
         $this->repository = $repository;
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
+     */
     public function handleNotificationChain(ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationTransfer
     {
-
         if ($erpOrderCancellationTransfer->getNotify()->count() === 0) {
             return $erpOrderCancellationTransfer;
         }
@@ -47,6 +54,7 @@ class NotificationChainHandler implements NotificationChainHandlerInterface
             if (array_key_exists($customerTransfer->getIdCustomer(), $currentChain)) {
                 $notifyCollection->append($currentChain[$customerTransfer->getIdCustomer()]);
                 unset($currentChain[$customerTransfer->getIdCustomer()]);
+
                 continue;
             }
             $new[$customerTransfer->getIdCustomer()] = $customerTransfer;
@@ -63,5 +71,4 @@ class NotificationChainHandler implements NotificationChainHandlerInterface
 
         return $erpOrderCancellationTransfer->setNotify($notifyCollection);
     }
-
 }

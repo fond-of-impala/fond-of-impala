@@ -14,7 +14,7 @@ interface EntityToTransferExpanderInterface
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function expandErpOrderCancellation(
-        FoiErpOrderCancellation      $erpOrderCancellation,
+        FoiErpOrderCancellation $erpOrderCancellation,
         ErpOrderCancellationTransfer $erpOrderCancellationTransfer
     ): ErpOrderCancellationTransfer;
 }

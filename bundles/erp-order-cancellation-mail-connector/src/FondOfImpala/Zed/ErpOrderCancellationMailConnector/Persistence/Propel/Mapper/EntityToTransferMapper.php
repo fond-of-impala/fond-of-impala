@@ -12,12 +12,13 @@ class EntityToTransferMapper implements EntityToTransferMapperInterface
 {
     /**
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\Base\FoiErpOrderCancellationNotify $erpOrderCancellationNotify
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
      */
     public function mapErpOrderCancellationNotifyEntityToTransfer(FoiErpOrderCancellationNotify $erpOrderCancellationNotify): ErpOrderCancellationNotifyTransfer
     {
         $spyCustomer = $erpOrderCancellationNotify->getSpyCustomer();
+
         return (new ErpOrderCancellationNotifyTransfer())->fromArray($spyCustomer->toArray(), true)
             ->setFkErpOrderCancellation($erpOrderCancellationNotify->getFkErpOrderCancellation())
             ->setFkCustomer($spyCustomer->getIdCustomer());
@@ -25,6 +26,7 @@ class EntityToTransferMapper implements EntityToTransferMapperInterface
 
     /**
      * @param \Propel\Runtime\Collection\Collection|\Propel\Runtime\Collection\ObjectCollection $objectCollection
+     *
      * @return \ArrayObject
      */
     public function mapErpOrderCancellationNotifyEntityCollectionToTransferCollection(Collection|ObjectCollection $objectCollection): ArrayObject
@@ -34,6 +36,7 @@ class EntityToTransferMapper implements EntityToTransferMapperInterface
             $notifyTransfer = $this->mapErpOrderCancellationNotifyEntityToTransfer($notification);
             $collection->append($notifyTransfer);
         }
+
         return $collection;
     }
 }

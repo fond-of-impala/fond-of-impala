@@ -64,15 +64,15 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     public function providePersistenceLayerDependencies(Container $container): Container
     {
-        $container =  parent::providePersistenceLayerDependencies($container);
+        $container = parent::providePersistenceLayerDependencies($container);
 
         return $this->addErpOrderCancellationEntityToTransferExpanderPlugin($container);
     }
-
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

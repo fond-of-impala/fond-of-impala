@@ -12,8 +12,16 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation;
  */
 class ErpOrderCancellationNotifyChainExpanderPlugin implements ErpOrderCancellationTransferExpanderPluginInterface
 {
-    public function expand(FoiErpOrderCancellation $erpOrderCancellation, ErpOrderCancellationTransfer $erpOrderCancellationTransfer): ErpOrderCancellationTransfer
-    {
+    /**
+     * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation $erpOrderCancellation
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
+     */
+    public function expand(
+        FoiErpOrderCancellation $erpOrderCancellation,
+        ErpOrderCancellationTransfer $erpOrderCancellationTransfer
+    ): ErpOrderCancellationTransfer {
         $notificationChain = $erpOrderCancellation->getFoiErpOrderCancellationNotifiesJoinSpyCustomer();
 
         foreach ($notificationChain->getData() as $notification) {
@@ -26,5 +34,4 @@ class ErpOrderCancellationNotifyChainExpanderPlugin implements ErpOrderCancellat
 
         return $erpOrderCancellationTransfer;
     }
-
 }

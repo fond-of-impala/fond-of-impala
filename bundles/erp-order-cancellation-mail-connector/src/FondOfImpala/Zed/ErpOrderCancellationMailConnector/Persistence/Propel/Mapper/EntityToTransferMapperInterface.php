@@ -12,13 +12,18 @@ interface EntityToTransferMapperInterface
 {
     /**
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\Base\FoiErpOrderCancellationNotify $erpOrderCancellationNotify
-     * @return \Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer
+     *
      * @throws \Propel\Runtime\Exception\PropelException
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer
      */
-    public function mapErpOrderCancellationNotifyEntityToTransfer(FoiErpOrderCancellationNotify $erpOrderCancellationNotify): ErpOrderCancellationNotifyTransfer;
+    public function mapErpOrderCancellationNotifyEntityToTransfer(
+        FoiErpOrderCancellationNotify $erpOrderCancellationNotify
+    ): ErpOrderCancellationNotifyTransfer;
 
     /**
      * @param \Propel\Runtime\Collection\Collection|\Propel\Runtime\Collection\ObjectCollection $objectCollection
+     *
      * @return \ArrayObject
      */
     public function mapErpOrderCancellationNotifyEntityCollectionToTransferCollection(Collection|ObjectCollection $objectCollection): ArrayObject;

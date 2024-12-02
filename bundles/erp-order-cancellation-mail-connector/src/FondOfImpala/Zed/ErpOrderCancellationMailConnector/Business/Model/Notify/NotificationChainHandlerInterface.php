@@ -4,5 +4,4 @@ namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Noti
 
 interface NotificationChainHandlerInterface
 {
-
 }

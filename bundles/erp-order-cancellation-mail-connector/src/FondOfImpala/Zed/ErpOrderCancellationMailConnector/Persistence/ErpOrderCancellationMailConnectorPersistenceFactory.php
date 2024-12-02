@@ -20,7 +20,6 @@ class ErpOrderCancellationMailConnectorPersistenceFactory extends AbstractPersis
 {
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\Propel\Mapper\EntityToTransferMapperInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function createEntityToTransferMapper(): EntityToTransferMapperInterface
     {

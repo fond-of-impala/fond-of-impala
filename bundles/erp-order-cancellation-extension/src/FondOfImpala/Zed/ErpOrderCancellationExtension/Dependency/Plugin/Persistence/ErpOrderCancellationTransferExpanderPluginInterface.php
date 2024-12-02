@@ -14,7 +14,7 @@ interface ErpOrderCancellationTransferExpanderPluginInterface
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function expand(
-        FoiErpOrderCancellation      $erpOrderCancellation,
+        FoiErpOrderCancellation $erpOrderCancellation,
         ErpOrderCancellationTransfer $erpOrderCancellationTransfer
     ): ErpOrderCancellationTransfer;
 }

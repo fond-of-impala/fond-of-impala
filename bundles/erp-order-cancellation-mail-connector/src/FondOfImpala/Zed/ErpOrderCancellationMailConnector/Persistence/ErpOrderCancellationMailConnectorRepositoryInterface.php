@@ -5,7 +5,6 @@ namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence;
 use ArrayObject;
 use Generated\Shared\Transfer\CustomerCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
-use Propel\Runtime\Collection\ObjectCollection;
 
 interface ErpOrderCancellationMailConnectorRepositoryInterface
 {
@@ -34,16 +33,20 @@ interface ErpOrderCancellationMailConnectorRepositoryInterface
 
     /**
      * @param array<int, string> $email
-     * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
+     *
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
      */
     public function getCustomerCollectionByMail(array $email): CustomerCollectionTransfer;
 
     /**
      * @param int $idErpOrderCancellation
-     * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer>
+     *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     *
+     * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer>
      */
     public function getNotificationChainByIdErpOrderCancellation(int $idErpOrderCancellation): ArrayObject;
 

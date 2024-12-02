@@ -9,12 +9,12 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation;
 class EntityToTransferExpander implements EntityToTransferExpanderInterface
 {
     /**
-     * @var ArrayObject|\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface[]
+     * @var \ArrayObject|array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface>
      */
     protected ArrayObject $erpOrderCancellationExpanderPlugins;
 
     /**
-     * @param ArrayObject<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface> $erpOrderCancellationExpanderPlugins
+     * @param \ArrayObject<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface> $erpOrderCancellationExpanderPlugins
      */
     public function __construct(ArrayObject $erpOrderCancellationExpanderPlugins)
     {
@@ -28,11 +28,10 @@ class EntityToTransferExpander implements EntityToTransferExpanderInterface
      * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function expandErpOrderCancellation(
-        FoiErpOrderCancellation      $erpOrderCancellation,
+        FoiErpOrderCancellation $erpOrderCancellation,
         ErpOrderCancellationTransfer $erpOrderCancellationTransfer
-    ): ErpOrderCancellationTransfer
-    {
-        foreach ($this->erpOrderCancellationExpanderPlugins as $plugin){
+    ): ErpOrderCancellationTransfer {
+        foreach ($this->erpOrderCancellationExpanderPlugins as $plugin) {
             $erpOrderCancellationTransfer = $plugin->expand($erpOrderCancellation, $erpOrderCancellationTransfer);
         }
 

@@ -2,17 +2,9 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence;
 
-use FondOfImpala\Zed\ErpOrderCancellationMailConnector\ErpOrderCancellationMailConnectorConfig;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer;
-use Orm\Zed\Company\Persistence\SpyCompanyQuery;
-use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
-use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery;
-use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
-use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationNotifyQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
-use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
  * @codeCoverageIgnore
@@ -23,9 +15,8 @@ class ErpOrderCancellationMailConnectorEntityManager extends AbstractEntityManag
 {
     /**
      * @param int $idErpOrderCancellation
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function removeNotificationRecipientsForErpOrderCancellation(int $idErpOrderCancellation): void
     {
@@ -37,10 +28,8 @@ class ErpOrderCancellationMailConnectorEntityManager extends AbstractEntityManag
     /**
      * @param int $idErpOrderCancellation
      * @param int $idCustomer
+     *
      * @return \Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function createNotificationChainEntry(int $idErpOrderCancellation, int $idCustomer): ErpOrderCancellationNotifyTransfer
     {
@@ -57,9 +46,8 @@ class ErpOrderCancellationMailConnectorEntityManager extends AbstractEntityManag
     /**
      * @param int $idErpOrderCancellation
      * @param int $idCustomer
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function deleteNotificationChainEntry(int $idErpOrderCancellation, int $idCustomer): void
     {

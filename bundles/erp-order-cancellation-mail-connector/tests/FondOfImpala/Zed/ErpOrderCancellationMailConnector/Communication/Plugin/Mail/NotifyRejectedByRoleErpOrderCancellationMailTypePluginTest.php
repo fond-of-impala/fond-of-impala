@@ -2,21 +2,19 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Communication\Plugin\Mail;
 
-use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\ErpOrderCancellationMailConnectorConfig;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepository;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationMailConfigResponseTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationMailConfigTransfer;
-use Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\MailRecipientTransfer;
 use Generated\Shared\Transfer\MailTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 use Spryker\Zed\Mail\Business\Model\Mail\Builder\MailBuilderInterface;
 
-class NotifyRejectedErpOrderCancellationMailTypePluginTest extends Unit
+class NotifyRejectedByRoleErpOrderCancellationMailTypePluginTest extends Unit
 {
     protected MailBuilderInterface|MockObject $mailBuilderMock;
 
@@ -28,17 +26,13 @@ class NotifyRejectedErpOrderCancellationMailTypePluginTest extends Unit
 
     protected MailTransfer|MockObject $mailTransferMock;
 
-    protected ErpOrderCancellationNotifyTransfer|MockObject $notifyTransferMock;
-
-    protected ErpOrderCancellationNotifyTransfer|MockObject $notifyTransferMock2;
-
     protected ErpOrderCancellationMailConfigResponseTransfer|MockObject $erpOrderCancellationMailConfigResponseTransferMock;
 
     protected ErpOrderCancellationMailConnectorRepository|MockObject $repositoryMock;
 
     protected ErpOrderCancellationMailConnectorConfig|MockObject $configMock;
 
-    protected NotifyRejectedErpOrderCancellationMailTypePlugin $plugin;
+    protected NotifyRejectedByRoleErpOrderCancellationMailTypePlugin $plugin;
 
     /**
      * @return void
@@ -65,14 +59,6 @@ class NotifyRejectedErpOrderCancellationMailTypePluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->notifyTransferMock = $this->getMockBuilder(ErpOrderCancellationNotifyTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->notifyTransferMock2 = $this->getMockBuilder(ErpOrderCancellationNotifyTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->erpOrderCancellationMailConfigResponseTransferMock = $this->getMockBuilder(ErpOrderCancellationMailConfigResponseTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -85,7 +71,7 @@ class NotifyRejectedErpOrderCancellationMailTypePluginTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->plugin = new NotifyRejectedErpOrderCancellationMailTypePlugin();
+        $this->plugin = new NotifyRejectedByRoleErpOrderCancellationMailTypePlugin();
         $this->plugin->setRepository($this->repositoryMock);
         $this->plugin->setConfig($this->configMock);
     }
@@ -104,7 +90,6 @@ class NotifyRejectedErpOrderCancellationMailTypePluginTest extends Unit
     public function testBuild(): void
     {
         $self = $this;
-        $notify = new ArrayObject([$this->notifyTransferMock, $this->notifyTransferMock2]);
         $this->mailBuilderMock->expects(static::once())
             ->method('setSubject')
             ->willReturnCallback(static function (string $subject) use ($self) {
@@ -157,21 +142,29 @@ class NotifyRejectedErpOrderCancellationMailTypePluginTest extends Unit
             ->method('getCancellation')
             ->willReturn($this->erpOrderCancellationTransferMock);
 
+        $this->erpOrderCancellationMailConfigTransferMock->expects(static::once())
+            ->method('getRoleNames')
+            ->willReturn([]);
+
+        $this->configMock->expects(static::once())
+            ->method('getRolesToNotify')
+            ->willReturn(['testRoleName']);
+
         $this->customerTransferMock->expects(static::once())
             ->method('getEmail')
             ->willReturn('test@test.de');
 
         $this->erpOrderCancellationTransferMock->expects(static::once())
-            ->method('getNotify')
-            ->willReturn($notify);
+            ->method('getDebitorNumber')
+            ->willReturn('debtornumber');
 
-        $this->notifyTransferMock->expects(static::once())
-            ->method('getEmail')
-            ->willReturn('test2@test.de');
-
-        $this->notifyTransferMock2->expects(static::once())
-            ->method('getEmail')
-            ->willReturn('test3@test.de');
+        $this->repositoryMock->expects(static::once())
+            ->method('getMailAddressesByDebtorNumberAndRoleNames')
+            ->willReturn([
+                'test@test.de',
+                'test2@test.de',
+                'test3@test.de',
+            ]);
 
         $this->mailTransferMock->expects(static::once())
             ->method('addRecipient')

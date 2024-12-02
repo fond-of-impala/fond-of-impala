@@ -40,7 +40,7 @@ class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessF
     {
         return new NotificationChainHandler(
             $this->getRepository(),
-            $this->getEntityManager()
+            $this->getEntityManager(),
         );
     }
 

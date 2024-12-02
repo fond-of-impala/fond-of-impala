@@ -30,7 +30,6 @@ class ErpOrderCancellationPersistenceFactory extends AbstractPersistenceFactory
 
     /**
      * @return \FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpanderInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function createEntityToTransferExpander(): EntityToTransferExpanderInterface
     {
@@ -55,7 +54,6 @@ class ErpOrderCancellationPersistenceFactory extends AbstractPersistenceFactory
 
     /**
      * @return \ArrayObject<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface>
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getErpOrderCancellationEntityToTransferExpanderPlugin(): ArrayObject
     {

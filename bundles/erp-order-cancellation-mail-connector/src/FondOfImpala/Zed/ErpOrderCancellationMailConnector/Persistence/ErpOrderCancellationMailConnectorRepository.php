@@ -76,9 +76,8 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
 
     /**
      * @param array<int, string> $email
+     *
      * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getCustomerCollectionByMail(array $email): CustomerCollectionTransfer
     {
@@ -95,8 +94,8 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
 
     /**
      * @param int $idErpOrderCancellation
+     *
      * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer>
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function getNotificationChainByIdErpOrderCancellation(int $idErpOrderCancellation): ArrayObject
     {
