@@ -9,7 +9,7 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation;
 class EntityToTransferExpander implements EntityToTransferExpanderInterface
 {
     /**
-     * @var \ArrayObject|array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface>
+     * @var \ArrayObject<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface>
      */
     protected ArrayObject $erpOrderCancellationExpanderPlugins;
 
