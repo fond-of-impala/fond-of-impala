@@ -3,7 +3,7 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Notify;
 
 use ArrayObject;
-use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManager;
+use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManagerInterface;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 
@@ -11,15 +11,15 @@ class NotificationChainHandler implements NotificationChainHandlerInterface
 {
     protected ErpOrderCancellationMailConnectorRepositoryInterface $repository;
 
-    protected ErpOrderCancellationMailConnectorEntityManager $entityManager;
+    protected ErpOrderCancellationMailConnectorEntityManagerInterface $entityManager;
 
     /**
      * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface $repository
-     * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManager $entityManager
+     * @param \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManagerInterface $entityManager
      */
     public function __construct(
         ErpOrderCancellationMailConnectorRepositoryInterface $repository,
-        ErpOrderCancellationMailConnectorEntityManager $entityManager
+        ErpOrderCancellationMailConnectorEntityManagerInterface $entityManager
     ) {
         $this->repository = $repository;
         $this->entityManager = $entityManager;
@@ -44,7 +44,8 @@ class NotificationChainHandler implements NotificationChainHandlerInterface
         $customerCollectionTransfer = $this->repository->getCustomerCollectionByMail($mailAddresses);
 
         $currentChain = [];
-        foreach ($this->repository->getNotificationChainByIdErpOrderCancellation($erpOrderCancellationTransfer->getIdErpOrderCancellation()) as $currentNotify) {
+        $dbNotifications = $this->repository->getNotificationChainByIdErpOrderCancellation($erpOrderCancellationTransfer->getIdErpOrderCancellation());
+        foreach ($dbNotifications as $currentNotify) {
             $currentChain[$currentNotify->getFkCustomer()] = $currentNotify;
         }
 
@@ -66,7 +67,7 @@ class NotificationChainHandler implements NotificationChainHandlerInterface
         }
 
         foreach ($currentChain as $customerTransfer) {
-            $this->entityManager->deleteNotificationChainEntry($erpOrderCancellationTransfer->getIdErpOrderCancellation(), $customerTransfer->getIdCustomer());
+            $this->entityManager->deleteNotificationChainEntry($erpOrderCancellationTransfer->getIdErpOrderCancellation(), $customerTransfer->getFkErpOrderCancellation());
         }
 
         return $erpOrderCancellationTransfer->setNotify($notifyCollection);
