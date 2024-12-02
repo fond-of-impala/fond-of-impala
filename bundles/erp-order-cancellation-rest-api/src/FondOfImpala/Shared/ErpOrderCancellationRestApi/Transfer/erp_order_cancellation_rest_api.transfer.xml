@@ -73,6 +73,7 @@
         <property name="reference" type="string"/>
         <property name="externalReference" type="string"/>
         <property name="state" type="string"/>
+        <property name="states" type="string[]" singular="state"/>
         <property name="customerReference" type="string"/>
         <property name="internalCustomerReference" type="string"/>
         <property name="page" type="RestErpOrderCancellationFilterPage" />
@@ -120,7 +121,7 @@
 
     <transfer name="ErpOrderCancellationFilter">
         <property name="ids" singular="id" type="array" />
-        <property name="states" singular="state" type="array" />
+        <property name="states" type="string[]" singular="state"/>
         <property name="offset" type="int" />
         <property name="limit" type="int" />
         <property name="originatorReference" type="string" />
