@@ -4,6 +4,8 @@ namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business;
 
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Mail\MailHandler;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Mail\MailHandlerInterface;
+use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Notify\NotificationChainHandler;
+use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Notify\NotificationChainHandlerInterface;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToLocaleFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\Dependency\Facade\ErpOrderCancellationMailConnectorToMailFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\ErpOrderCancellationMailConnectorDependencyProvider;
@@ -12,6 +14,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorRepositoryInterface getRepository()()
+ * @method \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence\ErpOrderCancellationMailConnectorEntityManagerInterface getEntityManager()()
  */
 class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessFactory
 {
@@ -27,6 +30,17 @@ class ErpOrderCancellationMailConnectorBusinessFactory extends AbstractBusinessF
             $this->getMailFacade(),
             $this->getLocaleFacade(),
             $this->getLogger(),
+        );
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ErpOrderCancellationMailConnector\Business\Model\Notify\NotificationChainHandlerInterface
+     */
+    public function createNotificationChainHandler(): NotificationChainHandlerInterface
+    {
+        return new NotificationChainHandler(
+            $this->getRepository(),
+            $this->getEntityManager()
         );
     }
 

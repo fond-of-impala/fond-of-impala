@@ -101,15 +101,8 @@ abstract class AbstractErpOrderCancellationMailTypePlugin extends AbstractPlugin
             $mailTransfer->addRecipient($recipient);
         }
 
-        $rolesToNotify = $config->getRoleNames();
-
-        if (count($rolesToNotify) === 0) {
-            $rolesToNotify = $this->getConfig()->getRolesToNotify();
-        }
-
-        $bcc = $this->getRepository()->getMailAddressesByDebtorNumberAndRoleNames($erpOrderCancellationTransfer->getDebitorNumber(), $rolesToNotify);
-
-        foreach ($bcc as $mailAddress) {
+        foreach ($erpOrderCancellationTransfer->getNotify() as $customerTransfer) {
+            $mailAddress = $customerTransfer->getEmail();
             if ($mailAddress === $defaultMailAddress) {
                 continue;
             }

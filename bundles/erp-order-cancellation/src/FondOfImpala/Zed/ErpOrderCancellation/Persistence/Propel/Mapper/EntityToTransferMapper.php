@@ -4,6 +4,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Mapper;
 
 use DateTime;
 use Exception;
+use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpanderInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
@@ -15,6 +16,16 @@ use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItem;
  */
 class EntityToTransferMapper implements EntityToTransferMapperInterface
 {
+    protected EntityToTransferExpanderInterface $entityToTransferExpander;
+
+    /**
+     * @param \FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpanderInterface $entityToTransferExpander
+     */
+    public function __construct(EntityToTransferExpanderInterface $entityToTransferExpander)
+    {
+        $this->entityToTransferExpander = $entityToTransferExpander;
+    }
+
     /**
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItem $orderItem
      * @param \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer|null $orderItemTransfer
@@ -70,9 +81,11 @@ class EntityToTransferMapper implements EntityToTransferMapperInterface
             $erpOrderCancellationTransfer->setCustomerInternal((new CustomerTransfer())->fromArray($internalCustomer->toArray(), true));
         }
 
-        return $erpOrderCancellationTransfer
+        $erpOrderCancellationTransfer
             ->setCreatedAt($this->convertDateTimeToTimestamp($erpOrderCancellation->getCreatedAt()))
             ->setUpdatedAt($this->convertDateTimeToTimestamp($erpOrderCancellation->getUpdatedAt()));
+
+        return $this->entityToTransferExpander->expandErpOrderCancellation($erpOrderCancellation, $erpOrderCancellationTransfer);
     }
 
     /**

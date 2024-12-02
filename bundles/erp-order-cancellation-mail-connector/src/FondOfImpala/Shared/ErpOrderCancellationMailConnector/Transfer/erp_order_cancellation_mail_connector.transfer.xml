@@ -21,6 +21,29 @@
     <transfer name="ErpOrderCancellation">
         <property name="readyMailSentData" type="string"/>
         <property name="manageMailSentData" type="string"/>
+        <property name="notify" singular="notify" type="ErpOrderCancellationNotify[]"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellationNotify">
+        <property name="fkErpOrderCancellation" type="int"/>
+        <property name="fkCustomer" type="int"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="email" type="string"/>
+    </transfer>
+
+    <transfer name="RestCustomer">
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="email" type="string"/>
+    </transfer>
+
+    <transfer name="RestErpOrderCancellation">
+        <property name="notify" singular="notify" type="RestCustomer[]" />
+    </transfer>
+
+    <transfer name="RestErpOrderCancellationAttributes">
+        <property name="notify" singular="notify" type="RestCustomer[]" />
     </transfer>
 
     <transfer name="ErpOrderCancellationMailConfig">
