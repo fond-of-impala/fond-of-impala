@@ -9,6 +9,7 @@ use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCan
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostSavePluginInterface;
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPostTransactionPluginInterface;
 use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationPreSavePluginInterface;
+use FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -40,6 +41,11 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
     public const PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE = 'PLUGIN_ERP_ORDER_CANCELLATION_ITEM_PRE_SAVE';
 
     /**
+     * @var string
+     */
+    public const PLUGIN_ERP_ORDER_CANCELLATION_ENTITY_TO_TRANSFER_EXPANDER = 'PLUGIN_ERP_ORDER_CANCELLATION_ENTITY_TO_TRANSFER_EXPANDER';
+
+    /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
@@ -54,6 +60,18 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
         $container = $this->addErpOrderCancellationItemPreSavePlugin($container);
 
         return $this->addErpOrderCancellationItemPostSavePlugin($container);
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function providePersistenceLayerDependencies(Container $container): Container
+    {
+        $container = parent::providePersistenceLayerDependencies($container);
+
+        return $this->addErpOrderCancellationEntityToTransferExpanderPlugin($container);
     }
 
     /**
@@ -142,6 +160,23 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
     }
 
     /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function addErpOrderCancellationEntityToTransferExpanderPlugin(Container $container): Container
+    {
+        $container[static::PLUGIN_ERP_ORDER_CANCELLATION_ENTITY_TO_TRANSFER_EXPANDER] = function () {
+            $plugins = $this->getErpOrderCancellationEntityToTransferExpanderPlugin();
+            $this->validatePlugin($plugins, ErpOrderCancellationTransferExpanderPluginInterface::class);
+
+            return new ArrayObject($plugins);
+        };
+
+        return $container;
+    }
+
+    /**
      * @param array $plugins
      * @param string $class
      *
@@ -198,6 +233,14 @@ class ErpOrderCancellationDependencyProvider extends AbstractBundleDependencyPro
      * @return array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\ErpOrderCancellationItemPreSavePluginInterface>
      */
     protected function getErpOrderCancellationItemPreSavePlugin(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface>
+     */
+    protected function getErpOrderCancellationEntityToTransferExpanderPlugin(): array
     {
         return [];
     }

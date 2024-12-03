@@ -7,4 +7,17 @@
         <column name="ready_mail_sent_data" required="false" type="LONGVARCHAR"/>
         <column name="manage_mail_sent_data" required="false" type="LONGVARCHAR"/>
     </table>
+
+    <table name="foi_erp_order_cancellation_notify" identifierQuoting="true">
+        <column name="fk_erp_order_cancellation" required="true" type="INTEGER"/>/>
+        <column name="fk_customer" required="true" type="INTEGER"/>/>
+
+        <foreign-key name="foi_erp_order_cancellation_notify-foi_erp_order_cancellation" foreignTable="foi_erp_order_cancellation">
+            <reference local="fk_erp_order_cancellation" foreign="id_erp_order_cancellation"/>
+        </foreign-key>
+
+        <foreign-key name="foi_erp_order_cancellation_notify-spy_customer" foreignTable="spy_customer">
+            <reference local="fk_customer" foreign="id_customer"/>
+        </foreign-key>
+    </table>
 </database>

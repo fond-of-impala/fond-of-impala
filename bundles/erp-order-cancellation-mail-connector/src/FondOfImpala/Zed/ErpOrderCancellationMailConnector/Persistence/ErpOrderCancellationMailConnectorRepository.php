@@ -2,13 +2,16 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationMailConnector\Persistence;
 
+use ArrayObject;
 use FondOfImpala\Zed\ErpOrderCancellationMailConnector\ErpOrderCancellationMailConnectorConfig;
+use Generated\Shared\Transfer\CustomerCollectionTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyRole\Persistence\Map\SpyCompanyRoleTableMap;
 use Orm\Zed\CompanyRole\Persistence\SpyCompanyRoleQuery;
 use Orm\Zed\Customer\Persistence\Map\SpyCustomerTableMap;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
+use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationNotifyQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -72,6 +75,36 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
     }
 
     /**
+     * @param array<int, string> $email
+     *
+     * @return \Generated\Shared\Transfer\CustomerCollectionTransfer
+     */
+    public function getCustomerCollectionByMail(array $email): CustomerCollectionTransfer
+    {
+        $collection = new CustomerCollectionTransfer();
+
+        $customerEntities = $this->getCustomerQuery()->filterByEmail_In($email)->find();
+
+        foreach ($customerEntities->getData() as $customerEntity) {
+            $collection->addCustomer((new CustomerTransfer())->fromArray($customerEntity->toArray(), true));
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @param int $idErpOrderCancellation
+     *
+     * @return \ArrayObject<\Generated\Shared\Transfer\ErpOrderCancellationNotifyTransfer>
+     */
+    public function getNotificationChainByIdErpOrderCancellation(int $idErpOrderCancellation): ArrayObject
+    {
+        $result = $this->getFoiErpOrderCancellationNotifyQuery()->filterByFkErpOrderCancellation($idErpOrderCancellation)->joinSpyCustomer()->find();
+
+        return $this->getFactory()->createEntityToTransferMapper()->mapErpOrderCancellationNotifyEntityCollectionToTransferCollection($result);
+    }
+
+    /**
      * @param int $idCustomer
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
@@ -120,5 +153,13 @@ class ErpOrderCancellationMailConnectorRepository extends AbstractRepository imp
         $config = $this->getFactory()->getConfig();
 
         return $config;
+    }
+
+    /**
+     * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationNotifyQuery
+     */
+    protected function getFoiErpOrderCancellationNotifyQuery(): FoiErpOrderCancellationNotifyQuery
+    {
+        return $this->getFactory()->createFoiErpOrderCancellationNotifyQuery()->clear();
     }
 }

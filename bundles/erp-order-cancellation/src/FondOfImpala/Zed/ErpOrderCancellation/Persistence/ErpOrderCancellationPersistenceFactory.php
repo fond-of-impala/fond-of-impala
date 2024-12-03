@@ -2,6 +2,10 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellation\Persistence;
 
+use ArrayObject;
+use FondOfImpala\Zed\ErpOrderCancellation\ErpOrderCancellationDependencyProvider;
+use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpander;
+use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpanderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Mapper\EntityToTransferMapper;
 use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Mapper\EntityToTransferMapperInterface;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItemQuery;
@@ -21,7 +25,15 @@ class ErpOrderCancellationPersistenceFactory extends AbstractPersistenceFactory
      */
     public function createEntityToTransferMapper(): EntityToTransferMapperInterface
     {
-        return new EntityToTransferMapper();
+        return new EntityToTransferMapper($this->createEntityToTransferExpander());
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpanderInterface
+     */
+    public function createEntityToTransferExpander(): EntityToTransferExpanderInterface
+    {
+        return new EntityToTransferExpander($this->getErpOrderCancellationEntityToTransferExpanderPlugin());
     }
 
     /**
@@ -38,5 +50,13 @@ class ErpOrderCancellationPersistenceFactory extends AbstractPersistenceFactory
     public function createErpOrderCancellationItemQuery(): FoiErpOrderCancellationItemQuery
     {
         return FoiErpOrderCancellationItemQuery::create()->clear();
+    }
+
+    /**
+     * @return \ArrayObject<\FondOfImpala\Zed\ErpOrderCancellationExtension\Dependency\Plugin\Persistence\ErpOrderCancellationTransferExpanderPluginInterface>
+     */
+    public function getErpOrderCancellationEntityToTransferExpanderPlugin(): ArrayObject
+    {
+        return $this->getProvidedDependency(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ENTITY_TO_TRANSFER_EXPANDER);
     }
 }

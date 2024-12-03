@@ -257,7 +257,7 @@
     },
     "erp-order-cancellation": {
       "path": "bundles/erp-order-cancellation",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "erp-order-cancellation-api": {
       "path": "bundles/erp-order-cancellation-api",
@@ -265,11 +265,11 @@
     },
     "erp-order-cancellation-extension": {
       "path": "bundles/erp-order-cancellation-extension",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "erp-order-cancellation-mail-connector": {
       "path": "bundles/erp-order-cancellation-mail-connector",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "erp-order-cancellation-rest-api": {
       "path": "bundles/erp-order-cancellation-rest-api",
