@@ -28,6 +28,7 @@ class RestDataMapper implements RestDataMapperInterface
 
     /**
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander
+     * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade
      */
     public function __construct(
         ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander,
