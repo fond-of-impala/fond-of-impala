@@ -255,7 +255,9 @@ class CancellationManager implements CancellationManagerInterface
             $responseCollection = (new RestErpOrderCancellationCollectionResponseTransfer());
 
             foreach ($collection->getCancellations() as $cancellation) {
-                $responseCollection->addErpOrderCancellation((new RestErpOrderCancellationTransfer())->fromArray($cancellation->toArray(), true));
+                $responseCollection->addErpOrderCancellation(
+                    $this->restDataMapper->mapResponse($cancellation)
+                );
             }
 
             $pagination = (new RestErpOrderCancellationPaginationTransfer())->fromArray($this->repository->getErpOrderCancellationPagination($filter)->toArray(), true);

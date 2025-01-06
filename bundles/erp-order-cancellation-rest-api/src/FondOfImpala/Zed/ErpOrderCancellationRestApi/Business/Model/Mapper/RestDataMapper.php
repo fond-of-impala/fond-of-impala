@@ -4,9 +4,11 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper;
 
 use ArrayObject;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
+use Generated\Shared\Transfer\ErpOrderTransfer;
 use Generated\Shared\Transfer\RestCancellationItemTransfer;
 use Generated\Shared\Transfer\RestCustomerTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
@@ -20,11 +22,19 @@ class RestDataMapper implements RestDataMapperInterface
     protected ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander;
 
     /**
+     * @var \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade
+     */
+    protected ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade;
+
+    /**
      * @param \FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander
      */
-    public function __construct(ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander)
-    {
+    public function __construct(
+        ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander,
+        ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade
+    ){
         $this->erpOrderCancellationExpander = $erpOrderCancellationExpander;
+        $this->erpOrderFacade = $erpOrderFacade;
     }
 
     /**
@@ -37,7 +47,8 @@ class RestDataMapper implements RestDataMapperInterface
         return (new RestErpOrderCancellationTransfer())
             ->fromArray($erpOrderCancellationTransfer->toArray(), true)
             ->setCustomer($this->mapRestCustomer($erpOrderCancellationTransfer->getCustomer()))
-            ->setInternalCustomer($this->mapRestCustomer($erpOrderCancellationTransfer->getCustomerInternal()));
+            ->setInternalCustomer($this->mapRestCustomer($erpOrderCancellationTransfer->getCustomerInternal()))
+            ->setErpOrder($this->mapErpOrder($erpOrderCancellationTransfer->getErpOrderExternalReference()));
     }
 
     /**
@@ -99,5 +110,19 @@ class RestDataMapper implements RestDataMapperInterface
 
         return (new RestCustomerTransfer())
             ->fromArray($customerTransfer->toArray(), true);
+    }
+
+    /**
+     * @param string $erpOrderExternalReference
+     *
+     * @return ErpOrderTransfer|null
+     */
+    protected function mapErpOrder(string $erpOrderExternalReference): ?ErpOrderTransfer
+    {
+        if ($erpOrderExternalReference === null) {
+            return null;
+        }
+
+        return $this->erpOrderFacade->findErpOrderByExternalReference($erpOrderExternalReference);
     }
 }

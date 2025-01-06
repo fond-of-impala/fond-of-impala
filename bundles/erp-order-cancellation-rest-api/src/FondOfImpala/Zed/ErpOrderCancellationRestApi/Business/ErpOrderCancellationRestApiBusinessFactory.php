@@ -48,6 +48,7 @@ class ErpOrderCancellationRestApiBusinessFactory extends AbstractBusinessFactory
     {
         return new RestDataMapper(
             $this->createErpOrderCancellationExpander(),
+            $this->getErpOrderFacade(),
         );
     }
 
