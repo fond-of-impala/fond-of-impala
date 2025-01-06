@@ -1014,9 +1014,10 @@ class CancellationManagerTest extends Unit
             ->method('getCancellations')
             ->willReturn($cancellationCollection);
 
-        $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
-            ->method('toArray')
-            ->willReturn([]);
+        $this->restDataMapperMock->expects(static::atLeastOnce())
+            ->method('mapResponse')
+            ->with($this->erpOrderCancellationTransferMock)
+            ->willReturn($this->restErpOrderCancellationTransferMock);
 
         $this->erpOrderCancellationPaginationTransfer->expects(static::atLeastOnce())
             ->method('toArray')
