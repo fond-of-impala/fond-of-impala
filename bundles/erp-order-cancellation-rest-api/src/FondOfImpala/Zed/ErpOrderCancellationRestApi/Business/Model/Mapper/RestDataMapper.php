@@ -32,7 +32,7 @@ class RestDataMapper implements RestDataMapperInterface
     public function __construct(
         ErpOrderCancellationExpanderInterface $erpOrderCancellationExpander,
         ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacade
-    ){
+    ) {
         $this->erpOrderCancellationExpander = $erpOrderCancellationExpander;
         $this->erpOrderFacade = $erpOrderFacade;
     }
@@ -115,7 +115,7 @@ class RestDataMapper implements RestDataMapperInterface
     /**
      * @param string $erpOrderExternalReference
      *
-     * @return ErpOrderTransfer|null
+     * @return \Generated\Shared\Transfer\ErpOrderTransfer|null
      */
     protected function mapErpOrder(string $erpOrderExternalReference): ?ErpOrderTransfer
     {

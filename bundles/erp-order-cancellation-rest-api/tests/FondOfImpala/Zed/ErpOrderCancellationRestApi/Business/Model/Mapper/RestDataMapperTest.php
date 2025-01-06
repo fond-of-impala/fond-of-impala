@@ -95,7 +95,7 @@ class RestDataMapperTest extends Unit
 
         $this->mapper = new RestDataMapper(
             $this->erpOrderCancellationExpanderMock,
-            $this->erpOrderFacadeMock
+            $this->erpOrderFacadeMock,
         );
     }
 
