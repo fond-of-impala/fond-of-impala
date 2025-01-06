@@ -120,10 +120,6 @@ class RestDataMapper implements RestDataMapperInterface
      */
     protected function mapErpOrder(string $erpOrderExternalReference): ?ErpOrderTransfer
     {
-        if ($erpOrderExternalReference === null) {
-            return null;
-        }
-
         return $this->erpOrderFacade->findErpOrderByExternalReference($erpOrderExternalReference);
     }
 }
