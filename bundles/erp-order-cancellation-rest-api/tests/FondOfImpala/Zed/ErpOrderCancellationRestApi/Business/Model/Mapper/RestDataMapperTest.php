@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Mapper;
 use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Business\Model\Expander\ErpOrderCancellationExpanderInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\RestCancellationItemTransfer;
@@ -84,11 +85,18 @@ class RestDataMapperTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->erpOrderFacadeMock = $this->getMockBuilder(ErpOrderCancellationRestApiToErpOrderFacadeInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->customerTransferMock = $this->getMockBuilder(CustomerTransfer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->mapper = new RestDataMapper($this->erpOrderCancellationExpanderMock);
+        $this->mapper = new RestDataMapper(
+            $this->erpOrderCancellationExpanderMock,
+            $this->erpOrderFacadeMock,
+        );
     }
 
     /**
@@ -96,6 +104,7 @@ class RestDataMapperTest extends Unit
      */
     public function testMapResponse(): void
     {
+        $erpOrderExternalReference = 'erp-order-external-reference';
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
             ->method('toArray')
             ->willReturn([]);
@@ -107,6 +116,10 @@ class RestDataMapperTest extends Unit
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
             ->method('getCustomerInternal')
             ->willReturn($this->customerTransferMock);
+
+        $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
+            ->method('getErpOrderExternalReference')
+            ->willReturn($erpOrderExternalReference);
 
         $this->customerTransferMock->expects(static::atLeastOnce())
             ->method('toArray')

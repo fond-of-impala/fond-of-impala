@@ -152,16 +152,19 @@ class ErpOrderCancellationRestApiBusinessFactoryTest extends Unit
      */
     public function testCreateRestDataMapper(): void
     {
+        $self = $this;
         $this->containerMock->expects(static::atLeastOnce())
             ->method('has')
             ->willReturn(true);
 
         $this->containerMock->expects(static::atLeastOnce())
             ->method('get')
-            ->willReturnCallback(static function (string $key) {
+            ->willReturnCallback(static function (string $key) use ($self) {
                 switch ($key) {
                     case ErpOrderCancellationRestApiDependencyProvider::PLUGINS_ERP_ORDER_CANCELLATION_EXPANDER:
                         return [];
+                    case ErpOrderCancellationRestApiDependencyProvider::FACADE_ERP_ORDER:
+                        return $self->erpOrderFacadeMock;
                 }
             });
 

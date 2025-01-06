@@ -17,7 +17,6 @@ use Generated\Shared\Transfer\RestErpOrderCancellationCollectionResponseTransfer
 use Generated\Shared\Transfer\RestErpOrderCancellationPaginationTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationRequestTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationResponseTransfer;
-use Generated\Shared\Transfer\RestErpOrderCancellationTransfer;
 use Generated\Shared\Transfer\RestErrorMessageTransfer;
 use Orm\Zed\ErpOrderCancellation\Persistence\Map\FoiErpOrderCancellationTableMap;
 use Psr\Log\LoggerInterface;
@@ -255,7 +254,9 @@ class CancellationManager implements CancellationManagerInterface
             $responseCollection = (new RestErpOrderCancellationCollectionResponseTransfer());
 
             foreach ($collection->getCancellations() as $cancellation) {
-                $responseCollection->addErpOrderCancellation((new RestErpOrderCancellationTransfer())->fromArray($cancellation->toArray(), true));
+                $responseCollection->addErpOrderCancellation(
+                    $this->restDataMapper->mapResponse($cancellation),
+                );
             }
 
             $pagination = (new RestErpOrderCancellationPaginationTransfer())->fromArray($this->repository->getErpOrderCancellationPagination($filter)->toArray(), true);

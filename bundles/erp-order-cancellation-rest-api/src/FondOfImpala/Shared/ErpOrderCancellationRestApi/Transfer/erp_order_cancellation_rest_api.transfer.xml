@@ -44,6 +44,7 @@
 
     <transfer name="ErpOrderCancellation">
         <property name="uuid" type="string"/>
+        <property name="erpOrder" type="ErpOrder"/>
     </transfer>
 
     <transfer name="RestCustomer">
