@@ -128,7 +128,7 @@ class CancellationManager implements CancellationManagerInterface
             $erpOrderCancellationTransfer->setErpOrderExternalReference($erpOrder->getExternalReference());
 
             $erpOrderCancellationTransfer->setFkCustomerRequested($companyUser->getCustomer()->getIdCustomer())
-                ->setState(FoiErpOrderCancellationTableMap::COL_STATE_NEW);
+                ->setState($attributes->getState() ? $attributes->getState() : FoiErpOrderCancellationTableMap::COL_STATE_NEW);
 
             $response = $this->erpOrderCancellationFacade->createErpOrderCancellation($erpOrderCancellationTransfer)->getErpOrderCancellation();
 
