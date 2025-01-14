@@ -27,6 +27,11 @@ class RestDataMapperTest extends Unit
     protected MockObject|ErpOrderCancellationTransfer $erpOrderCancellationTransferMock;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface
+     */
+    protected MockObject|ErpOrderCancellationRestApiToErpOrderFacadeInterface $erpOrderFacadeMock;
+
+    /**
      * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\RestErpOrderCancellationTransfer
      */
     protected MockObject|RestErpOrderCancellationTransfer $restErpOrderCancellationTransferMock;
