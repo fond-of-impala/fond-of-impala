@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi;
 
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeBridge;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
@@ -48,6 +49,11 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
      * @var string
      */
     public const FACADE_ERP_ORDER = 'FACADE_ERP_ORDER';
+
+    /**
+     * @var string
+     */
+    public const FACADE_CUSTOMER = 'FACADE_CUSTOMER';
 
     /**
      * @var string
@@ -111,8 +117,9 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
+        $container = $this->addErpOrderFacade($container);
 
-        return $this->addErpOrderFacade($container);
+        return $this->addCustomerFacade($container);
     }
 
     /**
@@ -152,6 +159,20 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
     {
         $container[static::FACADE_ERP_ORDER] = static function (Container $container) {
             return new ErpOrderCancellationRestApiToErpOrderFacadeBridge($container->getLocator()->erpOrder()->facade());
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCustomerFacade(Container $container): Container
+    {
+        $container[static::FACADE_CUSTOMER] = static function (Container $container) {
+            return new ErpOrderCancellationRestApiToCustomerFacadeBridge($container->getLocator()->customer()->facade());
         };
 
         return $container;
