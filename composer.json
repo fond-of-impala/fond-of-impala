@@ -218,7 +218,8 @@
     "fond-of-codeception/spryker": "*",
     "phpunit/phpunit": "*",
     "rector/rector": "*",
-    "spryker/code-sniffer": "0.17.26",
+    "slevomat/coding-standard": "8.15.0",
+    "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
   },
   "autoload": {
