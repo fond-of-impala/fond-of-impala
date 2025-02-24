@@ -9,7 +9,7 @@ interface ErpOrderCancellationRestApiToCustomerFacadeInterface
     /**
      * @param string $reference
      *
-     * @return \Generated\Shared\Transfer\ErpOrderTransfer|null
+     * @return \Generated\Shared\Transfer\CustomerTransfer|null
      */
     public function findByReference(string $reference): ?CustomerTransfer;
 }

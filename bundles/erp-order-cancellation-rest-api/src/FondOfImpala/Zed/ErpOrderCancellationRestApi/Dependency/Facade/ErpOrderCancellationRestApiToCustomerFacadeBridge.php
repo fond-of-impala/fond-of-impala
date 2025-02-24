@@ -21,7 +21,7 @@ class ErpOrderCancellationRestApiToCustomerFacadeBridge implements ErpOrderCance
     }
 
     /**
-     * @param string $customerReference
+     * @param string $reference
      *
      * @return \Generated\Shared\Transfer\CustomerTransfer|null
      */
