@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\Plugin\RestFilterExpander;
 
-use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApiExtension\Dependency\Plugin\ErpOrderCancellationRestFilterToFilterMapperExpanderPluginInterface;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer;
@@ -33,7 +32,7 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPlugin extends AbstractPl
         if (!$customerTransfer) {
             return $erpOrderCancellationFilterTransfer;
         }
-        
+
         return $erpOrderCancellationFilterTransfer->setFkCustomer($customerTransfer->getIdCustomer());
     }
 }

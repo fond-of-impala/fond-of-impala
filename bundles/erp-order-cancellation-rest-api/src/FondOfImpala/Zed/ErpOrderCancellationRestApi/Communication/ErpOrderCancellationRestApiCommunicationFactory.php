@@ -18,9 +18,7 @@ class ErpOrderCancellationRestApiCommunicationFactory extends AbstractCommunicat
     }
 
     /**
-     * @return ErpOrderCancellationRestApiToCustomerFacadeInterface
-     * 
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeInterface
      */
     public function getCustomerFacade(): ErpOrderCancellationRestApiToCustomerFacadeInterface
     {

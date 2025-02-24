@@ -15,7 +15,7 @@ class ErpOrderCancellationRestApiToCustomerFacadeBridge implements ErpOrderCance
     /**
      * @param \Spryker\Zed\Customer\Business\CustomerFacadeInterface $customerFacade
      */
-    public function __construct(CustomerFacadeInterface  $customerFacade)
+    public function __construct(CustomerFacadeInterface $customerFacade)
     {
         $this->customerFacade = $customerFacade;
     }
