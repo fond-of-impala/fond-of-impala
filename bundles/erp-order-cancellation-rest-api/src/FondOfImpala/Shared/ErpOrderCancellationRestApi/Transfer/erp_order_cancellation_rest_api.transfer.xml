@@ -70,6 +70,7 @@
     </transfer>
 
     <transfer name="RestErpOrderCancellationFilter">
+        <property name="customerReference" type="string" />
         <property name="debitorNumber" type="string"/>
         <property name="reference" type="string"/>
         <property name="externalReference" type="string"/>
@@ -126,6 +127,7 @@
         <property name="offset" type="int" />
         <property name="limit" type="int" />
         <property name="originatorReference" type="string" />
+        <property name="fkCustomer" type="int" />
         <property name="fkOriginator" type="int" />
         <property name="sorting" singular="sort" type="ErpOrderCancellationFilterSort[]" />
         <property name="customerReferences" singular="customerReference" type="array" />
