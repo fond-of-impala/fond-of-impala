@@ -29,6 +29,7 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
     protected MockObject|ErpOrderCancellationRestApiCommunicationFactory $factoryMock;
 
     protected MockObject|PermissionFacadeInterface $permissionFacadeMock;
+
     protected MockObject|RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransferMock;
 
     protected MockObject|ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransferMock;

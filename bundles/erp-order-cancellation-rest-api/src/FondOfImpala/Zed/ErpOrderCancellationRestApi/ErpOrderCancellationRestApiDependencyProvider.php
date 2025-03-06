@@ -57,8 +57,14 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
      */
     public const FACADE_CUSTOMER = 'FACADE_CUSTOMER';
 
+    /**
+     * @var string
+     */
     public const FACADE_COMPANY_USER_REFERENCE = 'FACADE_COMPANY_USER_REFERENCE';
 
+    /**
+     * @var string
+     */
     public const FACADE_PERMISSION = 'FACADE_PERMISSION';
 
     /**

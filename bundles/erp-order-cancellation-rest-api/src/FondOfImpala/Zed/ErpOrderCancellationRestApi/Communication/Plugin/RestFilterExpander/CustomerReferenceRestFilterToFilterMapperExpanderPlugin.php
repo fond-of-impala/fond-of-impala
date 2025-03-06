@@ -24,7 +24,6 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPlugin extends AbstractPl
         RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer,
         ErpOrderCancellationFilterTransfer $erpOrderCancellationFilterTransfer
     ): ErpOrderCancellationFilterTransfer {
-
         if ($this->canSeeAllErpOrderCancellation($restErpOrderCancellationFilterTransfer)) {
              return $erpOrderCancellationFilterTransfer;
         }
@@ -48,13 +47,11 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPlugin extends AbstractPl
      * @param \Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer
      *
      * @return bool
-     *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     private function canSeeAllErpOrderCancellation(
         RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransfer
     ): bool {
-        if  ($restErpOrderCancellationFilterTransfer->getCompanyUserReference() === null) {
+        if ($restErpOrderCancellationFilterTransfer->getCompanyUserReference() === null) {
             return false;
         }
 
@@ -62,7 +59,7 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPlugin extends AbstractPl
             ->getCompanyUserReferenceFacade()
             ->findCompanyUserByCompanyUserReference(
                 (new CompanyUserTransfer())
-                    ->setCompanyUserReference($restErpOrderCancellationFilterTransfer->getCompanyUserReference())
+                    ->setCompanyUserReference($restErpOrderCancellationFilterTransfer->getCompanyUserReference()),
             );
 
         if (

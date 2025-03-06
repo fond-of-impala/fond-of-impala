@@ -2,7 +2,6 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication;
 
-use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserReferenceFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
@@ -28,9 +27,7 @@ class ErpOrderCancellationRestApiCommunicationFactory extends AbstractCommunicat
     }
 
     /**
-     * @return ErpOrderCancellationRestApiToCompanyUserFacadeInterface
-     *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserFacadeInterface
      */
     public function getCompanyUserReferenceFacade(): ErpOrderCancellationRestApiToCompanyUserReferenceFacadeInterface
     {
@@ -38,9 +35,7 @@ class ErpOrderCancellationRestApiCommunicationFactory extends AbstractCommunicat
     }
 
     /**
-     * @return ErpOrderCancellationRestApiToPermissionFacadeInterface
-     *
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\ErpOrderCancellationRestApiToPermissionFacadeInterface
      */
     public function getPermissionFacade()
     {

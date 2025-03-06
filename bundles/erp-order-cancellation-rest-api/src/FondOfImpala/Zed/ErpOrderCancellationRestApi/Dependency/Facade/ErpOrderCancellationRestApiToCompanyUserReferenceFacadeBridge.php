@@ -28,7 +28,7 @@ class ErpOrderCancellationRestApiToCompanyUserReferenceFacadeBridge implements E
      */
     public function findCompanyUserByCompanyUserReference(
         CompanyUserTransfer $companyUserTransfer
-    ): CompanyUserResponseTransfer{
+    ): CompanyUserResponseTransfer {
         return $this->companyUserReferenceFacade
             ->findCompanyUserByCompanyUserReference($companyUserTransfer);
     }

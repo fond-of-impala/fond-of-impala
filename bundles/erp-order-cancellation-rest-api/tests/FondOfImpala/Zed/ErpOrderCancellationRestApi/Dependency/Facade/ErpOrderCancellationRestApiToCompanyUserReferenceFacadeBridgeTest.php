@@ -11,6 +11,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 class ErpOrderCancellationRestApiToCompanyUserReferenceFacadeBridgeTest extends Unit
 {
     protected ErpOrderCancellationRestApiToCompanyUserReferenceFacadeBridge $bridge;
+
     protected MockObject|CompanyUserReferenceFacadeInterface $companyUserReferenceFacadeMock;
 
     protected MockObject|CompanyUserTransfer $companyUserTransferMock;

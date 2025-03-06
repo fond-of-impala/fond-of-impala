@@ -3,8 +3,8 @@
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade;
 
 use Codeception\Test\Unit;
-use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
 
 class ErpOrderCancellationRestApiToPermissionFacadeBridgeTest extends Unit
 {
@@ -39,8 +39,6 @@ class ErpOrderCancellationRestApiToPermissionFacadeBridgeTest extends Unit
             ->method('can')
             ->with($permissionKey, $identifier)
             ->willReturn(true);
-
-
 
         static::assertTrue($this->bridge->can($permissionKey, $identifier));
     }
