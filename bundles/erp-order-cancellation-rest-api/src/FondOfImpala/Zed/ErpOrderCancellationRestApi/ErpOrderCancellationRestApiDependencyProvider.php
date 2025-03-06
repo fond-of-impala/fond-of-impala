@@ -2,9 +2,11 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellationRestApi;
 
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserReferenceFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderCancellationFacadeBridge;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeBridge;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToPermissionFacadeBridge;
 use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\CompanyUser\Persistence\SpyCompanyUserQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
@@ -54,6 +56,10 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
      * @var string
      */
     public const FACADE_CUSTOMER = 'FACADE_CUSTOMER';
+
+    public const FACADE_COMPANY_USER_REFERENCE = 'FACADE_COMPANY_USER_REFERENCE';
+
+    public const FACADE_PERMISSION = 'FACADE_PERMISSION';
 
     /**
      * @var string
@@ -118,8 +124,10 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
     {
         $container = parent::provideCommunicationLayerDependencies($container);
         $container = $this->addErpOrderFacade($container);
+        $container = $this->addCustomerFacade($container);
+        $container = $this->addCompanyUserReferenceFacade($container);
 
-        return $this->addCustomerFacade($container);
+        return $this->addPermissionFacade($container);
     }
 
     /**
@@ -173,6 +181,34 @@ class ErpOrderCancellationRestApiDependencyProvider extends AbstractBundleDepend
     {
         $container[static::FACADE_CUSTOMER] = static function (Container $container) {
             return new ErpOrderCancellationRestApiToCustomerFacadeBridge($container->getLocator()->customer()->facade());
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addCompanyUserReferenceFacade(Container $container): Container
+    {
+        $container[static::FACADE_COMPANY_USER_REFERENCE] = static function (Container $container) {
+            return new ErpOrderCancellationRestApiToCompanyUserReferenceFacadeBridge($container->getLocator()->companyUserReference()->facade());
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addPermissionFacade(Container $container): Container
+    {
+        $container[static::FACADE_PERMISSION] = static function (Container $container) {
+            return new ErpOrderCancellationRestApiToPermissionFacadeBridge($container->getLocator()->permission()->facade());
         };
 
         return $container;
