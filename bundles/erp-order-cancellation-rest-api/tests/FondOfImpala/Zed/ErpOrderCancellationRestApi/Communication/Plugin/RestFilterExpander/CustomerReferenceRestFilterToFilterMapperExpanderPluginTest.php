@@ -14,7 +14,6 @@ use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
 
-
 class CustomerReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
 {
     protected MockObject|CompanyUserTransfer $companyUserTransferMock;
