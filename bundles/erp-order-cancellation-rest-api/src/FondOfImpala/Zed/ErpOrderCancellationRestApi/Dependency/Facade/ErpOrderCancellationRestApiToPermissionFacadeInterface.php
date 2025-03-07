@@ -6,9 +6,9 @@ interface ErpOrderCancellationRestApiToPermissionFacadeInterface
 {
     /**
      * @param string $permissionKey
-     * @param string $identifier
+     * @param int|null $identifier
      *
      * @return bool
      */
-    public function can(string $permissionKey, string $identifier): bool;
+    public function can(string $permissionKey,  ?int $identifier): bool;
 }
