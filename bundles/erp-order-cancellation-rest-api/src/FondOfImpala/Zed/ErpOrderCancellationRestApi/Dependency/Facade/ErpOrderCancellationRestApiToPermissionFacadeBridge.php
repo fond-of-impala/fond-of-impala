@@ -7,12 +7,12 @@ use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
 class ErpOrderCancellationRestApiToPermissionFacadeBridge implements ErpOrderCancellationRestApiToPermissionFacadeInterface
 {
     /**
-     * @var \Spryker\Zed\Permission\Business\PermissionFacadeInterface;
+     * @var \Spryker\Zed\Permission\Business\PermissionFacadeInterface
      */
     protected PermissionFacadeInterface $permissionFacade;
 
     /**
-     * @param \Spryker\Zed\Customer\Business\CustomerFacadeInterface $customerFacade
+     * @param \Spryker\Zed\Permission\Business\PermissionFacadeInterface $permissionFacade
      */
     public function __construct(PermissionFacadeInterface $permissionFacade)
     {

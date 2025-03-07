@@ -63,8 +63,14 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPlugin extends AbstractPl
             );
 
         if (
-            $companyUserResponseTransfer->getIsSuccessful() === true
-            && $this->getFactory()->getPermissionFacade()
+            $companyUserResponseTransfer->getIsSuccessful() === false
+            || !$companyUserResponseTransfer->getCompanyUser()
+            || !$companyUserResponseTransfer->getCompanyUser()->getIdCompanyUser()
+        ) {
+            return false;
+        }
+
+        if ($this->getFactory()->getPermissionFacade()
                 ->can(SeeAllErpOrderCancellationPermissionPlugin::KEY, $companyUserResponseTransfer->getCompanyUser()->getIdCompanyUser())
         ) {
             return true;

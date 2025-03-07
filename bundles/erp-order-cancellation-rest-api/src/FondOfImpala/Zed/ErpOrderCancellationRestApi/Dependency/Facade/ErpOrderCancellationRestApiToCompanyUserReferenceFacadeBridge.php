@@ -14,7 +14,7 @@ class ErpOrderCancellationRestApiToCompanyUserReferenceFacadeBridge implements E
     protected CompanyUserReferenceFacadeInterface $companyUserReferenceFacade;
 
     /**
-     * @param \FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface $companyUserFacade
+     * @param \FondOfImpala\Zed\CompanyUserReference\Business\CompanyUserReferenceFacadeInterface $companyUserReferenceFacade
      */
     public function __construct(CompanyUserReferenceFacadeInterface $companyUserReferenceFacade)
     {

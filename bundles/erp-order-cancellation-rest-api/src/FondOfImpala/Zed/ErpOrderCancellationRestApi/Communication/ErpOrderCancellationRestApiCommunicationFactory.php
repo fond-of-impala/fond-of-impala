@@ -5,6 +5,7 @@ namespace FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserReferenceFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToErpOrderFacadeInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToPermissionFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\ErpOrderCancellationRestApiDependencyProvider;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 
@@ -27,7 +28,7 @@ class ErpOrderCancellationRestApiCommunicationFactory extends AbstractCommunicat
     }
 
     /**
-     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserFacadeInterface
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserReferenceFacadeInterface
      */
     public function getCompanyUserReferenceFacade(): ErpOrderCancellationRestApiToCompanyUserReferenceFacadeInterface
     {
@@ -35,9 +36,9 @@ class ErpOrderCancellationRestApiCommunicationFactory extends AbstractCommunicat
     }
 
     /**
-     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\ErpOrderCancellationRestApiToPermissionFacadeInterface
+     * @return \FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToPermissionFacadeInterface
      */
-    public function getPermissionFacade()
+    public function getPermissionFacade(): ErpOrderCancellationRestApiToPermissionFacadeInterface
     {
         return $this->getProvidedDependency(ErpOrderCancellationRestApiDependencyProvider::FACADE_PERMISSION);
     }
