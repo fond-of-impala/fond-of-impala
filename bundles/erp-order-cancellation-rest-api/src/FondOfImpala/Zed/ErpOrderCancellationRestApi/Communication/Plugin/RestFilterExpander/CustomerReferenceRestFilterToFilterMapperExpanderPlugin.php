@@ -70,7 +70,8 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPlugin extends AbstractPl
             return false;
         }
 
-        if ($this->getFactory()->getPermissionFacade()
+        if (
+            $this->getFactory()->getPermissionFacade()
                 ->can(SeeAllErpOrderCancellationPermissionPlugin::KEY, $companyUserResponseTransfer->getCompanyUser()->getIdCompanyUser())
         ) {
             return true;
