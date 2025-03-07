@@ -71,6 +71,7 @@
 
     <transfer name="RestErpOrderCancellationFilter">
         <property name="customerReference" type="string" />
+        <property name="companyUserReference" type="string" />
         <property name="debitorNumber" type="string"/>
         <property name="reference" type="string"/>
         <property name="externalReference" type="string"/>
