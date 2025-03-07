@@ -6,13 +6,14 @@ use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Communication\ErpOrderCancellationRestApiCommunicationFactory;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCompanyUserReferenceFacadeInterface;
 use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToCustomerFacadeInterface;
+use FondOfImpala\Zed\ErpOrderCancellationRestApi\Dependency\Facade\ErpOrderCancellationRestApiToPermissionFacadeInterface;
 use Generated\Shared\Transfer\CompanyUserResponseTransfer;
 use Generated\Shared\Transfer\CompanyUserTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationFilterTransfer;
 use Generated\Shared\Transfer\RestErpOrderCancellationFilterTransfer;
 use PHPUnit\Framework\MockObject\MockObject;
-use Spryker\Zed\Permission\Business\PermissionFacadeInterface;
+
 
 class CustomerReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
 {
@@ -28,7 +29,7 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
 
     protected MockObject|ErpOrderCancellationRestApiCommunicationFactory $factoryMock;
 
-    protected MockObject|PermissionFacadeInterface $permissionFacadeMock;
+    protected MockObject|ErpOrderCancellationRestApiToPermissionFacadeInterface $permissionFacadeMock;
 
     protected MockObject|RestErpOrderCancellationFilterTransfer $restErpOrderCancellationFilterTransferMock;
 
@@ -74,7 +75,7 @@ class CustomerReferenceRestFilterToFilterMapperExpanderPluginTest extends Unit
             ->getMock();
 
         $this->permissionFacadeMock = $this
-            ->getMockBuilder(PermissionFacadeInterface::class)
+            ->getMockBuilder(ErpOrderCancellationRestApiToPermissionFacadeInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->erpOrderCancellationFilterTransferMock = $this
