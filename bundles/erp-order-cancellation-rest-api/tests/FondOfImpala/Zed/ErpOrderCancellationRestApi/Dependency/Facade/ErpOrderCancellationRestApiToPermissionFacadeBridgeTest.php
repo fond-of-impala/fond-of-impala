@@ -33,7 +33,7 @@ class ErpOrderCancellationRestApiToPermissionFacadeBridgeTest extends Unit
     public function testCan(): void
     {
         $permissionKey = 'permissionKey';
-        $identifier = 'identifier';
+        $identifier = 1;
 
         $this->permissionFacadeMock->expects(static::atLeastOnce())
             ->method('can')
