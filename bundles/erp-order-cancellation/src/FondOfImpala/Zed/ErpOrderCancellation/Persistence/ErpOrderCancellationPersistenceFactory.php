@@ -4,6 +4,8 @@ namespace FondOfImpala\Zed\ErpOrderCancellation\Persistence;
 
 use ArrayObject;
 use FondOfImpala\Zed\ErpOrderCancellation\ErpOrderCancellationDependencyProvider;
+use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Mapper\ErpOrderCancellationMapper;
+use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Mapper\ErpOrderCancellationMapperInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpander;
 use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Expander\EntityToTransferExpanderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Persistence\Propel\Mapper\EntityToTransferMapper;
@@ -58,5 +60,13 @@ class ErpOrderCancellationPersistenceFactory extends AbstractPersistenceFactory
     public function getErpOrderCancellationEntityToTransferExpanderPlugin(): ArrayObject
     {
         return $this->getProvidedDependency(ErpOrderCancellationDependencyProvider::PLUGIN_ERP_ORDER_CANCELLATION_ENTITY_TO_TRANSFER_EXPANDER);
+    }
+
+    /**
+     * @return \FondOfImpala\Zed\ErpOrderCancellation\Persistence\Mapper\ErpOrderCancellationMapperInterface
+     */
+    public function createErpOrderCancellationMapper(): ErpOrderCancellationMapperInterface
+    {
+        return new ErpOrderCancellationMapper();
     }
 }

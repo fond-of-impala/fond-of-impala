@@ -43,4 +43,12 @@
         <property name="erpOrderCancellation" type="ErpOrderCancellation"/>
         <property name="isSuccessful" type="bool"/>
     </transfer>
+
+    <transfer name="ErpOrderCancellationCriteriaFilter">
+        <property name="erpOrderReference" type="string"/>
+    </transfer>
+
+    <transfer name="ErpOrderCancellation">
+        <property name="erpOrderCancellations" type="ErpOrderCancellation[]" singular="erpOrderCancellation"/>
+    </transfer>
 </transfers>

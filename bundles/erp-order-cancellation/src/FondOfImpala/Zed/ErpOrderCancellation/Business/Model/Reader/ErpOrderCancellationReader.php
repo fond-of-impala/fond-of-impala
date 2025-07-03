@@ -3,6 +3,8 @@
 namespace FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader;
 
 use FondOfImpala\Zed\ErpOrderCancellation\Persistence\ErpOrderCancellationRepositoryInterface;
+use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 
 class ErpOrderCancellationReader implements ReaderInterface
@@ -28,5 +30,16 @@ class ErpOrderCancellationReader implements ReaderInterface
     public function findErpOrderCancellationByIdErpOrderCancellation(int $idErpOrderCancellation): ?ErpOrderCancellationTransfer
     {
         return $this->repository->findErpOrderCancellationByIdErpOrderCancellation($idErpOrderCancellation);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
+     */
+    public function getErpOrderCancellationCollection(
+        ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+    ): ErpOrderCancellationCollectionTransfer {
+        return $this->repository->getErpOrderCancellationCollection($erpOrderCancellationCriteriaFilterTransfer);
     }
 }
