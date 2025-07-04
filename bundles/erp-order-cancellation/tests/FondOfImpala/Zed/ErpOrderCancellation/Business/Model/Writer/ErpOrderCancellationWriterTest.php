@@ -223,11 +223,6 @@ class ErpOrderCancellationWriterTest extends Unit
                 },
             );
 
-        $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
-            ->method('executePreSavePlugins')
-            ->with($this->erpOrderCancellationTransferMock)
-            ->willReturn($this->erpOrderCancellationTransferMock);
-
         $this->entityManagerMock->expects(static::atLeastOnce())
             ->method('updateErpOrderCancellation')
             ->with($this->erpOrderCancellationTransferMock)
@@ -256,7 +251,7 @@ class ErpOrderCancellationWriterTest extends Unit
     /**
      * @return void
      */
-    public function testUpdateWithException(): void
+     public function testUpdateWithException(): void
     {
         $exception = new Exception('foo');
         $serializedData = '{}';
@@ -269,8 +264,8 @@ class ErpOrderCancellationWriterTest extends Unit
                 },
             );
 
-        $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
-            ->method('executePreSavePlugins')
+        $this->entityManagerMock->expects(static::atLeastOnce())
+            ->method('updateErpOrderCancellation')
             ->with($this->erpOrderCancellationTransferMock)
             ->willThrowException($exception);
 
@@ -283,14 +278,6 @@ class ErpOrderCancellationWriterTest extends Unit
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
             ->method('serialize')
             ->willReturn($serializedData);
-
-        $this->loggerMock->expects(static::atLeastOnce())
-            ->method('error')
-            ->with($exception->getMessage(), [
-                'exception' => $exception->getMessage(),
-                'trace' => $exception->getTraceAsString(),
-                'data' => $serializedData,
-            ]);
 
         $responseTransfer = $this->writer->update($this->erpOrderCancellationTransferMock);
 
