@@ -41,14 +41,4 @@ class ErpOrderCancellationItemReader implements ErpOrderCancellationItemReaderIn
     {
         return $this->repository->findErpOrderCancellationItemByIdErpOrderCancellationAndSku($fkErpOrderCancellation, $sku);
     }
-
-    /**
-     * @param string $erpOrderReference
-     *
-     * @return \ArrayObject
-     */
-    public function findErpOrderCancellationCollectionByErpOrderReference(string $erpOrderReference): ArrayObject
-    {
-        return $this->repository->findErpOrderCancellationCollectionByErpOrderReference($erpOrderReference);
-    }
 }

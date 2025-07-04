@@ -10,10 +10,10 @@ use Propel\Runtime\Collection\Collection;
 class ErpOrderCancellationMapper implements ErpOrderCancellationMapperInterface
 {
     /**
-     * @param \Orm\Zed\Company\Persistence\SpyCompany $spyCompany
-     * @param \Generated\Shared\Transfer\CompanyTransfer $companyTransfer
+     * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellation $foiErpOrderCancellation
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationTransfer $erpOrderCancellationTransfer
      *
-     * @return \Generated\Shared\Transfer\CompanyTransfer
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationTransfer
      */
     public function mapEntityToErpOrderCancellationTransfer(
         FoiErpOrderCancellation $foiErpOrderCancellation,
