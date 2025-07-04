@@ -7,7 +7,6 @@ use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
-use Orm\Zed\ErpOrderCancellation\Persistence\Base\FoiErpOrderCancellation;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItemQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\Map\FoiErpOrderCancellationTableMap;
@@ -97,13 +96,13 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
 
         $erpOrderCancellationQuery->orderBy(
             FoiErpOrderCancellationTableMap::COL_ID_ERP_ORDER_CANCELLATION,
-            'DESC'
+            'DESC',
         );
 
         return $this->getFactory()
             ->createErpOrderCancellationMapper()
             ->mapErpOrderCancellationEntityCollectionToErpOderCancellationCollectionTransfer(
-                $erpOrderCancellationQuery->find()
+                $erpOrderCancellationQuery->find(),
             );
     }
 
@@ -135,7 +134,7 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
     ): FoiErpOrderCancellationQuery {
         if ($erpOrderCancellationCriteriaFilterTransfer->getErpOrderReference()) {
             $erpOrderCancellationQuery->filterByErpOrderReference(
-                $erpOrderCancellationCriteriaFilterTransfer->getErpOrderReference()
+                $erpOrderCancellationCriteriaFilterTransfer->getErpOrderReference(),
             );
         }
 

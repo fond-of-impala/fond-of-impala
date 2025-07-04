@@ -45,7 +45,7 @@ class ErpOrderCancellationItemReader implements ErpOrderCancellationItemReaderIn
     /**
      * @param string $erpOrderReference
      *
-     * @return ArrayObject
+     * @return \ArrayObject
      */
     public function findErpOrderCancellationCollectionByErpOrderReference(string $erpOrderReference): ArrayObject
     {

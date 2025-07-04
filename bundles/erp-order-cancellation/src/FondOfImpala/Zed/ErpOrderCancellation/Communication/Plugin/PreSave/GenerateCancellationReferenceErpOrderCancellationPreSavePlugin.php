@@ -32,7 +32,7 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePlugin extends Abs
 
         $erpOrderCancellationCollection = $erpOrderCancellationReader->getErpOrderCancellationCollection(
             (new ErpOrderCancellationCriteriaFilterTransfer())
-                ->setErpOrderReference($erpOrderReference)
+                ->setErpOrderReference($erpOrderReference),
         );
 
         $increment = 1;
@@ -45,7 +45,7 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePlugin extends Abs
             preg_match(
                 '/^' . $this->getConfig()->getPrefix() . '\d+-(\d+)$/',
                 $cancellationNumber,
-                $matches
+                $matches,
             );
 
             $increment = (int)$matches[1] + 1;
@@ -58,8 +58,8 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePlugin extends Abs
                 str_replace(
                     $this->getConfig()->getPrefixToReplace(),
                     $this->getConfig()->getPrefix(),
-                    $erpOrderReference
-                )
+                    $erpOrderReference,
+                ),
             );
     }
 }

@@ -24,6 +24,7 @@ class ErpOrderCancellationMapper implements ErpOrderCancellationMapperInterface
             true,
         );
     }
+
     /**
      * @param \Propel\Runtime\Collection\Collection $erpOrderCancellationEntities
      *

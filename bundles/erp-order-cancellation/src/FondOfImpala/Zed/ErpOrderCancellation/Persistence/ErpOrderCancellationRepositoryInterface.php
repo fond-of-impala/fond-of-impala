@@ -42,6 +42,4 @@ interface ErpOrderCancellationRepositoryInterface
     public function getErpOrderCancellationCollection(
         ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
     ): ErpOrderCancellationCollectionTransfer;
-
-
 }

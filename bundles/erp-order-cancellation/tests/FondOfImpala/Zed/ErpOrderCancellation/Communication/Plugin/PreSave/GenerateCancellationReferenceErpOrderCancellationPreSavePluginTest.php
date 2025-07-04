@@ -2,6 +2,7 @@
 
 namespace FondOfImpala\Zed\ErpOrderCancellation\Communication\Plugin\PostSave;
 
+use ArrayObject;
 use Codeception\Test\Unit;
 use FondOfImpala\Zed\ErpOrderCancellation\Business\Model\Reader\ReaderInterface;
 use FondOfImpala\Zed\ErpOrderCancellation\Communication\ErpOrderCancellationCommunicationFactory;
@@ -78,7 +79,7 @@ class GenerateCancellationReferenceErpOrderCancellationPreSavePluginTest extends
      */
     public function testPreSave(): void
     {
-        $cancellations =  new \ArrayObject();
+        $cancellations = new ArrayObject();
         $cancellations->append($this->erpOrderCancellationTransferMock);
         $cancellationNumber = 'prefix100000000-1';
         $prefixToReplace = 'prefixToReplace';

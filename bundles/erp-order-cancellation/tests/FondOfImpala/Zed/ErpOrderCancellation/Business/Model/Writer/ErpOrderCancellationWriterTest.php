@@ -251,33 +251,33 @@ class ErpOrderCancellationWriterTest extends Unit
     /**
      * @return void
      */
-     public function testUpdateWithException(): void
+    public function testUpdateWithException(): void
     {
         $exception = new Exception('foo');
         $serializedData = '{}';
 
         $this->transactionHandlerMock->expects(static::atLeastOnce())
-            ->method('handleTransaction')
-            ->willReturnCallback(
-                static function ($callable) {
-                    return $callable();
-                },
-            );
+           ->method('handleTransaction')
+           ->willReturnCallback(
+               static function ($callable) {
+                   return $callable();
+               },
+           );
 
         $this->entityManagerMock->expects(static::atLeastOnce())
-            ->method('updateErpOrderCancellation')
-            ->with($this->erpOrderCancellationTransferMock)
-            ->willThrowException($exception);
+           ->method('updateErpOrderCancellation')
+           ->with($this->erpOrderCancellationTransferMock)
+           ->willThrowException($exception);
 
         $this->erpOrderCancellationPluginExecutorMock->expects(static::atLeastOnce())
-            ->method('executePostTransactionPlugins')
-            ->willReturnCallback(static function (ErpOrderCancellationResponseTransfer $responseTransfer) {
-                return $responseTransfer;
-            });
+           ->method('executePostTransactionPlugins')
+           ->willReturnCallback(static function (ErpOrderCancellationResponseTransfer $responseTransfer) {
+               return $responseTransfer;
+           });
 
         $this->erpOrderCancellationTransferMock->expects(static::atLeastOnce())
-            ->method('serialize')
-            ->willReturn($serializedData);
+           ->method('serialize')
+           ->willReturn($serializedData);
 
         $responseTransfer = $this->writer->update($this->erpOrderCancellationTransferMock);
 
