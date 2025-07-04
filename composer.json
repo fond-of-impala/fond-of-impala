@@ -202,7 +202,7 @@
     "spryker/product-page-search-extension": "^1.4.0",
     "spryker/publisher-extension": "^1.0.0",
     "spryker/queue": "^1.0.0",
-    "spryker/quote": "^2.5.0",
+    "spryker/quote": "2.21.0",
     "spryker/quote-extension": "^1.2.0",
     "spryker/sales": "^11.0.0",
     "spryker/sales-extension": "^1.3",

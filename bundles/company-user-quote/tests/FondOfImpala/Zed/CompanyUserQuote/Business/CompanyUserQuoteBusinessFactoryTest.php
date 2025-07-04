@@ -73,8 +73,6 @@ class CompanyUserQuoteBusinessFactoryTest extends Unit
     }
 
     /**
-     * @skip
-     *
      * @return void
      */
     public function testCreateCompanyUserQuoteReader(): void
