@@ -126,9 +126,7 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
      * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery $erpOrderCancellationQuery
      * @param \Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
      *
-     * @return FoiErpOrderCancellationQuery
-     *
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
     protected function setErpOrderCancellationFilters(
         FoiErpOrderCancellationQuery $erpOrderCancellationQuery,
