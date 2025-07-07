@@ -3,6 +3,8 @@
 namespace FondOfImpala\Zed\ErpOrderCancellation\Persistence;
 
 use ArrayObject;
+use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 
@@ -31,4 +33,13 @@ interface ErpOrderCancellationRepositoryInterface
      * @return \Generated\Shared\Transfer\ErpOrderCancellationItemTransfer|null
      */
     public function findErpOrderCancellationItemByIdErpOrderCancellationAndSku(int $fkErpOrderCancellation, string $sku): ?ErpOrderCancellationItemTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
+     */
+    public function getErpOrderCancellationCollection(
+        ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+    ): ErpOrderCancellationCollectionTransfer;
 }

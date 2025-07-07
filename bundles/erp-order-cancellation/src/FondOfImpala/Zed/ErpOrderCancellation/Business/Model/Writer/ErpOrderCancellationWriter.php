@@ -144,7 +144,6 @@ class ErpOrderCancellationWriter implements ErpOrderCancellationWriterInterface
         ErpOrderCancellationResponseTransfer $erpOrderCancellationResponseTransfer
     ): ErpOrderCancellationResponseTransfer {
         $erpOrderCancellationTransfer = $erpOrderCancellationResponseTransfer->getErpOrderCancellation();
-        $erpOrderCancellationTransfer = $this->erpOrderCancellationPluginExecutor->executePreSavePlugins($erpOrderCancellationTransfer);
         $erpOrderCancellationTransfer = $this->entityManager->updateErpOrderCancellation($erpOrderCancellationTransfer);
         $erpOrderCancellationTransfer = $this->erpOrderCancellationPluginExecutor->executePostSavePlugins($erpOrderCancellationTransfer);
 

@@ -3,10 +3,13 @@
 namespace FondOfImpala\Zed\ErpOrderCancellation\Persistence;
 
 use ArrayObject;
+use Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer;
+use Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationItemTransfer;
 use Generated\Shared\Transfer\ErpOrderCancellationTransfer;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationItemQuery;
 use Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery;
+use Orm\Zed\ErpOrderCancellation\Persistence\Map\FoiErpOrderCancellationTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -77,6 +80,33 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+     *
+     * @return \Generated\Shared\Transfer\ErpOrderCancellationCollectionTransfer
+     */
+    public function getErpOrderCancellationCollection(
+        ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+    ): ErpOrderCancellationCollectionTransfer {
+        $erpOrderCancellationQuery = $this->getErpOrderCancellationQuery();
+
+        $erpOrderCancellationQuery = $this->setErpOrderCancellationFilters(
+            $erpOrderCancellationQuery,
+            $erpOrderCancellationCriteriaFilterTransfer,
+        );
+
+        $erpOrderCancellationQuery->orderBy(
+            FoiErpOrderCancellationTableMap::COL_ID_ERP_ORDER_CANCELLATION,
+            'DESC',
+        );
+
+        return $this->getFactory()
+            ->createErpOrderCancellationMapper()
+            ->mapErpOrderCancellationEntityCollectionToErpOderCancellationCollectionTransfer(
+                $erpOrderCancellationQuery->find(),
+            );
+    }
+
+    /**
      * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
      */
     protected function getErpOrderCancellationQuery(): FoiErpOrderCancellationQuery
@@ -90,5 +120,24 @@ class ErpOrderCancellationRepository extends AbstractRepository implements ErpOr
     protected function getErpOrderCancellationItemQuery(): FoiErpOrderCancellationItemQuery
     {
         return $this->getFactory()->createErpOrderCancellationItemQuery();
+    }
+
+    /**
+     * @param \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery $erpOrderCancellationQuery
+     * @param \Generated\Shared\Transfer\ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+     *
+     * @return \Orm\Zed\ErpOrderCancellation\Persistence\FoiErpOrderCancellationQuery
+     */
+    protected function setErpOrderCancellationFilters(
+        FoiErpOrderCancellationQuery $erpOrderCancellationQuery,
+        ErpOrderCancellationCriteriaFilterTransfer $erpOrderCancellationCriteriaFilterTransfer
+    ): FoiErpOrderCancellationQuery {
+        if ($erpOrderCancellationCriteriaFilterTransfer->getErpOrderReference()) {
+            $erpOrderCancellationQuery->filterByErpOrderReference(
+                $erpOrderCancellationCriteriaFilterTransfer->getErpOrderReference(),
+            );
+        }
+
+        return $erpOrderCancellationQuery;
     }
 }
